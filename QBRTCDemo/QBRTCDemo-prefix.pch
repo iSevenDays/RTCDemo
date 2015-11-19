@@ -1,0 +1,16 @@
+//
+//  QBRTCDemo-prefix.pch
+//  QBRTCDemo
+//
+//  Created by Anton Sokolchenko on 11/15/15.
+//  Copyright © 2015 anton. All rights reserved.
+//
+
+#ifndef QBRTCDemo_prefix_pch
+#define QBRTCDemo_prefix_pch
+
+@import Quickblox;
+@import Foundation;
+
+#define WEBRTC_IOS
+#endif /* QBRTCDemo_prefix_pch */

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C40a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYD-Zm-6Kn">
+                                <rect key="frame" x="20" y="40" width="129" height="30"/>
+                                <animations/>
+                                <state key="normal" title="ConnectWithUser1"/>
+                                <connections>
+                                    <action selector="connectUser1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0cT-vd-rQt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKB-PX-sde">
+                                <rect key="frame" x="169" y="40" width="131" height="30"/>
+                                <animations/>
+                                <state key="normal" title="ConnectWithUser2"/>
+                                <connections>
+                                    <action selector="connectUser2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VvW-gr-Jgb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBy-bw-swr">
+                                <rect key="frame" x="20" y="130" width="60" height="30"/>
+                                <animations/>
+                                <state key="normal" title="StartCall"/>
+                                <connections>
+                                    <action selector="startCall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ccw-Aa-06D"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected with user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eq-jS-52R">
+                                <rect key="frame" x="20" y="90" width="158.5" height="20.5"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K03-Mc-SbK">
+                                <rect key="frame" x="40" y="503.5" width="45" height="20.5"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hBy-bw-swr" firstAttribute="top" secondItem="6eq-jS-52R" secondAttribute="bottom" constant="20" id="AbK-57-vF8"/>
+                            <constraint firstItem="IYD-Zm-6Kn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Ixt-53-Knx"/>
+                            <constraint firstItem="jKB-PX-sde" firstAttribute="leading" secondItem="IYD-Zm-6Kn" secondAttribute="trailing" constant="20" id="JOR-aQ-C2K"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K03-Mc-SbK" secondAttribute="bottom" constant="76.5" id="K5i-z4-rZL"/>
+                            <constraint firstItem="jKB-PX-sde" firstAttribute="baseline" secondItem="IYD-Zm-6Kn" secondAttribute="baseline" id="Tal-Un-ier"/>
+                            <constraint firstItem="K03-Mc-SbK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Tdt-s5-4wu"/>
+                            <constraint firstItem="hBy-bw-swr" firstAttribute="leading" secondItem="6eq-jS-52R" secondAttribute="leading" id="XQ8-0l-OCd"/>
+                            <constraint firstItem="6eq-jS-52R" firstAttribute="leading" secondItem="IYD-Zm-6Kn" secondAttribute="leading" id="iq1-KB-kS1"/>
+                            <constraint firstItem="IYD-Zm-6Kn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="lQ6-2c-Gh6"/>
+                            <constraint firstItem="6eq-jS-52R" firstAttribute="top" secondItem="IYD-Zm-6Kn" secondAttribute="bottom" constant="20" id="yWC-cx-epm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lblConnected" destination="6eq-jS-52R" id="Vle-Vb-NCc"/>
+                        <outlet property="lblState" destination="K03-Mc-SbK" id="32h-oQ-mld"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="363" y="400"/>
+        </scene>
+    </scenes>
+</document>
