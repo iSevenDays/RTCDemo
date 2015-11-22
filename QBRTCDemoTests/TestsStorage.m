@@ -22,14 +22,20 @@ static SVUser *svuser = nil;
 }
 
 + (QBUUser *)qbuserTest {
+	if (!qbuser) {
+		[self initConfiguration];
+	}
 	return qbuser;
 }
 
 + (SVUser *)svuserTest {
+	if (!svuser) {
+		[self initConfiguration];
+	}
 	return svuser;
 }
 
-+ (void)init {
++ (void)initConfiguration {
 	qbuser = [QBUUser user];
 	qbuser.login = @"testlogin";
 	qbuser.ID = 777;

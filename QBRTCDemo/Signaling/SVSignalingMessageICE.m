@@ -23,8 +23,8 @@
 
 - (instancetype)initWithType:(NSString *)type params:(NSDictionary *)params {
 	self = [super initWithType:type params:params];
-	NSCAssert([type isEqualToString:SVSignalingMessageType.offer] || [type isEqualToString:SVSignalingMessageType.answer],
-			  @"Type must be offer or answer");
+	NSCAssert([type isEqualToString:SVSignalingMessageType.candidate],
+			  @"Type must be candidate");
 	if (self) {
 		
 		NSString *mid = params[SVSignalingParams.mid];

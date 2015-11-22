@@ -7,6 +7,7 @@
 //
 
 #import "SVSignalingMessageType.h"
+@class SVUser;
 
 @interface SVSignalingMessage : NSObject
 
@@ -15,5 +16,7 @@
 
 @property (nonatomic, copy, readonly, nonnull) NSString *type;
 @property (nonatomic, copy, readonly, nonnull) NSDictionary<NSString *, NSString *> *params;
-		   
+
+@property (nonatomic, strong, nonnull) SVUser *sender;
+
 @end

@@ -11,6 +11,6 @@
 const struct SVSignalingChannelState SVSignalingChannelState = {
 	.open = @"open",
 	.closed = @"closed",
-	.established = @"establised",
+	.established = @"established",
 	.error =  @"error",
 };

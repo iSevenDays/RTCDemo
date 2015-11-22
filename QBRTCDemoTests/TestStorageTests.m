@@ -20,7 +20,7 @@
 @implementation TestStorageTests
 
 - (void)setUp {
-	[TestsStorage init];
+	[TestsStorage initConfiguration];
 }
 
 - (void)tearDown {
@@ -99,6 +99,10 @@
 	
 }
 
+- (void)testStorageAreAlwaysInitialized {
+	assertThat([TestsStorage svuserTest], notNilValue());
+	assertThat([TestsStorage qbuserTest], notNilValue());
+}
 
 
 @end

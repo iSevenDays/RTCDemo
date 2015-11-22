@@ -9,8 +9,8 @@
 #ifndef QBRTCDemo_prefix_pch
 #define QBRTCDemo_prefix_pch
 
-@import Quickblox;
-@import Foundation;
+#import <Quickblox/Quickblox.h>
+#import <Foundation/Foundation.h>
 
 #define WEBRTC_IOS
 #endif /* QBRTCDemo_prefix_pch */

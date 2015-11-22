@@ -10,6 +10,8 @@
 #import "SVSignalingMessageICE.h"
 #import "SVSignalingMessageSDP.h"
 #import "SVSignalingParams.h"
+#import "SVUser.h"
+
 #import <RTCIceCandidate.h>
 #import <RTCSessionDescription.h>
 
@@ -18,7 +20,7 @@
 + (instancetype)messageWithSVSignalingMessage:(SVSignalingMessage *)signalingMessage {
 	QBChatMessage *message = [QBChatMessage message];
 	
-	NSMutableDictionary<NSString *, NSString *> *dic = signalingMessage.params.mutableCopy;
+	NSMutableDictionary *dic = signalingMessage.params.mutableCopy;
 	
 	if (dic == nil) {
 		dic = [NSMutableDictionary dictionary];
@@ -40,10 +42,16 @@
 		
 		message.customParameters[SVSignalingParams.sdp] = sigmessageSDP.sdp.description;
 	} else {
-		message.customParameters = signalingMessage.params.mutableCopy;
+		if (signalingMessage.params) {
+			message.customParameters = signalingMessage.params.mutableCopy;
+		}
 	}
 	
 	message.text = signalingMessage.type;
+	
+	// Fill sender
+	NSParameterAssert(signalingMessage.sender);
+	message.customParameters[SVSignalingParams.senderLogin] =[signalingMessage.sender.ID stringValue];
 	
 	return message;
 }

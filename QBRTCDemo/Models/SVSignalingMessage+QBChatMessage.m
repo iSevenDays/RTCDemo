@@ -9,6 +9,8 @@
 #import "SVSignalingMessage+QBChatMessage.h"
 #import "SVSignalingMessageICE.h"
 #import "SVSignalingMessageSDP.h"
+#import "SVSignalingParams.h"
+#import "SVUser.h"
 
 @implementation SVSignalingMessage (QBChatMessage)
 
@@ -16,17 +18,25 @@
 	NSString *signalingType = qbmessage.text;
 	NSDictionary *params = qbmessage.customParameters;
 	
+	SVSignalingMessage *svmessage = nil;
+	
 	if ([signalingType isEqualToString:SVSignalingMessageType.answer] ||
 		[signalingType isEqualToString:SVSignalingMessageType.offer] ) {
 		
-		return [SVSignalingMessageSDP messageWithType:signalingType params:qbmessage.customParameters];
+		svmessage = [SVSignalingMessageSDP messageWithType:signalingType params:qbmessage.customParameters];
 		
 	} else if([signalingType isEqualToString:SVSignalingMessageType.candidate]) {
 		
-		return [SVSignalingMessageICE messageWithType:signalingType params:params];
+		svmessage = [SVSignalingMessageICE messageWithType:signalingType params:params];
+	} else {
+		svmessage = [SVSignalingMessage messageWithType:signalingType params:params];
 	}
 	
-	return [SVSignalingMessage messageWithType:signalingType params:params];
+	// restore user back from dictionary
+	NSString *login = params[SVSignalingParams.senderLogin];
+	svmessage.sender = [SVUser userWithID:@(qbmessage.senderID) login:login password:@""];
+	
+	return svmessage;
 }
 
 @end

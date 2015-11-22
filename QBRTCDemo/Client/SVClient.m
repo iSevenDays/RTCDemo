@@ -23,10 +23,11 @@
 #import <RTCLogging.h>
 #import <RTCSessionDescriptionDelegate.h>
 
+#import "ARDSDPUtils.h"
+
 @interface SVClient() <SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate>
 
 @property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
-@property (nonatomic, strong) id<SVClientDelegate> clientDelegate;
 
 @property (nonatomic, strong) NSMutableArray *iceServers;
 @property (nonatomic, strong) NSMutableArray *messageQueue;
@@ -53,7 +54,8 @@
 	
 	if (self) {
 		self.signalingChannel = signalingChannel;
-		self.clientDelegate = clientDelegate;
+		self.signalingChannel.delegate = self;
+		self.delegate = clientDelegate;
 		
 		self.iceServers =
 		[NSMutableArray arrayWithObject:[[RTCICEServer alloc] initWithURI:[NSURL URLWithString:@"stun:stun.l.google.com:19302"] username:@"" password:@""]];
@@ -62,6 +64,8 @@
 		self.factory = [[RTCPeerConnectionFactory alloc] init];
 		
 		self.state = kClientStateDisconnected;
+		
+		self.isAudioOnly = NO;
 	}
 	return self;
 }
@@ -85,11 +89,15 @@
 }
 
 - (void)startCallWithOpponent:(SVUser *)opponent {
+	NSParameterAssert(opponent);
+	NSCAssert(![opponent.ID isEqualToNumber:@(0)], @"Invalid opponent ID");
+	
 	if (![self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]) {
 		NSLog(@"Chat is not connected");
 		return;
 	}
 	self.initiatorUser = self.signalingChannel.user;
+	self.opponentUser = opponent;
 	// Create peer connection.
 	
 	RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
@@ -109,8 +117,40 @@
 	} else {
 		// Check if we've received an offer.
 		// There we are sending signaling messages
+		
+		// TODO: this code never executes
 		[self drainMessageQueueIfReady];
 	}
+}
+
+- (void)hangup {
+	
+	if (self.state == kClientStateDisconnected) {
+		return;
+	}
+	
+	if (![[self.signalingChannel state] isEqualToString:SVSignalingChannelState.established]) {
+		return;
+	}
+	
+	SVSignalingMessage *hangupMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
+	
+	[self.signalingChannel sendMessage:hangupMessage toUser:self.opponentUser completion:^(NSError * _Nullable error) {
+		if (error) {
+			NSLog(@"Error hangup disconnect: %@", error);
+			return;
+		}
+		[self clearSession];
+	}];
+}
+
+- (void)clearSession {
+	self.initiatorUser = nil;
+	self.opponentUser = nil;
+	self.state = kClientStateDisconnected;
+	self.peerConnection = nil;
+	self.isReceivedSDP = NO;
+	self.messageQueue = [NSMutableArray array];
 }
 
 - (void)drainMessageQueueIfReady {
@@ -127,28 +167,35 @@
 - (void)processSignalingMessage:(SVSignalingMessage *)message {
 	NSParameterAssert(self.peerConnection ||
 					  [message.type isEqualToString:SVSignalingMessageType.hangup]);
+	
 	if ([message.type isEqualToString:SVSignalingMessageType.offer] ||
 		[message.type isEqualToString:SVSignalingMessageType.answer]) {
 		
-			SVSignalingMessageSDP *sdpMessage = (SVSignalingMessageSDP *)message;
-			RTCSessionDescription *description = sdpMessage.sdp;
-//			// Prefer H264 if available.
-//			RTCSessionDescription *sdpPreferringH264 =
-//			[ARDSDPUtils descriptionForDescription:description
-//							   preferredVideoCodec:@"H264"];
-			[self.peerConnection setRemoteDescriptionWithDelegate:self
-										   sessionDescription:description];
+		if ([message.type isEqualToString:SVSignalingMessageType.answer]) {
+			NSLog(@"GOT ANSWER");
+		}
+		
+		SVSignalingMessageSDP *sdpMessage = (SVSignalingMessageSDP *)message;
+		RTCSessionDescription *description = sdpMessage.sdp;
+		
+		NSParameterAssert(description);
+		
+		// Prefer H264 if available.
+		RTCSessionDescription *sdpPreferringH264 =
+		[ARDSDPUtils descriptionForDescription:description
+						   preferredVideoCodec:@"H264"];
+		
+		[self.peerConnection setRemoteDescriptionWithDelegate:self
+										   sessionDescription:sdpPreferringH264];
+		
 	} else if ([message.type isEqualToString:SVSignalingMessageType.candidate] ) {
 		
-				SVSignalingMessageICE *candidateMessage = (SVSignalingMessageICE *)message;
-			[self.peerConnection addICECandidate:candidateMessage.iceCandidate];
-}
-		else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
-			// Other client disconnected.
-			// TODO: support waiting in room for next client. For now just
-			// disconnect.
-			//[self disconnect];
-		}
+		SVSignalingMessageICE *candidateMessage = (SVSignalingMessageICE *)message;
+		[self.peerConnection addICECandidate:candidateMessage.iceCandidate];
+	} else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
+		// Other client disconnected.
+		[self clearSession];
+	}
 }
 
 // Sends a signaling message to the other client. The caller will send messages
@@ -177,7 +224,9 @@
 }
 
 - (RTCMediaStream *)createLocalMediaStream {
-	RTCMediaStream* localStream = [_factory mediaStreamWithLabel:@"ARDAMS"];
+	NSParameterAssert(self.factory);
+	
+	RTCMediaStream* localStream = [self.factory mediaStreamWithLabel:@"ARDAMS"];
 	RTCVideoTrack* localVideoTrack = [self createLocalVideoTrack];
 	if (localVideoTrack) {
 		[localStream addVideoTrack:localVideoTrack];
@@ -259,9 +308,22 @@
 	RTCLog(@"WARNING: Renegotiation needed but unimplemented.");
 }
 
-- (void)peerConnection:(RTCPeerConnection *)peerConnection
-  iceConnectionChanged:(RTCICEConnectionState)newState {
+- (void)peerConnection:(RTCPeerConnection *)peerConnection iceConnectionChanged:(RTCICEConnectionState)newState {
 	RTCLog(@"ICE state changed: %d", newState);
+	
+	switch (newState) {
+		case RTCICEConnectionChecking:
+			self.state = kClientStateConnecting;
+		case RTCICEConnectionCompleted:
+			self.state = kClientStateConnected;
+			break;
+		case RTCICEConnectionDisconnected:
+		case RTCICEConnectionFailed:
+			self.state = kClientStateDisconnected;
+  default:
+			break;
+	}
+	
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.delegate client:self didChangeConnectionState:newState];
 	});
@@ -307,14 +369,12 @@
 			[self.delegate client:self didError:sdpError];
 			return;
 		}
-		// Prefer H264 if available.
-//		RTCSessionDescription *sdpPreferringH264 =
-//		[ARDSDPUtils descriptionForDescription:sdp
-//						   preferredVideoCodec:@"H264"];
-		[_peerConnection setLocalDescriptionWithDelegate:self
-									  sessionDescription:sdp];
-		SVSignalingMessageSDP *message =
-		[[SVSignalingMessageSDP alloc]
+//		 Prefer H264 if available.
+		RTCSessionDescription *sdpPreferringH264 = [ARDSDPUtils descriptionForDescription:sdp preferredVideoCodec:@"H264"];
+		NSParameterAssert(sdp);
+		
+		[self.peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdpPreferringH264];
+		SVSignalingMessageSDP *message = [[SVSignalingMessageSDP alloc]
 		 initWithSessionDescription:sdp];
 		[self sendSignalingMessage:message];
 	});
@@ -330,19 +390,23 @@
 									   };
 			NSError *sdpError = [[NSError alloc] initWithDomain:@"" code:-1
 								   userInfo:userInfo];
-			[_delegate client:self didError:sdpError];
+			[self.delegate client:self didError:sdpError];
 			return;
 		}
 		// If we're answering and we've just set the remote offer we need to create
 		// an answer and set the local description.
-		if (!self.isInitiator && !_peerConnection.localDescription) {
-			RTCMediaConstraints *constraints = [self defaultAnswerConstraints];
-			[_peerConnection createAnswerWithDelegate:self
-										  constraints:constraints];
-			
-			
+		if (!self.isInitiator && !self.peerConnection.localDescription) {
+			NSCAssert(self.peerConnection, @"Peer connection must exists");
+			[self.peerConnection createAnswerWithDelegate:self
+										  constraints:[self defaultAnswerConstraints]];
 		}
 	});
+}
+
+- (RTCConfiguration *)defaulConfigurationWithCurrentICEServers {
+	RTCConfiguration *config = [[RTCConfiguration alloc] init];
+	config.iceServers = self.iceServers;
+	return config;
 }
 
 - (RTCMediaConstraints *)defaultAnswerConstraints {
@@ -356,6 +420,16 @@
 #pragma mark - SVSignalingChannelDelegate
 
 - (void)channel:(id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *)message {
+	if ([message.type isEqualToString:SVSignalingMessageType.offer]) {
+		NSCAssert(self.peerConnection == nil, @"At the time of answer there should be no active peerconnection");
+		NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
+		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");
+		
+		self.opponentUser = message.sender;
+		
+		self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaulConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
+		[self.peerConnection addStream:[self createLocalMediaStream]];
+	}
 	if ([message.type isEqualToString:SVSignalingMessageType.offer] ||
 		[message.type isEqualToString:SVSignalingMessageType.answer]) {
 		self.isReceivedSDP = YES;

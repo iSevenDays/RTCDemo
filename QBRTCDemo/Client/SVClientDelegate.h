@@ -12,8 +12,8 @@ enum SVClientState : NSInteger;
 
 @protocol SVClientDelegate <NSObject>
 
-- (void)client:(SVClient *)client didChangeState:(enum SVClientState)state;
 - (void)client:(SVClient *)client didChangeConnectionState:(RTCICEConnectionState)state;
+- (void)client:(SVClient *)client didChangeState:(enum SVClientState)state;
 - (void)client:(SVClient *)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
 - (void)client:(SVClient *)client didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
 - (void)client:(SVClient *)client didError:(NSError *)error;

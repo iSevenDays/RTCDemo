@@ -15,7 +15,7 @@
 @end
 
 @implementation QBSignalingChannel
-@synthesize state;
+@synthesize state = _state;
 @synthesize delegate;
 @synthesize user;
 
@@ -29,8 +29,11 @@
 }
 
 - (void)connectWithUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
+	NSCAssert(self.state == SVSignalingChannelState.error || SVSignalingChannelState.closed, @"Invalid channel state");
+	
 	self.state = SVSignalingChannelState.open;
-	[[QBChat instance] connectWithUser:[QBUUser userWithSVUser:svuser] completion:^(NSError * _Nullable error) {
+	
+	[[QBChat instance] connectWithUser:[QBUUser userWithSVUser:svuser] completion:^(NSError *error) {
 		if (error) {
 			self.state = SVSignalingChannelState.error;
 		} else {
@@ -47,8 +50,10 @@
 }
 
 - (void)sendMessage:(SVSignalingMessage *)message toUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
-	
+	NSParameterAssert(svuser);
 	NSCAssert([self.state isEqualToString:SVSignalingChannelState.established], @"Connection is not established");
+	
+	message.sender = self.user;
 	
 	QBChatMessage *signalMessage = [QBChatMessage messageWithSVSignalingMessage:message];
 	signalMessage.recipientID = svuser.ID.unsignedIntegerValue;
@@ -78,8 +83,6 @@
 			self.state = SVSignalingChannelState.error;
 		}
 		
-		[self notifyDelegateWithCurrentState];
-		
 		if (completion) {
 			completion(error);
 		}
@@ -88,26 +91,42 @@
 
 - (void)notifyDelegateWithCurrentState {
 	if (self.delegate) {
-		[self.delegate channel:self didChangeState:self.state];
+		if ([self.delegate respondsToSelector:@selector(channel:didChangeState:)]) {
+			[self.delegate channel:self didChangeState:self.state];
+		}
 	}
 }
 
+- (void)setState:(NSString *)state {
+	if (![_state isEqualToString:state]) {
+		_state = state;
+		[self notifyDelegateWithCurrentState];
+	}
+}
 #pragma mark QBChatDelegate methods
 
 - (void)chatDidAccidentallyDisconnect {
 	self.state = SVSignalingChannelState.closed;
-	[self notifyDelegateWithCurrentState];
 }
 
-- (void)chatDidReceiveMessage:(QBChatMessage *)message {
+- (void)chatDidFailWithStreamError:(NSError *)error {
+	self.state = SVSignalingChannelState.error;
+}
+
+- (void)chatDidNotConnectWithError:(NSError *)error {
+	self.state = SVSignalingChannelState.error;
+}
+
+- (void)chatDidReceiveSystemMessage:(QBChatMessage *)message {
 	NSString *type = message.text;
 	
 	if ([type isEqualToString:SVSignalingMessageType.answer] ||
-				  [type isEqualToString:SVSignalingMessageType.offer] ||
-				  [type isEqualToString:SVSignalingMessageType.hangup] ||
-				  [type isEqualToString:SVSignalingMessageType.candidate]) {
+		[type isEqualToString:SVSignalingMessageType.offer] ||
+		[type isEqualToString:SVSignalingMessageType.hangup] ||
+		[type isEqualToString:SVSignalingMessageType.candidate]) {
 		[self.delegate channel:self didReceiveMessage:[SVSignalingMessage messageWithQBChatMessage:message]];
 	}
 }
+
 
 @end

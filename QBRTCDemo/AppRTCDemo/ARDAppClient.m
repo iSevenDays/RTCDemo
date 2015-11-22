@@ -211,6 +211,7 @@ static NSInteger const kARDAppClientErrorInvalidRoom = -6;
 
   // Request TURN.
   __weak ARDAppClient *weakSelf = self;
+	self.isTurnComplete = YES;
   [_turnClient requestServersWithCompletionHandler:^(NSArray *turnServers,
                                                      NSError *error) {
     if (error) {
@@ -218,7 +219,7 @@ static NSInteger const kARDAppClientErrorInvalidRoom = -6;
                   error.localizedDescription);
     }
     ARDAppClient *strongSelf = weakSelf;
-    [strongSelf.iceServers addObjectsFromArray:turnServers];
+//    [strongSelf.iceServers addObjectsFromArray:turnServers];
     strongSelf.isTurnComplete = YES;
     [strongSelf startSignalingIfReady];
   }];

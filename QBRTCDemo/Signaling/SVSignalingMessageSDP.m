@@ -29,8 +29,8 @@
 	
 	if (self) {
 		NSString *sdp = params[SVSignalingParams.sdp];
+		sdp = [sdp stringByReplacingOccurrencesOfString:@"&#13;" withString:@"\r"];
 		NSCParameterAssert(sdp);
-		
 		_sdp = [[RTCSessionDescription alloc] initWithType:type sdp:sdp];
 	}
 	return self;

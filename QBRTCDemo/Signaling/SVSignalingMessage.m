@@ -15,6 +15,10 @@
 }
 
 - (instancetype)initWithType:(NSString *)type params:(NSDictionary *)params {
+	return [self initWithType:type params:params sender:nil];
+}
+
+- (instancetype)initWithType:(NSString *)type params:(NSDictionary *)params sender:(SVUser *)sender{
 	self = [super init];
 	
 	NSCAssert([type isEqualToString:SVSignalingMessageType.answer] ||
@@ -25,9 +29,9 @@
 	if (self) {
 		_type = type;
 		_params = [params copy];
+		_sender = sender;
 	}
 	return self;
 }
-
 
 @end
