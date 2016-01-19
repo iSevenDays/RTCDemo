@@ -89,6 +89,10 @@
 		[self.client startCallWithOpponent:self.user1];
 	}
 }
+- (IBAction)openDataChannel:(id)sender {
+	[self.client openDataChannel];
+}
+
 - (IBAction)hungup:(id)sender {
 	[self.client hangup];
 }

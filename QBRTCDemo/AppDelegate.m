@@ -21,7 +21,7 @@
 	[QBSettings setAuthKey:@"aqsHa2AhDO5Z9Th"];
 	[QBSettings setAuthSecret:@"825Bv-3ByACjD4O"];
 	[QBSettings setAccountKey:@"ZsFuaKozyNC3yLzvN3Xa"];
-	
+//	[QBSettings setTLS NO
 	return YES;
 }
 

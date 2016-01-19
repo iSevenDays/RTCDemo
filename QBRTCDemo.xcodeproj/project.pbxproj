@@ -208,10 +208,11 @@
 		1482340E1C002DFE0000E9ED /* CopyWebRTCHeaders.sh in Resources */ = {isa = PBXBuildFile; fileRef = 1452ABBE1BF9332A0018DA30 /* CopyWebRTCHeaders.sh */; };
 		1482340F1C002DFE0000E9ED /* ic_clear_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1A1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png */; };
 		148234101C002DFE0000E9ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADA1BF92FA30018DA30 /* Main.storyboard */; };
-		148234161C002E1D0000E9ED /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1482337C1C002DB80000E9ED /* webrtc-ia32.a */; };
-		148234171C002E1D0000E9ED /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1482337D1C002DB80000E9ED /* webrtc-x86_64.a */; };
-		1482341A1C002E1E0000E9ED /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148234181C002E1E0000E9ED /* webrtc-arm.a */; };
-		1482341B1C002E1E0000E9ED /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148234191C002E1E0000E9ED /* webrtc-arm64.a */; };
+		1483C8CF1C19B7D400C46B0C /* libprotobuf_lite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8CA1C19B7D400C46B0C /* libprotobuf_lite.a */; };
+		1483C8D01C19B7D400C46B0C /* librtc_base_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8CB1C19B7D400C46B0C /* librtc_base_objc.a */; };
+		1483C8D11C19B7D400C46B0C /* librtc_event_log_proto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8CC1C19B7D400C46B0C /* librtc_event_log_proto.a */; };
+		1483C8D31C19B7D400C46B0C /* libvideo_processing_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8CE1C19B7D400C46B0C /* libvideo_processing_neon.a */; };
+		1483C8D51C19B7F700C46B0C /* libaudioproc_debug_proto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8D41C19B7F700C46B0C /* libaudioproc_debug_proto.a */; };
 		14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */; };
 		14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028261BFA46F900BDF2C5 /* SVSignalingMessage.m */; };
 		14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028291BFA470C00BDF2C5 /* SVSignalingMessageType.m */; };
@@ -425,6 +426,14 @@
 		148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemo_s-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemo_s-Info.plist"; sourceTree = "<absolute>"; };
 		148234181C002E1E0000E9ED /* webrtc-arm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-arm.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-arm.a"; sourceTree = "<group>"; };
 		148234191C002E1E0000E9ED /* webrtc-arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-arm64.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-arm64.a"; sourceTree = "<group>"; };
+		1483C8CA1C19B7D400C46B0C /* libprotobuf_lite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf_lite.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/chromium/src/third_party/protobuf/../../../../xcodebuild/Debug-iphoneos/libprotobuf_lite.a"; sourceTree = "<absolute>"; };
+		1483C8CB1C19B7D400C46B0C /* librtc_base_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_base_objc.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/base/../../xcodebuild/Debug-iphoneos/librtc_base_objc.a"; sourceTree = "<absolute>"; };
+		1483C8CC1C19B7D400C46B0C /* librtc_event_log_proto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_event_log_proto.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/librtc_event_log_proto.a"; sourceTree = "<group>"; };
+		1483C8CD1C19B7D400C46B0C /* libsocketrocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsocketrocket.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libsocketrocket.a"; sourceTree = "<absolute>"; };
+		1483C8CE1C19B7D400C46B0C /* libvideo_processing_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvideo_processing_neon.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libvideo_processing_neon.a"; sourceTree = "<absolute>"; };
+		1483C8D41C19B7F700C46B0C /* libaudioproc_debug_proto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudioproc_debug_proto.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libaudioproc_debug_proto.a"; sourceTree = "<group>"; };
+		1483C9441C1AD5E000C46B0C /* libquickblox_webrtc_lib_objc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libquickblox_webrtc_lib_objc.dylib; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc_lib_objc.dylib"; sourceTree = "<absolute>"; };
+		1483C9451C1AD5E000C46B0C /* libquickblox_webrtc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libquickblox_webrtc.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc.a"; sourceTree = "<absolute>"; };
 		14A0281B1BFA43E700BDF2C5 /* SVSignalingChannelState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelState.h; sourceTree = "<group>"; };
 		14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingChannelState.m; sourceTree = "<group>"; };
 		14A0281F1BFA459A00BDF2C5 /* SVSignalingChannelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelProtocol.h; sourceTree = "<group>"; };
@@ -471,6 +480,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1483C8D51C19B7F700C46B0C /* libaudioproc_debug_proto.a in Frameworks */,
+				1483C8CF1C19B7D400C46B0C /* libprotobuf_lite.a in Frameworks */,
+				1483C8D01C19B7D400C46B0C /* librtc_base_objc.a in Frameworks */,
+				1483C8D11C19B7D400C46B0C /* librtc_event_log_proto.a in Frameworks */,
+				1483C8D31C19B7D400C46B0C /* libvideo_processing_neon.a in Frameworks */,
 				1473F3711BFF6BFE00ABA7E6 /* Quickblox.framework in Frameworks */,
 				14A0287D1BFB092800BDF2C5 /* libresolv.tbd in Frameworks */,
 				14A0287B1BFB090C00BDF2C5 /* SystemConfiguration.framework in Frameworks */,
@@ -566,10 +580,6 @@
 				148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */,
 				148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */,
 				148233AE1C002DFE0000E9ED /* MobileCoreServices.framework in Frameworks */,
-				1482341A1C002E1E0000E9ED /* webrtc-arm.a in Frameworks */,
-				1482341B1C002E1E0000E9ED /* webrtc-arm64.a in Frameworks */,
-				148234161C002E1D0000E9ED /* webrtc-ia32.a in Frameworks */,
-				148234171C002E1D0000E9ED /* webrtc-x86_64.a in Frameworks */,
 				148233AF1C002DFE0000E9ED /* libxml2.tbd in Frameworks */,
 				148233B01C002DFE0000E9ED /* GLKit.framework in Frameworks */,
 				148233B11C002DFE0000E9ED /* OpenGLES.framework in Frameworks */,
@@ -613,6 +623,14 @@
 		143609801BF9C7850091071C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1483C9441C1AD5E000C46B0C /* libquickblox_webrtc_lib_objc.dylib */,
+				1483C9451C1AD5E000C46B0C /* libquickblox_webrtc.a */,
+				1483C8D41C19B7F700C46B0C /* libaudioproc_debug_proto.a */,
+				1483C8CA1C19B7D400C46B0C /* libprotobuf_lite.a */,
+				1483C8CB1C19B7D400C46B0C /* librtc_base_objc.a */,
+				1483C8CC1C19B7D400C46B0C /* librtc_event_log_proto.a */,
+				1483C8CD1C19B7D400C46B0C /* libsocketrocket.a */,
+				1483C8CE1C19B7D400C46B0C /* libvideo_processing_neon.a */,
 				148234181C002E1E0000E9ED /* webrtc-arm.a */,
 				148234191C002E1E0000E9ED /* webrtc-arm64.a */,
 				1482337C1C002DB80000E9ED /* webrtc-ia32.a */,
@@ -1541,7 +1559,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -1572,7 +1589,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Release;
 		};

@@ -23,9 +23,11 @@
 #import <RTCLogging.h>
 #import <RTCSessionDescriptionDelegate.h>
 
+#import "RTCDataChannel.h"
+
 #import "ARDSDPUtils.h"
 
-@interface SVClient() <SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate>
+@interface SVClient() <SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
 
 @property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
 
@@ -41,6 +43,8 @@
 
 @property (nonatomic, strong) SVUser *opponentUser;
 @property (nonatomic, strong) SVUser *initiatorUser;
+
+@property (nonatomic, strong) RTCDataChannel *dataChannel;
 
 @end
 
@@ -96,6 +100,7 @@
 		NSLog(@"Chat is not connected");
 		return;
 	}
+	
 	self.initiatorUser = self.signalingChannel.user;
 	self.opponentUser = opponent;
 	// Create peer connection.
@@ -106,30 +111,36 @@
 	
 	self.peerConnection = [self.factory peerConnectionWithConfiguration:config constraints:constraints delegate:self];
 	
-	
 	// Create AV media stream and add it to the peer connection.
 	RTCMediaStream *localStream = [self createLocalMediaStream];
 	[self.peerConnection addStream:localStream];
-	if (self.isInitiator) {
-		// Send offer.
-		[self.peerConnection createOfferWithDelegate:self
-									 constraints:[self defaultOfferConstraints]];
-	} else {
-		// Check if we've received an offer.
-		// There we are sending signaling messages
-		
-		// TODO: this code never executes
-		[self drainMessageQueueIfReady];
-	}
+
+	[self openDataChannel]; // configure data channel, then start call
+	// Send offer.
+	[self.peerConnection createOfferWithDelegate:self constraints:[self defaultOfferConstraints]];
+}
+
+- (void)openDataChannel {
+//	if (![self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]
+//		|| self.state != kClientStateConnected) {
+//		NSLog(@"Connection is not established");
+//		return;
+//	}
+	RTCDataChannelInit *dataChannelInit = [[RTCDataChannelInit alloc] init];
+	
+	self.dataChannel = [self.peerConnection createDataChannelWithLabel:@"testdatachannel" config:dataChannelInit];
+	self.dataChannel.delegate = self;
 }
 
 - (void)hangup {
 	
 	if (self.state == kClientStateDisconnected) {
+		[self clearSession];
 		return;
 	}
 	
 	if (![[self.signalingChannel state] isEqualToString:SVSignalingChannelState.established]) {
+		[self clearSession];
 		return;
 	}
 	
@@ -145,12 +156,21 @@
 }
 
 - (void)clearSession {
+	NSLog(@"Clear session");
 	self.initiatorUser = nil;
 	self.opponentUser = nil;
 	self.state = kClientStateDisconnected;
+	for (RTCMediaStream *stream in  self.peerConnection.localStreams) {
+		[self.peerConnection removeStream:stream];
+	}
+	[self.peerConnection close];
 	self.peerConnection = nil;
 	self.isReceivedSDP = NO;
 	self.messageQueue = [NSMutableArray array];
+}
+
+- (BOOL)hasActiveCall {
+	return self.initiatorUser && self.opponentUser;
 }
 
 - (void)drainMessageQueueIfReady {
@@ -214,7 +234,9 @@
 - (RTCMediaConstraints *)defaultPeerConnectionConstraints {
 	NSString *value = false ? @"false" : @"true";
 	NSArray *optionalConstraints = @[
-									 [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:value]
+									 [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:value],
+									 [[RTCPair alloc] initWithKey:@"internalSctpDataChannels" value:@"true"],
+									 [[RTCPair alloc] initWithKey:@"RtpDataChannels" value:@"true"]
 									 ];
 	RTCMediaConstraints* constraints =
 	[[RTCMediaConstraints alloc]
@@ -227,7 +249,7 @@
 	NSParameterAssert(self.factory);
 	
 	RTCMediaStream* localStream = [self.factory mediaStreamWithLabel:@"ARDAMS"];
-	RTCVideoTrack* localVideoTrack = [self createLocalVideoTrack];
+	RTCVideoTrack* localVideoTrack = nil; [self createLocalVideoTrack];
 	if (localVideoTrack) {
 		[localStream addVideoTrack:localVideoTrack];
 		[self.delegate client:self didReceiveLocalVideoTrack:localVideoTrack];
@@ -271,7 +293,7 @@
 - (RTCMediaConstraints *)defaultOfferConstraints {
 	NSArray *mandatoryConstraints = @[
 									  [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"],
-									  [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"]
+									  [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"false"]
 									  ];
 	RTCMediaConstraints* constraints =
 	[[RTCMediaConstraints alloc]
@@ -318,9 +340,12 @@
 			self.state = kClientStateConnected;
 			break;
 		case RTCICEConnectionDisconnected:
+			self.state = kClientStateDisconnected;
+			break;
 		case RTCICEConnectionFailed:
 			self.state = kClientStateDisconnected;
-  default:
+			[self clearSession];
+		default:
 			break;
 	}
 	
@@ -341,6 +366,17 @@
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection didOpenDataChannel:(RTCDataChannel *)dataChannel {
+	NSLog(@"did Open Data Channel");
+	dataChannel.delegate = self;
+	[self sendDataChannelTestMessage];
+}
+
+- (void)sendDataChannelTestMessage {
+
+	NSString *str = [NSString stringWithFormat:@"%@ user calling to %@", self.signalingChannel.user.ID, self.opponentUser.ID];
+	RTCDataBuffer *buff = [[RTCDataBuffer alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] isBinary:NO];
+	
+	[self.dataChannel sendData:buff];
 }
 
 #pragma mark - RTCStatsDelegate
@@ -417,10 +453,11 @@
 	return [self.initiatorUser isEqual:self.signalingChannel.user];
 }
 
-#pragma mark - SVSignalingChannelDelegate
+#pragma mark - SVSignalingChannel Delegate
 
 - (void)channel:(id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *)message {
 	if ([message.type isEqualToString:SVSignalingMessageType.offer]) {
+		
 		NSCAssert(self.peerConnection == nil, @"At the time of answer there should be no active peerconnection");
 		NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
 		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");
@@ -448,5 +485,19 @@
 	}
 	[self drainMessageQueueIfReady];
 }
+
+#pragma mark DataChannel Delegate
+- (void)channelDidChangeState:(RTCDataChannel *)channel {
+	NSLog(@"%@ didChangeState: %u", channel, channel.state);
+//	if (channel.state == kRTCDataChannelStateOpen) {
+//		[self sendDataChannelTestMessage];
+//	}
+}
+
+- (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer {
+	NSLog(@"%@ didReceiveMessageWithBuffer: %@", channel, buffer);
+}
+
+
 
 @end

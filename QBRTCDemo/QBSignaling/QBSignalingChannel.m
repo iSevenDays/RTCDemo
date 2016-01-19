@@ -103,6 +103,7 @@
 		[self notifyDelegateWithCurrentState];
 	}
 }
+
 #pragma mark QBChatDelegate methods
 
 - (void)chatDidAccidentallyDisconnect {

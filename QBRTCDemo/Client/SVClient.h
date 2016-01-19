@@ -26,6 +26,9 @@ typedef NS_ENUM(NSInteger, SVClientState) {
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
+
+- (void)openDataChannel;
+
 - (void)hangup;
 
 @property (nonatomic, weak, nullable) id<SVClientDelegate> delegate;
