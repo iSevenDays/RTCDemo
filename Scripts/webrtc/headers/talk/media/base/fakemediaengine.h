@@ -38,9 +38,10 @@
 #include "talk/media/base/mediaengine.h"
 #include "talk/media/base/rtputils.h"
 #include "talk/media/base/streamparams.h"
-#include "webrtc/p2p/base/sessiondescription.h"
+#include "webrtc/audio/audio_sink.h"
 #include "webrtc/base/buffer.h"
 #include "webrtc/base/stringutils.h"
+#include "webrtc/p2p/base/sessiondescription.h"
 
 namespace cricket {
 
@@ -229,15 +230,13 @@ template <class Base> class RtpHelper : public Base {
 class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
  public:
   struct DtmfInfo {
-    DtmfInfo(uint32_t ssrc, int event_code, int duration, int flags)
+    DtmfInfo(uint32_t ssrc, int event_code, int duration)
         : ssrc(ssrc),
           event_code(event_code),
-          duration(duration),
-          flags(flags) {}
+          duration(duration) {}
     uint32_t ssrc;
     int event_code;
     int duration;
-    int flags;
   };
   explicit FakeVoiceMediaChannel(FakeVoiceEngine* engine,
                                  const AudioOptions& options)
@@ -321,9 +320,8 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
   }
   virtual bool InsertDtmf(uint32_t ssrc,
                           int event_code,
-                          int duration,
-                          int flags) {
-    dtmf_info_queue_.push_back(DtmfInfo(ssrc, event_code, duration, flags));
+                          int duration) {
+    dtmf_info_queue_.push_back(DtmfInfo(ssrc, event_code, duration));
     return true;
   }
 
@@ -349,6 +347,12 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
 
   virtual bool GetStats(VoiceMediaInfo* info) { return false; }
 
+  virtual void SetRawAudioSink(
+      uint32_t ssrc,
+      rtc::scoped_ptr<webrtc::AudioSinkInterface> sink) {
+    sink_ = std::move(sink);
+  }
+
  private:
   class VoiceChannelAudioSink : public AudioRenderer::Sink {
    public:
@@ -364,7 +368,7 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
     void OnData(const void* audio_data,
                 int bits_per_sample,
                 int sample_rate,
-                int number_of_channels,
+                size_t number_of_channels,
                 size_t number_of_frames) override {}
     void OnClose() override { renderer_ = NULL; }
     AudioRenderer* renderer() const { return renderer_; }
@@ -421,16 +425,16 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
   int time_since_last_typing_;
   AudioOptions options_;
   std::map<uint32_t, VoiceChannelAudioSink*> local_renderers_;
+  rtc::scoped_ptr<webrtc::AudioSinkInterface> sink_;
 };
 
 // A helper function to compare the FakeVoiceMediaChannel::DtmfInfo.
 inline bool CompareDtmfInfo(const FakeVoiceMediaChannel::DtmfInfo& info,
                             uint32_t ssrc,
                             int event_code,
-                            int duration,
-                            int flags) {
+                            int duration) {
   return (info.duration == duration && info.event_code == event_code &&
-          info.flags == flags && info.ssrc == ssrc);
+          info.ssrc == ssrc);
 }
 
 class FakeVideoMediaChannel : public RtpHelper<VideoMediaChannel> {
@@ -698,12 +702,10 @@ class FakeBaseEngine {
         fail_create_channel_(false) {}
   void set_fail_create_channel(bool fail) { fail_create_channel_ = fail; }
 
-  const std::vector<RtpHeaderExtension>& rtp_header_extensions() const {
-    return rtp_header_extensions_;
-  }
+  RtpCapabilities GetCapabilities() const { return capabilities_; }
   void set_rtp_header_extensions(
       const std::vector<RtpHeaderExtension>& extensions) {
-    rtp_header_extensions_ = extensions;
+    capabilities_.header_extensions = extensions;
   }
 
  protected:
@@ -712,7 +714,7 @@ class FakeBaseEngine {
   // TODO(thaloun): Replace with explicit checks of before & after values.
   bool options_changed_;
   bool fail_create_channel_;
-  std::vector<RtpHeaderExtension> rtp_header_extensions_;
+  RtpCapabilities capabilities_;
 };
 
 class FakeVoiceEngine : public FakeBaseEngine {
@@ -727,14 +729,6 @@ class FakeVoiceEngine : public FakeBaseEngine {
   void Terminate() {}
   rtc::scoped_refptr<webrtc::AudioState> GetAudioState() const {
     return rtc::scoped_refptr<webrtc::AudioState>();
-  }
-  AudioOptions GetOptions() const {
-    return options_;
-  }
-  bool SetOptions(const AudioOptions& options) {
-    options_ = options;
-    options_changed_ = true;
-    return true;
   }
 
   VoiceMediaChannel* CreateChannel(webrtc::Call* call,
@@ -757,27 +751,20 @@ class FakeVoiceEngine : public FakeBaseEngine {
   const std::vector<AudioCodec>& codecs() { return codecs_; }
   void SetCodecs(const std::vector<AudioCodec> codecs) { codecs_ = codecs; }
 
-  bool SetDevices(const Device* in_device, const Device* out_device) {
-    in_device_ = (in_device) ? in_device->name : "";
-    out_device_ = (out_device) ? out_device->name : "";
-    options_changed_ = true;
-    return true;
-  }
-
   bool GetOutputVolume(int* level) {
     *level = output_volume_;
     return true;
   }
-
   bool SetOutputVolume(int level) {
     output_volume_ = level;
-    options_changed_ = true;
     return true;
   }
 
   int GetInputLevel() { return 0; }
 
-  bool StartAecDump(rtc::PlatformFile file) { return false; }
+  bool StartAecDump(rtc::PlatformFile file, int64_t max_size_bytes) {
+    return false;
+  }
 
   void StopAecDump() {}
 
@@ -789,9 +776,6 @@ class FakeVoiceEngine : public FakeBaseEngine {
   std::vector<FakeVoiceMediaChannel*> channels_;
   std::vector<AudioCodec> codecs_;
   int output_volume_;
-  std::string in_device_;
-  std::string out_device_;
-  AudioOptions options_;
 
   friend class FakeMediaEngine;
 };
@@ -808,13 +792,6 @@ class FakeVideoEngine : public FakeBaseEngine {
     options_ = options;
     options_changed_ = true;
     return true;
-  }
-  bool SetDefaultEncoderConfig(const VideoEncoderConfig& config) {
-    default_encoder_config_ = config;
-    return true;
-  }
-  const VideoEncoderConfig& default_encoder_config() const {
-    return default_encoder_config_;
   }
 
   VideoMediaChannel* CreateChannel(webrtc::Call* call,
@@ -858,7 +835,6 @@ class FakeVideoEngine : public FakeBaseEngine {
  private:
   std::vector<FakeVideoMediaChannel*> channels_;
   std::vector<VideoCodec> codecs_;
-  VideoEncoderConfig default_encoder_config_;
   std::string in_device_;
   bool capture_;
   VideoOptions options_;
@@ -869,10 +845,7 @@ class FakeVideoEngine : public FakeBaseEngine {
 class FakeMediaEngine :
     public CompositeMediaEngine<FakeVoiceEngine, FakeVideoEngine> {
  public:
-  FakeMediaEngine() {
-    voice_ = FakeVoiceEngine();
-    video_ = FakeVideoEngine();
-  }
+  FakeMediaEngine() {}
   virtual ~FakeMediaEngine() {}
 
   void SetAudioCodecs(const std::vector<AudioCodec>& codecs) {
@@ -898,20 +871,13 @@ class FakeMediaEngine :
     return video_.GetChannel(index);
   }
 
-  AudioOptions audio_options() const { return voice_.options_; }
   int output_volume() const { return voice_.output_volume_; }
-  const VideoEncoderConfig& default_video_encoder_config() const {
-    return video_.default_encoder_config_;
-  }
-  const std::string& audio_in_device() const { return voice_.in_device_; }
-  const std::string& audio_out_device() const { return voice_.out_device_; }
   bool capture() const { return video_.capture_; }
   bool options_changed() const {
-    return voice_.options_changed_ || video_.options_changed_;
+    return video_.options_changed_;
   }
   void clear_options_changed() {
     video_.options_changed_ = false;
-    voice_.options_changed_ = false;
   }
   void set_fail_create_channel(bool fail) {
     voice_.set_fail_create_channel(fail);

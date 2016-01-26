@@ -8,37 +8,81 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>111</integer>
 		</dict>
 		<key>OCMock.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>112</integer>
+		</dict>
+		<key>Pods-QBRTCDemoTests-RamblerTyphoonUtils.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-QBRTCDemoTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>113</integer>
+		</dict>
+		<key>Pods-QBRTCDemo_s-RamblerTyphoonUtils.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-QBRTCDemo_s.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Typhoon.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ViperMcFlurry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>13C521AD4456EE6178C6C0ECE00939F4</key>
+		<key>4A2CAA839F2722C796C6F1DFDC806B92</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>714696D35D4AF27AED6CC6804539F3FE</key>
+		<key>54AC01AC3CAF2AC7FDC0B60A299A66A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9FDC5594AB111A8380F12A2CF9DD0625</key>
+		<key>738896312A448E0C8F0B44002EB3E99B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9A4E0D3920A3AB23BAC1C766C58636A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A1F054953861FCC97F25C9B88804EC9D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC7BA69751C112DB92E029AB3F1C9E5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E7DFE01DFD16CCEC234E02DAF8656599</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD6F78A34C368ABBABC6DCE96AAEFBF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

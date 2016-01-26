@@ -47,8 +47,8 @@ class VideoTrackRenderers : public cricket::VideoRenderer {
   VideoTrackRenderers();
   ~VideoTrackRenderers();
 
-  // Implements cricket::VideoRenderer
-  virtual bool SetSize(int width, int height, int reserved);
+  // Implements cricket::VideoRenderer. If the track is disabled,
+  // incoming frames are replaced by black frames.
   virtual bool RenderFrame(const cricket::VideoFrame* frame);
 
   void AddRenderer(VideoRendererInterface* renderer);
@@ -56,6 +56,10 @@ class VideoTrackRenderers : public cricket::VideoRenderer {
   void SetEnabled(bool enable);
 
  private:
+  // Pass the frame on to to each registered renderer. Requires
+  // critical_section_ already locked.
+  void RenderFrameToRenderers(const cricket::VideoFrame* frame);
+
   bool enabled_;
   std::set<VideoRendererInterface*> renderers_;
 

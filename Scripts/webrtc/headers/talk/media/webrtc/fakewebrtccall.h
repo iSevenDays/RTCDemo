@@ -49,10 +49,17 @@
 namespace cricket {
 class FakeAudioSendStream final : public webrtc::AudioSendStream {
  public:
+  struct TelephoneEvent {
+    int payload_type = -1;
+    uint8_t event_code = 0;
+    uint32_t duration_ms = 0;
+  };
+
   explicit FakeAudioSendStream(const webrtc::AudioSendStream::Config& config);
 
   const webrtc::AudioSendStream::Config& GetConfig() const;
   void SetStats(const webrtc::AudioSendStream::Stats& stats);
+  TelephoneEvent GetLatestTelephoneEvent() const;
 
  private:
   // webrtc::SendStream implementation.
@@ -64,8 +71,11 @@ class FakeAudioSendStream final : public webrtc::AudioSendStream {
   }
 
   // webrtc::AudioSendStream implementation.
+  bool SendTelephoneEvent(int payload_type, uint8_t event,
+                          uint32_t duration_ms) override;
   webrtc::AudioSendStream::Stats GetStats() const override;
 
+  TelephoneEvent latest_telephone_event_;
   webrtc::AudioSendStream::Config config_;
   webrtc::AudioSendStream::Stats stats_;
 };
@@ -79,6 +89,7 @@ class FakeAudioReceiveStream final : public webrtc::AudioReceiveStream {
   void SetStats(const webrtc::AudioReceiveStream::Stats& stats);
   int received_packets() const { return received_packets_; }
   void IncrementReceivedPackets();
+  const webrtc::AudioSinkInterface* sink() const { return sink_.get(); }
 
  private:
   // webrtc::ReceiveStream implementation.
@@ -96,10 +107,12 @@ class FakeAudioReceiveStream final : public webrtc::AudioReceiveStream {
 
   // webrtc::AudioReceiveStream implementation.
   webrtc::AudioReceiveStream::Stats GetStats() const override;
+  void SetSink(rtc::scoped_ptr<webrtc::AudioSinkInterface> sink) override;
 
   webrtc::AudioReceiveStream::Config config_;
   webrtc::AudioReceiveStream::Stats stats_;
   int received_packets_;
+  rtc::scoped_ptr<webrtc::AudioSinkInterface> sink_;
 };
 
 class FakeVideoSendStream final : public webrtc::VideoSendStream,

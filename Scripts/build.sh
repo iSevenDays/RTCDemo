@@ -2,38 +2,62 @@
 
 #  build.sh
 #  WebRTC
-#
-#  Created by Rahul Behera on 6/18/14.
-#  Copyright (c) 2014 Pristine, Inc. All rights reserved.
+#  Created by Andrey Ivanov on 04/11/15.
+#  Copyright © 2015 QuickBlox Team. All rights reserved.
 
-# Get location of the script itself .. thanks SO ! http://stackoverflow.com/a/246128
-SOURCE="${BASH_SOURCE[0]}"
+source="${BASH_SOURCE[0]}"
 
-while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-    DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-    SOURCE="$(readlink "$SOURCE")"
-    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+    dir="$( cd -P "$( dirname "$source" )" && pwd )"
+    source="$(readlink "$SOURCE")"
+    [[ $source != /* ]] && source="$dir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
-PROJECT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+#text
+line="%47s▫️▫️▫️\n"
+arr="➩"
+#URLS
+user_webrtc_url=""
+default_webrtc_url="https://chromium.googlesource.com/external/webrtc"
+depot_tools_url="https://chromium.googlesource.com/chromium/tools/depot_tools.git"
+#Directories
+project_dir="$( cd -P "$( dirname "$source" )" && pwd )"
+webrtc_source_dir="$project_dir/webrtc"
+depot_tools_dir="$project_dir/depot_tools"
 
-DEFAULT_WEBRTC_URL="https://chromium.googlesource.com/external/webrtc"
-DEFAULT_POD_URL="https://s3.amazonaws.com/libjingle"
-WEBRTC="$PROJECT_DIR/webrtc"
-DEPOT_TOOLS="$PROJECT_DIR/depot_tools"
-BUILD="$WEBRTC/lib"
-WEBRTC_TARGET="libWebRTC_objc"
+final_libs_dir="$webrtc_source_dir/lib"
+final_headers_dir="$webrtc_source_dir/headers"
 
-echo "Default webrtc url: $DEFAULT_WEBRTC_URL"
-echo "DEFAULT_POD_URL:$DEFAULT_POD_URL"
-echo "WEBRTC:$WEBRTC"
-echo "DEPOT_TOOLS:$DEPOT_TOOLS"
-echo "BUILD:$BUILD"
-echo "WEBRTC_TARGET:$WEBRTC_TARGET"
+prefix_out="out_quickblox_"
 
-printf "Start\n"
+webrtc_target="quickblox_webrtc"
+printf "🔨Environment variables:\n"
+printf "    webrtc_debug    $arr $webrtc_debug\n"
+printf "    webrtc_profile  $arr $webrtc_profile\n"
+printf "    webrtc_release  $arr $webrtc_release\n"
+
+printf $line
+
+printf "🔗URLs:\n"
+printf "    User webrtc     $arr $user_webrtc_url\n"
+printf "    Default webrtc  $arr $default_webrtc_url\n"
+printf "    Depot tools     $arr $depot_tools_url\n"
+
+printf $line
+
+printf "📁Directories:\n"
+printf "    Project         $arr $project_dir\n"
+printf "    Depot tools     $arr $depot_tools_dir\n"
+printf "    Final libs      $arr $final_libs_dir\n"
+
+printf $line
+
+printf "📦Build target:\n"
+printf "    $arr $webrtc_target\n"
 
 function create_directory_if_not_found() {
+
     if [ ! -d "$1" ];
+        echo "$1 exist"
     then
         mkdir -v -p "$1"
     fi
@@ -48,118 +72,93 @@ function exec_libtool() {
 function exec_strip() {
 
   echo "Running strip"
-  strip -S -X $@
+  strip -S -x -v $@
 }
 
 function exec_ninja() {
 
   echo "Running ninja"
-  ninja -C $1 $WEBRTC_TARGET
+  ninja -C $1 $webrtc_target
 }
-
-create_directory_if_not_found "$PROJECT_DIR"
-create_directory_if_not_found "$WEBRTC"
 
 # Update/Get/Ensure the Gclient Depot Tools
 function pull_depot_tools() {
 
-    echo Get the current working directory so we can change directories back when done
     WORKING_DIR=`pwd`
 
-    echo If no directory where depot tools should be...
-    if [ ! -d "$DEPOT_TOOLS" ]
-    then
-        echo Make directory for gclient called Depot Tools
-        mkdir -p $DEPOT_TOOLS
+    printf "%40s🔸Pull depot tools:\n\n"
 
-        echo Pull the depot tools project from chromium source into the depot tools directory
-        git clone "https://chromium.googlesource.com/chromium/tools/depot_tools.git" "$DEPOT_TOOLS"
+    echo "Get the current working directory so we can change directories back when done"
+    echo "If no directory where depot tools should be..."
+
+    if [ ! -d $depot_tools_dir ]
+    then
+        echo "Make directory for gclient called Depot Tools"
+        mkdir -p $depot_tools_dir
+
+        echo "Pull the depot tools project from chromium source into the depot tools directory"
+        git clone $depot_tools_url $depot_tools_dir
 
     else
 
-        echo Change directory into the depot tools
-        cd $DEPOT_TOOLS
+        echo "Change directory into the depot tools"
+        cd $depot_tools_dir
 
-        echo Pull the depot tools down to the latest
+        echo "Pull the depot tools down to the latest"
         git pull
     fi
-    PATH="$PATH:$DEPOT_TOOLS"
-    echo Go back to working directory
-    cd $WORKING_DIR
-}
 
-function choose_code_signing() {
-    if [ "$WEBRTC_TARGET" == "AppRTCDemo" ]; then
-        echo "AppRTCDemo target requires code signing since we are building an *.ipa"
-        if [[ -z $IDENTITY ]]
-        then
-            COUNT=$(security find-identity -v | grep -c "iPhone Developer")
-            if [[ $COUNT -gt 1 ]]
-            then
-              security find-identity -v
-              echo "Please select your code signing identity index from the above list:"
-              read INDEX
-              IDENTITY=$(security find-identity -v | awk -v i=$INDEX -F "\\\) |\"" '{if (i==$1) {print $3}}')
-            else
-              IDENTITY=$(security find-identity -v | grep "iPhone Developer" | awk -F "\) |\"" '{print $3}')
-            fi
-            echo Using code signing identity $IDENTITY
-        fi
-        sed -i -e "s/\'CODE_SIGN_IDENTITY\[sdk=iphoneos\*\]\': \'iPhone Developer\',/\'CODE_SIGN_IDENTITY[sdk=iphoneos*]\': \'$IDENTITY\',/" $WEBRTC/src/build/common.gypi
-    fi
+    PATH="$PATH:$depot_tools_dir"
+
+    echo "Go back to working directory"
+    cd $WORKING_DIR
 }
 
 # Set the base of the GYP defines, instructing gclient runhooks what to generate
 function wrbase() {
 
-    export GYP_DEFINES="build_with_libjingle=1 build_with_chromium=0 libjingle_objc=1"
-    if [ "$WEBRTC_TARGET" != "AppRTCDemo" ]; then
-        GYP_DEFINES="chromium_ios_signing=0"
-    fi
-    export GYP_GENERATORS="ninja,xcode-ninja"
+    export GYP_DEFINES="chromium_ios_signing=0 clang_xcode=1 use_objc_h264=1  include_tests=0"
+    export GYP_GENERATORS="ninja"
+    export GYP_GENERATOR_FLAGS="output_dir=$out_quickblox$1"
 }
 
 # Add the iOS Device specific defines on top of the base
-function wrios_armv7() {
-    wrbase
+function arm() {
+
+    wrbase $1
     export GYP_DEFINES="$GYP_DEFINES OS=ios target_arch=arm"
-    export GYP_GENERATOR_FLAGS="output_dir=out_ios_armeabi_v7a"
     export GYP_CROSSCOMPILE=1
 }
 
 # Add the iOS ARM 64 Device specific defines on top of the base
-function wrios_armv8() {
-    wrbase
-    export GYP_DEFINES="$GYP_DEFINES OS=ios target_arch=arm64 use_objc_h264=1"
-    export GYP_GENERATOR_FLAGS="output_dir=out_ios_arm64_v8a"
+function arm64() {
+
+    wrbase $1
+    export GYP_DEFINES="$GYP_DEFINES OS=ios target_arch=arm64"
+    export GYP_GENERATORS="$GYP_GENERATORS,xcode"
     export GYP_CROSSCOMPILE=1
 }
 
 # Add the iOS Simulator X86 specific defines on top of the base
-function wrX86() {
-    wrbase
+
+function ia32() {
+
+    wrbase $1
     export GYP_DEFINES="$GYP_DEFINES OS=ios target_arch=ia32"
-    export GYP_GENERATOR_FLAGS="output_dir=out_ios_x86"
 }
 
 # Add the iOS Simulator X64 specific defines on top of the base
-function wrX86_64() {
-    wrbase
+function x86_64() {
+
+    wrbase $1
     export GYP_DEFINES="$GYP_DEFINES OS=ios target_arch=x64 target_subarch=arm64 msan=1"
-    export GYP_GENERATOR_FLAGS="output_dir=out_ios_x86_64"
 }
 
-# Add the Mac 64 bit intel defines
-function wrMac64() {
-    wrbase
-    export GYP_DEFINES="$GYP_DEFINES OS=mac target_arch=x64 use_system_ssl=1 use_openssl=0 use_nss=0 mac_sdk=10.10"
-    export GYP_GENERATOR_FLAGS="output_dir=out_mac_x86_64"
-}
-
-# Gets the revision number of the current WebRTC svn repo on the filesystem
+## Gets the revision number of the current WebRTC svn repo on the filesystem
 function get_revision_number() {
+
     DIR=`pwd`
-    cd "$WEBRTC/src"
+    cd "$webrtc_source_dir/src"
 
     REVISION_NUMBER=`git log -1 | grep 'Cr-Commit-Position: refs/heads/master@{#' | egrep -o "[0-9]+}" | tr -d '}'`
 
@@ -185,72 +184,46 @@ function get_revision_number() {
 
 # This function allows you to pull the latest changes from WebRTC without doing an entire clone, much faster to build and try changes
 # Pass in a revision number as an argument to pull that specific revision ex: update2Revision 6798
+
 function update2Revision() {
     # Ensure that we have gclient added to our environment, so this function can run standalone
-    pull_depot_tools
-    cd $WEBRTC
-
+    cd $webrtc_source_dir
+    printf "%40s🔸Update to revision: $1\n\n"
     # Setup gclient config
-    echo Configuring gclient for iOS build
-    if [ -z $USER_WEBRTC_URL ]
+    echo "Configuring gclient for iOS build:"
+
+    if [ -n "$user_webrtc_url"]
     then
         echo "User has not specified a different webrtc url. Using default"
-        gclient config --unmanaged --name=src "$DEFAULT_WEBRTC_URL"
+        gclient config --unmanaged --name=src "$default_webrtc_url"
     else
-        echo "User has specified their own webrtc url $USER_WEBRTC_URL"
-        gclient config  --unmanaged --name=src "$USER_WEBRTC_URL"
+        echo "User has specified their own webrtc url $user_webrtc_url"
+        gclient config --unmanaged --name=src "$user_webrtc_url"
     fi
 
-    # # Make sure that the target os is set to JUST MAC at first by adding that to the .gclient file that gclient config command created
-    # # Note this is a workaround until one of the depot_tools/ios bugs has been fixed
-    # echo "target_os = ['mac']" >> .gclient
-    # if [ -z $1 ]
-    # then
-    #     sync
-    # else
-    #     sync "$1"
-    # fi
-
-    # # Delete the last line saying we will only build for mac
-    # sed -i "" '$d' .gclient
-
-    # Write mac and ios to the target os in the gclient file generated by gclient config
     echo "target_os = ['ios', 'mac']" >> .gclient
 
     if [ -z $1 ]
     then
-        sync
+        sync_webrtc
     else
-        sync "$1"
+        sync_webrtc "$1"
     fi
 
-    # Inject the new libWebRTC_objc target magic
-    if [ "$WEBRTC_TARGET" == "libWebRTC_objc" ] ; then
-        twiddle_objc_target
-    fi
-    echo "-- webrtc has been successfully updated"
-}
+    # Inject the new target
+    inject_quickblox_target
 
-# This function cleans out your webrtc directory and does a fresh clone -- slower than a pull
-# Pass in a revision number as an argument to clone that specific revision ex: clone 6798
-function clone() {
-    DIR=`pwd`
-
-    rm -rf $WEBRTC
-    mkdir -v $WEBRTC
-
-    update2Revision "$1"
+    echo "  ✓webrtc has been successfully updated"
 }
 
 # Fire the sync command. Accepts an argument as the revision number that you want to sync to
-function sync() {
-    pull_depot_tools
-    cd $WEBRTC
-    choose_code_signing
+function sync_webrtc() {
 
-    if [ "$WEBRTC_TARGET" == "libWebRTC_objc" ] ; then
-        untwiddle_objc_target
-    fi
+    echo "\nGlient sync $1"
+
+    cd $webrtc_source_dir
+
+    reject_quickblox_target
 
     if [ -z $1 ]
     then
@@ -260,269 +233,119 @@ function sync() {
     fi
 }
 
-# Functions to twiddle the libWebRTC_objc target so that we can build the files that we need and exclude socket rocket and such
-function twiddle_objc_target () {
-    cd $WEBRTC
-    echo "Adding a new libWebRTC_objc target"
-    echo "$PROJECT_DIR/insert_two_lines_after_text.py" 
-    python "$PROJECT_DIR/insert_two_lines_after_text.py"  "$WEBRTC/src/webrtc/libjingle_examples.gyp"
+function inject_quickblox_target () {
+
+    cd $webrtc_source_dir
+    echo "\n🔵Inject a new $webrtc_target target $project_dir/quickblox_target.py"
+
+    python "$project_dir/quickblox_target.py" "$webrtc_source_dir/src/webrtc/webrtc_examples.gyp"
 }
 
-function untwiddle_objc_target () {
-    cd $WEBRTC/src
-    
-    file_changed=`git status --porcelain webrtc/libjingle_examples.gyp | awk '/^ M/{ print $2 }'`
-    
-    if [ "$file_changed" == "webrtc/libjingle_examples.gyp" ] ; then
-        echo "Untwiddling the libWebRTC_objc target"
-        git checkout -- webrtc/libjingle_examples.gyp
+function reject_quickblox_target () {
+
+    if [ -d $webrtc_source_dir/src ]; then
+
+        cd $webrtc_source_dir/src
+        file_changed=`git status --porcelain webrtc/webrtc_examples.gyp | awk '/^ M/{ print $2 }'`
+
+        if [ "$file_changed" == "webrtc/webrtc_examples.gyp" ] ; then
+
+            echo "🔴Reject the $webrtc_target target"
+            git checkout -- webrtc/webrtc_examples.gyp
+        fi
     fi
 }
-
-LIBYUV="$WEBRTC/src/chromium/src/third_party/libyuv/include/"
-PUBLIC="$WEBRTC/src/talk/app/webrtc/objc/public/"
-
-WEBRTC_HEADERS="$WEBRTC/headers"
 
 # 1arg - mask, 2arg - dest_dir
 
-find_and_copy_files() {
+function find_and_copy_files() {
 
-    MASK=$1
-    DEST_DIR=$2
-    cp -R $MASK $DEST_DIR
+    mask=$1
+    dest_dir=$2
+    cp -R $mask $dest_dir
 }
 
-copy_webrtc_headers() {
+function copyHeaders() {
 
-    #Public headers
-    echo "create $WEBRTC_HEADERS/public"
-    create_directory_if_not_found "$WEBRTC_HEADERS/public"
-    cp -R "$PUBLIC" "$WEBRTC_HEADERS/public"
-    #Libyuv
-    echo "Create $WEBRTC_HEADERS/libyuv"
-    create_directory_if_not_found "$WEBRTC_HEADERS/libyuv"
-    cp -R "$LIBYUV" "$WEBRTC_HEADERS/libyuv"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/talk/media/base/"
-    find_and_copy_files "$WEBRTC/src/talk/media/base/*.h" "$WEBRTC_HEADERS/talk/media/base/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/base/"
-    find_and_copy_files "$WEBRTC/src/webrtc/base/*.h" "$WEBRTC_HEADERS/webrtc/base/"
-
-#################################################################################################################
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/common_video/"
-    find_and_copy_files "$WEBRTC/src/webrtc/common_video/*.h" "$WEBRTC_HEADERS/webrtc/common_video/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/common_video/interface/"
-    find_and_copy_files "$WEBRTC/src/webrtc/common_video/interface/*.h" "$WEBRTC_HEADERS/webrtc/common_video/interface/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/common_video/libyuv/include/"
-    find_and_copy_files "$WEBRTC/src/webrtc/common_video/libyuv/include/*.h" "$WEBRTC_HEADERS/webrtc/common_video/libyuv/include/"
-
-#################################################################################################################
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/modules/interface/"
-    find_and_copy_files "$WEBRTC/src/webrtc/modules/interface/*.h" "$WEBRTC_HEADERS/webrtc/modules/interface/"
-
-#################################################################################################################
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/modules/video_capture/"
-    find_and_copy_files "$WEBRTC/src/webrtc/modules/video_capture/*.h" "$WEBRTC_HEADERS/webrtc/modules/video_capture/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/modules/video_capture/ios/"
-    find_and_copy_files "$WEBRTC/src/webrtc/modules/video_capture/ios/*.h" "$WEBRTC_HEADERS/webrtc/modules/video_capture/ios/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/modules/video_capture/include/"
-    find_and_copy_files "$WEBRTC/src/webrtc/modules/video_capture/include/*.h" "$WEBRTC_HEADERS/webrtc/modules/video_capture/include/"
-
-#################################################################################################################
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/p2p/base/"
-    find_and_copy_files "$WEBRTC/src/webrtc/p2p/base/*.h" "$WEBRTC_HEADERS/webrtc/p2p/base/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/system_wrappers/interface/"
-    find_and_copy_files "$WEBRTC/src/webrtc/system_wrappers/interface/*.h" "$WEBRTC_HEADERS/webrtc/system_wrappers/interface/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/system_wrappers/source/"
-    find_and_copy_files "$WEBRTC/src/webrtc/system_wrappers/source/*.h" "$WEBRTC_HEADERS/webrtc/system_wrappers/source/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/talk/media/base/"
-    find_and_copy_files "$WEBRTC/src/talk/media/base/*.h" "$WEBRTC_HEADERS/talk/media/base/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/talk/app/webrtc/"
-    find_and_copy_files "$WEBRTC/src/talk/app/webrtc/*.h" "$WEBRTC_HEADERS/talk/app/webrtc/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/talk/media/webrtc/"
-    find_and_copy_files "$WEBRTC/src/talk/media/webrtc/*.h" "$WEBRTC_HEADERS/talk/media/webrtc/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/talk/session/media/"
-    find_and_copy_files "$WEBRTC/src/talk/session/media/*.h" "$WEBRTC_HEADERS/talk/session/media/"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/webrtc/p2p/client"
-    find_and_copy_files "$WEBRTC/src/webrtc/p2p/client/*.h" "$WEBRTC_HEADERS/webrtc/p2p/client"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/talk/app/webrtc/objc"
-    find_and_copy_files "$WEBRTC/src/talk/app/webrtc/objc/*.h" "$WEBRTC_HEADERS/talk/app/webrtc/objc"
-
-    create_directory_if_not_found "$WEBRTC_HEADERS/talk/media/devices/"
-    find_and_copy_files "$WEBRTC/src/talk/media/devices/*.h" "$WEBRTC_HEADERS/talk/media/devices/"
-
-    find_and_copy_files "$WEBRTC/src/webrtc/*.h" "$WEBRTC_HEADERS/webrtc/"
+    echo "copyHeaders"
+    create_directory_if_not_found "$final_headers_dir/$1"
+    find_and_copy_files "$webrtc_source_dir/src/$1*.h" "$final_headers_dir/$1"
 }
 
-function copy_headers() {
+copy_final_headers_dir() {
 
-    if [ ! -h "$BUILD" ]; then
+    rm -rf $final_headers_dir
+    create_directory_if_not_found "$final_headers_dir"
 
-        copy_webrtc_headers
-        create_directory_if_not_found "$BUILD"
-		ln -s "$WEBRTC/src/talk/app/webrtc/objc/public/" "$WEBRTC/headers" || true
-    fi
+    dirList=(
+        'chromium/src/third_party/libyuv/include/'
+        'chromium/src/third_party/libyuv/include/libyuv/'
+        'webrtc/'
+        'talk/media/base/'
+        'webrtc/audio/'
+        'webrtc/base/'
+        'webrtc/common_video/'
+        'webrtc/common_video/include/'
+        'webrtc/common_video/libyuv/include/'
+        'webrtc/common_audio/signal_processing/include/'
+        'webrtc/modules/video_capture/'
+        'webrtc/modules/include/'
+        'webrtc/modules/video_capture/ios/'
+        'webrtc/modules/audio_device/'
+        'webrtc/modules/audio_device/dummy/'
+        'webrtc/modules/audio_device/include/'
+        'webrtc/modules/utility/include/'
+        'webrtc/p2p/base/'
+        'webrtc/system_wrappers/include/'
+        'webrtc/system_wrappers/source/'
+        'talk/media/base/'
+        'talk/app/webrtc/'
+		'talk/app/webrtc/objc/'
+		'talk/app/webrtc/objc/public/'
+        'talk/media/webrtc/'
+        'talk/session/media/'
+        'webrtc/p2p/client/'
+        'talk/media/devices/'
+    )
+
+    for dir in ${dirList[@]}; do
+        copyHeaders $dir
+    done
 }
 
-function build_webrtc_mac() {
+# Build for the simulator (ia32 architecture)
+function build_t() {
 
-    cd "$WEBRTC/src"
+    printf "%40s🔸Build: $1\n"
 
-    wrMac64
-    choose_code_signing
+    cd "$webrtc_source_dir/src"
+
+    arch="$1"
+    out_dir="$prefix_out$arch"
+
+    $1 $out_dir
+
     gclient runhooks
-
-    copy_headers
-
-    WEBRTC_REVISION=`get_revision_number`
-    if [ "$WEBRTC_DEBUG" = true ] ; then
-        exec_ninja "out_mac_x86_64/Debug/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-mac-x86_64-Debug.a" $WEBRTC/src/out_mac_x86_64/Debug/*.a
-    fi
-
-    if [ "$WEBRTC_RELEASE" = true ] ; then
-        exec_ninja "out_mac_x86_64/Release/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-mac-x86_64-Release.a" $WEBRTC/src/out_mac_x86_64/Release/*.a
-        exec_strip "$BUILD/libWebRTC-$WEBRTC_REVISION-mac-x86_64-Release.a"
-    fi
-}
-
-# Build AppRTC Demo for the simulator (ia32 architecture)
-function build_apprtc_sim() {
-
-    cd "$WEBRTC/src"
-
-    wrX86
-    choose_code_signing
-    gclient runhooks
-
-    copy_headers
-
-    WEBRTC_REVISION=`get_revision_number`
-    if [ "$WEBRTC_DEBUG" = true ] ; then
-        exec_ninja "out_ios_x86/Debug-iphonesimulator/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86-Debug.a" $WEBRTC/src/out_ios_x86/Debug-iphonesimulator/*.a
-    fi
-
-    if [ "$WEBRTC_PROFILE" = true ] ; then
-        exec_ninja "out_ios_x86/Profile-iphonesimulator/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86-Profile.a" $WEBRTC/src/out_ios_x86/Profile-iphonesimulator/*.a
-    fi
-
-    if [ "$WEBRTC_RELEASE" = true ] ; then
-        exec_ninja "out_ios_x86/Release-iphonesimulator/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86-Release.a" $WEBRTC/src/out_ios_x86/Release-iphonesimulator/*.a
-        exec_strip "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86-Release.a"
-    fi
-}
-
-# Build AppRTC Demo for the 64 bit simulator (x86_64 architecture)
-function build_apprtc_sim64() {
-
-    cd "$WEBRTC/src"
-
-    wrX86_64
-    choose_code_signing
-    gclient runhooks
-
-    copy_headers
 
     WEBRTC_REVISION=`get_revision_number`
 
-    if [ "$WEBRTC_DEBUG" = true ] ; then
-        exec_ninja "out_ios_x86_64/Debug-iphonesimulator/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86_64-Debug.a" $WEBRTC/src/out_ios_x86_64/Debug-iphonesimulator/*.a
+    if [ $webrtc_debug = true ] ; then
+
+        exec_ninja "$out_dir/Debug$2/"
+        exec_libtool "$final_libs_dir/webrtc-$arch.a" "$webrtc_source_dir/src/$out_dir/Debug$2/*.a"
     fi
 
-    if [ "$WEBRTC_PROFILE" = true ] ; then
-        exec_ninja "out_ios_x86_64/Profile-iphonesimulator/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86_64-Profile.a" $WEBRTC/src/out_ios_x86_64/Profile-iphonesimulator/*.a
+    if [ $webrtc_profile = true ] ; then
+
+        exec_ninja "$out_dir/Profile$2/"
+        exec_libtool "$final_libs_dir/webrtc-$arch.a" "$webrtc_source_dir/src/$out_dir/Profile$2/*.a"
     fi
 
-    if [ "$WEBRTC_RELEASE" = true ] ; then
-        exec_ninja "out_ios_x86_64/Release-iphonesimulator/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86_64-Release.a" $WEBRTC/src/out_ios_x86_64/Release-iphonesimulator/*.a
-        exec_strip "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86_64-Release.a"
-    fi
-}
+    if [ $webrtc_release = true ] ; then
 
-# Build AppRTC Demo for a real device
-function build_apprtc() {
-
-    cd "$WEBRTC/src"
-
-    wrios_armv7
-    choose_code_signing
-    gclient runhooks
-
-    copy_headers
-
-    WEBRTC_REVISION=`get_revision_number`
-
-    if [ "$WEBRTC_DEBUG" = true ] ; then
-        exec_ninja "out_ios_armeabi_v7a/Debug-iphoneos/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-armeabi_v7a-Debug.a" $WEBRTC/src/out_ios_armeabi_v7a/Debug-iphoneos/*.a
-    fi
-
-    if [ "$WEBRTC_PROFILE" = true ] ; then
-        exec_ninja "out_ios_armeabi_v7a/Profile-iphoneos/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-armeabi_v7a-Profile.a" $WEBRTC/src/out_ios_armeabi_v7a/Profile-iphoneos/*.a
-    fi
-
-    if [ "$WEBRTC_RELEASE" = true ] ; then
-        exec_ninja "out_ios_armeabi_v7a/Release-iphoneos/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-armeabi_v7a-Release.a" $WEBRTC/src/out_ios_armeabi_v7a/Release-iphoneos/*.a
-        exec_strip "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-armeabi_v7a-Release.a"
-    fi
-}
-
-# Build AppRTC Demo for an armv7 real device
-function build_apprtc_arm64() {
-
-    cd "$WEBRTC/src"
-
-    wrios_armv8
-    choose_code_signing
-    gclient runhooks
-
-    copy_headers
-
-    WEBRTC_REVISION=`get_revision_number`
-
-    if [ "$WEBRTC_DEBUG" = true ] ; then
-
-        exec_ninja "out_ios_arm64_v8a/Debug-iphoneos/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-arm64_v8a-Debug.a" $WEBRTC/src/out_ios_arm64_v8a/Debug-iphoneos/*.a
-    fi
-
-    if [ "$WEBRTC_PROFILE" = true ] ; then
-
-        exec_ninja "out_ios_arm64_v8a/Profile-iphoneos/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-arm64_v8a-Profile.a" $WEBRTC/src/out_ios_arm64_v8a/Profile-iphoneos/*.a
-    fi
-
-    if [ "$WEBRTC_RELEASE" = true ] ; then
-
-        exec_ninja "out_ios_arm64_v8a/Release-iphoneos/"
-        exec_libtool "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-arm64_v8a-Release.a" $WEBRTC/src/out_ios_arm64_v8a/Release-iphoneos/*.a
-        exec_strip "$BUILD/libWebRTC-$WEBRTC_REVISION-ios-arm64_v8a-Release.a"
+        exec_ninja "$out_dir/Release$2/"
+        exec_libtool "$final_libs_dir/webrtc-$arch.a" "$webrtc_source_dir/src/$out_dir/Release$2/*.a"
+        exec_strip "$final_libs_dir/webrtc-$arch.a"
     fi
 }
 
@@ -530,225 +353,84 @@ function build_apprtc_arm64() {
 # Outputs the file into the build directory with the revision number
 function lipo_intel_and_arm() {
 
-    if [ "$WEBRTC_DEBUG" = true ] ; then
+    if [ "webrtc_source_dir_DEBUG" = true ] ; then
         lipo_for_configuration "Debug"
     fi
 
-    if [ "$WEBRTC_PROFILE" = true ] ; then
+    if [ "webrtc_source_dir_PROFILE" = true ] ; then
         lipo_for_configuration "Profile"
     fi
 
-    if [ "$WEBRTC_RELEASE" = true ] ; then
+    if [ "webrtc_source_dir_RELEASE" = true ] ; then
         lipo_for_configuration "Release"
     fi
 }
 
-function lipo_for_configuration() {
-
-    CONFIGURATION=$1
-    WEBRTC_REVISION=`get_revision_number`
-
-    # Directories to use for lipo, armv7 and ia32 as default
-    LIPO_DIRS="$BUILD/libWebRTC-$WEBRTC_REVISION-ios-armeabi_v7a-$CONFIGURATION.a"
-    # Add ARM64
-    LIPO_DIRS="$LIPO_DIRS $BUILD/libWebRTC-$WEBRTC_REVISION-ios-arm64_v8a-$CONFIGURATION.a"
-    # Add x86
-    LIPO_DIRS="$LIPO_DIRS $BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86-$CONFIGURATION.a"
-    # and add x86_64
-    LIPO_DIRS="$LIPO_DIRS $BUILD/libWebRTC-$WEBRTC_REVISION-ios-x86_64-$CONFIGURATION.a"
-
-    # Lipo the simulator build with the ios build into a universal library
-    lipo -create $LIPO_DIRS -output $BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-$CONFIGURATION.a
-
-    # Delete the latest symbolic link just in case :)
-    if [ -a $WEBRTC/libWebRTC-LATEST-Universal-$CONFIGURATION.a ]
-    then
-        rm $WEBRTC/libWebRTC-LATEST-Universal-$CONFIGURATION.a
-    fi
-
-    # Create a symbolic link pointing to the exact revision that is the latest. This way I don't have to change the xcode project file every time we update the revision number, while still keeping it easy to track which revision you are on
-    ln -sf $BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-$CONFIGURATION.a $WEBRTC/libWebRTC-LATEST-Universal-$CONFIGURATION.a
-
-    # Make it clear which revision you are using .... You don't want to get in the state where you don't know which revision you were using... trust me
-    echo "The libWebRTC-LATEST-Universal-$CONFIGURATION.a in this same directory, is revision " > $WEBRTC/libWebRTC-LATEST-Universal-$CONFIGURATION.a.version.txt
-
-    # Also write to a file for funzies
-    echo $WEBRTC_REVISION >> $WEBRTC/libWebRTC-LATEST-Universal-$CONFIGURATION.a.version.txt
-
-    # Write the version down to a file
-    echo "Architectures Built" >> $BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-$CONFIGURATION.a.version.txt
-    echo "ia32 - Intel x86" >> $BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-$CONFIGURATION.a.version.txt
-    echo "ia64 - Intel x86_64" >> $BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-$CONFIGURATION.a.version.txt
-    echo "armv7 - Arm x86" >> $BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-$CONFIGURATION.a.version.txt
-    echo "arm64_v8a - Arm 64 (armv8)" >> $BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-$CONFIGURATION.a.version.txt
-}
-
-# Convenience method to just "get webrtc" -- a clone
-# Pass in an argument if you want to get a specific webrtc revision
-function get_webrtc() {
-
-    pull_depot_tools
-    update2Revision "$1"
-}
-
-# Build webrtc for an ios device and simulator, then create a universal library
-function build_webrtc() {
-
-#	WEBRTC_REVISION=`get_revision_number`
-#	sed -i '' '4s/.*/  s.version = "'$WEBRTC_REVISION'"/' $PROJECT_DIR/WebRTCHeaders.podspec
-    pull_depot_tools
-    build_apprtc
-    build_apprtc_arm64
-    build_apprtc_sim
-    build_apprtc_sim64
-    lipo_intel_and_arm
-}
-
-# Create the static library, requires an argument specifiying Debug or Release
-function create_archive_of_static_libraries() {
-
-    echo Get the current working directory so we can change directories back when done
-    WORKING_DIR=`pwd`
-    VERSION_BUILD=0
-    WEBRTC_REVISION=`get_revision_number`
-
-    echo "Creating Static Library"
-    create_directory_if_not_found "$BUILD/archives"
-    rm -rf "$BUILD/archives/$WEBRTC_REVISION/$1"
-    create_directory_if_not_found "$BUILD/archives/$WEBRTC_REVISION"
-    create_directory_if_not_found "$BUILD/archives/$WEBRTC_REVISION/$1"
-    
-    create_directory_if_not_found "$BUILD/archives/LATEST/"
-	ln -sfv "$BUILD/archives/$WEBRTC_REVISION/$1" "$BUILD/archives/LATEST/"
-
-    cd "$BUILD/archives/$WEBRTC_REVISION/$1"
-
-    create_directory_if_not_found libjingle_peerconnection/
-    
-    # Copy podspec with ios and mac
-    cp -v "$PROJECT_DIR/libjingle_peerconnection.podspec" "libjingle_peerconnection.podspec"
-
-    # inject pod url
-    if [ -z $USER_POD_URL ]
-    then
-        echo "User has not specified a different pod url. Using default"
-        sed -ic "s|{POD_URL}|"$DEFAULT_POD_URL"|g" libjingle_peerconnection.podspec
-    else
-        echo "User has specified their own pod url $USER_POD_URL"
-        sed -ic "s|{POD_URL}|"$USER_POD_URL"|g" libjingle_peerconnection.podspec
-    fi
-    
-    # inject revision number
-    sed -ic "s/{WEBRTC_REVISION}/$WEBRTC_REVISION/g" libjingle_peerconnection.podspec
-    # inject build type string
-    sed -ic "s/{BUILD_TYPE_STRING}/$1/g" libjingle_peerconnection.podspec
-    
-    if [ $1 = "Debug" ] 
-    then
-        VERSION_BUILD=`get_version_build "$WEBRTC_REVISION" 0`
-        cp -fv "$BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-Debug.a" "libjingle_peerconnection/libWebRTC.a"
-        cp -fv "$BUILD/libWebRTC-$WEBRTC_REVISION-mac-x86_64-Debug.a" "libjingle_peerconnection/libWebRTC-osx.a"
-        sed -ic "s/{BUILD_TYPE}/0/g" libjingle_peerconnection.podspec
-        sed -ic "s/{VERSION_BUILD}/$VERSION_BUILD/g" libjingle_peerconnection.podspec
-    fi
-
-    if [ $1 = "Release" ] 
-    then
-        VERSION_BUILD=`get_version_build "$WEBRTC_REVISION" 2`
-        cp -fv "$BUILD/libWebRTC-$WEBRTC_REVISION-arm-intel-Release.a" "libjingle_peerconnection/libWebRTC.a"
-        cp -fv "$BUILD/libWebRTC-$WEBRTC_REVISION-mac-x86_64-Release.a" "libjingle_peerconnection/libWebRTC-osx.a"
-        sed -ic "s/{BUILD_TYPE}/2/g" libjingle_peerconnection.podspec
-        sed -ic "s/{VERSION_BUILD}/$VERSION_BUILD/g" libjingle_peerconnection.podspec
-    fi
-
-    # write the revision and build type into a file
-    echo "revision $WEBRTC_REVISION $1 build" > "libjingle_peerconnection/libjingle_peerconnection_revision_build.txt"
-    
-    # add headers
-    cp -fvR "$WEBRTC/src/talk/app/webrtc/objc/public/" "libjingle_peerconnection/Headers"
-
-    # Compress artifact
-    tar --use-compress-prog=pbzip2 -cvLf "libWebRTC.tar.bz2" *
-
-    echo Go back to working directory
-    cd $WORKING_DIR
-}
-
-# Grabs the current version build based on what is
-function get_version_build() {
-    # Set version build
-    VERSION_BUILD=0
-
-    # Create temp output file to parse
-    pod search libjingle_peerconnection > /tmp/libjingle_search.log
-
-    if [ -z $USER_POD_URL ]
-    then
-        VERSION_BUILD=`egrep -o 'Versions: .*\[master repo\]' /tmp/libjingle_search.log | egrep -o '\d+\.\d\.\d+' | awk -v REVISION_NUM="$1" -v BUILD_TYPE="$2" -F '.' 'BEGIN{ VERSION_COUNT = 0 }; { if ($1 == REVISION_NUM && $2 == BUILD_TYPE) VERSION_COUNT += 1 }; END{ print VERSION_COUNT };'`
-    else
-        VERSION_BUILD=`egrep -o '\[master repo\].*' /tmp/libjingle_search.log | egrep -o '\d+\.\d\.\d+' | awk -v REVISION_NUM="$1" -v BUILD_TYPE="$2" -F '.' 'BEGIN{ VERSION_COUNT = 0 }; { if ($1 == REVISION_NUM && $2 == BUILD_TYPE) VERSION_COUNT += 1 }; END{ print VERSION_COUNT };'`
-    fi
-
-    echo "$VERSION_BUILD"
-}
-
-# Create an iOS "framework" for distribution sans CocoaPods
-function create_ios_framework() {
-
-    if [ "$WEBRTC_DEBUG" = true ] ; then
-        create_ios_framework_for_configuration "Debug"
-    fi
-
-    if [ "$WEBRTC_PROFILE" = true ] ; then
-        create_ios_framework_for_configuration "Profile"
-    fi
-
-    if [ "$WEBRTC_RELEASE" = true ] ; then
-        create_ios_framework_for_configuration "Release"
-    fi
-}
-
-function create_ios_framework_for_configuration () {
-
-    CONFIGURATION=$1
-
-    rm -rf $WEBRTC/Framework/$CONFIGURATION/WebRTC.framework
-    mkdir -p $WEBRTC/Framework/$CONFIGURATION/WebRTC.framework/Versions/A/Headers
-    cp $WEBRTC/src/talk/app/webrtc/objc/public/*.h $WEBRTC/Framework/$CONFIGURATION/WebRTC.framework/Versions/A/Headers
-    cp $WEBRTC/libWebRTC-LATEST-Universal-$CONFIGURATION.a $WEBRTC/Framework/$CONFIGURATION/WebRTC.framework/Versions/A/WebRTC
-
-    WEBRTC_REVISION=`get_revision_number`
-    echo $WEBRTC_REVISION >> $WEBRTC/Framework/$CONFIGURATION/WebRTC.framework/Version.txt
-
-    pushd $WEBRTC/Framework/$CONFIGURATION/WebRTC.framework/Versions
-    ln -sfh A Current
-    popd
-    pushd $WEBRTC/Framework/$CONFIGURATION/WebRTC.framework
-    ln -sfh Versions/Current/Headers Headers
-    ln -sfh Versions/Current/WebRTC WebRTC
-    popd
-}
-
 # Get webrtc then build webrtc
 function dance() {
-    # These next if statement trickery is so that if you run from the command line and don't set anything to build, it will default to the debug profile.@
 
-echo "->>>>$@"
+#    # These next if statement trickery is so that if you run from the command line and don't set anything to build, it will default to the debug profile.@
+#
+#	# check for webrtc revision
+#	# if equal, skip dance and exit
+#    if [ -f $webrtc_source_dir/revision.txt ]; then
+#		echo "revision.txt exists."
+#		line=$(head -n 1 $webrtc_source_dir/revision.txt)
+#
+#		if [ "$line" == "$webrtc_revision" ]; then
+#			echo "Revision has not changed"
+#
+#			# need to check if libs dir is empty
+#			# every folder cotains .ds_store, so we need to check count of files in dir
+#			count=$(find $final_libs_dir -maxdepth 1 -name '*.a' | wc -l)
+#			# must be 4 .a files
+#			if [ $count == 4 ]; then
+#				# not empty
+#				echo "And all libs in $final_libs_dir are present, stopping... $count"
+#				exit 0
+#			else
+#				echo "But $final_libs_dir folder does not contain all libraries, so trying to continue build"
+#			fi
+#		else
+#			echo "Revision has changed since last build"
+#		fi
+#	fi
+#
+#	rm -rf $final_libs_dir
+#	echo "Previous webrtc libraries .a has been removed in the folder $final_libs_dir"
+#
+#	echo "$webrtc_revision" > $webrtc_source_dir/revision.txt
+
+
     BUILD_DEBUG=true
 
-    if [ "$WEBRTC_RELEASE" = true ] ; then
+    if [ "$webrtc_release" = true ] ; then
         BUILD_DEBUG=false
     fi
 
-    if [ "$WEBRTC_PROFILE" = true ] ; then
+    if [ "$webrtc_profile" = true ] ; then
         BUILD_DEBUG=false
     fi
 
-    if [ "$BUILD_DEBUG" = true ] ; then
-        WEBRTC_DEBUG=true
+    if [ "$webrtc_debug" = true ] ; then
+        BUILD_DEBUG=true
     fi
 
-    get_webrtc $@
-    build_webrtc
-    echo "Finished Dancing!"
+    create_directory_if_not_found "$webrtc_source_dir"
+    create_directory_if_not_found "$final_libs_dir"
+
+    pull_depot_tools
+
+    # Pass in an argument if you want to get a specific webrtc revision
+    update2Revision $webrtc_revision
+
+    build_t "ia32" "-iphonesimulator"
+    build_t "x86_64" "-iphonesimulator"
+    build_t "arm" "-iphoneos"
+    build_t "arm64" "-iphoneos"
+
+    copy_final_headers_dir
 }
+
+dance
+echo "$USER!! Build is Finished 🍺🍺🍺"

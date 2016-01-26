@@ -62,6 +62,7 @@ class VideoSendStream : public SendStream {
   };
 
   struct Stats {
+    std::string encoder_implementation_name = "unknown";
     int input_frame_rate = 0;
     int encode_frame_rate = 0;
     int avg_encode_time_ms = 0;
@@ -69,6 +70,7 @@ class VideoSendStream : public SendStream {
     int target_media_bitrate_bps = 0;
     int media_bitrate_bps = 0;
     bool suspended = false;
+    bool bw_limited_resolution = false;
     std::map<uint32_t, StreamStats> substreams;
   };
 
@@ -99,6 +101,9 @@ class VideoSendStream : public SendStream {
       std::string ToString() const;
 
       std::vector<uint32_t> ssrcs;
+
+      // See RtcpMode for description.
+      RtcpMode rtcp_mode = RtcpMode::kCompound;
 
       // Max RTP packet size delivered to send transport from VideoEngine.
       size_t max_packet_size = kDefaultMaxPacketSize;

@@ -1,2 +1,0 @@
-The libWebRTC-LATEST-Universal-Debug.a in this same directory, is revision 
-10741

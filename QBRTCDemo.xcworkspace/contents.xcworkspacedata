@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/all.xcodeproj">
+      location = "group:Scripts/webrtc/src/all.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:QBRTCDemo.xcodeproj">

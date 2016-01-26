@@ -41,8 +41,17 @@ BEGIN_PROXY_MAP(PeerConnection)
                 remote_streams)
   PROXY_METHOD1(bool, AddStream, MediaStreamInterface*)
   PROXY_METHOD1(void, RemoveStream, MediaStreamInterface*)
+  PROXY_METHOD2(rtc::scoped_refptr<RtpSenderInterface>,
+                AddTrack,
+                MediaStreamTrackInterface*,
+                std::vector<MediaStreamInterface*>)
+  PROXY_METHOD1(bool, RemoveTrack, RtpSenderInterface*)
   PROXY_METHOD1(rtc::scoped_refptr<DtmfSenderInterface>,
                 CreateDtmfSender, AudioTrackInterface*)
+  PROXY_METHOD2(rtc::scoped_refptr<RtpSenderInterface>,
+                CreateSender,
+                const std::string&,
+                const std::string&)
   PROXY_CONSTMETHOD0(std::vector<rtc::scoped_refptr<RtpSenderInterface>>,
                      GetSenders)
   PROXY_CONSTMETHOD0(std::vector<rtc::scoped_refptr<RtpReceiverInterface>>,

@@ -129,7 +129,6 @@ class ChannelManager : public rtc::MessageHandler,
 
   bool GetOutputVolume(int* level);
   bool SetOutputVolume(int level);
-  bool SetDefaultVideoEncoderConfig(const VideoEncoderConfig& config);
   // RTX will be enabled/disabled in engines that support it. The supporting
   // engines will start offering an RTX codec. Must be called before Init().
   bool SetVideoRtxEnabled(bool enable);
@@ -163,8 +162,10 @@ class ChannelManager : public rtc::MessageHandler,
 
   // The operations below occur on the main thread.
 
-  // Starts AEC dump using existing file.
-  bool StartAecDump(rtc::PlatformFile file);
+  // Starts AEC dump using existing file, with a specified maximum file size in
+  // bytes. When the limit is reached, logging will stop and the file will be
+  // closed. If max_size_bytes is set to <= 0, no limit will be used.
+  bool StartAecDump(rtc::PlatformFile file, int64_t max_size_bytes);
 
   // Stops recording AEC dump.
   void StopAecDump();
@@ -176,11 +177,6 @@ class ChannelManager : public rtc::MessageHandler,
   void StopRtcEventLog();
 
   sigslot::signal2<VideoCapturer*, CaptureState> SignalVideoCaptureStateChange;
-
- protected:
-  // Adds non-transient parameters which can only be changed through the
-  // options store.
-  bool SetAudioOptions(const AudioOptions& options);
 
  private:
   typedef std::vector<VoiceChannel*> VoiceChannels;
@@ -213,8 +209,6 @@ class ChannelManager : public rtc::MessageHandler,
                                    bool rtcp,
                                    DataChannelType data_channel_type);
   void DestroyDataChannel_w(DataChannel* data_channel);
-  bool SetAudioOptions_w(const AudioOptions& options,
-                         const Device* in_dev, const Device* out_dev);
   void OnVideoCaptureStateChange(VideoCapturer* capturer,
                                  CaptureState result);
   void GetSupportedFormats_w(
@@ -234,9 +228,7 @@ class ChannelManager : public rtc::MessageHandler,
   VideoChannels video_channels_;
   DataChannels data_channels_;
 
-  AudioOptions audio_options_;
   int audio_output_volume_;
-  VideoEncoderConfig default_video_encoder_config_;
   VideoRenderer* local_renderer_;
   bool enable_rtx_;
 

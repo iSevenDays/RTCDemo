@@ -42,12 +42,8 @@
 
 namespace webrtc {
 
+class MediaStreamObserver;
 class RemoteMediaStreamFactory;
-
-typedef std::vector<PortAllocatorFactoryInterface::StunConfiguration>
-    StunConfigurations;
-typedef std::vector<PortAllocatorFactoryInterface::TurnConfiguration>
-    TurnConfigurations;
 
 // Populates |session_options| from |rtc_options|, and returns true if options
 // are valid.
@@ -60,11 +56,11 @@ bool ConvertRtcOptionsForOffer(
 bool ParseConstraintsForAnswer(const MediaConstraintsInterface* constraints,
                                cricket::MediaSessionOptions* session_options);
 
-// Parses the URLs for each server in |servers| to build |stun_config| and
-// |turn_config|.
+// Parses the URLs for each server in |servers| to build |stun_servers| and
+// |turn_servers|.
 bool ParseIceServers(const PeerConnectionInterface::IceServers& servers,
-                     StunConfigurations* stun_config,
-                     TurnConfigurations* turn_config);
+                     cricket::ServerAddresses* stun_servers,
+                     std::vector<cricket::RelayServerConfig>* turn_servers);
 
 // PeerConnection implements the PeerConnectionInterface interface.
 // It uses WebRtcSession to implement the PeerConnection functionality.
@@ -74,15 +70,6 @@ class PeerConnection : public PeerConnectionInterface,
                        public sigslot::has_slots<> {
  public:
   explicit PeerConnection(PeerConnectionFactory* factory);
-
-  // TODO(deadbeef): Remove this overload of Initialize once everyone is moved
-  // to the new version.
-  bool Initialize(
-      const PeerConnectionInterface::RTCConfiguration& configuration,
-      const MediaConstraintsInterface* constraints,
-      PortAllocatorFactoryInterface* allocator_factory,
-      rtc::scoped_ptr<DtlsIdentityStoreInterface> dtls_identity_store,
-      PeerConnectionObserver* observer);
 
   bool Initialize(
       const PeerConnectionInterface::RTCConfiguration& configuration,
@@ -96,10 +83,19 @@ class PeerConnection : public PeerConnectionInterface,
   bool AddStream(MediaStreamInterface* local_stream) override;
   void RemoveStream(MediaStreamInterface* local_stream) override;
 
+  rtc::scoped_refptr<RtpSenderInterface> AddTrack(
+      MediaStreamTrackInterface* track,
+      std::vector<MediaStreamInterface*> streams) override;
+  bool RemoveTrack(RtpSenderInterface* sender) override;
+
   virtual WebRtcSession* session() { return session_.get(); }
 
   rtc::scoped_refptr<DtmfSenderInterface> CreateDtmfSender(
       AudioTrackInterface* track) override;
+
+  rtc::scoped_refptr<RtpSenderInterface> CreateSender(
+      const std::string& kind,
+      const std::string& stream_id) override;
 
   std::vector<rtc::scoped_refptr<RtpSenderInterface>> GetSenders()
       const override;
@@ -158,31 +154,15 @@ class PeerConnection : public PeerConnectionInterface,
               const std::string track_id,
               uint32_t ssrc)
         : stream_label(stream_label), track_id(track_id), ssrc(ssrc) {}
+    bool operator==(const TrackInfo& other) {
+      return this->stream_label == other.stream_label &&
+             this->track_id == other.track_id && this->ssrc == other.ssrc;
+    }
     std::string stream_label;
     std::string track_id;
     uint32_t ssrc;
   };
   typedef std::vector<TrackInfo> TrackInfos;
-
-  struct RemotePeerInfo {
-    RemotePeerInfo()
-        : msid_supported(false),
-          default_audio_track_needed(false),
-          default_video_track_needed(false) {}
-    // True if it has been discovered that the remote peer support MSID.
-    bool msid_supported;
-    // The remote peer indicates in the session description that audio will be
-    // sent but no MSID is given.
-    bool default_audio_track_needed;
-    // The remote peer indicates in the session description that video will be
-    // sent but no MSID is given.
-    bool default_video_track_needed;
-
-    bool IsDefaultMediaStreamNeeded() {
-      return !msid_supported &&
-             (default_audio_track_needed || default_video_track_needed);
-    }
-  };
 
   // Implements MessageHandler.
   void OnMessage(rtc::Message* msg) override;
@@ -197,12 +177,6 @@ class PeerConnection : public PeerConnectionInterface,
                             AudioTrackInterface* audio_track);
   void DestroyVideoReceiver(MediaStreamInterface* stream,
                             VideoTrackInterface* video_track);
-  void CreateAudioSender(MediaStreamInterface* stream,
-                         AudioTrackInterface* audio_track,
-                         uint32_t ssrc);
-  void CreateVideoSender(MediaStreamInterface* stream,
-                         VideoTrackInterface* video_track,
-                         uint32_t ssrc);
   void DestroyAudioSender(MediaStreamInterface* stream,
                           AudioTrackInterface* audio_track,
                           uint32_t ssrc);
@@ -219,6 +193,16 @@ class PeerConnection : public PeerConnectionInterface,
   // Signals from WebRtcSession.
   void OnSessionStateChange(WebRtcSession* session, WebRtcSession::State state);
   void ChangeSignalingState(SignalingState signaling_state);
+
+  // Signals from MediaStreamObserver.
+  void OnAudioTrackAdded(AudioTrackInterface* track,
+                         MediaStreamInterface* stream);
+  void OnAudioTrackRemoved(AudioTrackInterface* track,
+                           MediaStreamInterface* stream);
+  void OnVideoTrackAdded(VideoTrackInterface* track,
+                         MediaStreamInterface* stream);
+  void OnVideoTrackRemoved(VideoTrackInterface* track,
+                           MediaStreamInterface* stream);
 
   rtc::Thread* signaling_thread() const {
     return factory_->signaling_thread();
@@ -250,12 +234,15 @@ class PeerConnection : public PeerConnectionInterface,
   // Called when a media type is rejected (m-line set to port 0).
   void RemoveTracks(cricket::MediaType media_type);
 
-  // Makes sure a MediaStream Track is created for each StreamParam in
-  // |streams|. |media_type| is the type of the |streams| and can be either
-  // audio or video.
+  // Makes sure a MediaStreamTrack is created for each StreamParam in |streams|,
+  // and existing MediaStreamTracks are removed if there is no corresponding
+  // StreamParam. If |default_track_needed| is true, a default MediaStreamTrack
+  // is created if it doesn't exist; if false, it's removed if it exists.
+  // |media_type| is the type of the |streams| and can be either audio or video.
   // If a new MediaStream is created it is added to |new_streams|.
   void UpdateRemoteStreamsList(
       const std::vector<cricket::StreamParams>& streams,
+      bool default_track_needed,
       cricket::MediaType media_type,
       StreamCollection* new_streams);
 
@@ -278,8 +265,6 @@ class PeerConnection : public PeerConnectionInterface,
   // |remote_streams_| and notifies the observer that the MediaStreams no longer
   // exist.
   void UpdateEndedRemoteMediaStreams();
-
-  void MaybeCreateDefaultStream();
 
   // Set the MediaStreamTrackInterface::TrackState to |kEnded| on all remote
   // tracks of type |media_type|.
@@ -342,6 +327,8 @@ class PeerConnection : public PeerConnectionInterface,
   void OnDataChannelOpenMessage(const std::string& label,
                                 const InternalDataChannelInit& config);
 
+  RtpSenderInterface* FindSenderById(const std::string& id);
+
   std::vector<rtc::scoped_refptr<RtpSenderInterface>>::iterator
   FindSenderForTrack(MediaStreamTrackInterface* track);
   std::vector<rtc::scoped_refptr<RtpReceiverInterface>>::iterator
@@ -380,6 +367,8 @@ class PeerConnection : public PeerConnectionInterface,
   // Streams created as a result of SetRemoteDescription.
   rtc::scoped_refptr<StreamCollection> remote_streams_;
 
+  std::vector<rtc::scoped_ptr<MediaStreamObserver>> stream_observers_;
+
   // These lists store track info seen in local/remote descriptions.
   TrackInfos remote_audio_tracks_;
   TrackInfos remote_video_tracks_;
@@ -390,8 +379,9 @@ class PeerConnection : public PeerConnectionInterface,
   // label -> DataChannel
   std::map<std::string, rtc::scoped_refptr<DataChannel>> rtp_data_channels_;
   std::vector<rtc::scoped_refptr<DataChannel>> sctp_data_channels_;
+  std::vector<rtc::scoped_refptr<DataChannel>> sctp_data_channels_to_free_;
 
-  RemotePeerInfo remote_info_;
+  bool remote_peer_supports_msid_ = false;
   rtc::scoped_ptr<RemoteMediaStreamFactory> remote_stream_factory_;
 
   std::vector<rtc::scoped_refptr<RtpSenderInterface>> senders_;

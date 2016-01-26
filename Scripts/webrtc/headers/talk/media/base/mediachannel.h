@@ -51,14 +51,18 @@ class RateLimiter;
 class Timing;
 }
 
+namespace webrtc {
+class AudioSinkInterface;
+}
+
 namespace cricket {
 
 class AudioRenderer;
-struct RtpHeader;
 class ScreencastId;
-struct VideoFormat;
 class VideoCapturer;
 class VideoRenderer;
+struct RtpHeader;
+struct VideoFormat;
 
 const int kMinRtpHeaderExtensionId = 1;
 const int kMaxRtpHeaderExtensionId = 255;
@@ -267,6 +271,8 @@ struct VideoOptions {
             change.unsignalled_recv_stream_limit);
     SetFrom(&use_simulcast_adapter, change.use_simulcast_adapter);
     SetFrom(&screencast_min_bitrate, change.screencast_min_bitrate);
+    SetFrom(&disable_prerenderer_smoothing,
+            change.disable_prerenderer_smoothing);
   }
 
   bool operator==(const VideoOptions& o) const {
@@ -293,7 +299,8 @@ struct VideoOptions {
            suspend_below_min_bitrate == o.suspend_below_min_bitrate &&
            unsignalled_recv_stream_limit == o.unsignalled_recv_stream_limit &&
            use_simulcast_adapter == o.use_simulcast_adapter &&
-           screencast_min_bitrate == o.screencast_min_bitrate;
+           screencast_min_bitrate == o.screencast_min_bitrate &&
+           disable_prerenderer_smoothing == o.disable_prerenderer_smoothing;
   }
 
   std::string ToString() const {
@@ -379,6 +386,13 @@ struct VideoOptions {
   rtc::Optional<bool> use_simulcast_adapter;
   // Force screencast to use a minimum bitrate
   rtc::Optional<int> screencast_min_bitrate;
+  // Set to true if the renderer has an algorithm of frame selection.
+  // If the value is true, then WebRTC will hand over a frame as soon as
+  // possible without delay, and rendering smoothness is completely the duty
+  // of the renderer;
+  // If the value is false, then WebRTC is responsible to delay frame release
+  // in order to increase rendering smoothness.
+  rtc::Optional<bool> disable_prerenderer_smoothing;
 
  private:
   template <typename T>
@@ -403,8 +417,8 @@ struct RtpHeaderExtension {
   std::string ToString() const {
     std::ostringstream ost;
     ost << "{";
-    ost << "id: , " << id;
     ost << "uri: " << uri;
+    ost << ", id: " << id;
     ost << "}";
     return ost.str();
   }
@@ -435,12 +449,6 @@ enum MediaChannelOptions {
 enum VoiceMediaChannelOptions {
   // Tune the audio stream for vcs with different target levels.
   OPT_AGC_MINUS_10DB = 0x80000000
-};
-
-// DTMF flags to control if a DTMF tone should be played and/or sent.
-enum DtmfFlags {
-  DF_PLAY = 0x01,
-  DF_SEND = 0x02,
 };
 
 class MediaChannel : public sigslot::has_slots<> {
@@ -549,7 +557,6 @@ class MediaChannel : public sigslot::has_slots<> {
 
 enum SendFlags {
   SEND_NOTHING,
-  SEND_RINGBACKTONE,
   SEND_MICROPHONE
 };
 
@@ -776,6 +783,7 @@ struct VideoSenderInfo : public MediaSenderInfo {
   }
 
   std::vector<SsrcGroup> ssrc_groups;
+  std::string encoder_implementation_name;
   int packets_cached;
   int firs_rcvd;
   int plis_rcvd;
@@ -821,6 +829,7 @@ struct VideoReceiverInfo : public MediaReceiverInfo {
   }
 
   std::vector<SsrcGroup> ssrc_groups;
+  std::string decoder_implementation_name;
   int packets_concealed;
   int firs_sent;
   int plis_sent;
@@ -924,9 +933,13 @@ struct DataMediaInfo {
   std::vector<DataReceiverInfo> receivers;
 };
 
+struct RtcpParameters {
+  bool reduced_size = false;
+};
+
 template <class Codec>
 struct RtpParameters {
-  virtual std::string ToString() {
+  virtual std::string ToString() const {
     std::ostringstream ost;
     ost << "{";
     ost << "codecs: " << VectorToString(codecs) << ", ";
@@ -938,11 +951,12 @@ struct RtpParameters {
   std::vector<Codec> codecs;
   std::vector<RtpHeaderExtension> extensions;
   // TODO(pthatcher): Add streams.
+  RtcpParameters rtcp;
 };
 
 template <class Codec, class Options>
 struct RtpSendParameters : RtpParameters<Codec> {
-  std::string ToString() override {
+  std::string ToString() const override {
     std::ostringstream ost;
     ost << "{";
     ost << "codecs: " << VectorToString(this->codecs) << ", ";
@@ -1012,18 +1026,18 @@ class VoiceMediaChannel : public MediaChannel {
   // Set speaker output volume of the specified ssrc.
   virtual bool SetOutputVolume(uint32_t ssrc, double volume) = 0;
   // Returns if the telephone-event has been negotiated.
-  virtual bool CanInsertDtmf() { return false; }
-  // Send and/or play a DTMF |event| according to the |flags|.
-  // The DTMF out-of-band signal will be used on sending.
+  virtual bool CanInsertDtmf() = 0;
+  // Send a DTMF |event|. The DTMF out-of-band signal will be used.
   // The |ssrc| should be either 0 or a valid send stream ssrc.
   // The valid value for the |event| are 0 to 15 which corresponding to
   // DTMF event 0-9, *, #, A-D.
-  virtual bool InsertDtmf(uint32_t ssrc,
-                          int event,
-                          int duration,
-                          int flags) = 0;
+  virtual bool InsertDtmf(uint32_t ssrc, int event, int duration) = 0;
   // Gets quality stats for the channel.
   virtual bool GetStats(VoiceMediaInfo* info) = 0;
+
+  virtual void SetRawAudioSink(
+      uint32_t ssrc,
+      rtc::scoped_ptr<webrtc::AudioSinkInterface> sink) = 0;
 };
 
 struct VideoSendParameters : RtpSendParameters<VideoCodec, VideoOptions> {
@@ -1150,13 +1164,13 @@ struct SendDataParams {
 enum SendDataResult { SDR_SUCCESS, SDR_ERROR, SDR_BLOCK };
 
 struct DataOptions {
-  std::string ToString() {
+  std::string ToString() const {
     return "{}";
   }
 };
 
 struct DataSendParameters : RtpSendParameters<DataCodec, DataOptions> {
-  std::string ToString() {
+  std::string ToString() const {
     std::ostringstream ost;
     // Options and extensions aren't used.
     ost << "{";

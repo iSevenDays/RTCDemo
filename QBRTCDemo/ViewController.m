@@ -97,7 +97,6 @@
 	[self.client hangup];
 }
 
-
 #pragma mark - SVClientDelegate methods
 
 - (void)client:(SVClient *)client didChangeConnectionState:(RTCICEConnectionState)state {

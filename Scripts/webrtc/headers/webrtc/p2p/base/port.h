@@ -280,7 +280,11 @@ class Port : public PortInterface, public rtc::MessageHandler,
                             const std::string& remote_ufrag);
 
   // Called when a packet has been sent to the socket.
-  void OnSentPacket(const rtc::SentPacket& sent_packet);
+  // This is made pure virtual to notify subclasses of Port that they MUST
+  // listen to AsyncPacketSocket::SignalSentPacket and then call
+  // PortInterface::OnSentPacket.
+  virtual void OnSentPacket(rtc::AsyncPacketSocket* socket,
+                            const rtc::SentPacket& sent_packet) = 0;
 
   // Called when the socket is currently able to send.
   void OnReadyToSend();
@@ -446,7 +450,6 @@ class Connection : public rtc::MessageHandler,
   bool connected() const { return connected_; }
   bool weak() const { return !(writable() && receiving() && connected()); }
   bool active() const {
-    // TODO(honghaiz): Move from using |write_state_| to using |pruned_|.
     return write_state_ != STATE_WRITE_TIMEOUT;
   }
   // A connection is dead if it can be safely deleted.
@@ -514,6 +517,9 @@ class Connection : public rtc::MessageHandler,
   // Makes the connection go away.
   void Destroy();
 
+  // Makes the connection go away, in a failed state.
+  void FailAndDestroy();
+
   // Checks that the state of this connection is up-to-date.  The argument is
   // the current time, which is compared against various timeouts.
   void UpdateState(uint32_t now);
@@ -522,6 +528,9 @@ class Connection : public rtc::MessageHandler,
   uint32_t last_ping_sent() const { return last_ping_sent_; }
   void Ping(uint32_t now);
   void ReceivedPingResponse();
+  uint32_t last_ping_response_received() const {
+    return last_ping_response_received_;
+  }
 
   // Called whenever a valid ping is received on this connection.  This is
   // public because the connection intercepts the first ping for us.
@@ -634,17 +643,18 @@ class Connection : public rtc::MessageHandler,
   friend class ConnectionRequest;
 };
 
-// ProxyConnection defers all the interesting work to the port
+// ProxyConnection defers all the interesting work to the port.
 class ProxyConnection : public Connection {
  public:
-  ProxyConnection(Port* port, size_t index, const Candidate& candidate);
+  ProxyConnection(Port* port, size_t index, const Candidate& remote_candidate);
 
-  virtual int Send(const void* data, size_t size,
-                   const rtc::PacketOptions& options);
-  virtual int GetError() { return error_; }
+  int Send(const void* data,
+           size_t size,
+           const rtc::PacketOptions& options) override;
+  int GetError() override { return error_; }
 
  private:
-  int error_;
+  int error_ = 0;
 };
 
 }  // namespace cricket

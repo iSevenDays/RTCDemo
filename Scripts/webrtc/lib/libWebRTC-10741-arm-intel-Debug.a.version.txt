@@ -1,5 +1,0 @@
-Architectures Built
-ia32 - Intel x86
-ia64 - Intel x86_64
-armv7 - Arm x86
-arm64_v8a - Arm 64 (armv8)

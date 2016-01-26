@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YrU-5b-St0">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Video Story View Controller-->
+        <scene sceneID="EYw-yq-Vuq">
+            <objects>
+                <viewController id="YrU-5b-St0" customClass="VideoStoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ok7-Kn-klu"/>
+                        <viewControllerLayoutGuide type="bottom" id="TTr-2a-VOX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OXD-kM-Ds0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg2-SK-YBj">
+                                <rect key="frame" x="20" y="40" width="129" height="30"/>
+                                <state key="normal" title="ConnectWithUser1"/>
+                                <connections>
+                                    <action selector="didTapButtonConnectWithUser1:" destination="YrU-5b-St0" eventType="touchUpInside" id="BjE-yM-rUJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epV-31-fws">
+                                <rect key="frame" x="169" y="40" width="131" height="30"/>
+                                <state key="normal" title="ConnectWithUser2"/>
+                                <connections>
+                                    <action selector="didTapButtonConnectWithUser2:" destination="YrU-5b-St0" eventType="touchUpInside" id="YD5-W3-z7f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCe-my-4j2">
+                                <rect key="frame" x="20" y="130" width="60" height="30"/>
+                                <state key="normal" title="StartCall"/>
+                                <connections>
+                                    <action selector="didTapButtonStartCall:" destination="YrU-5b-St0" eventType="touchUpInside" id="hdV-Tx-ebR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected with user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlW-Iv-xHo">
+                                <rect key="frame" x="20" y="90" width="205" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-bV-rb3">
+                                <rect key="frame" x="40" y="503" width="45" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ice State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="er2-D3-FCN">
+                                <rect key="frame" x="13" y="544" width="72" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNT-dN-5QY" customClass="RTCEAGLVideoView">
+                                <rect key="frame" x="40" y="180" width="520" height="182"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-0I-S3D" userLabel="Local Video View" customClass="RTCEAGLVideoView">
+                                <rect key="frame" x="40" y="362" width="520" height="181.5"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSW-Wr-uX2">
+                                <rect key="frame" x="265" y="90" width="59" height="30"/>
+                                <state key="normal" title="Hung up"/>
+                                <connections>
+                                    <action selector="didTapButtonHangup:" destination="YrU-5b-St0" eventType="touchUpInside" id="keT-9V-2Wg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-Ed-lsL">
+                                <rect key="frame" x="265" y="120" width="130" height="30"/>
+                                <state key="normal" title="Open data channel"/>
+                                <connections>
+                                    <action selector="openDataChannel:" destination="YrU-5b-St0" eventType="touchUpInside" id="K9Y-8g-yAf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="er2-D3-FCN" firstAttribute="top" secondItem="wgw-bV-rb3" secondAttribute="bottom" constant="20" id="0fR-VQ-uLV"/>
+                            <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="wgw-bV-rb3" secondAttribute="bottom" constant="76.5" id="1EI-46-0ms"/>
+                            <constraint firstItem="wlW-Iv-xHo" firstAttribute="leading" secondItem="Lg2-SK-YBj" secondAttribute="leading" id="55D-KR-qdZ"/>
+                            <constraint firstItem="er2-D3-FCN" firstAttribute="leading" secondItem="wgw-bV-rb3" secondAttribute="leading" constant="-27" id="5Ty-j9-Fze"/>
+                            <constraint firstItem="NNT-dN-5QY" firstAttribute="centerX" secondItem="OXD-kM-Ds0" secondAttribute="centerX" id="BN9-TI-GE7"/>
+                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="top" secondItem="wlW-Iv-xHo" secondAttribute="top" id="CqM-Iu-vZT"/>
+                            <constraint firstItem="4cX-0I-S3D" firstAttribute="top" secondItem="NNT-dN-5QY" secondAttribute="bottom" id="GuL-mV-r5h"/>
+                            <constraint firstItem="NNT-dN-5QY" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leadingMargin" constant="20" id="J5X-gY-VUB"/>
+                            <constraint firstItem="4cX-0I-S3D" firstAttribute="centerX" secondItem="OXD-kM-Ds0" secondAttribute="centerX" id="MmU-lJ-yuq"/>
+                            <constraint firstItem="4cX-0I-S3D" firstAttribute="height" secondItem="NNT-dN-5QY" secondAttribute="height" id="Nbq-Jj-qOe"/>
+                            <constraint firstItem="zCe-my-4j2" firstAttribute="leading" secondItem="wlW-Iv-xHo" secondAttribute="leading" id="an9-nG-rNM"/>
+                            <constraint firstItem="4cX-0I-S3D" firstAttribute="bottom" secondItem="er2-D3-FCN" secondAttribute="top" id="dat-cZ-2CB"/>
+                            <constraint firstItem="4cX-0I-S3D" firstAttribute="width" secondItem="NNT-dN-5QY" secondAttribute="width" id="eRQ-Hx-R0L"/>
+                            <constraint firstItem="NNT-dN-5QY" firstAttribute="top" secondItem="ZrF-Ed-lsL" secondAttribute="bottom" constant="22" id="fUh-2r-xyO"/>
+                            <constraint firstItem="Lg2-SK-YBj" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="20" id="h4V-U1-sMc"/>
+                            <constraint firstItem="ZrF-Ed-lsL" firstAttribute="top" secondItem="hSW-Wr-uX2" secondAttribute="bottom" id="jiS-Kk-cE5"/>
+                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="265" id="lH7-bU-2ES"/>
+                            <constraint firstItem="epV-31-fws" firstAttribute="leading" secondItem="Lg2-SK-YBj" secondAttribute="trailing" constant="20" id="lke-kk-9pe"/>
+                            <constraint firstItem="er2-D3-FCN" firstAttribute="trailing" secondItem="wgw-bV-rb3" secondAttribute="trailing" id="nGj-Lg-xE6"/>
+                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="wlW-Iv-xHo" secondAttribute="trailing" constant="40" id="ogk-wd-n2r"/>
+                            <constraint firstItem="wgw-bV-rb3" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leadingMargin" constant="20" id="pOF-1G-2Ur"/>
+                            <constraint firstItem="zCe-my-4j2" firstAttribute="top" secondItem="wlW-Iv-xHo" secondAttribute="bottom" constant="20" id="poW-0c-tNn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NNT-dN-5QY" secondAttribute="trailing" constant="20" id="rhD-1X-hA4"/>
+                            <constraint firstItem="Lg2-SK-YBj" firstAttribute="top" secondItem="ok7-Kn-klu" secondAttribute="bottom" constant="20" id="uE7-Fd-1kU"/>
+                            <constraint firstItem="wlW-Iv-xHo" firstAttribute="top" secondItem="Lg2-SK-YBj" secondAttribute="bottom" constant="20" id="wJD-aE-Eag"/>
+                            <constraint firstItem="ZrF-Ed-lsL" firstAttribute="leading" secondItem="hSW-Wr-uX2" secondAttribute="leading" id="wka-Zu-v2N"/>
+                            <constraint firstItem="NNT-dN-5QY" firstAttribute="bottom" secondItem="wgw-bV-rb3" secondAttribute="top" constant="20" id="x5p-lO-WaU"/>
+                            <constraint firstItem="epV-31-fws" firstAttribute="baseline" secondItem="Lg2-SK-YBj" secondAttribute="baseline" id="yWp-bj-xOC"/>
+                            <constraint firstItem="NNT-dN-5QY" firstAttribute="top" secondItem="zCe-my-4j2" secondAttribute="bottom" constant="20" id="yxG-ug-S3I"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="BN9-TI-GE7"/>
+                                <exclude reference="fUh-2r-xyO"/>
+                                <exclude reference="x5p-lO-WaU"/>
+                                <exclude reference="nGj-Lg-xE6"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="btnConnectWithUser1" destination="Lg2-SK-YBj" id="aeR-Op-4ff"/>
+                        <outlet property="btnConnectWithUser2" destination="epV-31-fws" id="4vX-b9-s0I"/>
+                        <outlet property="btnHangup" destination="hSW-Wr-uX2" id="r3s-o1-JRu"/>
+                        <outlet property="btnOpenDataChannel" destination="ZrF-Ed-lsL" id="06b-zK-jna"/>
+                        <outlet property="btnStartCall" destination="zCe-my-4j2" id="eEG-X1-f67"/>
+                        <outlet property="lblConnected" destination="wlW-Iv-xHo" id="nX3-85-o9X"/>
+                        <outlet property="lblIceState" destination="er2-D3-FCN" id="jZf-nE-tzV"/>
+                        <outlet property="lblState" destination="wgw-bV-rb3" id="Wtw-bZ-dYj"/>
+                        <outlet property="viewLocal" destination="4cX-0I-S3D" id="vyV-HK-YlY"/>
+                        <outlet property="viewRemote" destination="NNT-dN-5QY" id="Alr-oo-5id"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sx2-lb-2Lf" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="352" y="397"/>
+        </scene>
+    </scenes>
+</document>

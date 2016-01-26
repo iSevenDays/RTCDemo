@@ -4,20 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BuildPeerConnection.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>QBRTCDemo copy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>101</integer>
+			<integer>4</integer>
 		</dict>
 		<key>QBRTCDemo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>QBRTCDemo_s.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -38,6 +43,16 @@
 			<true/>
 		</dict>
 		<key>148233801C002DFE0000E9ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>14FC45F81C4EE8FD00C1797D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>14FC46691C4FF82000C1797D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

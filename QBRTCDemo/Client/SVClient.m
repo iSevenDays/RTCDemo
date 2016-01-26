@@ -94,7 +94,7 @@
 
 - (void)startCallWithOpponent:(SVUser *)opponent {
 	NSParameterAssert(opponent);
-	NSCAssert(![opponent.ID isEqualToNumber:@(0)], @"Invalid opponent ID");
+	NSCAssert(![opponent.ID isEqualToNumber:@0], @"Invalid opponent ID");
 	
 	if (![self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]) {
 		NSLog(@"Chat is not connected");

@@ -106,7 +106,13 @@ class TurnPort : public Port {
                             const rtc::SocketAddress& remote_addr,
                             const rtc::PacketTime& packet_time);
 
+  virtual void OnSentPacket(rtc::AsyncPacketSocket* socket,
+                            const rtc::SentPacket& sent_packet);
   virtual void OnReadyToSend(rtc::AsyncPacketSocket* socket);
+  virtual bool SupportsProtocol(const std::string& protocol) const {
+    // Turn port only connects to UDP candidates.
+    return protocol == UDP_PROTOCOL_NAME;
+  }
 
   void OnSocketConnect(rtc::AsyncPacketSocket* socket);
   void OnSocketClose(rtc::AsyncPacketSocket* socket, int error);
@@ -133,11 +139,18 @@ class TurnPort : public Port {
                    const rtc::SocketAddress&,
                    const rtc::SocketAddress&> SignalResolvedServerAddress;
 
-  // This signal is only for testing purpose.
+  // All public methods/signals below are for testing only.
+  sigslot::signal2<TurnPort*, int> SignalTurnRefreshResult;
   sigslot::signal3<TurnPort*, const rtc::SocketAddress&, int>
       SignalCreatePermissionResult;
-  // For testing only.
-  void FlushRequests() { request_manager_.Flush(); }
+  void FlushRequests(int msg_type) { request_manager_.Flush(msg_type); }
+  bool HasRequests() { return !request_manager_.empty(); }
+  void set_credentials(RelayCredentials& credentials) {
+    credentials_ = credentials;
+  }
+  // Finds the turn entry with |address| and sets its channel id.
+  // Returns true if the entry is found.
+  bool SetEntryChannelId(const rtc::SocketAddress& address, int channel_id);
 
  protected:
   TurnPort(rtc::Thread* thread,
@@ -166,9 +179,10 @@ class TurnPort : public Port {
 
  private:
   enum {
-    MSG_ERROR = MSG_FIRST_AVAILABLE,
+    MSG_ALLOCATE_ERROR = MSG_FIRST_AVAILABLE,
     MSG_ALLOCATE_MISMATCH,
-    MSG_TRY_ALTERNATE_SERVER
+    MSG_TRY_ALTERNATE_SERVER,
+    MSG_REFRESH_ERROR
   };
 
   typedef std::list<TurnEntry*> EntryList;
@@ -187,6 +201,9 @@ class TurnPort : public Port {
     }
   }
 
+  // Shuts down the turn port, usually because of some fatal errors.
+  void Close();
+  void OnTurnRefreshError();
   bool SetAlternateServer(const rtc::SocketAddress& address);
   void ResolveTurnAddress(const rtc::SocketAddress& address);
   void OnResolveResult(rtc::AsyncResolverInterface* resolver);
@@ -219,6 +236,7 @@ class TurnPort : public Port {
   bool HasPermission(const rtc::IPAddress& ipaddr) const;
   TurnEntry* FindEntry(const rtc::SocketAddress& address) const;
   TurnEntry* FindEntry(int channel_id) const;
+  bool EntryExists(TurnEntry* e);
   void CreateOrRefreshEntry(const rtc::SocketAddress& address);
   void DestroyEntry(TurnEntry* entry);
   // Destroys the entry only if |timestamp| matches the destruction timestamp
@@ -227,6 +245,10 @@ class TurnPort : public Port {
   void ScheduleEntryDestruction(TurnEntry* entry);
   void CancelEntryDestruction(TurnEntry* entry);
   void OnConnectionDestroyed(Connection* conn);
+
+  // Destroys the connection with remote address |address|. Returns true if
+  // a connection is found and destroyed.
+  bool DestroyConnection(const rtc::SocketAddress& address);
 
   ProtocolAddress server_address_;
   RelayCredentials credentials_;

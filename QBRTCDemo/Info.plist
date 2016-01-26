@@ -16,6 +16,13 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>TyphoonAutoInjectionEnabled</key>
+	<string>YES</string>
+	<key>TyphoonInitialAssemblies</key>
+	<array>
+		<string>VideoStoryAssembly</string>
+		<string>ServiceComponentsAssembly</string>
+	</array>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
