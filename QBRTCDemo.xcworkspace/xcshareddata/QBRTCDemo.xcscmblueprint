@@ -5,14 +5,16 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "B415C5F5923FD1699E46B5668327F083B9C32C51+++1433C90" : 0,
-    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06" : 0,
+    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++9E5A111" : 0,
     "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++A3D3CA1" : 0,
-    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E4C1428" : 0,
+    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06" : 0,
+    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++5425A32" : 0,
     "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++4885EFA" : 0,
+    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E4C1428" : 0,
     "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++EB95EDF" : 0,
     "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E0AA3BC" : 0,
-    "F34C977979F46250B44064BFD35BA9250267BA7B+++9B68E21" : 0,
     "F34C977979F46250B44064BFD35BA9250267BA7B+++71C2A05" : 0,
+    "F34C977979F46250B44064BFD35BA9250267BA7B+++9B68E21" : 0,
     "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++A3CD98F" : 0,
     "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++6FE57C1" : 0,
     "9BB0A88D946603F0FED84C19B0F4D2E26218CC45+++1115B9F" : 0,
@@ -23,14 +25,16 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7DFE5B3F-20E0-4782-83EA-404EBCF98A03",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "B415C5F5923FD1699E46B5668327F083B9C32C51+++1433C90" : "..\/Documents\/work\/SDK-ios-WebRTC\/main",
-    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/libvpx_new\/source\/libvpx",
+    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++9E5A111" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libvpx_new\/source\/libvpx\/",
     "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++A3D3CA1" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/jsoncpp\/source\/",
-    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E4C1428" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/",
+    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/libvpx_new\/source\/libvpx",
+    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++5425A32" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libyuv\/",
     "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++4885EFA" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/libyuv",
+    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E4C1428" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/",
     "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++EB95EDF" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/usrsctp\/usrsctplib",
     "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E0AA3BC" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/",
-    "F34C977979F46250B44064BFD35BA9250267BA7B+++9B68E21" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/opus\/src\/",
     "F34C977979F46250B44064BFD35BA9250267BA7B+++71C2A05" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/opus\/src",
+    "F34C977979F46250B44064BFD35BA9250267BA7B+++9B68E21" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/opus\/src\/",
     "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++A3CD98F" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/libsrtp",
     "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++6FE57C1" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/jsoncpp\/source",
     "9BB0A88D946603F0FED84C19B0F4D2E26218CC45+++1115B9F" : "QBRTCDemo\/",
@@ -71,6 +75,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/libyuv\/libyuv.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++4885EFA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/libyuv\/libyuv.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++5425A32"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/github.com\/open-source-parsers\/jsoncpp.git",
@@ -116,6 +125,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/webm\/libvpx.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/webm\/libvpx.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++9E5A111"
     }
   ]
 }

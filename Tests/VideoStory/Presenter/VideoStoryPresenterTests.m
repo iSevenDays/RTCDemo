@@ -141,4 +141,14 @@
 	OCMVerify([self.mockView showErrorConnect]);
 }
 
+- (void)testThatPresenterHandlesLocalVideoTrack {
+	// given
+	
+	// when
+	[self.presenter didReceiveLocalVideoTrack:nil];
+	
+	// then
+	OCMVerify([self.mockView show]);
+}
+
 @end

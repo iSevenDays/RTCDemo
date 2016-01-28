@@ -70,4 +70,9 @@
 	OCMVerify([self.mockOutput didConnectToChatWithUser2]);
 }
 
+- (void)testThatCanReceiveLocalVideoTrack {
+	
+}
+
+
 @end

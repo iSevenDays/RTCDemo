@@ -284,6 +284,7 @@ copy_final_headers_dir() {
         'talk/media/base/'
         'webrtc/audio/'
         'webrtc/base/'
+		'webrtc/base/objc/'
         'webrtc/common_video/'
         'webrtc/common_video/include/'
         'webrtc/common_video/libyuv/include/'

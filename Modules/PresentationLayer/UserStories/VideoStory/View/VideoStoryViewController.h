@@ -13,10 +13,15 @@
 @protocol VideoStoryViewOutput;
 
 @class RTCEAGLVideoView;
+@class RTCVideoTrack;
+@class RTCCameraPreviewView;
 
 @interface VideoStoryViewController : UIViewController <VideoStoryViewInput>
 
 @property (nonatomic, strong) id<VideoStoryViewOutput> output;
+
+@property(nonatomic, strong) RTCVideoTrack *localVideoTrack;
+@property(nonatomic, strong) RTCVideoTrack *remoteVideoTrack;
 
 #pragma mark IBOutlets
 
@@ -29,7 +34,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblState;
 @property (weak, nonatomic) IBOutlet UILabel *lblIceState;
 @property (weak, nonatomic) IBOutlet RTCEAGLVideoView *viewRemote;
-@property (weak, nonatomic) IBOutlet RTCEAGLVideoView *viewLocal;
+@property (weak, nonatomic) IBOutlet RTCCameraPreviewView *viewLocal;
 
 
 #pragma mark IBActions

@@ -10,6 +10,10 @@
 
 #import "VideoStoryViewOutput.h"
 
+#import <RTCVideoTrack.h>
+#import <RTCAVFoundationVideoSource.h>
+#import <RTCCameraPreviewView.h>
+
 @implementation VideoStoryViewController
 
 #pragma mark - Методы жизненного цикла
@@ -37,6 +41,22 @@
 - (void)showErrorConnect {
 	[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot connect" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
 }
+
+- (void)showLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
+	if (self.localVideoTrack == localVideoTrack) {
+		return;
+	}
+	
+	self.localVideoTrack = localVideoTrack;
+	
+	RTCAVFoundationVideoSource *source = nil;
+	
+	if ([localVideoTrack.source isKindOfClass:[RTCAVFoundationVideoSource class]]) {
+		source = (RTCAVFoundationVideoSource*)localVideoTrack.source;
+	}
+	self.viewLocal.captureSession = source.captureSession;
+}
+
 
 #pragma mark - VideoStoryViewOutput methods
 

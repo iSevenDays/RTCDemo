@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class RTCVideoTrack;
+
 @protocol VideoStoryInteractorOutput <NSObject>
 
 - (void)didConnectToChatWithUser1;
 - (void)didConnectToChatWithUser2;
 
 - (void)didFailToConnectToChat;
+
+- (void)didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
 
 @end
