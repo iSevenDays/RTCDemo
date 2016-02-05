@@ -10,13 +10,13 @@
 #define CallServiceProtocol_h
 
 @protocol SVSignalingChannelProtocol;
-@protocol SVClientDelegate;
+@protocol CallClientDelegate;
 
 @class SVUser;
 
 @protocol CallServiceProtocol <NSObject>
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<SVClientDelegate>)clientDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
 
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
@@ -26,7 +26,9 @@
 
 - (void)hangup;
 
-@property (nonatomic, weak, nullable) id<SVClientDelegate> delegate;
+@property (nonatomic, assign, readonly) BOOL isConnecting;
+@property (nonatomic, assign, readwrite) BOOL isConnected;
+@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
 
 @end
 

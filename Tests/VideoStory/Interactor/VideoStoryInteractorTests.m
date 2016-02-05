@@ -6,16 +6,18 @@
 //  Copyright 2016 Anton Sokolchenko. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "BaseTestCase.h"
 #import <OCMock/OCMock.h>
 #import <TyphoonPatcher.h>
+#import "CallService.h"
 #import "FakeCallService.h"
+#import "FakeSignalingChannel.h"
 
 #import "VideoStoryInteractor.h"
 
 #import "VideoStoryInteractorOutput.h"
 
-@interface VideoStoryInteractorTests : XCTestCase
+@interface VideoStoryInteractorTests : BaseTestCase
 
 @property (strong, nonatomic) VideoStoryInteractor *interactor;
 
@@ -32,12 +34,25 @@
 	
     self.interactor = [[VideoStoryInteractor alloc] init];
 	
-	self.interactor.callService = [FakeCallService new];
-	
     self.mockOutput = OCMProtocolMock(@protocol(VideoStoryInteractorOutput));
-
+	
     self.interactor.output = self.mockOutput;
 	
+}
+
+// Use when using real CallService is not possible
+- (void)useFakeCallService {
+	if ([self.interactor.callService isKindOfClass:[FakeCallService class]]) {
+		return; // already set
+	}
+	self.interactor.callService = [[FakeCallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor];
+}
+
+- (void)useRealCallService {
+	if ([self.interactor.callService isKindOfClass:[CallService class]]) {
+		return; // already set
+	}
+	self.interactor.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor];
 }
 
 - (void)tearDown {
@@ -50,9 +65,9 @@
 
 #pragma mark - Тестирование методов VideoStoryInteractorInput
 
-- (void)testThatCanConnectWithUser1 {
+- (void)testConnectingWithUser1 {
 	// given
-	
+	[self useRealCallService];
 	// when
 	[self.interactor connectToChatWithUser1];
 	
@@ -60,9 +75,9 @@
 	OCMVerify([self.mockOutput didConnectToChatWithUser1]);
 }
 
-- (void)testThatCanConnectWithUser2 {
+- (void)testConnectingWithUser2 {
 	// given
-	
+	[self useRealCallService];
 	// when
 	[self.interactor connectToChatWithUser2];
 	
@@ -70,8 +85,43 @@
 	OCMVerify([self.mockOutput didConnectToChatWithUser2]);
 }
 
-- (void)testThatCanReceiveLocalVideoTrack {
+- (void)testHangup {
+	// given
+	[self useRealCallService];
+	// when
+	[self.interactor hangup];
 	
+	// then
+	OCMVerify([self.mockOutput didHangup]);
+}
+
+- (void)testSuccessfulSetLocalCaptureSession {
+	// given
+	// TODO: change to real call service
+	[self useFakeCallService];
+	
+	// when
+	[self.interactor connectToChatWithUser1];
+	[self.interactor startCall];
+	
+	// then
+//	OCMExpect([self.mockOutput didSetLocalCaptureSession:[OCMArg any]]);
+
+//	OCMVerifyAllWithDelay(self.mockOutput, 5);
+	
+	OCMVerify([self.mockOutput didSetLocalCaptureSession:[OCMArg any]]);
+}
+
+- (void)testHandlingRemoteVideoTrack {
+	// given
+	[self useFakeCallService];
+	
+	// when
+	[self.interactor connectToChatWithUser1];
+	[self.interactor startCall];
+	
+	// then
+	OCMVerify([self.mockOutput didReceiveRemoteVideoTrackWithConfigurationBlock:[OCMArg any]]);
 }
 
 

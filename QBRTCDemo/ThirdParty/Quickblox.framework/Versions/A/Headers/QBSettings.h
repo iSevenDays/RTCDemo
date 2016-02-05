@@ -46,13 +46,16 @@ typedef enum QBConnectionZoneType{
 /// Enable or disable chat auto reconnect
 + (void)setAutoReconnectEnabled:(BOOL)autoReconnectEnabled;
 
-/// Background mode for stream. By default is NO. Should be set before login to chat. Does not work on simulator
-+ (void)setBackgroundingEnabled:(BOOL)backgroundingEnabled;
+/* Background mode for stream. Not supported from 2.5.0 due to Apple policy on using battery in background mode.
+ *
+ * @warning *Deprecated in QB iOS SDK 2.5.0:* Method is no longer available.
+ */
++ (void)setBackgroundingEnabled:(BOOL)backgroundingEnabled DEPRECATED_MSG_ATTRIBUTE("Deprecated in 2.5.0. Method is no longer available.");
 
 /// Enable or disable message carbons
 + (void)setCarbonsEnabled:(BOOL)carbonsEnabled;
 
-/// Enable or disable Stream Resumption (XEP-0198). Works only if streamManagementEnabled=YES
+/// Enable or disable Stream Resumption (XEP-0198).
 + (void)setStreamResumptionEnabled:(BOOL)streamResumptionEnabled;
 
 /// Set timeout value for Stream Management send a message operation
@@ -188,5 +191,23 @@ typedef enum QBConnectionZoneType{
  *   Disables XMPP Framework logging to console.
  */
 + (void)disableXMPPLogging;
+
+#pragma mark - 
+#pragma mark NSURLSessionConfiguration
+
+/**
+ *  Set custom session configuration that will be used for REST API requests.
+ *  '[NSURLSessionConfiguration defaultSessionConfiguration]' is used if nil is passed.
+ *
+ *  @param configuration Your NSURLSessionConfiguration object.
+ */
++ (void)setSessionConfiguration:(QB_NULLABLE NSURLSessionConfiguration *)configuration;
+
+/**
+ *  Get custom session configuration.
+ *
+ *  @return Your NSURLSessionConfiguration object.
+ */
++ (QB_NULLABLE NSURLSessionConfiguration *)sessionConfiguration;
 
 @end

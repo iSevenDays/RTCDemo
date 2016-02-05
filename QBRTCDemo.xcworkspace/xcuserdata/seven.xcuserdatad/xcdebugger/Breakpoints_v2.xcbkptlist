@@ -83,29 +83,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QBRTCDemo/Client/SVClient.m"
-            timestampString = "471460505.529678"
+            filePath = "Modules/BusinessLogicLayer/Services/CallService/CallService.m"
+            timestampString = "476296970.301155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
-            landmarkName = "-peerConnection:didOpenDataChannel:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QBRTCDemo/Client/SVClient.m"
-            timestampString = "471460505.529678"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
-            landmarkName = "-sendDataChannelTestMessage"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "-processSignalingMessage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

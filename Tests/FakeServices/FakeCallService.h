@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CallServiceProtocol.h"
 
-@protocol CallServiceProtocol;
-@protocol SVClientDelegate;
-
+@protocol CallClientDelegate;
+@protocol SVSignalingChannelProtocol;
 
 @interface FakeCallService : NSObject<CallServiceProtocol>
 
-@property (nonatomic, weak, nullable) id<SVClientDelegate> delegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
+
+@property (nonatomic, assign, readonly) BOOL isConnecting;
+@property (nonatomic, assign, readwrite) BOOL isConnected;
+@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
 
 @end

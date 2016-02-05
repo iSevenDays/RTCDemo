@@ -85,6 +85,8 @@
 		
 		[definition injectProperty:@selector(iceServers)
 							  with:[WebRTCHelpers defaultIceServers]];
+
+		[definition injectProperty:@selector(defaultConfigurationWithCurrentICEServers) with:[WebRTCHelpers defaultConfigurationWithCurrentICEServers]];
 	}];
 }
 

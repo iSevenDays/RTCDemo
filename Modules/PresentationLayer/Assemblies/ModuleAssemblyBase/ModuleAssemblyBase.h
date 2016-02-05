@@ -13,6 +13,6 @@
 
 @interface ModuleAssemblyBase : TyphoonAssembly
 
-@property (strong, nonatomic, readonly) TyphoonAssembly <ServiceComponents> *serviceComponents;
+//@property (strong, nonatomic, readonly) TyphoonAssembly <ServiceComponents> *serviceComponents;
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import "CallService.h"
+#import "CallClientDelegate.h"
 
-#import "SVClient.h"
 #import "SVUser.h"
 
 #import "SVSignalingChannelProtocol.h"
@@ -31,8 +31,8 @@
 #import <RTCPair.h>
 #import <RTCLogging.h>
 
-#import "ARDSDPUtils.h"
 #import "WebRTCHelpers.h"
+#import "RTCMediaStream.h"
 
 @interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
 
@@ -41,7 +41,7 @@
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
 @property (nonatomic, strong) RTCPeerConnection *peerConnection;
 
-@property (nonatomic, assign) SVClientState state;
+@property (nonatomic, assign) CallClientState state;
 @property (nonatomic, assign) BOOL isReceivedSDP;
 @property (nonatomic, assign, getter=isInitiator) BOOL initiator;
 @property (nonatomic, assign) BOOL isAudioOnly;
@@ -55,12 +55,13 @@
 @property (nonatomic, strong) RTCMediaConstraints *defaultAnswerConstraints;
 @property (nonatomic, strong) RTCMediaConstraints *defaultPeerConnectionConstraints;
 @property (nonatomic, strong) RTCMediaConstraints *defaultMediaStreamConstraints;
+@property (nonatomic, strong) RTCConfiguration *defaultConfigurationWithCurrentICEServers;
 
 @end
 
 @implementation CallService
 
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<SVClientDelegate>)clientDelegate {
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate {
 	NSParameterAssert(signalingChannel);
 	NSParameterAssert(clientDelegate);
 	
@@ -79,6 +80,14 @@
 		_isAudioOnly = NO;
 	}
 	return self;
+}
+
+- (BOOL)isConnected {
+	return self.signalingChannel.state == SVSignalingChannelState.established;
+}
+
+- (BOOL)isConnecting {
+	return self.signalingChannel.state == SVSignalingChannelState.open;
 }
 
 - (void)connectWithUser:(SVUser *)user completion:(void(^)(NSError *error))completion {
@@ -108,7 +117,6 @@
 		return;
 	}
 	
-	self.initiatorUser = self.signalingChannel.user;
 	self.opponentUser = opponent;
 	// Create peer connection.
 	
@@ -133,10 +141,10 @@
 	//		NSLog(@"Connection is not established");
 	//		return;
 	//	}
-	RTCDataChannelInit *dataChannelInit = [[RTCDataChannelInit alloc] init];
-	
-	self.dataChannel = [self.peerConnection createDataChannelWithLabel:@"testdatachannel" config:dataChannelInit];
-	self.dataChannel.delegate = self;
+//	RTCDataChannelInit *dataChannelInit = [[RTCDataChannelInit alloc] init];
+//	
+//	self.dataChannel = [self.peerConnection createDataChannelWithLabel:@"testdatachannel" config:dataChannelInit];
+//	self.dataChannel.delegate = self;
 }
 
 - (void)hangup {
@@ -164,16 +172,19 @@
 
 - (void)clearSession {
 	NSLog(@"Clear session");
-	self.initiatorUser = nil;
 	self.opponentUser = nil;
 	self.state = kClientStateDisconnected;
-	for (RTCMediaStream *stream in  self.peerConnection.localStreams) {
+	for (RTCMediaStream *stream in self.peerConnection.localStreams) {
 		[self.peerConnection removeStream:stream];
 	}
 	[self.peerConnection close];
 	self.peerConnection = nil;
 	self.isReceivedSDP = NO;
 	self.messageQueue = [NSMutableArray array];
+}
+
+- (SVUser *)initiatorUser {
+	return self.signalingChannel.user;
 }
 
 - (BOOL)hasActiveCall {
@@ -209,7 +220,7 @@
 		
 		// Prefer H264 if available.
 		RTCSessionDescription *sdpPreferringH264 =
-		[ARDSDPUtils descriptionForDescription:description
+		[WebRTCHelpers descriptionForDescription:description
 						   preferredVideoCodec:@"H264"];
 		
 		[self.peerConnection setRemoteDescriptionWithDelegate:self
@@ -225,9 +236,6 @@
 	}
 }
 
-// Sends a signaling message to the other client. The caller will send messages
-// through the room server, whereas the callee will send messages over the
-// signaling channel.
 - (void)sendSignalingMessage:(SVSignalingMessage *)message {
 	__weak __typeof(self)weakSelf = self;
 	
@@ -241,12 +249,18 @@
 - (RTCMediaStream *)createLocalMediaStream {
 	NSParameterAssert(self.factory);
 	
-	RTCMediaStream* localStream = [self.factory mediaStreamWithLabel:@"ARDAMS"];
-	RTCVideoTrack* localVideoTrack = nil; [self createLocalVideoTrack];
+	RTCMediaStream *localStream = [self.factory mediaStreamWithLabel:@"ARDAMS"];
+	RTCVideoTrack *localVideoTrack = [self createLocalVideoTrack];
 	if (localVideoTrack) {
 		[localStream addVideoTrack:localVideoTrack];
 		[self.delegate client:self didReceiveLocalVideoTrack:localVideoTrack];
 	}
+	
+	// For XCTest
+	if (NSClassFromString(@"XCTest") != nil){
+		[self.delegate client:self didReceiveLocalVideoTrack:localVideoTrack];
+	}
+	
 	[localStream addAudioTrack:[_factory audioTrackWithID:@"ARDAMSa0"]];
 	return localStream;
 }
@@ -262,13 +276,15 @@
 	if (!_isAudioOnly) {
 		
 		RTCAVFoundationVideoSource *source =
-		[[RTCAVFoundationVideoSource alloc] initWithFactory:_factory
+		[[RTCAVFoundationVideoSource alloc] initWithFactory:self.factory
 												constraints:[self defaultMediaStreamConstraints]];
 		localVideoTrack =
-		[[RTCVideoTrack alloc] initWithFactory:_factory
+		[[RTCVideoTrack alloc] initWithFactory:self.factory
 										source:source
 									   trackId:@"ARDAMSv0"];
 	}
+	NSParameterAssert(localVideoTrack);
+	NSParameterAssert(self.factory);
 #endif
 	return localVideoTrack;
 }
@@ -378,7 +394,7 @@
 		}
 		NSParameterAssert(sdp);
 		//		 Prefer H264 if available.
-		RTCSessionDescription *sdpPreferringH264 = [ARDSDPUtils descriptionForDescription:sdp preferredVideoCodec:@"H264"];
+		RTCSessionDescription *sdpPreferringH264 = [WebRTCHelpers descriptionForDescription:sdp preferredVideoCodec:@"H264"];
 
 		
 		[self.peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdpPreferringH264];
@@ -404,17 +420,11 @@
 		// If we're answering and we've just set the remote offer we need to create
 		// an answer and set the local description.
 		if (!self.isInitiator && !self.peerConnection.localDescription) {
-			NSCAssert(self.peerConnection, @"Peer connection must exists");
+			NSCAssert(self.peerConnection, @"Peer connection must exist");
 			[self.peerConnection createAnswerWithDelegate:self
 											  constraints:[self defaultAnswerConstraints]];
 		}
 	});
-}
-
-- (RTCConfiguration *)defaulConfigurationWithCurrentICEServers {
-	RTCConfiguration *config = [[RTCConfiguration alloc] init];
-	config.iceServers = self.iceServers;
-	return config;
 }
 
 - (BOOL)isInitiator {
@@ -432,7 +442,7 @@
 		
 		self.opponentUser = message.sender;
 		
-		self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaulConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
+		self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
 		[self.peerConnection addStream:[self createLocalMediaStream]];
 	}
 	if ([message.type isEqualToString:SVSignalingMessageType.offer] ||

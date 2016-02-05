@@ -145,10 +145,20 @@
 	// given
 	
 	// when
-	[self.presenter didReceiveLocalVideoTrack:nil];
+	[self.presenter didSetLocalCaptureSession:[OCMArg any]];
 	
 	// then
-	OCMVerify([self.mockView show]);
+	OCMVerify([self.mockView setLocalVideoCaptureSession:[OCMArg any]]);
+}
+
+- (void)testThatPresenterHandlesRemoteVideoTrack {
+	// given
+	
+	// when
+	[self.presenter didReceiveRemoteVideoTrackWithConfigurationBlock:nil];
+	
+	// then
+	OCMVerify([self.mockView configureRemoteVideoViewWithBlock:nil]);
 }
 
 @end

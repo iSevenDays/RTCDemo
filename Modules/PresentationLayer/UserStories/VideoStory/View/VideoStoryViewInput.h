@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class RTCEAGLVideoView;
 
 @protocol VideoStoryViewInput <NSObject>
 
@@ -20,6 +21,12 @@
 - (void)configureViewWithUser1;
 - (void)configureViewWithUser2;
 
+- (void)showHangup;
+
 - (void)showErrorConnect;
+
+- (void)setLocalVideoCaptureSession:(nonnull AVCaptureSession *)captureSession;
+
+- (void)configureRemoteVideoViewWithBlock:(void (^_Nullable)(RTCEAGLVideoView *_Nullable renderer))block;
 
 @end

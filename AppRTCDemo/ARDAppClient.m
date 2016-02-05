@@ -26,12 +26,12 @@
 #import "ARDCEODTURNClient.h"
 #import "ARDJoinResponse.h"
 #import "ARDMessageResponse.h"
-#import "ARDSDPUtils.h"
 #import "ARDSignalingMessage.h"
 #import "ARDUtilities.h"
 #import "ARDWebSocketChannel.h"
 #import "RTCICECandidate+JSON.h"
 #import "RTCSessionDescription+JSON.h"
+#import "WebRTCHelpers.h"
 
 static NSString * const kARDDefaultSTUNServerUrl =
     @"stun:stun.l.google.com:19302";
@@ -417,7 +417,7 @@ static NSInteger const kARDAppClientErrorInvalidRoom = -6;
     }
     // Prefer H264 if available.
     RTCSessionDescription *sdpPreferringH264 =
-        [ARDSDPUtils descriptionForDescription:sdp
+        [WebRTCHelpers descriptionForDescription:sdp
                            preferredVideoCodec:@"H264"];
     [_peerConnection setLocalDescriptionWithDelegate:self
                                   sessionDescription:sdpPreferringH264];
@@ -519,7 +519,7 @@ static NSInteger const kARDAppClientErrorInvalidRoom = -6;
       RTCSessionDescription *description = sdpMessage.sessionDescription;
       // Prefer H264 if available.
       RTCSessionDescription *sdpPreferringH264 =
-          [ARDSDPUtils descriptionForDescription:description
+          [WebRTCHelpers descriptionForDescription:description
                              preferredVideoCodec:@"H264"];
       [_peerConnection setRemoteDescriptionWithDelegate:self
                                      sessionDescription:sdpPreferringH264];

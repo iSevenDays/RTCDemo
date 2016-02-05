@@ -20,9 +20,6 @@
 
 @property (nonatomic, strong) id<VideoStoryViewOutput> output;
 
-@property(nonatomic, strong) RTCVideoTrack *localVideoTrack;
-@property(nonatomic, strong) RTCVideoTrack *remoteVideoTrack;
-
 #pragma mark IBOutlets
 
 @property (weak, nonatomic) IBOutlet UIButton *btnConnectWithUser1;

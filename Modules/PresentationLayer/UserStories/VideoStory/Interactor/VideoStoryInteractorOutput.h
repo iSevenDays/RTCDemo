@@ -9,14 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @class RTCVideoTrack;
+@class RTCEAGLVideoView;
 
 @protocol VideoStoryInteractorOutput <NSObject>
 
 - (void)didConnectToChatWithUser1;
 - (void)didConnectToChatWithUser2;
 
+- (void)didHangup;
+
 - (void)didFailToConnectToChat;
 
-- (void)didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
+- (void)didSetLocalCaptureSession:(nonnull AVCaptureSession *)localCaptureSession;
+- (void)didReceiveRemoteVideoTrackWithConfigurationBlock:(void(^_Nullable)(RTCEAGLVideoView *_Nullable renderer))block;
 
 @end

@@ -9,14 +9,23 @@
 #import <Foundation/Foundation.h>
 #import "CallServiceProtocol.h"
 
-@protocol SVClientDelegate;
+typedef NS_ENUM(NSInteger, CallClientState) {
+    // Disconnected from servers.
+    kClientStateDisconnected,
+    // Connecting to servers.
+    kClientStateConnecting,
+    // Connected to chat.
+    kClientStateConnected,
+};
+
+@protocol CallClientDelegate;
 @protocol SVSignalingChannelProtocol;
 
 @class SVUser;
 
 @interface CallService : NSObject<CallServiceProtocol>
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<SVClientDelegate>)clientDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
 
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
@@ -26,7 +35,9 @@
 
 - (void)hangup;
 
-@property (nonatomic, weak, nullable) id<SVClientDelegate> delegate;
+@property (nonatomic, assign, readonly) BOOL isConnecting;
+@property (nonatomic, assign, readwrite) BOOL isConnected;
+@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
 
 @property (nonatomic, strong, nonnull) NSMutableArray *iceServers;
 

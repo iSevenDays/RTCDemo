@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
+#import <RTCCameraPreviewView.h>
+
 #import "VideoStoryViewController.h"
 
 #import "VideoStoryViewOutput.h"
@@ -28,7 +30,7 @@
 - (void)setUp {
     [super setUp];
 
-    self.controller = [[VideoStoryViewController alloc] init];
+	self.controller = [[UIStoryboard storyboardWithName:@"VideoStory" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([VideoStoryViewController class])];
 
     self.mockOutput = OCMProtocolMock(@protocol(VideoStoryViewOutput));
 
@@ -98,5 +100,18 @@
 }
 
 #pragma mark - Тестирование методов VideoStoryViewInput
+
+- (void)testSuccessfulSetLocalVideoCaptureSession {
+	// given
+	[self.controller loadView];
+	
+	AVCaptureSession *testSession = [[AVCaptureSession alloc] init];
+	
+	// when
+	[self.controller setLocalVideoCaptureSession:testSession];
+	
+	// then
+	OCMVerify([self.controller.viewLocal setCaptureSession:testSession]);
+}
 
 @end

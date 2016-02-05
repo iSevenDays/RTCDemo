@@ -9,7 +9,7 @@
         <!--Video Story View Controller-->
         <scene sceneID="EYw-yq-Vuq">
             <objects>
-                <viewController id="YrU-5b-St0" customClass="VideoStoryViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoStoryViewController" id="YrU-5b-St0" customClass="VideoStoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ok7-Kn-klu"/>
                         <viewControllerLayoutGuide type="bottom" id="TTr-2a-VOX"/>
@@ -61,7 +61,7 @@
                                 <rect key="frame" x="40" y="180" width="520" height="182"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-0I-S3D" userLabel="Local Video View" customClass="RTCEAGLVideoView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-0I-S3D" userLabel="Local Video View" customClass="RTCCameraPreviewView">
                                 <rect key="frame" x="40" y="362" width="520" height="181.5"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>

@@ -18,17 +18,6 @@
 @class QBChatDialog;
 @class QBPrivacyList;
 
-/**
- QBChatServiceError enum defines following connection error codes:
- QBChatServiceErrorConnectionRefused - Connection with server is not available
- QBChatServiceErrorConnectionClosed  - Chat service suddenly became unavailable
- QBChatServiceErrorConnectionTimeout - Connection with server timed out
- */
-typedef enum QBChatServiceError {
-    QBChatServiceErrorConnectionClosed = 1,
-    QBChatServiceErrorConnectionTimeout
-} QBChatServiceError;
-
 /** QBChat class declaration. */
 /** Overview */
 /** This class is the main entry point to work with Quickblox Chat API. */
@@ -44,13 +33,6 @@ typedef enum QBChatServiceError {
  *  @warning *Deprecated in QB iOS SDK 2.5.0:* Use [QBSettings setCarbonsEnabled:] instead.
  */
 @property (nonatomic, assign, getter = isCarbonsEnabled) BOOL carbonsEnabled DEPRECATED_MSG_ATTRIBUTE("Deprecated in 2.5. Use [QBSettings setCarbonsEnabled:] instead");
-
-/**
- *  Enable or disable Stream Management (XEP-0198)
- *
- *  @warning *Deprecated in QB iOS SDK 2.5.0:* Stream management is enabled by default.
- */
-@property (nonatomic, readonly, assign, getter = isStreamManagementEnabled) BOOL streamManagementEnabled DEPRECATED_MSG_ATTRIBUTE("Deprecated in 2.5. Stream management is enabled by default");
 
 /**
  *  Enable or disable Stream Resumption (XEP-0198). Works only if streamManagementEnabled=YES.
@@ -102,12 +84,11 @@ typedef enum QBChatServiceError {
  */
 @property (nonatomic, assign) NSTimeInterval keepAliveInterval DEPRECATED_MSG_ATTRIBUTE("Deprecated in 2.5. Use [QBSettings setKeepAliveInterval:] instead");
 
-/**
- *  Background mode for stream. By default is NO. Should be set before login to chat. Does not work on simulator.
- *  
- *  @warning *Deprecated in QB iOS SDK 2.5.0:* Use [QBSettings setBackgroundingEnabled:] instead.
+/* Background mode for stream. Not supported from 2.5.0 due to Apple policy on using battery in background mode.
+ *
+ * @warning *Deprecated in QB iOS SDK 2.5.0:* Method is no longer available.
  */
-@property (nonatomic, assign, getter = isBackgroundingEnabled) BOOL backgroundingEnabled DEPRECATED_MSG_ATTRIBUTE("Deprecated in 2.5. Use [QBSettings setBackgroundingEnabled:] instead");
+@property (nonatomic, assign, getter = isBackgroundingEnabled) BOOL backgroundingEnabled DEPRECATED_MSG_ATTRIBUTE("Deprecated in 2.5.0. Method is no longer available.");
 
 - (QB_NONNULL id)init __attribute__((unavailable("'init' is not a supported initializer for this class.")));
 
@@ -155,59 +136,12 @@ typedef enum QBChatServiceError {
 + (QB_NONNULL instancetype)instance;
 
 /**
- Authorize on QuickBlox Chat
- 
- @param user QBUUser structure represents user's login. Required user's fields: ID, password;
- 
- @warning *Deprecated in QB iOS SDK 2.4.4:* Use 'connectWithUser:' instead.
- 
- @return YES if the request was sent successfully. If not - see log.
- */
-- (BOOL)loginWithUser:(QB_NONNULL QBUUser *)user DEPRECATED_MSG_ATTRIBUTE("Use 'connectWithUser:' instead.");
-
-
-/**
- * Connect to QuickBlox Chat
- *
- * @param user QBUUser structure represents user's login. Required user's fields: ID, password;
- *
- * @warning *Deprecated in QB iOS SDK 2.4.5: Use 'connectWithUser:completion' instead.*
- *
- * @return YES if the request was sent successfully. If not - see log.
- */
-- (BOOL)connectWithUser:(QB_NONNULL QBUUser *)user DEPRECATED_MSG_ATTRIBUTE("Use 'connectWithUser:completion' instead.");
-
-/**
- *  Connect to QuicBlox Chat with completion.
+ *  Connect to QuickBlox Chat with completion.
  *
  *  @param user       QBUUser structure represents user's login. Required user's fields: ID, password.
  *  @param completion Completion block with failure error.
  */
 - (void)connectWithUser:(QB_NONNULL QBUUser *)user completion:(QB_NULLABLE QBChatCompletionBlock)completion;
-
-/**
- Authorize on QuickBlox Chat
- 
- @param user QBUUser structure represents user's login. Required user's fields: ID, password.
- @param resource The resource identifier of user.
- 
- @warning *Deprecated in QB iOS SDK 2.4.4:* Use 'connectWithUser:resource:' instead.
- 
- @return YES if the request was sent successfully. If not - see log.
- */
-- (BOOL)loginWithUser:(QB_NONNULL QBUUser *)user resource:(QB_NULLABLE NSString *)resource DEPRECATED_MSG_ATTRIBUTE("Use 'connectWithUser:resource:' instead.");
-
-/**
- * Connect to QuickBlox Chat.
- *
- * @param user QBUUser structure represents user's login. Required user's fields: ID, password.
- * @param resource The resource identifier of user.
- *
- *  @warning *Deprecated in QB iOS SDK 2.4.5:* Use 'connectWithUser:resource:completion' instead.
- *
- * @return YES if the request was sent successfully. If not - see log.
- */
-- (BOOL)connectWithUser:(QB_NONNULL QBUUser *)user resource:(QB_NULLABLE NSString *)resource DEPRECATED_MSG_ATTRIBUTE("Use 'connectWithUser:resource:completion' instead.");
 
 /**
  *  Connect to QuickBlox Chat.
@@ -219,29 +153,11 @@ typedef enum QBChatServiceError {
 - (void)connectWithUser:(QB_NONNULL QBUUser *)user resource:(nullable NSString *)resource completion:(QB_NULLABLE QBChatCompletionBlock)completion;
 
 /**
- Check if current user logged into Chat
- 
- @warning *Deprecated in QB iOS SDK 2.4.4:* Use 'isConnected' instead.
- 
- @return YES if user is logged in, NO otherwise
- */
-- (BOOL)isLoggedIn DEPRECATED_MSG_ATTRIBUTE("Use isConnected instead.");
-
-/**
  * Check if current user connected to Chat
  *
  * @return YES if user is connected in, NO otherwise
  */
 - (BOOL)isConnected;
-
-/**
- Logout current user from Chat
- 
- @warning *Deprecated in QB iOS SDK 2.4.4:* Use 'disconnect' instead.
- 
- @return YES if the request was sent successfully. If not - see log.
- */
-- (BOOL)logout DEPRECATED_MSG_ATTRIBUTE("Use 'disconnectWithCompletionBlock' instead.");
 
 /**
  *  Disconnect current user from Chat

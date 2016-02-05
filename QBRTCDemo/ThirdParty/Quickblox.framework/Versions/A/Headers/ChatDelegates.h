@@ -9,11 +9,6 @@
 #import <Quickblox/QBNullability.h>
 #import <Quickblox/QBGeneric.h>
 
-#define kStopVideoChatCallStatus_OpponentDidNotAnswer @"kStopVideoChatCallStatus_OpponentDidNotAnswer"
-#define kStopVideoChatCallStatus_Manually @"kStopVideoChatCallStatus_Manually"
-#define kStopVideoChatCallStatus_Cancel @"kStopVideoChatCallStatus_Cancel"
-#define kStopVideoChatCallStatus_BadConnection @"kStopVideoChatCallStatus_BadConnection"
-
 /**
  QBChatDelegate protocol definition
  This protocol defines methods signatures for callbacks. Implement this protocol in your class and
@@ -27,23 +22,6 @@
 
 #pragma mark -
 #pragma mark Base IM
-
-/**
- didLogin fired by QBChat when connection to service established and login is successfull
- 
- @warning *Deprecated in QB iOS SDK 2.4.4:* Use 'chatDidConnect' instead.
- 
- */
-- (void)chatDidLogin DEPRECATED_MSG_ATTRIBUTE("Use chatDidConnect instead.");
-
-/**
- didNotLoginWithError fired when login process did not finished successfully
- 
- @warning *Deprecated in QB iOS SDK 2.4.4:* Use 'chatDidNotConnectWithError:' instead.
-
- @param error Error
- */
-- (void)chatDidNotLoginWithError:(QB_NULLABLE NSError *)error DEPRECATED_MSG_ATTRIBUTE("Use 'chatDidNotConnectWithError:' instead.");
 
 /**
  *  didNotSendMessage fired when message cannot be send to user
@@ -67,8 +45,9 @@
 - (void)chatDidNotSendMessage:(QB_NONNULL QBChatMessage *)message toDialogID:(QB_NONNULL NSString *)dialogID error:(QB_NULLABLE NSError *)error DEPRECATED_MSG_ATTRIBUTE("Use 'onBlockedMessage' or 'setOnBlockedMessage' of QBChatDialog class instead.");
 
 /**
- didReceiveMessage fired when new message was received from QBChat
+ didReceiveMessage fired when new 1-1 message was received from QBChat
  
+ @note Will fire only on recipient device
  @param message Message received from Chat
  */
 - (void)chatDidReceiveMessage:(QB_NONNULL QBChatMessage *)message;
@@ -76,6 +55,7 @@
 /**
  didReceiveSystemMessage fired when new system message was received from QBChat
  
+ @note Will fire only on recipient device
  @param message Message received from Chat
  */
 - (void)chatDidReceiveSystemMessage:(QB_NONNULL QBChatMessage *)message;
@@ -135,17 +115,17 @@
 - (void)chatDidReceiveContactItemActivity:(NSUInteger)userID isOnline:(BOOL)isOnline status:(QB_NULLABLE NSString *)status;
 
 /**
- + Called when user has accepted your contact request
- +
- + @param userID User ID from which accepted your request
- + */
+ * Called when user has accepted your contact request
+ *
+ * @param userID User ID from which accepted your request
+ * */
 - (void)chatDidReceiveAcceptContactRequestFromUser:(NSUInteger)userID;
 
 /**
- + Called when user has rejected your contact request
- +
- + @param userID User ID from which rejected your request
- + */
+ * Called when user has rejected your contact request
+ *
+ * @param userID User ID from which rejected your request
+ */
 - (void)chatDidReceiveRejectContactRequestFromUser:(NSUInteger)userID;
 
 
@@ -153,8 +133,9 @@
 #pragma mark Rooms
 
 /**
- *  Called when dialog receives message.
+ *  Called when group chat dialog receives message.
  *
+ *  @note Will fire both on recepient and sender device (with corrected time from server)
  *  @param message  Received message.
  *  @param dialogID QBChatDialog identifier.
  */

@@ -52,8 +52,21 @@
 	[self.view configureViewWithUser2];
 }
 
+- (void)didHangup {
+	[self.view showHangup];
+}
+
 - (void)didFailToConnectToChat {
 	[self.view showErrorConnect];
 }
+
+- (void)didSetLocalCaptureSession:(AVCaptureSession *)localCaptureSession {
+	[self.view setLocalVideoCaptureSession:localCaptureSession];
+}
+
+- (void)didReceiveRemoteVideoTrackWithConfigurationBlock:(void (^_Nullable)(RTCEAGLVideoView * _Nullable))block {
+	[self.view configureRemoteVideoViewWithBlock:block];
+}
+
 
 @end

@@ -14,6 +14,8 @@
 #import <RTCAVFoundationVideoSource.h>
 #import <RTCCameraPreviewView.h>
 
+#import <RTCEAGLVideoView.h>
+
 @implementation VideoStoryViewController
 
 #pragma mark - Методы жизненного цикла
@@ -38,25 +40,21 @@
 	self.btnConnectWithUser2.backgroundColor = [UIColor greenColor];
 }
 
+- (void)showHangup {
+	[self.viewRemote renderFrame:nil];
+}
+
 - (void)showErrorConnect {
 	[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot connect" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
 }
 
-- (void)showLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
-	if (self.localVideoTrack == localVideoTrack) {
-		return;
-	}
-	
-	self.localVideoTrack = localVideoTrack;
-	
-	RTCAVFoundationVideoSource *source = nil;
-	
-	if ([localVideoTrack.source isKindOfClass:[RTCAVFoundationVideoSource class]]) {
-		source = (RTCAVFoundationVideoSource*)localVideoTrack.source;
-	}
-	self.viewLocal.captureSession = source.captureSession;
+- (void)setLocalVideoCaptureSession:(AVCaptureSession *)captureSession {
+	self.viewLocal.captureSession = captureSession;
 }
 
+- (void)configureRemoteVideoViewWithBlock:(void (^)(RTCEAGLVideoView *_Nullable renderer))block {
+	block(self.viewRemote);
+}
 
 #pragma mark - VideoStoryViewOutput methods
 
