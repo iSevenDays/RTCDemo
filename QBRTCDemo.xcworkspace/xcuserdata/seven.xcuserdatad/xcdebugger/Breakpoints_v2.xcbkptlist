@@ -84,12 +84,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Modules/BusinessLogicLayer/Services/CallService/CallService.m"
-            timestampString = "476296970.301155"
+            timestampString = "476352801.347845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "-processSignalingMessage:"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-startCallWithOpponent:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Modules/BusinessLogicLayer/Services/CallService/CallService.m"
+            timestampString = "476353079.207944"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "-clearSession"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

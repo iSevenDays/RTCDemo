@@ -118,6 +118,7 @@
 	}
 	
 	self.opponentUser = opponent;
+	self.initiatorUser = self.signalingChannel.user;
 	// Create peer connection.
 	
 	RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
@@ -156,7 +157,6 @@
 	
 	if (![[self.signalingChannel state] isEqualToString:SVSignalingChannelState.established]) {
 		[self clearSession];
-		return;
 	}
 	
 	SVSignalingMessage *hangupMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
@@ -173,6 +173,7 @@
 - (void)clearSession {
 	NSLog(@"Clear session");
 	self.opponentUser = nil;
+	self.initiatorUser = nil;
 	self.state = kClientStateDisconnected;
 	for (RTCMediaStream *stream in self.peerConnection.localStreams) {
 		[self.peerConnection removeStream:stream];
@@ -181,10 +182,6 @@
 	self.peerConnection = nil;
 	self.isReceivedSDP = NO;
 	self.messageQueue = [NSMutableArray array];
-}
-
-- (SVUser *)initiatorUser {
-	return self.signalingChannel.user;
 }
 
 - (BOOL)hasActiveCall {
@@ -441,6 +438,7 @@
 		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");
 		
 		self.opponentUser = message.sender;
+		self.initiatorUser = self.opponentUser;
 		
 		self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
 		[self.peerConnection addStream:[self createLocalMediaStream]];
