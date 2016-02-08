@@ -355,8 +355,8 @@
 		1436097C1BF9453C0091071C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		1436097E1BF945490091071C /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		143609811BF9C9FC0091071C /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
-		1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseTestCase.m; path = Base/BaseTestCase.m; sourceTree = "<group>"; };
-		1437CF741C63BC2000CCE1BD /* BaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseTestCase.h; path = Base/BaseTestCase.h; sourceTree = "<group>"; };
+		1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTestCase.m; sourceTree = "<group>"; };
+		1437CF741C63BC2000CCE1BD /* BaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTestCase.h; sourceTree = "<group>"; };
 		14398F6B1C010A0800F3CE74 /* SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUserTests.m; sourceTree = "<group>"; };
 		14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessageTests.m; sourceTree = "<group>"; };
 		1439F67A1C5A540000438B48 /* FakeCallServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallServiceDelegate.h; sourceTree = "<group>"; };
@@ -869,10 +869,10 @@
 		1437CF711C63BB2600CCE1BD /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */,
 				1437CF741C63BC2000CCE1BD /* BaseTestCase.h */,
+				1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */,
 			);
-			name = Base;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		1452AAC51BF92FA30018DA30 = {
@@ -880,7 +880,6 @@
 			children = (
 				1452AAE81BF92FD50018DA30 /* AppRTCDemo_unused */,
 				143609801BF9C7850091071C /* Frameworks */,
-				289A14BD05F2A6570BE88195 /* Modules */,
 				24FA710C5C0D79208F548C05 /* Pods */,
 				1452AACF1BF92FA30018DA30 /* Products */,
 				1452AAD01BF92FA30018DA30 /* QBRTCDemo */,
@@ -906,6 +905,7 @@
 			isa = PBXGroup;
 			children = (
 				14015A2E1BFC6F0600830618 /* Client */,
+				289A14BD05F2A6570BE88195 /* Modules */,
 				1452AAD11BF92FA30018DA30 /* Supporting Files */,
 				1452ABC51BF938130018DA30 /* ThirdParty */,
 				1452AAD41BF92FA30018DA30 /* AppDelegate.h */,
@@ -967,8 +967,7 @@
 				1452AB301BF92FD50018DA30 /* RTCSessionDescription+JSON.h */,
 				1452AB311BF92FD50018DA30 /* RTCSessionDescription+JSON.m */,
 			);
-			name = AppRTCDemo_unused;
-			path = AppRTCDemo;
+			path = AppRTCDemo_unused;
 			sourceTree = "<group>";
 		};
 		1452AB031BF92FD50018DA30 /* common */ = {
@@ -1958,7 +1957,7 @@
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 				);
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1991,7 +1990,7 @@
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 				);
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2042,7 +2041,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -2054,12 +2052,10 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/OCMock",
-					"\"$(SRCROOT)/../../Downloads/webrtc-build-scripts-master/ios/webrtc/libjingle_peerconnection_builds\"",
 					"$(PROJECT_DIR)/Scripts/webrtc/lib",
 				);
 				OTHER_LDFLAGS = (
@@ -2080,7 +2076,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -2092,12 +2087,10 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/OCMock",
-					"\"$(SRCROOT)/../../Downloads/webrtc-build-scripts-master/ios/webrtc/libjingle_peerconnection_builds\"",
 					"$(PROJECT_DIR)/Scripts/webrtc/lib",
 				);
 				OTHER_LDFLAGS = (

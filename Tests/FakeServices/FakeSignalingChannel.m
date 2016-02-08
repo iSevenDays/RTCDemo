@@ -20,6 +20,10 @@
 	}
 }
 
+- (BOOL)isConnected {
+	return YES;
+}
+
 - (void)sendMessage:(__kindof SVSignalingMessage *)message toUser:(SVUser *)user completion:(void (^)(NSError * _Nullable))completion {
 	if (completion) {
 		completion(nil);

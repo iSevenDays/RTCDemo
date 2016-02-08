@@ -2534,41 +2534,221 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		03CA91998D6773EC5D02B3DB87B8353E /* Release */ = {
+		03869CA632CF47AD413CAAF6D05D6B77 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 325C680473269ED7FC7AA6CB12906375 /* Pods-QBRTCDemo_s.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		05A388CCBA1952DB3C14865DD06C556A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5897B199BD75C0E96A2439EE9D43085B /* Pods-QBRTCDemoTests-RamblerTyphoonUtils.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemoTests-RamblerTyphoonUtils/Pods-QBRTCDemoTests-RamblerTyphoonUtils-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		0B57334D6C23DADAA4F7D802A5760EB2 /* Debug */ = {
+		17F9AA803EE0AD31FCE1AEF53A996695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFBE3C6B13014AF000599506C5C3847F /* Pods-QBRTCDemo_s-RamblerTyphoonUtils.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemo_s-RamblerTyphoonUtils/Pods-QBRTCDemo_s-RamblerTyphoonUtils-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		251121609363F57B20CE1485900386DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 173BCC3F5EC6974F9E4360E5E89A4D8A /* OCMock.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OCMock/OCMock-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3BEB0C5B968D16CBF58166C098B52B7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F62AA9503B03B910FE8A14FC6AF9756A /* Pods-QBRTCDemoTests.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4C29D00AD978F22DD3BAFF843620B69D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5897B199BD75C0E96A2439EE9D43085B /* Pods-QBRTCDemoTests-RamblerTyphoonUtils.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemoTests-RamblerTyphoonUtils/Pods-QBRTCDemoTests-RamblerTyphoonUtils-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		68672C51C711C5E16AC79EA5141170EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 173BCC3F5EC6974F9E4360E5E89A4D8A /* OCMock.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OCMock/OCMock-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		69D35D9D3D792E6595833EA9BACED786 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CE74E6BF8BA57CBB560307C7AB00735 /* OCHamcrest.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OCHamcrest/OCHamcrest-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6A7E655FF8EDA81F5629098B45FD7239 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFBE3C6B13014AF000599506C5C3847F /* Pods-QBRTCDemo_s-RamblerTyphoonUtils.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemo_s-RamblerTyphoonUtils/Pods-QBRTCDemo_s-RamblerTyphoonUtils-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		81791C676D1C7DBD2AFB3401A5489C83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B56B83FF4F9C5DFC1AE5DE9240A2C439 /* ViperMcFlurry.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ViperMcFlurry/ViperMcFlurry-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		83358BE32531663E7F662379F65C4BFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFD75F2453C0CA6C9857FD512CA9F7F2 /* Typhoon.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Typhoon/Typhoon-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		96B5548D2E205B7B03F772C1196C4B72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFD75F2453C0CA6C9857FD512CA9F7F2 /* Typhoon.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Typhoon/Typhoon-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2600,91 +2780,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		14682F523226BFECCBD89FD7D1B06D6F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFBE3C6B13014AF000599506C5C3847F /* Pods-QBRTCDemo_s-RamblerTyphoonUtils.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemo_s-RamblerTyphoonUtils/Pods-QBRTCDemo_s-RamblerTyphoonUtils-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		3F11CBF9590C5A6D2E95D76F8CF329C4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B56B83FF4F9C5DFC1AE5DE9240A2C439 /* ViperMcFlurry.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/ViperMcFlurry/ViperMcFlurry-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		6864B4971B44A4729C7FB2684D94F82B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5897B199BD75C0E96A2439EE9D43085B /* Pods-QBRTCDemoTests-RamblerTyphoonUtils.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemoTests-RamblerTyphoonUtils/Pods-QBRTCDemoTests-RamblerTyphoonUtils-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		8E4E1342CCFB6B3062B0BED7C2A9D405 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFD75F2453C0CA6C9857FD512CA9F7F2 /* Typhoon.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Typhoon/Typhoon-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		9510CA07AC2B5DD5E420666708354A60 /* Release */ = {
+		C10736CB4CEE22F0C0552E1F0C4500E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B26B2683EAA5B8EFCBD1E8D98192DD2 /* Pods-QBRTCDemoTests.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -2696,103 +2804,13 @@
 			};
 			name = Release;
 		};
-		A32E399AD8C914EFB6EC9DBB7B85FC25 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFBE3C6B13014AF000599506C5C3847F /* Pods-QBRTCDemo_s-RamblerTyphoonUtils.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemo_s-RamblerTyphoonUtils/Pods-QBRTCDemo_s-RamblerTyphoonUtils-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		A9DA420A3B18457E59B44A71B257240E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CE74E6BF8BA57CBB560307C7AB00735 /* OCHamcrest.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/OCHamcrest/OCHamcrest-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		AA5A6DF50D3AC448956FF7B1E71EB1E8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 173BCC3F5EC6974F9E4360E5E89A4D8A /* OCMock.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/OCMock/OCMock-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		B3CAC2BF93349AFCA499983741067640 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5897B199BD75C0E96A2439EE9D43085B /* Pods-QBRTCDemoTests-RamblerTyphoonUtils.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-QBRTCDemoTests-RamblerTyphoonUtils/Pods-QBRTCDemoTests-RamblerTyphoonUtils-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		B4FE617639CDA9773916E2A0E3DB2480 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFD75F2453C0CA6C9857FD512CA9F7F2 /* Typhoon.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Typhoon/Typhoon-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		C4DA3CAE081253CDCFA2695A5F216B69 /* Release */ = {
+		E483FE166734AE6C49671E3D7FECCFED /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B56B83FF4F9C5DFC1AE5DE9240A2C439 /* ViperMcFlurry.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/ViperMcFlurry/ViperMcFlurry-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2804,64 +2822,12 @@
 			};
 			name = Release;
 		};
-		D7BD3167DECF5CAB3663EFE089EC69DE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 325C680473269ED7FC7AA6CB12906375 /* Pods-QBRTCDemo_s.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		E0A8CC2787F975C34293CA69AADDA2A5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 173BCC3F5EC6974F9E4360E5E89A4D8A /* OCMock.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/OCMock/OCMock-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		E58930C0BB557BFF18AD124101F7C1B7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F62AA9503B03B910FE8A14FC6AF9756A /* Pods-QBRTCDemoTests.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		E912875FA08EBA839674446B6BC2B519 /* Release */ = {
+		F1050FFC4F070FCF416A29EE51ABEDDC /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 697CA074E7380C15BB478A880A7831CD /* Pods-QBRTCDemo_s.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -2873,13 +2839,13 @@
 			};
 			name = Release;
 		};
-		F10DBB3E2B9C5EF88D6B332DE2042127 /* Release */ = {
+		F1186921C0468D2ED7D2892B2DDB07A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9CE74E6BF8BA57CBB560307C7AB00735 /* OCHamcrest.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/OCHamcrest/OCHamcrest-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -2888,6 +2854,40 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2897,8 +2897,8 @@
 		10542776D8ACCA3DA970BD708ACC2AF4 /* Build configuration list for PBXNativeTarget "OCMock" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AA5A6DF50D3AC448956FF7B1E71EB1E8 /* Debug */,
-				E0A8CC2787F975C34293CA69AADDA2A5 /* Release */,
+				251121609363F57B20CE1485900386DF /* Debug */,
+				68672C51C711C5E16AC79EA5141170EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2906,8 +2906,8 @@
 		29508538A72FA7A43421AF5BC8B938DD /* Build configuration list for PBXNativeTarget "Typhoon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B4FE617639CDA9773916E2A0E3DB2480 /* Debug */,
-				8E4E1342CCFB6B3062B0BED7C2A9D405 /* Release */,
+				96B5548D2E205B7B03F772C1196C4B72 /* Debug */,
+				83358BE32531663E7F662379F65C4BFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2915,8 +2915,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0B57334D6C23DADAA4F7D802A5760EB2 /* Debug */,
-				03CA91998D6773EC5D02B3DB87B8353E /* Release */,
+				A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */,
+				FB45FFD90572718D82AB9092B750F0CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2924,8 +2924,8 @@
 		5D1CFF25CF7E850B57F659EF777FDB78 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemoTests-RamblerTyphoonUtils" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6864B4971B44A4729C7FB2684D94F82B /* Debug */,
-				B3CAC2BF93349AFCA499983741067640 /* Release */,
+				4C29D00AD978F22DD3BAFF843620B69D /* Debug */,
+				05A388CCBA1952DB3C14865DD06C556A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2933,8 +2933,8 @@
 		740A3C9801B864218F4272C96F516D23 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo_s" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D7BD3167DECF5CAB3663EFE089EC69DE /* Debug */,
-				E912875FA08EBA839674446B6BC2B519 /* Release */,
+				03869CA632CF47AD413CAAF6D05D6B77 /* Debug */,
+				F1050FFC4F070FCF416A29EE51ABEDDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2942,8 +2942,8 @@
 		A72D5BBFC5A6034450DA470496DE1FB8 /* Build configuration list for PBXNativeTarget "OCHamcrest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9DA420A3B18457E59B44A71B257240E /* Debug */,
-				F10DBB3E2B9C5EF88D6B332DE2042127 /* Release */,
+				69D35D9D3D792E6595833EA9BACED786 /* Debug */,
+				F1186921C0468D2ED7D2892B2DDB07A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2951,8 +2951,8 @@
 		CA0D5AA605EE0460DC765633917C2B31 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E58930C0BB557BFF18AD124101F7C1B7 /* Debug */,
-				9510CA07AC2B5DD5E420666708354A60 /* Release */,
+				3BEB0C5B968D16CBF58166C098B52B7C /* Debug */,
+				C10736CB4CEE22F0C0552E1F0C4500E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2960,8 +2960,8 @@
 		D97873BCDBF850F2CD7327AB1179A3D6 /* Build configuration list for PBXNativeTarget "ViperMcFlurry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F11CBF9590C5A6D2E95D76F8CF329C4 /* Debug */,
-				C4DA3CAE081253CDCFA2695A5F216B69 /* Release */,
+				81791C676D1C7DBD2AFB3401A5489C83 /* Debug */,
+				E483FE166734AE6C49671E3D7FECCFED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2969,8 +2969,8 @@
 		EE236CFD7008701FCFC1D3D4F20B436D /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo_s-RamblerTyphoonUtils" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A32E399AD8C914EFB6EC9DBB7B85FC25 /* Debug */,
-				14682F523226BFECCBD89FD7D1B06D6F /* Release */,
+				6A7E655FF8EDA81F5629098B45FD7239 /* Debug */,
+				17F9AA803EE0AD31FCE1AEF53A996695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

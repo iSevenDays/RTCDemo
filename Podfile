@@ -1,6 +1,6 @@
 target :QBRTCDemo_s, :exclusive => true do
 
-	pod 'ViperMcFlurry', '~> 1.1'
+	pod 'ViperMcFlurry', '~> 1.2'
 	pod 'Typhoon', '~> 3.3'
 	pod 'RamblerTyphoonUtils/AssemblyCollector'
 end
