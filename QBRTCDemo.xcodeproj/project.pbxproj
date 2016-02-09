@@ -493,9 +493,9 @@
 		14A0288C1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannelDelegate.m; sourceTree = "<group>"; };
 		14A0288E1BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVSignalingMessage+QBChatMessage.h"; sourceTree = "<group>"; };
 		14A0288F1BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVSignalingMessage+QBChatMessage.m"; sourceTree = "<group>"; };
-		14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CallServiceTests.m; path = CallService/CallServiceTests.m; sourceTree = "<group>"; };
-		14C534EC1C6A397100A0FFE8 /* CallServiceHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CallServiceHelpers.h; path = ../../../../../Tests/CallService/CallServiceHelpers.h; sourceTree = "<group>"; };
-		14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CallServiceHelpers.m; path = ../../../../../Tests/CallService/CallServiceHelpers.m; sourceTree = "<group>"; };
+		14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServiceTests.m; sourceTree = "<group>"; };
+		14C534EC1C6A397100A0FFE8 /* CallServiceHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceHelpers.h; sourceTree = "<group>"; };
+		14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServiceHelpers.m; sourceTree = "<group>"; };
 		14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallService_Private.h; sourceTree = "<group>"; };
 		14D0A3F11C529F01005AF958 /* ServiceComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceComponents.h; sourceTree = "<group>"; };
 		14D0A3F21C529F01005AF958 /* ServiceComponentsAssembly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceComponentsAssembly.h; sourceTree = "<group>"; };
@@ -1102,7 +1102,7 @@
 			children = (
 				14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */,
 			);
-			name = CallService;
+			path = CallService;
 			sourceTree = "<group>";
 		};
 		14D0A3B01C529C52005AF958 /* SVSignaling */ = {
@@ -1281,8 +1281,8 @@
 		5352BD24E023342BA941E49A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				14C534E91C6A310000A0FFE8 /* CallService */,
 				1437CF711C63BB2600CCE1BD /* Base */,
+				14C534E91C6A310000A0FFE8 /* CallService */,
 				1417B3441C57E4B9004D6416 /* FakeServices */,
 				24A0BB756AD5EE73AC99FEF0 /* VideoStory */,
 			);
