@@ -9,15 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "CallServiceProtocol.h"
 
-typedef NS_ENUM(NSInteger, CallClientState) {
-    // Disconnected from servers.
-    kClientStateDisconnected,
-    // Connecting to servers.
-    kClientStateConnecting,
-    // Connected to chat.
-    kClientStateConnected,
-};
-
 @protocol CallClientDelegate;
 @protocol SVSignalingChannelProtocol;
 
@@ -35,6 +26,7 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 
 - (void)hangup;
 
+@property (nonatomic, assign, readonly) CallClientState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
 @property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;

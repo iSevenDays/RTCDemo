@@ -14,6 +14,8 @@
 #import "CallServiceProtocol.h"
 #import "CallClientDelegate.h"
 
+#import "CallServiceHelpers.h"
+
 #import <RTCAVFoundationVideoSource.h>
 #import <RTCVideoTrack.h>
 #import <RTCEAGLVideoView.h>
@@ -38,11 +40,9 @@
 - (instancetype)init {
 	self = [super init];
 	if (self) {
-// prod
-//		self.user1 = [[SVUser alloc] initWithID:@(8662991) login:@"rtcuser1" password:@"rtcuser1"];
-//		self.user2 = [[SVUser alloc] initWithID:@(8663016
-		self.user1 = [[SVUser alloc] initWithID:@(6942802) login:@"rtcuser1" password:@"rtcuser1"];
-		self.user2 = [[SVUser alloc] initWithID:@(6942819) login:@"rtcuser2" password:@"rtcuser2"];
+
+		self.user1 = [CallServiceHelpers user1];
+		self.user2 = [CallServiceHelpers user2];
 	}
 	return self;
 }

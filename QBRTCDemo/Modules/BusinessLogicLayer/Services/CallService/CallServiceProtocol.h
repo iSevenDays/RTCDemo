@@ -9,6 +9,15 @@
 #ifndef CallServiceProtocol_h
 #define CallServiceProtocol_h
 
+typedef NS_ENUM(NSInteger, CallClientState) {
+	// Disconnected from servers.
+	kClientStateDisconnected,
+	// Connecting to servers.
+	kClientStateConnecting,
+	// Connected to chat.
+	kClientStateConnected,
+};
+
 @protocol SVSignalingChannelProtocol;
 @protocol CallClientDelegate;
 
@@ -26,6 +35,7 @@
 
 - (void)hangup;
 
+@property (nonatomic, assign, readonly) CallClientState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
 @property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;

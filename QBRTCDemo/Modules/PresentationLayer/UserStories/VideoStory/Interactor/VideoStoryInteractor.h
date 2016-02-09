@@ -19,3 +19,9 @@
 @property (nonatomic, strong) id<CallServiceProtocol> callService;
 
 @end
+
+@protocol CallServiceProtocol_Private;
+
+@interface VideoStoryInteractor (PrivateCallService)
+@property (nonatomic, strong, readwrite) id<CallServiceProtocol_Private> callService;
+@end

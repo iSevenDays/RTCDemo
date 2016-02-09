@@ -41,7 +41,7 @@
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
 @property (nonatomic, strong) RTCPeerConnection *peerConnection;
 
-@property (nonatomic, assign) CallClientState state;
+@property (nonatomic, assign, readwrite) CallClientState state;
 @property (nonatomic, assign) BOOL isReceivedSDP;
 @property (nonatomic, assign, getter=isInitiator) BOOL initiator;
 @property (nonatomic, assign) BOOL isAudioOnly;
@@ -168,6 +168,21 @@
 		}
 		[self clearSession];
 	}];
+}
+
+- (void)setState:(CallClientState)state {
+	if (state != _state) {
+		_state = state;
+		[self notifyDelegateWithCurrentState];
+	}
+}
+
+- (void)notifyDelegateWithCurrentState {
+	if (self.delegate) {
+		if ([self.delegate respondsToSelector:@selector(client:didChangeState:)]) {
+			[self.delegate client:self didChangeState:self.state];
+		}
+	}
 }
 
 - (void)clearSession {

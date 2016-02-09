@@ -8,14 +8,22 @@
 
 #import "BaseTestCase.h"
 #import <OCMock/OCMock.h>
+#import <OCMStubRecorder.h>
 #import <TyphoonPatcher.h>
 #import "CallService.h"
+
 #import "FakeCallService.h"
 #import "FakeSignalingChannel.h"
 
 #import "VideoStoryInteractor.h"
 
 #import "VideoStoryInteractorOutput.h"
+
+@interface CallService()
+
+@property (nonatomic, assign, readwrite) CallClientState state;
+
+@end
 
 @interface VideoStoryInteractorTests : BaseTestCase
 
@@ -88,6 +96,9 @@
 - (void)testHangup {
 	// given
 	[self useRealCallService];
+	
+	((CallService *) self.interactor.callService).state = kClientStateConnected;
+	
 	// when
 	[self.interactor hangup];
 	
@@ -97,19 +108,20 @@
 
 - (void)testSuccessfulSetLocalCaptureSession {
 	// given
-	// TODO: change to real call service
-	[self useFakeCallService];
+	[self useRealCallService];
+	
+	id mockedInteractor = OCMPartialMock(self.interactor);
+	
+	OCMStub([mockedInteractor client:[OCMArg any] didReceiveLocalVideoTrack:[OCMArg any]]).andCall(self.interactor.output, @selector(didSetLocalCaptureSession:));
+	
+	OCMExpect([self.mockOutput didSetLocalCaptureSession:[OCMArg any]]);
 	
 	// when
-	[self.interactor connectToChatWithUser1];
-	[self.interactor startCall];
+	[mockedInteractor connectToChatWithUser1];
+	[mockedInteractor startCall];
 	
 	// then
-//	OCMExpect([self.mockOutput didSetLocalCaptureSession:[OCMArg any]]);
-
-//	OCMVerifyAllWithDelay(self.mockOutput, 5);
-	
-	OCMVerify([self.mockOutput didSetLocalCaptureSession:[OCMArg any]]);
+	OCMVerifyAllWithDelay(self.mockOutput, 10);
 }
 
 - (void)testHandlingRemoteVideoTrack {

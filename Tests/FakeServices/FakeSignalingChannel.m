@@ -9,16 +9,38 @@
 #import "FakeSignalingChannel.h"
 #import "SVSignalingChannelProtocol.h"
 
+
 @implementation FakeSignalingChannel
+
+@synthesize user = _user;
 
 - (void)connectWithUser:(SVUser *)user completion:(void (^)(NSError * _Nullable))completion {
 	self.state = SVSignalingChannelState.open;
 	
+	self.user = user;
+	
+	self.state = SVSignalingChannelState.established;
+	
 	if (completion) {
-		self.state = SVSignalingChannelState.established;
 		completion(nil);
 	}
 }
+
+- (void)notifyDelegateWithCurrentState {
+	if (self.delegate) {
+		if ([self.delegate respondsToSelector:@selector(channel:didChangeState:)]) {
+			[self.delegate channel:self didChangeState:self.state];
+		}
+	}
+}
+
+- (void)setState:(NSString *)state {
+	if (![_state isEqualToString:state]) {
+		_state = state;
+		[self notifyDelegateWithCurrentState];
+	}
+}
+
 
 - (BOOL)isConnected {
 	return YES;
