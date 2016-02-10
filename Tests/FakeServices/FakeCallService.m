@@ -36,6 +36,10 @@
 	[self.signalingChannel connectWithUser:user completion:completion];
 }
 
+- (BOOL)hasActiveCall {
+	return NO;
+}
+
 - (void)startCallWithOpponent:(SVUser *)opponent {
 
 	RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];

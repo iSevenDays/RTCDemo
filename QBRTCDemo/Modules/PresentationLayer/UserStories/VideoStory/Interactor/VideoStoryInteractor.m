@@ -40,7 +40,6 @@
 - (instancetype)init {
 	self = [super init];
 	if (self) {
-
 		self.user1 = [CallServiceHelpers user1];
 		self.user2 = [CallServiceHelpers user2];
 	}
@@ -82,6 +81,11 @@
 }
 
 - (void)startCall {
+	if ([self.callService hasActiveCall]) {
+		NSLog(@"Can not call while already connecting");
+		return;
+	}
+	
 	if ([self.currentUser isEqual:self.user1]) {
 		[self.callService startCallWithOpponent:self.user2];
 	} else {

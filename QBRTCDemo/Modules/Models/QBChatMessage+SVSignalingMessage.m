@@ -20,7 +20,7 @@
 + (instancetype)messageWithSVSignalingMessage:(SVSignalingMessage *)signalingMessage {
 	QBChatMessage *message = [QBChatMessage message];
 	
-	NSMutableDictionary *dic = signalingMessage.params.mutableCopy;
+	NSMutableDictionary *dic = [signalingMessage.params mutableCopy];
 	
 	if (dic == nil) {
 		dic = [NSMutableDictionary dictionary];
@@ -51,7 +51,7 @@
 	
 	// Fill sender
 	NSParameterAssert(signalingMessage.sender);
-	message.customParameters[SVSignalingParams.senderLogin] =[signalingMessage.sender.ID stringValue];
+	message.customParameters[SVSignalingParams.senderLogin] = [signalingMessage.sender.ID stringValue];
 	
 	return message;
 }

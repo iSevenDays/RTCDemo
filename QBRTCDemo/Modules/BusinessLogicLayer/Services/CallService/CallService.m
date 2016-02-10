@@ -109,6 +109,11 @@
 }
 
 - (void)startCallWithOpponent:(SVUser *)opponent {
+	if ([self hasActiveCall]) {
+		NSLog(@"Trying to call while already calling. Returning.");
+		return;
+	}
+	
 	NSParameterAssert(opponent);
 	NSCAssert(![opponent.ID isEqualToNumber:@0], @"Invalid opponent ID");
 	
@@ -159,14 +164,33 @@
 		[self clearSession];
 	}
 	
+	[self sendHangupToUser:self.opponentUser completion:^(NSError * _Nullable error) {
+		[self clearSession];
+	}];
+	
+}
+
+- (void)sendHangupToUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {
 	SVSignalingMessage *hangupMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
 	
-	[self.signalingChannel sendMessage:hangupMessage toUser:self.opponentUser completion:^(NSError * _Nullable error) {
+	[self sendSignalingMessage:hangupMessage toUser:user completion:completion];
+}
+
+- (void)sendRejectToUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {
+	SVSignalingMessage *rejectMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.reject params:nil];
+	
+	[self sendSignalingMessage:rejectMessage toUser:user completion:completion];
+}
+
+- (void)sendSignalingMessage:(SVSignalingMessage *)signalingMessage toUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {
+	[self.signalingChannel sendMessage:signalingMessage toUser:user completion:^(NSError * _Nullable error) {
 		if (error) {
-			NSLog(@"Error hangup disconnect: %@", error);
+			NSLog(@"Error sending signaling message: %@ error: %@", signalingMessage, error);
 			return;
 		}
-		[self clearSession];
+		if (completion) {
+			completion(error);
+		}
 	}];
 }
 
@@ -226,6 +250,8 @@
 		}
 		
 		SVSignalingMessageSDP *sdpMessage = (SVSignalingMessageSDP *)message;
+		NSAssert([message isKindOfClass:[SVSignalingMessageSDP class]], @"Incorrect class");
+		
 		RTCSessionDescription *description = sdpMessage.sdp;
 		
 		NSParameterAssert(description);
@@ -241,6 +267,8 @@
 	} else if ([message.type isEqualToString:SVSignalingMessageType.candidate] ) {
 		
 		SVSignalingMessageICE *candidateMessage = (SVSignalingMessageICE *)message;
+		NSAssert([message isKindOfClass:[SVSignalingMessageICE class]], @"Incorrect class");
+		
 		[self.peerConnection addICECandidate:candidateMessage.iceCandidate];
 	} else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
 		// Other client disconnected.
@@ -446,8 +474,18 @@
 #pragma mark - SVSignalingChannel Delegate
 
 - (void)channel:(id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *)message {
+	
 	if ([message.type isEqualToString:SVSignalingMessageType.offer]) {
 		
+		if ([self hasActiveCall]) {
+			[self sendRejectToUser:message.sender completion:^(NSError * _Nullable error) {
+				if (!error) {
+					NSLog(@"Sent reject to: %@", message.sender);
+				}
+			}];
+			
+			return;
+		}
 		NSCAssert(self.peerConnection == nil, @"At the time of answer there should be no active peerconnection");
 		NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
 		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");
@@ -468,12 +506,12 @@
 	} else if ([message.type isEqualToString:SVSignalingMessageType.candidate] ) {
 		
 		[_messageQueue addObject:message];
-	}
-	else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
+	} else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
 		
 		// Disconnects can be processed immediately.
 		[self processSignalingMessage:message];
 	}
+	
 	[self drainMessageQueueIfReady];
 }
 

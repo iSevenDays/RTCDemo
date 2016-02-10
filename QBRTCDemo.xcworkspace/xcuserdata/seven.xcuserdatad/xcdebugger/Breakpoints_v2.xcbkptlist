@@ -9,7 +9,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            scope = "1"
+            scope = "0"
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,6 +90,22 @@
             startingLineNumber = "128"
             endingLineNumber = "128"
             landmarkName = "-startCallWithOpponent:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/CallService.m"
+            timestampString = "476744005.011773"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "-processSignalingMessage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

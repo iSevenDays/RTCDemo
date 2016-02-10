@@ -14,10 +14,13 @@
 
 @interface CallService ()
 
-@property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
+@property (nonatomic, strong, nullable) id<SVSignalingChannelProtocol> signalingChannel;
 
-- (void)processSignalingMessage:(SVSignalingMessage *)message;
+- (void)processSignalingMessage:(nonnull SVSignalingMessage *)message;
 - (void)clearSession;
+
+- (void)sendHangupToUser:(nonnull SVUser *)user completion:(void(^_Nullable)(NSError * _Nullable error))completion;
+- (void)sendRejectToUser:(nonnull SVUser *)user completion:(void(^_Nullable)(NSError * _Nullable error))completion;
 
 @end
 

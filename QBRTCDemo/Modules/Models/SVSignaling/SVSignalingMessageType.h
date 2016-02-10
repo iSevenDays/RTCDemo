@@ -13,4 +13,5 @@ extern const struct SVSignalingMessageType {
 	__unsafe_unretained NSString *offer;
 	__unsafe_unretained NSString *answer;
 	__unsafe_unretained NSString *hangup;
+	__unsafe_unretained NSString *reject;
 } SVSignalingMessageType;

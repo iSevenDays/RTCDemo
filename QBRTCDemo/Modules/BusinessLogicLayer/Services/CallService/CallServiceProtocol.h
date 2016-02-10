@@ -35,6 +35,8 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 
 - (void)hangup;
 
+- (BOOL)hasActiveCall;
+
 @property (nonatomic, assign, readonly) CallClientState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;

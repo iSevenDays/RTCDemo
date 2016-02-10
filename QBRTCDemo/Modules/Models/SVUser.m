@@ -32,4 +32,8 @@
 	return [self.ID isEqualToNumber:obj.ID] && [self.login isEqualToString:obj.login] && [self.password isEqualToString:obj.password];
 }
 
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<SVUser %p> id:%@ login:%@ password:%@", self, self.ID, self.login, self.password];
+}
+
 @end

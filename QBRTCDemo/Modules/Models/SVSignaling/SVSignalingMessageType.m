@@ -12,5 +12,6 @@ const struct SVSignalingMessageType SVSignalingMessageType = {
 	.candidate = @"candidate",
 	.offer = @"offer",
 	.answer = @"answer",
-	.hangup = @"hangup"
+	.hangup = @"hangup",
+	.reject = @"reject"
 };

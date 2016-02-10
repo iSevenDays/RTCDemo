@@ -124,7 +124,7 @@
 	OCMVerifyAllWithDelay(self.mockOutput, 10);
 }
 
-- (void)testHandlingRemoteVideoTrack {
+- (void)testReceiveRemoteVideoTrack_whenConnectedAndStartedCall {
 	// given
 	[self useFakeCallService];
 	
