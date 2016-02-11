@@ -31,13 +31,13 @@
 #include <string>
 #include <vector>
 
-#include "talk/media/base/capturemanager.h"
-#include "talk/media/base/mediaengine.h"
 #include "talk/session/media/voicechannel.h"
 #include "webrtc/base/criticalsection.h"
 #include "webrtc/base/fileutils.h"
 #include "webrtc/base/sigslotrepeater.h"
 #include "webrtc/base/thread.h"
+#include "webrtc/media/base/capturemanager.h"
+#include "webrtc/media/base/mediaengine.h"
 
 namespace webrtc {
 class MediaControllerInterface;
@@ -156,8 +156,10 @@ class ChannelManager : public rtc::MessageHandler,
                            const VideoFormat& desired_format,
                            CaptureManager::RestartOptions options);
 
-  bool AddVideoRenderer(VideoCapturer* capturer, VideoRenderer* renderer);
-  bool RemoveVideoRenderer(VideoCapturer* capturer, VideoRenderer* renderer);
+  virtual void AddVideoSink(VideoCapturer* video_capturer,
+                            rtc::VideoSinkInterface<VideoFrame>* sink);
+  virtual void RemoveVideoSink(VideoCapturer* video_capturer,
+                               rtc::VideoSinkInterface<VideoFrame>* sink);
   bool IsScreencastRunning() const;
 
   // The operations below occur on the main thread.

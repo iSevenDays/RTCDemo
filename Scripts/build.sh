@@ -2,8 +2,6 @@
 
 #  build.sh
 #  WebRTC
-#  Created by Andrey Ivanov on 04/11/15.
-#  Copyright © 2015 QuickBlox Team. All rights reserved.
 
 source="${BASH_SOURCE[0]}"
 
@@ -27,31 +25,31 @@ depot_tools_dir="$project_dir/depot_tools"
 final_libs_dir="$webrtc_source_dir/lib"
 final_headers_dir="$webrtc_source_dir/headers"
 
-prefix_out="out_quickblox_"
+prefix_out="out_"
 
-webrtc_target="quickblox_webrtc"
-printf "🔨Environment variables:\n"
+webrtc_target="webrtc_objc_target"
+printf "Environment variables:\n"
 printf "    webrtc_debug    $arr $webrtc_debug\n"
 printf "    webrtc_profile  $arr $webrtc_profile\n"
 printf "    webrtc_release  $arr $webrtc_release\n"
 
 printf $line
 
-printf "🔗URLs:\n"
+printf "URLs:\n"
 printf "    User webrtc     $arr $user_webrtc_url\n"
 printf "    Default webrtc  $arr $default_webrtc_url\n"
 printf "    Depot tools     $arr $depot_tools_url\n"
 
 printf $line
 
-printf "📁Directories:\n"
+printf "Directories:\n"
 printf "    Project         $arr $project_dir\n"
 printf "    Depot tools     $arr $depot_tools_dir\n"
 printf "    Final libs      $arr $final_libs_dir\n"
 
 printf $line
 
-printf "📦Build target:\n"
+printf "Build target:\n"
 printf "    $arr $webrtc_target\n"
 
 function create_directory_if_not_found() {
@@ -72,13 +70,14 @@ function exec_libtool() {
 function exec_strip() {
 
   echo "Running strip"
-  strip -S -x -v $@
+#  strip -S -x -v $@
 }
 
 function exec_ninja() {
 
   echo "Running ninja"
-  ninja -C $1 $webrtc_target
+  echo ninja -C $1
+  ninja -C $1
 }
 
 # Update/Get/Ensure the Gclient Depot Tools
@@ -86,7 +85,7 @@ function pull_depot_tools() {
 
     WORKING_DIR=`pwd`
 
-    printf "%40s🔸Pull depot tools:\n\n"
+    printf "%40s Pull depot tools:\n\n"
 
     echo "Get the current working directory so we can change directories back when done"
     echo "If no directory where depot tools should be..."
@@ -117,9 +116,9 @@ function pull_depot_tools() {
 # Set the base of the GYP defines, instructing gclient runhooks what to generate
 function wrbase() {
 
-    export GYP_DEFINES="chromium_ios_signing=0 clang_xcode=1 use_objc_h264=1  include_tests=0"
+    export GYP_DEFINES="chromium_ios_signing=0 clang_xcode=1 use_objc_h264=1 include_tests=0 build_with_libjingle=1 libjingle_objc=1 python_ver=2.7 build_with_chromium=0"
     export GYP_GENERATORS="ninja"
-    export GYP_GENERATOR_FLAGS="output_dir=$out_quickblox$1"
+    export GYP_GENERATOR_FLAGS="output_dir=$out_$1"
 }
 
 # Add the iOS Device specific defines on top of the base
@@ -127,6 +126,7 @@ function arm() {
 
     wrbase $1
     export GYP_DEFINES="$GYP_DEFINES OS=ios target_arch=arm"
+	export GYP_GENERATORS="$GYP_GENERATORS,xcode,xcode-ninja"
     export GYP_CROSSCOMPILE=1
 }
 
@@ -135,7 +135,6 @@ function arm64() {
 
     wrbase $1
     export GYP_DEFINES="$GYP_DEFINES OS=ios target_arch=arm64"
-    export GYP_GENERATORS="$GYP_GENERATORS,xcode"
     export GYP_CROSSCOMPILE=1
 }
 
@@ -211,9 +210,9 @@ function update2Revision() {
     fi
 
     # Inject the new target
-    inject_quickblox_target
+    inject_blox_target
 
-    echo "  ✓webrtc has been successfully updated"
+    echo "webrtc has been successfully updated"
 }
 
 # Fire the sync command. Accepts an argument as the revision number that you want to sync to
@@ -223,7 +222,7 @@ function sync_webrtc() {
 
     cd $webrtc_source_dir
 
-    reject_quickblox_target
+    reject_blox_target
 
     if [ -z $1 ]
     then
@@ -233,15 +232,15 @@ function sync_webrtc() {
     fi
 }
 
-function inject_quickblox_target () {
+function inject_blox_target () {
 
     cd $webrtc_source_dir
-    echo "\n🔵Inject a new $webrtc_target target $project_dir/quickblox_target.py"
+    echo "\nInject a new $webrtc_target target $project_dir/blox_target.py"
 
-    python "$project_dir/quickblox_target.py" "$webrtc_source_dir/src/webrtc/webrtc_examples.gyp"
+    python "$project_dir/blox_target.py" "$webrtc_source_dir/src/webrtc/webrtc_examples.gyp"
 }
 
-function reject_quickblox_target () {
+function reject_blox_target () {
 
     if [ -d $webrtc_source_dir/src ]; then
 
@@ -281,7 +280,9 @@ copy_final_headers_dir() {
         'chromium/src/third_party/libyuv/include/'
         'chromium/src/third_party/libyuv/include/libyuv/'
         'webrtc/'
-        'talk/media/base/'
+        'webrtc/media/base/'
+#		'webrtc/api/'
+#		'webrtc/api/objc/'
         'webrtc/audio/'
         'webrtc/base/'
 		'webrtc/base/objc/'
@@ -299,14 +300,13 @@ copy_final_headers_dir() {
         'webrtc/p2p/base/'
         'webrtc/system_wrappers/include/'
         'webrtc/system_wrappers/source/'
-        'talk/media/base/'
         'talk/app/webrtc/'
 		'talk/app/webrtc/objc/'
 		'talk/app/webrtc/objc/public/'
-        'talk/media/webrtc/'
         'talk/session/media/'
         'webrtc/p2p/client/'
-        'talk/media/devices/'
+        'webrtc/media/devices/'
+		'webrtc/webrtc/'
     )
 
     for dir in ${dirList[@]}; do
@@ -314,10 +314,9 @@ copy_final_headers_dir() {
     done
 }
 
-# Build for the simulator (ia32 architecture)
 function build_t() {
 
-    printf "%40s🔸Build: $1\n"
+    printf "%40s Build: $1\n"
 
     cd "$webrtc_source_dir/src"
 
@@ -427,11 +426,11 @@ function dance() {
 
     build_t "ia32" "-iphonesimulator"
     build_t "x86_64" "-iphonesimulator"
-    build_t "arm" "-iphoneos"
     build_t "arm64" "-iphoneos"
+    build_t "arm" "-iphoneos"
 
     copy_final_headers_dir
 }
 
 dance
-echo "$USER!! Build is Finished 🍺🍺🍺"
+echo "Build is Finished"

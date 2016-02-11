@@ -10,6 +10,7 @@
 
 #import "RTCICECandidate+JSON.h"
 
+#import <RTCIceServer.h>
 #import "RTCLogging.h"
 
 static NSString const *kRTCICECandidateTypeKey = @"type";

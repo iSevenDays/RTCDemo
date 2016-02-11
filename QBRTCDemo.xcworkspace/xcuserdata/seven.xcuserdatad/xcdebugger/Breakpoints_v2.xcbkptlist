@@ -4,16 +4,6 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -96,17 +86,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/CallService.m"
-            timestampString = "476744005.011773"
+            timestampString = "476899067.76853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "-processSignalingMessage:"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
+            landmarkName = "-peerConnection:didSetSessionDescriptionWithError:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[CallService peerConnection:didSetSessionDescriptionWithError:]_block_invoke"
+                  moduleName = "QBRTCDemo_s"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/CallService.m"
+                  timestampString = "476913987.409172"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "467"
+                  endingLineNumber = "467"
+                  offsetFromSymbolStart = "899">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[CallService peerConnection:didSetSessionDescriptionWithError:]_block_invoke"
+                  moduleName = "QBRTCDemo_s"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/CallService.m"
+                  timestampString = "476913987.409441"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "467"
+                  endingLineNumber = "467"
+                  offsetFromSymbolStart = "1012">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

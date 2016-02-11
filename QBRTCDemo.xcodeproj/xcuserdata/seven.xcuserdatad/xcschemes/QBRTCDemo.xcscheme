@@ -3,9 +3,1143 @@
    LastUpgradeVersion = "0710"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "YES"
+      parallelizeBuildables = "NO"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "49A289C341A625375DB25436"
+               BuildableName = "libboringssl.a"
+               BlueprintName = "boringssl"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/boringssl/boringssl.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EA6D366D9A92CC248E216A17"
+               BuildableName = "libwebrtc_common.a"
+               BlueprintName = "webrtc_common"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/common.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4AAF07A3B14F83E6A70E50F1"
+               BuildableName = "libcommon_audio.a"
+               BlueprintName = "common_audio"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/common_audio/common_audio.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "69B18E587AA62FB5FDC2E4DD"
+               BuildableName = "libcommon_audio_neon.a"
+               BlueprintName = "common_audio_neon"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/common_audio/common_audio.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7C7BFBE130B42EB6D24D4F1C"
+               BuildableName = "libcommon_video.a"
+               BlueprintName = "common_video"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/common_video/common_video.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "860D5397CBCB2ABB9196F2EC"
+               BuildableName = "libexpat.a"
+               BlueprintName = "expat"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/expat/expat.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BDC2AFFADE930C57C2109A9B"
+               BuildableName = "libcommand_line_parser.a"
+               BlueprintName = "command_line_parser"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/tools/internal_tools.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A5BFECDBEB4797D8B5F73D4B"
+               BuildableName = "libjsoncpp.a"
+               BlueprintName = "jsoncpp"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/jsoncpp/jsoncpp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "782E8193107BB38F530E75A6"
+               BuildableName = "libjingle_p2p.a"
+               BlueprintName = "libjingle_p2p"
+               ReferencedContainer = "container:Scripts/webrtc/src/talk/libjingle.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5BDE4DC25DE77F07A66426A0"
+               BuildableName = "libjingle_peerconnection_objc.a"
+               BlueprintName = "libjingle_peerconnection_objc"
+               ReferencedContainer = "container:Scripts/webrtc/src/talk/libjingle.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FA704BE3BEA106EE6CA5C614"
+               BuildableName = "libsrtp.a"
+               BlueprintName = "libsrtp"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/libsrtp/libsrtp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EBF893A740CC68793935A794"
+               BuildableName = "libvpx_new.a"
+               BlueprintName = "libvpx_new"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/libvpx_new/libvpx.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BFCB3C407E427151B276345A"
+               BuildableName = "libyuv.a"
+               BlueprintName = "libyuv"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/libyuv/libyuv.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EAE6309149E1A665CC38D2CC"
+               BuildableName = "libaudio_coding_module.a"
+               BlueprintName = "audio_coding_module"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A2F34E5F6E549F605335C683"
+               BuildableName = "libaudio_conference_mixer.a"
+               BlueprintName = "audio_conference_mixer"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "86F0BD284B0833A9CE74B1AC"
+               BuildableName = "libaudio_decoder_interface.a"
+               BlueprintName = "audio_decoder_interface"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AB9D6076BEA9AC39816E5FB2"
+               BuildableName = "libaudio_device.a"
+               BlueprintName = "audio_device"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A5FEEBBD4FC0B269527028CE"
+               BuildableName = "libaudio_encoder_interface.a"
+               BlueprintName = "audio_encoder_interface"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D5ABE4C4470CADEC4591094D"
+               BuildableName = "libaudio_processing.a"
+               BlueprintName = "audio_processing"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2AED72455056544471C54FAD"
+               BuildableName = "libaudio_processing_neon.a"
+               BlueprintName = "audio_processing_neon"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "96880E3D82F94407EADED817"
+               BuildableName = "libaudioproc_debug_proto.a"
+               BlueprintName = "audioproc_debug_proto"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0BB254FA1FF7FAC1BA5EFF8C"
+               BuildableName = "libbitrate_controller.a"
+               BlueprintName = "bitrate_controller"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C5822E1ADAD9CCADAC4F48CA"
+               BuildableName = "libcng.a"
+               BlueprintName = "cng"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5CF45D66982B3CACD6A440FB"
+               BuildableName = "libdesktop_capture.a"
+               BlueprintName = "desktop_capture"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "955CA37762933EEF790AC0E6"
+               BuildableName = "libg711.a"
+               BlueprintName = "g711"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "32CA4FB811BDF18286E83822"
+               BuildableName = "libg722.a"
+               BlueprintName = "g722"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5B0D436EFC4386B2C5421742"
+               BuildableName = "libilbc.a"
+               BlueprintName = "ilbc"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DFB005606C10A5EC0A95A41B"
+               BuildableName = "libisac.a"
+               BlueprintName = "isac"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F471D671F5310C2A6311624F"
+               BuildableName = "libisac_common.a"
+               BlueprintName = "isac_common"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "353880578DC08DFAFCA55A6D"
+               BuildableName = "libisac_fix.a"
+               BlueprintName = "isac_fix"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C48A3D6B66CEF75C3942266E"
+               BuildableName = "libisac_neon.a"
+               BlueprintName = "isac_neon"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7FE828FDC4766075645F7183"
+               BuildableName = "libmedia_file.a"
+               BlueprintName = "media_file"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "130C3ACA081C46C0654E9CC4"
+               BuildableName = "libneteq.a"
+               BlueprintName = "neteq"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F969376579EA69A4B00A9F13"
+               BuildableName = "libpaced_sender.a"
+               BlueprintName = "paced_sender"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "87F83D904A42880B4432AC95"
+               BuildableName = "libpcm16b.a"
+               BlueprintName = "pcm16b"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D770FD554D51124E0C2B6AC9"
+               BuildableName = "libred.a"
+               BlueprintName = "red"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0F2C22351C44CB4C0E7E56EE"
+               BuildableName = "libremote_bitrate_estimator.a"
+               BlueprintName = "remote_bitrate_estimator"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0CBF957C1EE1CCD420BD3BA1"
+               BuildableName = "librent_a_codec.a"
+               BlueprintName = "rent_a_codec"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "99657D96FF89F0429787625E"
+               BuildableName = "librtp_rtcp.a"
+               BlueprintName = "rtp_rtcp"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E729ED26D049DF424B09419A"
+               BuildableName = "libvideo_capture_module.a"
+               BlueprintName = "video_capture_module"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4AF530EC155B9CE75FB680F1"
+               BuildableName = "libvideo_capture.a"
+               BlueprintName = "video_capture"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A6F4DFD4C310EE7091314C6C"
+               BuildableName = "libvideo_capture_module_internal_impl.a"
+               BlueprintName = "video_capture_module_internal_impl"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3951678F0C7E1BC5DC0F68C8"
+               BuildableName = "libvideo_processing.a"
+               BlueprintName = "video_processing"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "34034DF2F9EAE8D8BF2964BD"
+               BuildableName = "libvideo_processing_neon.a"
+               BlueprintName = "video_processing_neon"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AD70960D1D9B73810CE3146C"
+               BuildableName = "libvideo_render.a"
+               BlueprintName = "video_render"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BA8A37A1546507B723C70CC4"
+               BuildableName = "libvideo_render_module.a"
+               BlueprintName = "video_render_module"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4D5AA8BC43393CBD88952FEA"
+               BuildableName = "libvideo_render_module_internal_impl.a"
+               BlueprintName = "video_render_module_internal_impl"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "820740FF0E91C2E3329B6FEA"
+               BuildableName = "libwebrtc_h264.a"
+               BlueprintName = "webrtc_h264"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FA76C81FAA3D11FBD0F08E14"
+               BuildableName = "libwebrtc_h264_video_toolbox.a"
+               BlueprintName = "webrtc_h264_video_toolbox"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BE3E9A686019AA1AD7E8DF1F"
+               BuildableName = "libwebrtc_i420.a"
+               BlueprintName = "webrtc_i420"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DFFB84325BE5BC43CF2EF26D"
+               BuildableName = "libwebrtc_opus.a"
+               BlueprintName = "webrtc_opus"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B2AE8A56386E1BDDB42075C3"
+               BuildableName = "libwebrtc_utility.a"
+               BlueprintName = "webrtc_utility"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "96E0C163EA198E299D3D2534"
+               BuildableName = "libwebrtc_video_coding.a"
+               BlueprintName = "webrtc_video_coding"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/modules.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "87FEE7BA56569457CC835153"
+               BuildableName = "libopus.a"
+               BlueprintName = "opus"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/opus/opus.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1494FA5CDE3588EAEBDC2D6E"
+               BuildableName = "libstunprober.a"
+               BlueprintName = "libstunprober"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/p2p/p2p.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4C2D90CF8BDE10313BAE2BC9"
+               BuildableName = "librtc_p2p.a"
+               BlueprintName = "rtc_p2p"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/p2p/p2p.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2A58E876F5C3F311B06BCA5C"
+               BuildableName = "libprotobuf_lite.a"
+               BlueprintName = "protobuf_lite"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/protobuf/protobuf.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2F085EDEEB1F569E8EBB30DD"
+               BuildableName = "librtc_sound.a"
+               BlueprintName = "rtc_sound"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/sound/sound.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A0D14594CF19BC7EF7EA5CE2"
+               BuildableName = "libfield_trial_default.a"
+               BlueprintName = "field_trial_default"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/system_wrappers/system_wrappers.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8462C7E420AD3137301BEA98"
+               BuildableName = "libmetrics_default.a"
+               BlueprintName = "metrics_default"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/system_wrappers/system_wrappers.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "455BC70E81E4CAFA527F91CD"
+               BuildableName = "libsystem_wrappers.a"
+               BlueprintName = "system_wrappers"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/system_wrappers/system_wrappers.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE6728B4C855BCCF35E005DC"
+               BuildableName = "libframe_editing_lib.a"
+               BlueprintName = "frame_editing_lib"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/tools/tools.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "15152578E9A090A459412F2B"
+               BuildableName = "libvideo_quality_analysis.a"
+               BlueprintName = "video_quality_analysis"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/tools/tools.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "688193AAF2880CB417C1716E"
+               BuildableName = "libusrsctplib.a"
+               BlueprintName = "usrsctplib"
+               ReferencedContainer = "container:Scripts/webrtc/src/chromium/src/third_party/usrsctp/usrsctp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D91A4F6F28D55902144D60E1"
+               BuildableName = "libvideo_coding_utility.a"
+               BlueprintName = "video_coding_utility"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/video_coding/utility/video_coding_utility.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3FE649B6771E58C79610DDA2"
+               BuildableName = "libvoice_engine.a"
+               BlueprintName = "voice_engine"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/voice_engine/voice_engine.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8574C931F99AA24A5EFF48C0"
+               BuildableName = "libwebrtc_vp8.a"
+               BlueprintName = "webrtc_vp8"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/video_coding/codecs/vp8/vp8.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45CF6C23327D8578B7E49291"
+               BuildableName = "libwebrtc_vp9.a"
+               BlueprintName = "webrtc_vp9"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/modules/video_coding/codecs/vp9/vp9.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3A23B033F131348C4A7B044C"
+               BuildableName = "librtc_event_log.a"
+               BlueprintName = "rtc_event_log"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/webrtc.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9DEE0782440C4203C9E8B799"
+               BuildableName = "librtc_event_log_proto.a"
+               BlueprintName = "rtc_event_log_proto"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/webrtc.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F49F64DE0324C1C581A660A5"
+               BuildableName = "libwebrtc.a"
+               BlueprintName = "webrtc"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/webrtc.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C34EA827420D08A07F9F51F1"
+               BuildableName = "libapprtc_common.a"
+               BlueprintName = "apprtc_common"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/webrtc_examples.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0867D0714652F16032CFD546"
+               BuildableName = "libapprtc_signaling.a"
+               BlueprintName = "apprtc_signaling"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/webrtc_examples.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1D3019549D2B7DFE019A1A10"
+               BuildableName = "libsocketrocket.a"
+               BlueprintName = "socketrocket"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/webrtc_examples.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5E6D9C1505CEAD5E28232495"
+               BuildableName = "librtc_xmllite.a"
+               BlueprintName = "rtc_xmllite"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/libjingle/xmllite/xmllite.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "056C9358707197F5E76F01E5"
+               BuildableName = "librtc_xmpp.a"
+               BlueprintName = "rtc_xmpp"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/libjingle/xmpp/xmpp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D4E3E634F7B1B8A56C590225"
+               BuildableName = "librtc_base.a"
+               BlueprintName = "rtc_base"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/base/base.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D62E4D73CCBE4056B391C41"
+               BuildableName = "librtc_base_approved.a"
+               BlueprintName = "rtc_base_approved"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/base/base.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "70971102E691C337339EABFD"
+               BuildableName = "librtc_base_objc.a"
+               BlueprintName = "rtc_base_objc"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/base/base.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F0B8302B6D2128B51307F85"
+               BuildableName = "libjingle_peerconnection.a"
+               BlueprintName = "libjingle_peerconnection"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/api/api.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E2D283601CC31A31B0062D5F"
+               BuildableName = "librtc_api_objc.a"
+               BlueprintName = "rtc_api_objc"
+               ReferencedContainer = "container:Scripts/webrtc/src/webrtc/api/api.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
@@ -26,13 +1160,14 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14015A381BFCD08400830618"
+               BlueprintIdentifier = "14E9F58E1C6CD317007F58B7"
                BuildableName = "QBRTCDemoTests.xctest"
                BlueprintName = "QBRTCDemoTests"
                ReferencedContainer = "container:QBRTCDemo.xcodeproj">

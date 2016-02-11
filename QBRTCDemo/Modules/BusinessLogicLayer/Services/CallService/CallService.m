@@ -164,10 +164,13 @@
 		[self clearSession];
 	}
 	
-	[self sendHangupToUser:self.opponentUser completion:^(NSError * _Nullable error) {
+	if ([self hasActiveCall]) {
+		[self sendHangupToUser:self.opponentUser completion:^(NSError * _Nullable error) {
+			[self clearSession];
+		}];
+	} else {
 		[self clearSession];
-	}];
-	
+	}
 }
 
 - (void)sendHangupToUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {
@@ -261,6 +264,7 @@
 		[WebRTCHelpers descriptionForDescription:description
 						   preferredVideoCodec:@"H264"];
 		
+		NSParameterAssert(self.peerConnection);
 		[self.peerConnection setRemoteDescriptionWithDelegate:self
 										   sessionDescription:sdpPreferringH264];
 		
@@ -436,6 +440,7 @@
 		//		 Prefer H264 if available.
 		RTCSessionDescription *sdpPreferringH264 = [WebRTCHelpers descriptionForDescription:sdp preferredVideoCodec:@"H264"];
 
+		NSParameterAssert(self.peerConnection);
 		
 		[self.peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdpPreferringH264];
 		SVSignalingMessageSDP *message = [[SVSignalingMessageSDP alloc]
@@ -448,7 +453,6 @@
 	dispatch_async(dispatch_get_main_queue(), ^{
 		if (error) {
 			RTCLogError(@"Failed to set session description. Error: %@", error);
-			//[self disconnect];
 			NSDictionary *userInfo = @{
 									   NSLocalizedDescriptionKey: @"Failed to set session description.",
 									   };
@@ -486,6 +490,7 @@
 			
 			return;
 		}
+		
 		NSCAssert(self.peerConnection == nil, @"At the time of answer there should be no active peerconnection");
 		NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
 		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");

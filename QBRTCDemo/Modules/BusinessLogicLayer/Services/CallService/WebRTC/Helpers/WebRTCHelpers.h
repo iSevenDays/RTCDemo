@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class RTCMediaConstraints;
-@class RTCICEServer;
+@class RTCIceServer;
 @class RTCConfiguration;
 @class RTCSessionDescription;
 
@@ -26,6 +26,6 @@
 + (RTCMediaConstraints *)defaultAnswerConstraints;
 + (RTCMediaConstraints *)defaultPeerConnectionConstraints;
 
-+ (NSArray<RTCICEServer *> *)defaultIceServers;
++ (NSArray<RTCIceServer *> *)defaultIceServers;
 
 @end

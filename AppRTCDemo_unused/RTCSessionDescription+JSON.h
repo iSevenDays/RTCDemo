@@ -9,6 +9,7 @@
  */
 
 #import "RTCSessionDescription.h"
+#import "SVSignalingMessageType.h"
 
 @interface RTCSessionDescription (JSON)
 

@@ -17,8 +17,19 @@ static NSString const *kRTCSessionDescriptionSdpKey = @"sdp";
 
 + (RTCSessionDescription *)descriptionFromJSONDictionary:
     (NSDictionary *)dictionary {
-  NSString *type = dictionary[kRTCSessionDescriptionTypeKey];
-  NSString *sdp = dictionary[kRTCSessionDescriptionSdpKey];
+  RTCSdpType type = dictionary[kRTCSessionDescriptionTypeKey];
+	NSString *sdp = dictionary[kRTCSessionDescriptionSdpKey];
+	NSString *sdpType = nil;
+	switch (type) {
+  case RTCSdpTypeOffer:
+			sdpType = SVSignalingMessageType.offer;
+			break;
+		case RTCSdpTypeAnswer:
+		case RTCSdpTypePrAnswer:
+			sdpType = SVSignalingMessageType.answer;
+  default:
+			break;
+	}
   return [[RTCSessionDescription alloc] initWithType:type sdp:sdp];
 }
 

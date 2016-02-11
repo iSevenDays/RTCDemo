@@ -21,11 +21,11 @@
 
 /* Begin PBXBuildFile section */
 		025D967AF7A054BD77F94998 /* libPods-QBRTCDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 482A838C9B84406A42BAF0B7 /* libPods-QBRTCDemoTests.a */; };
-		14015A3C1BFCD08400830618 /* QBRTCDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A3B1BFCD08400830618 /* QBRTCDemoTests.m */; };
 		14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		140746481BFB841000506088 /* SVSignalingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 140746471BFB841000506088 /* SVSignalingParams.m */; };
 		1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
+		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		143608E61BF943370091071C /* libwebrtc_common.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608DC1BF943370091071C /* libwebrtc_common.a */; };
 		143608E71BF943370091071C /* libwebrtc_h264_video_toolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608DD1BF943370091071C /* libwebrtc_h264_video_toolbox.a */; };
 		143608E81BF943370091071C /* libwebrtc_h264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608DE1BF943370091071C /* libwebrtc_h264.a */; };
@@ -36,9 +36,7 @@
 		143608ED1BF943380091071C /* libwebrtc_vp8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608E31BF943370091071C /* libwebrtc_vp8.a */; };
 		143608EE1BF943380091071C /* libwebrtc_vp9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608E41BF943370091071C /* libwebrtc_vp9.a */; };
 		143608EF1BF943380091071C /* libwebrtc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608E51BF943370091071C /* libwebrtc.a */; };
-		143608FA1BF943700091071C /* libjingle_media.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608F01BF943700091071C /* libjingle_media.a */; };
 		143608FB1BF943700091071C /* libjingle_p2p.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608F11BF943700091071C /* libjingle_p2p.a */; };
-		143608FC1BF943700091071C /* libjingle_peerconnection_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608F21BF943700091071C /* libjingle_peerconnection_objc.a */; };
 		143608FD1BF943700091071C /* libjingle_peerconnection.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608F31BF943700091071C /* libjingle_peerconnection.a */; };
 		143608FE1BF943700091071C /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608F41BF943700091071C /* libjsoncpp.a */; };
 		143608FF1BF943700091071C /* libmedia_file.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143608F51BF943700091071C /* libmedia_file.a */; };
@@ -70,20 +68,15 @@
 		143609351BF944500091071C /* libvoice_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609271BF944500091071C /* libvoice_engine.a */; };
 		143609361BF944500091071C /* libvpx_new.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609281BF944500091071C /* libvpx_new.a */; };
 		143609371BF944500091071C /* libyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609291BF944500091071C /* libyuv.a */; };
-		143609461BF944780091071C /* libcommand_line_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609381BF944770091071C /* libcommand_line_parser.a */; };
 		143609471BF944780091071C /* libcommon_audio_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609391BF944770091071C /* libcommon_audio_neon.a */; };
 		143609481BF944780091071C /* libcommon_audio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436093A1BF944770091071C /* libcommon_audio.a */; };
 		143609491BF944780091071C /* libcommon_video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436093B1BF944770091071C /* libcommon_video.a */; };
-		1436094A1BF944780091071C /* libdesktop_capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436093C1BF944770091071C /* libdesktop_capture.a */; };
 		1436094B1BF944780091071C /* libexpat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436093D1BF944770091071C /* libexpat.a */; };
 		1436094C1BF944780091071C /* libfield_trial_default.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436093E1BF944770091071C /* libfield_trial_default.a */; };
-		1436094D1BF944780091071C /* libframe_editing_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436093F1BF944770091071C /* libframe_editing_lib.a */; };
 		1436094E1BF944780091071C /* libg711.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609401BF944770091071C /* libg711.a */; };
 		1436094F1BF944780091071C /* libg722.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609411BF944770091071C /* libg722.a */; };
 		143609501BF944780091071C /* libilbc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609421BF944770091071C /* libilbc.a */; };
 		143609511BF944780091071C /* libisac_common.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609431BF944770091071C /* libisac_common.a */; };
-		143609521BF944780091071C /* libisac_fix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609441BF944780091071C /* libisac_fix.a */; };
-		143609531BF944780091071C /* libisac_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609451BF944780091071C /* libisac_neon.a */; };
 		143609641BF944890091071C /* libisac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609541BF944890091071C /* libisac.a */; };
 		143609651BF944890091071C /* libpcm16b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609551BF944890091071C /* libpcm16b.a */; };
 		143609661BF944890091071C /* libred.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609561BF944890091071C /* libred.a */; };
@@ -98,7 +91,6 @@
 		1436096F1BF944890091071C /* librtc_xmpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436095F1BF944890091071C /* librtc_xmpp.a */; };
 		143609701BF944890091071C /* librtp_rtcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609601BF944890091071C /* librtp_rtcp.a */; };
 		143609721BF944890091071C /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609621BF944890091071C /* libsrtp.a */; };
-		143609731BF944890091071C /* libstunprober.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609631BF944890091071C /* libstunprober.a */; };
 		143609751BF944C50091071C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		143609771BF944D60091071C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		143609791BF9450A0091071C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
@@ -114,22 +106,6 @@
 		1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD51BF92FA30018DA30 /* AppDelegate.m */; };
 		1452AADE1BF92FA30018DA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADD1BF92FA30018DA30 /* Assets.xcassets */; };
 		1452AAE11BF92FA30018DA30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */; };
-		1452AB3A1BF92FD50018DA30 /* ARDAppEngineClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAED1BF92FD50018DA30 /* ARDAppEngineClient.m */; };
-		1452AB3B1BF92FD50018DA30 /* ARDBitrateTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAEF1BF92FD50018DA30 /* ARDBitrateTracker.m */; };
-		1452AB3C1BF92FD50018DA30 /* ARDCEODTURNClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAF11BF92FD50018DA30 /* ARDCEODTURNClient.m */; };
-		1452AB3D1BF92FD50018DA30 /* ARDJoinResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAF41BF92FD50018DA30 /* ARDJoinResponse.m */; };
-		1452AB3E1BF92FD50018DA30 /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAF71BF92FD50018DA30 /* ARDMessageResponse.m */; };
-		1452AB3F1BF92FD50018DA30 /* ARDSDPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAFA1BF92FD50018DA30 /* ARDSDPUtils.m */; };
-		1452AB401BF92FD50018DA30 /* ARDSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAFD1BF92FD50018DA30 /* ARDSignalingMessage.m */; };
-		1452AB411BF92FD50018DA30 /* ARDStatsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAFF1BF92FD50018DA30 /* ARDStatsBuilder.m */; };
-		1452AB421BF92FD50018DA30 /* ARDWebSocketChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB021BF92FD50018DA30 /* ARDWebSocketChannel.m */; };
-		1452AB431BF92FD50018DA30 /* ARDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB051BF92FD50018DA30 /* ARDUtilities.m */; };
-		1452AB441BF92FD50018DA30 /* ARDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB091BF92FD50018DA30 /* ARDAppDelegate.m */; };
-		1452AB451BF92FD50018DA30 /* ARDMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB0B1BF92FD50018DA30 /* ARDMainView.m */; };
-		1452AB461BF92FD50018DA30 /* ARDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB0D1BF92FD50018DA30 /* ARDMainViewController.m */; };
-		1452AB471BF92FD50018DA30 /* ARDStatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB0F1BF92FD50018DA30 /* ARDStatsView.m */; };
-		1452AB481BF92FD50018DA30 /* ARDVideoCallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB111BF92FD50018DA30 /* ARDVideoCallView.m */; };
-		1452AB491BF92FD50018DA30 /* ARDVideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB131BF92FD50018DA30 /* ARDVideoCallViewController.m */; };
 		1452AB4A1BF92FD50018DA30 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB141BF92FD50018DA30 /* Info.plist */; };
 		1452AB4C1BF92FD50018DA30 /* ic_call_end_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB171BF92FD50018DA30 /* ic_call_end_black_24dp.png */; };
 		1452AB4D1BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB181BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png */; };
@@ -141,13 +117,10 @@
 		1452AB531BF92FD50018DA30 /* iPhone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1E1BF92FD50018DA30 /* iPhone6@2x.png */; };
 		1452AB541BF92FD50018DA30 /* iPhone6p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1F1BF92FD50018DA30 /* iPhone6p@3x.png */; };
 		1452AB551BF92FD50018DA30 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB201BF92FD50018DA30 /* Roboto-Regular.ttf */; };
-		1452AB561BF92FD50018DA30 /* UIImage+ARDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB221BF92FD50018DA30 /* UIImage+ARDUtilities.m */; };
 		1452AB5B1BF92FD50018DA30 /* RTCICECandidate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2B1BF92FD50018DA30 /* RTCICECandidate+JSON.m */; };
 		1452AB5C1BF92FD50018DA30 /* RTCICEServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2D1BF92FD50018DA30 /* RTCICEServer+JSON.m */; };
 		1452AB5D1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2F1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m */; };
-		1452AB5E1BF92FD50018DA30 /* RTCSessionDescription+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB311BF92FD50018DA30 /* RTCSessionDescription+JSON.m */; };
 		1452AB601BF92FD50018DA30 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB361BF92FD50018DA30 /* LICENSE */; };
-		1452AB611BF92FD50018DA30 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB381BF92FD50018DA30 /* SRWebSocket.m */; };
 		146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
 		146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
 		146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
@@ -167,14 +140,10 @@
 		147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestStorageTests.m */; };
 		148233851C002DFE0000E9ED /* SVSignalingMessageSDP.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028701BFA541A00BDF2C5 /* SVSignalingMessageSDP.m */; };
 		1482338D1C002DFE0000E9ED /* SVSignalingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 140746471BFB841000506088 /* SVSignalingParams.m */; };
-		1482338E1C002DFE0000E9ED /* RTCICECandidate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2B1BF92FD50018DA30 /* RTCICECandidate+JSON.m */; };
 		148233901C002DFE0000E9ED /* QBSignalingChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028741BFA545300BDF2C5 /* QBSignalingChannel.m */; };
 		148233911C002DFE0000E9ED /* SVSignalingMessageType.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028291BFA470C00BDF2C5 /* SVSignalingMessageType.m */; };
 		148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0288C1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m */; };
 		148233931C002DFE0000E9ED /* QBChatMessage+SVSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028891BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m */; };
-		148233961C002DFE0000E9ED /* RTCMediaConstraints+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2F1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m */; };
-		148233981C002DFE0000E9ED /* RTCICEServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2D1BF92FD50018DA30 /* RTCICEServer+JSON.m */; };
-		148233991C002DFE0000E9ED /* RTCSessionDescription+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB311BF92FD50018DA30 /* RTCSessionDescription+JSON.m */; };
 		1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */; };
 		1482339F1C002DFE0000E9ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD51BF92FA30018DA30 /* AppDelegate.m */; };
 		148233A01C002DFE0000E9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD21BF92FA30018DA30 /* main.m */; };
@@ -203,7 +172,6 @@
 		148234061C002DFE0000E9ED /* iPhone6p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1F1BF92FD50018DA30 /* iPhone6p@3x.png */; };
 		148234071C002DFE0000E9ED /* iPhone5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1D1BF92FD50018DA30 /* iPhone5@2x.png */; };
 		148234081C002DFE0000E9ED /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB201BF92FD50018DA30 /* Roboto-Regular.ttf */; };
-		148234091C002DFE0000E9ED /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB361BF92FD50018DA30 /* LICENSE */; };
 		1482340A1C002DFE0000E9ED /* ic_call_end_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB171BF92FD50018DA30 /* ic_call_end_black_24dp.png */; };
 		1482340B1C002DFE0000E9ED /* iPhone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1E1BF92FD50018DA30 /* iPhone6@2x.png */; };
 		1482340C1C002DFE0000E9ED /* ic_switch_video_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1B1BF92FD50018DA30 /* ic_switch_video_black_24dp.png */; };
@@ -213,6 +181,9 @@
 		1483C8D11C19B7D400C46B0C /* librtc_event_log_proto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8CC1C19B7D400C46B0C /* librtc_event_log_proto.a */; };
 		1483C8D31C19B7D400C46B0C /* libvideo_processing_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8CE1C19B7D400C46B0C /* libvideo_processing_neon.a */; };
 		1483C8D51C19B7F700C46B0C /* libaudioproc_debug_proto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8D41C19B7F700C46B0C /* libaudioproc_debug_proto.a */; };
+		14893AEB1C6BA06F00F1D581 /* libisac_fix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14893AE91C6BA06F00F1D581 /* libisac_fix.a */; };
+		14893AEC1C6BA06F00F1D581 /* libisac_neon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14893AEA1C6BA06F00F1D581 /* libisac_neon.a */; };
+		14893AF71C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */; };
 		14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */; };
 		14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028261BFA46F900BDF2C5 /* SVSignalingMessage.m */; };
 		14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028291BFA470C00BDF2C5 /* SVSignalingMessageType.m */; };
@@ -231,14 +202,55 @@
 		14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
 		14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
 		14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
+		14C5356D1C6B86E500A0FFE8 /* libsocketrocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C5356B1C6B86E500A0FFE8 /* libsocketrocket.a */; };
+		14C5356E1C6B86E500A0FFE8 /* libstunprober.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C5356C1C6B86E500A0FFE8 /* libstunprober.a */; };
+		14C5359F1C6B877700A0FFE8 /* libdesktop_capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C5359E1C6B877700A0FFE8 /* libdesktop_capture.a */; };
+		14C535C21C6B9C8E00A0FFE8 /* librtc_media.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C535C01C6B9C8E00A0FFE8 /* librtc_media.a */; };
 		14D0A3F41C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */; };
 		14D0A3F51C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */; };
 		14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */; };
 		14D0A41D1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */; };
-		14FC46711C4FFC7F00C1797D /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
-		14FC46721C4FFC7F00C1797D /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
-		14FC46731C4FFC7F00C1797D /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
-		14FC46741C4FFC7F00C1797D /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
+		14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */; };
+		14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */; };
+		14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
+		14E9F5961C6CD317007F58B7 /* TestStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestStorageTests.m */; };
+		14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
+		14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
+		14E9F59A1C6CD317007F58B7 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
+		14E9F59B1C6CD317007F58B7 /* VideoStoryViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */; };
+		14E9F59C1C6CD317007F58B7 /* FakeSignalingChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */; };
+		14E9F59D1C6CD317007F58B7 /* VideoStoryPresenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */; };
+		14E9F59E1C6CD317007F58B7 /* VideoStoryInteractorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */; };
+		14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
+		14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
+		14E9F5A11C6CD317007F58B7 /* FakeCallServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */; };
+		14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */; };
+		14E9F5A41C6CD317007F58B7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
+		14E9F5A51C6CD317007F58B7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
+		14E9F5A61C6CD317007F58B7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
+		14E9F5A71C6CD317007F58B7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
+		14E9F5A81C6CD317007F58B7 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
+		14E9F5A91C6CD317007F58B7 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
+		14E9F5AA1C6CD317007F58B7 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
+		14E9F5AB1C6CD317007F58B7 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
+		14E9F5AC1C6CD317007F58B7 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
+		14E9F5AD1C6CD317007F58B7 /* libPods-QBRTCDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 482A838C9B84406A42BAF0B7 /* libPods-QBRTCDemoTests.a */; };
+		14E9F5B81C6CD37E007F58B7 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
+		14EE3D071C6BC03700C451CF /* build_webrtc.sh in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D011C6BC03700C451CF /* build_webrtc.sh */; };
+		14EE3D091C6BC03700C451CF /* clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D021C6BC03700C451CF /* clone.sh */; };
+		14EE3D0B1C6BC03700C451CF /* framework_dance.sh in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D031C6BC03700C451CF /* framework_dance.sh */; };
+		14EE3D0D1C6BC03700C451CF /* pull.sh in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D041C6BC03700C451CF /* pull.sh */; };
+		14EE3D0F1C6BC03700C451CF /* blox_target.py in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D051C6BC03700C451CF /* blox_target.py */; };
+		14EE3D111C6BC03700C451CF /* build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D061C6BC03700C451CF /* build.sh */; };
+		14EE3D131C6BC5BE00C451CF /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
+		14EE3D141C6BC5BE00C451CF /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
+		14EE3D151C6BC5BE00C451CF /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
+		14EE3D161C6BC5BE00C451CF /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
+		14EE3D171C6BC7CF00C451CF /* VideoStoryAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */; };
+		14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */; };
+		14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
+		14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */; };
+		14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
 		14FC46841C5029D400C1797D /* VideoStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC46831C5029D400C1797D /* VideoStory.storyboard */; };
 		14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC46831C5029D400C1797D /* VideoStory.storyboard */; };
 		16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
@@ -247,10 +259,10 @@
 		5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */; };
 		62630B599C72A7D1974F12E0 /* VideoStoryPresenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */; };
 		62B3F09AE08CB2C15B7DB191 /* VideoStoryAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */; };
+		7ACB6F3B6C48CD514E7AEB23 /* libPods-QBRTCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB97CEFF2BF48571CFA7B175 /* libPods-QBRTCDemo.a */; };
 		88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */; };
 		924ECF4B68125FDFF008BAF4 /* VideoStoryViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */; };
 		9EA836EE51E076BE599B837A /* libPods-QBRTCDemo_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBDF0B03E40A5AFFD52F9B2 /* libPods-QBRTCDemo_s.a */; };
-		CB865B1A511D916D59551759 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB21858974D045EFD0FB030 /* libPods.a */; };
 		D4E7B9D497E6D08669C82C98 /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
 		E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
 /* End PBXBuildFile section */
@@ -263,12 +275,25 @@
 			remoteGlobalIDString = 148233801C002DFE0000E9ED;
 			remoteInfo = QBRTCDemo_static;
 		};
+		14E9F5901C6CD317007F58B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1452AAC61BF92FA30018DA30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 148233801C002DFE0000E9ED;
+			remoteInfo = QBRTCDemo_static;
+		};
+		14E9F5B61C6CD322007F58B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1452AAC61BF92FA30018DA30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1452AACD1BF92FA30018DA30;
+			remoteInfo = QBRTCDemo;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		14015A321BFC6F5C00830618 /* CallClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallClientDelegate.h; sourceTree = "<group>"; };
-		14015A391BFCD08400830618 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		14015A3B1BFCD08400830618 /* QBRTCDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QBRTCDemoTests.m; sourceTree = "<group>"; };
+		14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemo_sTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14015A3D1BFCD08400830618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUserTests.m"; sourceTree = "<group>"; };
 		140746461BFB841000506088 /* SVSignalingParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingParams.h; sourceTree = "<group>"; };
@@ -465,6 +490,9 @@
 		1483C8D41C19B7F700C46B0C /* libaudioproc_debug_proto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudioproc_debug_proto.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libaudioproc_debug_proto.a"; sourceTree = "<group>"; };
 		1483C9441C1AD5E000C46B0C /* libquickblox_webrtc_lib_objc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libquickblox_webrtc_lib_objc.dylib; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc_lib_objc.dylib"; sourceTree = "<absolute>"; };
 		1483C9451C1AD5E000C46B0C /* libquickblox_webrtc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libquickblox_webrtc.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc.a"; sourceTree = "<absolute>"; };
+		14893AE91C6BA06F00F1D581 /* libisac_fix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_fix.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libisac_fix.a"; sourceTree = "<group>"; };
+		14893AEA1C6BA06F00F1D581 /* libisac_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_neon.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libisac_neon.a"; sourceTree = "<group>"; };
+		14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<group>"; };
 		14A0281B1BFA43E700BDF2C5 /* SVSignalingChannelState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelState.h; sourceTree = "<group>"; };
 		14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingChannelState.m; sourceTree = "<group>"; };
 		14A0281F1BFA459A00BDF2C5 /* SVSignalingChannelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelProtocol.h; sourceTree = "<group>"; };
@@ -497,11 +525,24 @@
 		14C534EC1C6A397100A0FFE8 /* CallServiceHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceHelpers.h; sourceTree = "<group>"; };
 		14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServiceHelpers.m; sourceTree = "<group>"; };
 		14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallService_Private.h; sourceTree = "<group>"; };
+		14C5356B1C6B86E500A0FFE8 /* libsocketrocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsocketrocket.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libsocketrocket.a"; sourceTree = "<group>"; };
+		14C5356C1C6B86E500A0FFE8 /* libstunprober.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstunprober.a; path = "Scripts/webrtc/src/webrtc/p2p/../../xcodebuild/Debug-iphoneos/libstunprober.a"; sourceTree = "<group>"; };
+		14C5359E1C6B877700A0FFE8 /* libdesktop_capture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdesktop_capture.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libdesktop_capture.a"; sourceTree = "<group>"; };
+		14C535BF1C6B9C8E00A0FFE8 /* librtc_api_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_api_objc.a; path = "Scripts/webrtc/src/webrtc/api/../../xcodebuild/Debug-iphoneos/librtc_api_objc.a"; sourceTree = "<group>"; };
+		14C535C01C6B9C8E00A0FFE8 /* librtc_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_media.a; path = "Scripts/webrtc/src/webrtc/media/../../xcodebuild/Debug-iphoneos/librtc_media.a"; sourceTree = "<group>"; };
 		14D0A3F11C529F01005AF958 /* ServiceComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceComponents.h; sourceTree = "<group>"; };
 		14D0A3F21C529F01005AF958 /* ServiceComponentsAssembly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceComponentsAssembly.h; sourceTree = "<group>"; };
 		14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceComponentsAssembly.m; sourceTree = "<group>"; };
 		14D0A41A1C543A37005AF958 /* ModuleAssemblyBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleAssemblyBase.h; sourceTree = "<group>"; };
 		14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleAssemblyBase.m; sourceTree = "<group>"; };
+		14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemoTests copy-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemoTests copy-Info.plist"; sourceTree = "<absolute>"; };
+		14EE3D011C6BC03700C451CF /* build_webrtc.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_webrtc.sh; path = Scripts/build_webrtc.sh; sourceTree = "<group>"; };
+		14EE3D021C6BC03700C451CF /* clone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = clone.sh; path = Scripts/clone.sh; sourceTree = "<group>"; };
+		14EE3D031C6BC03700C451CF /* framework_dance.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = framework_dance.sh; path = Scripts/framework_dance.sh; sourceTree = "<group>"; };
+		14EE3D041C6BC03700C451CF /* pull.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = pull.sh; path = Scripts/pull.sh; sourceTree = "<group>"; };
+		14EE3D051C6BC03700C451CF /* blox_target.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = blox_target.py; path = Scripts/blox_target.py; sourceTree = "<group>"; };
+		14EE3D061C6BC03700C451CF /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build.sh; path = Scripts/build.sh; sourceTree = "<group>"; };
 		14FC45721C4EE1B900C1797D /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<absolute>"; };
 		14FC45741C4EE1CF00C1797D /* libjingle_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_media.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_media.a"; sourceTree = "<absolute>"; };
 		14FC45751C4EE1CF00C1797D /* libjingle_p2p.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_p2p.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_p2p.a"; sourceTree = "<absolute>"; };
@@ -541,11 +582,14 @@
 		93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssembly.m; sourceTree = "<group>"; };
 		9CCA2B14A51BFE81BA93CE52 /* VideoStoryInteractor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractor.h; sourceTree = "<group>"; };
 		AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryPresenterTests.m; sourceTree = "<group>"; };
+		BB97CEFF2BF48571CFA7B175 /* libPods-QBRTCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCAB06BC01A11FABE6C03E6 /* VideoStoryPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryPresenter.h; sourceTree = "<group>"; };
 		C02FBCE1A397B785CE04E483 /* Pods-QBRTCDemo_s.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_s.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.release.xcconfig"; sourceTree = "<group>"; };
 		C6835E0812DE2752A0BEDC72 /* VideoStoryRouter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryRouter.h; sourceTree = "<group>"; };
+		C6E48B3E659A67BEEC20CF57 /* Pods-QBRTCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C7859E7F0647AD04AFAA97AE /* VideoStoryInteractorOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractorOutput.h; sourceTree = "<group>"; };
 		D11B754886679B217E8FEAA2 /* VideoStoryModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryModuleInput.h; sourceTree = "<group>"; };
+		DBC0353942AD2FCE4DA37D4D /* Pods-QBRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryInteractorTests.m; sourceTree = "<group>"; };
 		FEB21858974D045EFD0FB030 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -555,6 +599,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */,
 				146CA9F51C62645400F768C8 /* GLKit.framework in Frameworks */,
 				146CA9F41C62644C00F768C8 /* VideoToolbox.framework in Frameworks */,
 				146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */,
@@ -572,6 +617,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1436097B1BF945280091071C /* libicucore.tbd in Frameworks */,
+				14893AF71C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a in Frameworks */,
+				14893AEB1C6BA06F00F1D581 /* libisac_fix.a in Frameworks */,
+				14893AEC1C6BA06F00F1D581 /* libisac_neon.a in Frameworks */,
+				14C535C21C6B9C8E00A0FFE8 /* librtc_media.a in Frameworks */,
+				14C5359F1C6B877700A0FFE8 /* libdesktop_capture.a in Frameworks */,
+				14C5356D1C6B86E500A0FFE8 /* libsocketrocket.a in Frameworks */,
+				14C5356E1C6B86E500A0FFE8 /* libstunprober.a in Frameworks */,
 				1483C8D51C19B7F700C46B0C /* libaudioproc_debug_proto.a in Frameworks */,
 				1483C8CF1C19B7D400C46B0C /* libprotobuf_lite.a in Frameworks */,
 				1483C8D01C19B7D400C46B0C /* librtc_base_objc.a in Frameworks */,
@@ -584,7 +637,6 @@
 				14A028771BFB089600BDF2C5 /* libxml2.tbd in Frameworks */,
 				1436097F1BF945490091071C /* GLKit.framework in Frameworks */,
 				1436097D1BF9453C0091071C /* OpenGLES.framework in Frameworks */,
-				1436097B1BF945280091071C /* libicucore.tbd in Frameworks */,
 				143609791BF9450A0091071C /* VideoToolbox.framework in Frameworks */,
 				143609771BF944D60091071C /* CoreVideo.framework in Frameworks */,
 				143609751BF944C50091071C /* libstdc++.tbd in Frameworks */,
@@ -602,21 +654,15 @@
 				1436096F1BF944890091071C /* librtc_xmpp.a in Frameworks */,
 				143609701BF944890091071C /* librtp_rtcp.a in Frameworks */,
 				143609721BF944890091071C /* libsrtp.a in Frameworks */,
-				143609731BF944890091071C /* libstunprober.a in Frameworks */,
-				143609461BF944780091071C /* libcommand_line_parser.a in Frameworks */,
 				143609471BF944780091071C /* libcommon_audio_neon.a in Frameworks */,
 				143609481BF944780091071C /* libcommon_audio.a in Frameworks */,
 				143609491BF944780091071C /* libcommon_video.a in Frameworks */,
-				1436094A1BF944780091071C /* libdesktop_capture.a in Frameworks */,
 				1436094B1BF944780091071C /* libexpat.a in Frameworks */,
 				1436094C1BF944780091071C /* libfield_trial_default.a in Frameworks */,
-				1436094D1BF944780091071C /* libframe_editing_lib.a in Frameworks */,
 				1436094E1BF944780091071C /* libg711.a in Frameworks */,
 				1436094F1BF944780091071C /* libg722.a in Frameworks */,
 				143609501BF944780091071C /* libilbc.a in Frameworks */,
 				143609511BF944780091071C /* libisac_common.a in Frameworks */,
-				143609521BF944780091071C /* libisac_fix.a in Frameworks */,
-				143609531BF944780091071C /* libisac_neon.a in Frameworks */,
 				1436092A1BF944500091071C /* libsystem_wrappers.a in Frameworks */,
 				1436092B1BF944500091071C /* libusrsctplib.a in Frameworks */,
 				1436092C1BF944500091071C /* libvideo_capture_module_internal_impl.a in Frameworks */,
@@ -641,9 +687,7 @@
 				143609191BF9443E0091071C /* libbitrate_controller.a in Frameworks */,
 				1436091A1BF9443E0091071C /* libboringssl.a in Frameworks */,
 				1436091B1BF9443E0091071C /* libcng.a in Frameworks */,
-				143608FA1BF943700091071C /* libjingle_media.a in Frameworks */,
 				143608FB1BF943700091071C /* libjingle_p2p.a in Frameworks */,
-				143608FC1BF943700091071C /* libjingle_peerconnection_objc.a in Frameworks */,
 				143608FD1BF943700091071C /* libjingle_peerconnection.a in Frameworks */,
 				143608FE1BF943700091071C /* libjsoncpp.a in Frameworks */,
 				143608FF1BF943700091071C /* libmedia_file.a in Frameworks */,
@@ -661,7 +705,7 @@
 				143608ED1BF943380091071C /* libwebrtc_vp8.a in Frameworks */,
 				143608EE1BF943380091071C /* libwebrtc_vp9.a in Frameworks */,
 				143608EF1BF943380091071C /* libwebrtc.a in Frameworks */,
-				CB865B1A511D916D59551759 /* libPods.a in Frameworks */,
+				7ACB6F3B6C48CD514E7AEB23 /* libPods-QBRTCDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,18 +717,36 @@
 				148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */,
 				148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */,
 				148233AE1C002DFE0000E9ED /* MobileCoreServices.framework in Frameworks */,
-				14FC46711C4FFC7F00C1797D /* webrtc-arm.a in Frameworks */,
-				14FC46721C4FFC7F00C1797D /* webrtc-arm64.a in Frameworks */,
-				14FC46731C4FFC7F00C1797D /* webrtc-ia32.a in Frameworks */,
-				14FC46741C4FFC7F00C1797D /* webrtc-x86_64.a in Frameworks */,
 				148233AF1C002DFE0000E9ED /* libxml2.tbd in Frameworks */,
 				148233B01C002DFE0000E9ED /* GLKit.framework in Frameworks */,
 				148233B11C002DFE0000E9ED /* OpenGLES.framework in Frameworks */,
+				14EE3D131C6BC5BE00C451CF /* webrtc-arm.a in Frameworks */,
+				14EE3D141C6BC5BE00C451CF /* webrtc-arm64.a in Frameworks */,
+				14EE3D151C6BC5BE00C451CF /* webrtc-ia32.a in Frameworks */,
+				14EE3D161C6BC5BE00C451CF /* webrtc-x86_64.a in Frameworks */,
 				148233B21C002DFE0000E9ED /* libicucore.tbd in Frameworks */,
 				148233B31C002DFE0000E9ED /* VideoToolbox.framework in Frameworks */,
 				148233B41C002DFE0000E9ED /* CoreVideo.framework in Frameworks */,
 				148233B51C002DFE0000E9ED /* libstdc++.tbd in Frameworks */,
 				9EA836EE51E076BE599B837A /* libPods-QBRTCDemo_s.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14E9F5A31C6CD317007F58B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14E9F5B81C6CD37E007F58B7 /* libicucore.tbd in Frameworks */,
+				14E9F5A41C6CD317007F58B7 /* GLKit.framework in Frameworks */,
+				14E9F5A51C6CD317007F58B7 /* VideoToolbox.framework in Frameworks */,
+				14E9F5A61C6CD317007F58B7 /* CoreMedia.framework in Frameworks */,
+				14E9F5A71C6CD317007F58B7 /* CoreVideo.framework in Frameworks */,
+				14E9F5A81C6CD317007F58B7 /* libstdc++.tbd in Frameworks */,
+				14E9F5A91C6CD317007F58B7 /* webrtc-arm.a in Frameworks */,
+				14E9F5AA1C6CD317007F58B7 /* webrtc-arm64.a in Frameworks */,
+				14E9F5AB1C6CD317007F58B7 /* webrtc-ia32.a in Frameworks */,
+				14E9F5AC1C6CD317007F58B7 /* webrtc-x86_64.a in Frameworks */,
+				14E9F5AD1C6CD317007F58B7 /* libPods-QBRTCDemoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,7 +787,6 @@
 			isa = PBXGroup;
 			children = (
 				14015A3D1BFCD08400830618 /* Info.plist */,
-				14015A3B1BFCD08400830618 /* QBRTCDemoTests.m */,
 				147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */,
 				14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */,
 				14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */,
@@ -753,6 +814,14 @@
 		143609801BF9C7850091071C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */,
+				14893AE91C6BA06F00F1D581 /* libisac_fix.a */,
+				14893AEA1C6BA06F00F1D581 /* libisac_neon.a */,
+				14C535BF1C6B9C8E00A0FFE8 /* librtc_api_objc.a */,
+				14C535C01C6B9C8E00A0FFE8 /* librtc_media.a */,
+				14C5359E1C6B877700A0FFE8 /* libdesktop_capture.a */,
+				14C5356B1C6B86E500A0FFE8 /* libsocketrocket.a */,
+				14C5356C1C6B86E500A0FFE8 /* libstunprober.a */,
 				146CA9F21C62644000F768C8 /* CoreMedia.framework */,
 				14FC46771C500EC900C1797D /* libquickblox_webrtc.dylib */,
 				14FC46751C500D1700C1797D /* libquickblox_webrtc.dylib */,
@@ -869,6 +938,7 @@
 				482A838C9B84406A42BAF0B7 /* libPods-QBRTCDemoTests.a */,
 				FEB21858974D045EFD0FB030 /* libPods.a */,
 				7FBDF0B03E40A5AFFD52F9B2 /* libPods-QBRTCDemo_s.a */,
+				BB97CEFF2BF48571CFA7B175 /* libPods-QBRTCDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -885,6 +955,7 @@
 		1452AAC51BF92FA30018DA30 = {
 			isa = PBXGroup;
 			children = (
+				14EE3D001C6BC02D00C451CF /* Scripts */,
 				1452AAE81BF92FD50018DA30 /* AppRTCDemo_unused */,
 				143609801BF9C7850091071C /* Frameworks */,
 				24FA710C5C0D79208F548C05 /* Pods */,
@@ -894,6 +965,7 @@
 				5352BD24E023342BA941E49A /* Tests */,
 				1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */,
 				148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */,
+				14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -902,8 +974,9 @@
 			children = (
 				1452AACE1BF92FA30018DA30 /* QBRTCDemo.app */,
 				1452ABBB1BF9315E0018DA30 /* CopyWebRTCHeaders.app */,
-				14015A391BFCD08400830618 /* QBRTCDemoTests.xctest */,
+				14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */,
 				148234141C002DFE0000E9ED /* QBRTCDemo_s.app */,
+				14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1176,6 +1249,19 @@
 			path = ModuleAssemblyBase;
 			sourceTree = "<group>";
 		};
+		14EE3D001C6BC02D00C451CF /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				14EE3D011C6BC03700C451CF /* build_webrtc.sh */,
+				14EE3D021C6BC03700C451CF /* clone.sh */,
+				14EE3D031C6BC03700C451CF /* framework_dance.sh */,
+				14EE3D041C6BC03700C451CF /* pull.sh */,
+				14EE3D051C6BC03700C451CF /* blox_target.py */,
+				14EE3D061C6BC03700C451CF /* build.sh */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
 		14F4FAF01C5295CE00E9488C /* BusinessLogicLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1239,6 +1325,8 @@
 				2E34DA0AFB952EA298811115 /* Pods.release.xcconfig */,
 				8AA6686E6F630801595DF8B0 /* Pods-QBRTCDemo_s.debug.xcconfig */,
 				C02FBCE1A397B785CE04E483 /* Pods-QBRTCDemo_s.release.xcconfig */,
+				C6E48B3E659A67BEEC20CF57 /* Pods-QBRTCDemo.debug.xcconfig */,
+				DBC0353942AD2FCE4DA37D4D /* Pods-QBRTCDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1350,9 +1438,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		14015A381BFCD08400830618 /* QBRTCDemoTests */ = {
+		14015A381BFCD08400830618 /* QBRTCDemo_sTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 14015A401BFCD08400830618 /* Build configuration list for PBXNativeTarget "QBRTCDemoTests" */;
+			buildConfigurationList = 14015A401BFCD08400830618 /* Build configuration list for PBXNativeTarget "QBRTCDemo_sTests" */;
 			buildPhases = (
 				4F2AC2ACE6AAE714B48F84DF /* Check Pods Manifest.lock */,
 				14015A351BFCD08400830618 /* Sources */,
@@ -1366,21 +1454,21 @@
 			dependencies = (
 				149A20B61C0123AD009FC236 /* PBXTargetDependency */,
 			);
-			name = QBRTCDemoTests;
+			name = QBRTCDemo_sTests;
 			productName = QBRTCDemoTests;
-			productReference = 14015A391BFCD08400830618 /* QBRTCDemoTests.xctest */;
+			productReference = 14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		1452AACD1BF92FA30018DA30 /* QBRTCDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1452AAE51BF92FA30018DA30 /* Build configuration list for PBXNativeTarget "QBRTCDemo" */;
 			buildPhases = (
-				E77D2FEA2F326F670BD4B36F /* Check Pods Manifest.lock */,
+				181BE1489761A40E9BFDC8CA /* Check Pods Manifest.lock */,
 				1452AACA1BF92FA30018DA30 /* Sources */,
 				1452AACB1BF92FA30018DA30 /* Frameworks */,
 				1452AACC1BF92FA30018DA30 /* Resources */,
-				52BBB893FBFADD11841E4EAA /* Embed Pods Frameworks */,
 				74D8C9A6671A48324195920F /* Copy Pods Resources */,
+				808B09EEC92C445DEF820643 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1426,6 +1514,28 @@
 			productReference = 148234141C002DFE0000E9ED /* QBRTCDemo_s.app */;
 			productType = "com.apple.product-type.application";
 		};
+		14E9F58E1C6CD317007F58B7 /* QBRTCDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14E9F5B11C6CD317007F58B7 /* Build configuration list for PBXNativeTarget "QBRTCDemoTests" */;
+			buildPhases = (
+				14E9F5911C6CD317007F58B7 /* Check Pods Manifest.lock */,
+				14E9F5921C6CD317007F58B7 /* Sources */,
+				14E9F5A31C6CD317007F58B7 /* Frameworks */,
+				14E9F5AE1C6CD317007F58B7 /* Resources */,
+				14E9F5AF1C6CD317007F58B7 /* Copy Pods Resources */,
+				14E9F5B01C6CD317007F58B7 /* Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14E9F58F1C6CD317007F58B7 /* PBXTargetDependency */,
+				14E9F5B71C6CD322007F58B7 /* PBXTargetDependency */,
+			);
+			name = QBRTCDemoTests;
+			productName = QBRTCDemoTests;
+			productReference = 14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1441,6 +1551,9 @@
 					};
 					1452AACD1BF92FA30018DA30 = {
 						CreatedOnToolsVersion = 7.1;
+					};
+					14E9F58E1C6CD317007F58B7 = {
+						TestTargetID = 1452AACD1BF92FA30018DA30;
 					};
 					14FC46691C4FF82000C1797D = {
 						CreatedOnToolsVersion = 7.2;
@@ -1462,9 +1575,10 @@
 			targets = (
 				1452AACD1BF92FA30018DA30 /* QBRTCDemo */,
 				1452AB841BF9315E0018DA30 /* CopyWebRTCHeaders */,
-				14015A381BFCD08400830618 /* QBRTCDemoTests */,
+				14015A381BFCD08400830618 /* QBRTCDemo_sTests */,
 				148233801C002DFE0000E9ED /* QBRTCDemo_s */,
 				14FC46691C4FF82000C1797D /* BuildPeerConnection */,
+				14E9F58E1C6CD317007F58B7 /* QBRTCDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1481,7 +1595,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14EE3D0F1C6BC03700C451CF /* blox_target.py in Resources */,
 				1452AB4D1BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png in Resources */,
+				14EE3D0D1C6BC03700C451CF /* pull.sh in Resources */,
+				14EE3D111C6BC03700C451CF /* build.sh in Resources */,
 				1452AB4A1BF92FD50018DA30 /* Info.plist in Resources */,
 				1452AAE11BF92FA30018DA30 /* LaunchScreen.storyboard in Resources */,
 				1452AB4E1BF92FD50018DA30 /* ic_clear_black_24dp.png in Resources */,
@@ -1490,11 +1607,14 @@
 				1452AB541BF92FD50018DA30 /* iPhone6p@3x.png in Resources */,
 				1452AB521BF92FD50018DA30 /* iPhone5@2x.png in Resources */,
 				1452AB551BF92FD50018DA30 /* Roboto-Regular.ttf in Resources */,
+				14EE3D091C6BC03700C451CF /* clone.sh in Resources */,
 				1452AB601BF92FD50018DA30 /* LICENSE in Resources */,
+				14EE3D0B1C6BC03700C451CF /* framework_dance.sh in Resources */,
 				1452AB4C1BF92FD50018DA30 /* ic_call_end_black_24dp.png in Resources */,
 				1452AB531BF92FD50018DA30 /* iPhone6@2x.png in Resources */,
 				1452AB501BF92FD50018DA30 /* ic_switch_video_black_24dp.png in Resources */,
 				14FC46841C5029D400C1797D /* VideoStory.storyboard in Resources */,
+				14EE3D071C6BC03700C451CF /* build_webrtc.sh in Resources */,
 				1452AB4F1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1512,12 +1632,18 @@
 				148234061C002DFE0000E9ED /* iPhone6p@3x.png in Resources */,
 				148234071C002DFE0000E9ED /* iPhone5@2x.png in Resources */,
 				148234081C002DFE0000E9ED /* Roboto-Regular.ttf in Resources */,
-				148234091C002DFE0000E9ED /* LICENSE in Resources */,
 				1482340A1C002DFE0000E9ED /* ic_call_end_black_24dp.png in Resources */,
 				1482340B1C002DFE0000E9ED /* iPhone6@2x.png in Resources */,
 				1482340C1C002DFE0000E9ED /* ic_switch_video_black_24dp.png in Resources */,
 				14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */,
 				1482340F1C002DFE0000E9ED /* ic_clear_black_24dp@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14E9F5AE1C6CD317007F58B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1551,6 +1677,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh ${PROJECT_DIR}/${PROJECT_NAME}/CopyWebRTCHeaders.sh";
+		};
+		14E9F5911C6CD317007F58B7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		14E9F5AF1C6CD317007F58B7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		14E9F5B01C6CD317007F58B7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		181BE1489761A40E9BFDC8CA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		3669B883064AE170C241EB45 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1597,21 +1783,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		52BBB893FBFADD11841E4EAA /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		74D8C9A6671A48324195920F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1624,7 +1795,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8078B1221C5521775495BAAC /* Check Pods Manifest.lock */ = {
@@ -1642,19 +1813,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E77D2FEA2F326F670BD4B36F /* Check Pods Manifest.lock */ = {
+		808B09EEC92C445DEF820643 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F2446CD3C2C27F4143B8491F /* Embed Pods Frameworks */ = {
@@ -1683,7 +1854,6 @@
 				14398F6E1C010C9100F3CE74 /* SVSignalingMessageTests.m in Sources */,
 				147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */,
 				147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */,
-				14015A3C1BFCD08400830618 /* QBRTCDemoTests.m in Sources */,
 				14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */,
 				14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */,
 				3772DBD8B200B94BC6C11C61 /* VideoStoryAssemblyTests.m in Sources */,
@@ -1703,46 +1873,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */,
-				1452AB471BF92FD50018DA30 /* ARDStatsView.m in Sources */,
-				1452AB441BF92FD50018DA30 /* ARDAppDelegate.m in Sources */,
-				1452AB3A1BF92FD50018DA30 /* ARDAppEngineClient.m in Sources */,
 				14A028711BFA541A00BDF2C5 /* SVSignalingMessageSDP.m in Sources */,
-				1452AB401BF92FD50018DA30 /* ARDSignalingMessage.m in Sources */,
-				1452AB3F1BF92FD50018DA30 /* ARDSDPUtils.m in Sources */,
-				1452AB561BF92FD50018DA30 /* UIImage+ARDUtilities.m in Sources */,
-				1452AB3D1BF92FD50018DA30 /* ARDJoinResponse.m in Sources */,
-				1452AB411BF92FD50018DA30 /* ARDStatsBuilder.m in Sources */,
 				140746481BFB841000506088 /* SVSignalingParams.m in Sources */,
 				1452AB5B1BF92FD50018DA30 /* RTCICECandidate+JSON.m in Sources */,
-				1452AB491BF92FD50018DA30 /* ARDVideoCallViewController.m in Sources */,
 				14A028751BFA545300BDF2C5 /* QBSignalingChannel.m in Sources */,
 				14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */,
+				14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */,
 				14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
 				14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */,
 				14A0288A1BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m in Sources */,
-				1452AB481BF92FD50018DA30 /* ARDVideoCallView.m in Sources */,
-				1452AB431BF92FD50018DA30 /* ARDUtilities.m in Sources */,
 				14D0A3F41C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */,
 				1452AB5D1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m in Sources */,
 				14736EE71C567EC5009DFBBC /* CallService.m in Sources */,
-				1452AB421BF92FD50018DA30 /* ARDWebSocketChannel.m in Sources */,
 				1452AB5C1BF92FD50018DA30 /* RTCICEServer+JSON.m in Sources */,
-				1452AB5E1BF92FD50018DA30 /* RTCSessionDescription+JSON.m in Sources */,
-				1452AB611BF92FD50018DA30 /* SRWebSocket.m in Sources */,
-				1452AB3B1BF92FD50018DA30 /* ARDBitrateTracker.m in Sources */,
-				1452AB461BF92FD50018DA30 /* ARDMainViewController.m in Sources */,
+				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
 				14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */,
 				1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */,
 				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
+				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
+				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
-				1452AB3E1BF92FD50018DA30 /* ARDMessageResponse.m in Sources */,
-				1452AB3C1BF92FD50018DA30 /* ARDCEODTURNClient.m in Sources */,
-				1452AB451BF92FD50018DA30 /* ARDMainView.m in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
 				14A028901BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m in Sources */,
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
 				14A0286E1BFA53DB00BDF2C5 /* SVSignalingMessageICE.m in Sources */,
+				14EE3D171C6BC7CF00C451CF /* VideoStoryAssembly.m in Sources */,
 				14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1756,14 +1912,10 @@
 				14D0A41D1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
 				14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				1482338D1C002DFE0000E9ED /* SVSignalingParams.m in Sources */,
-				1482338E1C002DFE0000E9ED /* RTCICECandidate+JSON.m in Sources */,
 				148233901C002DFE0000E9ED /* QBSignalingChannel.m in Sources */,
 				148233911C002DFE0000E9ED /* SVSignalingMessageType.m in Sources */,
 				148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */,
 				148233931C002DFE0000E9ED /* QBChatMessage+SVSignalingMessage.m in Sources */,
-				148233961C002DFE0000E9ED /* RTCMediaConstraints+JSON.m in Sources */,
-				148233981C002DFE0000E9ED /* RTCICEServer+JSON.m in Sources */,
-				148233991C002DFE0000E9ED /* RTCSessionDescription+JSON.m in Sources */,
 				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
 				1482339F1C002DFE0000E9ED /* AppDelegate.m in Sources */,
 				148233A01C002DFE0000E9ED /* main.m in Sources */,
@@ -1783,6 +1935,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14E9F5921C6CD317007F58B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */,
+				14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */,
+				14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */,
+				14E9F5961C6CD317007F58B7 /* TestStorageTests.m in Sources */,
+				14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */,
+				14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */,
+				14E9F59A1C6CD317007F58B7 /* VideoStoryAssemblyTests.m in Sources */,
+				14E9F59B1C6CD317007F58B7 /* VideoStoryViewControllerTests.m in Sources */,
+				14E9F59C1C6CD317007F58B7 /* FakeSignalingChannel.m in Sources */,
+				14E9F59D1C6CD317007F58B7 /* VideoStoryPresenterTests.m in Sources */,
+				14E9F59E1C6CD317007F58B7 /* VideoStoryInteractorTests.m in Sources */,
+				14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */,
+				14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */,
+				14E9F5A11C6CD317007F58B7 /* FakeCallServiceDelegate.m in Sources */,
+				14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1790,6 +1964,16 @@
 			isa = PBXTargetDependency;
 			target = 148233801C002DFE0000E9ED /* QBRTCDemo_s */;
 			targetProxy = 149A20B51C0123AD009FC236 /* PBXContainerItemProxy */;
+		};
+		14E9F58F1C6CD317007F58B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 148233801C002DFE0000E9ED /* QBRTCDemo_s */;
+			targetProxy = 14E9F5901C6CD317007F58B7 /* PBXContainerItemProxy */;
+		};
+		14E9F5B71C6CD322007F58B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1452AACD1BF92FA30018DA30 /* QBRTCDemo */;
+			targetProxy = 14E9F5B61C6CD322007F58B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1814,6 +1998,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -1851,6 +2036,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -1962,7 +2148,7 @@
 		};
 		1452AAE61BF92FA30018DA30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 371FA74ADC9B676C1F455BA3 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = C6E48B3E659A67BEEC20CF57 /* Pods-QBRTCDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -1970,6 +2156,7 @@
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -1977,6 +2164,8 @@
 					"\"$(SRCROOT)/QBRTCDemo/webrtcheaders\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
+					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1984,18 +2173,21 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/OCMock",
+					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Scripts/webrtc/src/talk\"/**";
 				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Debug;
 		};
 		1452AAE71BF92FA30018DA30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E34DA0AFB952EA298811115 /* Pods.release.xcconfig */;
+			baseConfigurationReference = DBC0353942AD2FCE4DA37D4D /* Pods-QBRTCDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -2003,6 +2195,7 @@
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -2010,6 +2203,8 @@
 					"\"$(SRCROOT)/QBRTCDemo/webrtcheaders\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
+					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
+					"$(inherited)",
 				);
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2017,11 +2212,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/OCMock",
+					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Scripts/webrtc/src/talk\"/**";
 				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Release;
@@ -2124,6 +2322,82 @@
 			};
 			name = Release;
 		};
+		14E9F5B21C6CD317007F58B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C1F7FA5E286979530920B85 /* Pods-QBRTCDemoTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/QBRTCDemo/ThirdParty",
+					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/QBRTCDemo/\"/**",
+					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
+					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
+					"$(inherited)",
+					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
+				);
+				INFOPLIST_FILE = "QBRTCDemoTests copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Scripts/webrtc/lib",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"OCHamcrest\"",
+					"-l\"OCMock\"",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo.app/QBRTCDemo";
+			};
+			name = Debug;
+		};
+		14E9F5B31C6CD317007F58B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EBB921A5AEF7B56EC5229BA /* Pods-QBRTCDemoTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/QBRTCDemo/ThirdParty",
+					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/QBRTCDemo/\"/**",
+					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
+					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
+					"$(inherited)",
+					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
+				);
+				INFOPLIST_FILE = "QBRTCDemoTests copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Scripts/webrtc/lib",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"OCHamcrest\"",
+					"-l\"OCMock\"",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo.app/QBRTCDemo";
+			};
+			name = Release;
+		};
 		14FC466A1C4FF82000C1797D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2141,7 +2415,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		14015A401BFCD08400830618 /* Build configuration list for PBXNativeTarget "QBRTCDemoTests" */ = {
+		14015A401BFCD08400830618 /* Build configuration list for PBXNativeTarget "QBRTCDemo_sTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14015A411BFCD08400830618 /* Debug */,
@@ -2182,6 +2456,15 @@
 			buildConfigurations = (
 				148234121C002DFE0000E9ED /* Debug */,
 				148234131C002DFE0000E9ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14E9F5B11C6CD317007F58B7 /* Build configuration list for PBXNativeTarget "QBRTCDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14E9F5B21C6CD317007F58B7 /* Debug */,
+				14E9F5B31C6CD317007F58B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

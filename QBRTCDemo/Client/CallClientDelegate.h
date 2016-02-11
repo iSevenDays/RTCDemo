@@ -6,11 +6,10 @@
 //  Copyright © 2015 anton. All rights reserved.
 //
 
-#import <RTCTypes.h>
 #import <RTCVideoTrack.h>
-#import "RTCTypes.h"
+#import <RTCTypes.h>
 
-
+enum RTCICEConnectionState : NSInteger;
 enum CallClientState : NSInteger;
 @protocol CallServiceProtocol;
 

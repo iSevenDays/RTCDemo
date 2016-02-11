@@ -28,16 +28,12 @@
 #ifndef TALK_SESSION_MEDIA_CHANNEL_H_
 #define TALK_SESSION_MEDIA_CHANNEL_H_
 
-#include <string>
-#include <vector>
 #include <map>
 #include <set>
+#include <string>
 #include <utility>
+#include <vector>
 
-#include "talk/media/base/mediachannel.h"
-#include "talk/media/base/mediaengine.h"
-#include "talk/media/base/streamparams.h"
-#include "talk/media/base/videocapturer.h"
 #include "talk/session/media/audiomonitor.h"
 #include "talk/session/media/bundlefilter.h"
 #include "talk/session/media/mediamonitor.h"
@@ -50,6 +46,11 @@
 #include "webrtc/base/network.h"
 #include "webrtc/base/sigslot.h"
 #include "webrtc/base/window.h"
+#include "webrtc/media/base/mediachannel.h"
+#include "webrtc/media/base/mediaengine.h"
+#include "webrtc/media/base/streamparams.h"
+#include "webrtc/media/base/videocapturer.h"
+#include "webrtc/media/base/videosinkinterface.h"
 #include "webrtc/p2p/base/transportcontroller.h"
 #include "webrtc/p2p/client/socketmonitor.h"
 
@@ -61,7 +62,6 @@ namespace cricket {
 
 struct CryptoParams;
 class MediaContentDescription;
-struct ViewRequest;
 
 enum SinkType {
   SINK_PRE_CRYPTO,  // Sink packets before encryption or after decryption.
@@ -455,8 +455,7 @@ class VideoChannel : public BaseChannel {
     return static_cast<VideoMediaChannel*>(BaseChannel::media_channel());
   }
 
-  bool SetRenderer(uint32_t ssrc, VideoRenderer* renderer);
-  bool ApplyViewRequest(const ViewRequest& request);
+  bool SetSink(uint32_t ssrc, rtc::VideoSinkInterface<VideoFrame>* sink);
 
   // TODO(pthatcher): Refactor to use a "capture id" instead of an
   // ssrc here as the "key".
@@ -478,9 +477,6 @@ class VideoChannel : public BaseChannel {
   sigslot::signal2<VideoChannel*, const VideoMediaInfo&> SignalMediaMonitor;
   sigslot::signal2<uint32_t, rtc::WindowEvent> SignalScreencastWindowEvent;
 
-  bool SendIntraFrame();
-  bool RequestIntraFrame();
-
   bool SetVideoSend(uint32_t ssrc, bool enable, const VideoOptions* options);
 
  private:
@@ -495,7 +491,6 @@ class VideoChannel : public BaseChannel {
   virtual bool SetRemoteContent_w(const MediaContentDescription* content,
                                   ContentAction action,
                                   std::string* error_desc);
-  bool ApplyViewRequest_w(const ViewRequest& request);
 
   bool AddScreencast_w(uint32_t ssrc, VideoCapturer* capturer);
   bool RemoveScreencast_w(uint32_t ssrc);
@@ -513,7 +508,6 @@ class VideoChannel : public BaseChannel {
   virtual void OnStateChange(VideoCapturer* capturer, CaptureState ev);
   bool GetLocalSsrc(const VideoCapturer* capturer, uint32_t* ssrc);
 
-  VideoRenderer* renderer_;
   ScreencastMap screencast_capturers_;
   rtc::scoped_ptr<VideoMediaMonitor> media_monitor_;
 

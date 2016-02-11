@@ -89,10 +89,11 @@
 }
 
 + (RTCMediaConstraints *)defaultMediaStreamConstraints {
-	RTCMediaConstraints* constraints =
-	[[RTCMediaConstraints alloc]
-	 initWithMandatoryConstraints:nil
-	 optionalConstraints:nil];
+	
+	RTCPair *dtls = [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:true ? @"true" : @"false"];
+	
+	NSArray *optionalConstraints = @[dtls];
+	RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:nil optionalConstraints:optionalConstraints];
 	return constraints;
 }
 
@@ -113,7 +114,7 @@
 }
 
 + (RTCMediaConstraints *)defaultPeerConnectionConstraints {
-	NSString *value = true ? @"false" : @"true";
+	NSString *value = true ? @"true" : @"false";
 	NSArray *optionalConstraints = @[
 									 [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:value],
 									 [[RTCPair alloc] initWithKey:@"internalSctpDataChannels" value:@"true"],
