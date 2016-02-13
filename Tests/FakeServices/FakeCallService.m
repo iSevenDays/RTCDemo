@@ -46,7 +46,7 @@
 
 	RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
 	
-	RTCVideoTrack *emptyVideoTrack = [[RTCVideoTrack alloc] initWithFactory:factory source:nil trackId:@""];
+	RTCVideoTrack *emptyVideoTrack = [[RTCVideoTrack alloc] initWithFactory:factory source:nil trackId:@"trackID"];
 	
 	[self.delegate client:self didReceiveLocalVideoTrack:emptyVideoTrack];
 	

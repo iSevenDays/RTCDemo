@@ -129,7 +129,7 @@
 	RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
 	RTCConfiguration *config = [[RTCConfiguration alloc] init];
 	config.iceServers = self.iceServers;
-	
+
 	self.peerConnection = [self.factory peerConnectionWithConfiguration:config constraints:constraints delegate:self];
 	
 	// Create AV media stream and add it to the peer connection.
@@ -139,18 +139,7 @@
 	[self openDataChannel]; // configure data channel, then start call
 	// Send offer.
 	[self.peerConnection createOfferWithDelegate:self constraints:[self defaultOfferConstraints]];
-}
 
-- (void)openDataChannel {
-	//	if (![self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]
-	//		|| self.state != kClientStateConnected) {
-	//		NSLog(@"Connection is not established");
-	//		return;
-	//	}
-//	RTCDataChannelInit *dataChannelInit = [[RTCDataChannelInit alloc] init];
-//	
-//	self.dataChannel = [self.peerConnection createDataChannelWithLabel:@"testdatachannel" config:dataChannelInit];
-//	self.dataChannel.delegate = self;
 }
 
 - (void)hangup {

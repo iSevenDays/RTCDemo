@@ -26,8 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -85,9 +84,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "148233801C002DFE0000E9ED"
-            BuildableName = "QBRTCDemo_s.app"
-            BlueprintName = "QBRTCDemo_s"
+            BlueprintIdentifier = "1452AB841BF9315E0018DA30"
+            BuildableName = "CopyWebRTCHeaders.app"
+            BlueprintName = "CopyWebRTCHeaders"
             ReferencedContainer = "container:QBRTCDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
