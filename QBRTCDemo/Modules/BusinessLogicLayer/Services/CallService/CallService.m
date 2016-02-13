@@ -136,7 +136,6 @@
 	RTCMediaStream *localStream = [self createLocalMediaStream];
 	[self.peerConnection addStream:localStream];
 	
-	[self openDataChannel]; // configure data channel, then start call
 	// Send offer.
 	[self.peerConnection createOfferWithDelegate:self constraints:[self defaultOfferConstraints]];
 

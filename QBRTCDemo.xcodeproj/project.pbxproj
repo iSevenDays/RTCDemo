@@ -40,21 +40,6 @@
 		1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD51BF92FA30018DA30 /* AppDelegate.m */; };
 		1452AADE1BF92FA30018DA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADD1BF92FA30018DA30 /* Assets.xcassets */; };
 		1452AAE11BF92FA30018DA30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */; };
-		1452AB4A1BF92FD50018DA30 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB141BF92FD50018DA30 /* Info.plist */; };
-		1452AB4C1BF92FD50018DA30 /* ic_call_end_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB171BF92FD50018DA30 /* ic_call_end_black_24dp.png */; };
-		1452AB4D1BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB181BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png */; };
-		1452AB4E1BF92FD50018DA30 /* ic_clear_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB191BF92FD50018DA30 /* ic_clear_black_24dp.png */; };
-		1452AB4F1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1A1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png */; };
-		1452AB501BF92FD50018DA30 /* ic_switch_video_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1B1BF92FD50018DA30 /* ic_switch_video_black_24dp.png */; };
-		1452AB511BF92FD50018DA30 /* ic_switch_video_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1C1BF92FD50018DA30 /* ic_switch_video_black_24dp@2x.png */; };
-		1452AB521BF92FD50018DA30 /* iPhone5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1D1BF92FD50018DA30 /* iPhone5@2x.png */; };
-		1452AB531BF92FD50018DA30 /* iPhone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1E1BF92FD50018DA30 /* iPhone6@2x.png */; };
-		1452AB541BF92FD50018DA30 /* iPhone6p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1F1BF92FD50018DA30 /* iPhone6p@3x.png */; };
-		1452AB551BF92FD50018DA30 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB201BF92FD50018DA30 /* Roboto-Regular.ttf */; };
-		1452AB5B1BF92FD50018DA30 /* RTCICECandidate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2B1BF92FD50018DA30 /* RTCICECandidate+JSON.m */; };
-		1452AB5C1BF92FD50018DA30 /* RTCICEServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2D1BF92FD50018DA30 /* RTCICEServer+JSON.m */; };
-		1452AB5D1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AB2F1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m */; };
-		1452AB601BF92FD50018DA30 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB361BF92FD50018DA30 /* LICENSE */; };
 		146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
 		146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
 		146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
@@ -97,19 +82,8 @@
 		148233B31C002DFE0000E9ED /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
 		148233B41C002DFE0000E9ED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		148233B51C002DFE0000E9ED /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
-		148234001C002DFE0000E9ED /* ic_call_end_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB181BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png */; };
-		148234011C002DFE0000E9ED /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB141BF92FD50018DA30 /* Info.plist */; };
 		148234021C002DFE0000E9ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */; };
-		148234031C002DFE0000E9ED /* ic_clear_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB191BF92FD50018DA30 /* ic_clear_black_24dp.png */; };
-		148234041C002DFE0000E9ED /* ic_switch_video_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1C1BF92FD50018DA30 /* ic_switch_video_black_24dp@2x.png */; };
 		148234051C002DFE0000E9ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADD1BF92FA30018DA30 /* Assets.xcassets */; };
-		148234061C002DFE0000E9ED /* iPhone6p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1F1BF92FD50018DA30 /* iPhone6p@3x.png */; };
-		148234071C002DFE0000E9ED /* iPhone5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1D1BF92FD50018DA30 /* iPhone5@2x.png */; };
-		148234081C002DFE0000E9ED /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB201BF92FD50018DA30 /* Roboto-Regular.ttf */; };
-		1482340A1C002DFE0000E9ED /* ic_call_end_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB171BF92FD50018DA30 /* ic_call_end_black_24dp.png */; };
-		1482340B1C002DFE0000E9ED /* iPhone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1E1BF92FD50018DA30 /* iPhone6@2x.png */; };
-		1482340C1C002DFE0000E9ED /* ic_switch_video_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1B1BF92FD50018DA30 /* ic_switch_video_black_24dp.png */; };
-		1482340F1C002DFE0000E9ED /* ic_clear_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1452AB1A1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png */; };
 		14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */; };
 		14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028261BFA46F900BDF2C5 /* SVSignalingMessage.m */; };
 		14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028291BFA470C00BDF2C5 /* SVSignalingMessageType.m */; };
@@ -404,71 +378,6 @@
 		1452AADD1BF92FA30018DA30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1452AAE01BF92FA30018DA30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1452AAE21BF92FA30018DA30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1452AAE91BF92FD50018DA30 /* ARDAppClient+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ARDAppClient+Internal.h"; sourceTree = "<group>"; };
-		1452AAEA1BF92FD50018DA30 /* ARDAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppClient.h; sourceTree = "<group>"; };
-		1452AAEB1BF92FD50018DA30 /* ARDAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppClient.m; sourceTree = "<group>"; };
-		1452AAEC1BF92FD50018DA30 /* ARDAppEngineClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppEngineClient.h; sourceTree = "<group>"; };
-		1452AAED1BF92FD50018DA30 /* ARDAppEngineClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppEngineClient.m; sourceTree = "<group>"; };
-		1452AAEE1BF92FD50018DA30 /* ARDBitrateTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDBitrateTracker.h; sourceTree = "<group>"; };
-		1452AAEF1BF92FD50018DA30 /* ARDBitrateTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDBitrateTracker.m; sourceTree = "<group>"; };
-		1452AAF01BF92FD50018DA30 /* ARDCEODTURNClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDCEODTURNClient.h; sourceTree = "<group>"; };
-		1452AAF11BF92FD50018DA30 /* ARDCEODTURNClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDCEODTURNClient.m; sourceTree = "<group>"; };
-		1452AAF21BF92FD50018DA30 /* ARDJoinResponse+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ARDJoinResponse+Internal.h"; sourceTree = "<group>"; };
-		1452AAF31BF92FD50018DA30 /* ARDJoinResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDJoinResponse.h; sourceTree = "<group>"; };
-		1452AAF41BF92FD50018DA30 /* ARDJoinResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDJoinResponse.m; sourceTree = "<group>"; };
-		1452AAF51BF92FD50018DA30 /* ARDMessageResponse+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ARDMessageResponse+Internal.h"; sourceTree = "<group>"; };
-		1452AAF61BF92FD50018DA30 /* ARDMessageResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDMessageResponse.h; sourceTree = "<group>"; };
-		1452AAF71BF92FD50018DA30 /* ARDMessageResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDMessageResponse.m; sourceTree = "<group>"; };
-		1452AAF81BF92FD50018DA30 /* ARDRoomServerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDRoomServerClient.h; sourceTree = "<group>"; };
-		1452AAF91BF92FD50018DA30 /* ARDSDPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSDPUtils.h; sourceTree = "<group>"; };
-		1452AAFA1BF92FD50018DA30 /* ARDSDPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDSDPUtils.m; sourceTree = "<group>"; };
-		1452AAFB1BF92FD50018DA30 /* ARDSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSignalingChannel.h; sourceTree = "<group>"; };
-		1452AAFC1BF92FD50018DA30 /* ARDSignalingMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSignalingMessage.h; sourceTree = "<group>"; };
-		1452AAFD1BF92FD50018DA30 /* ARDSignalingMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDSignalingMessage.m; sourceTree = "<group>"; };
-		1452AAFE1BF92FD50018DA30 /* ARDStatsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDStatsBuilder.h; sourceTree = "<group>"; };
-		1452AAFF1BF92FD50018DA30 /* ARDStatsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDStatsBuilder.m; sourceTree = "<group>"; };
-		1452AB001BF92FD50018DA30 /* ARDTURNClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDTURNClient.h; sourceTree = "<group>"; };
-		1452AB011BF92FD50018DA30 /* ARDWebSocketChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDWebSocketChannel.h; sourceTree = "<group>"; };
-		1452AB021BF92FD50018DA30 /* ARDWebSocketChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDWebSocketChannel.m; sourceTree = "<group>"; };
-		1452AB041BF92FD50018DA30 /* ARDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDUtilities.h; sourceTree = "<group>"; };
-		1452AB051BF92FD50018DA30 /* ARDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDUtilities.m; sourceTree = "<group>"; };
-		1452AB071BF92FD50018DA30 /* AppRTCDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppRTCDemo-Prefix.pch"; sourceTree = "<group>"; };
-		1452AB081BF92FD50018DA30 /* ARDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppDelegate.h; sourceTree = "<group>"; };
-		1452AB091BF92FD50018DA30 /* ARDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppDelegate.m; sourceTree = "<group>"; };
-		1452AB0A1BF92FD50018DA30 /* ARDMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDMainView.h; sourceTree = "<group>"; };
-		1452AB0B1BF92FD50018DA30 /* ARDMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDMainView.m; sourceTree = "<group>"; };
-		1452AB0C1BF92FD50018DA30 /* ARDMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDMainViewController.h; sourceTree = "<group>"; };
-		1452AB0D1BF92FD50018DA30 /* ARDMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDMainViewController.m; sourceTree = "<group>"; };
-		1452AB0E1BF92FD50018DA30 /* ARDStatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDStatsView.h; sourceTree = "<group>"; };
-		1452AB0F1BF92FD50018DA30 /* ARDStatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDStatsView.m; sourceTree = "<group>"; };
-		1452AB101BF92FD50018DA30 /* ARDVideoCallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDVideoCallView.h; sourceTree = "<group>"; };
-		1452AB111BF92FD50018DA30 /* ARDVideoCallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDVideoCallView.m; sourceTree = "<group>"; };
-		1452AB121BF92FD50018DA30 /* ARDVideoCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDVideoCallViewController.h; sourceTree = "<group>"; };
-		1452AB131BF92FD50018DA30 /* ARDVideoCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDVideoCallViewController.m; sourceTree = "<group>"; };
-		1452AB141BF92FD50018DA30 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1452AB171BF92FD50018DA30 /* ic_call_end_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_call_end_black_24dp.png; sourceTree = "<group>"; };
-		1452AB181BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_call_end_black_24dp@2x.png"; sourceTree = "<group>"; };
-		1452AB191BF92FD50018DA30 /* ic_clear_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_clear_black_24dp.png; sourceTree = "<group>"; };
-		1452AB1A1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_clear_black_24dp@2x.png"; sourceTree = "<group>"; };
-		1452AB1B1BF92FD50018DA30 /* ic_switch_video_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_switch_video_black_24dp.png; sourceTree = "<group>"; };
-		1452AB1C1BF92FD50018DA30 /* ic_switch_video_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_switch_video_black_24dp@2x.png"; sourceTree = "<group>"; };
-		1452AB1D1BF92FD50018DA30 /* iPhone5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5@2x.png"; sourceTree = "<group>"; };
-		1452AB1E1BF92FD50018DA30 /* iPhone6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone6@2x.png"; sourceTree = "<group>"; };
-		1452AB1F1BF92FD50018DA30 /* iPhone6p@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone6p@3x.png"; sourceTree = "<group>"; };
-		1452AB201BF92FD50018DA30 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		1452AB211BF92FD50018DA30 /* UIImage+ARDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ARDUtilities.h"; sourceTree = "<group>"; };
-		1452AB221BF92FD50018DA30 /* UIImage+ARDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ARDUtilities.m"; sourceTree = "<group>"; };
-		1452AB2A1BF92FD50018DA30 /* RTCICECandidate+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCICECandidate+JSON.h"; sourceTree = "<group>"; };
-		1452AB2B1BF92FD50018DA30 /* RTCICECandidate+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCICECandidate+JSON.m"; sourceTree = "<group>"; };
-		1452AB2C1BF92FD50018DA30 /* RTCICEServer+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCICEServer+JSON.h"; sourceTree = "<group>"; };
-		1452AB2D1BF92FD50018DA30 /* RTCICEServer+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCICEServer+JSON.m"; sourceTree = "<group>"; };
-		1452AB2E1BF92FD50018DA30 /* RTCMediaConstraints+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCMediaConstraints+JSON.h"; sourceTree = "<group>"; };
-		1452AB2F1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCMediaConstraints+JSON.m"; sourceTree = "<group>"; };
-		1452AB301BF92FD50018DA30 /* RTCSessionDescription+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCSessionDescription+JSON.h"; sourceTree = "<group>"; };
-		1452AB311BF92FD50018DA30 /* RTCSessionDescription+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCSessionDescription+JSON.m"; sourceTree = "<group>"; };
-		1452AB361BF92FD50018DA30 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		1452AB371BF92FD50018DA30 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
-		1452AB381BF92FD50018DA30 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		1452ABBB1BF9315E0018DA30 /* CopyWebRTCHeaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyWebRTCHeaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemo copy-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemo copy-Info.plist"; sourceTree = "<absolute>"; };
 		1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QBRTCDemo-prefix.pch"; sourceTree = "<group>"; };
@@ -1158,7 +1067,6 @@
 			isa = PBXGroup;
 			children = (
 				14EE3D001C6BC02D00C451CF /* Scripts */,
-				1452AAE81BF92FD50018DA30 /* AppRTCDemo_unused */,
 				14A600701C6DEDE700065437 /* webrtc_libraries */,
 				143609801BF9C7850091071C /* Frameworks */,
 				24FA710C5C0D79208F548C05 /* Pods */,
@@ -1208,118 +1116,6 @@
 				1452AAD21BF92FA30018DA30 /* main.m */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1452AAE81BF92FD50018DA30 /* AppRTCDemo_unused */ = {
-			isa = PBXGroup;
-			children = (
-				1452AB031BF92FD50018DA30 /* common */,
-				1452AB061BF92FD50018DA30 /* ios */,
-				1452AB341BF92FD50018DA30 /* third_party */,
-				1452AAE91BF92FD50018DA30 /* ARDAppClient+Internal.h */,
-				1452AAEA1BF92FD50018DA30 /* ARDAppClient.h */,
-				1452AAEB1BF92FD50018DA30 /* ARDAppClient.m */,
-				1452AAEC1BF92FD50018DA30 /* ARDAppEngineClient.h */,
-				1452AAED1BF92FD50018DA30 /* ARDAppEngineClient.m */,
-				1452AAEE1BF92FD50018DA30 /* ARDBitrateTracker.h */,
-				1452AAEF1BF92FD50018DA30 /* ARDBitrateTracker.m */,
-				1452AAF01BF92FD50018DA30 /* ARDCEODTURNClient.h */,
-				1452AAF11BF92FD50018DA30 /* ARDCEODTURNClient.m */,
-				1452AAF21BF92FD50018DA30 /* ARDJoinResponse+Internal.h */,
-				1452AAF31BF92FD50018DA30 /* ARDJoinResponse.h */,
-				1452AAF41BF92FD50018DA30 /* ARDJoinResponse.m */,
-				1452AAF51BF92FD50018DA30 /* ARDMessageResponse+Internal.h */,
-				1452AAF61BF92FD50018DA30 /* ARDMessageResponse.h */,
-				1452AAF71BF92FD50018DA30 /* ARDMessageResponse.m */,
-				1452AAF81BF92FD50018DA30 /* ARDRoomServerClient.h */,
-				1452AAF91BF92FD50018DA30 /* ARDSDPUtils.h */,
-				1452AAFA1BF92FD50018DA30 /* ARDSDPUtils.m */,
-				1452AAFB1BF92FD50018DA30 /* ARDSignalingChannel.h */,
-				1452AAFC1BF92FD50018DA30 /* ARDSignalingMessage.h */,
-				1452AAFD1BF92FD50018DA30 /* ARDSignalingMessage.m */,
-				1452AAFE1BF92FD50018DA30 /* ARDStatsBuilder.h */,
-				1452AAFF1BF92FD50018DA30 /* ARDStatsBuilder.m */,
-				1452AB001BF92FD50018DA30 /* ARDTURNClient.h */,
-				1452AB011BF92FD50018DA30 /* ARDWebSocketChannel.h */,
-				1452AB021BF92FD50018DA30 /* ARDWebSocketChannel.m */,
-				1452AB2A1BF92FD50018DA30 /* RTCICECandidate+JSON.h */,
-				1452AB2B1BF92FD50018DA30 /* RTCICECandidate+JSON.m */,
-				1452AB2C1BF92FD50018DA30 /* RTCICEServer+JSON.h */,
-				1452AB2D1BF92FD50018DA30 /* RTCICEServer+JSON.m */,
-				1452AB2E1BF92FD50018DA30 /* RTCMediaConstraints+JSON.h */,
-				1452AB2F1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m */,
-				1452AB301BF92FD50018DA30 /* RTCSessionDescription+JSON.h */,
-				1452AB311BF92FD50018DA30 /* RTCSessionDescription+JSON.m */,
-			);
-			path = AppRTCDemo_unused;
-			sourceTree = "<group>";
-		};
-		1452AB031BF92FD50018DA30 /* common */ = {
-			isa = PBXGroup;
-			children = (
-				1452AB041BF92FD50018DA30 /* ARDUtilities.h */,
-				1452AB051BF92FD50018DA30 /* ARDUtilities.m */,
-			);
-			path = common;
-			sourceTree = "<group>";
-		};
-		1452AB061BF92FD50018DA30 /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				1452AB161BF92FD50018DA30 /* resources */,
-				1452AB081BF92FD50018DA30 /* ARDAppDelegate.h */,
-				1452AB091BF92FD50018DA30 /* ARDAppDelegate.m */,
-				1452AB0A1BF92FD50018DA30 /* ARDMainView.h */,
-				1452AB0B1BF92FD50018DA30 /* ARDMainView.m */,
-				1452AB0C1BF92FD50018DA30 /* ARDMainViewController.h */,
-				1452AB0D1BF92FD50018DA30 /* ARDMainViewController.m */,
-				1452AB0E1BF92FD50018DA30 /* ARDStatsView.h */,
-				1452AB0F1BF92FD50018DA30 /* ARDStatsView.m */,
-				1452AB101BF92FD50018DA30 /* ARDVideoCallView.h */,
-				1452AB111BF92FD50018DA30 /* ARDVideoCallView.m */,
-				1452AB121BF92FD50018DA30 /* ARDVideoCallViewController.h */,
-				1452AB131BF92FD50018DA30 /* ARDVideoCallViewController.m */,
-				1452AB071BF92FD50018DA30 /* AppRTCDemo-Prefix.pch */,
-				1452AB141BF92FD50018DA30 /* Info.plist */,
-				1452AB211BF92FD50018DA30 /* UIImage+ARDUtilities.h */,
-				1452AB221BF92FD50018DA30 /* UIImage+ARDUtilities.m */,
-			);
-			path = ios;
-			sourceTree = "<group>";
-		};
-		1452AB161BF92FD50018DA30 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				1452AB201BF92FD50018DA30 /* Roboto-Regular.ttf */,
-				1452AB1D1BF92FD50018DA30 /* iPhone5@2x.png */,
-				1452AB1E1BF92FD50018DA30 /* iPhone6@2x.png */,
-				1452AB1F1BF92FD50018DA30 /* iPhone6p@3x.png */,
-				1452AB171BF92FD50018DA30 /* ic_call_end_black_24dp.png */,
-				1452AB181BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png */,
-				1452AB191BF92FD50018DA30 /* ic_clear_black_24dp.png */,
-				1452AB1A1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png */,
-				1452AB1B1BF92FD50018DA30 /* ic_switch_video_black_24dp.png */,
-				1452AB1C1BF92FD50018DA30 /* ic_switch_video_black_24dp@2x.png */,
-			);
-			path = resources;
-			sourceTree = "<group>";
-		};
-		1452AB341BF92FD50018DA30 /* third_party */ = {
-			isa = PBXGroup;
-			children = (
-				1452AB351BF92FD50018DA30 /* SocketRocket */,
-			);
-			path = third_party;
-			sourceTree = "<group>";
-		};
-		1452AB351BF92FD50018DA30 /* SocketRocket */ = {
-			isa = PBXGroup;
-			children = (
-				1452AB361BF92FD50018DA30 /* LICENSE */,
-				1452AB371BF92FD50018DA30 /* SRWebSocket.h */,
-				1452AB381BF92FD50018DA30 /* SRWebSocket.m */,
-			);
-			path = SocketRocket;
 			sourceTree = "<group>";
 		};
 		1452ABC51BF938130018DA30 /* ThirdParty */ = {
@@ -1840,26 +1636,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				14EE3D0F1C6BC03700C451CF /* blox_target.py in Resources */,
-				1452AB4D1BF92FD50018DA30 /* ic_call_end_black_24dp@2x.png in Resources */,
 				14EE3D0D1C6BC03700C451CF /* pull.sh in Resources */,
 				14EE3D111C6BC03700C451CF /* build.sh in Resources */,
-				1452AB4A1BF92FD50018DA30 /* Info.plist in Resources */,
 				1452AAE11BF92FA30018DA30 /* LaunchScreen.storyboard in Resources */,
-				1452AB4E1BF92FD50018DA30 /* ic_clear_black_24dp.png in Resources */,
-				1452AB511BF92FD50018DA30 /* ic_switch_video_black_24dp@2x.png in Resources */,
 				1452AADE1BF92FA30018DA30 /* Assets.xcassets in Resources */,
-				1452AB541BF92FD50018DA30 /* iPhone6p@3x.png in Resources */,
-				1452AB521BF92FD50018DA30 /* iPhone5@2x.png in Resources */,
-				1452AB551BF92FD50018DA30 /* Roboto-Regular.ttf in Resources */,
 				14EE3D091C6BC03700C451CF /* clone.sh in Resources */,
-				1452AB601BF92FD50018DA30 /* LICENSE in Resources */,
 				14EE3D0B1C6BC03700C451CF /* framework_dance.sh in Resources */,
-				1452AB4C1BF92FD50018DA30 /* ic_call_end_black_24dp.png in Resources */,
-				1452AB531BF92FD50018DA30 /* iPhone6@2x.png in Resources */,
-				1452AB501BF92FD50018DA30 /* ic_switch_video_black_24dp.png in Resources */,
 				14FC46841C5029D400C1797D /* VideoStory.storyboard in Resources */,
 				14EE3D071C6BC03700C451CF /* build_webrtc.sh in Resources */,
-				1452AB4F1BF92FD50018DA30 /* ic_clear_black_24dp@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1867,20 +1651,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				148234001C002DFE0000E9ED /* ic_call_end_black_24dp@2x.png in Resources */,
-				148234011C002DFE0000E9ED /* Info.plist in Resources */,
 				148234021C002DFE0000E9ED /* LaunchScreen.storyboard in Resources */,
-				148234031C002DFE0000E9ED /* ic_clear_black_24dp.png in Resources */,
-				148234041C002DFE0000E9ED /* ic_switch_video_black_24dp@2x.png in Resources */,
 				148234051C002DFE0000E9ED /* Assets.xcassets in Resources */,
-				148234061C002DFE0000E9ED /* iPhone6p@3x.png in Resources */,
-				148234071C002DFE0000E9ED /* iPhone5@2x.png in Resources */,
-				148234081C002DFE0000E9ED /* Roboto-Regular.ttf in Resources */,
-				1482340A1C002DFE0000E9ED /* ic_call_end_black_24dp.png in Resources */,
-				1482340B1C002DFE0000E9ED /* iPhone6@2x.png in Resources */,
-				1482340C1C002DFE0000E9ED /* ic_switch_video_black_24dp.png in Resources */,
 				14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */,
-				1482340F1C002DFE0000E9ED /* ic_clear_black_24dp@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2119,7 +1892,6 @@
 				1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */,
 				14A028711BFA541A00BDF2C5 /* SVSignalingMessageSDP.m in Sources */,
 				140746481BFB841000506088 /* SVSignalingParams.m in Sources */,
-				1452AB5B1BF92FD50018DA30 /* RTCICECandidate+JSON.m in Sources */,
 				14A028751BFA545300BDF2C5 /* QBSignalingChannel.m in Sources */,
 				14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */,
 				14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */,
@@ -2127,9 +1899,7 @@
 				14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */,
 				14A0288A1BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m in Sources */,
 				14D0A3F41C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */,
-				1452AB5D1BF92FD50018DA30 /* RTCMediaConstraints+JSON.m in Sources */,
 				14736EE71C567EC5009DFBBC /* CallService.m in Sources */,
-				1452AB5C1BF92FD50018DA30 /* RTCICEServer+JSON.m in Sources */,
 				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
 				14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */,
 				1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */,
@@ -2421,11 +2191,7 @@
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/OCMock",
-					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -2460,11 +2226,7 @@
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/OCMock",
-					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",

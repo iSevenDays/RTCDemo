@@ -22,8 +22,6 @@
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
 
-- (void)openDataChannel;
-
 - (void)hangup;
 
 - (BOOL)hasActiveCall;
