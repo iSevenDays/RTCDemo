@@ -113,6 +113,38 @@
             endingLineNumber = "88"
             landmarkName = "AsyncSocketAdapter::GetError()"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "rtc::AsyncSocketAdapter::GetError() const"
+                  moduleName = "QBRTCDemo_s"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/base/asyncsocket.cc"
+                  timestampString = "477163675.872934"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "9">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "rtc::AsyncSocketAdapter::GetError() const"
+                  moduleName = "QBRTCDemo_sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/base/asyncsocket.cc"
+                  timestampString = "477163680.089755"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "9">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,6 +177,38 @@
             endingLineNumber = "955"
             landmarkName = "WebRtcSession::UpdateSessionState( Action action, cricket::ContentSource source, std::string* err_desc)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "webrtc::WebRtcSession::UpdateSessionState(webrtc::WebRtcSession::Action, cricket::ContentSource, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;*)"
+                  moduleName = "QBRTCDemo_s"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/api/webrtcsession.cc"
+                  timestampString = "477163675.87407"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "955"
+                  endingLineNumber = "955"
+                  offsetFromSymbolStart = "531">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "webrtc::WebRtcSession::UpdateSessionState(webrtc::WebRtcSession::Action, cricket::ContentSource, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;*)"
+                  moduleName = "QBRTCDemo_sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/api/webrtcsession.cc"
+                  timestampString = "477163680.120767"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "955"
+                  endingLineNumber = "955"
+                  offsetFromSymbolStart = "531">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -177,6 +241,38 @@
             endingLineNumber = "141"
             landmarkName = "RtpDataMediaChannel::SetSendParameters(const DataSendParameters&amp; params)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cricket::RtpDataMediaChannel::SetSendParameters(cricket::DataSendParameters const&amp;)"
+                  moduleName = "QBRTCDemo_s"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/media/base/rtpdataengine.cc"
+                  timestampString = "477163675.875083"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "14">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "cricket::RtpDataMediaChannel::SetSendParameters(cricket::DataSendParameters const&amp;)"
+                  moduleName = "QBRTCDemo_sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/media/base/rtpdataengine.cc"
+                  timestampString = "477163680.121041"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "14">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -193,22 +289,38 @@
             endingLineNumber = "2543"
             landmarkName = "ParseContent(const std::string&amp; message, const MediaType media_type, int mline_index, const std::string&amp; protocol, const std::vector&lt;int&gt;&amp; codec_preference, size_t* pos, std::string* content_name, MediaContentDescription* media_desc, TransportDescription* transport, std::vector&lt;JsepIceCandidate*&gt;* candidates, SdpParseError* error)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Scripts/webrtc/src/webrtc/api/webrtcsession.cc"
-            timestampString = "477089088.062234"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1402"
-            endingLineNumber = "1402"
-            landmarkName = "WebRtcSession::ConnectDataChannel(DataChannel* webrtc_data_channel)"
-            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "webrtc::ParseContent(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, cricket::MediaType, int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt; const&amp;, unsigned long*, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;*, cricket::MediaContentDescription*, cricket::TransportDescription*, std::__1::vector&lt;webrtc::JsepIceCandidate*, std::__1::allocator&lt;webrtc::JsepIceCandidate*&gt; &gt;*, webrtc::SdpParseError*)"
+                  moduleName = "QBRTCDemo_s"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/api/webrtcsdp.cc"
+                  timestampString = "477163675.875828"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2543"
+                  endingLineNumber = "2543"
+                  offsetFromSymbolStart = "3984">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "webrtc::ParseContent(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, cricket::MediaType, int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, std::__1::vector&lt;int, std::__1::allocator&lt;int&gt; &gt; const&amp;, unsigned long*, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;*, cricket::MediaContentDescription*, cricket::TransportDescription*, std::__1::vector&lt;webrtc::JsepIceCandidate*, std::__1::allocator&lt;webrtc::JsepIceCandidate*&gt; &gt;*, webrtc::SdpParseError*)"
+                  moduleName = "QBRTCDemo_sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/api/webrtcsdp.cc"
+                  timestampString = "477163680.127311"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2543"
+                  endingLineNumber = "2543"
+                  offsetFromSymbolStart = "3984">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -225,6 +337,38 @@
             endingLineNumber = "156"
             landmarkName = "DataChannel::Init(const InternalDataChannelInit&amp; config)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "webrtc::DataChannel::Init(webrtc::InternalDataChannelInit const&amp;)"
+                  moduleName = "QBRTCDemo_s"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/api/datachannel.cc"
+                  timestampString = "477163675.876532"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "70">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "webrtc::DataChannel::Init(webrtc::InternalDataChannelInit const&amp;)"
+                  moduleName = "QBRTCDemo_sTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/seven/projects/QBRTCDemo/Scripts/webrtc/src/out_ia32/Release-iphonesimulator/../../webrtc/api/datachannel.cc"
+                  timestampString = "477163680.127607"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "70">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

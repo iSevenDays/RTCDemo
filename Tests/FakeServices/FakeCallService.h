@@ -18,6 +18,5 @@
 
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
-@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
 
 @end

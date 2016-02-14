@@ -8,6 +8,7 @@
 
 #import "CallService.h"
 #import "CallClientDelegate.h"
+#import "CallServiceDataChannelAdditionsDelegate.h"
 
 #import "SVUser.h"
 
@@ -61,7 +62,10 @@
 
 @implementation CallService
 
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate {
+@synthesize dataChannelEnabled = _dataChannelEnabled;
+@synthesize delegate = _delegate;
+
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate, CallServiceDataChannelAdditionsDelegate>)clientDelegate {
 	NSParameterAssert(signalingChannel);
 	NSParameterAssert(clientDelegate);
 	
@@ -222,6 +226,7 @@
 	self.peerConnection = nil;
 	self.isReceivedSDP = NO;
 	self.messageQueue = [NSMutableArray array];
+	self.dataChannel = nil;
 }
 
 - (BOOL)hasActiveCall {
@@ -537,19 +542,9 @@
 #pragma mark RTC Data Channel delegate
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection didOpenDataChannel:(RTCDataChannel *)dataChannel {
-	NSLog(@"didOpenDataChannel");
+	NSLog(@"peerConnection %@ didOpenDataChannel %@", peerConnection, dataChannel);
 	self.dataChannel = dataChannel;
 	dataChannel.delegate = self;
-	[self sendDataChannelTestMessage];
-}
-
-- (void)sendDataChannelTestMessage {
-	NSLog(@"sending test datachannel message user is calling");
-	
-	NSString *str = [NSString stringWithFormat:@"%@ user calling to %@", self.signalingChannel.user.ID, self.opponentUser.ID];
-	RTCDataBuffer *buff = [[RTCDataBuffer alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] isBinary:NO];
-	
-	[self.dataChannel sendData:buff];
 }
 
 - (void)channelDidChangeState:(RTCDataChannel *)channel {
@@ -564,8 +559,11 @@
 - (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer {
 	NSLog(@"dataChannel %@ didReceiveMessageWithBuffer: %@", channel, buffer);
 	
-	//send test asnwer text
-	[self sendText:@"hello answer!"];
+	if (buffer.isBinary) {
+		[self.delegate callService:self didReceiveData:buffer.data];
+	} else {
+		[self.delegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
+	}
 }
 
 @end

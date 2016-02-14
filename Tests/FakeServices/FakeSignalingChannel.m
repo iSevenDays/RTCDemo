@@ -14,6 +14,8 @@
 
 @synthesize user = _user;
 
+@synthesize delegate;
+
 - (void)connectWithUser:(SVUser *)user completion:(void (^)(NSError * _Nullable))completion {
 	self.state = SVSignalingChannelState.open;
 	

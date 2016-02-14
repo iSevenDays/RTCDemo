@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 
 @protocol SVSignalingChannelProtocol;
 @protocol CallClientDelegate;
+@protocol CallServiceDataChannelAdditionsDelegate;
 
 @class SVUser;
 
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 @property (nonatomic, assign, readonly) CallClientState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
-@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
+@property (nonatomic, weak, nullable) id<CallClientDelegate, CallServiceDataChannelAdditionsDelegate> delegate;
 
 @end
 

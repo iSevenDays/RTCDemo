@@ -29,6 +29,7 @@
 		1431CE121C6F959F00DCED6D /* libwebrtc_libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */; };
 		1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */; };
 		1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */; };
+		1431CE181C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */; };
 		143609751BF944C50091071C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		143609771BF944D60091071C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		143609791BF9450A0091071C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
@@ -281,7 +282,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		14015A321BFC6F5C00830618 /* CallClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallClientDelegate.h; sourceTree = "<group>"; };
+		14015A321BFC6F5C00830618 /* CallClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CallClientDelegate.h; path = ../../../../Client/CallClientDelegate.h; sourceTree = "<group>"; };
 		14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemo_sTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14015A3D1BFCD08400830618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUserTests.m"; sourceTree = "<group>"; };
@@ -292,6 +293,7 @@
 		1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsProtocol.h; sourceTree = "<group>"; };
 		1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = webrtc_libraries_dummy.m; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.m; sourceTree = SOURCE_ROOT; };
 		1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = webrtc_libraries_dummy.h; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.h; sourceTree = SOURCE_ROOT; };
+		1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsDelegate.h; sourceTree = "<group>"; };
 		143608DC1BF943370091071C /* libwebrtc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_common.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_common.a"; sourceTree = "<absolute>"; };
 		143608DD1BF943370091071C /* libwebrtc_h264_video_toolbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_h264_video_toolbox.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libwebrtc_h264_video_toolbox.a"; sourceTree = "<absolute>"; };
 		143608DE1BF943370091071C /* libwebrtc_h264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_h264.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libwebrtc_h264.a"; sourceTree = "<absolute>"; };
@@ -806,14 +808,6 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		14015A2E1BFC6F0600830618 /* Client */ = {
-			isa = PBXGroup;
-			children = (
-				14015A321BFC6F5C00830618 /* CallClientDelegate.h */,
-			);
-			path = Client;
-			sourceTree = "<group>";
-		};
 		14015A3A1BFCD08400830618 /* QBRTCDemoTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1106,7 +1100,6 @@
 		1452AAD01BF92FA30018DA30 /* QBRTCDemo */ = {
 			isa = PBXGroup;
 			children = (
-				14015A2E1BFC6F0600830618 /* Client */,
 				289A14BD05F2A6570BE88195 /* Modules */,
 				1452AAD11BF92FA30018DA30 /* Supporting Files */,
 				1452ABC51BF938130018DA30 /* ThirdParty */,
@@ -1139,6 +1132,7 @@
 		14736E821C561284009DFBBC /* CallService */ = {
 			isa = PBXGroup;
 			children = (
+				14015A321BFC6F5C00830618 /* CallClientDelegate.h */,
 				14A028721BFA543A00BDF2C5 /* QBSignaling */,
 				14F4FAF21C52961400E9488C /* Signaling */,
 				14736EEA1C56843F009DFBBC /* WebRTC */,
@@ -1149,6 +1143,7 @@
 				14736EE91C56817C009DFBBC /* CallServiceProtocol.h */,
 				14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */,
 				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
+				1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */,
 			);
 			path = CallService;
 			sourceTree = "<group>";
@@ -1463,6 +1458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */,
+				1431CE181C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

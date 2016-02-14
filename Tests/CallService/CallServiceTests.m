@@ -111,6 +111,8 @@
 
 - (void)testSendsRejectIfAlreadyHasActiveCall {
 	// given
+	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
+	
 	RTCSessionDescription *rtcofferSDP = [[RTCSessionDescription alloc] initWithType:SVSignalingMessageType.offer sdp:[self offerSDP]];
 	SVSignalingMessage *offer = [[SVSignalingMessageSDP alloc] initWithSessionDescription:rtcofferSDP];
 	offer.sender = self.user3;
@@ -129,6 +131,8 @@
 
 - (void)testCorrectlyProcessesHangupSignalingMessage {
 	// given
+	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
+	
 	SVSignalingMessage *hangup = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
 	
 	// when
@@ -155,6 +159,8 @@
 	iceAudio.sender = self.user2;
 	iceVideo.sender = self.user2;
 	
+	OCMExpect([self.mockCallService drainMessageQueueIfReady]);
+	
 	// when
 	[self.callService connectWithUser:self.user1 completion:nil];
 	[self.callService startCallWithOpponent:self.user2];
@@ -163,7 +169,7 @@
 	[self.callService channel:self.callService.signalingChannel didReceiveMessage:iceVideo];
 	
 	// then
-	OCMVerify([self.mockCallService drainMessageQueueIfReady]);
+	OCMVerifyAll(self.mockCallService);
 }
 
 - (void)testCorrectlyProcessesSignalingMessageOfferFromOpponent_andCreatesAnswer {
