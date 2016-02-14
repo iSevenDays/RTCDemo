@@ -26,6 +26,9 @@
 		1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
+		1431CE121C6F959F00DCED6D /* libwebrtc_libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */; };
+		1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */; };
+		1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */; };
 		143609751BF944C50091071C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		143609771BF944D60091071C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		143609791BF9450A0091071C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
@@ -179,7 +182,6 @@
 		14A6012F1C6DEDF400065437 /* libwebrtc_vp9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600D61C6DEDF400065437 /* libwebrtc_vp9.a */; };
 		14A601301C6DEDF400065437 /* libwebrtc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600D71C6DEDF400065437 /* libwebrtc.a */; };
 		14A601311C6DEDF400065437 /* libyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600D81C6DEDF400065437 /* libyuv.a */; };
-		14A601341C6DEE3700065437 /* libwebrtc_libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */; };
 		14A601351C6DEFFB00065437 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		14A601361C6DF0B600065437 /* librtc_base_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600B21C6DEDF400065437 /* librtc_base_objc.a */; };
 		14A601371C6DF0DC00065437 /* libjingle_peerconnection_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */; };
@@ -248,6 +250,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1431CE101C6F956A00DCED6D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1452AAC61BF92FA30018DA30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14A6006E1C6DEDE700065437;
+			remoteInfo = webrtc_libraries;
+		};
 		149A20B51C0123AD009FC236 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1452AAC61BF92FA30018DA30 /* Project object */;
@@ -280,6 +289,9 @@
 		140746471BFB841000506088 /* SVSignalingParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingParams.m; sourceTree = "<group>"; };
 		1417B3451C57E4E8004D6416 /* FakeCallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallService.h; sourceTree = "<group>"; };
 		1417B3461C57E4E8004D6416 /* FakeCallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallService.m; sourceTree = "<group>"; };
+		1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsProtocol.h; sourceTree = "<group>"; };
+		1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = webrtc_libraries_dummy.m; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.m; sourceTree = SOURCE_ROOT; };
+		1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = webrtc_libraries_dummy.h; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.h; sourceTree = SOURCE_ROOT; };
 		143608DC1BF943370091071C /* libwebrtc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_common.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_common.a"; sourceTree = "<absolute>"; };
 		143608DD1BF943370091071C /* libwebrtc_h264_video_toolbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_h264_video_toolbox.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libwebrtc_h264_video_toolbox.a"; sourceTree = "<absolute>"; };
 		143608DE1BF943370091071C /* libwebrtc_h264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_h264.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libwebrtc_h264.a"; sourceTree = "<absolute>"; };
@@ -437,8 +449,6 @@
 		14A0288E1BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVSignalingMessage+QBChatMessage.h"; sourceTree = "<group>"; };
 		14A0288F1BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVSignalingMessage+QBChatMessage.m"; sourceTree = "<group>"; };
 		14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwebrtc_libraries.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		14A600711C6DEDE700065437 /* webrtc_libraries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = webrtc_libraries.h; sourceTree = "<group>"; };
-		14A600731C6DEDE700065437 /* webrtc_libraries.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = webrtc_libraries.m; sourceTree = "<group>"; };
 		14A600801C6DEDF400065437 /* libapprtc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libapprtc_common.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libapprtc_common.a"; sourceTree = "<group>"; };
 		14A600811C6DEDF400065437 /* libapprtc_signaling.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libapprtc_signaling.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libapprtc_signaling.a"; sourceTree = "<group>"; };
 		14A600821C6DEDF400065437 /* libaudio_coding_module.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio_coding_module.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libaudio_coding_module.a"; sourceTree = "<group>"; };
@@ -625,8 +635,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1431CE121C6F959F00DCED6D /* libwebrtc_libraries.a in Frameworks */,
 				14A601351C6DEFFB00065437 /* libicucore.tbd in Frameworks */,
-				14A601341C6DEE3700065437 /* libwebrtc_libraries.a in Frameworks */,
 				1473F3711BFF6BFE00ABA7E6 /* Quickblox.framework in Frameworks */,
 				14A0287D1BFB092800BDF2C5 /* libresolv.tbd in Frameworks */,
 				14A0287B1BFB090C00BDF2C5 /* SystemConfiguration.framework in Frameworks */,
@@ -1138,6 +1148,7 @@
 				14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */,
 				14736EE91C56817C009DFBBC /* CallServiceProtocol.h */,
 				14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */,
+				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
 			);
 			path = CallService;
 			sourceTree = "<group>";
@@ -1173,8 +1184,8 @@
 		14A600701C6DEDE700065437 /* webrtc_libraries */ = {
 			isa = PBXGroup;
 			children = (
-				14A600711C6DEDE700065437 /* webrtc_libraries.h */,
-				14A600731C6DEDE700065437 /* webrtc_libraries.m */,
+				1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */,
+				1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */,
 			);
 			path = webrtc_libraries;
 			sourceTree = "<group>";
@@ -1451,6 +1462,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1492,6 +1504,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1431CE111C6F956A00DCED6D /* PBXTargetDependency */,
 			);
 			name = QBRTCDemo;
 			productName = QBRTCDemo;
@@ -1953,6 +1966,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1981,6 +1995,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1431CE111C6F956A00DCED6D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14A6006E1C6DEDE700065437 /* webrtc_libraries */;
+			targetProxy = 1431CE101C6F956A00DCED6D /* PBXContainerItemProxy */;
+		};
 		149A20B61C0123AD009FC236 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 148233801C002DFE0000E9ED /* QBRTCDemo_s */;
@@ -2175,14 +2194,16 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					HAVE_SCTP,
+				);
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/QBRTCDemo/webrtcheaders\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
@@ -2210,14 +2231,16 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					HAVE_SCTP,
+				);
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/QBRTCDemo/webrtcheaders\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
@@ -2271,15 +2294,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/QBRTCDemo/ThirdParty/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/QBRTCDemo/webrtcheaders\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
@@ -2306,15 +2325,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
-					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/QBRTCDemo/ThirdParty/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/QBRTCDemo/webrtcheaders\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
