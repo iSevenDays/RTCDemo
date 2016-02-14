@@ -8,6 +8,7 @@
 
 #import "CallService.h"
 #import "CallClientDelegate.h"
+#import "CallServiceDataChannelAdditionsDelegate.h"
 
 #import "SVUser.h"
 
@@ -41,6 +42,8 @@
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
 @property (nonatomic, strong) RTCPeerConnection *peerConnection;
 
+@property (nonatomic, strong) RTCDataChannel *dataChannel;
+
 @property (nonatomic, assign, readwrite) CallClientState state;
 @property (nonatomic, assign) BOOL isReceivedSDP;
 @property (nonatomic, assign, getter=isInitiator) BOOL initiator;
@@ -48,8 +51,6 @@
 
 @property (nonatomic, strong) SVUser *opponentUser;
 @property (nonatomic, strong) SVUser *initiatorUser;
-
-@property (nonatomic, strong) RTCDataChannel *dataChannel;
 
 @property (nonatomic, strong) RTCMediaConstraints *defaultOfferConstraints;
 @property (nonatomic, strong) RTCMediaConstraints *defaultAnswerConstraints;
@@ -61,7 +62,10 @@
 
 @implementation CallService
 
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate {
+@synthesize dataChannelEnabled = _dataChannelEnabled;
+@synthesize delegate = _delegate;
+
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate, CallServiceDataChannelAdditionsDelegate>)clientDelegate {
 	NSParameterAssert(signalingChannel);
 	NSParameterAssert(clientDelegate);
 	
@@ -78,6 +82,8 @@
 		_state = kClientStateDisconnected;
 		
 		_isAudioOnly = NO;
+		
+		_dataChannelEnabled = YES;
 	}
 	return self;
 }
@@ -131,12 +137,19 @@
 	config.iceServers = self.iceServers;
 
 	self.peerConnection = [self.factory peerConnectionWithConfiguration:config constraints:constraints delegate:self];
+	self.peerConnection.delegate = self;
+	
+	
+	if (self.isDataChannelEnabled) {
+		RTCDataChannelInit *dataChannelInit = [[RTCDataChannelInit alloc] init];
+		self.dataChannel = [self.peerConnection createDataChannelWithLabel:@"offerDataChannel" config:dataChannelInit];
+		self.dataChannel.delegate = self;
+	}
 	
 	// Create AV media stream and add it to the peer connection.
 	RTCMediaStream *localStream = [self createLocalMediaStream];
 	[self.peerConnection addStream:localStream];
 	
-	[self openDataChannel]; // configure data channel, then start call
 	// Send offer.
 	[self.peerConnection createOfferWithDelegate:self constraints:[self defaultOfferConstraints]];
 
@@ -213,6 +226,7 @@
 	self.peerConnection = nil;
 	self.isReceivedSDP = NO;
 	self.messageQueue = [NSMutableArray array];
+	self.dataChannel = nil;
 }
 
 - (BOOL)hasActiveCall {
@@ -223,6 +237,11 @@
 	if (!self.peerConnection || !self.isReceivedSDP) {
 		return;
 	}
+	
+	if (self.isDataChannelEnabled && self.peerConnection.iceGatheringState == RTCICEGatheringGathering) {
+		return;
+	}
+	
 	for (SVSignalingMessage *message in self.messageQueue) {
 		[self processSignalingMessage:message];
 	}
@@ -376,6 +395,7 @@
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection iceGatheringChanged:(RTCICEGatheringState)newState {
 	RTCLog(@"ICE gathering state changed: %d", newState);
+	[self drainMessageQueueIfReady];
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection gotICECandidate:(RTCICECandidate *)candidate {
@@ -383,20 +403,6 @@
 		SVSignalingMessageICE *message = [[SVSignalingMessageICE alloc] initWithICECandidate:candidate];
 		[self sendSignalingMessage:message];
 	});
-}
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection didOpenDataChannel:(RTCDataChannel *)dataChannel {
-	NSLog(@"did Open Data Channel");
-	dataChannel.delegate = self;
-	[self sendDataChannelTestMessage];
-}
-
-- (void)sendDataChannelTestMessage {
-	
-	NSString *str = [NSString stringWithFormat:@"%@ user calling to %@", self.signalingChannel.user.ID, self.opponentUser.ID];
-	RTCDataBuffer *buff = [[RTCDataBuffer alloc] initWithData:[str dataUsingEncoding:NSUTF8StringEncoding] isBinary:NO];
-	
-	[self.dataChannel sendData:buff];
 }
 
 #pragma mark - RTCStatsDelegate
@@ -489,6 +495,7 @@
 		
 		self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
 		[self.peerConnection addStream:[self createLocalMediaStream]];
+		self.peerConnection.delegate = self;
 	}
 	if ([message.type isEqualToString:SVSignalingMessageType.offer] ||
 		[message.type isEqualToString:SVSignalingMessageType.answer]) {
@@ -509,17 +516,54 @@
 	[self drainMessageQueueIfReady];
 }
 
-#pragma mark DataChannel Delegate
+#pragma mark Data Channel
+
+- (void)sendText:(NSString *)text {
+	if (!self.dataChannel) {
+		return;
+	}
+	
+	NSData *textData = [text dataUsingEncoding:NSUTF8StringEncoding];
+	RTCDataBuffer *buffer = [[RTCDataBuffer alloc] initWithData:textData isBinary:NO];
+	
+	[self.dataChannel sendData:buffer];
+}
+
+- (void)sendData:(NSData *)data {
+	if (!self.dataChannel) {
+		return;
+	}
+	
+	RTCDataBuffer *buffer = [[RTCDataBuffer alloc] initWithData:data isBinary:YES];
+	
+	[self.dataChannel sendData:buffer];
+}
+
+#pragma mark RTC Data Channel delegate
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection didOpenDataChannel:(RTCDataChannel *)dataChannel {
+	NSLog(@"peerConnection %@ didOpenDataChannel %@", peerConnection, dataChannel);
+	self.dataChannel = dataChannel;
+	dataChannel.delegate = self;
+}
 
 - (void)channelDidChangeState:(RTCDataChannel *)channel {
-	NSLog(@"%@ didChangeState: %u", channel, channel.state);
-	//	if (channel.state == kRTCDataChannelStateOpen) {
-	//		[self sendDataChannelTestMessage];
-	//	}
+	NSLog(@"dataChannel %@ didChangeState: %u", channel, channel.state);
+	
+	//send test offer text
+	if (channel.state == kRTCDataChannelStateOpen) {
+		[self sendText:@"hello!"];
+	}
 }
 
 - (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer {
-	NSLog(@"%@ didReceiveMessageWithBuffer: %@", channel, buffer);
+	NSLog(@"dataChannel %@ didReceiveMessageWithBuffer: %@", channel, buffer);
+	
+	if (buffer.isBinary) {
+		[self.delegate callService:self didReceiveData:buffer.data];
+	} else {
+		[self.delegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
+	}
 }
 
 @end

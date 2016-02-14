@@ -23,13 +23,14 @@
 
 @implementation FakeCallService
 
-@synthesize state;
+@synthesize state = _state;
+@synthesize delegate = _delegate;
 
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate {
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate, CallServiceDataChannelAdditionsDelegate>)clientDelegate {
 	self = [super init];
 	if (self) {
-		self.signalingChannel = signalingChannel;
-		self.delegate = clientDelegate;
+		_signalingChannel = signalingChannel;
+		_delegate = clientDelegate;
 	}
 	return self;
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "NO"
+      parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -20,50 +20,15 @@
                ReferencedContainer = "container:QBRTCDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1452AACD1BF92FA30018DA30"
-               BuildableName = "QBRTCDemo.app"
-               BlueprintName = "QBRTCDemo"
-               ReferencedContainer = "container:QBRTCDemo.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
-      enableAddressSanitizer = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14E9F58E1C6CD317007F58B7"
-               BuildableName = "QBRTCDemoTests.xctest"
-               BlueprintName = "QBRTCDemoTests"
-               ReferencedContainer = "container:QBRTCDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1452AACD1BF92FA30018DA30"
-            BuildableName = "QBRTCDemo.app"
-            BlueprintName = "QBRTCDemo"
-            ReferencedContainer = "container:QBRTCDemo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -77,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1452AACD1BF92FA30018DA30"
-            BuildableName = "QBRTCDemo.app"
-            BlueprintName = "QBRTCDemo"
+            BlueprintIdentifier = "14A6006E1C6DEDE700065437"
+            BuildableName = "libwebrtc_libraries.a"
+            BlueprintName = "webrtc_libraries"
             ReferencedContainer = "container:QBRTCDemo.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -96,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1452AACD1BF92FA30018DA30"
-            BuildableName = "QBRTCDemo.app"
-            BlueprintName = "QBRTCDemo"
+            BlueprintIdentifier = "14A6006E1C6DEDE700065437"
+            BuildableName = "libwebrtc_libraries.a"
+            BlueprintName = "webrtc_libraries"
             ReferencedContainer = "container:QBRTCDemo.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
