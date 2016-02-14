@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "CallServiceProtocol.h"
+#import "CallServiceDataChannelAdditionsProtocol.h"
 
 @protocol CallClientDelegate;
 @protocol SVSignalingChannelProtocol;
 
 @class SVUser;
+@class RTCICEServer;
 
-@interface CallService : NSObject<CallServiceProtocol>
+@interface CallService : NSObject<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate, CallServiceDataChannelAdditionsProtocol>)clientDelegate;
 
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
-
-- (void)openDataChannel;
 
 - (void)hangup;
 
@@ -31,8 +31,7 @@
 @property (nonatomic, assign, readonly) CallClientState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
-@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
 
-@property (nonatomic, strong, nonnull) NSMutableArray *iceServers;
+@property (nonatomic, strong, nonnull) NSMutableArray<RTCICEServer *> *iceServers;
 
 @end

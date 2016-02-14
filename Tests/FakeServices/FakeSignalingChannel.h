@@ -16,7 +16,6 @@
 @interface FakeSignalingChannel : NSObject <SVSignalingChannelProtocol>
 
 @property (nonatomic, strong, nonnull) NSString *state;
-@property (nonatomic, weak) id <SVSignalingChannelDelegate> delegate;
 
 @property (nonatomic, strong, nullable) SVUser *user;
 
