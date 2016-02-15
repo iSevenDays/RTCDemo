@@ -23,22 +23,6 @@
 
 @implementation FakeCallService
 
-@synthesize state = _state;
-@synthesize delegate = _delegate;
-
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate, CallServiceDataChannelAdditionsDelegate>)clientDelegate {
-	self = [super init];
-	if (self) {
-		_signalingChannel = signalingChannel;
-		_delegate = clientDelegate;
-	}
-	return self;
-}
-
-- (void)connectWithUser:(SVUser *)user completion:(void (^)(NSError * _Nullable))completion {
-	[self.signalingChannel connectWithUser:user completion:completion];
-}
-
 - (BOOL)hasActiveCall {
 	return NO;
 }
@@ -52,22 +36,6 @@
 	[self.delegate client:self didReceiveLocalVideoTrack:emptyVideoTrack];
 	
 	[self.delegate client:self didReceiveRemoteVideoTrack:emptyVideoTrack];
-}
-
-- (void)hangup {
-	
-}
-
-- (void)openDataChannel {
-	
-}
-
-- (BOOL)isConnected {
-	return self.signalingChannel.state == SVSignalingChannelState.established;
-}
-
-- (BOOL)isConnecting {
-	return self.signalingChannel.state == SVSignalingChannelState.open;
 }
 
 @end
