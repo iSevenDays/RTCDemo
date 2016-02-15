@@ -22,3 +22,4 @@ DerivedData/
 *.xcscmblueprint
 
 xcuserdata/*
+UserInterfaceState.xcuserstate
