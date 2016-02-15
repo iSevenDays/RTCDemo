@@ -27,7 +27,7 @@
 
 @interface CallServiceTests : BaseTestCase
 
-@property (nonatomic, strong) CallService<SVSignalingChannelDelegate> *callService;
+@property (nonatomic, strong) CallService<SVSignalingChannelDelegate, CallServiceProtocol, CallServiceDataChannelAdditionsProtocol> *callService;
 @property (nonatomic, strong) id mockOutput;
 @property (nonatomic, strong) id mockCallService;
 
@@ -38,7 +38,6 @@
 @end
 
 @implementation CallServiceTests
-
 
 - (void)setUp {
 	[super setUp];
@@ -60,7 +59,7 @@
 	self.mockOutput = nil;
 }
 
-- (void)testCanConnectWithUserAndHaveConnectState {
+- (void)testCanConnectWithUserAndHaveConnectedState {
 	// given
 	XCTestExpectation *expectation = [self currentSelectorTestExpectation];
 	// when

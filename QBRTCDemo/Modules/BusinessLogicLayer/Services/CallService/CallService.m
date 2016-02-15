@@ -64,8 +64,10 @@
 
 @synthesize dataChannelEnabled = _dataChannelEnabled;
 @synthesize delegate = _delegate;
+@synthesize dataChannelDelegate = _dataChannelDelegate;
 
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate, CallServiceDataChannelAdditionsDelegate>)clientDelegate {
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate dataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
+	
 	NSParameterAssert(signalingChannel);
 	NSParameterAssert(clientDelegate);
 	
@@ -74,7 +76,9 @@
 	if (self) {
 		_signalingChannel = signalingChannel;
 		_signalingChannel.delegate = self;
+		
 		_delegate = clientDelegate;
+		_dataChannelDelegate = dataChannelDelegate;
 		
 		_messageQueue = [NSMutableArray array];
 		_factory = [[RTCPeerConnectionFactory alloc] init];
@@ -86,6 +90,10 @@
 		_dataChannelEnabled = YES;
 	}
 	return self;
+}
+
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate {
+	return [[[self class] alloc] initWithSignalingChannel:signalingChannel clientDelegate:clientDelegate dataChannelDelegate:nil];
 }
 
 - (BOOL)isConnected {
@@ -560,9 +568,9 @@
 	NSLog(@"dataChannel %@ didReceiveMessageWithBuffer: %@", channel, buffer);
 	
 	if (buffer.isBinary) {
-		[self.delegate callService:self didReceiveData:buffer.data];
+		[self.dataChannelDelegate callService:self didReceiveData:buffer.data];
 	} else {
-		[self.delegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
+		[self.dataChannelDelegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
 	}
 }
 

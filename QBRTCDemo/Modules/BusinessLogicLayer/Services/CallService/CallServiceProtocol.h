@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
 
+
+
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
@@ -39,7 +41,12 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 @property (nonatomic, assign, readonly) CallClientState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
-@property (nonatomic, weak, nullable) id<CallClientDelegate, CallServiceDataChannelAdditionsDelegate> delegate;
+@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
+
+@optional
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate dataChannelDelegate:(nullable id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
+
+@property (nonatomic, weak, nullable) id<CallServiceDataChannelAdditionsDelegate> dataChannelDelegate;
 
 @end
 
