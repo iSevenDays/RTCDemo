@@ -11,10 +11,10 @@ xcodeproj_path: QBRTCDemo.xcodeproj
 project_target: QBRTCDemo_s
 
 # The file path for new modules
-project_file_path: Modules
+project_file_path: QBRTCDemo/Modules/PresentationLayer/UserStories
 
 # The Xcode group path to new modules
-project_group_path: Modules
+project_group_path: QBRTCDemo/Modules/PresentationLayer/UserStories
 
 ### Tests generation settings section
 # The tests target name
