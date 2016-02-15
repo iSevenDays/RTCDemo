@@ -21,6 +21,10 @@
 
 /* Begin PBXBuildFile section */
 		025D967AF7A054BD77F94998 /* libPods-QBRTCDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 482A838C9B84406A42BAF0B7 /* libPods-QBRTCDemoTests.a */; };
+		0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */; };
+		07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */; };
+		0BAC818B34C4A8E7F9975F66 /* ImageGalleryStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */; };
+		0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */; };
 		14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		140746481BFB841000506088 /* SVSignalingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 140746471BFB841000506088 /* SVSignalingParams.m */; };
 		1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
@@ -238,7 +242,14 @@
 		14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC46831C5029D400C1797D /* VideoStory.storyboard */; };
 		16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
 		190FDDC34E863B7B25D9DB7A /* VideoStoryInteractorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */; };
+		1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */; };
+		279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */; };
+		3179BD737E1FD9AF9F11F04C /* ImageGalleryStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */; };
+		32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */; };
+		34295AF1A7D1C75DF764635D /* ImageGalleryStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF28E4660188FA1C009EC65 /* ImageGalleryStoryRouter.swift */; };
 		3772DBD8B200B94BC6C11C61 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
+		3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */; };
+		3FA698C85BC1C35878F3106E /* ImageGalleryStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */; };
 		5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */; };
 		62630B599C72A7D1974F12E0 /* VideoStoryPresenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */; };
 		62B3F09AE08CB2C15B7DB191 /* VideoStoryAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */; };
@@ -246,8 +257,14 @@
 		88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */; };
 		924ECF4B68125FDFF008BAF4 /* VideoStoryViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */; };
 		9EA836EE51E076BE599B837A /* libPods-QBRTCDemo_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FBDF0B03E40A5AFFD52F9B2 /* libPods-QBRTCDemo_s.a */; };
+		C39E99EF43065B34302624F5 /* ImageGalleryStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */; };
+		CA0E7FA1C1007C0399606B63 /* ImageGalleryStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */; };
+		CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */; };
 		D4E7B9D497E6D08669C82C98 /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
+		DA504752039A0FB1064FE384 /* ImageGalleryStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */; };
+		E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */; };
 		E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
+		E93D0D88C76A33845273181B /* ImageGalleryStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -578,17 +595,23 @@
 		14FC46751C500D1700C1797D /* libquickblox_webrtc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libquickblox_webrtc.dylib; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc.dylib"; sourceTree = "<absolute>"; };
 		14FC46771C500EC900C1797D /* libquickblox_webrtc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libquickblox_webrtc.dylib; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc.dylib"; sourceTree = "<absolute>"; };
 		14FC46831C5029D400C1797D /* VideoStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VideoStory.storyboard; sourceTree = "<group>"; };
+		177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorOutput.swift; sourceTree = "<group>"; };
 		242CA5506C5490232512450E /* VideoStoryRouterInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryRouterInput.h; sourceTree = "<group>"; };
 		2B2950E2BA569568389A3E95 /* VideoStoryInteractorInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractorInput.h; sourceTree = "<group>"; };
 		2E34DA0AFB952EA298811115 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorTests.swift; sourceTree = "<group>"; };
 		371FA74ADC9B676C1F455BA3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryInteractor.m; sourceTree = "<group>"; };
+		37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryPresenter.swift; sourceTree = "<group>"; };
 		3C1F7FA5E286979530920B85 /* Pods-QBRTCDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryRouterTests.m; sourceTree = "<group>"; };
+		3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryConfigurator.swift; sourceTree = "<group>"; };
 		416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssemblyTests.m; sourceTree = "<group>"; };
 		482A838C9B84406A42BAF0B7 /* libPods-QBRTCDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryViewControllerTests.m; sourceTree = "<group>"; };
 		5629FBD696A140459D4AB81A /* VideoStoryViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryViewController.m; sourceTree = "<group>"; };
+		56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInitializer.swift; sourceTree = "<group>"; };
+		58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryPresenterTests.swift; sourceTree = "<group>"; };
 		5EBB921A5AEF7B56EC5229BA /* Pods-QBRTCDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		6E8FF503DFB4C6FBA61B978F /* VideoStoryAssembly.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryAssembly.h; sourceTree = "<group>"; };
 		748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryRouter.m; sourceTree = "<group>"; };
@@ -597,11 +620,18 @@
 		7FBDF0B03E40A5AFFD52F9B2 /* libPods-QBRTCDemo_s.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo_s.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80BD790ED0AA90A637D44374 /* VideoStoryAssembly_Testable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryAssembly_Testable.h; sourceTree = "<group>"; };
 		813BE7391A0AB394F65B4605 /* VideoStoryViewOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryViewOutput.h; sourceTree = "<group>"; };
+		82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractor.swift; sourceTree = "<group>"; };
 		85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryPresenter.m; sourceTree = "<group>"; };
 		8AA6686E6F630801595DF8B0 /* Pods-QBRTCDemo_s.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_s.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.debug.xcconfig"; sourceTree = "<group>"; };
 		93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssembly.m; sourceTree = "<group>"; };
+		95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorInput.swift; sourceTree = "<group>"; };
 		9CCA2B14A51BFE81BA93CE52 /* VideoStoryInteractor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractor.h; sourceTree = "<group>"; };
+		A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryConfiguratorTests.swift; sourceTree = "<group>"; };
+		A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewController.swift; sourceTree = "<group>"; };
+		A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryModuleInput.swift; sourceTree = "<group>"; };
 		AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryPresenterTests.m; sourceTree = "<group>"; };
+		B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouterInput.swift; sourceTree = "<group>"; };
+		B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewInput.swift; sourceTree = "<group>"; };
 		BB97CEFF2BF48571CFA7B175 /* libPods-QBRTCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCAB06BC01A11FABE6C03E6 /* VideoStoryPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryPresenter.h; sourceTree = "<group>"; };
 		C02FBCE1A397B785CE04E483 /* Pods-QBRTCDemo_s.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_s.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.release.xcconfig"; sourceTree = "<group>"; };
@@ -611,6 +641,10 @@
 		D11B754886679B217E8FEAA2 /* VideoStoryModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryModuleInput.h; sourceTree = "<group>"; };
 		DBC0353942AD2FCE4DA37D4D /* Pods-QBRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryInteractorTests.m; sourceTree = "<group>"; };
+		F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewOutput.swift; sourceTree = "<group>"; };
+		F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewTests.swift; sourceTree = "<group>"; };
+		F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouterTests.swift; sourceTree = "<group>"; };
+		FBF28E4660188FA1C009EC65 /* ImageGalleryStoryRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouter.swift; sourceTree = "<group>"; };
 		FEB21858974D045EFD0FB030 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1243,6 +1277,7 @@
 			isa = PBXGroup;
 			children = (
 				026796DE6A883B4D7DB503D7 /* VideoStory */,
+				F80407DF3A1CB8A2F0595408 /* ImageGalleryStory */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -1319,6 +1354,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		153556CC5CD4AB9C63F9DDF6 /* ImageGalleryStory */ = {
+			isa = PBXGroup;
+			children = (
+				2923FCDDE58704ACFD4A61D9 /* Configurator */,
+				B0ED59F4B0014E8C062F9C60 /* View */,
+				D3BF590081CFE7B3104E0CE1 /* Interactor */,
+				29C7AD027DBF156F961E8134 /* Presenter */,
+				998B1E5FC290BE81663C2750 /* Router */,
+			);
+			path = ImageGalleryStory;
+			sourceTree = "<group>";
+		};
 		24A0BB756AD5EE73AC99FEF0 /* VideoStory */ = {
 			isa = PBXGroup;
 			children = (
@@ -1356,12 +1403,46 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		2923FCDDE58704ACFD4A61D9 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		29C7AD027DBF156F961E8134 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2AC2C440C3943EE0E58DE629 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */,
+				56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
 		317F4048270873BCEA198B1A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		39BF6D2F3DCFC792C445A263 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */,
+				FBF28E4660188FA1C009EC65 /* ImageGalleryStoryRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		4148FDA270892B0DC9D9D729 /* Interactor */ = {
@@ -1388,8 +1469,36 @@
 				14C534E91C6A310000A0FFE8 /* CallService */,
 				1417B3441C57E4B9004D6416 /* FakeServices */,
 				24A0BB756AD5EE73AC99FEF0 /* VideoStory */,
+				153556CC5CD4AB9C63F9DDF6 /* ImageGalleryStory */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		6414E01C8ABDE0BFE0074888 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */,
+				177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */,
+				82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		83CEB8E898F5043C7BC28B77 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */,
+				37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		998B1E5FC290BE81663C2750 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		A20A2D5D766D5C024C690748 /* Presenter */ = {
@@ -1409,12 +1518,28 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
+		B0ED59F4B0014E8C062F9C60 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B3E7514767E0618C84730499 /* Router */ = {
 			isa = PBXGroup;
 			children = (
 				3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		D3BF590081CFE7B3104E0CE1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		DC745E65212C7A94C4AFAB38 /* View */ = {
@@ -1429,6 +1554,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E9D450ABF52304EE9E26D5F6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */,
+				F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */,
+				A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F3EECC2FCD991E9CEA95067F /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1438,6 +1573,18 @@
 				C7859E7F0647AD04AFAA97AE /* VideoStoryInteractorOutput.h */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		F80407DF3A1CB8A2F0595408 /* ImageGalleryStory */ = {
+			isa = PBXGroup;
+			children = (
+				E9D450ABF52304EE9E26D5F6 /* View */,
+				83CEB8E898F5043C7BC28B77 /* Presenter */,
+				6414E01C8ABDE0BFE0074888 /* Interactor */,
+				39BF6D2F3DCFC792C445A263 /* Router */,
+				2AC2C440C3943EE0E58DE629 /* Configurator */,
+			);
+			path = ImageGalleryStory;
 			sourceTree = "<group>";
 		};
 		FA34D2D1401A5665B16EE109 /* Router */ = {
@@ -1955,6 +2102,18 @@
 				16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */,
 				88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */,
 				5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */,
+				32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */,
+				0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */,
+				3FA698C85BC1C35878F3106E /* ImageGalleryStoryViewController.swift in Sources */,
+				1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */,
+				0BAC818B34C4A8E7F9975F66 /* ImageGalleryStoryPresenter.swift in Sources */,
+				3179BD737E1FD9AF9F11F04C /* ImageGalleryStoryInteractorInput.swift in Sources */,
+				CA0E7FA1C1007C0399606B63 /* ImageGalleryStoryInteractorOutput.swift in Sources */,
+				C39E99EF43065B34302624F5 /* ImageGalleryStoryInteractor.swift in Sources */,
+				DA504752039A0FB1064FE384 /* ImageGalleryStoryRouterInput.swift in Sources */,
+				34295AF1A7D1C75DF764635D /* ImageGalleryStoryRouter.swift in Sources */,
+				0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */,
+				07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1985,6 +2144,11 @@
 				14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */,
 				14E9F5A11C6CD317007F58B7 /* FakeCallServiceDelegate.m in Sources */,
 				14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */,
+				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
+				CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */,
+				E93D0D88C76A33845273181B /* ImageGalleryStoryInteractorTests.swift in Sources */,
+				279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */,
+				E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
