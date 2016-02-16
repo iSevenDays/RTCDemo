@@ -54,14 +54,14 @@
 	if ([self.interactor.callService isKindOfClass:[FakeCallService class]]) {
 		return; // already set
 	}
-	self.interactor.callService = [[FakeCallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor];
+	self.interactor.callService = [[FakeCallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor dataChannelDelegate:self.interactor];
 }
 
 - (void)useRealCallService {
 	if ([self.interactor.callService isKindOfClass:[CallService class]]) {
 		return; // already set
 	}
-	self.interactor.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor];
+	self.interactor.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor dataChannelDelegate:self.interactor];
 }
 
 - (void)tearDown {
