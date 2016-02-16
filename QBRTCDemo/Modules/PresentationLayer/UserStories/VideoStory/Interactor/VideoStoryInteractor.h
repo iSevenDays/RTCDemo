@@ -8,20 +8,16 @@
 
 #import "VideoStoryInteractorInput.h"
 #import "CallClientDelegate.h"
+#import "CallServiceDataChannelAdditionsDelegate.h"
 
 @protocol VideoStoryInteractorOutput;
 @protocol CallServiceProtocol;
+@protocol CallServiceDataChannelAdditionsProtocol;
 
-@interface VideoStoryInteractor : NSObject <VideoStoryInteractorInput, CallClientDelegate>
+@interface VideoStoryInteractor : NSObject <VideoStoryInteractorInput, CallClientDelegate, CallServiceDataChannelAdditionsDelegate>
 
 @property (nonatomic, weak) id<VideoStoryInteractorOutput> output;
 
-@property (nonatomic, strong) id<CallServiceProtocol> callService;
+@property (nonatomic, strong) id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol> callService;
 
-@end
-
-@protocol CallServiceProtocol_Private;
-
-@interface VideoStoryInteractor (PrivateCallService)
-@property (nonatomic, strong, readwrite) id<CallServiceProtocol_Private> callService;
 @end

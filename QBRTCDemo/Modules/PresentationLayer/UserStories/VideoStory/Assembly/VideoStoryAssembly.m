@@ -68,9 +68,10 @@
 
 - (id<CallServiceProtocol>)callService {
 	return [TyphoonDefinition withClass:[CallService class] configuration:^(TyphoonDefinition *definition) {
-		[definition useInitializer:@selector(initWithSignalingChannel:clientDelegate:) parameters:^(TyphoonMethod *initializer) {
+		[definition useInitializer:@selector(initWithSignalingChannel:clientDelegate:dataChannelDelegate:) parameters:^(TyphoonMethod *initializer) {
 
 			[initializer injectParameterWith:[self signalingChannel]];
+			[initializer injectParameterWith:[self interactorVideoStoryModule]];
 			[initializer injectParameterWith:[self interactorVideoStoryModule]];
 		}];
 		

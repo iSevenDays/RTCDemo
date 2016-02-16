@@ -74,5 +74,9 @@
 	[self.output didTriggerHangupButtonTaped];
 }
 
+- (IBAction)didTapButtonDataChannelImageGallery:(id)sender {
+	[self.output didTriggerDataChannelButtonTaped];
+}
+
 
 @end

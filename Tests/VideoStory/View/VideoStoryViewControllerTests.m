@@ -99,6 +99,16 @@
 	OCMVerify([self.mockOutput didTriggerHangupButtonTaped]);
 }
 
+- (void)testSuccessDidTapDataChannelButton_ImageGallery {
+	// given
+	
+	// when
+	[self.controller didTapButtonDataChannelImageGallery:nil];
+	
+	// then
+	OCMVerify([self.mockOutput didTriggerDataChannelButtonTaped]);
+}
+
 #pragma mark - Тестирование методов VideoStoryViewInput
 
 - (void)testSuccessfulSetLocalVideoCaptureSession {

@@ -12,8 +12,9 @@
 
 #import "SVUser.h"
 #import "CallServiceProtocol.h"
-#import "CallClientDelegate.h"
+#import "CallServiceDataChannelAdditionsProtocol.h"
 
+#import "CallClientDelegate.h"
 #import "CallServiceHelpers.h"
 
 #import <RTCAVFoundationVideoSource.h>
@@ -101,6 +102,9 @@
 	[self.output didHangup];
 }
 
+- (BOOL)isReadyForDataChannel {
+	return [self.callService isDataChannelEnabled] && [self.callService isDataChannelReady];
+}
 
 #pragma mark SVClientDelegate methods
 
@@ -151,6 +155,10 @@
 		[strongSelf.remoteVideoTrack addRenderer:renderer];
 		
 	}];
+}
+
+- (void)callService:(id<CallServiceProtocol>)callService didOpenDataChannel:(RTCDataChannel *)dataChannel {
+	[self.output didOpenDataChannel];
 }
 
 @end

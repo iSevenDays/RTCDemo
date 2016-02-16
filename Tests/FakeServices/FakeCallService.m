@@ -10,6 +10,7 @@
 #import "FakeSignalingChannel.h"
 
 #import "CallServiceProtocol.h"
+#import "CallServiceDataChannelAdditionsDelegate.h"
 #import "CallClientDelegate.h"
 
 #import <RTCPeerConnectionFactory.h>
@@ -36,6 +37,8 @@
 	[self.delegate client:self didReceiveLocalVideoTrack:emptyVideoTrack];
 	
 	[self.delegate client:self didReceiveRemoteVideoTrack:emptyVideoTrack];
+	
+	[self.dataChannelDelegate callService:self didOpenDataChannel:nil];
 }
 
 @end

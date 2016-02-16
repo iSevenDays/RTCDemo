@@ -23,6 +23,7 @@
 @class VideoStoryRouter;
 
 @protocol CallServiceProtocol;
+@protocol CallServiceDataChannelAdditionsProtocol;
 @protocol SVSignalingChannelProtocol;
 
 @interface VideoStoryAssembly : ModuleAssemblyBase <RamblerInitialAssembly>
@@ -32,7 +33,7 @@
 - (VideoStoryPresenter *)presenterVideoStoryModule;
 - (VideoStoryRouter *)routerVideoStoryModule;
 
-- (id<CallServiceProtocol>)callService;
+- (id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)callService;
 - (id<SVSignalingChannelProtocol>)signalingChannel;
 
 @end

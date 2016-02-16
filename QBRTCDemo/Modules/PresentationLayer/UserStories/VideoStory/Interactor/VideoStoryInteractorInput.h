@@ -16,4 +16,6 @@
 - (void)startCall;
 - (void)hangup;
 
+- (BOOL)isReadyForDataChannel;
+
 @end

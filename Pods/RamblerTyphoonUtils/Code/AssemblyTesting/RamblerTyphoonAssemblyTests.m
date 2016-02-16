@@ -67,9 +67,20 @@ typedef NS_ENUM(NSInteger, RamblerPropertyType) {
             }
                 
             case RamblerProtocol: {
-                NSString *protocolName = [dependencyExpectedType substringWithRange:NSMakeRange(1, dependencyExpectedType.length - 2)];
-                Protocol *expectedProtocol = NSProtocolFromString(protocolName);
-                XCTAssertTrue([dependencyObject conformsToProtocol:expectedProtocol], @"Свойство %@ объекта %@ не имплементирует протокол %@", propertyName, targetObject, protocolName);
+				// protocol1>protocol2>protocol3
+				// or
+				// protocol1>
+				NSString *angledString = [dependencyExpectedType stringByReplacingOccurrencesOfString:@"<" withString:@""] ;
+				
+				NSMutableArray *protocols = [[angledString componentsSeparatedByString:@">"] mutableCopy];
+				
+				[protocols removeObject:@""]; // This removes all objects like @""
+				
+				for (NSString *protocolName in protocols) {
+					//                NSString *protocolName = [dependencyExpectedType substringWithRange:NSMakeRange(1, dependencyExpectedType.length - 2)];
+					Protocol *expectedProtocol = NSProtocolFromString(protocolName);
+					XCTAssertTrue([dependencyObject conformsToProtocol:expectedProtocol], @"Свойство %@ объекта %@ не имплементирует протокол %@", propertyName, targetObject, protocolName);
+				}
                 break;
             }
                 

@@ -11,6 +11,7 @@
 #import <OCMStubRecorder.h>
 #import <TyphoonPatcher.h>
 #import "CallService.h"
+#import "CallServiceDataChannelAdditionsProtocol.h"
 
 #import "FakeCallService.h"
 #import "FakeSignalingChannel.h"
@@ -136,5 +137,18 @@
 	OCMVerify([self.mockOutput didReceiveRemoteVideoTrackWithConfigurationBlock:[OCMArg any]]);
 }
 
+- (void)testTriggerDataChannelOpenWhenReceivedDataChannel {
+	// given
+	[self useFakeCallService]; // for fast user connection
+	
+	// when
+	[self.interactor.callService setDataChannelEnabled:YES];
+	[self.interactor connectToChatWithUser1];
+	[self.interactor startCall];
+
+	// then
+	OCMVerify([self.mockOutput didOpenDataChannel]);
+	
+}
 
 @end

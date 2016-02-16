@@ -42,6 +42,10 @@
 	[self.interactor hangup];
 }
 
+- (void)didTriggerDataChannelButtonTaped {
+	[self.router openImageGallery];
+}
+
 #pragma mark - Методы VideoStoryInteractorOutput
 
 - (void)didConnectToChatWithUser1 {
@@ -68,5 +72,8 @@
 	[self.view configureRemoteVideoViewWithBlock:block];
 }
 
+- (void)didOpenDataChannel {
+	
+}
 
 @end

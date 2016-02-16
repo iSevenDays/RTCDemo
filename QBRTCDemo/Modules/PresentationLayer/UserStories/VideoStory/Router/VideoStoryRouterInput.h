@@ -10,4 +10,6 @@
 
 @protocol VideoStoryRouterInput <NSObject>
 
+- (void)openImageGallery;
+
 @end
