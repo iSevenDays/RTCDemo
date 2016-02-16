@@ -238,6 +238,8 @@
 		14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
 		14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */; };
 		14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
+		14FB2CB61C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */; };
+		14FB2CB71C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */; };
 		14FC46841C5029D400C1797D /* VideoStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC46831C5029D400C1797D /* VideoStory.storyboard */; };
 		14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC46831C5029D400C1797D /* VideoStory.storyboard */; };
 		16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
@@ -580,6 +582,7 @@
 		14EE3D041C6BC03700C451CF /* pull.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = pull.sh; path = Scripts/pull.sh; sourceTree = "<group>"; };
 		14EE3D051C6BC03700C451CF /* blox_target.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = blox_target.py; path = Scripts/blox_target.py; sourceTree = "<group>"; };
 		14EE3D061C6BC03700C451CF /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build.sh; path = Scripts/build.sh; sourceTree = "<group>"; };
+		14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageGalleryStory.storyboard; sourceTree = "<group>"; };
 		14FC45721C4EE1B900C1797D /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<absolute>"; };
 		14FC45741C4EE1CF00C1797D /* libjingle_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_media.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_media.a"; sourceTree = "<absolute>"; };
 		14FC45751C4EE1CF00C1797D /* libjingle_p2p.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_p2p.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_p2p.a"; sourceTree = "<absolute>"; };
@@ -1560,6 +1563,7 @@
 				B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */,
 				F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */,
 				A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */,
+				14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1798,6 +1802,7 @@
 				1452AADE1BF92FA30018DA30 /* Assets.xcassets in Resources */,
 				14EE3D091C6BC03700C451CF /* clone.sh in Resources */,
 				14EE3D0B1C6BC03700C451CF /* framework_dance.sh in Resources */,
+				14FB2CB61C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */,
 				14FC46841C5029D400C1797D /* VideoStory.storyboard in Resources */,
 				14EE3D071C6BC03700C451CF /* build_webrtc.sh in Resources */,
 			);
@@ -1810,6 +1815,7 @@
 				148234021C002DFE0000E9ED /* LaunchScreen.storyboard in Resources */,
 				148234051C002DFE0000E9ED /* Assets.xcassets in Resources */,
 				14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */,
+				14FB2CB71C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

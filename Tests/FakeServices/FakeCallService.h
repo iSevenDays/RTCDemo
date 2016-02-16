@@ -10,7 +10,7 @@
 #import "CallServiceProtocol.h"
 #import "CallService.h"
 
-@protocol CallClientDelegate;
+
 @protocol SVSignalingChannelProtocol;
 
 @interface FakeCallService : CallService

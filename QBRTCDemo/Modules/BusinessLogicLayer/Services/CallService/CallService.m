@@ -27,10 +27,11 @@
 #import <RTCMediaStream.h>
 #import <RTCPeerConnection.h>
 #import <RTCPeerConnectionFactory.h>
-#import "RTCDataChannel.h"
 #import <RTCMediaConstraints.h>
 #import <RTCPair.h>
 #import <RTCLogging.h>
+
+#import "RTCDataChannel.h"
 
 #import "WebRTCHelpers.h"
 #import "RTCMediaStream.h"
@@ -232,9 +233,12 @@
 	}
 	[self.peerConnection close];
 	self.peerConnection = nil;
+	
+	[self.dataChannel close];
+	self.dataChannel = nil;
+	
 	self.isReceivedSDP = NO;
 	self.messageQueue = [NSMutableArray array];
-	self.dataChannel = nil;
 }
 
 - (BOOL)hasActiveCall {
@@ -547,12 +551,18 @@
 	[self.dataChannel sendData:buffer];
 }
 
+- (BOOL)isDataChannelReady {
+	return self.dataChannel && self.dataChannel.state == kRTCDataChannelStateOpen;
+}
+
 #pragma mark RTC Data Channel delegate
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection didOpenDataChannel:(RTCDataChannel *)dataChannel {
 	NSLog(@"peerConnection %@ didOpenDataChannel %@", peerConnection, dataChannel);
 	self.dataChannel = dataChannel;
 	dataChannel.delegate = self;
+	
+	[self.dataChannelDelegate callService:self didOpenDataChannel:dataChannel];
 }
 
 - (void)channelDidChangeState:(RTCDataChannel *)channel {

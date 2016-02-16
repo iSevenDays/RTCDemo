@@ -16,5 +16,5 @@ end
 target :QBRTCDemoTests, :exclusive => true do
 	pod 'OCHamcrest', '~> 5.0'
 	pod 'OCMock', '~> 3.2'
-	pod 'RamblerTyphoonUtils/AssemblyTesting', '1.0.0'
+	pod 'RamblerTyphoonUtils/AssemblyTesting', '1.2.0'
 end

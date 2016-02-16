@@ -21,4 +21,8 @@
 //	}];
 }
 
+- (void)openImageGallery {
+//	[self.transitionHandler 
+}
+
 @end

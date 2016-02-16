@@ -19,6 +19,7 @@
  *  By default enabled
  */
 @property (nonatomic, assign, getter=isDataChannelEnabled) BOOL dataChannelEnabled;
+- (BOOL)isDataChannelReady;
 
 - (void)sendText:(NSString *)text;
 - (void)sendData:(NSData *)data;

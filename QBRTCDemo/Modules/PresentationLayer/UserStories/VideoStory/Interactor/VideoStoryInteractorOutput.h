@@ -23,4 +23,6 @@
 - (void)didSetLocalCaptureSession:(nonnull AVCaptureSession *)localCaptureSession;
 - (void)didReceiveRemoteVideoTrackWithConfigurationBlock:(void(^_Nullable)(RTCEAGLVideoView *_Nullable renderer))block;
 
+- (void)didOpenDataChannel;
+
 @end
