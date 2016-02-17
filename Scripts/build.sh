@@ -70,7 +70,7 @@ function exec_libtool() {
 function exec_strip() {
 
   echo "Running strip"
-#  strip -S -x -v $@
+  strip -S -x -v $@
 }
 
 function exec_ninja() {
