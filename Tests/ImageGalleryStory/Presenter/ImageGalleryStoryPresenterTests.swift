@@ -8,20 +8,54 @@
 
 import XCTest
 
-class ImageGalleryStoryPresenterTest: XCTestCase {
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
 
+class ImageGalleryStoryPresenterTest: XCTestCase {
+	var presenter: ImageGalleryStoryPresenter!
+	var mockInteractor: MockInteractor!
+	var mockRouter: MockRouter!
+	var mockView: MockViewController!
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		self.presenter = ImageGalleryStoryPresenter()
+		
+		self.mockInteractor = MockInteractor()
+		
+		self.mockRouter = MockRouter()
+		self.mockView = MockViewController()
+		
+		self.presenter.interactor = self.mockInteractor
+		self.presenter.router = self.mockRouter
+		self.presenter.view = self.mockView
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	
+	//
+	// MARK: ImageGalleryStoryInteractorInput tests
+	//
+	
+	func testPresenterHandlesViewReadyEvent() {
+		// given
+		
+		// when
+		self.presenter.didTriggerStartButtonTaped()
+		
+		// then
+		XCTAssertTrue(self.mockInteractor.startedSynchronizationImages)
+	}
 
     class MockInteractor: ImageGalleryStoryInteractorInput {
-
+		var startedSynchronizationImages = false
+		
+		func startSynchronizationImages() {
+			startedSynchronizationImages = true
+		}
     }
 
     class MockRouter: ImageGalleryStoryRouterInput {

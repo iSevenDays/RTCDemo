@@ -8,19 +8,41 @@
 
 import XCTest
 
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
+
 class ImageGalleryStoryInteractorTests: XCTestCase {
 
+	var interactor: ImageGalleryStoryInteractor!
+	var mockOutput: MockPresenter!
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		self.interactor = ImageGalleryStoryInteractor()
+		self.mockOutput = MockPresenter()
+		self.interactor.output = mockOutput
     }
+	
+	func testNotificatesAboutStartingSynchronizationImages() {
+		// given
+		
+		// when
+		self.interactor.startSynchronizationImages()
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+		// then
+		XCTAssertTrue(self.mockOutput.didStartSynchronizationImagesGotCalled)
+	}
 
     class MockPresenter: ImageGalleryStoryInteractorOutput {
-
+		var didStartSynchronizationImagesGotCalled = false
+		
+		func didStartSynchronizationImages() {
+			didStartSynchronizationImagesGotCalled = true
+		}
     }
 }

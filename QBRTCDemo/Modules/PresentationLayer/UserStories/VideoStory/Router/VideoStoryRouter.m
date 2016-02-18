@@ -11,18 +11,14 @@
 
 #import <ViperMcFlurry/ViperMcFlurry.h>
 
+NSString *kVideoStoryToImageGalleryModuleSegue = @"VideoStoryToImageGalleryModuleSegue";
+
 @implementation VideoStoryRouter
 
 #pragma mark - Методы VideoStoryRouterInput
 
-- (void)openSettingsModule {
-//	[[self.transitionHandler openModuleUsingSegue:@"segue"] thenChainUsingBlock:^id<RamblerViperModuleOutput>(id<VideoStoryModuleInput> moduleInput) {
-//		[moduleInput configureModule];
-//	}];
-}
-
 - (void)openImageGallery {
-//	[self.transitionHandler 
+	[self.transitionHandler openModuleUsingSegue:kVideoStoryToImageGalleryModuleSegue];
 }
 
 @end

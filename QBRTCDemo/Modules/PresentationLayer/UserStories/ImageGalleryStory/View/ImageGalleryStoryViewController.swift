@@ -18,8 +18,11 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
         output.viewIsReady()
     }
 
-
     // MARK: ImageGalleryStoryViewInput
     func setupInitialState() {
     }
+	
+	@IBAction func didTapStartButton(sender: AnyObject) {
+		self.output.didTriggerStartButtonTaped()
+	}
 }

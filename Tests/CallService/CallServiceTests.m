@@ -116,6 +116,8 @@
 	SVSignalingMessage *offer = [[SVSignalingMessageSDP alloc] initWithSessionDescription:rtcofferSDP];
 	offer.sender = self.user3;
 	
+	OCMExpect([self.mockCallService sendRejectToUser:self.user3 completion:[OCMArg any]]);
+	
 	// when
 	[self.callService connectWithUser:self.user1 completion:nil];
 	[self.callService startCallWithOpponent:self.user2];
@@ -123,7 +125,7 @@
 	[self.callService channel:self.callService.signalingChannel didReceiveMessage:offer];
 	
 	// then
-	OCMVerify([self.mockCallService sendRejectToUser:self.user3 completion:[OCMArg any]]);
+	OCMVerifyAll(self.mockCallService);
 }
 
 #pragma mark Signaling messages processing

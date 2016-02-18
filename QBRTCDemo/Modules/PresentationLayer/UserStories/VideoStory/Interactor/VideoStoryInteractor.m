@@ -102,6 +102,14 @@
 	[self.output didHangup];
 }
 
+- (void)requestDataChannelState {
+	if ([self isReadyForDataChannel]) {
+		[self.output didReceiveDataChannelStateReady];
+	} else {
+		[self.output didReceiveDataChannelStateNotReady];
+	}
+}
+
 - (BOOL)isReadyForDataChannel {
 	return [self.callService isDataChannelEnabled] && [self.callService isDataChannelReady];
 }
@@ -159,6 +167,10 @@
 
 - (void)callService:(id<CallServiceProtocol>)callService didOpenDataChannel:(RTCDataChannel *)dataChannel {
 	[self.output didOpenDataChannel];
+}
+
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveMessage:(NSString *)message {
+	NSLog(@"callService %@ didReceiveMessage %@", callService, message);
 }
 
 @end

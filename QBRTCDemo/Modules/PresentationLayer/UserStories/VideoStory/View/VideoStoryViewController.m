@@ -48,6 +48,10 @@
 	[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot connect" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
 }
 
+- (void)showErrorDataChannelNotReady {
+	[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Data channel not ready" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+}
+
 - (void)setLocalVideoCaptureSession:(AVCaptureSession *)captureSession {
 	self.viewLocal.captureSession = captureSession;
 }

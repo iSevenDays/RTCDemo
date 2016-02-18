@@ -417,13 +417,12 @@
 	});
 }
 
-#pragma mark - RTCStatsDelegate
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection didGetStats:(NSArray *)stats {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		//		[self.delegate client:self didGetStats:stats];
-	});
-}
+//#pragma mark - RTCStatsDelegate
+//- (void)peerConnection:(RTCPeerConnection *)peerConnection didGetStats:(NSArray *)stats {
+//	dispatch_async(dispatch_get_main_queue(), ^{
+//				[self.delegate client:self didGetStats:stats];
+//	});
+//}
 
 #pragma mark - RTCSessionDescriptionDelegate
 // Callbacks for this delegate occur on non-main thread and need to be

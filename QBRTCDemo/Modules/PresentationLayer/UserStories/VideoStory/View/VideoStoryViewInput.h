@@ -24,6 +24,7 @@
 - (void)showHangup;
 
 - (void)showErrorConnect;
+- (void)showErrorDataChannelNotReady;
 
 - (void)setLocalVideoCaptureSession:(nonnull AVCaptureSession *)captureSession;
 

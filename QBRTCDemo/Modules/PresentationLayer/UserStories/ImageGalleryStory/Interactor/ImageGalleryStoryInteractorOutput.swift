@@ -10,4 +10,6 @@ import Foundation
 
 protocol ImageGalleryStoryInteractorOutput: class {
 
+	func didStartSynchronizationImages()
+
 }

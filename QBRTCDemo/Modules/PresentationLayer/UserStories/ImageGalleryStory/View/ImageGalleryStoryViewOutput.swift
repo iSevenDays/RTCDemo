@@ -14,4 +14,6 @@ protocol ImageGalleryStoryViewOutput {
     */
 
     func viewIsReady()
+	
+	func didTriggerStartButtonTaped()
 }

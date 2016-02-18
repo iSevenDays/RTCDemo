@@ -137,7 +137,9 @@
 	OCMVerify([self.mockOutput didReceiveRemoteVideoTrackWithConfigurationBlock:[OCMArg any]]);
 }
 
-- (void)testTriggerDataChannelOpenWhenReceivedDataChannel {
+#pragma mark Data Channel Tests
+
+- (void)testTriggersDidOpenDataChannelOpen_whenReceivedDataChannel {
 	// given
 	[self useFakeCallService]; // for fast user connection
 	
@@ -145,10 +147,35 @@
 	[self.interactor.callService setDataChannelEnabled:YES];
 	[self.interactor connectToChatWithUser1];
 	[self.interactor startCall];
-
+	
 	// then
 	OCMVerify([self.mockOutput didOpenDataChannel]);
+}
+
+- (void)testTriggersDidReceiveDataChannelStateReady_whenReceivedDataChannel {
+	// given
+	[self useFakeCallService]; // for fast user connection
 	
+	// when
+	[self.interactor.callService setDataChannelEnabled:YES];
+	[self.interactor connectToChatWithUser1];
+	[self.interactor startCall];
+	[self.interactor requestDataChannelState];
+	
+	// then
+	OCMVerify([self.mockOutput didReceiveDataChannelStateReady]);
+}
+
+- (void)testTriggersDidReceiveDataChannelStateNotReady_whenNoDataChannel {
+	// given
+	[self useRealCallService];
+	
+	// when
+	[self.interactor.callService setDataChannelEnabled:YES];
+	[self.interactor requestDataChannelState];
+	
+	// then
+	OCMVerify([self.mockOutput didReceiveDataChannelStateNotReady]);
 }
 
 @end

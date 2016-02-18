@@ -8,6 +8,14 @@
 
 import XCTest
 
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
+
 class ImageGalleryStoryModuleConfiguratorTests: XCTestCase {
 
     override func setUp() {
@@ -40,6 +48,8 @@ class ImageGalleryStoryModuleConfiguratorTests: XCTestCase {
 
         let interactor: ImageGalleryStoryInteractor = presenter.interactor as! ImageGalleryStoryInteractor
         XCTAssertNotNil(interactor.output, "output in ImageGalleryStoryInteractor is nil after configuration")
+		
+		XCTAssertNotNil(interactor.callService, "callService in ImageGalleryStoryInteractor is nil after configuration")
     }
 
     class ImageGalleryStoryViewControllerMock: ImageGalleryStoryViewController {
