@@ -16,6 +16,7 @@
 #import <RTCPeerConnectionFactory.h>
 #import <RTCPeerConnectionInterface.h>
 #import <RTCMediaConstraints.h>
+#import <RTCVideoSource.h>
 #import "SVSignalingChannelState.h"
 
 @interface FakeCallService()
@@ -32,13 +33,17 @@
 
 	RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
 	
-	RTCVideoTrack *emptyVideoTrack = [[RTCVideoTrack alloc] initWithFactory:factory source:nil trackId:@"trackID"];
+	RTCVideoTrack *emptyVideoTrack = [[RTCVideoTrack alloc] initWithFactory:factory source:[RTCVideoSource new] trackId:@"trackID"];
 	
 	[self.delegate client:self didReceiveLocalVideoTrack:emptyVideoTrack];
 	
 	[self.delegate client:self didReceiveRemoteVideoTrack:emptyVideoTrack];
 	
 	[self.dataChannelDelegate callService:self didOpenDataChannel:nil];
+}
+
+- (BOOL)isDataChannelReady {
+	return YES;
 }
 
 @end

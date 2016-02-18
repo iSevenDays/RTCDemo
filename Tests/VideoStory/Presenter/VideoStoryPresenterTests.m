@@ -53,13 +53,12 @@
     [super tearDown];
 }
 
-#pragma mark - Тестирование методов VideoStoryModuleInput
+#pragma mark - Testing methods VideoStoryModuleInput
 
-#pragma mark - Тестирование методов VideoStoryViewOutput
+#pragma mark - Testing methods VideoStoryViewOutput
 
 - (void)testThatPresenterHandlesViewReadyEvent {
     // given
-
 
     // when
     [self.presenter didTriggerViewReadyEvent];
@@ -108,8 +107,18 @@
 	OCMVerify([self.mockInteractor hangup]);
 }
 
+- (void)testThatPresenterHandlesDataChannelButtonTapped_and {
+	// given
+	
+	// when
+	[self.presenter didTriggerDataChannelButtonTaped];
+	
+	// then
+	OCMVerify([self.mockInteractor requestDataChannelState]);
+}
 
-#pragma mark - Тестирование методов VideoStoryInteractorOutput
+
+#pragma mark - Testing methods VideoStoryInteractorOutput
 
 - (void)testThatPresenterHandlesDidConnectToChatWithUser1 {
 	// given
@@ -131,7 +140,7 @@
 	OCMVerify([self.mockView configureViewWithUser2]);
 }
 
-- (void)testThatPresenterHandlesErrors {
+- (void)testThatPresenterHandlesConnectionError {
 	// given
 	
 	// when
@@ -159,6 +168,26 @@
 	
 	// then
 	OCMVerify([self.mockView configureRemoteVideoViewWithBlock:nil]);
+}
+
+- (void)testPresenterHandlesDataChannelNotReadyState {
+	// given
+	
+	// when
+	[self.presenter didReceiveDataChannelStateNotReady];
+	
+	// then
+	OCMVerify([self.mockView showErrorDataChannelNotReady]);
+}
+
+- (void)testPresenterHandlesDataChannelReadyState_andOpensImageGallery {
+	// given
+	
+	// when
+	[self.presenter didReceiveDataChannelStateReady];
+	
+	// then
+	OCMVerify([self.mockRouter openImageGallery]);
 }
 
 @end

@@ -25,4 +25,7 @@
 
 - (void)didOpenDataChannel;
 
+- (void)didReceiveDataChannelStateReady;
+- (void)didReceiveDataChannelStateNotReady;
+
 @end

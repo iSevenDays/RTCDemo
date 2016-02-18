@@ -27,6 +27,7 @@ class ImageGalleryStoryModuleConfigurator {
 
         let interactor = ImageGalleryStoryInteractor()
         interactor.output = presenter
+		interactor.callService = CallService()
 
         presenter.interactor = interactor
         viewController.output = presenter

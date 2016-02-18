@@ -9,28 +9,44 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
+#import "VideoStoryAssembly.h"
 #import "VideoStoryRouter.h"
+#import <ViperMcFlurry/ViperMcFlurry.h>
 
 @interface VideoStoryRouterTests : XCTestCase
 
 @property (strong, nonatomic) VideoStoryRouter *router;
-
+@property (strong, nonatomic) VideoStoryAssembly *assembly;
 @end
 
 @implementation VideoStoryRouterTests
 
-#pragma mark - Настройка окружения для тестирования
+#pragma mark - Setup environment for testing
 
 - (void)setUp {
     [super setUp];
 
-    self.router = [[VideoStoryRouter alloc] init];
+	self.assembly = [VideoStoryAssembly new];
+	[self.assembly activate];
+	
+    self.router = [self.assembly routerVideoStoryModule];
+	
 }
 
 - (void)tearDown {
     self.router = nil;
 
     [super tearDown];
+}
+
+- (void)testRouterOpenImageGalleryCallsTransitionHandler {
+	// given
+	id mockTransitionHandler = OCMPartialMock(self.router.transitionHandler);
+	// when
+	[self.router openImageGallery];
+	
+	// then
+	OCMVerify([mockTransitionHandler openModuleUsingSegue:[OCMArg any]]);
 }
 
 @end

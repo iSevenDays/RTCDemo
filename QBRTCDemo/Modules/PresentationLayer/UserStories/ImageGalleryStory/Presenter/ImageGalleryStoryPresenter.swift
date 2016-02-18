@@ -15,4 +15,17 @@ class ImageGalleryStoryPresenter: ImageGalleryStoryModuleInput, ImageGalleryStor
     func viewIsReady() {
 
     }
+	
+	// MARK: ImageGalleryStoryViewOutput
+	
+	func didTriggerStartButtonTaped() {
+		self.interactor.startSynchronizationImages()
+	}
+	
+	// MARK: ImageGalleryStoryViewInput
+	
+	func didStartSynchronizationImages() {
+		
+	}
+	
 }

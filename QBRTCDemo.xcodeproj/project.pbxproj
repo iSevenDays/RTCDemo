@@ -29,6 +29,7 @@
 		140746481BFB841000506088 /* SVSignalingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 140746471BFB841000506088 /* SVSignalingParams.m */; };
 		1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
+		1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1418BAEB1C761B0A0085C7E3 /* Photos.framework */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		1431CE121C6F959F00DCED6D /* libwebrtc_libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */; };
 		1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */; };
@@ -190,6 +191,23 @@
 		14A601351C6DEFFB00065437 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		14A601361C6DF0B600065437 /* librtc_base_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600B21C6DEDF400065437 /* librtc_base_objc.a */; };
 		14A601371C6DF0DC00065437 /* libjingle_peerconnection_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */; };
+		14ADBDDC1C73850F003A0C98 /* ImageGalleryStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */; };
+		14ADBDDD1C738514003A0C98 /* ImageGalleryStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */; };
+		14ADBDDE1C73851C003A0C98 /* ImageGalleryStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */; };
+		14ADBDDF1C73851C003A0C98 /* ImageGalleryStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */; };
+		14ADBDE01C73851C003A0C98 /* ImageGalleryStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */; };
+		14ADBDE21C73854C003A0C98 /* ImageGalleryStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */; };
+		14ADBDE31C73854C003A0C98 /* ImageGalleryStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */; };
+		14ADBDE41C73854C003A0C98 /* ImageGalleryStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */; };
+		14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */; };
+		14ADBDEE1C738554003A0C98 /* ImageGalleryStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */; };
+		14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */; };
+		14ADBDF01C738554003A0C98 /* ImageGalleryStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */; };
+		14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */; };
+		14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */; };
+		14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF28E4660188FA1C009EC65 /* ImageGalleryStoryRouter.swift */; };
+		14ADBDF41C738554003A0C98 /* ImageGalleryStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */; };
+		14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */; };
 		14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
 		14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
 		14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
@@ -309,6 +327,7 @@
 		140746471BFB841000506088 /* SVSignalingParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingParams.m; sourceTree = "<group>"; };
 		1417B3451C57E4E8004D6416 /* FakeCallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallService.h; sourceTree = "<group>"; };
 		1417B3461C57E4E8004D6416 /* FakeCallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallService.m; sourceTree = "<group>"; };
+		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsProtocol.h; sourceTree = "<group>"; };
 		1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = webrtc_libraries_dummy.m; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.m; sourceTree = SOURCE_ROOT; };
 		1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = webrtc_libraries_dummy.h; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.h; sourceTree = SOURCE_ROOT; };
@@ -404,6 +423,7 @@
 		1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallServiceDelegate.m; sourceTree = "<group>"; };
 		1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSignalingChannel.h; sourceTree = "<group>"; };
 		1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeSignalingChannel.m; sourceTree = "<group>"; };
+		144AE6E51C7505B900B7A156 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		1452AACE1BF92FA30018DA30 /* QBRTCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QBRTCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1452AAD21BF92FA30018DA30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1452AAD41BF92FA30018DA30 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -694,6 +714,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */,
 				148233AB1C002DFE0000E9ED /* Quickblox.framework in Frameworks */,
 				148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */,
 				148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */,
@@ -876,6 +897,7 @@
 		143609801BF9C7850091071C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1418BAEB1C761B0A0085C7E3 /* Photos.framework */,
 				14A601321C6DEE1D00065437 /* libicucore.tbd */,
 				14A600801C6DEDF400065437 /* libapprtc_common.a */,
 				14A600811C6DEDF400065437 /* libapprtc_signaling.a */,
@@ -1146,6 +1168,7 @@
 				1452AAE21BF92FA30018DA30 /* Info.plist */,
 				1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */,
 				1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */,
+				144AE6E51C7505B900B7A156 /* BridgingHeader.h */,
 			);
 			path = QBRTCDemo;
 			sourceTree = "<group>";
@@ -1738,6 +1761,7 @@
 		1452AAC61BF92FA30018DA30 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = anton;
 				TargetAttributes = {
@@ -2034,11 +2058,16 @@
 				147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */,
 				147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */,
 				14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */,
+				14ADBDE01C73851C003A0C98 /* ImageGalleryStoryRouterTests.swift in Sources */,
+				14ADBDDE1C73851C003A0C98 /* ImageGalleryStoryInteractorTests.swift in Sources */,
 				14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */,
 				3772DBD8B200B94BC6C11C61 /* VideoStoryAssemblyTests.m in Sources */,
+				14ADBDDD1C738514003A0C98 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
+				14ADBDDF1C73851C003A0C98 /* ImageGalleryStoryPresenterTests.swift in Sources */,
 				924ECF4B68125FDFF008BAF4 /* VideoStoryViewControllerTests.m in Sources */,
 				1439F67F1C5A556B00438B48 /* FakeSignalingChannel.m in Sources */,
 				62630B599C72A7D1974F12E0 /* VideoStoryPresenterTests.m in Sources */,
+				14ADBDDC1C73850F003A0C98 /* ImageGalleryStoryViewTests.swift in Sources */,
 				190FDDC34E863B7B25D9DB7A /* VideoStoryInteractorTests.m in Sources */,
 				E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */,
 				14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */,
@@ -2053,27 +2082,39 @@
 			files = (
 				1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */,
 				14A028711BFA541A00BDF2C5 /* SVSignalingMessageSDP.m in Sources */,
+				14ADBDF01C738554003A0C98 /* ImageGalleryStoryInteractorOutput.swift in Sources */,
 				140746481BFB841000506088 /* SVSignalingParams.m in Sources */,
+				14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */,
+				14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */,
 				14A028751BFA545300BDF2C5 /* QBSignalingChannel.m in Sources */,
 				14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */,
+				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
 				14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */,
 				14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
 				14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */,
+				14ADBDE31C73854C003A0C98 /* ImageGalleryStoryViewOutput.swift in Sources */,
+				14ADBDE41C73854C003A0C98 /* ImageGalleryStoryViewController.swift in Sources */,
 				14A0288A1BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m in Sources */,
+				14ADBDE21C73854C003A0C98 /* ImageGalleryStoryViewInput.swift in Sources */,
+				14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */,
 				14D0A3F41C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */,
 				14736EE71C567EC5009DFBBC /* CallService.m in Sources */,
 				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
 				14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */,
 				1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */,
+				14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */,
 				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
 				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
+				14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
 				14A028901BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m in Sources */,
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
+				14ADBDEE1C738554003A0C98 /* ImageGalleryStoryPresenter.swift in Sources */,
 				14A0286E1BFA53DB00BDF2C5 /* SVSignalingMessageICE.m in Sources */,
+				14ADBDF41C738554003A0C98 /* ImageGalleryStoryConfigurator.swift in Sources */,
 				14EE3D171C6BC7CF00C451CF /* VideoStoryAssembly.m in Sources */,
 				14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */,
 			);
@@ -2208,6 +2249,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/QBRTCDemo/\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2228,6 +2273,7 @@
 					"-l\"OCMock\"",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "-DQBRTCDemo_s";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo_s.app/QBRTCDemo_s";
@@ -2246,6 +2292,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/QBRTCDemo/\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2266,6 +2316,7 @@
 					"-l\"OCMock\"",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "-DQBRTCDemo_s";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo_s.app/QBRTCDemo_s";
@@ -2430,6 +2481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/${PROJECT_NAME}/QBRTCDemo-prefix.pch";
 				INFOPLIST_FILE = "QBRTCDemo copy-Info.plist";
@@ -2437,6 +2489,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -2444,6 +2498,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/${PROJECT_NAME}/QBRTCDemo-prefix.pch";
 				INFOPLIST_FILE = "QBRTCDemo copy-Info.plist";
@@ -2451,6 +2506,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -2463,6 +2519,10 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/QBRTCDemo/ThirdParty/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2482,6 +2542,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
 			};
 			name = Debug;
 		};
@@ -2494,6 +2555,10 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/QBRTCDemo/ThirdParty/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2513,15 +2578,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
 			};
 			name = Release;
 		};
 		14A600751C6DEDE700065437 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
@@ -2530,6 +2598,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "i386 x86_64 arm64 armv7s armv7";
 			};
 			name = Debug;
@@ -2537,9 +2607,11 @@
 		14A600761C6DEDE700065437 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
@@ -2548,6 +2620,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALID_ARCHS = "i386 x86_64 arm64 armv7s armv7";
 			};
 			name = Release;
@@ -2564,6 +2637,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/QBRTCDemo/\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2584,6 +2661,7 @@
 					"-l\"OCMock\"",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "-DQBRTCDemo";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo.app/QBRTCDemo";
@@ -2602,6 +2680,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/QBRTCDemo/\"/**",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2622,6 +2704,7 @@
 					"-l\"OCMock\"",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "-DQBRTCDemo";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo.app/QBRTCDemo";
@@ -2631,14 +2714,21 @@
 		14FC466A1C4FF82000C1797D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		14FC466B1C4FF82000C1797D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
