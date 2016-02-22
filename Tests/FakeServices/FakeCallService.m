@@ -11,7 +11,7 @@
 
 #import "CallServiceProtocol.h"
 #import "CallServiceDataChannelAdditionsDelegate.h"
-#import "CallClientDelegate.h"
+#import "CallServiceDelegate.h"
 
 #import <RTCPeerConnectionFactory.h>
 #import <RTCPeerConnectionInterface.h>

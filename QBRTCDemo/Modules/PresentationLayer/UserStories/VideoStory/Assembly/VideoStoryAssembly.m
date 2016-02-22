@@ -61,14 +61,15 @@
                           configuration:^(TyphoonDefinition *definition) {
                               [definition injectProperty:@selector(transitionHandler)
                                                     with:[self viewVideoStoryModule]];
+							  [definition injectProperty:@selector(callService) with:[self callService]];
                           }];
 }
 
 #pragma mark CallService
 
-- (id<CallServiceProtocol>)callService {
+- (id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)callService {
 	return [TyphoonDefinition withClass:[CallService class] configuration:^(TyphoonDefinition *definition) {
-		[definition useInitializer:@selector(initWithSignalingChannel:clientDelegate:dataChannelDelegate:) parameters:^(TyphoonMethod *initializer) {
+		[definition useInitializer:@selector(initWithSignalingChannel:callServiceDelegate:dataChannelDelegate:) parameters:^(TyphoonMethod *initializer) {
 
 			[initializer injectParameterWith:[self signalingChannel]];
 			[initializer injectParameterWith:[self interactorVideoStoryModule]];
@@ -88,6 +89,8 @@
 							  with:[WebRTCHelpers defaultIceServers]];
 
 		[definition injectProperty:@selector(defaultConfigurationWithCurrentICEServers) with:[WebRTCHelpers defaultConfigurationWithCurrentICEServers]];
+		
+		[definition setScope:TyphoonScopeSingleton];
 	}];
 }
 

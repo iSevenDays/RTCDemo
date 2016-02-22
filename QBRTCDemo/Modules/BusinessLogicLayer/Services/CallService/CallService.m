@@ -7,7 +7,7 @@
 //
 
 #import "CallService.h"
-#import "CallClientDelegate.h"
+#import "CallServiceDelegate.h"
 #import "CallServiceDataChannelAdditionsDelegate.h"
 
 #import "SVUser.h"
@@ -45,7 +45,7 @@
 
 @property (nonatomic, strong) RTCDataChannel *dataChannel;
 
-@property (nonatomic, assign, readwrite) CallClientState state;
+@property (nonatomic, assign, readwrite) CallServiceState state;
 @property (nonatomic, assign) BOOL isReceivedSDP;
 @property (nonatomic, assign, getter=isInitiator) BOOL initiator;
 @property (nonatomic, assign) BOOL isAudioOnly;
@@ -67,10 +67,9 @@
 @synthesize delegate = _delegate;
 @synthesize dataChannelDelegate = _dataChannelDelegate;
 
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate dataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
 	
 	NSParameterAssert(signalingChannel);
-	NSParameterAssert(clientDelegate);
 	
 	self = [super init];
 	
@@ -78,7 +77,7 @@
 		_signalingChannel = signalingChannel;
 		_signalingChannel.delegate = self;
 		
-		_delegate = clientDelegate;
+		_delegate = callServiceDelegate;
 		_dataChannelDelegate = dataChannelDelegate;
 		
 		_messageQueue = [NSMutableArray array];
@@ -93,8 +92,8 @@
 	return self;
 }
 
-- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(id<CallClientDelegate>)clientDelegate {
-	return [[[self class] alloc] initWithSignalingChannel:signalingChannel clientDelegate:clientDelegate dataChannelDelegate:nil];
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(id<CallServiceDelegate>)callServiceDelegate {
+	return [self initWithSignalingChannel:signalingChannel callServiceDelegate:callServiceDelegate dataChannelDelegate:nil];
 }
 
 - (BOOL)isConnected {
@@ -208,7 +207,7 @@
 	}];
 }
 
-- (void)setState:(CallClientState)state {
+- (void)setState:(CallServiceState)state {
 	if (state != _state) {
 		_state = state;
 		[self notifyDelegateWithCurrentState];

@@ -53,8 +53,16 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
     class MockInteractor: ImageGalleryStoryInteractorInput {
 		var startedSynchronizationImages = false
 		
+		func configureWithCallService(callService: protocol<CallServiceDataChannelAdditionsProtocol, CallServiceProtocol>) {
+			
+		}
+		
 		func startSynchronizationImages() {
 			startedSynchronizationImages = true
+		}
+		
+		func requestCallerRole() {
+			
 		}
     }
 
@@ -67,5 +75,9 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
         func setupInitialState() {
 
         }
+		
+		func configureViewForReceiving() {
+			
+		}
     }
 }

@@ -10,7 +10,7 @@
 #import "CallServiceProtocol.h"
 #import "CallServiceDataChannelAdditionsProtocol.h"
 
-@protocol CallClientDelegate;
+@protocol CallServiceDelegate;
 @protocol SVSignalingChannelProtocol;
 
 @class SVUser;
@@ -18,9 +18,11 @@
 
 @interface CallService : NSObject<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate dataChannelDelegate:(nullable id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nonnull id<CallServiceDelegate>)callServiceDelegate;
+
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(nullable id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
 
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
@@ -30,7 +32,7 @@
 
 - (BOOL)hasActiveCall;
 
-@property (nonatomic, assign, readonly) CallClientState state;
+@property (nonatomic, assign, readonly) CallServiceState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
 

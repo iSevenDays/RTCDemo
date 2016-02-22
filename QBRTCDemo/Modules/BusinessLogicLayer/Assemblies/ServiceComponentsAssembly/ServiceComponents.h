@@ -22,9 +22,10 @@
 #import "TyphoonAssembly.h"
 
 @protocol CallServiceProtocol;
+@protocol CallServiceDataChannelAdditionsProtocol;
 
 @protocol ServiceComponents <NSObject>
-
-//- (id<CallServiceProtocol>)callService;
+//
+//- (id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)callService;
 
 @end

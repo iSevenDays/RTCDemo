@@ -319,7 +319,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		14015A321BFC6F5C00830618 /* CallClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CallClientDelegate.h; path = ../../../../Client/CallClientDelegate.h; sourceTree = "<group>"; };
+		14015A321BFC6F5C00830618 /* CallServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CallServiceDelegate.h; path = ../../../../Client/CallServiceDelegate.h; sourceTree = "<group>"; };
 		14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemo_sTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14015A3D1BFCD08400830618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUserTests.m"; sourceTree = "<group>"; };
@@ -1192,7 +1192,7 @@
 		14736E821C561284009DFBBC /* CallService */ = {
 			isa = PBXGroup;
 			children = (
-				14015A321BFC6F5C00830618 /* CallClientDelegate.h */,
+				14015A321BFC6F5C00830618 /* CallServiceDelegate.h */,
 				14A028721BFA543A00BDF2C5 /* QBSignaling */,
 				14F4FAF21C52961400E9488C /* Signaling */,
 				14736EEA1C56843F009DFBBC /* WebRTC */,

@@ -11,5 +11,9 @@ import Foundation
 protocol ImageGalleryStoryInteractorOutput: class {
 
 	func didStartSynchronizationImages()
-
+	func didFinishSynchronizationImages()
+	
+	func didReceiveRoleSender()
+	func didReceiveRoleReceiver()
+	
 }

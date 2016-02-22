@@ -6,8 +6,8 @@
 //  Copyright © 2016 anton. All rights reserved.
 //
 
-#import "CallClientDelegate.h"
+#import "../../QBRTCDemo/Client/CallServiceDelegate.h"
 
-@interface FakeCallServiceDelegate : NSObject <CallClientDelegate>
+@interface FakeCallServiceDelegate : NSObject <CallServiceDelegate>
 
 @end

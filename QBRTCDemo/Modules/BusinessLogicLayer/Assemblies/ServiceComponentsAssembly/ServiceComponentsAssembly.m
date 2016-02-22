@@ -25,10 +25,8 @@
 
 @implementation ServiceComponentsAssembly
 
-//- (id <CallServiceProtocol>)callService {
-//    return [TyphoonDefinition withClass:[CallService class] configuration:^(TyphoonDefinition *definition) {
-//		
-//	}];
+//- (id<CallServiceProtocol,CallServiceDataChannelAdditionsProtocol>)callService {
+//	
 //}
 
 @end

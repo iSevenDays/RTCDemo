@@ -6,6 +6,6 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-protocol ImageGalleryStoryModuleInput: class {
-
+@objc protocol ImageGalleryStoryModuleInput: RamblerViperModuleInput {
+	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)
 }

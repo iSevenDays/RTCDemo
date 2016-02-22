@@ -7,7 +7,7 @@
 //
 
 #import "FakeCallServiceDelegate.h"
-#import "CallClientDelegate.h"
+#import "CallServiceDelegate.h"
 
 @implementation FakeCallServiceDelegate
 
@@ -15,7 +15,7 @@
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallClientState)state {
+- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallServiceState)state {
 	
 }
 

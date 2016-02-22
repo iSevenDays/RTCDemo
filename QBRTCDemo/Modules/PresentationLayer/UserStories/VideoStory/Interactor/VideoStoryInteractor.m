@@ -14,7 +14,7 @@
 #import "CallServiceProtocol.h"
 #import "CallServiceDataChannelAdditionsProtocol.h"
 
-#import "CallClientDelegate.h"
+#import "CallServiceDelegate.h"
 #import "CallServiceHelpers.h"
 
 #import <RTCAVFoundationVideoSource.h>
@@ -121,7 +121,7 @@
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallClientState)state {
+- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallServiceState)state {
 	
 }
 

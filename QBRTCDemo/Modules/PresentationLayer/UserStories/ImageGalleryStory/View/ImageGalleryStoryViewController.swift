@@ -12,6 +12,8 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
 
     var output: ImageGalleryStoryViewOutput!
 
+	@IBOutlet weak var btnStartSynchronization: UIBarButtonItem!
+	
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,11 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
     // MARK: ImageGalleryStoryViewInput
     func setupInitialState() {
     }
+	
+	func configureViewForReceiving() {
+		self.btnStartSynchronization.title = ""
+		self.btnStartSynchronization.enabled = false
+	}
 	
 	@IBAction func didTapStartButton(sender: AnyObject) {
 		self.output.didTriggerStartButtonTaped()

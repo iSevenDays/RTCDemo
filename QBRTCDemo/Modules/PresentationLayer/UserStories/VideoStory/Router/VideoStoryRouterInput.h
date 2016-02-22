@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol CallServiceProtocol;
+@protocol CallServiceDataChannelAdditionsProtocol;
+
 @protocol VideoStoryRouterInput <NSObject>
 
 - (void)openImageGallery;

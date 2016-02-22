@@ -8,19 +8,31 @@
 
 import Photos
 
-class ImageGalleryStoryInteractor: ImageGalleryStoryInteractorInput {
+class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDelegate, ImageGalleryStoryInteractorInput {
 
     weak var output: ImageGalleryStoryInteractorOutput!
 
 	var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
 	
+	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>) {
+		self.callService = callService
+	}
 	
 	func startSynchronizationImages() {
 		self.output.didStartSynchronizationImages()
 		
-		//self.callService.sendText("Hello")
+		self.callService?.sendText("Sender")
+		
+		self.output.didFinishSynchronizationImages()
 	}
 	
+	func requestCallerRole() {
+		if self.callService.isInitiator() {
+			self.output.didReceiveRoleSender()
+		} else {
+			self.output.didReceiveRoleReceiver()
+		}
+	}
 	
 	func fetchPhotos(){
 		let fetchOptions = PHFetchOptions()
