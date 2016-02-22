@@ -7,14 +7,14 @@
 //
 
 #import "VideoStoryInteractorInput.h"
-#import "CallClientDelegate.h"
+#import "CallServiceDelegate.h"
 #import "CallServiceDataChannelAdditionsDelegate.h"
 
 @protocol VideoStoryInteractorOutput;
 @protocol CallServiceProtocol;
 @protocol CallServiceDataChannelAdditionsProtocol;
 
-@interface VideoStoryInteractor : NSObject <VideoStoryInteractorInput, CallClientDelegate, CallServiceDataChannelAdditionsDelegate>
+@interface VideoStoryInteractor : NSObject <VideoStoryInteractorInput, CallServiceDelegate, CallServiceDataChannelAdditionsDelegate>
 
 @property (nonatomic, weak) id<VideoStoryInteractorOutput> output;
 

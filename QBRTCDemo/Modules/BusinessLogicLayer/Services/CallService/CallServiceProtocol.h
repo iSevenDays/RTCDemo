@@ -9,7 +9,7 @@
 #ifndef CallServiceProtocol_h
 #define CallServiceProtocol_h
 
-typedef NS_ENUM(NSInteger, CallClientState) {
+typedef NS_ENUM(NSInteger, CallServiceState) {
 	// Disconnected from servers.
 	kClientStateDisconnected,
 	// Connecting to servers.
@@ -19,16 +19,14 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 };
 
 @protocol SVSignalingChannelProtocol;
-@protocol CallClientDelegate;
+@protocol CallServiceDelegate;
 @protocol CallServiceDataChannelAdditionsDelegate;
 
 @class SVUser;
 
 @protocol CallServiceProtocol <NSObject>
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
-
-
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nonnull id<CallServiceDelegate>)callServiceDelegate;
 
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
@@ -38,13 +36,16 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 
 - (BOOL)hasActiveCall;
 
-@property (nonatomic, assign, readonly) CallClientState state;
+/// @return YES if current user is call initiator
+- (BOOL)isInitiator;
+
+@property (nonatomic, assign, readonly) CallServiceState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
-@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
+@property (nonatomic, weak, nullable) id<CallServiceDelegate> delegate;
 
 @optional
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate dataChannelDelegate:(nullable id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(nonnull id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
 
 @property (nonatomic, weak, nullable) id<CallServiceDataChannelAdditionsDelegate> dataChannelDelegate;
 

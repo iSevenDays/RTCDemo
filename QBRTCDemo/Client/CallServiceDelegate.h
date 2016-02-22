@@ -1,5 +1,5 @@
 //
-//  CallClientDelegate.h
+//  CallServiceDelegate.h
 //  QBRTCDemo
 //
 //  Created by Anton Sokolchenko on 11/18/15.
@@ -10,13 +10,13 @@
 #import <RTCTypes.h>
 
 enum RTCICEConnectionState : NSInteger;
-enum CallClientState : NSInteger;
+enum CallServiceState : NSInteger;
 @protocol CallServiceProtocol;
 
-@protocol CallClientDelegate <NSObject>
+@protocol CallServiceDelegate <NSObject>
 
 - (void)client:(id<CallServiceProtocol>)client didChangeConnectionState:(RTCICEConnectionState)state;
-- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallClientState)state;
+- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallServiceState)state;
 - (void)client:(id<CallServiceProtocol>)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
 - (void)client:(id<CallServiceProtocol>)client didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
 - (void)client:(id<CallServiceProtocol>)client didError:(NSError *)error;

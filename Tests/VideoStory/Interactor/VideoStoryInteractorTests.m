@@ -22,7 +22,7 @@
 
 @interface CallService()
 
-@property (nonatomic, assign, readwrite) CallClientState state;
+@property (nonatomic, assign, readwrite) CallServiceState state;
 
 @end
 
@@ -54,14 +54,14 @@
 	if ([self.interactor.callService isKindOfClass:[FakeCallService class]]) {
 		return; // already set
 	}
-	self.interactor.callService = [[FakeCallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor dataChannelDelegate:self.interactor];
+	self.interactor.callService = [[FakeCallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] callServiceDelegate:self.interactor dataChannelDelegate:self.interactor];
 }
 
 - (void)useRealCallService {
 	if ([self.interactor.callService isKindOfClass:[CallService class]]) {
 		return; // already set
 	}
-	self.interactor.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.interactor dataChannelDelegate:self.interactor];
+	self.interactor.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] callServiceDelegate:self.interactor dataChannelDelegate:self.interactor];
 }
 
 - (void)tearDown {

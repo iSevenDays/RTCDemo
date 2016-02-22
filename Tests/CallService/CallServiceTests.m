@@ -17,7 +17,7 @@
 #import "CallService_Private.h"
 #import "CallServiceHelpers.h"
 
-#import "CallClientDelegate.h"
+#import "CallServiceDelegate.h"
 #import "FakeSignalingChannel.h"
 
 #import "SVSignalingMessage.h"
@@ -45,9 +45,9 @@
 	self.user2 = [CallServiceHelpers user2];
 	self.user3 = [[SVUser alloc] initWithID:@1 login:@"login" password:@""];
 	
-	self.mockOutput = OCMProtocolMock(@protocol(CallClientDelegate));
+	self.mockOutput = OCMProtocolMock(@protocol(CallServiceDelegate));
 	
-	self.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] clientDelegate:self.mockOutput];
+	self.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] callServiceDelegate:self.mockOutput];
 	
 	self.mockCallService = OCMPartialMock(self.callService);
 }

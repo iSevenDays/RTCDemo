@@ -48,6 +48,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="btnStartSynchronization" destination="lZL-tQ-A4J" id="KVW-e0-2ei"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13h-qM-nk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="1mS-Sl-ZNO" customClass="ImageGalleryStoryModuleInitializer" customModule="QBRTCDemo_s">
