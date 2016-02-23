@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CallServiceProtocol.h"
 #import "CallServiceDataChannelAdditionsProtocol.h"
+#import "SVMulticastDelegate.h"
 
 @protocol CallServiceDelegate;
 @protocol SVSignalingChannelProtocol;
@@ -31,6 +32,9 @@
 - (void)hangup;
 
 - (BOOL)hasActiveCall;
+
+@property (nonatomic, strong, nonnull) SVMulticastDelegate<CallServiceDelegate> *multicastDelegate;
+@property (nonatomic, strong, nonnull) SVMulticastDelegate<CallServiceDataChannelAdditionsDelegate> *multicastDataChannelDelegate;
 
 @property (nonatomic, assign, readonly) CallServiceState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;

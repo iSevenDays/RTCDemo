@@ -113,7 +113,7 @@
 	
 	id mockedInteractor = OCMPartialMock(self.interactor);
 	
-	OCMStub([mockedInteractor client:[OCMArg any] didReceiveLocalVideoTrack:[OCMArg any]]).andCall(self.interactor.output, @selector(didSetLocalCaptureSession:));
+	OCMStub([mockedInteractor callService:[OCMArg any] didReceiveLocalVideoTrack:[OCMArg any]]).andCall(self.interactor.output, @selector(didSetLocalCaptureSession:));
 	
 	OCMExpect([self.mockOutput didSetLocalCaptureSession:[OCMArg any]]);
 	
@@ -143,13 +143,15 @@
 	// given
 	[self useFakeCallService]; // for fast user connection
 	
+	OCMExpect([self.mockOutput didOpenDataChannel]);
+	
 	// when
 	[self.interactor.callService setDataChannelEnabled:YES];
 	[self.interactor connectToChatWithUser1];
 	[self.interactor startCall];
 	
 	// then
-	OCMVerify([self.mockOutput didOpenDataChannel]);
+	OCMVerifyAll(self.mockOutput);
 }
 
 - (void)testTriggersDidReceiveDataChannelStateReady_whenReceivedDataChannel {

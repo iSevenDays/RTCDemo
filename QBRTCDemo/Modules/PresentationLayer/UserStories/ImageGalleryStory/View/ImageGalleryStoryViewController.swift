@@ -10,7 +10,7 @@ import UIKit
 
 class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewInput {
 
-    var output: ImageGalleryStoryViewOutput!
+    @objc var output: ImageGalleryStoryViewOutput!
 
 	@IBOutlet weak var btnStartSynchronization: UIBarButtonItem!
 	

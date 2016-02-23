@@ -15,6 +15,7 @@
 #import "SVSignalingChannelProtocol.h"
 #import "SVSignalingMessageSDP.h"
 #import "SVSignalingMessageICE.h"
+#import "SVMulticastDelegate.h"
 
 #import <RTCAVFoundationVideoSource.h>
 #import <RTCMediaStream.h>
@@ -64,8 +65,6 @@
 @implementation CallService
 
 @synthesize dataChannelEnabled = _dataChannelEnabled;
-@synthesize delegate = _delegate;
-@synthesize dataChannelDelegate = _dataChannelDelegate;
 
 - (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
 	
@@ -76,9 +75,17 @@
 	if (self) {
 		_signalingChannel = signalingChannel;
 		_signalingChannel.delegate = self;
+		_multicastDelegate = (SVMulticastDelegate<CallServiceDelegate>*)[[SVMulticastDelegate alloc] init];
 		
-		_delegate = callServiceDelegate;
-		_dataChannelDelegate = dataChannelDelegate;
+		if (callServiceDelegate) {
+			[_multicastDelegate addDelegate:callServiceDelegate];
+		}
+		
+		_multicastDataChannelDelegate = (SVMulticastDelegate<CallServiceDataChannelAdditionsDelegate>*)[[SVMulticastDelegate alloc] init];
+		
+		if (dataChannelDelegate) {
+			[_multicastDataChannelDelegate addDelegate:dataChannelDelegate];
+		}
 		
 		_messageQueue = [NSMutableArray array];
 		_factory = [[RTCPeerConnectionFactory alloc] init];
@@ -215,10 +222,8 @@
 }
 
 - (void)notifyDelegateWithCurrentState {
-	if (self.delegate) {
-		if ([self.delegate respondsToSelector:@selector(client:didChangeState:)]) {
-			[self.delegate client:self didChangeState:self.state];
-		}
+	if ([self.multicastDelegate respondsToSelector:@selector(callService:didChangeState:)]) {
+		[self.multicastDelegate callService:self didChangeState:self.state];
 	}
 }
 
@@ -304,7 +309,7 @@
 	
 	[self.signalingChannel sendMessage:message toUser:self.opponentUser completion:^(NSError * _Nullable error) {
 		if (error) {
-			[weakSelf.delegate client:weakSelf didError:error];
+			[weakSelf.multicastDelegate callService:weakSelf didError:error];
 		}
 	}];
 }
@@ -316,12 +321,16 @@
 	RTCVideoTrack *localVideoTrack = [self createLocalVideoTrack];
 	if (localVideoTrack) {
 		[localStream addVideoTrack:localVideoTrack];
-		[self.delegate client:self didReceiveLocalVideoTrack:localVideoTrack];
+		if ([self.multicastDelegate respondsToSelector:@selector(callService:didReceiveLocalVideoTrack:)]) {
+			[self.multicastDelegate callService:self didReceiveLocalVideoTrack:localVideoTrack];
+		}
 	}
 	
 	// For XCTest
 	if (NSClassFromString(@"XCTest") != nil){
-		[self.delegate client:self didReceiveLocalVideoTrack:localVideoTrack];
+		if ([self.multicastDelegate respondsToSelector:@selector(callService:didReceiveLocalVideoTrack:)]) {
+			[self.multicastDelegate callService:self didReceiveLocalVideoTrack:localVideoTrack];
+		}
 	}
 	
 	[localStream addAudioTrack:[_factory audioTrackWithID:@"ARDAMSa0"]];
@@ -367,7 +376,7 @@
 			   (unsigned long)stream.audioTracks.count);
 		if (stream.videoTracks.count) {
 			RTCVideoTrack *videoTrack = stream.videoTracks[0];
-			[self.delegate client:self didReceiveRemoteVideoTrack:videoTrack];
+			[self.multicastDelegate callService:self didReceiveRemoteVideoTrack:videoTrack];
 		}
 	});
 }
@@ -400,7 +409,7 @@
 	}
 	
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self.delegate client:self didChangeConnectionState:newState];
+		[self.multicastDelegate callService:self didChangeConnectionState:newState];
 	});
 }
 
@@ -438,7 +447,7 @@
 			NSError *sdpError = [[NSError alloc] initWithDomain:@"error"
 														   code:-1
 													   userInfo:userInfo];
-			[self.delegate client:self didError:sdpError];
+			[self.multicastDelegate callService:self didError:sdpError];
 			return;
 		}
 		NSParameterAssert(sdp);
@@ -463,7 +472,7 @@
 									   };
 			NSError *sdpError = [[NSError alloc] initWithDomain:@"" code:-1
 													   userInfo:userInfo];
-			[self.delegate client:self didError:sdpError];
+			[self.multicastDelegate callService:self didError:sdpError];
 			return;
 		}
 		// If we're answering and we've just set the remote offer we need to create
@@ -560,7 +569,9 @@
 	self.dataChannel = dataChannel;
 	dataChannel.delegate = self;
 	
-	[self.dataChannelDelegate callService:self didOpenDataChannel:dataChannel];
+	if ([self.multicastDataChannelDelegate respondsToSelector:@selector(callService:didOpenDataChannel:)]) {
+		[self.multicastDataChannelDelegate callService:self didOpenDataChannel:dataChannel];
+	}
 }
 
 - (void)channelDidChangeState:(RTCDataChannel *)channel {
@@ -576,9 +587,9 @@
 	NSLog(@"dataChannel %@ didReceiveMessageWithBuffer: %@", channel, buffer);
 	
 	if (buffer.isBinary) {
-		[self.dataChannelDelegate callService:self didReceiveData:buffer.data];
+		[self.multicastDataChannelDelegate callService:self didReceiveData:buffer.data];
 	} else {
-		[self.dataChannelDelegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
+		[self.multicastDataChannelDelegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
 	}
 }
 

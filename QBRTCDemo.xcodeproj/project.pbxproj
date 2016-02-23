@@ -215,6 +215,10 @@
 		14D0A3F51C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */; };
 		14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */; };
 		14D0A41D1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */; };
+		14D1B5F11C7CA4E6006EB865 /* SVMulticastDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */; };
+		14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
+		14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
+		14D1B5F41C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
 		14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */; };
 		14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */; };
 		14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
@@ -594,6 +598,8 @@
 		14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceComponentsAssembly.m; sourceTree = "<group>"; };
 		14D0A41A1C543A37005AF958 /* ModuleAssemblyBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleAssemblyBase.h; sourceTree = "<group>"; };
 		14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleAssemblyBase.m; sourceTree = "<group>"; };
+		14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVMulticastDelegate.h; path = Utils/SVMulticastDelegate.h; sourceTree = "<group>"; };
+		14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVMulticastDelegate.m; path = Utils/SVMulticastDelegate.m; sourceTree = "<group>"; };
 		14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemoTests copy-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemoTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		14EE3D011C6BC03700C451CF /* build_webrtc.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_webrtc.sh; path = Scripts/build_webrtc.sh; sourceTree = "<group>"; };
@@ -1325,6 +1331,15 @@
 			path = ModuleAssemblyBase;
 			sourceTree = "<group>";
 		};
+		14D1B5EE1C7CA4D5006EB865 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */,
+				14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		14EE3D001C6BC02D00C451CF /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1341,6 +1356,7 @@
 		14F4FAF01C5295CE00E9488C /* BusinessLogicLayer */ = {
 			isa = PBXGroup;
 			children = (
+				14D1B5EE1C7CA4D5006EB865 /* Utils */,
 				14D0A3EF1C529EDD005AF958 /* Assemblies */,
 				14F4FAF11C5295DA00E9488C /* Services */,
 			);
@@ -1633,6 +1649,7 @@
 			files = (
 				1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */,
 				1431CE181C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h in Headers */,
+				14D1B5F11C7CA4E6006EB865 /* SVMulticastDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2106,6 +2123,7 @@
 				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
 				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
+				14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
@@ -2150,6 +2168,7 @@
 				88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */,
 				5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */,
 				32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */,
+				14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */,
 				3FA698C85BC1C35878F3106E /* ImageGalleryStoryViewController.swift in Sources */,
 				1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */,
@@ -2168,6 +2187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14D1B5F41C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2419,6 +2439,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					HAVE_SCTP,
+					QBRTCDemo,
 				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2436,6 +2457,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
 				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Debug;
@@ -2456,6 +2478,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					HAVE_SCTP,
+					QBRTCDemo,
 				);
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
@@ -2473,6 +2496,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
 				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Release;
@@ -2522,6 +2546,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					QBRTCDemo_s,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2558,6 +2583,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					QBRTCDemo_s,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

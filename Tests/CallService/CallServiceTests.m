@@ -84,7 +84,7 @@
 	[self.callService startCallWithOpponent:self.user2];
 
 	// then
-	OCMVerify([self.mockOutput client:[OCMArg any] didReceiveLocalVideoTrack:[OCMArg any]]);
+	OCMVerify([self.mockOutput callService:[OCMArg any] didReceiveLocalVideoTrack:[OCMArg any]]);
 }
 
 - (void)testCorrectlyChangesClientStateToConnected {
@@ -94,7 +94,7 @@
 	[self.callService connectWithUser:self.user1 completion:nil];
 	
 	// then
-	OCMVerify([self.mockOutput client:[OCMArg any] didChangeState:kClientStateConnected]);
+	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateConnected]);
 }
 
 - (void)testCorrectlyChangesClientStateToDisconnectedAfterHangup {
@@ -105,7 +105,7 @@
 	[self.callService hangup];
 
 	// then
-	OCMVerify([self.mockOutput client:[OCMArg any] didChangeState:kClientStateDisconnected]);
+	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
 }
 
 - (void)testSendsRejectIfAlreadyHasActiveCall {

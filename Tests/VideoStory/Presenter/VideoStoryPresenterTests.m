@@ -58,8 +58,6 @@
 #pragma mark - Testing methods VideoStoryViewOutput
 
 - (void)testThatPresenterHandlesViewReadyEvent {
-    // given
-
     // when
     [self.presenter didTriggerViewReadyEvent];
 
@@ -68,8 +66,6 @@
 }
 
 - (void)testThatPresenterHandlesConnectWitUser1ButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerConnectWithUser1ButtonTaped];
 	
@@ -78,8 +74,6 @@
 }
 
 - (void)testThatPresenterHandlesConnectWitUser2ButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerConnectWithUser2ButtonTaped];
 	
@@ -88,8 +82,6 @@
 }
 
 - (void)testThatPresenterHandlesStartCallButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerStartCallButtonTaped];
 	
@@ -98,8 +90,6 @@
 }
 
 - (void)testThatPresenterHandlesHangupButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerHangupButtonTaped];
 	
@@ -108,8 +98,6 @@
 }
 
 - (void)testThatPresenterHandlesDataChannelButtonTapped_and {
-	// given
-	
 	// when
 	[self.presenter didTriggerDataChannelButtonTaped];
 	
@@ -121,8 +109,6 @@
 #pragma mark - Testing methods VideoStoryInteractorOutput
 
 - (void)testThatPresenterHandlesDidConnectToChatWithUser1 {
-	// given
-	
 	// when
 	[self.presenter didConnectToChatWithUser1];
 	
@@ -131,8 +117,6 @@
 }
 
 - (void)testThatPresenterHandlesDidConnectToChatWithUser2 {
-	// given
-	
 	// when
 	[self.presenter didConnectToChatWithUser2];
 	
@@ -161,8 +145,6 @@
 }
 
 - (void)testThatPresenterHandlesRemoteVideoTrack {
-	// given
-	
 	// when
 	[self.presenter didReceiveRemoteVideoTrackWithConfigurationBlock:nil];
 	
@@ -171,8 +153,6 @@
 }
 
 - (void)testPresenterHandlesDataChannelNotReadyState {
-	// given
-	
 	// when
 	[self.presenter didReceiveDataChannelStateNotReady];
 	
@@ -181,8 +161,6 @@
 }
 
 - (void)testPresenterHandlesDataChannelReadyState_andOpensImageGallery {
-	// given
-	
 	// when
 	[self.presenter didReceiveDataChannelStateReady];
 	

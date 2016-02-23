@@ -42,12 +42,9 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 @property (nonatomic, assign, readonly) CallServiceState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
-@property (nonatomic, weak, nullable) id<CallServiceDelegate> delegate;
 
 @optional
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(nonnull id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
-
-@property (nonatomic, weak, nullable) id<CallServiceDataChannelAdditionsDelegate> dataChannelDelegate;
 
 @end
 

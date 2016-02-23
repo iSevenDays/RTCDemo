@@ -28,19 +28,11 @@ class ImageGalleryStoryViewTests: XCTestCase {
 		self.controller = UIStoryboard(name: "ImageGalleryStory", bundle: nil).instantiateViewControllerWithIdentifier(String( ImageGalleryStoryViewController.self)) as! ImageGalleryStoryViewController
 		self.mockOutput = MockViewControllerOutput()
 		self.controller.output = self.mockOutput
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-	
+	}
 	
 	// MARK: IBActions
 	
 	func testViewDidLoadTriggersViewIsReadyAction() {
-		// given
-		
 		// when
 		self.controller.viewDidLoad()
 		
@@ -49,8 +41,6 @@ class ImageGalleryStoryViewTests: XCTestCase {
 	}
 	
 	func testStartButtonTriggersAction() {
-		// given
-		
 		// when
 		self.controller.didTapStartButton(emptySender)
 		
@@ -58,7 +48,7 @@ class ImageGalleryStoryViewTests: XCTestCase {
 		XCTAssertTrue(self.mockOutput.startButtonTaped)
 	}
 	
-	class MockViewControllerOutput : ImageGalleryStoryViewOutput {
+	@objc class MockViewControllerOutput : NSObject,  ImageGalleryStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		var startButtonTaped = false
 		

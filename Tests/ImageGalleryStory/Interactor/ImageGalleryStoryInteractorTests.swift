@@ -42,8 +42,9 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		self.interactor.callService = CallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: self.interactor)
 	}
 	
-	func testNotificatesAboutStartingSynchronizationImages() {
+	func testStartsAndNotificatesAboutSynchronizationImages() {
 		// given
+		self.useFakeCallService()
 		
 		// when
 		self.interactor.startSynchronizationImages()
@@ -63,6 +64,18 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(self.mockOutput.didReceiveRoleSenderGotCalled)
+	}
+	
+	func testShowsRoleReceiverWhenCallerIsReceiver() {
+		// given
+		self.useRealCallService()
+		self.interactor.callService.connectWithUser(self.user1, completion: nil)
+		
+		// when
+		self.interactor.requestCallerRole()
+		
+		// then
+		XCTAssertTrue(self.mockOutput.didReceiveRoleReceiverGotCalled)
 	}
 
     class MockPresenter: ImageGalleryStoryInteractorOutput {

@@ -49,12 +49,34 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		// then
 		XCTAssertTrue(self.mockInteractor.startedSynchronizationImages)
 	}
+	
+	func testPresenterConfiguresModule() {
+		// given
+		let callService = CallService(signalingChannel: FakeSignalingChannel(), callServiceDelegate: nil, dataChannelDelegate: nil)
+		// when
+		self.presenter.configureWithCallService(callService!)
+		
+		// then
+		XCTAssertTrue(self.mockInteractor.configureWithCallServiceGotCalled)
+	}
+	
+	func testPresenterConfiguresView_whenReceiver() {
+		// given
+		
+		// when
+		self.presenter.didReceiveRoleReceiver();
+		
+		// then
+		XCTAssertTrue(self.mockView.configureViewForReceivingGotCalled)
+	}
 
     class MockInteractor: ImageGalleryStoryInteractorInput {
 		var startedSynchronizationImages = false
 		
+		var configureWithCallServiceGotCalled = false
+		
 		func configureWithCallService(callService: protocol<CallServiceDataChannelAdditionsProtocol, CallServiceProtocol>) {
-			
+			configureWithCallServiceGotCalled = true
 		}
 		
 		func startSynchronizationImages() {
@@ -71,13 +93,15 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
     }
 
     class MockViewController: ImageGalleryStoryViewInput {
-
+		
+		var configureViewForReceivingGotCalled = false
+		
         func setupInitialState() {
 
         }
 		
 		func configureViewForReceiving() {
-			
+			configureViewForReceivingGotCalled = true
 		}
     }
 }

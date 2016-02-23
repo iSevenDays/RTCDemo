@@ -6,20 +6,23 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class ImageGalleryStoryPresenter: NSObject, ImageGalleryStoryModuleInput, ImageGalleryStoryViewOutput, ImageGalleryStoryInteractorOutput {
+@objc class ImageGalleryStoryPresenter: NSObject, ImageGalleryStoryModuleInput, ImageGalleryStoryViewOutput, ImageGalleryStoryInteractorOutput {
 
     weak var view: ImageGalleryStoryViewInput!
     var interactor: ImageGalleryStoryInteractorInput!
     var router: ImageGalleryStoryRouterInput!
 
+	
 	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>){
 		self.interactor.configureWithCallService(callService)
+		
+		self.interactor.requestCallerRole()
 	}
 	
 	// MARK: ImageGalleryStoryViewOutput
 	
 	func viewIsReady() {
-		self.interactor.requestCallerRole()
+		
 	}
 	
 	func didTriggerStartButtonTaped() {

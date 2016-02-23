@@ -9,6 +9,7 @@
 #import "FakeCallService.h"
 #import "FakeSignalingChannel.h"
 
+
 #import "CallServiceProtocol.h"
 #import "CallServiceDataChannelAdditionsDelegate.h"
 #import "CallServiceDelegate.h"
@@ -35,11 +36,21 @@
 	
 	RTCVideoTrack *emptyVideoTrack = [[RTCVideoTrack alloc] initWithFactory:factory source:[RTCVideoSource new] trackId:@"trackID"];
 	
-	[self.delegate client:self didReceiveLocalVideoTrack:emptyVideoTrack];
+	if ([self.multicastDelegate respondsToSelector:@selector(callService:didReceiveLocalVideoTrack:)]) {
+		[self.multicastDelegate callService:self didReceiveLocalVideoTrack:emptyVideoTrack];
+	}
 	
-	[self.delegate client:self didReceiveRemoteVideoTrack:emptyVideoTrack];
+	if ([self.multicastDelegate respondsToSelector:@selector(callService:didReceiveRemoteVideoTrack:)]) {
+		[self.multicastDelegate callService:self didReceiveRemoteVideoTrack:emptyVideoTrack];
+	}
 	
-	[self.dataChannelDelegate callService:self didOpenDataChannel:nil];
+	if ([self.multicastDataChannelDelegate respondsToSelector:@selector(callService:didOpenDataChannel:)]) {
+		[self.multicastDataChannelDelegate callService:self didOpenDataChannel:nil];
+	}
+}
+
+- (BOOL)isInitiator {
+	return YES;
 }
 
 - (BOOL)isDataChannelReady {
