@@ -117,19 +117,19 @@
 #pragma mark SVClientDelegate methods
 
 
-- (void)client:(id<CallServiceProtocol>)client didChangeConnectionState:(RTCICEConnectionState)state {
+- (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallServiceState)state {
+- (void)callService:(id<CallServiceProtocol>)callService didChangeState:(enum CallServiceState)state {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didError:(NSError *)error {
+- (void)callService:(id<CallServiceProtocol>)callService didError:(NSError *)error {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
 	if (self.localVideoTrack == localVideoTrack) {
 		return;
 	}
@@ -143,7 +143,7 @@
 	[self.output didSetLocalCaptureSession:source.captureSession];
 }
 
-- (void)client:(id<CallServiceProtocol>)client didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
 	__weak __typeof(self)weakSelf = self;
 	
 	[self.output didReceiveRemoteVideoTrackWithConfigurationBlock:^(RTCEAGLVideoView *renderer) {

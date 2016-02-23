@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="r6B-8a-zen">
             <objects>
-                <viewController storyboardIdentifier="ImageGalleryStoryViewController" id="Ogq-NF-eaz" customClass="ImageGalleryStoryViewController" customModule="QBRTCDemo_s" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageGalleryStoryViewController" id="Ogq-NF-eaz" customClass="ImageGalleryStoryViewController" customModule="QBRTCDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Df6-sy-fJW"/>
                         <viewControllerLayoutGuide type="bottom" id="C7C-pW-GZZ"/>
@@ -53,7 +53,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13h-qM-nk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="1mS-Sl-ZNO" customClass="ImageGalleryStoryModuleInitializer" customModule="QBRTCDemo_s">
+                <customObject id="1mS-Sl-ZNO" customClass="ImageGalleryStoryModuleInitializer" customModule="QBRTCDemo" customModuleProvider="target">
                     <connections>
                         <outlet property="viewController" destination="Ogq-NF-eaz" id="T8c-aM-AHv"/>
                     </connections>

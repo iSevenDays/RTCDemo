@@ -19,11 +19,20 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	}
 	
 	func startSynchronizationImages() {
-		self.output.didStartSynchronizationImages()
+		guard callService != nil else {
+			print("startSynchronizationImages: no call service")
+			return
+		}
 		
-		self.callService?.sendText("Sender")
-		
-		self.output.didFinishSynchronizationImages()
+		if self.callService.isInitiator() {
+			self.output.didStartSynchronizationImages()
+			
+			self.callService.sendText("Sender")
+			
+			self.fetchPhotos()
+			
+			self.output.didFinishSynchronizationImages()
+		}
 	}
 	
 	func requestCallerRole() {

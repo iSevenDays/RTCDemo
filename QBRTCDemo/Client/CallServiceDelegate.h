@@ -15,10 +15,10 @@ enum CallServiceState : NSInteger;
 
 @protocol CallServiceDelegate <NSObject>
 
-- (void)client:(id<CallServiceProtocol>)client didChangeConnectionState:(RTCICEConnectionState)state;
-- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallServiceState)state;
-- (void)client:(id<CallServiceProtocol>)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
-- (void)client:(id<CallServiceProtocol>)client didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
-- (void)client:(id<CallServiceProtocol>)client didError:(NSError *)error;
+- (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state;
+- (void)callService:(id<CallServiceProtocol>)callService didChangeState:(enum CallServiceState)state;
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
+- (void)callService:(id<CallServiceProtocol>)callService didError:(NSError *)error;
 
 @end

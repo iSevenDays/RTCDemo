@@ -1,7 +1,7 @@
 def available_pods
 	pod 'ViperMcFlurry', '~> 1.2'
 	pod 'Typhoon', '~> 3.3'
-	pod 'RamblerTyphoonUtils/AssemblyCollector'
+	pod 'RamblerTyphoonUtils/AssemblyCollector', '1.2.0'
 end
 
 
