@@ -51,6 +51,7 @@
 
 - (void)sendMessage:(SVSignalingMessage *)message toUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
 	NSParameterAssert(svuser);
+	NSParameterAssert(self.user);
 	NSCAssert([self.state isEqualToString:SVSignalingChannelState.established], @"Connection is not established");
 	
 	message.sender = self.user;

@@ -179,6 +179,8 @@ function get_revision_number() {
 
     echo $REVISION_NUMBER
     cd $DIR
+#remove changed .gyp files by blox_target.py
+#	git reset --hard
 }
 
 # This function allows you to pull the latest changes from WebRTC without doing an entire clone, much faster to build and try changes
@@ -281,7 +283,7 @@ copy_final_headers_dir() {
         'chromium/src/third_party/libyuv/include/libyuv/'
         'webrtc/'
         'webrtc/media/base/'
-#		'webrtc/api/'
+		'webrtc/api/'
 #		'webrtc/api/objc/'
         'webrtc/audio/'
         'webrtc/base/'
@@ -296,6 +298,7 @@ copy_final_headers_dir() {
         'webrtc/modules/audio_device/'
         'webrtc/modules/audio_device/dummy/'
         'webrtc/modules/audio_device/include/'
+		'webrtc/modules/audio_device/ios/objc/'
         'webrtc/modules/utility/include/'
         'webrtc/p2p/base/'
         'webrtc/system_wrappers/include/'
@@ -307,6 +310,7 @@ copy_final_headers_dir() {
         'webrtc/p2p/client/'
         'webrtc/media/devices/'
 		'webrtc/webrtc/'
+		'webrtc/pc/'
     )
 
     for dir in ${dirList[@]}; do
@@ -431,6 +435,11 @@ function dance() {
 
     copy_final_headers_dir
 }
+if [ "$webrtc_debug" = true ] || [ "$webrtc_profile" = true ] || [ "$webrtc_release" = true ] ; then
+	dance
+else
+	echo "Only copying webrtc headers"
+	copy_final_headers_dir
+fi
 
-dance
 echo "Build is Finished"

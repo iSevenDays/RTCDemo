@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nonnull id<CallServiceDelegate>)callServiceDelegate;
 
+- (void)addDelegate:(nonnull id<CallServiceDelegate>)delegate;
+
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;

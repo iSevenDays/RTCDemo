@@ -20,7 +20,7 @@
 #include "webrtc/media/base/videocommon.h"
 #include "webrtc/media/base/videoframe.h"
 #ifdef HAVE_WEBRTC_VIDEO
-#include "webrtc/media/webrtc/webrtcvideoframefactory.h"
+#include "webrtc/media/engine/webrtcvideoframefactory.h"
 #endif
 
 namespace cricket {
@@ -79,12 +79,11 @@ class FakeVideoCapturer : public cricket::VideoCapturer {
       return false;
     }
     // Currently, |fourcc| is always I420 or ARGB.
-    // TODO(fbarchard): Extend SizeOf to take fourcc.
     uint32_t size = 0u;
     if (fourcc == cricket::FOURCC_ARGB) {
       size = width * 4 * height;
     } else if (fourcc == cricket::FOURCC_I420) {
-      size = static_cast<uint32_t>(cricket::VideoFrame::SizeOf(width, height));
+      size = width * height + 2 * ((width + 1) / 2) * ((height + 1) / 2);
     } else {
       return false;  // Unsupported FOURCC.
     }
