@@ -103,6 +103,14 @@
 	return [self initWithSignalingChannel:signalingChannel callServiceDelegate:callServiceDelegate dataChannelDelegate:nil];
 }
 
+- (void)addDataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
+	[self.multicastDataChannelDelegate addDelegate:dataChannelDelegate];
+}
+
+- (void)addDelegate:(id<CallServiceDelegate>)delegate {
+	[self.multicastDelegate addDelegate:delegate];
+}
+
 - (BOOL)isConnected {
 	return self.signalingChannel.state == SVSignalingChannelState.established;
 }
@@ -309,7 +317,9 @@
 	
 	[self.signalingChannel sendMessage:message toUser:self.opponentUser completion:^(NSError * _Nullable error) {
 		if (error) {
-			[weakSelf.multicastDelegate callService:weakSelf didError:error];
+			if ([weakSelf.multicastDelegate respondsToSelector:@selector(callService:didError:)]) {
+				[weakSelf.multicastDelegate callService:self didError:error];
+			}
 		}
 	}];
 }
@@ -409,7 +419,9 @@
 	}
 	
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self.multicastDelegate callService:self didChangeConnectionState:newState];
+		if ([self.multicastDelegate respondsToSelector:@selector(callService:didChangeConnectionState:)]) {
+			[self.multicastDelegate callService:self didChangeConnectionState:newState];
+		}
 	});
 }
 
@@ -447,7 +459,9 @@
 			NSError *sdpError = [[NSError alloc] initWithDomain:@"error"
 														   code:-1
 													   userInfo:userInfo];
-			[self.multicastDelegate callService:self didError:sdpError];
+			if ([self.multicastDelegate respondsToSelector:@selector(callService:didError:)]) {
+				[self.multicastDelegate callService:self didError:sdpError];
+			}
 			return;
 		}
 		NSParameterAssert(sdp);
@@ -472,7 +486,9 @@
 									   };
 			NSError *sdpError = [[NSError alloc] initWithDomain:@"" code:-1
 													   userInfo:userInfo];
-			[self.multicastDelegate callService:self didError:sdpError];
+			if ([self.multicastDelegate respondsToSelector:@selector(callService:didError:)]) {
+				[self.multicastDelegate callService:self didError:sdpError];
+			}
 			return;
 		}
 		// If we're answering and we've just set the remote offer we need to create

@@ -23,7 +23,7 @@
 #include "webrtc/media/base/fakevideorenderer.h"
 #include "webrtc/media/base/mediachannel.h"
 #include "webrtc/media/base/streamparams.h"
-#include "webrtc/media/webrtc/fakewebrtccall.h"
+#include "webrtc/media/engine/fakewebrtccall.h"
 
 #define EXPECT_FRAME_WAIT(c, w, h, t) \
   EXPECT_EQ_WAIT((c), renderer_.num_rendered_frames(), (t)); \
@@ -86,21 +86,6 @@ class VideoEngineOverride : public T {
   virtual ~VideoEngineOverride() {
   }
   bool is_camera_on() const { return T::GetVideoCapturer()->IsRunning(); }
-  void set_has_senders(bool has_senders) {
-    cricket::VideoCapturer* video_capturer = T::GetVideoCapturer();
-    if (has_senders) {
-      video_capturer->SignalVideoFrame.connect(this,
-          &VideoEngineOverride<T>::OnLocalFrame);
-    } else {
-      video_capturer->SignalVideoFrame.disconnect(this);
-    }
-  }
-  void OnLocalFrame(cricket::VideoCapturer*,
-                    const cricket::VideoFrame*) {
-  }
-  void OnLocalFrameFormat(cricket::VideoCapturer*,
-                          const cricket::VideoFormat*) {
-  }
 
   void TriggerMediaFrame(uint32_t ssrc,
                          cricket::VideoFrame* frame,
@@ -125,8 +110,8 @@ class VideoMediaChannelTest : public testing::Test,
   virtual void SetUp() {
     cricket::Device device("test", "device");
     engine_.Init();
-    channel_.reset(
-        engine_.CreateChannel(call_.get(), cricket::VideoOptions()));
+    channel_.reset(engine_.CreateChannel(call_.get(), cricket::MediaConfig(),
+                                         cricket::VideoOptions()));
     EXPECT_TRUE(channel_.get() != NULL);
     network_interface_.SetDestination(channel_.get());
     channel_->SetInterface(&network_interface_);
@@ -509,7 +494,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetOneCodec(DefaultCodec()));
     cricket::VideoSendParameters parameters;
     parameters.codecs.push_back(DefaultCodec());
-    parameters.options.conference_mode = rtc::Optional<bool>(true);
+    parameters.conference_mode = true;
     EXPECT_TRUE(channel_->SetSendParameters(parameters));
     EXPECT_TRUE(SetSend(true));
     EXPECT_TRUE(channel_->AddRecvStream(
@@ -560,7 +545,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetOneCodec(DefaultCodec()));
     cricket::VideoSendParameters parameters;
     parameters.codecs.push_back(DefaultCodec());
-    parameters.options.conference_mode = rtc::Optional<bool>(true);
+    parameters.conference_mode = true;
     EXPECT_TRUE(channel_->SetSendParameters(parameters));
     EXPECT_TRUE(channel_->AddRecvStream(
         cricket::StreamParams::CreateLegacy(kSsrc)));
@@ -740,7 +725,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetDefaultCodec());
     cricket::VideoSendParameters parameters;
     parameters.codecs.push_back(DefaultCodec());
-    parameters.options.conference_mode = rtc::Optional<bool>(true);
+    parameters.conference_mode = true;
     EXPECT_TRUE(channel_->SetSendParameters(parameters));
     EXPECT_TRUE(SetSend(true));
     EXPECT_TRUE(channel_->AddRecvStream(

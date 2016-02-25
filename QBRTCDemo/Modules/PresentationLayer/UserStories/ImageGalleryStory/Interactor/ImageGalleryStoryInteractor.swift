@@ -16,6 +16,7 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	
 	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>) {
 		self.callService = callService
+		self.callService.addDataChannelDelegate(self)
 	}
 	
 	func startSynchronizationImages() {
@@ -64,4 +65,16 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 			}
 		}
 	}
+	
+	///
+	/// CallServiceDataChannelAdditionsDelegate
+	///
+	func callService(callService: CallServiceProtocol, didReceiveMessage message: String) {
+		print("Received message \(message)")
+	}
+	
+	func callService(callService: CallServiceProtocol, didReceiveData data: NSData) {
+		print("Received data \(data)")
+	}
+
 }

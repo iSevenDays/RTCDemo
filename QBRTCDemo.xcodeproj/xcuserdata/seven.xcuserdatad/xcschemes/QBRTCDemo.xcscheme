@@ -72,6 +72,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "QBRTCDemo"
+            value = ""
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
