@@ -64,12 +64,12 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "webrtc_release"
-            value = "true"
+            value = "false"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "webrtc_debug"
-            value = "false"
+            value = "true"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
@@ -79,7 +79,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "webrtc_revision"
-            value = "bf66ae6d80c5639234a08edbbdd99ec33f694023"
+            value = "cedddbdf7b54541ce1786495ab9cc582b3ed58c4"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

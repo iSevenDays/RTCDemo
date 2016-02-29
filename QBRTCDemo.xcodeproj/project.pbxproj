@@ -612,6 +612,7 @@
 		14EE3D041C6BC03700C451CF /* pull.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = pull.sh; path = Scripts/pull.sh; sourceTree = "<group>"; };
 		14EE3D051C6BC03700C451CF /* blox_target.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = blox_target.py; path = Scripts/blox_target.py; sourceTree = "<group>"; };
 		14EE3D061C6BC03700C451CF /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build.sh; path = Scripts/build.sh; sourceTree = "<group>"; };
+		14F6B4481C80690F008D2844 /* libwebrtc_objc_target.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwebrtc_objc_target.dylib; path = "Scripts/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_objc_target.dylib"; sourceTree = "<group>"; };
 		14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageGalleryStory.storyboard; sourceTree = "<group>"; };
 		14FC45721C4EE1B900C1797D /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<absolute>"; };
 		14FC45741C4EE1CF00C1797D /* libjingle_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_media.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_media.a"; sourceTree = "<absolute>"; };
@@ -907,6 +908,7 @@
 		143609801BF9C7850091071C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14F6B4481C80690F008D2844 /* libwebrtc_objc_target.dylib */,
 				14C3FE3E1C7F20290077877C /* libcongestion_controller.a */,
 				14C3FE3C1C7F1FF70077877C /* librtc_pc.a */,
 				14D1B7AA1C7E1DB6006EB865 /* libjingle_media.a */,
@@ -2576,10 +2578,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Scripts/webrtc/lib",
+					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2613,10 +2617,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Scripts/webrtc/lib",
+					"$(PROJECT_DIR)/Scripts/webrtc/src/xcodebuild/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

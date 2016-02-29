@@ -70,14 +70,14 @@ function exec_libtool() {
 function exec_strip() {
 
   echo "Running strip"
-  strip -S -x -v $@
+#  strip -S -x -v $@
 }
 
 function exec_ninja() {
 
   echo "Running ninja"
-  echo ninja -C $1
-  ninja -C $1
+  echo ninja -C $1 $webrtc_target
+  ninja -C $1 $webrtc_target
 }
 
 # Update/Get/Ensure the Gclient Depot Tools
@@ -117,6 +117,7 @@ function pull_depot_tools() {
 function wrbase() {
 
     export GYP_DEFINES="chromium_ios_signing=0 clang_xcode=1 use_objc_h264=1 include_tests=0 build_with_libjingle=1 libjingle_objc=1 python_ver=2.7 build_with_chromium=0"
+#include_examples=0
     export GYP_GENERATORS="ninja"
     export GYP_GENERATOR_FLAGS="output_dir=$out_$1"
 }
