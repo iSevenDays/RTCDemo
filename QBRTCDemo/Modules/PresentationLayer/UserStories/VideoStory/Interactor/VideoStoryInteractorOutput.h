@@ -28,4 +28,10 @@
 - (void)didReceiveDataChannelStateReady;
 - (void)didReceiveDataChannelStateNotReady;
 
+/// Sender has sent us(receiver side) invitation to open image gallery and start sync
+- (void)didReceiveInvitationToOpenImageGallery;
+
+/// We have sent to a receiver an invitation to open image gallery and start sync
+- (void)didSendInvitationToOpenImageGallery;
+
 @end

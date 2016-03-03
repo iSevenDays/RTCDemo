@@ -41,8 +41,6 @@
 			self.state = SVSignalingChannelState.established;
 		}
 		
-		[self notifyDelegateWithCurrentState];
-		
 		if (completion) {
 			completion(error);
 		}
@@ -106,6 +104,10 @@
 }
 
 #pragma mark QBChatDelegate methods
+
+- (void)chatDidReconnect {
+	self.state = SVSignalingChannelState.established;
+}
 
 - (void)chatDidAccidentallyDisconnect {
 	self.state = SVSignalingChannelState.closed;

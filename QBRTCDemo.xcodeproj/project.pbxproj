@@ -49,6 +49,11 @@
 		1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD51BF92FA30018DA30 /* AppDelegate.m */; };
 		1452AADE1BF92FA30018DA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADD1BF92FA30018DA30 /* Assets.xcassets */; };
 		1452AAE11BF92FA30018DA30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */; };
+		1454052A1C859167005E3790 /* CallServiceProtocol_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 145405291C859167005E3790 /* CallServiceProtocol_Private.h */; };
+		1454052D1C859431005E3790 /* DataChannelMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 1454052B1C859431005E3790 /* DataChannelMessages.h */; };
+		1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
+		1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
+		145405301C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
 		146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
 		146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
 		146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
@@ -437,6 +442,9 @@
 		1452ABBB1BF9315E0018DA30 /* CopyWebRTCHeaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyWebRTCHeaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemo copy-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemo copy-Info.plist"; sourceTree = "<absolute>"; };
 		1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QBRTCDemo-prefix.pch"; sourceTree = "<group>"; };
+		145405291C859167005E3790 /* CallServiceProtocol_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceProtocol_Private.h; sourceTree = "<group>"; };
+		1454052B1C859431005E3790 /* DataChannelMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataChannelMessages.h; sourceTree = "<group>"; };
+		1454052C1C859431005E3790 /* DataChannelMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataChannelMessages.m; sourceTree = "<group>"; };
 		146CA9F21C62644000F768C8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		14736EE51C567EC5009DFBBC /* CallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallService.h; sourceTree = "<group>"; };
 		14736EE61C567EC5009DFBBC /* CallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService.m; sourceTree = "<group>"; };
@@ -1154,9 +1162,6 @@
 				1452AAD01BF92FA30018DA30 /* QBRTCDemo */,
 				14015A3A1BFCD08400830618 /* QBRTCDemoTests */,
 				5352BD24E023342BA941E49A /* Tests */,
-				1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */,
-				148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */,
-				14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1183,6 +1188,9 @@
 				1452AAD51BF92FA30018DA30 /* AppDelegate.m */,
 				1452AADD1BF92FA30018DA30 /* Assets.xcassets */,
 				1452AAE21BF92FA30018DA30 /* Info.plist */,
+				1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */,
+				148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */,
+				14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests copy-Info.plist */,
 				1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */,
 				1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */,
 				144AE6E51C7505B900B7A156 /* BridgingHeader.h */,
@@ -1221,6 +1229,7 @@
 				14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */,
 				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
 				1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */,
+				145405291C859167005E3790 /* CallServiceProtocol_Private.h */,
 			);
 			path = CallService;
 			sourceTree = "<group>";
@@ -1403,6 +1412,8 @@
 				14A0288F1BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m */,
 				14A0287F1BFB190800BDF2C5 /* SVUser.h */,
 				14A028801BFB190800BDF2C5 /* SVUser.m */,
+				1454052B1C859431005E3790 /* DataChannelMessages.h */,
+				1454052C1C859431005E3790 /* DataChannelMessages.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1658,6 +1669,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1454052D1C859431005E3790 /* DataChannelMessages.h in Headers */,
+				1454052A1C859167005E3790 /* CallServiceProtocol_Private.h in Headers */,
 				1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */,
 				1431CE181C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h in Headers */,
 				14D1B5F11C7CA4E6006EB865 /* SVMulticastDelegate.h in Headers */,
@@ -2135,6 +2148,7 @@
 				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
 				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
 				14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
+				1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */,
 				14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
@@ -2180,6 +2194,7 @@
 				5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */,
 				32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
+				1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */,
 				0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */,
 				3FA698C85BC1C35878F3106E /* ImageGalleryStoryViewController.swift in Sources */,
 				1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */,
@@ -2199,6 +2214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */,
+				145405301C859431005E3790 /* DataChannelMessages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2573,7 +2589,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2612,7 +2628,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

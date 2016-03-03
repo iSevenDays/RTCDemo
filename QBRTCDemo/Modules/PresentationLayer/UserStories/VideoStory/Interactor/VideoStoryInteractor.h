@@ -16,6 +16,10 @@
 
 @interface VideoStoryInteractor : NSObject <VideoStoryInteractorInput, CallServiceDelegate, CallServiceDataChannelAdditionsDelegate>
 
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithUsers:(NSArray *)users;
+
 @property (nonatomic, weak) id<VideoStoryInteractorOutput> output;
 
 @property (nonatomic, strong) id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol> callService;

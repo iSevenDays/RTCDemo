@@ -26,7 +26,7 @@
 @protocol CallServiceDataChannelAdditionsProtocol;
 @protocol SVSignalingChannelProtocol;
 
-@interface VideoStoryAssembly : ModuleAssemblyBase <RamblerInitialAssembly>
+@interface VideoStoryAssembly : ModuleAssemblyBase
 
 - (VideoStoryViewController *)viewVideoStoryModule;
 - (VideoStoryInteractor *)interactorVideoStoryModule;
@@ -36,4 +36,5 @@
 - (id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)callService;
 - (id<SVSignalingChannelProtocol>)signalingChannel;
 
+- (UIStoryboard *)videoStoryStoryboard;
 @end

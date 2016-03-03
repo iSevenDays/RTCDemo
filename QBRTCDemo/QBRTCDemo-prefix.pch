@@ -12,6 +12,10 @@
 #ifdef __OBJC__
 #import <Quickblox/Quickblox.h>
 #import <Foundation/Foundation.h>
+#import <CocoaLumberjack/CocoaLumberjack.h>
+
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+
 #endif
 
 #define WEBRTC_POSIX

@@ -17,6 +17,8 @@
 #import "CallServiceDelegate.h"
 #import "CallServiceHelpers.h"
 
+#import "DataChannelMessages.h"
+
 #import <RTCAVFoundationVideoSource.h>
 #import <RTCVideoTrack.h>
 #import <RTCEAGLVideoView.h>
@@ -39,10 +41,17 @@
 #pragma mark - Методы VideoStoryInteractorInput
 
 - (instancetype)init {
+	[NSException raise:@"Unavailable initializer" format:@"init is invalid"];
+	
+	return nil;
+}
+
+- (instancetype)initWithUsers:(NSArray *)users {
 	self = [super init];
 	if (self) {
-		self.user1 = [CallServiceHelpers user1];
-		self.user2 = [CallServiceHelpers user2];
+		NSLog(@"%@ initWithUsers %p initialized", NSStringFromClass([self class]), self);
+		self.user1 = users[0];
+		self.user2 = users[1];
 	}
 	return self;
 }
@@ -83,7 +92,7 @@
 
 - (void)startCall {
 	if ([self.callService hasActiveCall]) {
-		NSLog(@"Can not call while already connecting");
+		DDLogWarn(@"Can not call while already connecting");
 		return;
 	}
 	
@@ -91,6 +100,14 @@
 		[self.callService startCallWithOpponent:self.user2];
 	} else {
 		[self.callService startCallWithOpponent:self.user1];
+	}
+}
+
+- (void)sendInvitationMessageAndOpenImageGallery {
+	NSParameterAssert([self.callService hasActiveCall]);
+	
+	if ([self.callService sendText:[DataChannelMessages invitationToOpenImageGallery]]) {
+		[self.output didSendInvitationToOpenImageGallery];
 	}
 }
 
@@ -114,8 +131,7 @@
 	return [self.callService isDataChannelEnabled] && [self.callService isDataChannelReady];
 }
 
-#pragma mark SVClientDelegate methods
-
+#pragma mark CallServiceDelegate methods
 
 - (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state {
 	
@@ -170,7 +186,12 @@
 }
 
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveMessage:(NSString *)message {
-	NSLog(@"callService %@ didReceiveMessage %@", callService, message);
+	DDLogVerbose(@"callService %@ didReceiveMessage %@", callService, message);
+	
+	if ([message isEqualToString:[DataChannelMessages invitationToOpenImageGallery]]) {
+		DDLogInfo(@"received invitation to open image gallery");
+		[self.output didReceiveInvitationToOpenImageGallery];
+	}
 }
 
 @end

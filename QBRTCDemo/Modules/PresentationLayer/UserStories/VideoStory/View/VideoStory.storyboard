@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E39d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YLt-n8-hVe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E56a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YLt-n8-hVe">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -56,7 +55,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected with user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlW-Iv-xHo">
-                                <rect key="frame" x="20" y="134" width="205" height="20.5"/>
+                                <rect key="frame" x="20" y="134" width="210" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -82,14 +81,14 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSW-Wr-uX2">
-                                <rect key="frame" x="265" y="134" width="59" height="30"/>
+                                <rect key="frame" x="240" y="134" width="59" height="30"/>
                                 <state key="normal" title="Hung up"/>
                                 <connections>
                                     <action selector="didTapButtonHangup:" destination="YrU-5b-St0" eventType="touchUpInside" id="keT-9V-2Wg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-Ed-lsL">
-                                <rect key="frame" x="265" y="164" width="184" height="30"/>
+                                <rect key="frame" x="240" y="164" width="184" height="30"/>
                                 <state key="normal" title="Start data channel transfer"/>
                                 <connections>
                                     <action selector="didTapButtonDataChannelImageGallery:" destination="YrU-5b-St0" eventType="touchUpInside" id="lJe-cz-a0v"/>
@@ -114,10 +113,10 @@
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="top" secondItem="ZrF-Ed-lsL" secondAttribute="bottom" constant="22" id="fUh-2r-xyO"/>
                             <constraint firstItem="Lg2-SK-YBj" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="20" id="h4V-U1-sMc"/>
                             <constraint firstItem="ZrF-Ed-lsL" firstAttribute="top" secondItem="hSW-Wr-uX2" secondAttribute="bottom" id="jiS-Kk-cE5"/>
-                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="265" id="lH7-bU-2ES"/>
+                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="240" id="lH7-bU-2ES"/>
                             <constraint firstItem="epV-31-fws" firstAttribute="leading" secondItem="Lg2-SK-YBj" secondAttribute="trailing" constant="20" id="lke-kk-9pe"/>
                             <constraint firstItem="er2-D3-FCN" firstAttribute="trailing" secondItem="wgw-bV-rb3" secondAttribute="trailing" id="nGj-Lg-xE6"/>
-                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="wlW-Iv-xHo" secondAttribute="trailing" constant="40" id="ogk-wd-n2r"/>
+                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="wlW-Iv-xHo" secondAttribute="trailing" constant="10" id="ogk-wd-n2r"/>
                             <constraint firstItem="wgw-bV-rb3" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leadingMargin" constant="20" id="pOF-1G-2Ur"/>
                             <constraint firstItem="zCe-my-4j2" firstAttribute="top" secondItem="wlW-Iv-xHo" secondAttribute="bottom" constant="20" id="poW-0c-tNn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NNT-dN-5QY" secondAttribute="trailing" constant="20" id="rhD-1X-hA4"/>
@@ -138,6 +137,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="wx3-x7-kZe"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="typhoonKey" value="viewVideoStoryModule"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="btnConnectWithUser1" destination="Lg2-SK-YBj" id="aeR-Op-4ff"/>
                         <outlet property="btnConnectWithUser2" destination="epV-31-fws" id="4vX-b9-s0I"/>

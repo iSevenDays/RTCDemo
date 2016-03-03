@@ -26,10 +26,6 @@
 
 @implementation FakeCallService
 
-- (BOOL)hasActiveCall {
-	return NO;
-}
-
 - (void)startCallWithOpponent:(SVUser *)opponent {
 
 	RTCPeerConnectionFactory *factory = [[RTCPeerConnectionFactory alloc] init];
@@ -54,6 +50,14 @@
 }
 
 - (BOOL)isDataChannelReady {
+	return YES;
+}
+
+- (BOOL)sendText:(NSString *)text {
+	return YES;
+}
+
+- (BOOL)sendData:(NSData *)data {
 	return YES;
 }
 
