@@ -102,7 +102,7 @@
 	[self.presenter didTriggerDataChannelButtonTaped];
 	
 	// then
-	OCMVerify([self.mockInteractor requestDataChannelState]);
+	OCMVerify([self.mockInteractor sendInvitationMessageAndOpenImageGallery]);
 }
 
 
@@ -125,8 +125,6 @@
 }
 
 - (void)testThatPresenterHandlesConnectionError {
-	// given
-	
 	// when
 	[self.presenter didFailToConnectToChat];
 	
@@ -135,8 +133,6 @@
 }
 
 - (void)testThatPresenterHandlesLocalVideoTrack {
-	// given
-	
 	// when
 	[self.presenter didSetLocalCaptureSession:[OCMArg any]];
 	
@@ -160,12 +156,22 @@
 	OCMVerify([self.mockView showErrorDataChannelNotReady]);
 }
 
-- (void)testPresenterHandlesDataChannelReadyState_andOpensImageGallery {
+- (void)testPresenterHandlesIncomingDataChannelInvitationToOpenImageGallery_andOpensImageGallery {
 	// when
-	[self.presenter didReceiveDataChannelStateReady];
+	[self.presenter didReceiveInvitationToOpenImageGallery];
 	
 	// then
 	OCMVerify([self.mockRouter openImageGallery]);
 }
+
+- (void)testPresenterHandlesOutgoingDataChannelInvitationToOpenImageGallery_andOpensImageGallery {
+	// when
+	[self.presenter didSendInvitationToOpenImageGallery];
+	
+	// then
+	OCMVerify([self.mockRouter openImageGallery]);
+}
+
+
 
 @end

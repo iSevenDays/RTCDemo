@@ -25,8 +25,8 @@
 @property (nonatomic, assign, getter=isDataChannelEnabled) BOOL dataChannelEnabled;
 - (BOOL)isDataChannelReady;
 
-- (void)sendText:(NSString *)text;
-- (void)sendData:(NSData *)data;
+- (BOOL)sendText:(NSString *)text;
+- (BOOL)sendData:(NSData *)data;
 
 @end
 

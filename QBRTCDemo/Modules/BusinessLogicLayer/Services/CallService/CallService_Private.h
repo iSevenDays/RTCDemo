@@ -14,6 +14,8 @@
 @class SVSignalingMessage;
 @class RTCPeerConnection;
 
+@protocol SVSignalingChannelDelegate;
+
 @interface CallService ()
 
 @property (nonatomic, strong, nullable) id<SVSignalingChannelProtocol> signalingChannel;

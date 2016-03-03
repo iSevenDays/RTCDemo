@@ -40,7 +40,7 @@
 @interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
 
 @property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
-@property (nonatomic, strong) NSMutableArray *messageQueue;
+@property (atomic, strong) NSMutableArray *messageQueue;
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
 @property (nonatomic, strong) RTCPeerConnection *peerConnection;
 
@@ -78,13 +78,13 @@
 		_multicastDelegate = (SVMulticastDelegate<CallServiceDelegate>*)[[SVMulticastDelegate alloc] init];
 		
 		if (callServiceDelegate) {
-			[_multicastDelegate addDelegate:callServiceDelegate];
+			[self addDelegate:callServiceDelegate];
 		}
 		
 		_multicastDataChannelDelegate = (SVMulticastDelegate<CallServiceDataChannelAdditionsDelegate>*)[[SVMulticastDelegate alloc] init];
 		
 		if (dataChannelDelegate) {
-			[_multicastDataChannelDelegate addDelegate:dataChannelDelegate];
+			[self addDataChannelDelegate:dataChannelDelegate];
 		}
 		
 		_messageQueue = [NSMutableArray array];
@@ -103,12 +103,14 @@
 	return [self initWithSignalingChannel:signalingChannel callServiceDelegate:callServiceDelegate dataChannelDelegate:nil];
 }
 
-- (void)addDataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
-	[self.multicastDataChannelDelegate addDelegate:dataChannelDelegate];
+- (void)addDelegate:(id<CallServiceDelegate>)delegate {
+	DDLogInfo(@"Added call delegate: %@", delegate);
+	[self.multicastDelegate addDelegate:delegate];
 }
 
-- (void)addDelegate:(id<CallServiceDelegate>)delegate {
-	[self.multicastDelegate addDelegate:delegate];
+- (void)addDataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
+	DDLogInfo(@"Added dataChannel delegate: %@", dataChannelDelegate);
+	[self.multicastDataChannelDelegate addDelegate:dataChannelDelegate];
 }
 
 - (BOOL)isConnected {
@@ -139,7 +141,7 @@
 
 - (void)startCallWithOpponent:(SVUser *)opponent {
 	if ([self hasActiveCall]) {
-		NSLog(@"Trying to call while already calling. Returning.");
+		DDLogWarn(@"Trying to call while already calling. Returning.");
 		return;
 	}
 	
@@ -147,7 +149,7 @@
 	NSCAssert(![opponent.ID isEqualToNumber:@0], @"Invalid opponent ID");
 	
 	if (![self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]) {
-		NSLog(@"Chat is not connected");
+		DDLogWarn(@"Chat is not connected");
 		return;
 	}
 	
@@ -213,7 +215,7 @@
 - (void)sendSignalingMessage:(SVSignalingMessage *)signalingMessage toUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {
 	[self.signalingChannel sendMessage:signalingMessage toUser:user completion:^(NSError * _Nullable error) {
 		if (error) {
-			NSLog(@"Error sending signaling message: %@ error: %@", signalingMessage, error);
+			DDLogWarn(@"Error sending signaling message: %@ error: %@", signalingMessage, error);
 			return;
 		}
 		if (completion) {
@@ -236,7 +238,8 @@
 }
 
 - (void)clearSession {
-	NSLog(@"Clear session");
+	DDLogInfo(@"Clear session");
+	
 	self.opponentUser = nil;
 	self.initiatorUser = nil;
 	self.state = kClientStateDisconnected;
@@ -281,7 +284,7 @@
 		[message.type isEqualToString:SVSignalingMessageType.answer]) {
 		
 		if ([message.type isEqualToString:SVSignalingMessageType.answer]) {
-			NSLog(@"GOT ANSWER");
+			DDLogVerbose(@"GOT ANSWER");
 		}
 		
 		SVSignalingMessageSDP *sdpMessage = (SVSignalingMessageSDP *)message;
@@ -386,6 +389,7 @@
 			   (unsigned long)stream.audioTracks.count);
 		if (stream.videoTracks.count) {
 			RTCVideoTrack *videoTrack = stream.videoTracks[0];
+			
 			[self.multicastDelegate callService:self didReceiveRemoteVideoTrack:videoTrack];
 		}
 	});
@@ -514,7 +518,7 @@
 		if ([self hasActiveCall]) {
 			[self sendRejectToUser:message.sender completion:^(NSError * _Nullable error) {
 				if (!error) {
-					NSLog(@"Sent reject to: %@", message.sender);
+					DDLogInfo(@"Sent reject to: %@", message.sender);
 				}
 			}];
 			
@@ -553,25 +557,25 @@
 
 #pragma mark Data Channel
 
-- (void)sendText:(NSString *)text {
+- (BOOL)sendText:(NSString *)text {
 	if (!self.dataChannel) {
-		return;
+		return NO;
 	}
 	
 	NSData *textData = [text dataUsingEncoding:NSUTF8StringEncoding];
 	RTCDataBuffer *buffer = [[RTCDataBuffer alloc] initWithData:textData isBinary:NO];
 	
-	[self.dataChannel sendData:buffer];
+	return [self.dataChannel sendData:buffer];
 }
 
-- (void)sendData:(NSData *)data {
+- (BOOL)sendData:(NSData *)data {
 	if (!self.dataChannel) {
-		return;
+		return NO;
 	}
 	
 	RTCDataBuffer *buffer = [[RTCDataBuffer alloc] initWithData:data isBinary:YES];
 	
-	[self.dataChannel sendData:buffer];
+	return [self.dataChannel sendData:buffer];
 }
 
 - (BOOL)isDataChannelReady {
@@ -581,7 +585,7 @@
 #pragma mark RTC Data Channel delegate
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection didOpenDataChannel:(RTCDataChannel *)dataChannel {
-	NSLog(@"peerConnection %@ didOpenDataChannel %@", peerConnection, dataChannel);
+	DDLogVerbose(@"peerConnection %@ didOpenDataChannel %@", peerConnection, dataChannel);
 	self.dataChannel = dataChannel;
 	dataChannel.delegate = self;
 	
@@ -591,7 +595,7 @@
 }
 
 - (void)channelDidChangeState:(RTCDataChannel *)channel {
-	NSLog(@"dataChannel %@ didChangeState: %u", channel, channel.state);
+	DDLogVerbose(@"dataChannel %@ didChangeState: %u", channel, channel.state);
 	
 	//send test offer text
 	if (channel.state == kRTCDataChannelStateOpen) {
@@ -600,12 +604,16 @@
 }
 
 - (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer {
-	NSLog(@"dataChannel %@ didReceiveMessageWithBuffer: %@", channel, buffer);
+	DDLogVerbose(@"dataChannel %@ didReceiveMessageWithBuffer: %@", channel, buffer);
 	
 	if (buffer.isBinary) {
-		[self.multicastDataChannelDelegate callService:self didReceiveData:buffer.data];
+		if ([self.multicastDataChannelDelegate respondsToSelector:@selector(callService:didReceiveData:)]) {
+			[self.multicastDataChannelDelegate callService:self didReceiveData:buffer.data];
+		}
 	} else {
-		[self.multicastDataChannelDelegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
+		if ([self.multicastDataChannelDelegate respondsToSelector:@selector(callService:didReceiveMessage:)]) {
+			[self.multicastDataChannelDelegate callService:self didReceiveMessage:[[NSString alloc] initWithData:buffer.data encoding:NSUTF8StringEncoding]];
+		}
 	}
 }
 

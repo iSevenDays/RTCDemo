@@ -43,7 +43,7 @@
 }
 
 - (void)didTriggerDataChannelButtonTaped {
-	[self.interactor requestDataChannelState];
+	[self.interactor sendInvitationMessageAndOpenImageGallery];
 }
 
 #pragma mark - Methods VideoStoryInteractorOutput
@@ -73,6 +73,14 @@
 }
 
 - (void)didReceiveDataChannelStateReady {
+	// do nothing
+}
+
+- (void)didReceiveInvitationToOpenImageGallery {
+	[self.router openImageGallery];
+}
+
+- (void)didSendInvitationToOpenImageGallery {
 	[self.router openImageGallery];
 }
 

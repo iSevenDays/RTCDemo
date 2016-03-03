@@ -15,4 +15,6 @@
 
 @interface FakeCallService : CallService
 
+@property (nonatomic, assign) BOOL hasActiveCall;
+
 @end

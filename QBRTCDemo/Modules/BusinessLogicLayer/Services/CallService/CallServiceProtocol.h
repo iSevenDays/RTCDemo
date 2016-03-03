@@ -9,6 +9,8 @@
 #ifndef CallServiceProtocol_h
 #define CallServiceProtocol_h
 
+#import "SVSignalingChannelDelegate.h"
+
 typedef NS_ENUM(NSInteger, CallServiceState) {
 	// Disconnected from servers.
 	kClientStateDisconnected,
@@ -24,7 +26,7 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 
 @class SVUser;
 
-@protocol CallServiceProtocol <NSObject>
+@protocol CallServiceProtocol <SVSignalingChannelDelegate>
 
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nonnull id<CallServiceDelegate>)callServiceDelegate;
 
@@ -34,11 +36,16 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
 
+/**
+ * Clears session and ends a call
+ *
+ * @note sends hangup message when -hasActiveCall YES
+ */
 - (void)hangup;
 
 - (BOOL)hasActiveCall;
 
-/// @return YES if current user is call initiator
+/// @return YES if current user is a call initiator
 - (BOOL)isInitiator;
 
 @property (nonatomic, assign, readonly) CallServiceState state;

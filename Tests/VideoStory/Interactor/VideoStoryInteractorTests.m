@@ -11,14 +11,29 @@
 #import <OCMStubRecorder.h>
 #import <TyphoonPatcher.h>
 #import "CallService.h"
+#import "CallService_Private.h"
+#import "CallServiceHelpers.h"
+#import "CallServiceProtocol_Private.h"
 #import "CallServiceDataChannelAdditionsProtocol.h"
 
 #import "FakeCallService.h"
 #import "FakeSignalingChannel.h"
 
+#import "SVSignalingChannelDelegate.h"
+
 #import "VideoStoryInteractor.h"
 
 #import "VideoStoryInteractorOutput.h"
+
+#import "RTCDataChannel.h"
+#import "DataChannelMessages.h"
+
+#import "SVSignalingMessage.h"
+#import "SVSignalingMessageSDP.h"
+#import "SVSignalingMessageICE.h"
+#import "SVSignalingParams.h"
+
+#import <RTCSessionDescription.h>
 
 @interface CallService()
 
@@ -41,7 +56,7 @@
 - (void)setUp {
     [super setUp];
 	
-    self.interactor = [[VideoStoryInteractor alloc] init];
+    self.interactor = [[VideoStoryInteractor alloc] initWithUsers:@[[CallServiceHelpers user1], [CallServiceHelpers user2]]];
 	
     self.mockOutput = OCMProtocolMock(@protocol(VideoStoryInteractorOutput));
 	
@@ -72,7 +87,7 @@
     [super tearDown];
 }
 
-#pragma mark - Тестирование методов VideoStoryInteractorInput
+#pragma mark - Testing methods VideoStoryInteractorInput
 
 - (void)testConnectingWithUser1 {
 	// given
@@ -98,7 +113,8 @@
 	// given
 	[self useRealCallService];
 	
-	((CallService *) self.interactor.callService).state = kClientStateConnected;
+	id<CallServiceProtocol_Private> callService = (id<CallServiceProtocol_Private>)self.interactor.callService;
+	callService.state = kClientStateConnected;
 	
 	// when
 	[self.interactor hangup];
@@ -143,15 +159,13 @@
 	// given
 	[self useFakeCallService]; // for fast user connection
 	
-	OCMExpect([self.mockOutput didOpenDataChannel]);
-	
 	// when
 	[self.interactor.callService setDataChannelEnabled:YES];
 	[self.interactor connectToChatWithUser1];
 	[self.interactor startCall];
 	
 	// then
-	OCMVerifyAll(self.mockOutput);
+	OCMVerify([self.mockOutput didOpenDataChannel]);
 }
 
 - (void)testTriggersDidReceiveDataChannelStateReady_whenReceivedDataChannel {
@@ -178,6 +192,45 @@
 	
 	// then
 	OCMVerify([self.mockOutput didReceiveDataChannelStateNotReady]);
+}
+
+- (void)testTriggersDidReceiveInvitationToOpenImageGallery_whenReceivedDataChannelInvitationMessage {
+	// given
+	[self useFakeCallService]; // for fast user connection
+	
+	// when
+	[self.interactor.callService setDataChannelEnabled:YES];
+	[self.interactor connectToChatWithUser1];
+	[self.interactor startCall];
+	
+	id <CallServiceProtocol_Private> callService = (id<CallServiceProtocol_Private>)self.interactor.callService;
+	
+	NSData *invitationData = [[DataChannelMessages invitationToOpenImageGallery] dataUsingEncoding:NSUTF8StringEncoding];
+	RTCDataBuffer *invitationMessage = [[RTCDataBuffer alloc] initWithData:invitationData isBinary:NO];
+	
+	[callService channel:nil didReceiveMessageWithBuffer:invitationMessage];
+	
+	// then
+	OCMVerify([self.mockOutput didReceiveInvitationToOpenImageGallery]);
+}
+
+- (void)testTriggersDidSendInvitationToOpenImageGallery_whenRequestedImageGallery {
+	// given
+	[self useFakeCallService]; // for fast user connection
+	
+	OCMExpect([self.mockOutput didSendInvitationToOpenImageGallery]);
+	
+	// when
+	[self.interactor.callService setDataChannelEnabled:YES];
+	[self.interactor connectToChatWithUser1];
+	[self.interactor startCall];
+	id<CallServiceProtocol_Private> fakeCallService = (id<CallServiceProtocol_Private>)self.interactor.callService;
+	fakeCallService.hasActiveCall = YES;
+	
+	[self.interactor sendInvitationMessageAndOpenImageGallery];
+	
+	// then
+	OCMVerifyAllWithDelay(self.mockOutput, 10);
 }
 
 @end
