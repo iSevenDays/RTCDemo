@@ -27,9 +27,23 @@ class ImageGalleryStoryModuleConfigurator {
 
         let interactor = ImageGalleryStoryInteractor()
         interactor.output = presenter
-
+		
         presenter.interactor = interactor
         viewController.output = presenter
+		
+		let imagesInteractor = ImageGalleryStoryCollectionViewInteractor()
+		
+		interactor.imagesOutput = imagesInteractor
+		
+		interactor.collectionViewConfigurationBlock = {
+			collectionView in
+			
+			collectionView.interactor = imagesInteractor
+			
+			interactor.imagesOutput = collectionView.interactor
+			
+			collectionView.dataSource = collectionView.interactor
+		}
     }
 
 }

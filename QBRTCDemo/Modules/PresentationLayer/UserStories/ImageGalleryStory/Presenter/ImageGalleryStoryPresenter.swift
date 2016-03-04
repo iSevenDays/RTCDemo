@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-@objc class ImageGalleryStoryPresenter: NSObject, ImageGalleryStoryModuleInput, ImageGalleryStoryViewOutput, ImageGalleryStoryInteractorOutput {
+@objc class ImageGalleryStoryPresenter: NSObject, ImageGalleryStoryModuleInput, ImageGalleryStoryViewOutput, ImageGalleryStoryInteractorOutput, ImageGalleryStoryCollectionViewInteractorOutput {
 
     weak var view: ImageGalleryStoryViewInput!
     var interactor: ImageGalleryStoryInteractorInput!
@@ -22,7 +22,7 @@
 	// MARK: ImageGalleryStoryViewOutput
 	
 	func viewIsReady() {
-		
+		self.interactor.configureCollectionView(self.view.collectionView())
 	}
 	
 	func didTriggerStartButtonTaped() {
@@ -47,5 +47,10 @@
 		
 	}
 	
+	// MARK: ImageGalleryStoryCollectionViewInteractorOutput
+	
+	func didUpdateImages() {
+		self.view.reloadCollectionView()
+	}
 	
 }

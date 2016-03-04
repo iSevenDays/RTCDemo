@@ -14,4 +14,6 @@ protocol ImageGalleryStoryInteractorInput {
 	func startSynchronizationImages()
 	
 	func requestCallerRole()
+	
+	func configureCollectionView(collectionView: ImageGalleryStoryCollectionView)
 }
