@@ -12,9 +12,12 @@
 
 #import "SVUser.h"
 #import "CallServiceProtocol.h"
-#import "CallClientDelegate.h"
+#import "CallServiceDataChannelAdditionsProtocol.h"
 
+#import "CallServiceDelegate.h"
 #import "CallServiceHelpers.h"
+
+#import "DataChannelMessages.h"
 
 #import <RTCAVFoundationVideoSource.h>
 #import <RTCVideoTrack.h>
@@ -38,10 +41,17 @@
 #pragma mark - Методы VideoStoryInteractorInput
 
 - (instancetype)init {
+	[NSException raise:@"Unavailable initializer" format:@"init is invalid"];
+	
+	return nil;
+}
+
+- (instancetype)initWithUsers:(NSArray *)users {
 	self = [super init];
 	if (self) {
-		self.user1 = [CallServiceHelpers user1];
-		self.user2 = [CallServiceHelpers user2];
+		NSLog(@"%@ initWithUsers %p initialized", NSStringFromClass([self class]), self);
+		self.user1 = users[0];
+		self.user2 = users[1];
 	}
 	return self;
 }
@@ -82,7 +92,7 @@
 
 - (void)startCall {
 	if ([self.callService hasActiveCall]) {
-		NSLog(@"Can not call while already connecting");
+		DDLogWarn(@"Can not call while already connecting");
 		return;
 	}
 	
@@ -90,6 +100,14 @@
 		[self.callService startCallWithOpponent:self.user2];
 	} else {
 		[self.callService startCallWithOpponent:self.user1];
+	}
+}
+
+- (void)sendInvitationMessageAndOpenImageGallery {
+	NSParameterAssert([self.callService hasActiveCall]);
+	
+	if ([self.callService sendText:[DataChannelMessages invitationToOpenImageGallery]]) {
+		[self.output didSendInvitationToOpenImageGallery];
 	}
 }
 
@@ -101,23 +119,33 @@
 	[self.output didHangup];
 }
 
+- (void)requestDataChannelState {
+	if ([self isReadyForDataChannel]) {
+		[self.output didReceiveDataChannelStateReady];
+	} else {
+		[self.output didReceiveDataChannelStateNotReady];
+	}
+}
 
-#pragma mark SVClientDelegate methods
+- (BOOL)isReadyForDataChannel {
+	return [self.callService isDataChannelEnabled] && [self.callService isDataChannelReady];
+}
 
+#pragma mark CallServiceDelegate methods
 
-- (void)client:(id<CallServiceProtocol>)client didChangeConnectionState:(RTCICEConnectionState)state {
+- (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallClientState)state {
+- (void)callService:(id<CallServiceProtocol>)callService didChangeState:(enum CallServiceState)state {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didError:(NSError *)error {
+- (void)callService:(id<CallServiceProtocol>)callService didError:(NSError *)error {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
 	if (self.localVideoTrack == localVideoTrack) {
 		return;
 	}
@@ -131,7 +159,7 @@
 	[self.output didSetLocalCaptureSession:source.captureSession];
 }
 
-- (void)client:(id<CallServiceProtocol>)client didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
 	__weak __typeof(self)weakSelf = self;
 	
 	[self.output didReceiveRemoteVideoTrackWithConfigurationBlock:^(RTCEAGLVideoView *renderer) {
@@ -151,6 +179,19 @@
 		[strongSelf.remoteVideoTrack addRenderer:renderer];
 		
 	}];
+}
+
+- (void)callService:(id<CallServiceProtocol>)callService didOpenDataChannel:(RTCDataChannel *)dataChannel {
+	[self.output didOpenDataChannel];
+}
+
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveMessage:(NSString *)message {
+	DDLogVerbose(@"callService %@ didReceiveMessage %@", callService, message);
+	
+	if ([message isEqualToString:[DataChannelMessages invitationToOpenImageGallery]]) {
+		DDLogInfo(@"received invitation to open image gallery");
+		[self.output didReceiveInvitationToOpenImageGallery];
+	}
 }
 
 @end

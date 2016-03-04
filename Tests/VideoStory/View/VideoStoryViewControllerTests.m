@@ -25,7 +25,7 @@
 
 @implementation VideoStoryViewControllerTests
 
-#pragma mark - Настройка окружения для тестирования
+#pragma mark - Setup environment for testing
 
 - (void)setUp {
     [super setUp];
@@ -45,7 +45,7 @@
     [super tearDown];
 }
 
-#pragma mark - Тестирование жизненного цикла
+#pragma mark - Testing life cycle
 
 - (void)testThatViewNotifiesPresenterOnDidLoad {
 	// given
@@ -57,9 +57,9 @@
 	OCMVerify([self.mockOutput didTriggerViewReadyEvent]);
 }
 
-#pragma mark - Тестирование методов интерфейса
+#pragma mark - IBActions testing
 
-- (void)testSuccessDidTapConnectToChatWithUser1Button {
+- (void)testSuccessConnectToChatWithUser1ButtonTriggersAction {
 	// given
 	
 	// when
@@ -69,7 +69,7 @@
 	OCMVerify([self.mockOutput didTriggerConnectWithUser1ButtonTaped]);
 }
 
-- (void)testSuccessDidTapConnectToChatWithUser2Button {
+- (void)testSuccessTapConnectToChatWithUser2ButtonTriggersAction {
 	// given
 	
 	// when
@@ -79,7 +79,7 @@
 	OCMVerify([self.mockOutput didTriggerConnectWithUser2ButtonTaped]);
 }
 
-- (void)testSuccessDidTapStartCallButton {
+- (void)testStartCallButtonTriggersAction {
 	// given
 	
 	// when
@@ -89,7 +89,7 @@
 	OCMVerify([self.mockOutput didTriggerStartCallButtonTaped]);
 }
 
-- (void)testSuccessDidTapHangupButton {
+- (void)testHangupButtonTriggersAction {
 	// given
 	
 	// when
@@ -99,9 +99,19 @@
 	OCMVerify([self.mockOutput didTriggerHangupButtonTaped]);
 }
 
-#pragma mark - Тестирование методов VideoStoryViewInput
+- (void)testSuccessDataChannelButton_ImageGalleryTriggersAction {
+	// given
+	
+	// when
+	[self.controller didTapButtonDataChannelImageGallery:nil];
+	
+	// then
+	OCMVerify([self.mockOutput didTriggerDataChannelButtonTaped]);
+}
 
-- (void)testSuccessfulSetLocalVideoCaptureSession {
+#pragma mark - Testing methods VideoStoryViewInput
+
+- (void)testSetLocalVideoCaptureSession_setsCaptureSession {
 	// given
 	[self.controller loadView];
 	

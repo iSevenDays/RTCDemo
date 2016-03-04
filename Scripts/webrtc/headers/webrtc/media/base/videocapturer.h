@@ -14,19 +14,20 @@
 #define WEBRTC_MEDIA_BASE_VIDEOCAPTURER_H_
 
 #include <algorithm>
+#include <memory>
 #include <string>
 #include <vector>
 
 #include "webrtc/base/basictypes.h"
 #include "webrtc/base/criticalsection.h"
-#include "webrtc/base/messagehandler.h"
+#include "webrtc/media/base/videosourceinterface.h"
 #include "webrtc/base/rollingaccumulator.h"
-#include "webrtc/base/scoped_ptr.h"
 #include "webrtc/base/sigslot.h"
-#include "webrtc/base/thread.h"
 #include "webrtc/base/timing.h"
+#include "webrtc/base/thread_checker.h"
 #include "webrtc/media/base/mediachannel.h"
 #include "webrtc/media/base/videoadapter.h"
+#include "webrtc/media/base/videobroadcaster.h"
 #include "webrtc/media/base/videocommon.h"
 #include "webrtc/media/base/videoframefactory.h"
 #include "webrtc/media/devices/devicemanager.h"
@@ -35,8 +36,6 @@
 namespace cricket {
 
 // Current state of the capturer.
-// TODO(hellner): CS_NO_DEVICE is an error code not a capture state. Separate
-//                error codes and states.
 enum CaptureState {
   CS_STOPPED,    // The capturer has been stopped or hasn't started yet.
   CS_STARTING,   // The capturer is in the process of starting. Note, it may
@@ -45,7 +44,6 @@ enum CaptureState {
                  // capturing.
   CS_PAUSED,     // The capturer has been paused.
   CS_FAILED,     // The capturer failed to start.
-  CS_NO_DEVICE,  // The capturer has no device and consequently failed to start.
 };
 
 class VideoFrame;
@@ -73,7 +71,7 @@ struct CapturedFrame {
                        // time with nanosecond units.
   uint32_t data_size;  // number of bytes of the frame data
 
-  webrtc::VideoRotation rotation; // rotation in degrees of the frame.
+  webrtc::VideoRotation rotation;  // rotation in degrees of the frame.
 
   void*  data;          // pointer to the frame data. This object allocates the
                         // memory or points to an existing memory.
@@ -89,13 +87,13 @@ struct CapturedFrame {
 // The captured frames may need to be adapted (for example, cropping).
 // Video adaptation is built into and enabled by default. After a frame has
 // been captured from the device, it is sent to the video adapter, then out to
-// the encoder.
+// the sinks.
 //
 // Programming model:
 //   Create an object of a subclass of VideoCapturer
 //   Initialize
 //   SignalStateChange.connect()
-//   SignalFrameCaptured.connect()
+//   AddOrUpdateSink()
 //   Find the capture format for Start() by either calling GetSupportedFormats()
 //   and selecting one of the supported or calling GetBestCaptureFormat().
 //   video_adapter()->OnOutputFormatRequest(desired_encoding_format)
@@ -108,14 +106,11 @@ struct CapturedFrame {
 //   media engine thread). Hence, the VideoCapture subclasses dont need to be
 //   thread safe.
 //
-class VideoCapturer
-    : public sigslot::has_slots<>,
-      public rtc::MessageHandler {
+class VideoCapturer : public sigslot::has_slots<>,
+                      public rtc::VideoSourceInterface<cricket::VideoFrame> {
  public:
-  // All signals are marshalled to |thread| or the creating thread if
-  // none is provided.
   VideoCapturer();
-  explicit VideoCapturer(rtc::Thread* thread);
+
   virtual ~VideoCapturer() {}
 
   // Gets the id of the underlying device, which is available after the capturer
@@ -161,12 +156,6 @@ class VideoCapturer
   //   CS_FAILED:    if the capturer failes to start..
   //   CS_NO_DEVICE: if the capturer has no device and fails to start.
   virtual CaptureState Start(const VideoFormat& capture_format) = 0;
-  // Sets the desired aspect ratio. If the capturer is capturing at another
-  // aspect ratio it will crop the width or the height so that asked for
-  // aspect ratio is acheived. Note that ratio_w and ratio_h do not need to be
-  // relatively prime.
-  void UpdateAspectRatio(int ratio_w, int ratio_h);
-  void ClearAspectRatio();
 
   // Get the current capture format, which is set by the Start() call.
   // Note that the width and height of the captured frames may differ from the
@@ -177,31 +166,20 @@ class VideoCapturer
   }
 
   // Pause the video capturer.
-  virtual bool Pause(bool paused);
+  // DEPRECATED
+  // TODO(perkj): Remove once Chrome remoting doesn't override this method.
+  virtual bool Pause(bool paused) {
+    RTC_NOTREACHED();
+    return false;
+  }
   // Stop the video capturer.
   virtual void Stop() = 0;
   // Check if the video capturer is running.
   virtual bool IsRunning() = 0;
-  // Restart the video capturer with the new |capture_format|.
-  // Default implementation stops and starts the capturer.
-  virtual bool Restart(const VideoFormat& capture_format);
-  // TODO(thorcarpenter): This behavior of keeping the camera open just to emit
-  // black frames is a total hack and should be fixed.
-  // When muting, produce black frames then pause the camera.
-  // When unmuting, start the camera. Camera starts unmuted.
-  virtual bool MuteToBlackThenPause(bool muted);
-  virtual bool IsMuted() const {
-    return muted_;
-  }
   CaptureState capture_state() const {
     return capture_state_;
   }
 
-  // Tells videocapturer whether to apply the pending rotation. By default, the
-  // rotation is applied and the generated frame is up right. When set to false,
-  // generated frames will carry the rotation information from
-  // SetCaptureRotation. Return value indicates whether this operation succeeds.
-  virtual bool SetApplyRotation(bool enable);
   virtual bool GetApplyRotation() { return apply_rotation_; }
 
   // Returns true if the capturer is screencasting. This can be used to
@@ -222,14 +200,6 @@ class VideoCapturer
     return enable_camera_list_;
   }
 
-  // Enable scaling to ensure square pixels.
-  void set_square_pixel_aspect_ratio(bool square_pixel_aspect_ratio) {
-    square_pixel_aspect_ratio_ = square_pixel_aspect_ratio;
-  }
-  bool square_pixel_aspect_ratio() {
-    return square_pixel_aspect_ratio_;
-  }
-
   // Signal all capture state changes that are not a direct result of calling
   // Start().
   sigslot::signal2<VideoCapturer*, CaptureState> SignalStateChange;
@@ -240,10 +210,6 @@ class VideoCapturer
   // Signal the captured frame to downstream.
   sigslot::signal2<VideoCapturer*, const CapturedFrame*,
                    sigslot::multi_threaded_local> SignalFrameCaptured;
-  // Signal the captured and possibly adapted frame to downstream consumers
-  // such as the encoder.
-  sigslot::signal2<VideoCapturer*, const VideoFrame*,
-                   sigslot::multi_threaded_local> SignalVideoFrame;
 
   // If true, run video adaptation. By default, video adaptation is enabled
   // and users must call video_adapter()->OnOutputFormatRequest()
@@ -251,11 +217,6 @@ class VideoCapturer
   bool enable_video_adapter() const { return enable_video_adapter_; }
   void set_enable_video_adapter(bool enable_video_adapter) {
     enable_video_adapter_ = enable_video_adapter;
-  }
-
-  CoordinatedVideoAdapter* video_adapter() { return &video_adapter_; }
-  const CoordinatedVideoAdapter* video_adapter() const {
-    return &video_adapter_;
   }
 
   // Takes ownership.
@@ -269,14 +230,33 @@ class VideoCapturer
                 VariableInfo<double>* frame_time_stats,
                 VideoFormat* last_captured_frame_format);
 
+  // Implements VideoSourceInterface
+  void AddOrUpdateSink(rtc::VideoSinkInterface<cricket::VideoFrame>* sink,
+                       const rtc::VideoSinkWants& wants) override;
+  void RemoveSink(rtc::VideoSinkInterface<cricket::VideoFrame>* sink) override;
+
  protected:
+  // Signal the captured and possibly adapted frame to downstream consumers
+  // such as the encoder.
+  // TODO(perkj): Remove once it is not used by remoting in Chrome.
+  sigslot::signal2<VideoCapturer*, const VideoFrame*,
+                    sigslot::multi_threaded_local> SignalVideoFrame;
+
+  // OnSinkWantsChanged can be overridden to change the default behavior
+  // when a sink changes its VideoSinkWants by calling AddOrUpdateSink.
+  virtual void OnSinkWantsChanged(const rtc::VideoSinkWants& wants);
+
   // Callback attached to SignalFrameCaptured where SignalVideoFrames is called.
   void OnFrameCaptured(VideoCapturer* video_capturer,
                        const CapturedFrame* captured_frame);
-  void SetCaptureState(CaptureState state);
 
-  // Marshals SignalStateChange onto thread_.
-  void OnMessage(rtc::Message* message);
+  // Callback attached to SignalVideoFrame.
+  // TODO(perkj): Remove once SignalVideoFrame is removed.
+  void OnFrame(VideoCapturer* capturer, const VideoFrame* frame);
+
+  CoordinatedVideoAdapter* video_adapter() { return &video_adapter_; }
+
+  void SetCaptureState(CaptureState state);
 
   // subclasses override this virtual method to provide a vector of fourccs, in
   // order of preference, that are expected by the media engine.
@@ -326,13 +306,13 @@ class VideoCapturer
       const rtc::RollingAccumulator<T>& data,
       VariableInfo<T>* stats);
 
-  rtc::Thread* thread_;
+  rtc::ThreadChecker thread_checker_;
   std::string id_;
   CaptureState capture_state_;
-  rtc::scoped_ptr<VideoFrameFactory> frame_factory_;
-  rtc::scoped_ptr<VideoFormat> capture_format_;
+  std::unique_ptr<VideoFrameFactory> frame_factory_;
+  std::unique_ptr<VideoFormat> capture_format_;
   std::vector<VideoFormat> supported_formats_;
-  rtc::scoped_ptr<VideoFormat> max_format_;
+  std::unique_ptr<VideoFormat> max_format_;
   std::vector<VideoFormat> filtered_supported_formats_;
 
   int ratio_w_;  // View resolution. e.g. 1280 x 720.
@@ -341,9 +321,8 @@ class VideoCapturer
   bool square_pixel_aspect_ratio_;  // Enable scaling to square pixels.
   int scaled_width_;  // Current output size from ComputeScale.
   int scaled_height_;
-  bool muted_;
-  int black_frame_count_down_;
 
+  rtc::VideoBroadcaster broadcaster_;
   bool enable_video_adapter_;
   CoordinatedVideoAdapter video_adapter_;
 

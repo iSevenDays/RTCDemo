@@ -7,27 +7,27 @@
 //
 
 #import "FakeCallServiceDelegate.h"
-#import "CallClientDelegate.h"
+#import "CallServiceDelegate.h"
 
 @implementation FakeCallServiceDelegate
 
-- (void)client:(id<CallServiceProtocol>)client didChangeConnectionState:(RTCICEConnectionState)state {
+- (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didChangeState:(enum CallClientState)state {
+- (void)callService:(id<CallServiceProtocol>)callService didChangeState:(enum CallServiceState)state {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didError:(NSError *)error {
+- (void)callService:(id<CallServiceProtocol>)callService didError:(NSError *)error {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didReceiveLocalVideoTrack:(id)localVideoTrack {
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(id)localVideoTrack {
 	
 }
 
-- (void)client:(id<CallServiceProtocol>)client didReceiveRemoteVideoTrack:(id)remoteVideoTrack {
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveRemoteVideoTrack:(id)remoteVideoTrack {
 	
 }
 

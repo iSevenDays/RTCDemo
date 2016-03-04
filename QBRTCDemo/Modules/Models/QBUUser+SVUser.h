@@ -10,6 +10,6 @@
 
 @interface QBUUser (SVUser)
 
-+ (nullable instancetype)userWithSVUser:(SVUser *_Nonnull)svser;
++ (nonnull instancetype)userWithSVUser:(SVUser *_Nonnull)svser;
 
 @end

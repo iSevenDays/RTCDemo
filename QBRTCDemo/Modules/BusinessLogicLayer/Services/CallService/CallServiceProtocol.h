@@ -9,7 +9,9 @@
 #ifndef CallServiceProtocol_h
 #define CallServiceProtocol_h
 
-typedef NS_ENUM(NSInteger, CallClientState) {
+#import "SVSignalingChannelDelegate.h"
+
+typedef NS_ENUM(NSInteger, CallServiceState) {
 	// Disconnected from servers.
 	kClientStateDisconnected,
 	// Connecting to servers.
@@ -19,34 +21,39 @@ typedef NS_ENUM(NSInteger, CallClientState) {
 };
 
 @protocol SVSignalingChannelProtocol;
-@protocol CallClientDelegate;
+@protocol CallServiceDelegate;
 @protocol CallServiceDataChannelAdditionsDelegate;
 
 @class SVUser;
 
-@protocol CallServiceProtocol <NSObject>
+@protocol CallServiceProtocol <SVSignalingChannelDelegate>
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nonnull id<CallServiceDelegate>)callServiceDelegate;
 
-
+- (void)addDelegate:(nonnull id<CallServiceDelegate>)delegate;
 
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
 
+/**
+ * Clears session and ends a call
+ *
+ * @note sends hangup message when -hasActiveCall YES
+ */
 - (void)hangup;
 
 - (BOOL)hasActiveCall;
 
-@property (nonatomic, assign, readonly) CallClientState state;
+/// @return YES if current user is a call initiator
+- (BOOL)isInitiator;
+
+@property (nonatomic, assign, readonly) CallServiceState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
-@property (nonatomic, weak, nullable) id<CallClientDelegate> delegate;
 
 @optional
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel clientDelegate:(nonnull id<CallClientDelegate>)clientDelegate dataChannelDelegate:(nullable id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
-
-@property (nonatomic, weak, nullable) id<CallServiceDataChannelAdditionsDelegate> dataChannelDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(nonnull id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
 
 @end
 

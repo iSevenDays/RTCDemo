@@ -53,14 +53,11 @@
     [super tearDown];
 }
 
-#pragma mark - Тестирование методов VideoStoryModuleInput
+#pragma mark - Testing methods VideoStoryModuleInput
 
-#pragma mark - Тестирование методов VideoStoryViewOutput
+#pragma mark - Testing methods VideoStoryViewOutput
 
 - (void)testThatPresenterHandlesViewReadyEvent {
-    // given
-
-
     // when
     [self.presenter didTriggerViewReadyEvent];
 
@@ -69,8 +66,6 @@
 }
 
 - (void)testThatPresenterHandlesConnectWitUser1ButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerConnectWithUser1ButtonTaped];
 	
@@ -79,8 +74,6 @@
 }
 
 - (void)testThatPresenterHandlesConnectWitUser2ButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerConnectWithUser2ButtonTaped];
 	
@@ -89,8 +82,6 @@
 }
 
 - (void)testThatPresenterHandlesStartCallButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerStartCallButtonTaped];
 	
@@ -99,8 +90,6 @@
 }
 
 - (void)testThatPresenterHandlesHangupButtonTapped {
-	// given
-	
 	// when
 	[self.presenter didTriggerHangupButtonTaped];
 	
@@ -108,12 +97,18 @@
 	OCMVerify([self.mockInteractor hangup]);
 }
 
+- (void)testThatPresenterHandlesDataChannelButtonTapped_and {
+	// when
+	[self.presenter didTriggerDataChannelButtonTaped];
+	
+	// then
+	OCMVerify([self.mockInteractor sendInvitationMessageAndOpenImageGallery]);
+}
 
-#pragma mark - Тестирование методов VideoStoryInteractorOutput
+
+#pragma mark - Testing methods VideoStoryInteractorOutput
 
 - (void)testThatPresenterHandlesDidConnectToChatWithUser1 {
-	// given
-	
 	// when
 	[self.presenter didConnectToChatWithUser1];
 	
@@ -122,8 +117,6 @@
 }
 
 - (void)testThatPresenterHandlesDidConnectToChatWithUser2 {
-	// given
-	
 	// when
 	[self.presenter didConnectToChatWithUser2];
 	
@@ -131,9 +124,7 @@
 	OCMVerify([self.mockView configureViewWithUser2]);
 }
 
-- (void)testThatPresenterHandlesErrors {
-	// given
-	
+- (void)testThatPresenterHandlesConnectionError {
 	// when
 	[self.presenter didFailToConnectToChat];
 	
@@ -142,8 +133,6 @@
 }
 
 - (void)testThatPresenterHandlesLocalVideoTrack {
-	// given
-	
 	// when
 	[self.presenter didSetLocalCaptureSession:[OCMArg any]];
 	
@@ -152,13 +141,37 @@
 }
 
 - (void)testThatPresenterHandlesRemoteVideoTrack {
-	// given
-	
 	// when
 	[self.presenter didReceiveRemoteVideoTrackWithConfigurationBlock:nil];
 	
 	// then
 	OCMVerify([self.mockView configureRemoteVideoViewWithBlock:nil]);
 }
+
+- (void)testPresenterHandlesDataChannelNotReadyState {
+	// when
+	[self.presenter didReceiveDataChannelStateNotReady];
+	
+	// then
+	OCMVerify([self.mockView showErrorDataChannelNotReady]);
+}
+
+- (void)testPresenterHandlesIncomingDataChannelInvitationToOpenImageGallery_andOpensImageGallery {
+	// when
+	[self.presenter didReceiveInvitationToOpenImageGallery];
+	
+	// then
+	OCMVerify([self.mockRouter openImageGallery]);
+}
+
+- (void)testPresenterHandlesOutgoingDataChannelInvitationToOpenImageGallery_andOpensImageGallery {
+	// when
+	[self.presenter didSendInvitationToOpenImageGallery];
+	
+	// then
+	OCMVerify([self.mockRouter openImageGallery]);
+}
+
+
 
 @end

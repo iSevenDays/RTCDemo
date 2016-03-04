@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class RTCMediaConstraints;
-@class RTCIceServer;
+@class RTCICEServer;
 @class RTCConfiguration;
 @class RTCSessionDescription;
 
@@ -22,10 +22,23 @@
 + (RTCConfiguration *)defaultConfigurationWithCurrentICEServers;
 
 + (RTCMediaConstraints *)defaultMediaStreamConstraints;
+
+/**
+ *  RTCMediaConstraints.
+ *  Enable/disable Video and Audio.
+ *
+ *  @note default audio state: disabled
+ *  @note default video state: disabled
+ *
+ *  @return RTCMediaConstraints instance
+ */
 + (RTCMediaConstraints *)defaultOfferConstraints;
+
+/// @return +defaultOfferConstraints
 + (RTCMediaConstraints *)defaultAnswerConstraints;
+
 + (RTCMediaConstraints *)defaultPeerConnectionConstraints;
 
-+ (NSArray<RTCIceServer *> *)defaultIceServers;
++ (NSArray<RTCICEServer *> *)defaultIceServers;
 
 @end

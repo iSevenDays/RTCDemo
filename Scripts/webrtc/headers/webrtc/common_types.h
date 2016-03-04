@@ -37,7 +37,7 @@
 #define NULL 0
 #endif
 
-#define RTP_PAYLOAD_NAME_SIZE 32
+#define RTP_PAYLOAD_NAME_SIZE 32u
 
 #if defined(WEBRTC_WIN) || defined(WIN32)
 // Compares two strings without regard to case.
@@ -207,6 +207,20 @@ struct RtcpPacketTypeCounter {
        (other.first_packet_time_ms < first_packet_time_ms ||
         first_packet_time_ms == -1)) {
       // Use oldest time.
+      first_packet_time_ms = other.first_packet_time_ms;
+    }
+  }
+
+  void Subtract(const RtcpPacketTypeCounter& other) {
+    nack_packets -= other.nack_packets;
+    fir_packets -= other.fir_packets;
+    pli_packets -= other.pli_packets;
+    nack_requests -= other.nack_requests;
+    unique_nack_requests -= other.unique_nack_requests;
+    if (other.first_packet_time_ms != -1 &&
+        (other.first_packet_time_ms > first_packet_time_ms ||
+         first_packet_time_ms == -1)) {
+      // Use youngest time.
       first_packet_time_ms = other.first_packet_time_ms;
     }
   }

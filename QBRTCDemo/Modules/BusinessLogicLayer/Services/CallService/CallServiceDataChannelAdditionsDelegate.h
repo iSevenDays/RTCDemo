@@ -12,9 +12,12 @@
 #import <Foundation/Foundation.h>
 
 @protocol CallServiceProtocol;
+@class RTCDataChannel;
 
 @protocol CallServiceDataChannelAdditionsDelegate <NSObject>
 
+@optional
+- (void)callService:(id<CallServiceProtocol>)callService didOpenDataChannel:(RTCDataChannel *)dataChannel;
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveMessage:(NSString *)message;
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveData:(NSData *)data;
 

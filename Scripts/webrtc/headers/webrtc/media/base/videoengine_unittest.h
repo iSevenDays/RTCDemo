@@ -11,6 +11,7 @@
 #ifndef WEBRTC_MEDIA_BASE_VIDEOENGINE_UNITTEST_H_  // NOLINT
 #define WEBRTC_MEDIA_BASE_VIDEOENGINE_UNITTEST_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -23,7 +24,7 @@
 #include "webrtc/media/base/fakevideorenderer.h"
 #include "webrtc/media/base/mediachannel.h"
 #include "webrtc/media/base/streamparams.h"
-#include "webrtc/media/webrtc/fakewebrtccall.h"
+#include "webrtc/media/engine/fakewebrtccall.h"
 
 #define EXPECT_FRAME_WAIT(c, w, h, t) \
   EXPECT_EQ_WAIT((c), renderer_.num_rendered_frames(), (t)); \
@@ -86,21 +87,6 @@ class VideoEngineOverride : public T {
   virtual ~VideoEngineOverride() {
   }
   bool is_camera_on() const { return T::GetVideoCapturer()->IsRunning(); }
-  void set_has_senders(bool has_senders) {
-    cricket::VideoCapturer* video_capturer = T::GetVideoCapturer();
-    if (has_senders) {
-      video_capturer->SignalVideoFrame.connect(this,
-          &VideoEngineOverride<T>::OnLocalFrame);
-    } else {
-      video_capturer->SignalVideoFrame.disconnect(this);
-    }
-  }
-  void OnLocalFrame(cricket::VideoCapturer*,
-                    const cricket::VideoFrame*) {
-  }
-  void OnLocalFrameFormat(cricket::VideoCapturer*,
-                          const cricket::VideoFormat*) {
-  }
 
   void TriggerMediaFrame(uint32_t ssrc,
                          cricket::VideoFrame* frame,
@@ -125,8 +111,8 @@ class VideoMediaChannelTest : public testing::Test,
   virtual void SetUp() {
     cricket::Device device("test", "device");
     engine_.Init();
-    channel_.reset(
-        engine_.CreateChannel(call_.get(), cricket::VideoOptions()));
+    channel_.reset(engine_.CreateChannel(call_.get(), cricket::MediaConfig(),
+                                         cricket::VideoOptions()));
     EXPECT_TRUE(channel_.get() != NULL);
     network_interface_.SetDestination(channel_.get());
     channel_->SetInterface(&network_interface_);
@@ -353,7 +339,7 @@ class VideoMediaChannelTest : public testing::Test,
   bool CountRtcpFir(int start_index, int stop_index, int* fir_count) {
     int count = 0;
     for (int i = start_index; i < stop_index; ++i) {
-      rtc::scoped_ptr<const rtc::Buffer> p(GetRtcpPacket(i));
+      std::unique_ptr<const rtc::Buffer> p(GetRtcpPacket(i));
       rtc::ByteBuffer buf(*p);
       size_t total_len = 0;
       // The packet may be a compound RTCP packet.
@@ -418,7 +404,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetSend(true));
     EXPECT_TRUE(SendFrame());
     EXPECT_TRUE_WAIT(NumRtpPackets() > 0, kTimeout);
-    rtc::scoped_ptr<const rtc::Buffer> p(GetRtpPacket(0));
+    std::unique_ptr<const rtc::Buffer> p(GetRtpPacket(0));
     EXPECT_EQ(codec.id, GetPayloadType(p.get()));
   }
   // Tests that we can send and receive frames.
@@ -429,7 +415,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_EQ(0, renderer_.num_rendered_frames());
     EXPECT_TRUE(SendFrame());
     EXPECT_FRAME_WAIT(1, codec.width, codec.height, kTimeout);
-    rtc::scoped_ptr<const rtc::Buffer> p(GetRtpPacket(0));
+    std::unique_ptr<const rtc::Buffer> p(GetRtpPacket(0));
     EXPECT_EQ(codec.id, GetPayloadType(p.get()));
   }
   void SendReceiveManyAndGetStats(const cricket::VideoCodec& codec,
@@ -444,7 +430,7 @@ class VideoMediaChannelTest : public testing::Test,
         EXPECT_FRAME_WAIT(frame + i * fps, codec.width, codec.height, kTimeout);
       }
     }
-    rtc::scoped_ptr<const rtc::Buffer> p(GetRtpPacket(0));
+    std::unique_ptr<const rtc::Buffer> p(GetRtpPacket(0));
     EXPECT_EQ(codec.id, GetPayloadType(p.get()));
   }
 
@@ -509,7 +495,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetOneCodec(DefaultCodec()));
     cricket::VideoSendParameters parameters;
     parameters.codecs.push_back(DefaultCodec());
-    parameters.options.conference_mode = rtc::Optional<bool>(true);
+    parameters.conference_mode = true;
     EXPECT_TRUE(channel_->SetSendParameters(parameters));
     EXPECT_TRUE(SetSend(true));
     EXPECT_TRUE(channel_->AddRecvStream(
@@ -560,7 +546,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetOneCodec(DefaultCodec()));
     cricket::VideoSendParameters parameters;
     parameters.codecs.push_back(DefaultCodec());
-    parameters.options.conference_mode = rtc::Optional<bool>(true);
+    parameters.conference_mode = true;
     EXPECT_TRUE(channel_->SetSendParameters(parameters));
     EXPECT_TRUE(channel_->AddRecvStream(
         cricket::StreamParams::CreateLegacy(kSsrc)));
@@ -572,7 +558,7 @@ class VideoMediaChannelTest : public testing::Test,
 
     // Add an additional capturer, and hook up a renderer to receive it.
     cricket::FakeVideoRenderer renderer2;
-    rtc::scoped_ptr<cricket::FakeVideoCapturer> capturer(
+    std::unique_ptr<cricket::FakeVideoCapturer> capturer(
         CreateFakeVideoCapturer());
     capturer->SetScreencast(true);
     const int kTestWidth = 160;
@@ -638,7 +624,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SendFrame());
     EXPECT_TRUE_WAIT(NumRtpPackets() > 0, kTimeout);
     uint32_t ssrc = 0;
-    rtc::scoped_ptr<const rtc::Buffer> p(GetRtpPacket(0));
+    std::unique_ptr<const rtc::Buffer> p(GetRtpPacket(0));
     ParseRtpPacket(p.get(), NULL, NULL, NULL, NULL, &ssrc, NULL);
     EXPECT_EQ(kSsrc, ssrc);
     // Packets are being paced out, so these can mismatch between the first and
@@ -661,7 +647,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(WaitAndSendFrame(0));
     EXPECT_TRUE_WAIT(NumRtpPackets() > 0, kTimeout);
     uint32_t ssrc = 0;
-    rtc::scoped_ptr<const rtc::Buffer> p(GetRtpPacket(0));
+    std::unique_ptr<const rtc::Buffer> p(GetRtpPacket(0));
     ParseRtpPacket(p.get(), NULL, NULL, NULL, NULL, &ssrc, NULL);
     EXPECT_EQ(999u, ssrc);
     // Packets are being paced out, so these can mismatch between the first and
@@ -711,7 +697,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_GT(NumRtpPackets(), 0);
     uint32_t ssrc = 0;
     size_t last_packet = NumRtpPackets() - 1;
-    rtc::scoped_ptr<const rtc::Buffer>
+    std::unique_ptr<const rtc::Buffer>
         p(GetRtpPacket(static_cast<int>(last_packet)));
     ParseRtpPacket(p.get(), NULL, NULL, NULL, NULL, &ssrc, NULL);
     EXPECT_EQ(kSsrc, ssrc);
@@ -740,7 +726,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(SetDefaultCodec());
     cricket::VideoSendParameters parameters;
     parameters.codecs.push_back(DefaultCodec());
-    parameters.options.conference_mode = rtc::Optional<bool>(true);
+    parameters.conference_mode = true;
     EXPECT_TRUE(channel_->SetSendParameters(parameters));
     EXPECT_TRUE(SetSend(true));
     EXPECT_TRUE(channel_->AddRecvStream(
@@ -761,7 +747,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_FRAME_ON_RENDERER_WAIT(
         renderer2, 1, DefaultCodec().width, DefaultCodec().height, kTimeout);
 
-    rtc::scoped_ptr<const rtc::Buffer> p(GetRtpPacket(0));
+    std::unique_ptr<const rtc::Buffer> p(GetRtpPacket(0));
     EXPECT_EQ(DefaultCodec().id, GetPayloadType(p.get()));
     EXPECT_EQ(DefaultCodec().width, renderer1.width());
     EXPECT_EQ(DefaultCodec().height, renderer1.height());
@@ -783,7 +769,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_EQ(0, renderer_.num_rendered_frames());
     EXPECT_TRUE(SendFrame());
     EXPECT_FRAME_WAIT(1, codec.width, codec.height, kTimeout);
-    rtc::scoped_ptr<cricket::FakeVideoCapturer> capturer(
+    std::unique_ptr<cricket::FakeVideoCapturer> capturer(
         CreateFakeVideoCapturer());
     capturer->SetScreencast(true);
     cricket::VideoFormat format(480, 360,
@@ -880,7 +866,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(channel_->SetSink(1, &renderer1));
     EXPECT_TRUE(channel_->AddSendStream(
         cricket::StreamParams::CreateLegacy(1)));
-    rtc::scoped_ptr<cricket::FakeVideoCapturer> capturer1(
+    std::unique_ptr<cricket::FakeVideoCapturer> capturer1(
         CreateFakeVideoCapturer());
     capturer1->SetScreencast(true);
     EXPECT_EQ(cricket::CS_RUNNING, capturer1->Start(capture_format));
@@ -892,7 +878,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(channel_->SetSink(2, &renderer2));
     EXPECT_TRUE(channel_->AddSendStream(
         cricket::StreamParams::CreateLegacy(2)));
-    rtc::scoped_ptr<cricket::FakeVideoCapturer> capturer2(
+    std::unique_ptr<cricket::FakeVideoCapturer> capturer2(
         CreateFakeVideoCapturer());
     capturer2->SetScreencast(true);
     EXPECT_EQ(cricket::CS_RUNNING, capturer2->Start(capture_format));
@@ -948,7 +934,7 @@ class VideoMediaChannelTest : public testing::Test,
 
     // Registering an external capturer is currently the same as screen casting
     // (update the test when this changes).
-    rtc::scoped_ptr<cricket::FakeVideoCapturer> capturer(
+    std::unique_ptr<cricket::FakeVideoCapturer> capturer(
         CreateFakeVideoCapturer());
     capturer->SetScreencast(true);
     const std::vector<cricket::VideoFormat>* formats =
@@ -1022,7 +1008,7 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_TRUE(WaitAndSendFrame(30));  // Should be rendered.
     frame_count += 2;
     EXPECT_FRAME_WAIT(frame_count, codec.width, codec.height, kTimeout);
-    rtc::scoped_ptr<const rtc::Buffer> p(GetRtpPacket(0));
+    std::unique_ptr<const rtc::Buffer> p(GetRtpPacket(0));
     EXPECT_EQ(codec.id, GetPayloadType(p.get()));
 
     // The channel requires 15 fps.
@@ -1190,11 +1176,11 @@ class VideoMediaChannelTest : public testing::Test,
     EXPECT_EQ(0u, channel_->GetDefaultSendChannelSsrc());
   }
 
-  const rtc::scoped_ptr<webrtc::Call> call_;
+  const std::unique_ptr<webrtc::Call> call_;
   VideoEngineOverride<E> engine_;
-  rtc::scoped_ptr<cricket::FakeVideoCapturer> video_capturer_;
-  rtc::scoped_ptr<cricket::FakeVideoCapturer> video_capturer_2_;
-  rtc::scoped_ptr<C> channel_;
+  std::unique_ptr<cricket::FakeVideoCapturer> video_capturer_;
+  std::unique_ptr<cricket::FakeVideoCapturer> video_capturer_2_;
+  std::unique_ptr<C> channel_;
   cricket::FakeNetworkInterface network_interface_;
   cricket::FakeVideoRenderer renderer_;
   cricket::VideoMediaChannel::Error media_error_;

@@ -13,11 +13,12 @@
 
 #include <list>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
 
-#include "webrtc/audio/audio_sink.h"
+#include "webrtc/audio_sink.h"
 #include "webrtc/base/buffer.h"
 #include "webrtc/base/stringutils.h"
 #include "webrtc/media/base/audiorenderer.h"
@@ -332,7 +333,7 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
 
   virtual void SetRawAudioSink(
       uint32_t ssrc,
-      rtc::scoped_ptr<webrtc::AudioSinkInterface> sink) {
+      std::unique_ptr<webrtc::AudioSinkInterface> sink) {
     sink_ = std::move(sink);
   }
 
@@ -408,7 +409,7 @@ class FakeVoiceMediaChannel : public RtpHelper<VoiceMediaChannel> {
   int time_since_last_typing_;
   AudioOptions options_;
   std::map<uint32_t, VoiceChannelAudioSink*> local_renderers_;
-  rtc::scoped_ptr<webrtc::AudioSinkInterface> sink_;
+  std::unique_ptr<webrtc::AudioSinkInterface> sink_;
 };
 
 // A helper function to compare the FakeVoiceMediaChannel::DtmfInfo.
@@ -665,6 +666,7 @@ class FakeVoiceEngine : public FakeBaseEngine {
   }
 
   VoiceMediaChannel* CreateChannel(webrtc::Call* call,
+                                   const MediaConfig& config,
                                    const AudioOptions& options) {
     if (fail_create_channel_) {
       return nullptr;
@@ -728,6 +730,7 @@ class FakeVideoEngine : public FakeBaseEngine {
   }
 
   VideoMediaChannel* CreateChannel(webrtc::Call* call,
+                                   const MediaConfig& config,
                                    const VideoOptions& options) {
     if (fail_create_channel_) {
       return NULL;

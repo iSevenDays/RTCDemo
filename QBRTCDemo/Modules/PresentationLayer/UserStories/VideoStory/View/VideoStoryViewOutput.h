@@ -23,4 +23,6 @@
 - (void)didTriggerStartCallButtonTaped;
 - (void)didTriggerHangupButtonTaped;
 
+- (void)didTriggerDataChannelButtonTaped;
+
 @end
