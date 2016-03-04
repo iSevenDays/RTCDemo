@@ -10,7 +10,7 @@ import Foundation
 
 class ImageGalleryStoryCollectionView: UICollectionView {
 	
-	var interactor :protocol<UICollectionViewDataSource, ImageGalleryStoryCollectionViewInteractorInput, ImageGalleryStoryInteractorImagesOutput>!
+	var interactor: protocol<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,  ImageGalleryStoryCollectionViewInteractorInput, ImageGalleryStoryInteractorImagesOutput>!
 	
 	
 }

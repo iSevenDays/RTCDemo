@@ -10,7 +10,7 @@ import Foundation
 
 let imageGalleryStoryCollectionViewCellIdentifier = "imageGalleryStoryCollectionViewCellIdentifier"
 
-class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDataSource, ImageGalleryStoryCollectionViewInteractorInput, ImageGalleryStoryInteractorImagesOutput {
+class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ImageGalleryStoryCollectionViewInteractorInput, ImageGalleryStoryInteractorImagesOutput {
 	
 	var images: [UIImage] = []
 	weak var output: ImageGalleryStoryCollectionViewInteractorOutput!
@@ -28,22 +28,26 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewData
 		return nil;
 	}
 	
-	func imagesCount() -> UInt {
-		return UInt(images.count)
+	func imagesCount() -> Int {
+		return images.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return images.count
+		return self.imagesCount()
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(imageGalleryStoryCollectionViewCellIdentifier, forIndexPath: indexPath) as! ImageGalleryStoryCollectionViewCell
-		
+
 		cell.imageView?.image = self.images[indexPath.row]
 		
 		return cell
 		
+	}
+	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+		return CGSizeMake(100, 100)
 	}
 	
 	
