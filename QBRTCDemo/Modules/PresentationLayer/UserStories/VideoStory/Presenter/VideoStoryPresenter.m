@@ -14,13 +14,13 @@
 
 @implementation VideoStoryPresenter
 
-#pragma mark - Методы VideoStoryModuleInput
+#pragma mark - Methods VideoStoryModuleInput
 
 - (void)configureModule {
-    // Стартовая конфигурация модуля, не привязанная к состоянию view
+    // Start configuration
 }
 
-#pragma mark - Методы VideoStoryViewOutput
+#pragma mark - Methods VideoStoryViewOutput
 
 - (void)didTriggerViewReadyEvent {
 	[self.view setupInitialState];
@@ -42,7 +42,11 @@
 	[self.interactor hangup];
 }
 
-#pragma mark - Методы VideoStoryInteractorOutput
+- (void)didTriggerDataChannelButtonTaped {
+	[self.interactor sendInvitationMessageAndOpenImageGallery];
+}
+
+#pragma mark - Methods VideoStoryInteractorOutput
 
 - (void)didConnectToChatWithUser1 {
 	[self.view configureViewWithUser1];
@@ -68,5 +72,24 @@
 	[self.view configureRemoteVideoViewWithBlock:block];
 }
 
+- (void)didReceiveDataChannelStateReady {
+	// do nothing
+}
+
+- (void)didReceiveInvitationToOpenImageGallery {
+	[self.router openImageGallery];
+}
+
+- (void)didSendInvitationToOpenImageGallery {
+	[self.router openImageGallery];
+}
+
+- (void)didReceiveDataChannelStateNotReady {
+	[self.view showErrorDataChannelNotReady];
+}
+
+- (void)didOpenDataChannel {
+	
+}
 
 @end

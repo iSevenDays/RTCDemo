@@ -18,12 +18,19 @@
 #import <ViperMcFlurry/ViperMcFlurry.h>
 
 #import "CallService.h"
+#import "CallServiceHelpers.h"
 #import "WebRTCHelpers.h"
 #import "QBSignalingChannel.h"
+
+static NSString *const kVideoStoryboardName = @"VideoStory";
 
 @implementation VideoStoryAssembly
 
 - (VideoStoryViewController *)viewVideoStoryModule {
+//	return [TyphoonFactoryDefinition withFactory:[self videoStoryStoryboard] selector:@selector(instantiateViewControllerWithIdentifier:) parameters:^(TyphoonMethod *factoryMethod) {
+//		[factoryMethod injectParameterWith:NSStringFromClass([VideoStoryViewController class])];
+//	}];
+	
     return [TyphoonDefinition withClass:[VideoStoryViewController class]
                           configuration:^(TyphoonDefinition *definition) {
                               [definition injectProperty:@selector(output)
@@ -36,6 +43,11 @@
 - (VideoStoryInteractor *)interactorVideoStoryModule {
     return [TyphoonDefinition withClass:[VideoStoryInteractor class]
                           configuration:^(TyphoonDefinition *definition) {
+							  [definition useInitializer:@selector(initWithUsers:) parameters:^(TyphoonMethod *initializer) {
+								  [initializer injectParameterWith:@[[CallServiceHelpers user1],
+																	 [CallServiceHelpers user2]]];
+							  }];
+							  
                               [definition injectProperty:@selector(output)
                                                     with:[self presenterVideoStoryModule]];
 							  
@@ -61,16 +73,20 @@
                           configuration:^(TyphoonDefinition *definition) {
                               [definition injectProperty:@selector(transitionHandler)
                                                     with:[self viewVideoStoryModule]];
+							  [definition injectProperty:@selector(callService) with:[self callService]];
                           }];
 }
 
 #pragma mark CallService
 
-- (id<CallServiceProtocol>)callService {
+- (id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)callService {
 	return [TyphoonDefinition withClass:[CallService class] configuration:^(TyphoonDefinition *definition) {
-		[definition useInitializer:@selector(initWithSignalingChannel:clientDelegate:) parameters:^(TyphoonMethod *initializer) {
-
+		[definition useInitializer:@selector(initWithSignalingChannel:callServiceDelegate:dataChannelDelegate:) parameters:^(TyphoonMethod *initializer) {
+			
 			[initializer injectParameterWith:[self signalingChannel]];
+//			[initializer injectParameterWith:nil];
+//			[initializer injectParameterWith:nil];
+			[initializer injectParameterWith:[self interactorVideoStoryModule]];
 			[initializer injectParameterWith:[self interactorVideoStoryModule]];
 		}];
 		
@@ -87,11 +103,25 @@
 							  with:[WebRTCHelpers defaultIceServers]];
 
 		[definition injectProperty:@selector(defaultConfigurationWithCurrentICEServers) with:[WebRTCHelpers defaultConfigurationWithCurrentICEServers]];
+		
+//		[definition setScope:TyphoonScopeSingleton];
 	}];
 }
 
 - (id<SVSignalingChannelProtocol>)signalingChannel {
 	return [TyphoonDefinition withClass:[QBSignalingChannel class]];
+}
+
+- (UIStoryboard *)videoStoryStoryboard {
+	return [TyphoonDefinition withClass:[TyphoonStoryboard class]
+						  configuration:^(TyphoonDefinition *definition) {
+							  [definition useInitializer:@selector(storyboardWithName:factory:bundle:)
+											  parameters:^(TyphoonMethod *initializer) {
+												  [initializer injectParameterWith:kVideoStoryboardName];
+												  [initializer injectParameterWith:self];
+												  [initializer injectParameterWith:nil];
+											  }];
+						  }];
 }
 
 @end

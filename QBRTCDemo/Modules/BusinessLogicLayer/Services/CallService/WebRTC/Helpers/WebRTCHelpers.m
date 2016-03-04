@@ -99,8 +99,8 @@
 
 + (RTCMediaConstraints *)defaultOfferConstraints {
 	NSArray *mandatoryConstraints = @[
-									  [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"],
-									  [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"]
+									  [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"false"],
+									  [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"false"]
 									  ];
 	RTCMediaConstraints* constraints =
 	[[RTCMediaConstraints alloc]

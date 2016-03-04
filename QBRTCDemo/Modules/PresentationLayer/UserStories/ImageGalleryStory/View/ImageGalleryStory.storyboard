@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E56a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ogq-NF-eaz">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="r6B-8a-zen">
+            <objects>
+                <viewController storyboardIdentifier="ImageGalleryStoryViewController" id="Ogq-NF-eaz" customClass="ImageGalleryStoryViewController" customModule="QBRTCDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Df6-sy-fJW"/>
+                        <viewControllerLayoutGuide type="bottom" id="C7C-pW-GZZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TdV-Am-IRT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Nfm-DG-4lS" customClass="ImageGalleryStoryCollectionView" customModule="QBRTCDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LXF-RM-y25">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageGalleryStoryCollectionViewCellIdentifier" id="stJ-8Q-VZs" customClass="ImageGalleryStoryCollectionViewCell" customModule="QBRTCDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yzi-zw-kYo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="Yzi-zw-kYo" firstAttribute="top" secondItem="stJ-8Q-VZs" secondAttribute="top" id="Re7-yz-qPF"/>
+                                            <constraint firstAttribute="bottom" secondItem="Yzi-zw-kYo" secondAttribute="bottom" id="SOD-g5-8SK"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yzi-zw-kYo" secondAttribute="trailing" id="byK-WF-Dyq"/>
+                                            <constraint firstItem="Yzi-zw-kYo" firstAttribute="leading" secondItem="stJ-8Q-VZs" secondAttribute="leading" id="nre-3X-wpj"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="Yzi-zw-kYo" id="Szv-Bn-Jxs"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Nfm-DG-4lS" firstAttribute="top" secondItem="Df6-sy-fJW" secondAttribute="bottom" id="Bbd-TI-OBK"/>
+                            <constraint firstItem="Nfm-DG-4lS" firstAttribute="leading" secondItem="TdV-Am-IRT" secondAttribute="leading" id="EQS-cv-W4K"/>
+                            <constraint firstItem="C7C-pW-GZZ" firstAttribute="top" secondItem="Nfm-DG-4lS" secondAttribute="bottom" id="Qbg-Ov-cAc"/>
+                            <constraint firstAttribute="trailing" secondItem="Nfm-DG-4lS" secondAttribute="trailing" id="g8k-Pb-mAy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Image Gallery Story" id="sln-iJ-cVO">
+                        <barButtonItem key="rightBarButtonItem" title="Start" id="lZL-tQ-A4J">
+                            <connections>
+                                <action selector="didTapStartButton:" destination="Ogq-NF-eaz" id="TdW-QD-HxO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="btnStartSynchronization" destination="lZL-tQ-A4J" id="KVW-e0-2ei"/>
+                        <outlet property="imageCollectionView" destination="Nfm-DG-4lS" id="fUc-M4-v99"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="13h-qM-nk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="1mS-Sl-ZNO" customClass="ImageGalleryStoryModuleInitializer" customModule="QBRTCDemo" customModuleProvider="target">
+                    <connections>
+                        <outlet property="viewController" destination="Ogq-NF-eaz" id="T8c-aM-AHv"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="140" y="409"/>
+        </scene>
+    </scenes>
+</document>

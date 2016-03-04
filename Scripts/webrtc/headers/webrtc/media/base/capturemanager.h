@@ -29,13 +29,13 @@
 
 #include "webrtc/base/sigslotrepeater.h"
 #include "webrtc/base/thread_checker.h"
-#include "webrtc/media/base/capturerenderadapter.h"
 #include "webrtc/media/base/videocommon.h"
+#include "webrtc/media/base/videocapturer.h"
+#include "webrtc/media/base/videosinkinterface.h"
 
 namespace cricket {
 
-class VideoCapturer;
-class VideoRenderer;
+class VideoFrame;
 class VideoCapturerState;
 
 class CaptureManager : public sigslot::has_slots<> {
@@ -52,15 +52,6 @@ class CaptureManager : public sigslot::has_slots<> {
                                  const VideoFormat& desired_format);
   virtual bool StopVideoCapture(VideoCapturer* video_capturer,
                                 const VideoFormat& format);
-
-  // Possibly restarts the capturer. If |options| is set to kRequestRestart,
-  // the CaptureManager chooses whether this request can be handled with the
-  // current state or if a restart is actually needed. If |options| is set to
-  // kForceRestart, the capturer is restarted.
-  virtual bool RestartVideoCapture(VideoCapturer* video_capturer,
-                                   const VideoFormat& previous_format,
-                                   const VideoFormat& desired_format,
-                                   RestartOptions options);
 
   virtual void AddVideoSink(VideoCapturer* video_capturer,
                             rtc::VideoSinkInterface<VideoFrame>* sink);
@@ -80,7 +71,6 @@ class CaptureManager : public sigslot::has_slots<> {
                                   VideoCapturer* video_capturer);
 
   VideoCapturerState* GetCaptureState(VideoCapturer* video_capturer) const;
-  CaptureRenderAdapter* GetAdapter(VideoCapturer* video_capturer) const;
 
   rtc::ThreadChecker thread_checker_;
   CaptureStates capture_states_;

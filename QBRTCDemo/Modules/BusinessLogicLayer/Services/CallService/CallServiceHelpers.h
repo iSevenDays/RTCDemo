@@ -15,4 +15,6 @@
 + (SVUser *)user1;
 + (SVUser *)user2;
 
++ (NSString *)offerSDP;
+
 @end

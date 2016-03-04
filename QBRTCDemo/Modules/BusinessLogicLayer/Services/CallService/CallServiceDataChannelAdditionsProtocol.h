@@ -11,7 +11,11 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol CallServiceDataChannelAdditionsDelegate;
+
 @protocol CallServiceDataChannelAdditionsProtocol <NSObject>
+
+- (void)addDataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
 
 /**
  *  When enabled, connection will be created with data channel support
@@ -19,9 +23,10 @@
  *  By default enabled
  */
 @property (nonatomic, assign, getter=isDataChannelEnabled) BOOL dataChannelEnabled;
+- (BOOL)isDataChannelReady;
 
-- (void)sendText:(NSString *)text;
-- (void)sendData:(NSData *)data;
+- (BOOL)sendText:(NSString *)text;
+- (BOOL)sendData:(NSData *)data;
 
 @end
 

@@ -7,10 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
-@interface AppDelegate ()
-
-@end
+#import "VideoStoryAssembly.h"
 
 @implementation AppDelegate
 
@@ -21,6 +18,9 @@
 	[QBSettings setAuthKey:@"aqsHa2AhDO5Z9Th"];
 	[QBSettings setAuthSecret:@"825Bv-3ByACjD4O"];
 	[QBSettings setAccountKey:@"ZsFuaKozyNC3yLzvN3Xa"];
+	
+	[DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
+	
 //	[QBSettings setTLS NO
 	return YES;
 }

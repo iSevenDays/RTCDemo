@@ -16,4 +16,9 @@
 - (void)startCall;
 - (void)hangup;
 
+- (void)requestDataChannelState;
+
+// Triggers didSendInvitationToOpenImageGallery if successful
+- (void)sendInvitationMessageAndOpenImageGallery;
+
 @end

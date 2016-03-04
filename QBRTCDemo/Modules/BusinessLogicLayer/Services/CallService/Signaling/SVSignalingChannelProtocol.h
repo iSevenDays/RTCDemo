@@ -17,7 +17,7 @@
 
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError *_Nullable error))completion;
 
-- (void)sendMessage:(__kindof SVSignalingMessage *_Nonnull)message toUser:(SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError *_Nullable error))completion;
+- (void)sendMessage:(__kindof SVSignalingMessage *_Nonnull)message toUser:(__kindof SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError *_Nullable error))completion;
 
 - (BOOL)isConnected;
 
