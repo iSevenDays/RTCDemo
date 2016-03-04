@@ -15,4 +15,8 @@ protocol ImageGalleryStoryViewInput: class {
 
     func setupInitialState()
 	func configureViewForReceiving()
+	
+	func reloadCollectionView()
+	
+	func collectionView() -> ImageGalleryStoryCollectionView
 }

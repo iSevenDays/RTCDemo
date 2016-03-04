@@ -12,6 +12,7 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
 
     @objc var output: ImageGalleryStoryViewOutput!
 
+	@IBOutlet weak var imageCollectionView: ImageGalleryStoryCollectionView!
 	@IBOutlet weak var btnStartSynchronization: UIBarButtonItem!
 	
     // MARK: Life cycle
@@ -24,6 +25,10 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
     func setupInitialState() {
     }
 	
+	func collectionView() -> ImageGalleryStoryCollectionView {
+		return self.imageCollectionView
+	}
+	
 	func configureViewForReceiving() {
 		self.btnStartSynchronization.title = ""
 		self.btnStartSynchronization.enabled = false
@@ -31,5 +36,9 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
 	
 	@IBAction func didTapStartButton(sender: AnyObject) {
 		self.output.didTriggerStartButtonTaped()
+	}
+	
+	func reloadCollectionView() {
+		self.imageCollectionView.reloadData()
 	}
 }

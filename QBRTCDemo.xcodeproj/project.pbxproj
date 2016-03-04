@@ -31,6 +31,20 @@
 		1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1418BAEB1C761B0A0085C7E3 /* Photos.framework */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
+		142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */; };
+		142D13791C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */; };
+		142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */; };
+		142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */; };
+		142D137F1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */; };
+		142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */; };
+		142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13811C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift */; };
+		142D13831C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13811C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift */; };
+		142D13851C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13841C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift */; };
+		142D13861C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13841C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift */; };
+		142D138C1C888A87005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13891C8888AD005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift */; };
+		142D138D1C888A8A005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13891C8888AD005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift */; };
+		142D138F1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D138E1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift */; };
+		142D13901C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D138E1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift */; };
 		1431CE121C6F959F00DCED6D /* libwebrtc_libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */; };
 		1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */; };
 		1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */; };
@@ -53,7 +67,6 @@
 		1454052D1C859431005E3790 /* DataChannelMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 1454052B1C859431005E3790 /* DataChannelMessages.h */; };
 		1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
 		1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
-		145405301C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
 		146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
 		146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
 		146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
@@ -336,6 +349,13 @@
 		1417B3451C57E4E8004D6416 /* FakeCallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallService.h; sourceTree = "<group>"; };
 		1417B3461C57E4E8004D6416 /* FakeCallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallService.m; sourceTree = "<group>"; };
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionView.swift; sourceTree = "<group>"; };
+		142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractor.swift; sourceTree = "<group>"; };
+		142D13811C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorImagesOutput.swift; sourceTree = "<group>"; };
+		142D13841C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractorOutput.swift; sourceTree = "<group>"; };
+		142D13891C8888AD005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractorTests.swift; sourceTree = "<group>"; };
+		142D138E1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorImagesInput.swift; sourceTree = "<group>"; };
 		1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsProtocol.h; sourceTree = "<group>"; };
 		1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = webrtc_libraries_dummy.m; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.m; sourceTree = SOURCE_ROOT; };
 		1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = webrtc_libraries_dummy.h; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.h; sourceTree = SOURCE_ROOT; };
@@ -911,6 +931,34 @@
 				1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */,
 			);
 			path = FakeServices;
+			sourceTree = "<group>";
+		};
+		142D137D1C887837005A348D /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */,
+				142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		142D13871C888662005A348D /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */,
+				142D13811C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift */,
+				142D13841C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift */,
+				142D138E1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		142D13881C88889B005A348D /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				142D13891C8888AD005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift */,
+			);
+			name = CollectionView;
 			sourceTree = "<group>";
 		};
 		143609801BF9C7850091071C /* Frameworks */ = {
@@ -1541,6 +1589,7 @@
 		6414E01C8ABDE0BFE0074888 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				142D13871C888662005A348D /* CollectionView */,
 				95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */,
 				177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */,
 				82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */,
@@ -1601,6 +1650,7 @@
 		D3BF590081CFE7B3104E0CE1 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				142D13881C88889B005A348D /* CollectionView */,
 				2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */,
 			);
 			path = Interactor;
@@ -1621,6 +1671,7 @@
 		E9D450ABF52304EE9E26D5F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				142D137D1C887837005A348D /* CollectionView */,
 				B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */,
 				F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */,
 				A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */,
@@ -2094,6 +2145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142D138D1C888A8A005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				147A0C761BFE139D0009044A /* QBSignalingChannelTests.m in Sources */,
 				14398F6E1C010C9100F3CE74 /* SVSignalingMessageTests.m in Sources */,
 				147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */,
@@ -2127,10 +2179,12 @@
 				140746481BFB841000506088 /* SVSignalingParams.m in Sources */,
 				14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */,
 				14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */,
+				142D137F1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				14A028751BFA545300BDF2C5 /* QBSignalingChannel.m in Sources */,
 				14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */,
 				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
 				14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */,
+				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
 				14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */,
 				14ADBDE31C73854C003A0C98 /* ImageGalleryStoryViewOutput.swift in Sources */,
@@ -2138,6 +2192,7 @@
 				14A0288A1BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m in Sources */,
 				14ADBDE21C73854C003A0C98 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */,
+				142D138F1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
 				14D0A3F41C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */,
 				14736EE71C567EC5009DFBBC /* CallService.m in Sources */,
 				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
@@ -2145,13 +2200,16 @@
 				1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */,
 				14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */,
 				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
+				142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
 				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
 				14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */,
+				142D13851C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */,
 				14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
+				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				14A028901BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m in Sources */,
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
@@ -2173,10 +2231,12 @@
 				14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				1482338D1C002DFE0000E9ED /* SVSignalingParams.m in Sources */,
 				148233901C002DFE0000E9ED /* QBSignalingChannel.m in Sources */,
+				142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				148233911C002DFE0000E9ED /* SVSignalingMessageType.m in Sources */,
 				148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */,
 				148233931C002DFE0000E9ED /* QBChatMessage+SVSignalingMessage.m in Sources */,
 				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
+				142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1482339F1C002DFE0000E9ED /* AppDelegate.m in Sources */,
 				148233A01C002DFE0000E9ED /* main.m in Sources */,
 				148233A51C002DFE0000E9ED /* SVSignalingChannelState.m in Sources */,
@@ -2184,6 +2244,7 @@
 				148233A61C002DFE0000E9ED /* SVSignalingMessage+QBChatMessage.m in Sources */,
 				148233A71C002DFE0000E9ED /* SVUser.m in Sources */,
 				148233A81C002DFE0000E9ED /* SVSignalingMessageICE.m in Sources */,
+				142D13901C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
 				14D0A3F51C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */,
 				14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				148233A91C002DFE0000E9ED /* SVSignalingMessage.m in Sources */,
@@ -2191,13 +2252,16 @@
 				D4E7B9D497E6D08669C82C98 /* VideoStoryViewController.m in Sources */,
 				16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */,
 				88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */,
+				142D13831C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */,
 				32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */,
+				142D13861C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */,
 				0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */,
 				3FA698C85BC1C35878F3106E /* ImageGalleryStoryViewController.swift in Sources */,
 				1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */,
+				142D13791C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				0BAC818B34C4A8E7F9975F66 /* ImageGalleryStoryPresenter.swift in Sources */,
 				3179BD737E1FD9AF9F11F04C /* ImageGalleryStoryInteractorInput.swift in Sources */,
 				CA0E7FA1C1007C0399606B63 /* ImageGalleryStoryInteractorOutput.swift in Sources */,
@@ -2214,7 +2278,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */,
-				145405301C859431005E3790 /* DataChannelMessages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2222,6 +2285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142D138C1C888A87005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */,
 				14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */,
 				14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */,

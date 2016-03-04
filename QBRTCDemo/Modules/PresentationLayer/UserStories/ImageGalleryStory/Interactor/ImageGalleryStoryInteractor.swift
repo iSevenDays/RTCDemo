@@ -11,8 +11,16 @@ import Photos
 class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDelegate, ImageGalleryStoryInteractorInput {
 
     weak var output: ImageGalleryStoryInteractorOutput!
+	
+	weak var imagesOutput: ImageGalleryStoryInteractorImagesOutput!
 
 	var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
+	
+	var collectionViewConfigurationBlock: ((collectionView: ImageGalleryStoryCollectionView) -> Void)!
+	
+	func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {
+		self.collectionViewConfigurationBlock(collectionView: collectionView)
+	}
 	
 	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>) {
 		self.callService = callService
@@ -27,8 +35,6 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		
 		if self.callService.isInitiator() {
 			self.output.didStartSynchronizationImages()
-			
-			self.callService.sendText("Sender")
 			
 			self.fetchPhotos()
 			
@@ -60,7 +66,12 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 				let info: [NSObject : AnyObject]?) -> Void in
 				
 				if let imageDataUnwrapped = imageData {
-					self.callService.sendData(imageDataUnwrapped)
+					let success = self.callService.sendData(imageDataUnwrapped)
+					if success {
+						print("Successfully sent image")
+					} else {
+						print("Error sending image")
+					}
 				}
 			}
 		}
@@ -75,6 +86,12 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	
 	func callService(callService: CallServiceProtocol, didReceiveData data: NSData) {
 		print("Received data \(data)")
+		
+		if let image = UIImage(data: data) {
+			self.imagesOutput.didReceiveImage(image)
+		} else {
+			print("Received data that is not convertible to UIImage")
+		}
 	}
 
 }

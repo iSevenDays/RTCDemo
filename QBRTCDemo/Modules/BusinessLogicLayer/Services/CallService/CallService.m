@@ -599,7 +599,7 @@
 	
 	//send test offer text
 	if (channel.state == kRTCDataChannelStateOpen) {
-		[self sendText:@"hello!"];
+		//
 	}
 }
 

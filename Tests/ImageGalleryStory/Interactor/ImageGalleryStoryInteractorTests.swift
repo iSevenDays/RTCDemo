@@ -77,8 +77,21 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		// then
 		XCTAssertTrue(self.mockOutput.didReceiveRoleReceiverGotCalled)
 	}
+	
+	func testNotifiesImagesOutputhWhenReceivedNewImage() {
+		// given
+		self.useRealCallService()
+		self.interactor.callService.connectWithUser(self.user1, completion: nil)
+		
+		// when
+		self.interactor.requestCallerRole()
+		
+		// then
+		XCTAssertTrue(self.mockOutput.didReceiveRoleReceiverGotCalled)
+	}
 
     class MockPresenter: ImageGalleryStoryInteractorOutput {
+		
 		var didStartSynchronizationImagesGotCalled = false
 		var didFinishSynchronizationImagesGotCalled = false
 		
