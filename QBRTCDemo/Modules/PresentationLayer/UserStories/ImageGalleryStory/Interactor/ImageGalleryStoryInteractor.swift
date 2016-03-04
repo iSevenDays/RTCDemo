@@ -36,7 +36,11 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		if self.callService.isInitiator() {
 			self.output.didStartSynchronizationImages()
 			
-			self.fetchPhotos()
+			let images = self.allImages()
+			
+			let imageDataObjects = self.dataWithUIImages(images)
+			
+			self.sendDataObjects(imageDataObjects)
 			
 			self.output.didFinishSynchronizationImages()
 		}
@@ -50,30 +54,74 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		}
 	}
 	
-	func fetchPhotos(){
+	func allImages() -> [UIImage] {
 		let fetchOptions = PHFetchOptions()
+
 		fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+		
+		var images: [UIImage] = []
 		
 		let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
 		
-		if let lastAsset: PHAsset = fetchResult.lastObject as? PHAsset {
-			let manager = PHImageManager.defaultManager()
-			let imageRequestOptions = PHImageRequestOptions()
+		for var i = 0; i < fetchResult.count; i++ {
 			
-			manager.requestImageDataForAsset(lastAsset, options: imageRequestOptions) {
-				(let imageData: NSData?, let dataUTI: String?,
-				let orientation: UIImageOrientation,
+			let asset = fetchResult.objectAtIndex(i) as! PHAsset
+			
+			let manager = PHImageManager.defaultManager()
+			
+			let imageRequestOptions = PHImageRequestOptions()
+			imageRequestOptions.synchronous = true
+			
+			manager.requestImageForAsset(asset, targetSize: CGSizeMake(128, 128), contentMode: PHImageContentMode.Default, options: imageRequestOptions, resultHandler: {(
+				let image: UIImage?,
 				let info: [NSObject : AnyObject]?) -> Void in
 				
-				if let imageDataUnwrapped = imageData {
-					let success = self.callService.sendData(imageDataUnwrapped)
-					if success {
-						print("Successfully sent image")
-					} else {
-						print("Error sending image")
-					}
+				guard let imageUnwrapped = image else {
+					print("Retrieved image is nil")
+					return;
 				}
+				
+				images.append(imageUnwrapped)
+			})
+			
+		}
+		
+		return images
+	}
+	
+	func dataWithUIImage(image: UIImage) -> NSData? {
+		guard let imageDataUnwrapped = UIImageJPEGRepresentation(image, 0.9) else {
+			print("Cannot create image JPEG representation")
+			return nil;
+		}
+		
+		return imageDataUnwrapped
+	}
+	
+	func dataWithUIImages(images: [UIImage]) -> [NSData] {
+		var data: [NSData] = []
+		
+		for image in images {
+			if let unwrappedImageData = dataWithUIImage(image) {
+				data.append(unwrappedImageData)
 			}
+		}
+		return data
+	}
+	
+	func sendData(data: NSData) -> Bool {
+		let success = self.callService.sendData(data)
+		if success {
+			print("Successfully sent image data")
+		} else {
+			print("Error sending image data")
+		}
+		return success
+	}
+	
+	func sendDataObjects(data: [NSData]) {
+		for dataObject in data {
+			self.callService.sendData(dataObject)
 		}
 	}
 	
@@ -85,9 +133,10 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	}
 	
 	func callService(callService: CallServiceProtocol, didReceiveData data: NSData) {
-		print("Received data \(data)")
+		print("Received data, size in bytes \(data.length)")
 		
 		if let image = UIImage(data: data) {
+			print("Received data is UIImage")
 			self.imagesOutput.didReceiveImage(image)
 		} else {
 			print("Received data that is not convertible to UIImage")

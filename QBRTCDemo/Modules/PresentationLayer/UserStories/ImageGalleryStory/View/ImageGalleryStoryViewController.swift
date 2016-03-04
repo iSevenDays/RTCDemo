@@ -26,6 +26,8 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
     }
 	
 	func collectionView() -> ImageGalleryStoryCollectionView {
+		assert(self.imageCollectionView != nil)
+		
 		return self.imageCollectionView
 	}
 	
@@ -39,6 +41,11 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
 	}
 	
 	func reloadCollectionView() {
-		self.imageCollectionView.reloadData()
+		dispatch_async(dispatch_get_main_queue()) { () -> Void in
+			
+			self.imageCollectionView.collectionViewLayout.invalidateLayout()
+			self.imageCollectionView.reloadData()
+			
+		}
 	}
 }
