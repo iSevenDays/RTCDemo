@@ -36,11 +36,21 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		if self.callService.isInitiator() {
 			self.output.didStartSynchronizationImages()
 			
-			let images = self.allImages()
+			let assets = self.allAssets()
 			
-			let imageDataObjects = self.dataWithUIImages(images)
-			
-			self.sendDataObjects(imageDataObjects)
+			for asset in assets {
+				
+				guard let image = self.imageWithAsset(asset) else {
+					print("can not retrieve image from asset")
+					continue
+				}
+				
+				guard let imageData = self.dataWithUIImage(image) else {
+					continue
+				}
+				
+				self.sendData(imageData)
+			}
 			
 			self.output.didFinishSynchronizationImages()
 		}
@@ -61,32 +71,60 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		
 		var images: [UIImage] = []
 		
-		let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+		let assets = self.allAssets()
 		
-		for var i = 0; i < fetchResult.count; i++ {
+		for asset in assets {
 			
-			let asset = fetchResult.objectAtIndex(i) as! PHAsset
+			if let image = imageWithAsset(asset) {
 			
-			let manager = PHImageManager.defaultManager()
-			
-			let imageRequestOptions = PHImageRequestOptions()
-			imageRequestOptions.synchronous = true
-			
-			manager.requestImageForAsset(asset, targetSize: CGSizeMake(128, 128), contentMode: PHImageContentMode.Default, options: imageRequestOptions, resultHandler: {(
-				let image: UIImage?,
-				let info: [NSObject : AnyObject]?) -> Void in
-				
-				guard let imageUnwrapped = image else {
-					print("Retrieved image is nil")
-					return;
-				}
-				
-				images.append(imageUnwrapped)
-			})
-			
+				images.append(image)
+			}
 		}
 		
 		return images
+	}
+	
+	func allAssets() -> [PHAsset] {
+		let fetchOptions = PHFetchOptions()
+		
+		fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+		
+		var assets: [PHAsset] = []
+		
+		let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+		
+		fetchResult.enumerateObjectsUsingBlock { (object: AnyObject!, count: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
+		
+			if let asset = object as? PHAsset {
+				assets.append(asset)
+			}
+			
+		}
+		return assets
+	}
+	
+	func imageWithAsset(asset: PHAsset) -> UIImage? {
+		
+		let manager = PHImageManager.defaultManager()
+		
+		var finalImage: UIImage?
+		
+		let imageRequestOptions = PHImageRequestOptions()
+		imageRequestOptions.synchronous = true
+		
+		manager.requestImageForAsset(asset, targetSize: CGSizeMake(128, 128), contentMode: PHImageContentMode.Default, options: imageRequestOptions, resultHandler: {(
+			let image: UIImage?,
+			let info: [NSObject : AnyObject]?) -> Void in
+			
+			guard let imageUnwrapped = image else {
+				print("Retrieved image is nil")
+				return;
+			}
+			
+			finalImage = imageUnwrapped
+		})
+		
+		return finalImage
 	}
 	
 	func dataWithUIImage(image: UIImage) -> NSData? {
