@@ -1,5 +1,5 @@
 //  OCHamcrest by Jon Reid, http://qualitycoding.org/about/
-//  Copyright 2015 hamcrest.org. See LICENSE.txt
+//  Copyright 2016 hamcrest.org. See LICENSE.txt
 
 #import <OCHamcrest/HCBaseMatcher.h>
 
@@ -32,7 +32,7 @@ FOUNDATION_EXPORT id HC_hasCount(id <HCMatcher> countMatcher);
 static inline id hasCount(id <HCMatcher> countMatcher)
 {
     return HC_hasCount(countMatcher);
-};
+}
 #endif
 
 

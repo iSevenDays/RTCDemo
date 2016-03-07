@@ -10,6 +10,7 @@
 #define BridgingHeader_h
 
 #import <Quickblox/Quickblox.h>
+#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "CallService.h"
 #import "CallServiceProtocol.h"
 #import "CallServiceDelegate.h"
