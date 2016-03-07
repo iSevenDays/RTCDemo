@@ -1,5 +1,5 @@
 //  OCHamcrest by Jon Reid, http://qualitycoding.org/about/
-//  Copyright 2015 hamcrest.org. See LICENSE.txt
+//  Copyright 2016 hamcrest.org. See LICENSE.txt
 
 #import "HCAllOf.h"
 
@@ -26,7 +26,9 @@
     {
         if (![oneMatcher matches:item])
         {
-            [[mismatchDescription appendDescriptionOf:oneMatcher] appendText:@" "];
+            [[[mismatchDescription appendText:@"instead of "]
+                                   appendDescriptionOf:oneMatcher]
+                                   appendText:@", "];
             [oneMatcher describeMismatchOf:item to:mismatchDescription];
             return NO;
         }

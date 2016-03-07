@@ -167,6 +167,7 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	/// CallServiceDataChannelAdditionsDelegate
 	///
 	func callService(callService: CallServiceProtocol, didReceiveMessage message: String) {
+		DDLogWarn("")
 		print("Received message \(message)")
 	}
 	
