@@ -27,18 +27,27 @@ namespace webrtc {
 
 class MediaStreamObserver;
 class RemoteMediaStreamFactory;
+class VideoRtpReceiver;
 
 // Populates |session_options| from |rtc_options|, and returns true if options
 // are valid.
 // |session_options|->transport_options map entries must exist in order for
 // them to be populated from |rtc_options|.
-bool ConvertRtcOptionsForOffer(
+bool ExtractMediaSessionOptions(
     const PeerConnectionInterface::RTCOfferAnswerOptions& rtc_options,
+    bool is_offer,
     cricket::MediaSessionOptions* session_options);
 
 // Populates |session_options| from |constraints|, and returns true if all
 // mandatory constraints are satisfied.
 // Assumes that |session_options|->transport_options map entries exist.
+// Will also set defaults if corresponding constraints are not present:
+// recv_audio=true, recv_video=true, bundle_enabled=true.
+// Other fields will be left with existing values.
+//
+// Deprecated. Will be removed once callers that use constraints are gone.
+// TODO(hta): Remove when callers are gone.
+// https://bugs.chromium.org/p/webrtc/issues/detail?id=5617
 bool ParseConstraintsForAnswer(const MediaConstraintsInterface* constraints,
                                cricket::MediaSessionOptions* session_options);
 
@@ -58,8 +67,8 @@ class PeerConnection : public PeerConnectionInterface,
   explicit PeerConnection(PeerConnectionFactory* factory);
 
   bool Initialize(
+      const cricket::MediaConfig& media_config,
       const PeerConnectionInterface::RTCConfiguration& configuration,
-      const MediaConstraintsInterface* constraints,
       rtc::scoped_ptr<cricket::PortAllocator> allocator,
       rtc::scoped_ptr<DtlsIdentityStoreInterface> dtls_identity_store,
       PeerConnectionObserver* observer);
@@ -106,12 +115,16 @@ class PeerConnection : public PeerConnectionInterface,
   const SessionDescriptionInterface* remote_description() const override;
 
   // JSEP01
+  // Deprecated, use version without constraints.
   void CreateOffer(CreateSessionDescriptionObserver* observer,
                    const MediaConstraintsInterface* constraints) override;
   void CreateOffer(CreateSessionDescriptionObserver* observer,
                    const RTCOfferAnswerOptions& options) override;
+  // Deprecated, use version without constraints.
   void CreateAnswer(CreateSessionDescriptionObserver* observer,
                     const MediaConstraintsInterface* constraints) override;
+  void CreateAnswer(CreateSessionDescriptionObserver* observer,
+                    const RTCOfferAnswerOptions& options) override;
   void SetLocalDescription(SetSessionDescriptionObserver* observer,
                            SessionDescriptionInterface* desc) override;
   void SetRemoteDescription(SetSessionDescriptionObserver* observer,
@@ -156,8 +169,9 @@ class PeerConnection : public PeerConnectionInterface,
   void CreateAudioReceiver(MediaStreamInterface* stream,
                            AudioTrackInterface* audio_track,
                            uint32_t ssrc);
+
   void CreateVideoReceiver(MediaStreamInterface* stream,
-                           VideoTrackInterface* video_track,
+                           const std::string& track_id,
                            uint32_t ssrc);
   void DestroyAudioReceiver(MediaStreamInterface* stream,
                             AudioTrackInterface* audio_track);
@@ -211,8 +225,17 @@ class PeerConnection : public PeerConnectionInterface,
 
   // Returns a MediaSessionOptions struct with options decided by
   // |constraints|, the local MediaStreams and DataChannels.
+  // Deprecated, use version without constraints.
   virtual bool GetOptionsForAnswer(
       const MediaConstraintsInterface* constraints,
+      cricket::MediaSessionOptions* session_options);
+  virtual bool GetOptionsForAnswer(
+      const RTCOfferAnswerOptions& options,
+      cricket::MediaSessionOptions* session_options);
+
+  // Helper function for options processing.
+  // Deprecated.
+  virtual void FinishOptionsForAnswer(
       cricket::MediaSessionOptions* session_options);
 
   // Remove all local and remote tracks of type |media_type|.

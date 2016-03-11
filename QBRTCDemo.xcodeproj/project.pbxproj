@@ -20,7 +20,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		025D967AF7A054BD77F94998 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */; };
 		07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */; };
 		0BAC818B34C4A8E7F9975F66 /* ImageGalleryStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */; };
@@ -192,7 +191,6 @@
 		14A601211C6DEDF400065437 /* libvideo_render_module.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600C81C6DEDF400065437 /* libvideo_render_module.a */; };
 		14A601221C6DEDF400065437 /* libvideo_render.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600C91C6DEDF400065437 /* libvideo_render.a */; };
 		14A601241C6DEDF400065437 /* libvoice_engine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600CB1C6DEDF400065437 /* libvoice_engine.a */; };
-		14A601251C6DEDF400065437 /* libvpx_new.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600CC1C6DEDF400065437 /* libvpx_new.a */; };
 		14A601261C6DEDF400065437 /* libwebrtc_common.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600CD1C6DEDF400065437 /* libwebrtc_common.a */; };
 		14A601271C6DEDF400065437 /* libwebrtc_h264_video_toolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600CE1C6DEDF400065437 /* libwebrtc_h264_video_toolbox.a */; };
 		14A601281C6DEDF400065437 /* libwebrtc_h264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600CF1C6DEDF400065437 /* libwebrtc_h264.a */; };
@@ -236,6 +234,7 @@
 		14D1B5F11C7CA4E6006EB865 /* SVMulticastDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */; };
 		14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
 		14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
+		14DE29691C92FDA900D5842E /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DE29681C92FDA900D5842E /* libvpx.a */; };
 		14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */; };
 		14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */; };
 		14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
@@ -302,6 +301,7 @@
 		CA0E7FA1C1007C0399606B63 /* ImageGalleryStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */; };
 		CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */; };
 		D4E7B9D497E6D08669C82C98 /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
+		D8A5049A8BBC5BAB5D1CEA6E /* libPods-QBRTCDemo_sTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFD4216F81E96C670300BBF /* libPods-QBRTCDemo_sTests.a */; };
 		DA504752039A0FB1064FE384 /* ImageGalleryStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */; };
 		E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */; };
 		E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
@@ -317,13 +317,6 @@
 			remoteInfo = webrtc_libraries;
 		};
 		149A20B51C0123AD009FC236 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1452AAC61BF92FA30018DA30 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 148233801C002DFE0000E9ED;
-			remoteInfo = QBRTCDemo_static;
-		};
-		14E9F5901C6CD317007F58B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1452AAC61BF92FA30018DA30 /* Project object */;
 			proxyType = 1;
@@ -349,6 +342,7 @@
 		1417B3451C57E4E8004D6416 /* FakeCallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallService.h; sourceTree = "<group>"; };
 		1417B3461C57E4E8004D6416 /* FakeCallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallService.m; sourceTree = "<group>"; };
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		141B75D71C93090E0095B818 /* libPods-QBRTCDemoTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-QBRTCDemoTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-QBRTCDemoTests.a"; sourceTree = "<group>"; };
 		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionView.swift; sourceTree = "<group>"; };
 		142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractor.swift; sourceTree = "<group>"; };
@@ -632,8 +626,9 @@
 		14D1B6C21C7DDD74006EB865 /* libcongestion_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcongestion_controller.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libcongestion_controller.a"; sourceTree = "<group>"; };
 		14D1B7A81C7E1DAA006EB865 /* libwebrtc_objc_target.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_objc_target.a; path = "Scripts/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_objc_target.a"; sourceTree = "<group>"; };
 		14D1B7AA1C7E1DB6006EB865 /* libjingle_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_media.a; path = "Scripts/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_media.a"; sourceTree = "<group>"; };
+		14DE29681C92FDA900D5842E /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "Scripts/webrtc/src/chromium/src/third_party/libvpx/../../../../xcodebuild/Debug-iphoneos/libvpx.a"; sourceTree = "<group>"; };
 		14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemoTests copy-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemoTests copy-Info.plist"; sourceTree = "<absolute>"; };
+		14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemoTests-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemoTests-Info.plist"; sourceTree = "<absolute>"; };
 		14EE3D011C6BC03700C451CF /* build_webrtc.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_webrtc.sh; path = Scripts/build_webrtc.sh; sourceTree = "<group>"; };
 		14EE3D021C6BC03700C451CF /* clone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = clone.sh; path = Scripts/clone.sh; sourceTree = "<group>"; };
 		14EE3D031C6BC03700C451CF /* framework_dance.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = framework_dance.sh; path = Scripts/framework_dance.sh; sourceTree = "<group>"; };
@@ -689,17 +684,20 @@
 		93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssembly.m; sourceTree = "<group>"; };
 		95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorInput.swift; sourceTree = "<group>"; };
 		9CCA2B14A51BFE81BA93CE52 /* VideoStoryInteractor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractor.h; sourceTree = "<group>"; };
+		9FFD4216F81E96C670300BBF /* libPods-QBRTCDemo_sTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo_sTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryConfiguratorTests.swift; sourceTree = "<group>"; };
 		A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewController.swift; sourceTree = "<group>"; };
 		A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryModuleInput.swift; sourceTree = "<group>"; };
 		AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryPresenterTests.m; sourceTree = "<group>"; };
 		B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouterInput.swift; sourceTree = "<group>"; };
 		B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewInput.swift; sourceTree = "<group>"; };
+		BA90EB928664E9A7BE27FC61 /* Pods-QBRTCDemo_sTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_sTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests.release.xcconfig"; sourceTree = "<group>"; };
 		BFCAB06BC01A11FABE6C03E6 /* VideoStoryPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryPresenter.h; sourceTree = "<group>"; };
 		C02FBCE1A397B785CE04E483 /* Pods-QBRTCDemo_s.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_s.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.release.xcconfig"; sourceTree = "<group>"; };
 		C6835E0812DE2752A0BEDC72 /* VideoStoryRouter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryRouter.h; sourceTree = "<group>"; };
 		C6E48B3E659A67BEEC20CF57 /* Pods-QBRTCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C7859E7F0647AD04AFAA97AE /* VideoStoryInteractorOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractorOutput.h; sourceTree = "<group>"; };
+		CD68A95CBB14037EB80F16B8 /* Pods-QBRTCDemo_sTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_sTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D11B754886679B217E8FEAA2 /* VideoStoryModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryModuleInput.h; sourceTree = "<group>"; };
 		DBC0353942AD2FCE4DA37D4D /* Pods-QBRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryInteractorTests.m; sourceTree = "<group>"; };
@@ -725,7 +723,7 @@
 				146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */,
 				146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */,
 				146CA9EF1C62642100F768C8 /* webrtc-x86_64.a in Frameworks */,
-				025D967AF7A054BD77F94998 /* (null) in Frameworks */,
+				D8A5049A8BBC5BAB5D1CEA6E /* libPods-QBRTCDemo_sTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,6 +775,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14DE29691C92FDA900D5842E /* libvpx.a in Frameworks */,
 				14C3FE3F1C7F20290077877C /* libcongestion_controller.a in Frameworks */,
 				14C3FE3D1C7F1FF70077877C /* librtc_pc.a in Frameworks */,
 				14A601371C6DF0DC00065437 /* libjingle_peerconnection_objc.a in Frameworks */,
@@ -840,7 +839,6 @@
 				14A601211C6DEDF400065437 /* libvideo_render_module.a in Frameworks */,
 				14A601221C6DEDF400065437 /* libvideo_render.a in Frameworks */,
 				14A601241C6DEDF400065437 /* libvoice_engine.a in Frameworks */,
-				14A601251C6DEDF400065437 /* libvpx_new.a in Frameworks */,
 				14A601261C6DEDF400065437 /* libwebrtc_common.a in Frameworks */,
 				14A601271C6DEDF400065437 /* libwebrtc_h264_video_toolbox.a in Frameworks */,
 				14A601281C6DEDF400065437 /* libwebrtc_h264.a in Frameworks */,
@@ -964,6 +962,8 @@
 		143609801BF9C7850091071C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				141B75D71C93090E0095B818 /* libPods-QBRTCDemoTests.a */,
+				14DE29681C92FDA900D5842E /* libvpx.a */,
 				14F6B4481C80690F008D2844 /* libwebrtc_objc_target.dylib */,
 				14C3FE3E1C7F20290077877C /* libcongestion_controller.a */,
 				14C3FE3C1C7F1FF70077877C /* librtc_pc.a */,
@@ -1186,6 +1186,7 @@
 				8F2BF9FB6A271BDA0BC6C453 /* libPods-QBRTCDemo.a */,
 				397A001A65F49158378570F3 /* libPods-QBRTCDemoTests.a */,
 				1ABC4B3083558C9747EC9D26 /* libPods-QBRTCDemo_s.a */,
+				9FFD4216F81E96C670300BBF /* libPods-QBRTCDemo_sTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1238,7 +1239,7 @@
 				1452AAE21BF92FA30018DA30 /* Info.plist */,
 				1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */,
 				148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */,
-				14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests copy-Info.plist */,
+				14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests-Info.plist */,
 				1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */,
 				1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */,
 				144AE6E51C7505B900B7A156 /* BridgingHeader.h */,
@@ -1501,6 +1502,8 @@
 				C02FBCE1A397B785CE04E483 /* Pods-QBRTCDemo_s.release.xcconfig */,
 				C6E48B3E659A67BEEC20CF57 /* Pods-QBRTCDemo.debug.xcconfig */,
 				DBC0353942AD2FCE4DA37D4D /* Pods-QBRTCDemo.release.xcconfig */,
+				CD68A95CBB14037EB80F16B8 /* Pods-QBRTCDemo_sTests.debug.xcconfig */,
+				BA90EB928664E9A7BE27FC61 /* Pods-QBRTCDemo_sTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1839,7 +1842,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				14E9F58F1C6CD317007F58B7 /* PBXTargetDependency */,
 				14E9F5B71C6CD322007F58B7 /* PBXTargetDependency */,
 			);
 			name = QBRTCDemoTests;
@@ -1957,7 +1959,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1452ABBD1BF9316F0018DA30 /* ShellScript */ = {
@@ -2135,7 +2137,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2322,11 +2324,6 @@
 			target = 148233801C002DFE0000E9ED /* QBRTCDemo_s */;
 			targetProxy = 149A20B51C0123AD009FC236 /* PBXContainerItemProxy */;
 		};
-		14E9F58F1C6CD317007F58B7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 148233801C002DFE0000E9ED /* QBRTCDemo_s */;
-			targetProxy = 14E9F5901C6CD317007F58B7 /* PBXContainerItemProxy */;
-		};
 		14E9F5B71C6CD322007F58B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1452AACD1BF92FA30018DA30 /* QBRTCDemo */;
@@ -2349,7 +2346,7 @@
 /* Begin XCBuildConfiguration section */
 		14015A411BFCD08400830618 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C1F7FA5E286979530920B85 /* Pods-QBRTCDemoTests.debug.xcconfig */;
+			baseConfigurationReference = CD68A95CBB14037EB80F16B8 /* Pods-QBRTCDemo_sTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2375,24 +2372,23 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Scripts/webrtc/lib",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"OCHamcrest\"",
-					"-l\"OCMock\"",
-					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "-DQBRTCDemo_s";
-				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo_sTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo_s.app/QBRTCDemo_s";
 			};
 			name = Debug;
 		};
 		14015A421BFCD08400830618 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EBB921A5AEF7B56EC5229BA /* Pods-QBRTCDemoTests.release.xcconfig */;
+			baseConfigurationReference = BA90EB928664E9A7BE27FC61 /* Pods-QBRTCDemo_sTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2418,17 +2414,16 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Scripts/webrtc/lib",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
-					"-l\"OCHamcrest\"",
-					"-l\"OCMock\"",
-					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "-DQBRTCDemo_s";
-				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo_sTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo_s.app/QBRTCDemo_s";
 			};
 			name = Release;
@@ -2469,7 +2464,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2506,7 +2501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -2638,7 +2633,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/QBRTCDemo/ThirdParty/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2653,7 +2651,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2679,7 +2677,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/QBRTCDemo/ThirdParty/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2694,7 +2695,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2779,7 +2780,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
-				INFOPLIST_FILE = "QBRTCDemoTests copy-Info.plist";
+				INFOPLIST_FILE = QBRTCDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2795,6 +2796,7 @@
 				OTHER_SWIFT_FLAGS = "-DQBRTCDemo";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo.app/QBRTCDemo";
 			};
 			name = Debug;
@@ -2822,7 +2824,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
-				INFOPLIST_FILE = "QBRTCDemoTests copy-Info.plist";
+				INFOPLIST_FILE = QBRTCDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2838,6 +2840,7 @@
 				OTHER_SWIFT_FLAGS = "-DQBRTCDemo";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo.app/QBRTCDemo";
 			};
 			name = Release;

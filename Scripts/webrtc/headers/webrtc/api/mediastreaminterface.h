@@ -23,6 +23,7 @@
 #include "webrtc/base/basictypes.h"
 #include "webrtc/base/refcount.h"
 #include "webrtc/base/scoped_ref_ptr.h"
+#include "webrtc/media/base/mediachannel.h"
 #include "webrtc/media/base/videosinkinterface.h"
 #include "webrtc/media/base/videosourceinterface.h"
 
@@ -120,17 +121,44 @@ class VideoRendererInterface
   virtual ~VideoRendererInterface() {}
 };
 
-class VideoSourceInterface;
+// VideoTrackSourceInterface is a reference counted source used for VideoTracks.
+// The same source can be used in multiple VideoTracks.
+class VideoTrackSourceInterface
+    : public MediaSourceInterface,
+      public rtc::VideoSourceInterface<cricket::VideoFrame> {
+ public:
+  // Get access to the source implementation of cricket::VideoCapturer.
+  // This can be used for receiving frames and state notifications.
+  // But it should not be used for starting or stopping capturing.
+  // TODO(perkj): We are currently trying to replace all internal use of
+  // cricket::VideoCapturer with rtc::VideoSourceInterface. Once that
+  // refactoring is done,
+  // remove this method.
+  virtual cricket::VideoCapturer* GetVideoCapturer() = 0;
+
+  virtual void Stop() = 0;
+  virtual void Restart() = 0;
+
+  // Indicates that parameters suitable for screencasts should be automatically
+  // applied to RtpSenders.
+  // TODO(perkj): Remove these once all known applications have moved to
+  // explicitly setting suitable parameters for screencasts and dont' need this
+  // implicit behavior.
+  virtual bool is_screencast() const = 0;
+
+  // Indicates that the encoder should denoise the video before encoding it.
+  // TODO(perkj): Remove this once denoising is done by the source, and not by
+  // the encoder.
+  virtual bool needs_denoising() const = 0;
+
+ protected:
+  virtual ~VideoTrackSourceInterface() {}
+};
 
 class VideoTrackInterface
     : public MediaStreamTrackInterface,
       public rtc::VideoSourceInterface<cricket::VideoFrame> {
  public:
-  // Make an unqualified VideoSourceInterface resolve to
-  // webrtc::VideoSourceInterface, not our base class
-  // rtc::VideoSourceInterface<cricket::VideoFrame>.
-  using VideoSourceInterface = webrtc::VideoSourceInterface;
-
   // AddRenderer and RemoveRenderer are for backwards compatibility
   // only. They are obsoleted by the methods of
   // rtc::VideoSourceInterface.
@@ -147,27 +175,7 @@ class VideoTrackInterface
   void RemoveSink(
       rtc::VideoSinkInterface<cricket::VideoFrame>* sink) override{};
 
-  virtual VideoSourceInterface* GetSource() const = 0;
-
-  // Return the track input sink. I.e., frames sent to this sink are
-  // propagated to all renderers registered with the track. The
-  // returned sink must not change between calls. Currently, this
-  // method is used for remote tracks (VideoRtpReceiver); further
-  // refactoring is planned for this path, it's unclear if this method
-  // belongs here long term.
-
-  // We do this instead of simply implementing the
-  // VideoSourceInterface directly, because if we did the latter, we'd
-  // need an OnFrame method in VideoTrackProxy, with a thread jump on
-  // each call.
-
-  // TODO(nisse): It has a default implementation so that mock
-  // objects, in particular, chrome's MockWebRtcVideoTrack, doesn't
-  // need to know about it. Consider removing the implementation (or
-  // this comment) after refactoring dust settles.
-  virtual rtc::VideoSinkInterface<cricket::VideoFrame>* GetSink() {
-    return nullptr;
-  };
+  virtual VideoTrackSourceInterface* GetSource() const = 0;
 
  protected:
   virtual ~VideoTrackInterface() {}

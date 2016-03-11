@@ -1,52 +1,34 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9BB0A88D946603F0FED84C19B0F4D2E26218CC45+++1115B9F",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9BB0A88D946603F0FED84C19B0F4D2E26218CC45",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E4C1428" : 0,
-    "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64+++8C9D51B" : 0,
-    "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++A3D3CA1" : 0,
-    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E0AA3BC" : 0,
-    "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++A3CD98F" : 0,
-    "1F749A9C17645530CD5B454B2D8030B9C45FEF70+++5413EFB" : 0,
-    "60C590E0A1E3A270911208E27AD0681DC1AAA138+++9B68E21" : 0,
-    "60C590E0A1E3A270911208E27AD0681DC1AAA138+++71C2A05" : 0,
-    "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++EB95EDF" : 0,
-    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++9E5A111" : 0,
-    "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++3410D07" : 0,
-    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06" : 0,
-    "B415C5F5923FD1699E46B5668327F083B9C32C51+++1433C90" : 0,
-    "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++6FE57C1" : 0,
-    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++5425A32" : 0,
-    "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++A086153" : 0,
-    "1F749A9C17645530CD5B454B2D8030B9C45FEF70+++C7F4374" : 0,
-    "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64+++61AC10F" : 0,
-    "9BB0A88D946603F0FED84C19B0F4D2E26218CC45+++1115B9F" : 0,
-    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++4885EFA" : 0
+    "B415C5F5923FD1699E46B5668327F083B9C32C51" : 0,
+    "60C590E0A1E3A270911208E27AD0681DC1AAA138" : 0,
+    "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64" : 0,
+    "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37" : 0,
+    "53403E622BAB3B22A36A324DC0C5C9EDD3058103" : 0,
+    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46" : 0,
+    "F5D38FC5BD16BFA221E1525959CF901C96293D7B" : 0,
+    "9BB0A88D946603F0FED84C19B0F4D2E26218CC45" : 0,
+    "2B873900A958E0D347CFCD989ACA6447A7A8433A" : 0,
+    "B43103296E34F73CA51817BF0C8D7B74E5C8BD26" : 0,
+    "1F749A9C17645530CD5B454B2D8030B9C45FEF70" : 0
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7DFE5B3F-20E0-4782-83EA-404EBCF98A03",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "63B9F22A-66CE-4D3E-B625-469CE793C4A6",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E4C1428" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/",
-    "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64+++8C9D51B" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src",
-    "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++A3D3CA1" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/jsoncpp\/source\/",
-    "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E0AA3BC" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/",
-    "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++A3CD98F" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/libsrtp",
-    "1F749A9C17645530CD5B454B2D8030B9C45FEF70+++5413EFB" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/boringssl\/src\/",
-    "60C590E0A1E3A270911208E27AD0681DC1AAA138+++9B68E21" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/opus\/src\/",
-    "60C590E0A1E3A270911208E27AD0681DC1AAA138+++71C2A05" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/opus\/src",
-    "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++EB95EDF" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/usrsctp\/usrsctplib",
-    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++9E5A111" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libvpx_new\/source\/libvpx\/",
-    "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++3410D07" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libsrtp\/",
-    "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/libvpx_new\/source\/libvpx",
-    "B415C5F5923FD1699E46B5668327F083B9C32C51+++1433C90" : "..\/Documents\/work\/SDK-ios-WebRTC\/main",
-    "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++6FE57C1" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/jsoncpp\/source",
-    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++5425A32" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libyuv\/",
-    "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++A086153" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/usrsctp\/usrsctplib\/",
-    "1F749A9C17645530CD5B454B2D8030B9C45FEF70+++C7F4374" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/boringssl\/src",
-    "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64+++61AC10F" : "QBRTCDemo\/Scripts\/webrtc\/src\/",
-    "9BB0A88D946603F0FED84C19B0F4D2E26218CC45+++1115B9F" : "QBRTCDemo\/",
-    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++4885EFA" : "..\/Documents\/work\/SDK-ios-WebRTC\/main\/QuickbloxWebRTC\/build_webrtc\/webrtc\/src\/chromium\/src\/third_party\/libyuv"
+    "B415C5F5923FD1699E46B5668327F083B9C32C51" : "..\/Documents\/work\/SDK-ios-WebRTC\/main",
+    "60C590E0A1E3A270911208E27AD0681DC1AAA138" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/opus\/src\/",
+    "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64" : "QBRTCDemo\/Scripts\/webrtc\/src\/",
+    "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/jsoncpp\/source\/",
+    "53403E622BAB3B22A36A324DC0C5C9EDD3058103" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libsrtp\/",
+    "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libyuv\/",
+    "F5D38FC5BD16BFA221E1525959CF901C96293D7B" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/libvpx\/source\/libvpx\/",
+    "9BB0A88D946603F0FED84C19B0F4D2E26218CC45" : "QBRTCDemo\/",
+    "2B873900A958E0D347CFCD989ACA6447A7A8433A" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/",
+    "B43103296E34F73CA51817BF0C8D7B74E5C8BD26" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/usrsctp\/usrsctplib\/",
+    "1F749A9C17645530CD5B454B2D8030B9C45FEF70" : "QBRTCDemo\/Scripts\/webrtc\/src\/chromium\/src\/third_party\/boringssl\/src\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "QBRTCDemo",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -55,102 +37,57 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/boringssl.googlesource.com\/boringssl.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1F749A9C17645530CD5B454B2D8030B9C45FEF70+++5413EFB"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/boringssl.googlesource.com\/boringssl.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1F749A9C17645530CD5B454B2D8030B9C45FEF70+++C7F4374"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1F749A9C17645530CD5B454B2D8030B9C45FEF70"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/src.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E0AA3BC"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/src.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B873900A958E0D347CFCD989ACA6447A7A8433A+++E4C1428"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B873900A958E0D347CFCD989ACA6447A7A8433A"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/libsrtp.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++3410D07"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/libsrtp.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "53403E622BAB3B22A36A324DC0C5C9EDD3058103+++A3CD98F"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "53403E622BAB3B22A36A324DC0C5C9EDD3058103"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/opus.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "60C590E0A1E3A270911208E27AD0681DC1AAA138+++71C2A05"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/chromium\/deps\/opus.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "60C590E0A1E3A270911208E27AD0681DC1AAA138+++9B68E21"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "60C590E0A1E3A270911208E27AD0681DC1AAA138"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/libyuv\/libyuv.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++4885EFA"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/libyuv\/libyuv.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46+++5425A32"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6A3B4D2909F28DB31AD1B89DCEECA4FB6C94CC46"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/github.com\/open-source-parsers\/jsoncpp.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++6FE57C1"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/github.com\/open-source-parsers\/jsoncpp.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37+++A3D3CA1"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7A197CB7B32EDB86AEA5CFBEAF5A15B1DBED1C37"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/webrtc",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64+++61AC10F"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/webrtc",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64+++8C9D51B"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:iSevenDays\/rtcdemo.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9BB0A88D946603F0FED84C19B0F4D2E26218CC45+++1115B9F"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9BB0A88D946603F0FED84C19B0F4D2E26218CC45"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:QuickBlox\/SDK-ios-WebRTC.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B415C5F5923FD1699E46B5668327F083B9C32C51+++1433C90"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B415C5F5923FD1699E46B5668327F083B9C32C51"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/github.com\/sctplab\/usrsctp",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++A086153"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/external\/usrsctplib.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B43103296E34F73CA51817BF0C8D7B74E5C8BD26+++EB95EDF"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B43103296E34F73CA51817BF0C8D7B74E5C8BD26"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/webm\/libvpx.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++75CEC06"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/chromium.googlesource.com\/webm\/libvpx.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F5D38FC5BD16BFA221E1525959CF901C96293D7B+++9E5A111"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F5D38FC5BD16BFA221E1525959CF901C96293D7B"
     }
   ]
 }

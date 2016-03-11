@@ -1,0 +1,20 @@
+Index: webrtc/base/scoped_autorelease_pool.mm
+diff --git a/webrtc/base/scoped_autorelease_pool.mm b/webrtc/base/scoped_autorelease_pool.mm
+index 4176aad0e9cda5016da93017185b163bcfe7ec0e..ed557b474db5da9c6d9c341b59df017e1d1fdc37 100644
+--- a/webrtc/base/scoped_autorelease_pool.mm
++++ b/webrtc/base/scoped_autorelease_pool.mm
+@@ -8,6 +8,8 @@
+  *  be found in the AUTHORS file in the root of the source tree.
+  */
+ 
++#if defined(WEBRTC_MAC)
++
+ #import <Foundation/Foundation.h>
+ 
+ #import "webrtc/base/scoped_autorelease_pool.h"
+@@ -23,3 +25,5 @@ ScopedAutoreleasePool::~ScopedAutoreleasePool() {
+ }
+ 
+ }  // namespace rtc
++
++#endif  // defined(WERTC_MAC)

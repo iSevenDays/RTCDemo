@@ -19,6 +19,7 @@ APPEND = """
    'target_name':'webrtc_shared',
    'type':'shared_library',
    'xcode_settings':{
+   'IPHONEOS_DEPLOYMENT_TARGET': '7.0',
    },
    'dependencies':[
       '<(webrtc_root)/api/api.gyp:libjingle_peerconnection',
@@ -124,12 +125,14 @@ APPEND = """
    ],
    'all_dependent_settings':{
       'xcode_settings':{
+		 'IPHONEOS_DEPLOYMENT_TARGET': '7.0',
          'CLANG_ENABLE_OBJC_ARC':'YES',
       },
 
    },
    'xcode_settings':{
       'CLANG_ENABLE_OBJC_ARC':'YES',
+	  'IPHONEOS_DEPLOYMENT_TARGET': '7.0',
       # common.gypi enables this for mac but we want this to be disabled
             # like it is for ios.
             'CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS':'NO',

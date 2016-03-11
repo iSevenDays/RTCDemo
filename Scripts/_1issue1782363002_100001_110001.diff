@@ -1,0 +1,23 @@
+Index: webrtc/base/BUILD.gn
+diff --git a/webrtc/base/BUILD.gn b/webrtc/base/BUILD.gn
+index b4d14fc6d13c6cb66976e858b070732ee44fc61e..5b80e841e2ab492270361044ef7fbe432d475847 100644
+--- a/webrtc/base/BUILD.gn
++++ b/webrtc/base/BUILD.gn
+@@ -141,6 +141,8 @@ static_library("rtc_base_approved") {
+     "rate_statistics.cc",
+     "rate_statistics.h",
+     "refcount.h",
++    "scoped_autorelease_pool.h",
++    "scoped_autorelease_pool.mm",
+     "scoped_ptr.h",
+     "scoped_ref_ptr.h",
+     "stringencode.cc",
+@@ -283,8 +285,6 @@ static_library("rtc_base") {
+     "ratetracker.h",
+     "rtccertificate.cc",
+     "rtccertificate.h",
+-    "scoped_autorelease_pool.h",
+-    "scoped_autorelease_pool.mm",
+     "sha1.cc",
+     "sha1.h",
+     "sha1digest.cc",
