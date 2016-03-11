@@ -40,20 +40,17 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	// MARK: ImageGalleryStoryInteractorInput tests
 	//
 	
-	func DISABLE_testPresenterHandlesViewReadyEvent() {
-		// given
-		
+	func testPresenterHandlesViewReadyEvent() {
 		// when
 		self.presenter.viewIsReady()
 		
 		// then
+		XCTAssertTrue(self.mockView.setupInitialStateGotCalled)
 		XCTAssertTrue(self.mockView.collectionViewGotCalled)
 		XCTAssertTrue(self.mockInteractor.configureCollectionViewGotCalled)
 	}
 	
 	func testPresenterHandlesStartButtonTapedEvent() {
-		// given
-		
 		// when
 		self.presenter.didTriggerStartButtonTaped()
 		
@@ -106,7 +103,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		}
 		
 		func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {
-			configureCollectionViewGotCalled = false
+			configureCollectionViewGotCalled = true
 		}
     }
 
@@ -119,8 +116,11 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		var configureViewForReceivingGotCalled = false
 		var reloadCollectionViewGotCalled = false
 		var collectionViewGotCalled = false
+		
+		var setupInitialStateGotCalled = false
+		
         func setupInitialState() {
-
+			setupInitialStateGotCalled = true
         }
 		
 		func configureViewForReceiving() {
@@ -130,10 +130,10 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		func reloadCollectionView() {
 			reloadCollectionViewGotCalled = true
 		}
-// TODO fix crash
+
 		func collectionView() -> ImageGalleryStoryCollectionView {
-			collectionViewGotCalled = false
-			let collection = ImageGalleryStoryCollectionView()
+			collectionViewGotCalled = true
+			let collection = ImageGalleryStoryCollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
 			return collection
 		}
     }

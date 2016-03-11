@@ -49,6 +49,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-QBRTCDemo_sTests-RamblerTyphoonUtils.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-QBRTCDemo_sTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Typhoon.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -87,6 +97,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>911EAA7790657CEF34786210606959B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CC03CA0B0EFE1E8062940D1C52D84AF9</key>
 		<dict>
 			<key>primary</key>
@@ -108,6 +123,11 @@
 			<true/>
 		</dict>
 		<key>ED166BF6D21249FEB250996F90791EEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F354F302F6279CE3FB7E33EE2AB6FA04</key>
 		<dict>
 			<key>primary</key>
 			<true/>

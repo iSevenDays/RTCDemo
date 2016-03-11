@@ -1,0 +1,460 @@
+Index: webrtc/base/BUILD.gn
+diff --git a/webrtc/base/BUILD.gn b/webrtc/base/BUILD.gn
+index b4d14fc6d13c6cb66976e858b070732ee44fc61e..5b80e841e2ab492270361044ef7fbe432d475847 100644
+--- a/webrtc/base/BUILD.gn
++++ b/webrtc/base/BUILD.gn
+@@ -141,6 +141,8 @@ static_library("rtc_base_approved") {
+     "rate_statistics.cc",
+     "rate_statistics.h",
+     "refcount.h",
++    "scoped_autorelease_pool.h",
++    "scoped_autorelease_pool.mm",
+     "scoped_ptr.h",
+     "scoped_ref_ptr.h",
+     "stringencode.cc",
+@@ -283,8 +285,6 @@ static_library("rtc_base") {
+     "ratetracker.h",
+     "rtccertificate.cc",
+     "rtccertificate.h",
+-    "scoped_autorelease_pool.h",
+-    "scoped_autorelease_pool.mm",
+     "sha1.cc",
+     "sha1.h",
+     "sha1digest.cc",
+Index: webrtc/base/base.gyp
+diff --git a/webrtc/base/base.gyp b/webrtc/base/base.gyp
+index f43fde215c78c9e74629c3fd16306a6b20d472cd..5219cecf5ced97f1abd382da861f63a53602be65 100644
+--- a/webrtc/base/base.gyp
++++ b/webrtc/base/base.gyp
+@@ -118,6 +118,8 @@
+         'ratetracker.cc',
+         'ratetracker.h',
+         'refcount.h',
++        'scoped_autorelease_pool.h',
++        'scoped_autorelease_pool.mm',
+         'scoped_ptr.h',
+         'scoped_ref_ptr.h',
+         'stringencode.cc',
+@@ -322,8 +324,6 @@
+         'rollingaccumulator.h',
+         'rtccertificate.cc',
+         'rtccertificate.h',
+-        'scoped_autorelease_pool.h',
+-        'scoped_autorelease_pool.mm',
+         'scopedptrcollection.h',
+         'sec_buffer.h',
+         'sha1.cc',
+Index: webrtc/base/objc/RTCDispatcher.h
+diff --git a/webrtc/base/objc/RTCDispatcher.h b/webrtc/base/objc/RTCDispatcher.h
+index c32b93d47206815bc49fb9ea3b27370a0a33555e..a9b92a661fd1f6c82b90ffff4e23e691993f693c 100644
+--- a/webrtc/base/objc/RTCDispatcher.h
++++ b/webrtc/base/objc/RTCDispatcher.h
+@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, RTCDispatcherQueueType) {
+   // Used for starting/stopping AVCaptureSession, and assigning
+   // capture session to AVCaptureVideoPreviewLayer.
+   RTCDispatcherTypeCaptureSession,
++  // Used for operations on AVAudioSession.
++  RTCDispatcherTypeAudioSession,
+ };
+ 
+ /** Dispatcher that asynchronously dispatches blocks to a specific
+Index: webrtc/base/objc/RTCDispatcher.m
+diff --git a/webrtc/base/objc/RTCDispatcher.m b/webrtc/base/objc/RTCDispatcher.m
+index 065705a4aea70e368658f4d2e346ef902a6d5d99..3d469c6dab782d48475aa8f5ce4a8ee7235e8bbd 100644
+--- a/webrtc/base/objc/RTCDispatcher.m
++++ b/webrtc/base/objc/RTCDispatcher.m
+@@ -10,15 +10,20 @@
+ 
+ #import "RTCDispatcher.h"
+ 
++static dispatch_queue_t kAudioSessionQueue = nil;
+ static dispatch_queue_t kCaptureSessionQueue = nil;
+ 
+ @implementation RTCDispatcher {
+   dispatch_queue_t _captureSessionQueue;
++  dispatch_queue_t _audioSessionQueue;
+ }
+ 
+ + (void)initialize {
+   static dispatch_once_t onceToken;
+   dispatch_once(&onceToken, ^{
++    kAudioSessionQueue = dispatch_queue_create(
++        "org.webrtc.RTCDispatcherAudioSession",
++        DISPATCH_QUEUE_SERIAL);
+     kCaptureSessionQueue = dispatch_queue_create(
+         "org.webrtc.RTCDispatcherCaptureSession",
+         DISPATCH_QUEUE_SERIAL);
+@@ -39,6 +44,8 @@ static dispatch_queue_t kCaptureSessionQueue = nil;
+       return dispatch_get_main_queue();
+     case RTCDispatcherTypeCaptureSession:
+       return kCaptureSessionQueue;
++    case RTCDispatcherTypeAudioSession:
++      return kAudioSessionQueue;
+   }
+ }
+ 
+Index: webrtc/base/scoped_autorelease_pool.mm
+diff --git a/webrtc/base/scoped_autorelease_pool.mm b/webrtc/base/scoped_autorelease_pool.mm
+index 4176aad0e9cda5016da93017185b163bcfe7ec0e..ed557b474db5da9c6d9c341b59df017e1d1fdc37 100644
+--- a/webrtc/base/scoped_autorelease_pool.mm
++++ b/webrtc/base/scoped_autorelease_pool.mm
+@@ -8,6 +8,8 @@
+  *  be found in the AUTHORS file in the root of the source tree.
+  */
+ 
++#if defined(WEBRTC_MAC)
++
+ #import <Foundation/Foundation.h>
+ 
+ #import "webrtc/base/scoped_autorelease_pool.h"
+@@ -23,3 +25,5 @@ ScopedAutoreleasePool::~ScopedAutoreleasePool() {
+ }
+ 
+ }  // namespace rtc
++
++#endif  // defined(WERTC_MAC)
+Index: webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.h
+diff --git a/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.h b/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.h
+index 378281d0057311444b1ec0a9eef37e24fdd7c0ae..636443afdf0b3915a1cb88cf23c817ac339bfe9a 100644
+--- a/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.h
++++ b/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.h
+@@ -21,6 +21,9 @@
+ // Called when the camera switch button is pressed.
+ - (void)videoCallViewDidSwitchCamera:(ARDVideoCallView *)view;
+ 
++// Called when the route change button is pressed.
++- (void)videoCallViewDidChangeRoute:(ARDVideoCallView *)view;
++
+ // Called when the hangup button is pressed.
+ - (void)videoCallViewDidHangup:(ARDVideoCallView *)view;
+ 
+Index: webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.m
+diff --git a/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.m b/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.m
+index 4c9c9d284e0ef0bd5c1baaa919cb01cfb524f0ae..6e5fc597e9fc2defaba07e8dc02dad4eafb2f9b6 100644
+--- a/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.m
++++ b/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallView.m
+@@ -23,6 +23,7 @@ static CGFloat const kStatusBarHeight = 20;
+ @end
+ 
+ @implementation ARDVideoCallView {
++  UIButton *_routeChangeButton;
+   UIButton *_cameraSwitchButton;
+   UIButton *_hangupButton;
+   CGSize _remoteVideoSize;
+@@ -48,12 +49,23 @@ static CGFloat const kStatusBarHeight = 20;
+     _statsView.hidden = YES;
+     [self addSubview:_statsView];
+ 
++    _routeChangeButton = [UIButton buttonWithType:UIButtonTypeCustom];
++    _routeChangeButton.backgroundColor = [UIColor whiteColor];
++    _routeChangeButton.layer.cornerRadius = kButtonSize / 2;
++    _routeChangeButton.layer.masksToBounds = YES;
++    UIImage *image = [UIImage imageNamed:@"ic_surround_sound_black_24dp.png"];
++    [_routeChangeButton setImage:image forState:UIControlStateNormal];
++    [_routeChangeButton addTarget:self
++                           action:@selector(onRouteChange:)
++                 forControlEvents:UIControlEventTouchUpInside];
++    [self addSubview:_routeChangeButton];
++
+     // TODO(tkchin): don't display this if we can't actually do camera switch.
+     _cameraSwitchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+     _cameraSwitchButton.backgroundColor = [UIColor whiteColor];
+     _cameraSwitchButton.layer.cornerRadius = kButtonSize / 2;
+     _cameraSwitchButton.layer.masksToBounds = YES;
+-    UIImage *image = [UIImage imageNamed:@"ic_switch_video_black_24dp.png"];
++    image = [UIImage imageNamed:@"ic_switch_video_black_24dp.png"];
+     [_cameraSwitchButton setImage:image forState:UIControlStateNormal];
+     [_cameraSwitchButton addTarget:self
+                       action:@selector(onCameraSwitch:)
+@@ -140,6 +152,12 @@ static CGFloat const kStatusBarHeight = 20;
+       CGRectGetMaxX(cameraSwitchFrame) + kButtonPadding;
+   _cameraSwitchButton.frame = cameraSwitchFrame;
+ 
++  // Place route button to the right of camera button.
++  CGRect routeChangeFrame = _cameraSwitchButton.frame;
++  routeChangeFrame.origin.x =
++      CGRectGetMaxX(routeChangeFrame) + kButtonPadding;
++  _routeChangeButton.frame = routeChangeFrame;
++
+   [_statusLabel sizeToFit];
+   _statusLabel.center =
+       CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+@@ -160,6 +178,10 @@ static CGFloat const kStatusBarHeight = 20;
+   [_delegate videoCallViewDidSwitchCamera:self];
+ }
+ 
++- (void)onRouteChange:(id)sender {
++  [_delegate videoCallViewDidChangeRoute:self];
++}
++
+ - (void)onHangup:(id)sender {
+   [_delegate videoCallViewDidHangup:self];
+ }
+Index: webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallViewController.m
+diff --git a/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallViewController.m b/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallViewController.m
+index 51290a05b585bed47fe4074f17bf80b0cbec5026..9bf4c07daebcb4bb379a84a7f2f0101a909b6381 100644
+--- a/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallViewController.m
++++ b/webrtc/examples/objc/AppRTCDemo/ios/ARDVideoCallViewController.m
+@@ -10,6 +10,9 @@
+ 
+ #import "ARDVideoCallViewController.h"
+ 
++#import "webrtc/base/objc/RTCDispatcher.h"
++#import "webrtc/modules/audio_device/ios/objc/RTCAudioSession.h"
++
+ #import "RTCAVFoundationVideoSource.h"
+ #import "RTCLogging.h"
+ 
+@@ -27,6 +30,7 @@
+   ARDAppClient *_client;
+   RTCVideoTrack *_remoteVideoTrack;
+   RTCVideoTrack *_localVideoTrack;
++  AVAudioSessionPortOverride _portOverride;
+ }
+ 
+ @synthesize videoCallView = _videoCallView;
+@@ -117,6 +121,26 @@
+   [self switchCamera];
+ }
+ 
++- (void)videoCallViewDidChangeRoute:(ARDVideoCallView *)view {
++  AVAudioSessionPortOverride override = AVAudioSessionPortOverrideNone;
++  if (_portOverride == AVAudioSessionPortOverrideNone) {
++    override = AVAudioSessionPortOverrideSpeaker;
++  }
++  [RTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeAudioSession
++                               block:^{
++    RTCAudioSession *session = [RTCAudioSession sharedInstance];
++    [session lockForConfiguration];
++    NSError *error = nil;
++    if ([session overrideOutputAudioPort:override error:&error]) {
++      _portOverride = override;
++    } else {
++      RTCLogError(@"Error overriding output port: %@",
++                  error.localizedDescription);
++    }
++    [session unlockForConfiguration];
++  }];
++}
++
+ - (void)videoCallViewDidEnableStats:(ARDVideoCallView *)view {
+   _client.shouldGetStats = YES;
+   _videoCallView.statsView.hidden = NO;
+Index: webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp.png
+diff --git a/webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp.png b/webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..8f3343d3a76ef23f14fbbc6267f5cb913324ca0b
+Binary files /dev/null and b/webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp.png differ
+Index: webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp@2x.png
+diff --git a/webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp@2x.png b/webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..764880467a19c241cc79a00d8c1ba1b06a2d9822
+Binary files /dev/null and b/webrtc/examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp@2x.png differ
+Index: webrtc/modules/audio_device/ios/objc/RTCAudioSession+Private.h
+diff --git a/webrtc/modules/audio_device/ios/objc/RTCAudioSession+Private.h b/webrtc/modules/audio_device/ios/objc/RTCAudioSession+Private.h
+index 523a4c10941fcf9a414c473bb798fb6915cf7bc2..fb311853b79afab72c83db3d0dd524b405ba3fe2 100644
+--- a/webrtc/modules/audio_device/ios/objc/RTCAudioSession+Private.h
++++ b/webrtc/modules/audio_device/ios/objc/RTCAudioSession+Private.h
+@@ -14,9 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
+ 
+ @interface RTCAudioSession ()
+ 
+-/** The lock that guards access to AVAudioSession methods. */
+-@property(nonatomic, strong) NSRecursiveLock *lock;
+-
+ /** The delegates. */
+ @property(nonatomic, readonly) NSSet *delegates;
+ 
+Index: webrtc/modules/audio_device/ios/objc/RTCAudioSession.mm
+diff --git a/webrtc/modules/audio_device/ios/objc/RTCAudioSession.mm b/webrtc/modules/audio_device/ios/objc/RTCAudioSession.mm
+index ea7c546e8e9143decad7e60d08c729358ac155ca..83189b900c8104fbc2bf9d69e79645ea1e291248 100644
+--- a/webrtc/modules/audio_device/ios/objc/RTCAudioSession.mm
++++ b/webrtc/modules/audio_device/ios/objc/RTCAudioSession.mm
+@@ -11,6 +11,7 @@
+ #import "webrtc/modules/audio_device/ios/objc/RTCAudioSession.h"
+ 
+ #include "webrtc/base/checks.h"
++#include "webrtc/base/criticalsection.h"
+ 
+ #import "webrtc/base/objc/RTCLogging.h"
+ #import "webrtc/modules/audio_device/ios/objc/RTCAudioSession+Private.h"
+@@ -22,15 +23,15 @@ NSInteger const kRTCAudioSessionErrorLockRequired = -1;
+ // TODO(tkchin): Consider more granular locking. We're not expecting a lot of
+ // lock contention so coarse locks should be fine for now.
+ @implementation RTCAudioSession {
++  rtc::CriticalSection _crit;
+   AVAudioSession *_session;
+   NSHashTable *_delegates;
+   NSInteger _activationCount;
++  NSInteger _lockRecursionCount;
+   BOOL _isActive;
+-  BOOL _isLocked;
+ }
+ 
+ @synthesize session = _session;
+-@synthesize lock = _lock;
+ 
+ + (instancetype)sharedInstance {
+   static dispatch_once_t onceToken;
+@@ -45,7 +46,7 @@ NSInteger const kRTCAudioSessionErrorLockRequired = -1;
+   if (self = [super init]) {
+     _session = [AVAudioSession sharedInstance];
+     _delegates = [NSHashTable weakObjectsHashTable];
+-    _lock = [[NSRecursiveLock alloc] init];
++
+     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+     [center addObserver:self
+                selector:@selector(handleInterruptionNotification:)
+@@ -86,7 +87,7 @@ NSInteger const kRTCAudioSessionErrorLockRequired = -1;
+ 
+ - (BOOL)isLocked {
+   @synchronized(self) {
+-    return _isLocked;
++    return _lockRecursionCount > 0;
+   }
+ }
+ 
+@@ -103,24 +104,23 @@ NSInteger const kRTCAudioSessionErrorLockRequired = -1;
+ }
+ 
+ - (void)lockForConfiguration {
+-  [_lock lock];
++  _crit.Enter();
+   @synchronized(self) {
+-    _isLocked = YES;
++    ++_lockRecursionCount;
+   }
+ }
+ 
+ - (void)unlockForConfiguration {
+   // Don't let threads other than the one that called lockForConfiguration
+   // unlock.
+-  if ([_lock tryLock]) {
++  if (_crit.TryEnter()) {
+     @synchronized(self) {
+-      _isLocked = NO;
++      --_lockRecursionCount;
+     }
+     // One unlock for the tryLock, and another one to actually unlock. If this
+-    // was called without anyone calling lock, the underlying NSRecursiveLock
+-    // should spit out an error.
+-    [_lock unlock];
+-    [_lock unlock];
++    // was called without anyone calling lock, we will hit an assertion.
++    _crit.Leave();
++    _crit.Leave();
+   }
+ }
+ 
+Index: webrtc/modules/audio_device/ios/objc/RTCAudioSessionTest.mm
+diff --git a/webrtc/modules/audio_device/ios/objc/RTCAudioSessionTest.mm b/webrtc/modules/audio_device/ios/objc/RTCAudioSessionTest.mm
+new file mode 100644
+index 0000000000000000000000000000000000000000..ac065c7e3790acea8bc4487e422579504cecb9f3
+--- /dev/null
++++ b/webrtc/modules/audio_device/ios/objc/RTCAudioSessionTest.mm
+@@ -0,0 +1,44 @@
++/*
++ *  Copyright 2016 The WebRTC project authors. All Rights Reserved.
++ *
++ *  Use of this source code is governed by a BSD-style license
++ *  that can be found in the LICENSE file in the root of the source
++ *  tree. An additional intellectual property rights grant can be found
++ *  in the file PATENTS.  All contributing project authors may
++ *  be found in the AUTHORS file in the root of the source tree.
++ */
++
++#import <Foundation/Foundation.h>
++
++#include "testing/gtest/include/gtest/gtest.h"
++
++#import "webrtc/modules/audio_device/ios/objc/RTCAudioSession.h"
++
++@interface RTCAudioSessionTest : NSObject
++
++- (void)testLockForConfiguration;
++
++@end
++
++@implementation RTCAudioSessionTest
++
++- (void)testLockForConfiguration {
++  RTCAudioSession *session = [RTCAudioSession sharedInstance];
++
++  for (size_t i = 0; i < 2; i++) {
++    [session lockForConfiguration];
++    EXPECT_TRUE(session.isLocked);
++  }
++  for (size_t i = 0; i < 2; i++) {
++    EXPECT_TRUE(session.isLocked);
++    [session unlockForConfiguration];
++  }
++  EXPECT_FALSE(session.isLocked);
++}
++
++@end
++
++TEST(RTCAudioSessionTest, LockForConfiguration) {
++  RTCAudioSessionTest *test = [[RTCAudioSessionTest alloc] init];
++  [test testLockForConfiguration];
++}
+Index: webrtc/modules/modules.gyp
+diff --git a/webrtc/modules/modules.gyp b/webrtc/modules/modules.gyp
+index 5deef3596ccb986ec7e9847ddb7d5d273abe4dbc..89af024bc60aa24fff86b1dc94c10d314c650517 100644
+--- a/webrtc/modules/modules.gyp
++++ b/webrtc/modules/modules.gyp
+@@ -471,9 +471,13 @@
+               ],
+             }],
+             ['OS=="ios"', {
++              'includes': [
++                '../build/objc_common.gypi',
++              ],
+               'sources': [
+                 'video_coding/codecs/h264/h264_video_toolbox_nalu_unittest.cc',
+                 'audio_device/ios/audio_device_unittest_ios.cc',
++                'audio_device/ios/objc/RTCAudioSessionTest.mm',
+               ],
+               # This needs to be kept in sync with modules_unittests.isolate.
+               'mac_bundle_resources': [
+Index: webrtc/test/run_all_unittests.cc
+diff --git a/webrtc/test/run_all_unittests.cc b/webrtc/test/run_all_unittests.cc
+index 486df5ea8cc956ba2a984a36df90f7c77862b163..80166c3ca8a1bd2db395f5e3f095a01cd5e68969 100644
+--- a/webrtc/test/run_all_unittests.cc
++++ b/webrtc/test/run_all_unittests.cc
+@@ -8,9 +8,13 @@
+  *  be found in the AUTHORS file in the root of the source tree.
+  */
+ 
++#include "webrtc/base/scoped_autorelease_pool.h"
+ #include "webrtc/test/test_suite.h"
+ 
+ int main(int argc, char** argv) {
++#if defined(WEBRTC_MAC)
++  rtc::ScopedAutoreleasePool pool;
++#endif
+   webrtc::test::TestSuite test_suite(argc, argv);
+   return test_suite.Run();
+ }
+Index: webrtc/webrtc_examples.gyp
+diff --git a/webrtc/webrtc_examples.gyp b/webrtc/webrtc_examples.gyp
+index 74162a1c8dd876b9c6cf9887f82385df3c774c9a..3baa6901818cac0cd140e7f382b601ca13d265b3 100755
+--- a/webrtc/webrtc_examples.gyp
++++ b/webrtc/webrtc_examples.gyp
+@@ -281,14 +281,16 @@
+           'conditions': [
+             ['OS=="ios"', {
+               'mac_bundle_resources': [
++                'examples/objc/AppRTCDemo/ios/resources/Roboto-Regular.ttf',
+                 'examples/objc/AppRTCDemo/ios/resources/iPhone5@2x.png',
+                 'examples/objc/AppRTCDemo/ios/resources/iPhone6@2x.png',
+                 'examples/objc/AppRTCDemo/ios/resources/iPhone6p@3x.png',
+-                'examples/objc/AppRTCDemo/ios/resources/Roboto-Regular.ttf',
+                 'examples/objc/AppRTCDemo/ios/resources/ic_call_end_black_24dp.png',
+                 'examples/objc/AppRTCDemo/ios/resources/ic_call_end_black_24dp@2x.png',
+                 'examples/objc/AppRTCDemo/ios/resources/ic_clear_black_24dp.png',
+                 'examples/objc/AppRTCDemo/ios/resources/ic_clear_black_24dp@2x.png',
++                'examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp.png',
++                'examples/objc/AppRTCDemo/ios/resources/ic_surround_sound_black_24dp@2x.png',
+                 'examples/objc/AppRTCDemo/ios/resources/ic_switch_video_black_24dp.png',
+                 'examples/objc/AppRTCDemo/ios/resources/ic_switch_video_black_24dp@2x.png',
+                 'examples/objc/AppRTCDemo/ios/resources/mozart.mp3',

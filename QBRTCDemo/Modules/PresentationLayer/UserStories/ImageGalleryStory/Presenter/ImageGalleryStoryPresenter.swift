@@ -22,6 +22,8 @@
 	// MARK: ImageGalleryStoryViewOutput
 	
 	func viewIsReady() {
+		self.view.setupInitialState()
+		
 		self.interactor.configureCollectionView(self.view.collectionView())
 	}
 	

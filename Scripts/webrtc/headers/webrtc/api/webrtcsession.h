@@ -147,7 +147,6 @@ class WebRtcSession : public AudioProviderInterface,
 
   bool Initialize(
       const PeerConnectionFactoryInterface::Options& options,
-      const MediaConstraintsInterface* constraints,
       rtc::scoped_ptr<DtlsIdentityStoreInterface> dtls_identity_store,
       const PeerConnectionInterface::RTCConfiguration& rtc_configuration);
   // Deletes the voice, video and data channel and changes the session state
@@ -197,7 +196,6 @@ class WebRtcSession : public AudioProviderInterface,
       const PeerConnectionInterface::RTCOfferAnswerOptions& options,
       const cricket::MediaSessionOptions& session_options);
   void CreateAnswer(CreateSessionDescriptionObserver* observer,
-                    const MediaConstraintsInterface* constraints,
                     const cricket::MediaSessionOptions& session_options);
   // The ownership of |desc| will be transferred after this call.
   bool SetLocalDescription(SessionDescriptionInterface* desc,
@@ -234,7 +232,7 @@ class WebRtcSession : public AudioProviderInterface,
   void SetAudioSend(uint32_t ssrc,
                     bool enable,
                     const cricket::AudioOptions& options,
-                    cricket::AudioRenderer* renderer) override;
+                    cricket::AudioSource* source) override;
   void SetAudioPlayoutVolume(uint32_t ssrc, double volume) override;
   void SetRawAudioSink(uint32_t ssrc,
                        rtc::scoped_ptr<AudioSinkInterface> sink) override;

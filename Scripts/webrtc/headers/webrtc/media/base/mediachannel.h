@@ -24,7 +24,7 @@
 #include "webrtc/base/socket.h"
 #include "webrtc/base/window.h"
 #include "webrtc/media/base/codec.h"
-#include "webrtc/media/base/constants.h"
+#include "webrtc/media/base/mediaconstants.h"
 #include "webrtc/media/base/streamparams.h"
 #include "webrtc/media/base/videosinkinterface.h"
 // TODO(juberti): re-evaluate this include
@@ -42,7 +42,7 @@ class AudioSinkInterface;
 
 namespace cricket {
 
-class AudioRenderer;
+class AudioSource;
 class ScreencastId;
 class VideoCapturer;
 class VideoFrame;
@@ -87,30 +87,38 @@ struct MediaConfig {
   // PeerConnection constraint 'googDscp'.
   bool enable_dscp = false;
 
-  // Video-specific config
+  // Video-specific config.
+  struct Video {
+    // Enable WebRTC CPU Overuse Detection. This flag comes from the
+    // PeerConnection constraint 'googCpuOveruseDetection' and is
+    // checked in WebRtcVideoChannel2::OnLoadUpdate, where it's passed
+    // to VideoCapturer::video_adapter()->OnCpuResolutionRequest.
+    bool enable_cpu_overuse_detection = true;
 
-  // Enable WebRTC CPU Overuse Detection. This flag comes from the
-  // PeerConnection constraint 'googCpuOveruseDetection' and is
-  // checked in WebRtcVideoChannel2::OnLoadUpdate, where it's passed
-  // to VideoCapturer::video_adapter()->OnCpuResolutionRequest.
-  bool enable_cpu_overuse_detection = true;
+    // Enable WebRTC suspension of video. No video frames will be sent
+    // when the bitrate is below the configured minimum bitrate. This
+    // flag comes from the PeerConnection constraint
+    // 'googSuspendBelowMinBitrate', and WebRtcVideoChannel2 copies it
+    // to VideoSendStream::Config::suspend_below_min_bitrate.
+    bool suspend_below_min_bitrate = false;
 
-  // Set to true if the renderer has an algorithm of frame selection.
-  // If the value is true, then WebRTC will hand over a frame as soon as
-  // possible without delay, and rendering smoothness is completely the duty
-  // of the renderer;
-  // If the value is false, then WebRTC is responsible to delay frame release
-  // in order to increase rendering smoothness.
-  //
-  // This flag comes from PeerConnection's RtcConfiguration, but is
-  // currently only set by the command line flag
-  // 'disable-rtc-smoothness-algorithm'.
-  // WebRtcVideoChannel2::AddRecvStream copies it to the created
-  // WebRtcVideoReceiveStream, where it is returned by the
-  // SmoothsRenderedFrames method. This method is used by the
-  // VideoReceiveStream, where the value is passed on to the
-  // IncomingVideoStream constructor.
-  bool disable_prerenderer_smoothing = false;
+    // Set to true if the renderer has an algorithm of frame selection.
+    // If the value is true, then WebRTC will hand over a frame as soon as
+    // possible without delay, and rendering smoothness is completely the duty
+    // of the renderer;
+    // If the value is false, then WebRTC is responsible to delay frame release
+    // in order to increase rendering smoothness.
+    //
+    // This flag comes from PeerConnection's RtcConfiguration, but is
+    // currently only set by the command line flag
+    // 'disable-rtc-smoothness-algorithm'.
+    // WebRtcVideoChannel2::AddRecvStream copies it to the created
+    // WebRtcVideoReceiveStream, where it is returned by the
+    // SmoothsRenderedFrames method. This method is used by the
+    // VideoReceiveStream, where the value is passed on to the
+    // IncomingVideoStream constructor.
+    bool disable_prerenderer_smoothing = false;
+  } video;
 };
 
 // Options that can be applied to a VoiceMediaChannel or a VoiceMediaEngine.
@@ -249,24 +257,23 @@ struct AudioOptions {
 struct VideoOptions {
   void SetAll(const VideoOptions& change) {
     SetFrom(&video_noise_reduction, change.video_noise_reduction);
-    SetFrom(&suspend_below_min_bitrate, change.suspend_below_min_bitrate);
     SetFrom(&screencast_min_bitrate_kbps, change.screencast_min_bitrate_kbps);
+    SetFrom(&is_screencast, change.is_screencast);
   }
 
   bool operator==(const VideoOptions& o) const {
     return video_noise_reduction == o.video_noise_reduction &&
-           suspend_below_min_bitrate == o.suspend_below_min_bitrate &&
-           screencast_min_bitrate_kbps == o.screencast_min_bitrate_kbps;
+           screencast_min_bitrate_kbps == o.screencast_min_bitrate_kbps &&
+           is_screencast == o.is_screencast;
   }
 
   std::string ToString() const {
     std::ostringstream ost;
     ost << "VideoOptions {";
     ost << ToStringIfSet("noise reduction", video_noise_reduction);
-    ost << ToStringIfSet("suspend below min bitrate",
-                         suspend_below_min_bitrate);
     ost << ToStringIfSet("screencast min bitrate kbps",
                          screencast_min_bitrate_kbps);
+    ost << ToStringIfSet("is_screencast ", is_screencast);
     ost << "}";
     return ost.str();
   }
@@ -275,16 +282,15 @@ struct VideoOptions {
   // constraint 'googNoiseReduction', and WebRtcVideoEngine2 passes it
   // on to the codec options. Disabled by default.
   rtc::Optional<bool> video_noise_reduction;
-  // Enable WebRTC suspension of video. No video frames will be sent
-  // when the bitrate is below the configured minimum bitrate. This
-  // flag comes from the PeerConnection constraint
-  // 'googSuspendBelowMinBitrate', and WebRtcVideoChannel2 copies it
-  // to VideoSendStream::Config::suspend_below_min_bitrate.
-  rtc::Optional<bool> suspend_below_min_bitrate;
   // Force screencast to use a minimum bitrate. This flag comes from
   // the PeerConnection constraint 'googScreencastMinBitrate'. It is
   // copied to the encoder config by WebRtcVideoChannel2.
   rtc::Optional<int> screencast_min_bitrate_kbps;
+  // Set by screencast sources. Implies selection of encoding settings
+  // suitable for screencast. Most likely not the right way to do
+  // things, e.g., screencast of a text document and screencast of a
+  // youtube video have different needs.
+  rtc::Optional<bool> is_screencast;
 
  private:
   template <typename T>
@@ -440,11 +446,6 @@ class MediaChannel : public sigslot::has_slots<> {
   // of network_interface_ object.
   rtc::CriticalSection network_interface_crit_;
   NetworkInterface* network_interface_;
-};
-
-enum SendFlags {
-  SEND_NOTHING,
-  SEND_MICROPHONE
 };
 
 // The stats information is structured as follows:
@@ -895,12 +896,12 @@ class VoiceMediaChannel : public MediaChannel {
   // Starts or stops playout of received audio.
   virtual bool SetPlayout(bool playout) = 0;
   // Starts or stops sending (and potentially capture) of local audio.
-  virtual bool SetSend(SendFlags flag) = 0;
+  virtual void SetSend(bool send) = 0;
   // Configure stream for sending.
   virtual bool SetAudioSend(uint32_t ssrc,
                             bool enable,
                             const AudioOptions* options,
-                            AudioRenderer* renderer) = 0;
+                            AudioSource* source) = 0;
   // Gets current energy levels for all incoming streams.
   virtual bool GetActiveStreams(AudioInfo::StreamList* actives) = 0;
   // Get the current energy level of the stream sent to the speaker.
