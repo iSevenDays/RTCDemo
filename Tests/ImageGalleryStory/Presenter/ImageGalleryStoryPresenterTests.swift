@@ -52,7 +52,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	
 	func testPresenterHandlesStartButtonTapedEvent() {
 		// when
-		self.presenter.didTriggerStartButtonTaped()
+		self.presenter.didTriggerStartButtonTapped()
 		
 		// then
 		XCTAssertTrue(self.mockInteractor.startedSynchronizationImages)

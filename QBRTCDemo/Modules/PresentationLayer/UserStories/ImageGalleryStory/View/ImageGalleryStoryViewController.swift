@@ -21,6 +21,10 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
         output.viewIsReady()
     }
 
+	@IBAction func didTapStartButton(sender: AnyObject) {
+		self.output.didTriggerStartButtonTapped()
+	}
+	
     // MARK: ImageGalleryStoryViewInput
     func setupInitialState() {
     }
@@ -34,10 +38,6 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
 	func configureViewForReceiving() {
 		self.btnStartSynchronization.title = ""
 		self.btnStartSynchronization.enabled = false
-	}
-	
-	@IBAction func didTapStartButton(sender: AnyObject) {
-		self.output.didTriggerStartButtonTaped()
 	}
 	
 	func reloadCollectionView() {

@@ -26,6 +26,7 @@ class ImageGalleryStoryViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
 		self.controller = UIStoryboard(name: "ImageGalleryStory", bundle: nil).instantiateViewControllerWithIdentifier(String( ImageGalleryStoryViewController.self)) as! ImageGalleryStoryViewController
+		
 		self.mockOutput = MockViewControllerOutput()
 		self.controller.output = self.mockOutput
 	}
@@ -56,7 +57,7 @@ class ImageGalleryStoryViewTests: XCTestCase {
 			viewIsReadyGotCalled = true
 		}
 		
-		func didTriggerStartButtonTaped() {
+		func didTriggerStartButtonTapped() {
 			startButtonTaped = true
 		}
 		

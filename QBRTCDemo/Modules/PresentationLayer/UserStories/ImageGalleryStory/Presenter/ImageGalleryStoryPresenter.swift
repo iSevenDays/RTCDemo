@@ -27,7 +27,7 @@
 		self.interactor.configureCollectionView(self.view.collectionView())
 	}
 	
-	func didTriggerStartButtonTaped() {
+	func didTriggerStartButtonTapped() {
 		self.interactor.startSynchronizationImages()
 	}
 	
