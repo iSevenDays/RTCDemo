@@ -6,13 +6,22 @@
 //  Copyright © 2015 anton. All rights reserved.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SVUser : NSObject
 
-+ (instancetype)userWithID:(NSNumber *)ID login:(NSString *)login password:(NSString *)password;
-- (instancetype)initWithID:(NSNumber *)ID login:(NSString *)login password:(NSString *)password;
++ (nonnull instancetype)userWithID:(nullable NSNumber *)ID login:(NSString *)login password:(nullable NSString *)password;
++ (nonnull instancetype)userWithID:(nullable NSNumber *)ID login:(NSString *)login password:(nullable NSString *)password tags:(nullable NSArray<NSString *> *)tags;
 
-@property (nonatomic, copy) NSNumber *ID;
+- (nonnull instancetype)initWithID:(nullable NSNumber *)ID login:(NSString *)login password:(nullable NSString *)password;
+- (nonnull instancetype)initWithID:(nullable NSNumber *)ID login:(NSString *)login password:(nullable NSString *)password tags:(nullable NSArray<NSString *> *)tags;
+
+@property (nonatomic, copy, nullable) NSNumber *ID;
 @property (nonatomic, copy) NSString *login;
-@property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy, nullable) NSString *password;
+
+@property (nonatomic, copy, nullable) NSArray <NSString *> *tags;
 
 @end
+
+NS_ASSUME_NONNULL_END

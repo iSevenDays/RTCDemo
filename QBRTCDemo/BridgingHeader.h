@@ -20,6 +20,7 @@
 #import "QBSignalingChannel.h"
 #import "FakeSignalingChannel.h"
 #import "CallServiceHelpers.h"
+#import "SVUser+QBUUser.h"
 #import <ViperMcFlurry/ViperMcFlurry.h>
 
 #endif /* BridgingHeader_h */
