@@ -8,6 +8,14 @@
 
 import XCTest
 
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
+
 class AuthStoryRouterTests: XCTestCase {
 
     override func setUp() {

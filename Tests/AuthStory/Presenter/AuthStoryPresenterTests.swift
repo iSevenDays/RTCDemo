@@ -8,11 +8,35 @@
 
 import XCTest
 
-class AuthStoryPresenterTest: XCTestCase {
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
 
+class AuthStoryPresenterTests: XCTestCase {
+
+	var presenter: AuthStoryPresenter!
+	var mockInteractor: MockInteractor!
+	var mockRouter: MockRouter!
+	var mockView: MockViewController!
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		
+		self.presenter = AuthStoryPresenter()
+		
+		self.mockInteractor = MockInteractor()
+		
+		self.mockRouter = MockRouter()
+		self.mockView = MockViewController()
+		
+		self.presenter.interactor = self.mockInteractor
+		self.presenter.router = self.mockRouter
+		self.presenter.view = self.mockView
+		
     }
 
     override func tearDown() {
@@ -20,6 +44,11 @@ class AuthStoryPresenterTest: XCTestCase {
         super.tearDown()
     }
 
+	func testRetrieveUserNameAndRoomName() {
+		// when
+		
+	}
+	
     class MockInteractor: AuthStoryInteractorInput {
 
     }
@@ -33,5 +62,25 @@ class AuthStoryPresenterTest: XCTestCase {
         func setupInitialState() {
 
         }
+		
+		func enableInput() {
+			
+		}
+		
+		func disableInput() {
+			
+		}
+		
+		func setUserName(userName: String) {
+			
+		}
+		
+		func setRoomName(roomName: String) {
+			
+		}
+		
+		func retrieveInformation() {
+			
+		}
     }
 }

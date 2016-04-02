@@ -8,16 +8,87 @@
 
 import XCTest
 
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
+
 class AuthStoryViewTests: XCTestCase {
 
+	var controller: AuthStoryViewController!
+	var mockOutput: MockViewControllerOutput!
+	
+	let emptySender = UIResponder()
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		self.controller = UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewControllerWithIdentifier(String(AuthStoryViewController.self)) as! AuthStoryViewController
+		
+		self.mockOutput = MockViewControllerOutput()
+		self.controller.output = self.mockOutput
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	// MARK: IBActions
+	
+	func testViewDidLoadTriggersViewIsReadyAction() {
+		// when
+		self.controller.viewDidLoad()
+		
+		// then
+		XCTAssertTrue(self.mockOutput.viewIsReadyGotCalled)
+	}
+	
+	func testStartButtonTriggersAction() {
+		// when
+		self.controller.didTapLoginButton(emptySender)
+		
+		// then
+		XCTAssertTrue(self.mockOutput.loginButtonTaped)
+	}
+	
+	func testReturnsUserNameAndRoomName() {
+		// given
+		let userName = "user"
+		let roomName = "room"
+		
+		self.controller.loadView()
+		
+		self.controller.setUserName(userName)
+		self.controller.setRoomName(roomName)
+		
+		// when
+		self.controller.retrieveInformation()
+		
+		// then
+		XCTAssertEqual(self.mockOutput.userName, userName)
+		XCTAssertEqual(self.mockOutput.roomName, roomName)
+	}
+	
+	class MockViewControllerOutput : AuthStoryViewOutput {
+		var viewIsReadyGotCalled = false
+		var loginButtonTaped = false
+		
+		var roomName = ""
+		var userName = ""
+		
+		func viewIsReady() {
+			viewIsReadyGotCalled = true
+		}
+		
+		func didTriggerLoginButtonTapped() {
+			loginButtonTaped = true
+		}
+		
+		func didReceiveUserName(userName: String, roomName: String) {
+			
+			self.userName = userName
+			self.roomName = roomName
+		}
+	
+	}
+
 
 }

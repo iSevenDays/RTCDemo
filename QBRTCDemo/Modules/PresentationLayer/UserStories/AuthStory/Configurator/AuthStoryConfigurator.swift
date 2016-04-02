@@ -27,6 +27,7 @@ class AuthStoryModuleConfigurator {
 
         let interactor = AuthStoryInteractor()
         interactor.output = presenter
+		interactor.restService = QBRestService()
 
         presenter.interactor = interactor
         viewController.output = presenter

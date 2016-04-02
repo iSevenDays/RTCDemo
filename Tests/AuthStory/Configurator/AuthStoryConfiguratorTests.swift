@@ -8,6 +8,14 @@
 
 import XCTest
 
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
+
 class AuthStoryModuleConfiguratorTests: XCTestCase {
 
     override func setUp() {
@@ -40,6 +48,7 @@ class AuthStoryModuleConfiguratorTests: XCTestCase {
 
         let interactor: AuthStoryInteractor = presenter.interactor as! AuthStoryInteractor
         XCTAssertNotNil(interactor.output, "output in AuthStoryInteractor is nil after configuration")
+		 XCTAssertNotNil(interactor.restService, "restService in AuthStoryInteractor is nil after configuration")
     }
 
     class AuthStoryViewControllerMock: AuthStoryViewController {

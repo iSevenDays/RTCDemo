@@ -12,7 +12,37 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
     var interactor: AuthStoryInteractorInput!
     var router: AuthStoryRouterInput!
 
+	
+	// MARK: AuthStoryViewOutput
+	
     func viewIsReady() {
 
     }
+	
+	
+	func didTriggerLoginButtonTapped() {
+		
+	}
+	
+	func didReceiveUserName(userName: String, roomName: String) {
+		
+	}
+	
+	// MARK: AuthStoryInteractorInput
+	
+	func didLoginUser(user: SVUser) {
+		
+	}
+	
+	func didSignUpUser(user: SVUser) {
+		
+	}
+	
+	func didErrorLogin(error: NSError?) {
+		
+	}
+	
+	func didErrorSignup(error: NSError?) {
+		
+	}
 }

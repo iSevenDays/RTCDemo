@@ -69,10 +69,6 @@
 		1454052D1C859431005E3790 /* DataChannelMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 1454052B1C859431005E3790 /* DataChannelMessages.h */; };
 		1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
 		1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
-		146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
-		146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
-		146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
-		146CA9EF1C62642100F768C8 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
 		146CA9F01C62643400F768C8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		146CA9F11C62643C00F768C8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
@@ -82,7 +78,34 @@
 		14736EE81C567EC5009DFBBC /* CallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 14736EE61C567EC5009DFBBC /* CallService.m */; };
 		14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14736EED1C568462009DFBBC /* WebRTCHelpers.m */; };
 		14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14736EED1C568462009DFBBC /* WebRTCHelpers.m */; };
+		1473EAC51CAC6070007F9DF8 /* AuthStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */; };
+		1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1847E4079F80C8F1433FFEF /* AuthStoryViewTests.swift */; };
+		1473EAC71CAC607C007F9DF8 /* AuthStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290BECE1782295B3A7E6D67 /* AuthStoryInteractorTests.swift */; };
+		1473EAC81CAC607C007F9DF8 /* AuthStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF0B11DA03F8E9D8D53ECFD /* AuthStoryPresenterTests.swift */; };
+		1473EAC91CAC607C007F9DF8 /* AuthStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2810D9B20834E7C66A82B3 /* AuthStoryRouterTests.swift */; };
+		1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F542C488136D61B93B026A /* AuthStoryConfiguratorTests.swift */; };
+		1473EACB1CAC6090007F9DF8 /* AuthStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */; };
+		1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E060D9B417D26811FFBC52D7 /* AuthStoryViewOutput.swift */; };
+		1473EACD1CAC6090007F9DF8 /* AuthStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50230D5A781F75168CCA1AF4 /* AuthStoryModuleInput.swift */; };
+		1473EACE1CAC6090007F9DF8 /* AuthStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDF899EEC6EBDD23CD862F6 /* AuthStoryPresenter.swift */; };
+		1473EACF1CAC6090007F9DF8 /* AuthStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA7DD6CDF214B9109C588 /* AuthStoryInteractorInput.swift */; };
+		1473EAD01CAC6090007F9DF8 /* AuthStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */; };
+		1473EAD11CAC6090007F9DF8 /* AuthStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */; };
+		1473EAD21CAC6090007F9DF8 /* AuthStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */; };
+		1473EAD31CAC6090007F9DF8 /* AuthStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D04FD706443E892936BF0 /* AuthStoryRouter.swift */; };
+		1473EAD41CAC6090007F9DF8 /* AuthStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E979D19A33587E93B35ADA1 /* AuthStoryConfigurator.swift */; };
+		1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */; };
+		1473EADA1CAC69DB007F9DF8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
+		1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
+		1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
+		1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
 		1473F3711BFF6BFE00ABA7E6 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; };
+		1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
+		1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
+		147546411CAE560C004CCE95 /* RestServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RestServiceProtocol.swift */; };
+		147546421CAE560D004CCE95 /* RestServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RestServiceProtocol.swift */; };
+		147546441CAE5649004CCE95 /* QBRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRestService.swift */; };
+		147546451CAE5649004CCE95 /* QBRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRestService.swift */; };
 		147A0C761BFE139D0009044A /* QBSignalingChannelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */; };
 		147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
 		147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestStorageTests.m */; };
@@ -486,6 +509,10 @@
 		14736EE91C56817C009DFBBC /* CallServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceProtocol.h; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
+		1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVUser+QBUUser.h"; sourceTree = "<group>"; };
+		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
+		147546401CAE5533004CCE95 /* RestServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestServiceProtocol.swift; path = RestService/RestServiceProtocol.swift; sourceTree = "<group>"; };
+		147546431CAE5649004CCE95 /* QBRestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QBRestService.swift; path = RestService/QBRestService.swift; sourceTree = "<group>"; };
 		147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannelTests.m; sourceTree = "<group>"; };
 		147A0C791BFE13FD0009044A /* TestsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsStorage.h; sourceTree = "<group>"; };
 		147A0C7A1BFE13FD0009044A /* TestsStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorage.m; sourceTree = "<group>"; };
@@ -750,16 +777,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1473EADA1CAC69DB007F9DF8 /* webrtc-arm.a in Frameworks */,
+				1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */,
+				1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */,
+				1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */,
 				1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */,
 				146CA9F51C62645400F768C8 /* GLKit.framework in Frameworks */,
 				146CA9F41C62644C00F768C8 /* VideoToolbox.framework in Frameworks */,
 				146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */,
 				146CA9F11C62643C00F768C8 /* CoreVideo.framework in Frameworks */,
 				146CA9F01C62643400F768C8 /* libstdc++.tbd in Frameworks */,
-				146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */,
-				146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */,
-				146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */,
-				146CA9EF1C62642100F768C8 /* webrtc-x86_64.a in Frameworks */,
 				D8A5049A8BBC5BAB5D1CEA6E /* libPods-QBRTCDemo_sTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1337,6 +1364,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1475463F1CAE544E004CCE95 /* RestService */ = {
+			isa = PBXGroup;
+			children = (
+				147546401CAE5533004CCE95 /* RestServiceProtocol.swift */,
+				147546431CAE5649004CCE95 /* QBRestService.swift */,
+			);
+			name = RestService;
+			sourceTree = "<group>";
+		};
 		14A028721BFA543A00BDF2C5 /* QBSignaling */ = {
 			isa = PBXGroup;
 			children = (
@@ -1473,6 +1509,7 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1475463F1CAE544E004CCE95 /* RestService */,
 				14736E821C561284009DFBBC /* CallService */,
 			);
 			path = Services;
@@ -1501,6 +1538,8 @@
 				14A028801BFB190800BDF2C5 /* SVUser.m */,
 				1454052B1C859431005E3790 /* DataChannelMessages.h */,
 				1454052C1C859431005E3790 /* DataChannelMessages.m */,
+				1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */,
+				1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2303,10 +2342,12 @@
 				142D138D1C888A8A005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				147A0C761BFE139D0009044A /* QBSignalingChannelTests.m in Sources */,
 				14398F6E1C010C9100F3CE74 /* SVSignalingMessageTests.m in Sources */,
+				1473EAC91CAC607C007F9DF8 /* AuthStoryRouterTests.swift in Sources */,
 				147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */,
 				147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */,
 				14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */,
 				14ADBDE01C73851C003A0C98 /* ImageGalleryStoryRouterTests.swift in Sources */,
+				1473EAC71CAC607C007F9DF8 /* AuthStoryInteractorTests.swift in Sources */,
 				14ADBDDE1C73851C003A0C98 /* ImageGalleryStoryInteractorTests.swift in Sources */,
 				14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */,
 				3772DBD8B200B94BC6C11C61 /* VideoStoryAssemblyTests.m in Sources */,
@@ -2316,10 +2357,13 @@
 				1439F67F1C5A556B00438B48 /* FakeSignalingChannel.m in Sources */,
 				62630B599C72A7D1974F12E0 /* VideoStoryPresenterTests.m in Sources */,
 				14ADBDDC1C73850F003A0C98 /* ImageGalleryStoryViewTests.swift in Sources */,
+				1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */,
 				190FDDC34E863B7B25D9DB7A /* VideoStoryInteractorTests.m in Sources */,
 				E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */,
 				14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */,
 				1439F67C1C5A540000438B48 /* FakeCallServiceDelegate.m in Sources */,
+				1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */,
+				1473EAC81CAC607C007F9DF8 /* AuthStoryPresenterTests.swift in Sources */,
 				1437CF731C63BB4B00CCE1BD /* BaseTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2328,22 +2372,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1473EACB1CAC6090007F9DF8 /* AuthStoryViewInput.swift in Sources */,
+				1473EAD01CAC6090007F9DF8 /* AuthStoryInteractorOutput.swift in Sources */,
+				147546421CAE560D004CCE95 /* RestServiceProtocol.swift in Sources */,
 				1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */,
+				147546441CAE5649004CCE95 /* QBRestService.swift in Sources */,
+				1473EACD1CAC6090007F9DF8 /* AuthStoryModuleInput.swift in Sources */,
+				1473EAD41CAC6090007F9DF8 /* AuthStoryConfigurator.swift in Sources */,
 				14A028711BFA541A00BDF2C5 /* SVSignalingMessageSDP.m in Sources */,
 				14ADBDF01C738554003A0C98 /* ImageGalleryStoryInteractorOutput.swift in Sources */,
+				1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				140746481BFB841000506088 /* SVSignalingParams.m in Sources */,
 				14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */,
 				14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */,
 				142D137F1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				14A028751BFA545300BDF2C5 /* QBSignalingChannel.m in Sources */,
 				14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */,
+				1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */,
 				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
 				14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */,
 				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
 				14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */,
+				1473EAD31CAC6090007F9DF8 /* AuthStoryRouter.swift in Sources */,
 				14ADBDE31C73854C003A0C98 /* ImageGalleryStoryViewOutput.swift in Sources */,
 				14ADBDE41C73854C003A0C98 /* ImageGalleryStoryViewController.swift in Sources */,
+				1473EACE1CAC6090007F9DF8 /* AuthStoryPresenter.swift in Sources */,
 				14A0288A1BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m in Sources */,
 				14ADBDE21C73854C003A0C98 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */,
@@ -2353,25 +2407,30 @@
 				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
 				14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */,
 				1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */,
+				1473EACF1CAC6090007F9DF8 /* AuthStoryInteractorInput.swift in Sources */,
 				14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */,
 				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
+				1473EAD11CAC6090007F9DF8 /* AuthStoryInteractor.swift in Sources */,
 				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
 				14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */,
 				142D13851C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */,
 				14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */,
+				1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				14A028901BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m in Sources */,
+				1473EAD21CAC6090007F9DF8 /* AuthStoryRouterInput.swift in Sources */,
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
 				14ADBDEE1C738554003A0C98 /* ImageGalleryStoryPresenter.swift in Sources */,
 				14A0286E1BFA53DB00BDF2C5 /* SVSignalingMessageICE.m in Sources */,
 				14ADBDF41C738554003A0C98 /* ImageGalleryStoryConfigurator.swift in Sources */,
 				14EE3D171C6BC7CF00C451CF /* VideoStoryAssembly.m in Sources */,
+				1473EAC51CAC6070007F9DF8 /* AuthStoryViewController.swift in Sources */,
 				14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2382,11 +2441,14 @@
 			files = (
 				1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */,
 				148233851C002DFE0000E9ED /* SVSignalingMessageSDP.m in Sources */,
+				147546411CAE560C004CCE95 /* RestServiceProtocol.swift in Sources */,
 				14D0A41D1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
+				147546451CAE5649004CCE95 /* QBRestService.swift in Sources */,
 				14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				1482338D1C002DFE0000E9ED /* SVSignalingParams.m in Sources */,
 				148233901C002DFE0000E9ED /* QBSignalingChannel.m in Sources */,
 				142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
+				1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				148233911C002DFE0000E9ED /* SVSignalingMessageType.m in Sources */,
 				148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */,
 				148233931C002DFE0000E9ED /* QBChatMessage+SVSignalingMessage.m in Sources */,
@@ -2538,6 +2600,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = QBRTCDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2580,6 +2643,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = QBRTCDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2821,7 +2885,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2865,7 +2929,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

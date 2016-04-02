@@ -10,4 +10,12 @@ import Foundation
 
 protocol AuthStoryInteractorOutput: class {
 
+	func didLoginUser(user: SVUser)
+	
+	/**
+	Called when user logined successfuly
+	But returned user is nil (this should not happen)
+	*/
+	func didErrorLogin(error: NSError?)
+	
 }

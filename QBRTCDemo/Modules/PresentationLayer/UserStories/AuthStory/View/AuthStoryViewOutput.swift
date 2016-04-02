@@ -14,4 +14,8 @@ protocol AuthStoryViewOutput {
     */
 
     func viewIsReady()
+	
+	func didTriggerLoginButtonTapped()
+	
+	func didReceiveUserName(userName: String, roomName: String)
 }
