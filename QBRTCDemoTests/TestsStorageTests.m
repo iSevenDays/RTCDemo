@@ -19,13 +19,6 @@
 
 @implementation TestStorageTests
 
-- (void)setUp {
-	[TestsStorage initConfiguration];
-}
-
-- (void)tearDown {
-	[TestsStorage reset];
-}
 
 - (void)testCorrectInit {
 	QBUUser *qbuser = [TestsStorage qbuserTest];
@@ -60,43 +53,21 @@
 - (void)testCorrectChangingPropertiesOfSVUser {
 	SVUser *svuser = [TestsStorage svuserTest];
 	
-	svuser.login = @"svg4h7580gijr9aeov[SVM";
-	svuser.password = @"svdrhugijno43487gAYCHOU*IJ__";
+	NSString *login = @"svg4h7580gijr9aeov[SVM";
+	NSString *password = @"svdrhugijno43487gAYCHOU*IJ__";
+	NSString *fullName = @"full_name_test";
+	
+	svuser.login = login;
+	svuser.password = password;
+	svuser.fullName = fullName;
 	svuser.ID = @(4785909);
 	
 	assertThat(svuser, notNilValue());
-	assertThat(svuser.login, equalTo(@"svg4h7580gijr9aeov[SVM"));
-	assertThat(svuser.password, equalTo(@"svdrhugijno43487gAYCHOU*IJ__"));
+	assertThat(svuser.login, equalTo(login));
+	assertThat(svuser.password, equalTo(password));
+	assertThat(svuser.fullName, equalTo(fullName));
 	
 	assertThat(svuser.ID, equalTo(@(4785909)));
-}
-
-- (void)testUsersResetting {
-	
-	QBUUser *qbuser = [TestsStorage qbuserTest];
-	qbuser.login = @"testlogin2%cerm23er34r";
-	qbuser.password = @"testrpgmr3497^F%ST*G&YFIU";
-	qbuser.ID = 12943050;
-	
-	SVUser *svuser = [TestsStorage svuserTest];
-	svuser.login = @"svg4h7580gijr9aeov[SVM";
-	svuser.password = @"svdrhugijno43487gAYCHOU*IJ__";
-	svuser.ID = @(4785909);
-	
-	[TestsStorage reset];
-	
-	// Default values
-	assertThat(qbuser, notNilValue());
-	
-	assertThat(qbuser.login, equalTo(@"testlogin"));
-	assertThat(qbuser.password, equalTo(@"testpass"));
-	assertThat(@(qbuser.ID), equalTo(@(777)));
-	
-	assertThat(svuser, notNilValue());
-	assertThat(svuser.login, equalTo(@"svlogin"));
-	assertThat(svuser.password, equalTo(@"svpass"));
-	assertThat(svuser.ID, equalTo(@(123)));
-	
 }
 
 - (void)testStorageAreAlwaysInitialized {

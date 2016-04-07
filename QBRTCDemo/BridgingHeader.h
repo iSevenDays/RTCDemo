@@ -21,6 +21,7 @@
 #import "FakeSignalingChannel.h"
 #import "CallServiceHelpers.h"
 #import "SVUser+QBUUser.h"
+#import "TestsStorage.h"
 #import <ViperMcFlurry/ViperMcFlurry.h>
 
 #endif /* BridgingHeader_h */
