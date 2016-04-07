@@ -55,7 +55,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		self.presenter.didTriggerStartButtonTapped()
 		
 		// then
-		XCTAssertTrue(self.mockInteractor.startedSynchronizationImages)
+		XCTAssertTrue(self.mockInteractor.startSynchronizationImagesGotCalled)
 	}
 	
 	func testPresenterConfiguresModule() {
@@ -66,6 +66,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		
 		// then
 		XCTAssertTrue(self.mockInteractor.configureWithCallServiceGotCalled)
+		XCTAssertTrue(self.mockInteractor.requestCallerRoleGotCalled)
 	}
 	
 	func testPresenterConfiguresView_whenReceiver() {
@@ -82,6 +83,22 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		
 		// then
 		XCTAssertTrue(self.mockView.reloadCollectionViewGotCalled)
+	}
+	
+	func testPresentedHandlesDidStartSynchronizationImages() {
+		// when
+		self.presenter.didStartSynchronizationImages()
+		
+		// then
+		XCTAssertTrue(self.mockView.showSynchronizationImagesStartedGotCalled)
+	}
+	
+	func testPresentedHandlesDidFinishSynchronizationImages() {
+		// when
+		self.presenter.didFinishSynchronizationImages()
+		
+		// then
+		XCTAssertTrue(self.mockView.showSynchronizationImagesFinishedGotCalled)
 	}
 
     class MockInteractor: ImageGalleryStoryInteractorInput {
