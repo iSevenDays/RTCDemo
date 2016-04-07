@@ -31,7 +31,7 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 	// MARK: AuthStoryInteractorInput
 	
 	func didLoginUser(user: SVUser) {
-		
+		router.openVideoStory()
 	}
 	
 	func didSignUpUser(user: SVUser) {

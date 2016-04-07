@@ -7,5 +7,12 @@
 //
 
 class AuthStoryRouter: AuthStoryRouterInput {
-
+	
+	let authStoryToVideoStorySegueIdentifier = "AuthStoryToVideoStorySegue"
+	
+	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!;
+	
+	func openVideoStory() {
+		transitionHandler.openModuleUsingSegue?(authStoryToVideoStorySegueIdentifier)
+	}
 }

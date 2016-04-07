@@ -39,12 +39,32 @@ class AuthStoryPresenterTests: XCTestCase {
 		
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
-	func testRetrieveUserNameAndRoomName() {
+	
+	// MARK: AuthStoryInteractorInput tests
+	
+	func testRetrievesUserNameAndRoomName_whenViewIsReady() {
+		// when
+		presenter.viewIsReady();
+		
+		// then
+		XCTAssertTrue(mockInteractor.tryRetrieveCachedUserGotCalled)
+	}
+	
+	func testHandlesLoginWithUserNameAndRoomName() {
+		// when
+		presenter.didTriggerLoginButtonTapped("userName", roomName: "roomName")
+		
+		// then
+		XCTAssertTrue(mockInteractor.signUpOrLoginWithUserNameGotCalled)
+	}
+	
+	func testOpensVideoStory_whenLoggedIn() {
+		// when
+		self.presenter.didLoginUser(TestsStorage.svuserTest())
+		
+		// then
+		XCTAssertTrue(self.mockRouter.openVideoStoryGotCalled)
+	}
 		// when
 		
 	}
@@ -54,7 +74,11 @@ class AuthStoryPresenterTests: XCTestCase {
     }
 
     class MockRouter: AuthStoryRouterInput {
-
+		var openVideoStoryGotCalled = false
+		
+		func openVideoStory() {
+			openVideoStoryGotCalled = true
+		}
     }
 
     class MockViewController: AuthStoryViewInput {
