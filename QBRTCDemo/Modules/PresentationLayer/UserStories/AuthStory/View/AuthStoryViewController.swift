@@ -65,9 +65,10 @@ class AuthStoryViewController: UITableViewController, AuthStoryViewInput {
 	}
 	
 	func retrieveInformation() {
-		let userName = self.userNameInput.text ?? ""
-		let roomName = self.roomNameInput.text ?? ""
+		let userName = self.userNameInput.text
+		let roomName = self.roomNameInput.text
 		
-		self.output.didReceiveUserName(userName, roomName: roomName)
+		self.output.didReceiveUserName(userName!, roomName: roomName!)
+		
 	}
 }

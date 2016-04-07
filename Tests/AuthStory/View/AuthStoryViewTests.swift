@@ -68,11 +68,13 @@ class AuthStoryViewTests: XCTestCase {
 		// then
 		XCTAssertEqual(self.mockOutput.userName, userName)
 		XCTAssertEqual(self.mockOutput.roomName, roomName)
+		XCTAssertTrue(self.mockOutput.didReceiveUserNameGotCalled)
 	}
 	
 	class MockViewControllerOutput : AuthStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		var loginButtonTapped = false
+		var didReceiveUserNameGotCalled = false
 		
 		var roomName = ""
 		var userName = ""
@@ -86,7 +88,7 @@ class AuthStoryViewTests: XCTestCase {
 		}
 		
 		func didReceiveUserName(userName: String, roomName: String) {
-			
+			didReceiveUserNameGotCalled = true
 			self.userName = userName
 			self.roomName = roomName
 		}
