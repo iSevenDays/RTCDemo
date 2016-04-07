@@ -16,7 +16,7 @@ import UIKit
 	import QBRTCDemo
 #endif
 
-class AuthStoryViewController: UITableViewController, AuthStoryViewInput {
+class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthStoryViewInput {
 
     var output: AuthStoryViewOutput!
 
@@ -28,6 +28,11 @@ class AuthStoryViewController: UITableViewController, AuthStoryViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
+		
+		userNameInput.addTarget(self, action: #selector(textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
+		roomNameInput.addTarget(self, action: #selector(textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
+		
+		tableView.estimatedRowHeight = 80
     }
 
 	func setInputEnabled(value: Bool) {
@@ -70,5 +75,36 @@ class AuthStoryViewController: UITableViewController, AuthStoryViewInput {
 		
 		self.output.didReceiveUserName(userName!, roomName: roomName!)
 		
+	}
+	
+	// Mark: UITextFieldDelegate methods
+	
+	// Limit max length of tag text field to 15
+	func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+		if textField != roomNameInput {
+			return true
+		}
+		
+		// Prevent crashing undo bug – see http://stackoverflow.com/a/1773257/760518
+		let charactersCount = textField.text?.characters.count ?? 0
+		if range.length + range.location > charactersCount {
+			return false
+		}
+		let newLength = charactersCount + string.characters.count - range.length
+		return newLength <= 15
+	}
+	
+	func textFieldDidChange(sender: AnyObject) {
+		let minCharactersCount = 3
+		let userName = userNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+		let tag = roomNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+		
+		login.enabled = userName?.characters.count >= minCharactersCount && tag?.characters.count >= minCharactersCount
+	}
+
+	// MARK: UITableViewDelegate
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return UITableViewAutomaticDimension
 	}
 }
