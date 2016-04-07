@@ -29,6 +29,8 @@
 		0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */; };
 		14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		140746481BFB841000506088 /* SVSignalingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 140746471BFB841000506088 /* SVSignalingParams.m */; };
+		14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 14114A171CB68FEB0092AA26 /* NSObject+Testing.m */; };
+		14114A191CB68FEB0092AA26 /* NSObject+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 14114A171CB68FEB0092AA26 /* NSObject+Testing.m */; };
 		1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1418BAEB1C761B0A0085C7E3 /* Photos.framework */; };
@@ -383,6 +385,8 @@
 		14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUserTests.m"; sourceTree = "<group>"; };
 		140746461BFB841000506088 /* SVSignalingParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingParams.h; sourceTree = "<group>"; };
 		140746471BFB841000506088 /* SVSignalingParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingParams.m; sourceTree = "<group>"; };
+		14114A161CB68FEB0092AA26 /* NSObject+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Testing.h"; sourceTree = "<group>"; };
+		14114A171CB68FEB0092AA26 /* NSObject+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Testing.m"; sourceTree = "<group>"; };
 		1417B3451C57E4E8004D6416 /* FakeCallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallService.h; sourceTree = "<group>"; };
 		1417B3461C57E4E8004D6416 /* FakeCallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallService.m; sourceTree = "<group>"; };
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -978,6 +982,8 @@
 				147A0C7C1BFE159B0009044A /* TestStorageTests.m */,
 				147A0C791BFE13FD0009044A /* TestsStorage.h */,
 				147A0C7A1BFE13FD0009044A /* TestsStorage.m */,
+				14114A161CB68FEB0092AA26 /* NSObject+Testing.h */,
+				14114A171CB68FEB0092AA26 /* NSObject+Testing.m */,
 			);
 			path = QBRTCDemoTests;
 			sourceTree = "<group>";
@@ -2357,6 +2363,7 @@
 				1439F67F1C5A556B00438B48 /* FakeSignalingChannel.m in Sources */,
 				62630B599C72A7D1974F12E0 /* VideoStoryPresenterTests.m in Sources */,
 				14ADBDDC1C73850F003A0C98 /* ImageGalleryStoryViewTests.swift in Sources */,
+				14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
 				1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */,
 				190FDDC34E863B7B25D9DB7A /* VideoStoryInteractorTests.m in Sources */,
 				E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */,
@@ -2532,6 +2539,7 @@
 				14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */,
 				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */,
+				14114A191CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
 				E93D0D88C76A33845273181B /* ImageGalleryStoryInteractorTests.swift in Sources */,
 				279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */,
 				E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */,
