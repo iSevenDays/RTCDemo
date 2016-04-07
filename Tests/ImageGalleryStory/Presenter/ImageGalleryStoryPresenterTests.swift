@@ -69,6 +69,10 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(self.mockInteractor.requestCallerRoleGotCalled)
 	}
 	
+	//
+	// MARK: ImageGalleryStoryViewInput tests
+	//
+	
 	func testPresenterConfiguresView_whenReceiver() {
 		// when
 		self.presenter.didReceiveRoleReceiver();
@@ -106,6 +110,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		
 		var configureWithCallServiceGotCalled = false
 		var configureCollectionViewGotCalled = false
+		var requestCallerRoleGotCalled = false
 		
 		func configureWithCallService(callService: protocol<CallServiceDataChannelAdditionsProtocol, CallServiceProtocol>) {
 			configureWithCallServiceGotCalled = true
@@ -116,7 +121,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		}
 		
 		func requestCallerRole() {
-			
+			requestCallerRoleGotCalled = true
 		}
 		
 		func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {

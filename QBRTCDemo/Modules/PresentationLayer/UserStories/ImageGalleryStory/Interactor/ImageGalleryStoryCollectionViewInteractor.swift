@@ -15,6 +15,7 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	var images: [UIImage] = []
 	weak var output: ImageGalleryStoryCollectionViewInteractorOutput!
 	
+	// MARK: ImageGalleryStoryCollectionViewInteractorInput
 	func addImage(image: UIImage) {
 		self.images.append(image)
 		
@@ -22,7 +23,7 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	}
 	
 	func imageAt(index: Int) -> UIImage? {
-		if images.count < index {
+		if images.count > index {
 			return self.images[index]
 		}
 		return nil;
@@ -32,6 +33,7 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 		return images.count
 	}
 	
+	// MARK: UICollectionView
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return self.imagesCount()
 	}
@@ -51,7 +53,7 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	}
 	
 	
-	// ImageGalleryStoryInteractorImagesOutput
+	// MARK: ImageGalleryStoryInteractorImagesOutput
 	
 	func didReceiveImage(image: UIImage) {
 		self.addImage(image)
