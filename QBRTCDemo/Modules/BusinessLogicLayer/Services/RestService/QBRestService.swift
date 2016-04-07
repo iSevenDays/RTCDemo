@@ -1,5 +1,5 @@
 //
-//  QBRestService.swift
+//  QBRESTService.swift
 //  QBRTCDemo
 //
 //  Created by Anton Sokolchenko on 4/1/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class QBRestService : RestServiceProtocol {
+class QBRESTService : RESTServiceProtocol {
 	
 	func loginWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?) {
 		guard !user.login.isEmpty else {

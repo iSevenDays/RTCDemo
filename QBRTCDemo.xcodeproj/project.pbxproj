@@ -104,10 +104,10 @@
 		1473F3711BFF6BFE00ABA7E6 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; };
 		1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
 		1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
-		147546411CAE560C004CCE95 /* RestServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RestServiceProtocol.swift */; };
-		147546421CAE560D004CCE95 /* RestServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RestServiceProtocol.swift */; };
-		147546441CAE5649004CCE95 /* QBRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRestService.swift */; };
-		147546451CAE5649004CCE95 /* QBRestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRestService.swift */; };
+		147546411CAE560C004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
+		147546421CAE560D004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
+		147546441CAE5649004CCE95 /* QBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRESTService.swift */; };
+		147546451CAE5649004CCE95 /* QBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRESTService.swift */; };
 		147A0C761BFE139D0009044A /* QBSignalingChannelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */; };
 		147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
 		147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestStorageTests.m */; };
@@ -515,8 +515,8 @@
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
 		1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVUser+QBUUser.h"; sourceTree = "<group>"; };
 		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
-		147546401CAE5533004CCE95 /* RestServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestServiceProtocol.swift; path = RestService/RestServiceProtocol.swift; sourceTree = "<group>"; };
-		147546431CAE5649004CCE95 /* QBRestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QBRestService.swift; path = RestService/QBRestService.swift; sourceTree = "<group>"; };
+		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RESTServiceProtocol.swift; path = RestService/RESTServiceProtocol.swift; sourceTree = "<group>"; };
+		147546431CAE5649004CCE95 /* QBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QBRESTService.swift; path = RestService/QBRESTService.swift; sourceTree = "<group>"; };
 		147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannelTests.m; sourceTree = "<group>"; };
 		147A0C791BFE13FD0009044A /* TestsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsStorage.h; sourceTree = "<group>"; };
 		147A0C7A1BFE13FD0009044A /* TestsStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorage.m; sourceTree = "<group>"; };
@@ -1370,13 +1370,13 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		1475463F1CAE544E004CCE95 /* RestService */ = {
+		1475463F1CAE544E004CCE95 /* RESTService */ = {
 			isa = PBXGroup;
 			children = (
-				147546401CAE5533004CCE95 /* RestServiceProtocol.swift */,
-				147546431CAE5649004CCE95 /* QBRestService.swift */,
+				147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */,
+				147546431CAE5649004CCE95 /* QBRESTService.swift */,
 			);
-			name = RestService;
+			name = RESTService;
 			sourceTree = "<group>";
 		};
 		14A028721BFA543A00BDF2C5 /* QBSignaling */ = {
@@ -1515,7 +1515,7 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1475463F1CAE544E004CCE95 /* RestService */,
+				1475463F1CAE544E004CCE95 /* RESTService */,
 				14736E821C561284009DFBBC /* CallService */,
 			);
 			path = Services;
@@ -2381,9 +2381,9 @@
 			files = (
 				1473EACB1CAC6090007F9DF8 /* AuthStoryViewInput.swift in Sources */,
 				1473EAD01CAC6090007F9DF8 /* AuthStoryInteractorOutput.swift in Sources */,
-				147546421CAE560D004CCE95 /* RestServiceProtocol.swift in Sources */,
+				147546421CAE560D004CCE95 /* RESTServiceProtocol.swift in Sources */,
 				1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */,
-				147546441CAE5649004CCE95 /* QBRestService.swift in Sources */,
+				147546441CAE5649004CCE95 /* QBRESTService.swift in Sources */,
 				1473EACD1CAC6090007F9DF8 /* AuthStoryModuleInput.swift in Sources */,
 				1473EAD41CAC6090007F9DF8 /* AuthStoryConfigurator.swift in Sources */,
 				14A028711BFA541A00BDF2C5 /* SVSignalingMessageSDP.m in Sources */,
@@ -2448,9 +2448,9 @@
 			files = (
 				1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */,
 				148233851C002DFE0000E9ED /* SVSignalingMessageSDP.m in Sources */,
-				147546411CAE560C004CCE95 /* RestServiceProtocol.swift in Sources */,
+				147546411CAE560C004CCE95 /* RESTServiceProtocol.swift in Sources */,
 				14D0A41D1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
-				147546451CAE5649004CCE95 /* QBRestService.swift in Sources */,
+				147546451CAE5649004CCE95 /* QBRESTService.swift in Sources */,
 				14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				1482338D1C002DFE0000E9ED /* SVSignalingParams.m in Sources */,
 				148233901C002DFE0000E9ED /* QBSignalingChannel.m in Sources */,

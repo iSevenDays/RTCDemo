@@ -1,5 +1,5 @@
 //
-//  RestServiceProtocol.swift
+//  RESTServiceProtocol.swift
 //  QBRTCDemo
 //
 //  Created by Anton Sokolchenko on 4/1/16.
@@ -7,7 +7,7 @@
 //
 
 
-protocol RestServiceProtocol {
+protocol RESTServiceProtocol {
 	
 	func loginWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?)
 	
