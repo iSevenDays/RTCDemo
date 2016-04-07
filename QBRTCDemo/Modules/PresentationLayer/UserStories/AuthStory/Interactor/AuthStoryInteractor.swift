@@ -13,6 +13,28 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
     weak var output: AuthStoryInteractorOutput!
 	var restService: protocol<RESTServiceProtocol>!
 	
+	
+	// MARK: AuthStoryInteractorInput
+	func tryRetrieveCachedUser() {
+		if let cachedUser = cachedUser() {
+			output.doingLoginWithUser(cachedUser)
+		}
+	}
+	
+	func cacheUser(user: SVUser) {
+		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
+		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: "user")
+		NSUserDefaults.standardUserDefaults().synchronize()
+	}
+	
+	func cachedUser() -> SVUser? {
+		if let userData = NSUserDefaults.standardUserDefaults().objectForKey("user") {
+			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData as! NSData) as? SVUser
+			return user
+		}
+		return nil
+	}
+	
 	func signUpOrLoginWithUserName(userName: String, tags: [String]) {
 		
 		let login = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString
