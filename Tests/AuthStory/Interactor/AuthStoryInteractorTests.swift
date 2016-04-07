@@ -98,6 +98,22 @@ class AuthStoryInteractorTests: XCTestCase {
 		XCTAssertTrue(mockOutput.doingSignUpWithUserGotCalled)
 	}
 	
+	func testCachesUserAfterLogin() {
+		// given
+		fakeService.shouldLoginSuccessfully = true
+		let userName = "test"
+		let tags = ["tag"]
+		
+		// when
+		interactor.signUpOrLoginWithUserName(userName, tags: tags)
+		
+		// then
+		let cachedUser = interactor.cachedUser()
+		XCTAssertNotNil(cachedUser)
+		XCTAssertEqual(cachedUser?.fullName, userName)
+		XCTAssertEqual(cachedUser?.tags?.first, tags.first)
+	}
+	
     class MockPresenter: AuthStoryInteractorOutput {
 		var doingLoginWithUserGotCalled = false
 		var doingSignUpWithUserGotCalled = false

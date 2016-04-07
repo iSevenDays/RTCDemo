@@ -46,7 +46,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		signUpOrLoginWithUser(user, successBlock: { [weak self] (user) in
 			
 			user.password = password
-			
+			self?.cacheUser(user)
 			self?.output.didLoginUser(user)
 			
 			}) { [weak self] (error) in
