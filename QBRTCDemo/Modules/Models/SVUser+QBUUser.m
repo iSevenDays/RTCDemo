@@ -11,7 +11,7 @@
 @implementation SVUser (QBUUser)
 
 - (instancetype)initWithQBUUser:(QBUUser *)user {
-	return [SVUser userWithID:@(user.ID) login:user.login password:user.password tags:user.tags];
+	return [[SVUser alloc] initWithID:@(user.ID) login:user.login  fullName:user.fullName password:user.password tags:user.tags];
 }
 
 @end
