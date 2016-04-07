@@ -18,23 +18,106 @@ import XCTest
 
 class AuthStoryInteractorTests: XCTestCase {
 
+	var interactor: AuthStoryInteractor!
+	var mockOutput: MockPresenter!
+	
+	let fakeService = FakeQBRESTService()
+	//let realService = QBRESTService()
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		interactor = AuthStoryInteractor()
+		mockOutput = MockPresenter()
+		interactor.output = mockOutput
+		
+		interactor.restService = fakeService
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
+	override func tearDown() {
+		super.tearDown()
+		fakeService.tearDown()
+	}
+	
+	func testNotifiesPresenterAboutSuccessfulLogin() {
+		// given
+		
+		fakeService.shouldLoginSuccessfully = true
+		
+		// when
+		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		
+		// then
+		XCTAssertTrue(mockOutput.didLoginUserGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutSuccessfulLoginAfterSignup() {
+		// given
+		fakeService.shouldLoginSuccessfully = false
+		fakeService.shouldLoginAfterSignupSuccessfully = true
+		fakeService.shouldSignUpSuccessfully = true
+		
+		// when
+		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		
+		// then
+		XCTAssertTrue(mockOutput.didLoginUserGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutFailedLogin() {
+		// given
+		fakeService.shouldLoginSuccessfully = false
+		fakeService.shouldLoginAfterSignupSuccessfully = false
+		fakeService.shouldSignUpSuccessfully = false
+		
+		// when
+		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		
+		// then
+		XCTAssertTrue(mockOutput.didErrorLoginGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutDoingLogin() {
+		// given
+		fakeService.shouldLoginSuccessfully = true
+		
+		// when
+		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		
+		// then
+		XCTAssertTrue(mockOutput.doingLoginWithUserGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutDoingSignUp() {
+		// given
+		fakeService.shouldLoginSuccessfully = false
+		
+		// when
+		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		
+		// then
+		XCTAssertTrue(mockOutput.doingSignUpWithUserGotCalled)
+	}
+	
     class MockPresenter: AuthStoryInteractorOutput {
+		var doingLoginWithUserGotCalled = false
+		var doingSignUpWithUserGotCalled = false
+		var didLoginUserGotCalled = false
+		var didErrorLoginGotCalled = false
+		
+		func doingLoginWithUser(user: SVUser) {
+			doingLoginWithUserGotCalled = true
+		}
+		
+		func doingSignUpWithUser(user: SVUser) {
+			doingSignUpWithUserGotCalled = true
+		}
+		
 		func didLoginUser(user: SVUser) {
-			
+			didLoginUserGotCalled = true
 		}
 		
 		func didErrorLogin(error: NSError?) {
-			
+			didErrorLoginGotCalled = true
 		}
     }
 }

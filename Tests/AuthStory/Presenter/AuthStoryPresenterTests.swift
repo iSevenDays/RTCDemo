@@ -65,12 +65,49 @@ class AuthStoryPresenterTests: XCTestCase {
 		// then
 		XCTAssertTrue(self.mockRouter.openVideoStoryGotCalled)
 	}
+	
+	// MARK: AuthStoryViewInput tests
+	
+	func testShowsLoggingInIndicator() {
 		// when
+		self.presenter.doingLoginWithUser(TestsStorage.svuserTest())
+		
+		// then
+		XCTAssertTrue(self.mockView.showIndicatorLoggingInGotCalled)
+		XCTAssertTrue(self.mockView.setUserNameGotCalled)
+		XCTAssertTrue(self.mockView.setRoomNameGotCalled)
 		
 	}
 	
+	func testShowsSigningUpIndicator() {
+		// when
+		self.presenter.doingSignUpWithUser(TestsStorage.svuserTest())
+		
+		// then
+		XCTAssertTrue(self.mockView.showIndicatorSigningUpGotCalled)
+		XCTAssertTrue(self.mockView.setUserNameGotCalled)
+		XCTAssertTrue(self.mockView.setRoomNameGotCalled)
+	}
+	
+	func testShowsError_whenLoginFailed() {
+		// when
+		self.presenter.didErrorLogin(nil)
+		
+		// then
+		XCTAssertTrue(self.mockView.showErrorLoginGotCalled)
+	}
+	
     class MockInteractor: AuthStoryInteractorInput {
-
+		var tryRetrieveCachedUserGotCalled = false
+		var signUpOrLoginWithUserNameGotCalled = false
+		
+		func tryRetrieveCachedUser() {
+			tryRetrieveCachedUserGotCalled = true
+		}
+		
+		func signUpOrLoginWithUserName(userName: String, tags: [String]) {
+			signUpOrLoginWithUserNameGotCalled = true
+		}
     }
 
     class MockRouter: AuthStoryRouterInput {
@@ -82,29 +119,53 @@ class AuthStoryPresenterTests: XCTestCase {
     }
 
     class MockViewController: AuthStoryViewInput {
-
+		var enableInputGotCalled = false
+		var disableInputGotCalled = false
+		
+		var setUserNameGotCalled = false
+		var setRoomNameGotCalled = false
+		
+		var retrieveInformationGotCalled = false
+		
+		var showIndicatorLoggingInGotCalled = false
+		var showIndicatorSigningUpGotCalled = false
+		
+		var showErrorLoginGotCalled = false
+		
         func setupInitialState() {
 
         }
 		
 		func enableInput() {
-			
+			enableInputGotCalled = true
 		}
 		
 		func disableInput() {
-			
+			disableInputGotCalled = true
 		}
 		
 		func setUserName(userName: String) {
-			
+			setUserNameGotCalled = true
 		}
 		
 		func setRoomName(roomName: String) {
-			
+			setRoomNameGotCalled = true
 		}
 		
 		func retrieveInformation() {
-			
+			retrieveInformationGotCalled = true
+		}
+		
+		func showIndicatorLoggingIn() {
+			showIndicatorLoggingInGotCalled = true
+		}
+		
+		func showIndicatorSigningUp() {
+			showIndicatorSigningUpGotCalled = true
+		}
+		
+		func showErrorLogin() {
+			showErrorLoginGotCalled = true
 		}
     }
 }

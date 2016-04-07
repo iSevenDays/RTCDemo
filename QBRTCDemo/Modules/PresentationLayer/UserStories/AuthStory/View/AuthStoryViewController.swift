@@ -74,6 +74,17 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 		let roomName = self.roomNameInput.text
 		
 		self.output.didReceiveUserName(userName!, roomName: roomName!)
+	}
+	
+	func showIndicatorLoggingIn() {
+		
+	}
+	
+	func showIndicatorSigningUp() {
+		
+	}
+	
+	func showErrorLogin() {
 		
 	}
 	

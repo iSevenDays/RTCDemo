@@ -11,4 +11,5 @@ import Foundation
 protocol AuthStoryInteractorInput {
 
 	func tryRetrieveCachedUser()
+	func signUpOrLoginWithUserName(userName: String, tags: [String])
 }

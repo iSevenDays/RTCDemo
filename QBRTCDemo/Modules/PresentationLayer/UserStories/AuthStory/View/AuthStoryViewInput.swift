@@ -25,4 +25,9 @@ protocol AuthStoryViewInput: class {
 	Retrieve UserName and RoomName
 	*/
 	func retrieveInformation()
+	
+	func showIndicatorLoggingIn()
+	func showIndicatorSigningUp()
+	
+	func showErrorLogin()
 }

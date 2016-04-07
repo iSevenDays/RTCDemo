@@ -34,15 +34,21 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 		router.openVideoStory()
 	}
 	
-	func didSignUpUser(user: SVUser) {
-		
-	}
-	
 	func didErrorLogin(error: NSError?) {
-		
+		view.showErrorLogin()
 	}
 	
-	func didErrorSignup(error: NSError?) {
-		
+	// MARK: AuthStoryInteractorOutput
+	
+	func doingLoginWithUser(user: SVUser) {
+		view.showIndicatorLoggingIn()
+		view.setUserName(user.fullName)
+		view.setRoomName(user.tags!.joinWithSeparator(","))
+	}
+	
+	func doingSignUpWithUser(user: SVUser) {
+		view.showIndicatorSigningUp()
+		view.setUserName(user.fullName)
+		view.setRoomName(user.tags!.joinWithSeparator(","))
 	}
 }
