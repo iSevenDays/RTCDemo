@@ -20,8 +20,8 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
     }
 	
 	
-	func didTriggerLoginButtonTapped() {
-		
+	func didTriggerLoginButtonTapped(userName: String, roomName: String) {
+		interactor.signUpOrLoginWithUserName(userName, tags: [roomName])
 	}
 	
 	func didReceiveUserName(userName: String, roomName: String) {

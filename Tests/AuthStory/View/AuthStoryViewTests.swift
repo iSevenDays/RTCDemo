@@ -41,12 +41,15 @@ class AuthStoryViewTests: XCTestCase {
 		XCTAssertTrue(self.mockOutput.viewIsReadyGotCalled)
 	}
 	
-	func testStartButtonTriggersAction() {
+	func testLoginButtonTriggersAction() {
+		// given
+		self.controller.loadView()
+		
 		// when
 		self.controller.didTapLoginButton(emptySender)
 		
 		// then
-		XCTAssertTrue(self.mockOutput.loginButtonTaped)
+		XCTAssertTrue(self.mockOutput.loginButtonTapped)
 	}
 	
 	func testReturnsUserNameAndRoomName() {
@@ -69,7 +72,7 @@ class AuthStoryViewTests: XCTestCase {
 	
 	class MockViewControllerOutput : AuthStoryViewOutput {
 		var viewIsReadyGotCalled = false
-		var loginButtonTaped = false
+		var loginButtonTapped = false
 		
 		var roomName = ""
 		var userName = ""
@@ -78,8 +81,8 @@ class AuthStoryViewTests: XCTestCase {
 			viewIsReadyGotCalled = true
 		}
 		
-		func didTriggerLoginButtonTapped() {
-			loginButtonTaped = true
+		func didTriggerLoginButtonTapped(userName: String, roomName: String) {
+			loginButtonTapped = true
 		}
 		
 		func didReceiveUserName(userName: String, roomName: String) {

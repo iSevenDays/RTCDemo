@@ -39,7 +39,9 @@ class AuthStoryViewController: UITableViewController, AuthStoryViewInput {
 	// MAKR: IBActions
 	
 	@IBAction func didTapLoginButton(sender: AnyObject) {
-		self.output.didTriggerLoginButtonTapped()
+		let userName = userNameInput.text ?? ""
+		let roomName = roomNameInput.text ?? ""
+		self.output.didTriggerLoginButtonTapped(userName, roomName: roomName)
 	}
 	
     // MARK: AuthStoryViewInput
