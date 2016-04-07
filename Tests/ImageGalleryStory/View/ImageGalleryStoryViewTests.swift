@@ -46,19 +46,19 @@ class ImageGalleryStoryViewTests: XCTestCase {
 		self.controller.didTapStartButton(emptySender)
 		
 		// then
-		XCTAssertTrue(self.mockOutput.startButtonTaped)
+		XCTAssertTrue(self.mockOutput.startButtonTapped)
 	}
 	
 	@objc class MockViewControllerOutput : NSObject,  ImageGalleryStoryViewOutput {
 		var viewIsReadyGotCalled = false
-		var startButtonTaped = false
+		var startButtonTapped = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
 		}
 		
 		func didTriggerStartButtonTapped() {
-			startButtonTaped = true
+			startButtonTapped = true
 		}
 		
 	}
