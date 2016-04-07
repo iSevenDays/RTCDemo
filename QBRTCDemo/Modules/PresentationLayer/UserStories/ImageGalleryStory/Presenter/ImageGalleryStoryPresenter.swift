@@ -42,11 +42,11 @@
 	}
 	
 	func didStartSynchronizationImages() {
-		
+		self.view.showSynchronizationImagesStarted()
 	}
 	
 	func didFinishSynchronizationImages() {
-		
+		self.view.showSynchronizationImagesFinished()
 	}
 	
 	// MARK: ImageGalleryStoryCollectionViewInteractorOutput

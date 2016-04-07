@@ -48,4 +48,12 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
 			
 		}
 	}
+	
+	func showSynchronizationImagesStarted() {
+		
+	}
+	
+	func showSynchronizationImagesFinished() {
+		
+	}
 }
