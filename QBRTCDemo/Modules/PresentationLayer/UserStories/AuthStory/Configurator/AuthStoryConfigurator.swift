@@ -20,14 +20,15 @@ class AuthStoryModuleConfigurator {
     private func configure(viewController: AuthStoryViewController) {
 
         let router = AuthStoryRouter()
-
+		router.transitionHandler = viewController
+		
         let presenter = AuthStoryPresenter()
         presenter.view = viewController
         presenter.router = router
 
         let interactor = AuthStoryInteractor()
         interactor.output = presenter
-		interactor.restService = QBRestService()
+		interactor.restService = QBRESTService()
 
         presenter.interactor = interactor
         viewController.output = presenter

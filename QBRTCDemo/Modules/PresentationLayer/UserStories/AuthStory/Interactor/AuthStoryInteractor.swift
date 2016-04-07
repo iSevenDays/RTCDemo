@@ -11,7 +11,7 @@ import AdSupport // for UDID
 class AuthStoryInteractor: AuthStoryInteractorInput {
 
     weak var output: AuthStoryInteractorOutput!
-	var restService: protocol<RestServiceProtocol>!
+	var restService: protocol<RESTServiceProtocol>!
 	
 	func signUpOrLoginWithUserName(userName: String, tags: [String]) {
 		
