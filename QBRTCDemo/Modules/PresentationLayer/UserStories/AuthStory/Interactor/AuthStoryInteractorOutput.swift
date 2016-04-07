@@ -10,6 +10,9 @@ import Foundation
 
 protocol AuthStoryInteractorOutput: class {
 
+	func doingLoginWithUser(user: SVUser)
+	func doingSignUpWithUser(user: SVUser)
+	
 	func didLoginUser(user: SVUser)
 	
 	/**

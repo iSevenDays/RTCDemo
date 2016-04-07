@@ -41,20 +41,26 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		let password = "zZc64fj13$_1=fx%"
 		
 		let user = SVUser.init(ID: nil, login: login, password: password, tags: tags)
+		user.fullName = userName
 		
-		self.signUpOrLoginWithUser(user, successBlock: { (user) in
+		signUpOrLoginWithUser(user, successBlock: { [weak self] (user) in
+			
 			user.password = password
-			self.output.didLoginUser(user)
-			}) { (error) in
-				self.output.didErrorLogin(error)
+			
+			self?.output.didLoginUser(user)
+			
+			}) { [weak self] (error) in
+				
+				self?.output.didErrorLogin(error)
 		}
 		
 	}
-	
+
 	private func signUpOrLoginWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?) {
+		output.doingLoginWithUser(user)
 		
-		self.restService.loginWithUser(user, successBlock: successBlock) { [weak self] (error) in
-				
+		restService.loginWithUser(user, successBlock: successBlock) { [weak self] (error) in
+				self?.output.doingSignUpWithUser(user)
 				self?.restService.signUpWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
 		}
 	}
