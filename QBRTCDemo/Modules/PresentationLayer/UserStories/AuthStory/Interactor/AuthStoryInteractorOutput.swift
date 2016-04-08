@@ -10,7 +10,15 @@ import Foundation
 
 protocol AuthStoryInteractorOutput: class {
 
+	/**
+	Notifies about doing login in with user
+	note: can be called after doingLoginWithCachedUser
+	*/
 	func doingLoginWithUser(user: SVUser)
+	
+	/**
+	Notifies about doing login with cached user
+	*/
 	func doingLoginWithCachedUser(user: SVUser)
 	
 	func doingSignUpWithUser(user: SVUser)

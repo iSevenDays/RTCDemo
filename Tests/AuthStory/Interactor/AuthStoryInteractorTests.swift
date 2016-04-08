@@ -99,6 +99,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.doingLoginWithCachedUserGotCalled)
+		XCTAssertTrue(mockOutput.doingLoginWithUserGotCalled)
 	}
 	
 	func testNotifiesPresenterAboutDoingSignUp() {
