@@ -81,14 +81,6 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(self.mockView.configureViewForReceivingGotCalled)
 	}
 	
-	func testPresenterCallsReloadCollectionView_onDidUpdateImages() {
-		// when
-		self.presenter.didUpdateImages();
-		
-		// then
-		XCTAssertTrue(self.mockView.reloadCollectionViewGotCalled)
-	}
-	
 	func testPresentedHandlesDidStartSynchronizationImages() {
 		// when
 		self.presenter.didStartSynchronizationImages()
@@ -103,6 +95,16 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		
 		// then
 		XCTAssertTrue(self.mockView.showSynchronizationImagesFinishedGotCalled)
+	}
+	
+	// MARK: ImageGalleryStoryCollectionViewInteractorOutput
+	
+	func testPresenterCallsReloadCollectionView_onDidUpdateImages() {
+		// when
+		self.presenter.didUpdateImages();
+		
+		// then
+		XCTAssertTrue(self.mockView.reloadCollectionViewGotCalled)
 	}
 
     class MockInteractor: ImageGalleryStoryInteractorInput {
