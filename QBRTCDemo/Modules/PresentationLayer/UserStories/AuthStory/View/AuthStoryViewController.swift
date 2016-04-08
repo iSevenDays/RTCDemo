@@ -63,10 +63,12 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 	
 	func setUserName(userName: String) {
 		self.userNameInput.text = userName
+		updateLoginButtonEnabledState()
 	}
 	
 	func setRoomName(roomName: String) {
 		self.roomNameInput.text = roomName
+		updateLoginButtonEnabledState()
 	}
 	
 	func retrieveInformation() {
@@ -77,11 +79,11 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 	}
 	
 	func showIndicatorLoggingIn() {
-		
+		print("Doing login")
 	}
 	
 	func showIndicatorSigningUp() {
-		
+		print("Doing signup")
 	}
 	
 	func showErrorLogin() {
@@ -106,6 +108,10 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 	}
 	
 	func textFieldDidChange(sender: AnyObject) {
+		updateLoginButtonEnabledState()
+	}
+	
+	func updateLoginButtonEnabledState() {
 		let minCharactersCount = 3
 		let userName = userNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
 		let tag = roomNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
