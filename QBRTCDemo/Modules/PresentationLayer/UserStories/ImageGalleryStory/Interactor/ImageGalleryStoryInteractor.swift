@@ -64,6 +64,11 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		}
 	}
 	
+	/**
+	Creates [UIImage] from all assets in image galler
+	
+	- returns: array of UIImage instances
+	*/
 	func allImages() -> [UIImage] {
 		let fetchOptions = PHFetchOptions()
 
@@ -84,6 +89,11 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		return images
 	}
 	
+	/**
+	Retrieves all assets from image gallery
+	
+	- returns: array of PHAsset instances
+	*/
 	func allAssets() -> [PHAsset] {
 		let fetchOptions = PHFetchOptions()
 		

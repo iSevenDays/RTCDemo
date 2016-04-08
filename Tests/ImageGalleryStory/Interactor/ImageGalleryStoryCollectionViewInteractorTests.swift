@@ -44,6 +44,7 @@ class ImageGalleryStoryCollectionViewInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertNotNil(self.interactor.imageAt(0))
+		XCTAssertNil(self.interactor.imageAt(1))
 	}
 	
 	class MockPresenter: ImageGalleryStoryCollectionViewInteractorOutput {
