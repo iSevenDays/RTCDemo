@@ -17,7 +17,11 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	// MARK: AuthStoryInteractorInput
 	func tryRetrieveCachedUser() {
 		if let cachedUser = cachedUser() {
-			output.doingLoginWithUser(cachedUser)
+			guard let userTags = cachedUser.tags else {
+				print("error: cached user has not tags")
+				return
+			}
+			self.signUpOrLoginWithUserName(cachedUser.fullName, tags: userTags)
 		}
 	}
 	
