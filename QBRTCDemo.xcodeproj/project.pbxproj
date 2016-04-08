@@ -61,7 +61,6 @@
 		1437CF731C63BB4B00CCE1BD /* BaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */; };
 		14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
 		14398F6E1C010C9100F3CE74 /* SVSignalingMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */; };
-		1439F67C1C5A540000438B48 /* FakeCallServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */; };
 		1439F67F1C5A556B00438B48 /* FakeSignalingChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */; };
 		1452AAD31BF92FA30018DA30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD21BF92FA30018DA30 /* main.m */; };
 		1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD51BF92FA30018DA30 /* AppDelegate.m */; };
@@ -280,7 +279,6 @@
 		14E9F59E1C6CD317007F58B7 /* VideoStoryInteractorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */; };
 		14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
 		14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
-		14E9F5A11C6CD317007F58B7 /* FakeCallServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */; };
 		14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */; };
 		14E9F5A41C6CD317007F58B7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
 		14E9F5A51C6CD317007F58B7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
@@ -491,8 +489,6 @@
 		1437CF741C63BC2000CCE1BD /* BaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTestCase.h; sourceTree = "<group>"; };
 		14398F6B1C010A0800F3CE74 /* SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUserTests.m; sourceTree = "<group>"; };
 		14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessageTests.m; sourceTree = "<group>"; };
-		1439F67A1C5A540000438B48 /* FakeCallServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallServiceDelegate.h; sourceTree = "<group>"; };
-		1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallServiceDelegate.m; sourceTree = "<group>"; };
 		1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSignalingChannel.h; sourceTree = "<group>"; };
 		1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeSignalingChannel.m; sourceTree = "<group>"; };
 		144AE6E51C7505B900B7A156 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -996,8 +992,6 @@
 			children = (
 				1417B3451C57E4E8004D6416 /* FakeCallService.h */,
 				1417B3461C57E4E8004D6416 /* FakeCallService.m */,
-				1439F67A1C5A540000438B48 /* FakeCallServiceDelegate.h */,
-				1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */,
 				1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */,
 				1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */,
 				148A83D51CB0180400F88933 /* FakeQBService.swift */,
@@ -2373,7 +2367,6 @@
 				148A83D61CB0180400F88933 /* FakeQBService.swift in Sources */,
 				E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */,
 				14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */,
-				1439F67C1C5A540000438B48 /* FakeCallServiceDelegate.m in Sources */,
 				1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */,
 				1473EAC81CAC607C007F9DF8 /* AuthStoryPresenterTests.swift in Sources */,
 				1437CF731C63BB4B00CCE1BD /* BaseTestCase.m in Sources */,
@@ -2540,7 +2533,6 @@
 				14E9F59E1C6CD317007F58B7 /* VideoStoryInteractorTests.m in Sources */,
 				14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */,
 				14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */,
-				14E9F5A11C6CD317007F58B7 /* FakeCallServiceDelegate.m in Sources */,
 				14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */,
 				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */,
