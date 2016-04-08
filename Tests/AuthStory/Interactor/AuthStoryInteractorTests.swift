@@ -24,6 +24,9 @@ class AuthStoryInteractorTests: XCTestCase {
 	let fakeService = FakeQBRESTService()
 	//let realService = QBRESTService()
 	
+	let userName = "test"
+	let tags = ["tag"]
+	
     override func setUp() {
         super.setUp()
 		interactor = AuthStoryInteractor()
@@ -40,11 +43,10 @@ class AuthStoryInteractorTests: XCTestCase {
 	
 	func testNotifiesPresenterAboutSuccessfulLogin() {
 		// given
-		
 		fakeService.shouldLoginSuccessfully = true
 		
 		// when
-		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		interactor.signUpOrLoginWithUserName(userName, tags: tags)
 		
 		// then
 		XCTAssertTrue(mockOutput.didLoginUserGotCalled)
@@ -57,7 +59,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		fakeService.shouldSignUpSuccessfully = true
 		
 		// when
-		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		interactor.signUpOrLoginWithUserName(userName, tags: tags)
 		
 		// then
 		XCTAssertTrue(mockOutput.didLoginUserGotCalled)
@@ -70,7 +72,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		fakeService.shouldSignUpSuccessfully = false
 		
 		// when
-		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		interactor.signUpOrLoginWithUserName(userName, tags: tags)
 		
 		// then
 		XCTAssertTrue(mockOutput.didErrorLoginGotCalled)
@@ -81,10 +83,22 @@ class AuthStoryInteractorTests: XCTestCase {
 		fakeService.shouldLoginSuccessfully = true
 		
 		// when
-		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		interactor.signUpOrLoginWithUserName(userName, tags: tags)
 		
 		// then
 		XCTAssertTrue(mockOutput.doingLoginWithUserGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutDoingLoginWithCachedUser() {
+		// given
+		fakeService.shouldLoginSuccessfully = true
+		
+		// when
+		interactor.cacheUser(SVUser.init(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
+		interactor.tryRetrieveCachedUser()
+		
+		// then
+		XCTAssertTrue(mockOutput.doingLoginWithCachedUserGotCalled)
 	}
 	
 	func testNotifiesPresenterAboutDoingSignUp() {
@@ -92,7 +106,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		fakeService.shouldLoginSuccessfully = false
 		
 		// when
-		interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		interactor.signUpOrLoginWithUserName(userName, tags: tags)
 		
 		// then
 		XCTAssertTrue(mockOutput.doingSignUpWithUserGotCalled)
@@ -101,8 +115,6 @@ class AuthStoryInteractorTests: XCTestCase {
 	func testCachesUserAfterLogin() {
 		// given
 		fakeService.shouldLoginSuccessfully = true
-		let userName = "test"
-		let tags = ["tag"]
 		
 		// when
 		interactor.signUpOrLoginWithUserName(userName, tags: tags)
@@ -116,12 +128,18 @@ class AuthStoryInteractorTests: XCTestCase {
 	
     class MockPresenter: AuthStoryInteractorOutput {
 		var doingLoginWithUserGotCalled = false
+		var doingLoginWithCachedUserGotCalled = false
+		
 		var doingSignUpWithUserGotCalled = false
 		var didLoginUserGotCalled = false
 		var didErrorLoginGotCalled = false
 		
 		func doingLoginWithUser(user: SVUser) {
 			doingLoginWithUserGotCalled = true
+		}
+		
+		func doingLoginWithCachedUser(user: SVUser) {
+			doingLoginWithCachedUserGotCalled = true
 		}
 		
 		func doingSignUpWithUser(user: SVUser) {

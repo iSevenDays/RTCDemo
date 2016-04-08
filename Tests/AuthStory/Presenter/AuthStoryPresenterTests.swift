@@ -38,16 +38,19 @@ class AuthStoryPresenterTests: XCTestCase {
 		self.presenter.view = self.mockView
 		
     }
-
 	
 	// MARK: AuthStoryInteractorInput tests
 	
-	func testRetrievesUserNameAndRoomName_whenViewIsReady() {
+	func testTriesToLoginWithCachedIfAvailable_whenViewIsReady() {
+		// given
+		presenter.interactor.signUpOrLoginWithUserName("test", tags: ["tag"])
+		
 		// when
 		presenter.viewIsReady();
 		
 		// then
 		XCTAssertTrue(mockInteractor.tryRetrieveCachedUserGotCalled)
+		XCTAssertTrue(mockInteractor.signUpOrLoginWithUserNameGotCalled)
 	}
 	
 	func testHandlesLoginWithUserNameAndRoomName() {
@@ -108,6 +111,7 @@ class AuthStoryPresenterTests: XCTestCase {
 		func signUpOrLoginWithUserName(userName: String, tags: [String]) {
 			signUpOrLoginWithUserNameGotCalled = true
 		}
+		
     }
 
     class MockRouter: AuthStoryRouterInput {

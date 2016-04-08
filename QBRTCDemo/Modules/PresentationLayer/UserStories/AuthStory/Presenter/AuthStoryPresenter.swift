@@ -46,6 +46,12 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 		view.setRoomName(user.tags!.joinWithSeparator(","))
 	}
 	
+	func doingLoginWithCachedUser(user: SVUser) {
+		view.showIndicatorLoggingIn()
+		view.setUserName(user.fullName)
+		view.setRoomName(user.tags!.joinWithSeparator(","))
+	}
+	
 	func doingSignUpWithUser(user: SVUser) {
 		view.showIndicatorSigningUp()
 		view.setUserName(user.fullName)

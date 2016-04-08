@@ -21,6 +21,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 				print("error: cached user has not tags")
 				return
 			}
+			output.doingLoginWithCachedUser(cachedUser)
 			self.signUpOrLoginWithUserName(cachedUser.fullName, tags: userTags)
 		}
 	}
