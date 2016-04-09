@@ -19,4 +19,10 @@
 
 @property (nonatomic, strong, nullable) SVUser *user;
 
+/**
+ *  Should send messages successfully or with error
+ *  Default: YES
+ */
+@property (nonatomic, assign) BOOL shouldSendMessagesSuccessfully;
+
 @end

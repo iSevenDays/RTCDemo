@@ -12,7 +12,6 @@ protocol ImageGalleryStoryCollectionViewInteractorInput: UICollectionViewDataSou
 	
 	func addImage(image: UIImage)
 	func imageAt(index: Int) -> UIImage?
-	
 	func imagesCount() -> Int
 }
 

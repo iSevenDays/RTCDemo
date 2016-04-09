@@ -14,5 +14,5 @@
     */
     func viewIsReady()
 	
-	func didTriggerStartButtonTaped()
+	func didTriggerStartButtonTapped()
 }

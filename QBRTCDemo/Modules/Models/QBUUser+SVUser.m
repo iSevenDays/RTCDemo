@@ -16,6 +16,8 @@
 	qbuser.ID = svuser.ID.unsignedIntegerValue;
 	qbuser.login = svuser.login;
 	qbuser.password = svuser.password;
+	qbuser.tags = [svuser.tags mutableCopy];
+	qbuser.fullName = svuser.fullName;
 	return qbuser;
 }
 

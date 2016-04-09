@@ -28,9 +28,4 @@
  */
 + (nonnull SVUser*)svuserTest;
 
-+ (void)initConfiguration;
-
-/// Reset test users
-+ (void)reset;
-
 @end

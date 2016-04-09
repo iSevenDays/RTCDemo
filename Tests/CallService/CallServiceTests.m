@@ -34,6 +34,7 @@
 @property (nonatomic, strong) SVUser *user1;
 @property (nonatomic, strong) SVUser *user2;
 @property (nonatomic, strong) SVUser *user3;
+@property (nonatomic, strong) FakeSignalingChannel *signalingChannel;
 
 @end
 
@@ -46,8 +47,9 @@
 	self.user3 = [[SVUser alloc] initWithID:@1 login:@"login" password:@""];
 	
 	self.mockOutput = OCMProtocolMock(@protocol(CallServiceDelegate));
+	self.signalingChannel = [FakeSignalingChannel new];
 	
-	self.callService = [[CallService alloc] initWithSignalingChannel:[FakeSignalingChannel new] callServiceDelegate:self.mockOutput];
+	self.callService = [[CallService alloc] initWithSignalingChannel:self.signalingChannel callServiceDelegate:self.mockOutput];
 	
 	self.mockCallService = OCMPartialMock(self.callService);
 }
@@ -232,6 +234,17 @@
 	OCMVerify([self.mockCallService processSignalingMessage:iceVideo]);
 	
 	OCMVerifyAll(self.mockCallService);
+}
+
+- (void)testCallsDidError_onFailedSignalingMessage {
+	// given
+	self.signalingChannel.shouldSendMessagesSuccessfully = NO;
+	
+	// when
+	[self.callService sendSignalingMessage:[SVSignalingMessage messageWithType:SVSignalingMessageType.offer params:nil]];
+	
+	// then
+	OCMVerify([self.mockOutput callService:self.callService didError:[OCMArg any]]);
 }
 
 @end

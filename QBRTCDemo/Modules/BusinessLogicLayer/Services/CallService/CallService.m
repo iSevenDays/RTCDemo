@@ -155,8 +155,8 @@
 	
 	self.opponentUser = opponent;
 	self.initiatorUser = self.signalingChannel.user;
-	// Create peer connection.
 	
+	// Create peer connection.
 	RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
 	RTCConfiguration *config = [[RTCConfiguration alloc] init];
 	config.iceServers = self.iceServers;
@@ -187,17 +187,15 @@
 		return;
 	}
 	
-	if (![[self.signalingChannel state] isEqualToString:SVSignalingChannelState.established]) {
-		[self clearSession];
+	if ([self hasActiveCall] && [self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]) {
+		[self sendHangupToUser:self.opponentUser completion:^(NSError * _Nullable error) {
+			if (error) {
+				DDLogWarn(@"Did not send hangup to user");
+			}
+		}];
 	}
 	
-	if ([self hasActiveCall]) {
-		[self sendHangupToUser:self.opponentUser completion:^(NSError * _Nullable error) {
-			[self clearSession];
-		}];
-	} else {
-		[self clearSession];
-	}
+	[self clearSession];
 }
 
 - (void)sendHangupToUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {

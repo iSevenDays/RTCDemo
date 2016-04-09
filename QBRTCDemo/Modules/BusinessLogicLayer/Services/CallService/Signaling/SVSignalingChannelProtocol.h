@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong, nonnull) NSString *state;
 @property (nonatomic, strong, nullable) SVUser *user; // currently connected user
-@property (nonatomic, weak) id <SVSignalingChannelDelegate> delegate;
+@property (nonatomic, weak, nullable) id <SVSignalingChannelDelegate> delegate;
 
 @optional
 
