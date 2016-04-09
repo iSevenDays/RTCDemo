@@ -22,42 +22,19 @@ static SVUser *svuser = nil;
 }
 
 + (QBUUser *)qbuserTest {
-	if (!qbuser) {
-		[self initConfiguration];
-	}
+	
+	QBUUser *qbuser = [QBUUser user];
+	qbuser.login = @"testlogin";
+	qbuser.ID = 777;
+	qbuser.password = @"testpass";
+	qbuser.fullName = @"full_name";
+	qbuser.tags = [@[@"tag"] mutableCopy];
+	
 	return qbuser;
 }
 
 + (SVUser *)svuserTest {
-	if (!svuser) {
-		[self initConfiguration];
-	}
-	return svuser;
-}
-
-+ (void)initConfiguration {
-	qbuser = [QBUUser user];
-	qbuser.login = @"testlogin";
-	qbuser.ID = 777;
-	qbuser.password = @"testpass";
-	
-	svuser = [[SVUser alloc] initWithID:@(123) login:@"svlogin" password:@"svpass"];
-}
-
-+ (void)reset {
-	if(!qbuser){
-		qbuser = [QBUUser user];
-	}
-	qbuser.login = @"testlogin";
-	qbuser.ID = 777;
-	qbuser.password = @"testpass";
-	
-	if (!svuser) {
-		svuser = [[SVUser alloc] init];
-	}
-	svuser.ID = @(123);
-	svuser.login = @"svlogin";
-	svuser.password = @"svpass";
+	return [[SVUser alloc] initWithID:@(123) login:@"svlogin" fullName:@"full_name_sv" password:@"svpass" tags:@[@"svtag"]];
 }
 
 @end

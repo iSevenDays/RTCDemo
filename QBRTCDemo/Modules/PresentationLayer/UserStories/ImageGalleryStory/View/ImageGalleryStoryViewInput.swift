@@ -13,6 +13,9 @@ protocol ImageGalleryStoryViewInput: class {
         Setup initial state of the view
     */
 
+	func showSynchronizationImagesStarted()
+	func showSynchronizationImagesFinished()
+	
     func setupInitialState()
 	func configureViewForReceiving()
 	

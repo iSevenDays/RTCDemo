@@ -14,21 +14,21 @@
 
 	
 	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>){
-		self.interactor.configureWithCallService(callService)
+		interactor.configureWithCallService(callService)
 		
-		self.interactor.requestCallerRole()
+		interactor.requestCallerRole()
 	}
 	
 	// MARK: ImageGalleryStoryViewOutput
 	
 	func viewIsReady() {
-		self.view.setupInitialState()
+		view.setupInitialState()
 		
-		self.interactor.configureCollectionView(self.view.collectionView())
+		interactor.configureCollectionView(self.view.collectionView())
 	}
 	
-	func didTriggerStartButtonTaped() {
-		self.interactor.startSynchronizationImages()
+	func didTriggerStartButtonTapped() {
+		interactor.startSynchronizationImages()
 	}
 	
 	// MARK: ImageGalleryStoryInteractorOutput
@@ -38,21 +38,21 @@
 	}
 	
 	func didReceiveRoleReceiver() {
-		self.view.configureViewForReceiving()
+		view.configureViewForReceiving()
 	}
 	
 	func didStartSynchronizationImages() {
-		
+		view.showSynchronizationImagesStarted()
 	}
 	
 	func didFinishSynchronizationImages() {
-		
+		view.showSynchronizationImagesFinished()
 	}
 	
 	// MARK: ImageGalleryStoryCollectionViewInteractorOutput
 	
 	func didUpdateImages() {
-		self.view.reloadCollectionView()
+		view.reloadCollectionView()
 	}
 	
 }

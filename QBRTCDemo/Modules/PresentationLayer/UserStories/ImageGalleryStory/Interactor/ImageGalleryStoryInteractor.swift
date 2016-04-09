@@ -19,12 +19,12 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	var collectionViewConfigurationBlock: ((collectionView: ImageGalleryStoryCollectionView) -> Void)!
 	
 	func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {
-		self.collectionViewConfigurationBlock(collectionView: collectionView)
+		collectionViewConfigurationBlock(collectionView: collectionView)
 	}
 	
 	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>) {
 		self.callService = callService
-		self.callService.addDataChannelDelegate(self)
+		callService.addDataChannelDelegate(self)
 	}
 	
 	func startSynchronizationImages() {
@@ -33,37 +33,42 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 			return
 		}
 		
-		if self.callService.isInitiator() {
-			self.output.didStartSynchronizationImages()
+		if callService.isInitiator() {
+			output.didStartSynchronizationImages()
 			
-			let assets = self.allAssets()
+			let assets = allAssets()
 			
 			for asset in assets {
 				
-				guard let image = self.imageWithAsset(asset) else {
+				guard let image = imageWithAsset(asset) else {
 					print("can not retrieve image from asset")
 					continue
 				}
 				
-				guard let imageData = self.dataWithUIImage(image) else {
+				guard let imageData = dataWithUIImage(image) else {
 					continue
 				}
 				
-				self.sendData(imageData)
+				sendData(imageData)
 			}
 			
-			self.output.didFinishSynchronizationImages()
+			output.didFinishSynchronizationImages()
 		}
 	}
 	
 	func requestCallerRole() {
-		if self.callService.isInitiator() {
-			self.output.didReceiveRoleSender()
+		if callService.isInitiator() {
+			output.didReceiveRoleSender()
 		} else {
-			self.output.didReceiveRoleReceiver()
+			output.didReceiveRoleReceiver()
 		}
 	}
 	
+	/**
+	Creates [UIImage] from all assets in image galler
+	
+	- returns: array of UIImage instances
+	*/
 	func allImages() -> [UIImage] {
 		let fetchOptions = PHFetchOptions()
 
@@ -71,7 +76,7 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		
 		var images: [UIImage] = []
 		
-		let assets = self.allAssets()
+		let assets = allAssets()
 		
 		for asset in assets {
 			
@@ -84,6 +89,11 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		return images
 	}
 	
+	/**
+	Retrieves all assets from image gallery
+	
+	- returns: array of PHAsset instances
+	*/
 	func allAssets() -> [PHAsset] {
 		let fetchOptions = PHFetchOptions()
 		
@@ -148,7 +158,7 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	}
 	
 	func sendData(data: NSData) -> Bool {
-		let success = self.callService.sendData(data)
+		let success = callService.sendData(data)
 		if success {
 			print("Successfully sent image data")
 		} else {
@@ -159,7 +169,7 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	
 	func sendDataObjects(data: [NSData]) {
 		for dataObject in data {
-			self.callService.sendData(dataObject)
+			callService.sendData(dataObject)
 		}
 	}
 	
@@ -175,7 +185,7 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 		
 		if let image = UIImage(data: data) {
 			print("Received data is UIImage")
-			self.imagesOutput.didReceiveImage(image)
+			imagesOutput.didReceiveImage(image)
 		} else {
 			print("Received data that is not convertible to UIImage")
 		}

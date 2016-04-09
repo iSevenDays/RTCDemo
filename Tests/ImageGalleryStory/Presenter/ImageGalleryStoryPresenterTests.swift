@@ -52,10 +52,10 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	
 	func testPresenterHandlesStartButtonTapedEvent() {
 		// when
-		self.presenter.didTriggerStartButtonTaped()
+		self.presenter.didTriggerStartButtonTapped()
 		
 		// then
-		XCTAssertTrue(self.mockInteractor.startedSynchronizationImages)
+		XCTAssertTrue(self.mockInteractor.startSynchronizationImagesGotCalled)
 	}
 	
 	func testPresenterConfiguresModule() {
@@ -66,7 +66,12 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		
 		// then
 		XCTAssertTrue(self.mockInteractor.configureWithCallServiceGotCalled)
+		XCTAssertTrue(self.mockInteractor.requestCallerRoleGotCalled)
 	}
+	
+	//
+	// MARK: ImageGalleryStoryViewInput tests
+	//
 	
 	func testPresenterConfiguresView_whenReceiver() {
 		// when
@@ -75,6 +80,24 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		// then
 		XCTAssertTrue(self.mockView.configureViewForReceivingGotCalled)
 	}
+	
+	func testPresentedHandlesDidStartSynchronizationImages() {
+		// when
+		self.presenter.didStartSynchronizationImages()
+		
+		// then
+		XCTAssertTrue(self.mockView.showSynchronizationImagesStartedGotCalled)
+	}
+	
+	func testPresentedHandlesDidFinishSynchronizationImages() {
+		// when
+		self.presenter.didFinishSynchronizationImages()
+		
+		// then
+		XCTAssertTrue(self.mockView.showSynchronizationImagesFinishedGotCalled)
+	}
+	
+	// MARK: ImageGalleryStoryCollectionViewInteractorOutput
 	
 	func testPresenterCallsReloadCollectionView_onDidUpdateImages() {
 		// when
@@ -85,21 +108,22 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	}
 
     class MockInteractor: ImageGalleryStoryInteractorInput {
-		var startedSynchronizationImages = false
+		var startSynchronizationImagesGotCalled = false
 		
 		var configureWithCallServiceGotCalled = false
 		var configureCollectionViewGotCalled = false
+		var requestCallerRoleGotCalled = false
 		
 		func configureWithCallService(callService: protocol<CallServiceDataChannelAdditionsProtocol, CallServiceProtocol>) {
 			configureWithCallServiceGotCalled = true
 		}
 		
 		func startSynchronizationImages() {
-			startedSynchronizationImages = true
+			startSynchronizationImagesGotCalled = true
 		}
 		
 		func requestCallerRole() {
-			
+			requestCallerRoleGotCalled = true
 		}
 		
 		func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {
@@ -118,6 +142,8 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		var collectionViewGotCalled = false
 		
 		var setupInitialStateGotCalled = false
+		var showSynchronizationImagesStartedGotCalled = false
+		var showSynchronizationImagesFinishedGotCalled = false
 		
         func setupInitialState() {
 			setupInitialStateGotCalled = true
@@ -129,6 +155,14 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		
 		func reloadCollectionView() {
 			reloadCollectionViewGotCalled = true
+		}
+		
+		func showSynchronizationImagesStarted() {
+			showSynchronizationImagesStartedGotCalled = true
+		}
+		
+		func showSynchronizationImagesFinished() {
+			showSynchronizationImagesFinishedGotCalled = true
 		}
 
 		func collectionView() -> ImageGalleryStoryCollectionView {

@@ -29,15 +29,19 @@
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
 
+/// Clears session and sends hangup if -hasActiveCall YES
 - (void)hangup;
 
+/// @return YES if both initiatorUser and opponentUser are set
 - (BOOL)hasActiveCall;
 
 @property (nonatomic, strong, nonnull) SVMulticastDelegate<CallServiceDelegate> *multicastDelegate;
 @property (nonatomic, strong, nonnull) SVMulticastDelegate<CallServiceDataChannelAdditionsDelegate> *multicastDataChannelDelegate;
 
 @property (nonatomic, assign, readonly) CallServiceState state;
+/// @return YES if signaling channel state is open
 @property (nonatomic, assign, readonly) BOOL isConnecting;
+/// @return YES if signaling channel state is established
 @property (nonatomic, assign, readwrite) BOOL isConnected;
 
 @property (nonatomic, strong, nonnull) NSMutableArray<RTCICEServer *> *iceServers;

@@ -11,6 +11,7 @@
 
 #import "SVUser.h"
 #import "TestsStorage.h"
+#import "NSObject+Testing.h"
 
 @interface SVUserTests : XCTestCase
 
@@ -30,9 +31,19 @@
 - (void)testThatIsEqualMethodCorrectlyComparesEqualObjects {
 	SVUser *testUser = [TestsStorage svuserTest];
 	
-	SVUser *equalUser = [SVUser userWithID:testUser.ID login:testUser.login password:testUser.password];
+	SVUser *equalUser = [[SVUser alloc] initWithID:testUser.ID login:testUser.login fullName:@"full_name" password:testUser.password tags:@[@"svtag"]];
 	
 	assertThat(testUser, equalTo(equalUser));
+}
+
+- (void)testSVUserSupportsNSCoding {
+	SVUser *testUser = [TestsStorage svuserTest];
+	[testUser compareWithSelfClonedObject];
+}
+
+- (void)testSVUserSupportsNSCopying {
+	SVUser *testUser = [TestsStorage svuserTest];
+	[testUser compareWithSelfCopiedObject];
 }
 
 @end

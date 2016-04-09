@@ -16,6 +16,14 @@
 
 @synthesize delegate;
 
+- (instancetype)init {
+	self = [super init];
+	if (self) {
+		self.shouldSendMessagesSuccessfully = YES;
+	}
+	return self;
+}
+
 - (void)connectWithUser:(SVUser *)user completion:(void (^)(NSError * _Nullable))completion {
 	self.state = SVSignalingChannelState.open;
 	
@@ -50,7 +58,12 @@
 
 - (void)sendMessage:(__kindof SVSignalingMessage *)message toUser:(SVUser *)user completion:(void (^)(NSError * _Nullable))completion {
 	if (completion) {
-		completion(nil);
+		if (self.shouldSendMessagesSuccessfully) {
+			completion(nil);
+		} else {
+			completion([[NSError alloc] init]);
+		}
+		
 	}
 }
 

@@ -28,6 +28,7 @@ class ImageGalleryStoryCollectionViewInteractorTests: XCTestCase {
 		self.interactor.output = mockOutput
 	}
 	
+	// MARK: ImageGalleryStoryCollectionViewInteractorInput tests
 	func testStartsAndNotificatesAboutSynchronizationImages() {
 		// when
 		self.interactor.addImage(UIImage())
@@ -35,6 +36,15 @@ class ImageGalleryStoryCollectionViewInteractorTests: XCTestCase {
 		// then
 		XCTAssertTrue(self.mockOutput.didUpdateImagesGotCalled)
 		XCTAssertEqual(self.interactor.imagesCount(), 1)
+	}
+	
+	func testCorrectlyRetrievesImage() {
+		// when
+		self.interactor.didReceiveImage(UIImage())
+		
+		// then
+		XCTAssertNotNil(self.interactor.imageAt(0))
+		XCTAssertNil(self.interactor.imageAt(1))
 	}
 	
 	class MockPresenter: ImageGalleryStoryCollectionViewInteractorOutput {

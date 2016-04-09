@@ -20,12 +20,17 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		010F6CCF815DCADC3352D1B8 /* AuthStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2810D9B20834E7C66A82B3 /* AuthStoryRouterTests.swift */; };
+		0525A30887D71636FB168713 /* AuthStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF0B11DA03F8E9D8D53ECFD /* AuthStoryPresenterTests.swift */; };
 		0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */; };
 		07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */; };
+		0BA1EF8A8A8D529DCD29EDDA /* AuthStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */; };
 		0BAC818B34C4A8E7F9975F66 /* ImageGalleryStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */; };
 		0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */; };
 		14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		140746481BFB841000506088 /* SVSignalingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 140746471BFB841000506088 /* SVSignalingParams.m */; };
+		14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 14114A171CB68FEB0092AA26 /* NSObject+Testing.m */; };
+		14114A191CB68FEB0092AA26 /* NSObject+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 14114A171CB68FEB0092AA26 /* NSObject+Testing.m */; };
 		1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1418BAEB1C761B0A0085C7E3 /* Photos.framework */; };
@@ -56,7 +61,6 @@
 		1437CF731C63BB4B00CCE1BD /* BaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */; };
 		14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
 		14398F6E1C010C9100F3CE74 /* SVSignalingMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */; };
-		1439F67C1C5A540000438B48 /* FakeCallServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */; };
 		1439F67F1C5A556B00438B48 /* FakeSignalingChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */; };
 		1452AAD31BF92FA30018DA30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD21BF92FA30018DA30 /* main.m */; };
 		1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD51BF92FA30018DA30 /* AppDelegate.m */; };
@@ -66,10 +70,6 @@
 		1454052D1C859431005E3790 /* DataChannelMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 1454052B1C859431005E3790 /* DataChannelMessages.h */; };
 		1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
 		1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
-		146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
-		146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
-		146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
-		146CA9EF1C62642100F768C8 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
 		146CA9F01C62643400F768C8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		146CA9F11C62643C00F768C8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
@@ -79,10 +79,37 @@
 		14736EE81C567EC5009DFBBC /* CallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 14736EE61C567EC5009DFBBC /* CallService.m */; };
 		14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14736EED1C568462009DFBBC /* WebRTCHelpers.m */; };
 		14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14736EED1C568462009DFBBC /* WebRTCHelpers.m */; };
+		1473EAC51CAC6070007F9DF8 /* AuthStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */; };
+		1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1847E4079F80C8F1433FFEF /* AuthStoryViewTests.swift */; };
+		1473EAC71CAC607C007F9DF8 /* AuthStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290BECE1782295B3A7E6D67 /* AuthStoryInteractorTests.swift */; };
+		1473EAC81CAC607C007F9DF8 /* AuthStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF0B11DA03F8E9D8D53ECFD /* AuthStoryPresenterTests.swift */; };
+		1473EAC91CAC607C007F9DF8 /* AuthStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2810D9B20834E7C66A82B3 /* AuthStoryRouterTests.swift */; };
+		1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F542C488136D61B93B026A /* AuthStoryConfiguratorTests.swift */; };
+		1473EACB1CAC6090007F9DF8 /* AuthStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */; };
+		1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E060D9B417D26811FFBC52D7 /* AuthStoryViewOutput.swift */; };
+		1473EACD1CAC6090007F9DF8 /* AuthStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50230D5A781F75168CCA1AF4 /* AuthStoryModuleInput.swift */; };
+		1473EACE1CAC6090007F9DF8 /* AuthStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDF899EEC6EBDD23CD862F6 /* AuthStoryPresenter.swift */; };
+		1473EACF1CAC6090007F9DF8 /* AuthStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA7DD6CDF214B9109C588 /* AuthStoryInteractorInput.swift */; };
+		1473EAD01CAC6090007F9DF8 /* AuthStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */; };
+		1473EAD11CAC6090007F9DF8 /* AuthStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */; };
+		1473EAD21CAC6090007F9DF8 /* AuthStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */; };
+		1473EAD31CAC6090007F9DF8 /* AuthStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D04FD706443E892936BF0 /* AuthStoryRouter.swift */; };
+		1473EAD41CAC6090007F9DF8 /* AuthStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E979D19A33587E93B35ADA1 /* AuthStoryConfigurator.swift */; };
+		1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */; };
+		1473EADA1CAC69DB007F9DF8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
+		1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
+		1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
+		1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
 		1473F3711BFF6BFE00ABA7E6 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; };
+		1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
+		1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
+		147546411CAE560C004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
+		147546421CAE560D004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
+		147546441CAE5649004CCE95 /* QBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRESTService.swift */; };
+		147546451CAE5649004CCE95 /* QBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRESTService.swift */; };
 		147A0C761BFE139D0009044A /* QBSignalingChannelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */; };
 		147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
-		147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestStorageTests.m */; };
+		147A0C7D1BFE159B0009044A /* TestsStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestsStorageTests.m */; };
 		148233851C002DFE0000E9ED /* SVSignalingMessageSDP.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028701BFA541A00BDF2C5 /* SVSignalingMessageSDP.m */; };
 		1482338D1C002DFE0000E9ED /* SVSignalingParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 140746471BFB841000506088 /* SVSignalingParams.m */; };
 		148233901C002DFE0000E9ED /* QBSignalingChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028741BFA545300BDF2C5 /* QBSignalingChannel.m */; };
@@ -110,6 +137,10 @@
 		148233B51C002DFE0000E9ED /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		148234021C002DFE0000E9ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */; };
 		148234051C002DFE0000E9ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADD1BF92FA30018DA30 /* Assets.xcassets */; };
+		148A83D61CB0180400F88933 /* FakeQBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A83D51CB0180400F88933 /* FakeQBService.swift */; };
+		148A83D71CB0180400F88933 /* FakeQBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A83D51CB0180400F88933 /* FakeQBService.swift */; };
+		149A0D351CA7F02C008FB3A9 /* AuthStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */; };
+		149A0D361CA7F02C008FB3A9 /* AuthStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */; };
 		14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */; };
 		14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028261BFA46F900BDF2C5 /* SVSignalingMessage.m */; };
 		14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028291BFA470C00BDF2C5 /* SVSignalingMessageType.m */; };
@@ -238,7 +269,7 @@
 		14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */; };
 		14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */; };
 		14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
-		14E9F5961C6CD317007F58B7 /* TestStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestStorageTests.m */; };
+		14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestsStorageTests.m */; };
 		14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
 		14E9F59A1C6CD317007F58B7 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
@@ -248,7 +279,6 @@
 		14E9F59E1C6CD317007F58B7 /* VideoStoryInteractorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */; };
 		14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
 		14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
-		14E9F5A11C6CD317007F58B7 /* FakeCallServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */; };
 		14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */; };
 		14E9F5A41C6CD317007F58B7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
 		14E9F5A51C6CD317007F58B7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
@@ -282,6 +312,9 @@
 		16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
 		190FDDC34E863B7B25D9DB7A /* VideoStoryInteractorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */; };
 		1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */; };
+		24B87B4B94DFA5D9067F6C69 /* AuthStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290BECE1782295B3A7E6D67 /* AuthStoryInteractorTests.swift */; };
+		24BCC726FCD00FB50CE99B69 /* AuthStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */; };
+		24C83F54AD1112D275D087D8 /* AuthStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA7DD6CDF214B9109C588 /* AuthStoryInteractorInput.swift */; };
 		279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */; };
 		3179BD737E1FD9AF9F11F04C /* ImageGalleryStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */; };
 		32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */; };
@@ -289,16 +322,26 @@
 		3772DBD8B200B94BC6C11C61 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
 		3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */; };
 		3FA698C85BC1C35878F3106E /* ImageGalleryStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */; };
+		4565B18CED6A7AAC3013F9CA /* AuthStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E979D19A33587E93B35ADA1 /* AuthStoryConfigurator.swift */; };
 		4CFDC200D90FC1D32D1510B6 /* libPods-QBRTCDemo_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABC4B3083558C9747EC9D26 /* libPods-QBRTCDemo_s.a */; };
+		4DEB82D05EA0A1975DFD6636 /* AuthStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */; };
 		5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */; };
 		62630B599C72A7D1974F12E0 /* VideoStoryPresenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */; };
 		62B3F09AE08CB2C15B7DB191 /* VideoStoryAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */; };
+		63A59E34E800C1A9FCF24C63 /* AuthStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */; };
+		6C49A339274F0DC6F59B9512 /* AuthStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */; };
+		71126378754862BDA35556EB /* AuthStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1847E4079F80C8F1433FFEF /* AuthStoryViewTests.swift */; };
+		7C92BC563CF188F3FDA03D37 /* AuthStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */; };
 		88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */; };
 		924ECF4B68125FDFF008BAF4 /* VideoStoryViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */; };
+		A049C3E01A2B5FAE66666F31 /* AuthStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E060D9B417D26811FFBC52D7 /* AuthStoryViewOutput.swift */; };
+		A49D4EB8C7F6DF685E7F5B8D /* AuthStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F542C488136D61B93B026A /* AuthStoryConfiguratorTests.swift */; };
 		B835B497F18EBFADE6707066 /* libPods-QBRTCDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 397A001A65F49158378570F3 /* libPods-QBRTCDemoTests.a */; };
+		B9EC69970C8CCBEF7AF2BA39 /* AuthStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50230D5A781F75168CCA1AF4 /* AuthStoryModuleInput.swift */; };
 		C3967EC4692C62217BA73C83 /* libPods-QBRTCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F2BF9FB6A271BDA0BC6C453 /* libPods-QBRTCDemo.a */; };
 		C39E99EF43065B34302624F5 /* ImageGalleryStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */; };
 		CA0E7FA1C1007C0399606B63 /* ImageGalleryStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */; };
+		CAB1B0BA5443499CF8EF2DFD /* AuthStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D04FD706443E892936BF0 /* AuthStoryRouter.swift */; };
 		CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */; };
 		D4E7B9D497E6D08669C82C98 /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
 		D8A5049A8BBC5BAB5D1CEA6E /* libPods-QBRTCDemo_sTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFD4216F81E96C670300BBF /* libPods-QBRTCDemo_sTests.a */; };
@@ -306,6 +349,7 @@
 		E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */; };
 		E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
 		E93D0D88C76A33845273181B /* ImageGalleryStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */; };
+		EA81168A4C17567BC162640A /* AuthStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDF899EEC6EBDD23CD862F6 /* AuthStoryPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,12 +377,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		036D04FD706443E892936BF0 /* AuthStoryRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryRouter.swift; sourceTree = "<group>"; };
+		0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractorOutput.swift; sourceTree = "<group>"; };
 		14015A321BFC6F5C00830618 /* CallServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CallServiceDelegate.h; path = ../../../../Client/CallServiceDelegate.h; sourceTree = "<group>"; };
 		14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemo_sTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14015A3D1BFCD08400830618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUserTests.m"; sourceTree = "<group>"; };
 		140746461BFB841000506088 /* SVSignalingParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingParams.h; sourceTree = "<group>"; };
 		140746471BFB841000506088 /* SVSignalingParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingParams.m; sourceTree = "<group>"; };
+		14114A161CB68FEB0092AA26 /* NSObject+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Testing.h"; sourceTree = "<group>"; };
+		14114A171CB68FEB0092AA26 /* NSObject+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Testing.m"; sourceTree = "<group>"; };
 		1417B3451C57E4E8004D6416 /* FakeCallService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallService.h; sourceTree = "<group>"; };
 		1417B3461C57E4E8004D6416 /* FakeCallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallService.m; sourceTree = "<group>"; };
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -441,8 +489,6 @@
 		1437CF741C63BC2000CCE1BD /* BaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTestCase.h; sourceTree = "<group>"; };
 		14398F6B1C010A0800F3CE74 /* SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUserTests.m; sourceTree = "<group>"; };
 		14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessageTests.m; sourceTree = "<group>"; };
-		1439F67A1C5A540000438B48 /* FakeCallServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeCallServiceDelegate.h; sourceTree = "<group>"; };
-		1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallServiceDelegate.m; sourceTree = "<group>"; };
 		1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSignalingChannel.h; sourceTree = "<group>"; };
 		1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeSignalingChannel.m; sourceTree = "<group>"; };
 		144AE6E51C7505B900B7A156 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -465,10 +511,14 @@
 		14736EE91C56817C009DFBBC /* CallServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceProtocol.h; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
+		1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVUser+QBUUser.h"; sourceTree = "<group>"; };
+		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
+		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RESTServiceProtocol.swift; path = RestService/RESTServiceProtocol.swift; sourceTree = "<group>"; };
+		147546431CAE5649004CCE95 /* QBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QBRESTService.swift; path = RestService/QBRESTService.swift; sourceTree = "<group>"; };
 		147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannelTests.m; sourceTree = "<group>"; };
 		147A0C791BFE13FD0009044A /* TestsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsStorage.h; sourceTree = "<group>"; };
 		147A0C7A1BFE13FD0009044A /* TestsStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorage.m; sourceTree = "<group>"; };
-		147A0C7C1BFE159B0009044A /* TestStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestStorageTests.m; sourceTree = "<group>"; };
+		147A0C7C1BFE159B0009044A /* TestsStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorageTests.m; sourceTree = "<group>"; };
 		1482337C1C002DB80000E9ED /* webrtc-ia32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-ia32.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-ia32.a"; sourceTree = "<group>"; };
 		1482337D1C002DB80000E9ED /* webrtc-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-x86_64.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-x86_64.a"; sourceTree = "<group>"; };
 		148234141C002DFE0000E9ED /* QBRTCDemo_s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QBRTCDemo_s.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -486,6 +536,8 @@
 		14893AE91C6BA06F00F1D581 /* libisac_fix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_fix.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libisac_fix.a"; sourceTree = "<group>"; };
 		14893AEA1C6BA06F00F1D581 /* libisac_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_neon.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libisac_neon.a"; sourceTree = "<group>"; };
 		14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<group>"; };
+		148A83D51CB0180400F88933 /* FakeQBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeQBService.swift; sourceTree = "<group>"; };
+		149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStory.storyboard; sourceTree = "<group>"; };
 		14A0281B1BFA43E700BDF2C5 /* SVSignalingChannelState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelState.h; sourceTree = "<group>"; };
 		14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingChannelState.m; sourceTree = "<group>"; };
 		14A0281F1BFA459A00BDF2C5 /* SVSignalingChannelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelProtocol.h; sourceTree = "<group>"; };
@@ -654,6 +706,8 @@
 		14FC46831C5029D400C1797D /* VideoStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VideoStory.storyboard; sourceTree = "<group>"; };
 		177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorOutput.swift; sourceTree = "<group>"; };
 		1ABC4B3083558C9747EC9D26 /* libPods-QBRTCDemo_s.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo_s.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E979D19A33587E93B35ADA1 /* AuthStoryConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryConfigurator.swift; sourceTree = "<group>"; };
+		2290BECE1782295B3A7E6D67 /* AuthStoryInteractorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractorTests.swift; sourceTree = "<group>"; };
 		242CA5506C5490232512450E /* VideoStoryRouterInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryRouterInput.h; sourceTree = "<group>"; };
 		2B2950E2BA569568389A3E95 /* VideoStoryInteractorInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractorInput.h; sourceTree = "<group>"; };
 		2E34DA0AFB952EA298811115 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -667,11 +721,14 @@
 		3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryConfigurator.swift; sourceTree = "<group>"; };
 		416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssemblyTests.m; sourceTree = "<group>"; };
 		4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryViewControllerTests.m; sourceTree = "<group>"; };
+		50230D5A781F75168CCA1AF4 /* AuthStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryModuleInput.swift; sourceTree = "<group>"; };
 		5629FBD696A140459D4AB81A /* VideoStoryViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryViewController.m; sourceTree = "<group>"; };
 		56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInitializer.swift; sourceTree = "<group>"; };
 		58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryPresenterTests.swift; sourceTree = "<group>"; };
 		5EBB921A5AEF7B56EC5229BA /* Pods-QBRTCDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryViewController.swift; sourceTree = "<group>"; };
 		6E8FF503DFB4C6FBA61B978F /* VideoStoryAssembly.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryAssembly.h; sourceTree = "<group>"; };
+		70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryViewInput.swift; sourceTree = "<group>"; };
 		748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryRouter.m; sourceTree = "<group>"; };
 		7B02AC1A790D8B10AF844A71 /* VideoStoryViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryViewController.h; sourceTree = "<group>"; };
 		7FBAF35FD623A0445B6E7BCB /* VideoStoryViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryViewInput.h; sourceTree = "<group>"; };
@@ -683,24 +740,34 @@
 		8F2BF9FB6A271BDA0BC6C453 /* libPods-QBRTCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssembly.m; sourceTree = "<group>"; };
 		95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorInput.swift; sourceTree = "<group>"; };
+		992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryRouterInput.swift; sourceTree = "<group>"; };
 		9CCA2B14A51BFE81BA93CE52 /* VideoStoryInteractor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractor.h; sourceTree = "<group>"; };
 		9FFD4216F81E96C670300BBF /* libPods-QBRTCDemo_sTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo_sTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryConfiguratorTests.swift; sourceTree = "<group>"; };
 		A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewController.swift; sourceTree = "<group>"; };
 		A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryModuleInput.swift; sourceTree = "<group>"; };
 		AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryPresenterTests.m; sourceTree = "<group>"; };
+		ACDF899EEC6EBDD23CD862F6 /* AuthStoryPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryPresenter.swift; sourceTree = "<group>"; };
 		B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouterInput.swift; sourceTree = "<group>"; };
 		B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewInput.swift; sourceTree = "<group>"; };
+		B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractor.swift; sourceTree = "<group>"; };
 		BA90EB928664E9A7BE27FC61 /* Pods-QBRTCDemo_sTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_sTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests.release.xcconfig"; sourceTree = "<group>"; };
 		BFCAB06BC01A11FABE6C03E6 /* VideoStoryPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryPresenter.h; sourceTree = "<group>"; };
 		C02FBCE1A397B785CE04E483 /* Pods-QBRTCDemo_s.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_s.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.release.xcconfig"; sourceTree = "<group>"; };
 		C6835E0812DE2752A0BEDC72 /* VideoStoryRouter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryRouter.h; sourceTree = "<group>"; };
 		C6E48B3E659A67BEEC20CF57 /* Pods-QBRTCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C7859E7F0647AD04AFAA97AE /* VideoStoryInteractorOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractorOutput.h; sourceTree = "<group>"; };
+		CBF0B11DA03F8E9D8D53ECFD /* AuthStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryPresenterTests.swift; sourceTree = "<group>"; };
 		CD68A95CBB14037EB80F16B8 /* Pods-QBRTCDemo_sTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_sTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D11B754886679B217E8FEAA2 /* VideoStoryModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryModuleInput.h; sourceTree = "<group>"; };
+		D1847E4079F80C8F1433FFEF /* AuthStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryViewTests.swift; sourceTree = "<group>"; };
+		D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInitializer.swift; sourceTree = "<group>"; };
 		DBC0353942AD2FCE4DA37D4D /* Pods-QBRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
+		DCECA7DD6CDF214B9109C588 /* AuthStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractorInput.swift; sourceTree = "<group>"; };
+		DE2810D9B20834E7C66A82B3 /* AuthStoryRouterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryRouterTests.swift; sourceTree = "<group>"; };
+		E060D9B417D26811FFBC52D7 /* AuthStoryViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryViewOutput.swift; sourceTree = "<group>"; };
 		E9D2275BC415291964FA7FA5 /* VideoStoryInteractorTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryInteractorTests.m; sourceTree = "<group>"; };
+		E9F542C488136D61B93B026A /* AuthStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryConfiguratorTests.swift; sourceTree = "<group>"; };
 		F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewOutput.swift; sourceTree = "<group>"; };
 		F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewTests.swift; sourceTree = "<group>"; };
 		F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouterTests.swift; sourceTree = "<group>"; };
@@ -713,16 +780,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1473EADA1CAC69DB007F9DF8 /* webrtc-arm.a in Frameworks */,
+				1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */,
+				1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */,
+				1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */,
 				1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */,
 				146CA9F51C62645400F768C8 /* GLKit.framework in Frameworks */,
 				146CA9F41C62644C00F768C8 /* VideoToolbox.framework in Frameworks */,
 				146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */,
 				146CA9F11C62643C00F768C8 /* CoreVideo.framework in Frameworks */,
 				146CA9F01C62643400F768C8 /* libstdc++.tbd in Frameworks */,
-				146CA9EC1C62642100F768C8 /* webrtc-arm.a in Frameworks */,
-				146CA9ED1C62642100F768C8 /* webrtc-arm64.a in Frameworks */,
-				146CA9EE1C62642100F768C8 /* webrtc-ia32.a in Frameworks */,
-				146CA9EF1C62642100F768C8 /* webrtc-x86_64.a in Frameworks */,
 				D8A5049A8BBC5BAB5D1CEA6E /* libPods-QBRTCDemo_sTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -911,9 +978,11 @@
 				14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */,
 				14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */,
 				14398F6B1C010A0800F3CE74 /* SVUserTests.m */,
-				147A0C7C1BFE159B0009044A /* TestStorageTests.m */,
+				147A0C7C1BFE159B0009044A /* TestsStorageTests.m */,
 				147A0C791BFE13FD0009044A /* TestsStorage.h */,
 				147A0C7A1BFE13FD0009044A /* TestsStorage.m */,
+				14114A161CB68FEB0092AA26 /* NSObject+Testing.h */,
+				14114A171CB68FEB0092AA26 /* NSObject+Testing.m */,
 			);
 			path = QBRTCDemoTests;
 			sourceTree = "<group>";
@@ -923,10 +992,9 @@
 			children = (
 				1417B3451C57E4E8004D6416 /* FakeCallService.h */,
 				1417B3461C57E4E8004D6416 /* FakeCallService.m */,
-				1439F67A1C5A540000438B48 /* FakeCallServiceDelegate.h */,
-				1439F67B1C5A540000438B48 /* FakeCallServiceDelegate.m */,
 				1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */,
 				1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */,
+				148A83D51CB0180400F88933 /* FakeQBService.swift */,
 			);
 			path = FakeServices;
 			sourceTree = "<group>";
@@ -1300,6 +1368,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1475463F1CAE544E004CCE95 /* RESTService */ = {
+			isa = PBXGroup;
+			children = (
+				147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */,
+				147546431CAE5649004CCE95 /* QBRESTService.swift */,
+			);
+			name = RESTService;
+			sourceTree = "<group>";
+		};
 		14A028721BFA543A00BDF2C5 /* QBSignaling */ = {
 			isa = PBXGroup;
 			children = (
@@ -1379,6 +1456,7 @@
 			children = (
 				026796DE6A883B4D7DB503D7 /* VideoStory */,
 				F80407DF3A1CB8A2F0595408 /* ImageGalleryStory */,
+				23F82BE9FD8E54B286B07835 /* AuthStory */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -1435,6 +1513,7 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1475463F1CAE544E004CCE95 /* RESTService */,
 				14736E821C561284009DFBBC /* CallService */,
 			);
 			path = Services;
@@ -1463,6 +1542,8 @@
 				14A028801BFB190800BDF2C5 /* SVUser.m */,
 				1454052B1C859431005E3790 /* DataChannelMessages.h */,
 				1454052C1C859431005E3790 /* DataChannelMessages.m */,
+				1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */,
+				1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1477,6 +1558,35 @@
 				998B1E5FC290BE81663C2750 /* Router */,
 			);
 			path = ImageGalleryStory;
+			sourceTree = "<group>";
+		};
+		18FE6C20D2CE11A121B4D264 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				1E979D19A33587E93B35ADA1 /* AuthStoryConfigurator.swift */,
+				D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		22274E388C059BE001CAE2EA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CBF0B11DA03F8E9D8D53ECFD /* AuthStoryPresenterTests.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		23F82BE9FD8E54B286B07835 /* AuthStory */ = {
+			isa = PBXGroup;
+			children = (
+				31C83B5B65A426026AF15561 /* View */,
+				A7B2F002B210CAA784038F46 /* Presenter */,
+				41C231BC1B4903897CFA7137 /* Interactor */,
+				555DD871313DE05CB1B1F3AB /* Router */,
+				18FE6C20D2CE11A121B4D264 /* Configurator */,
+			);
+			path = AuthStory;
 			sourceTree = "<group>";
 		};
 		24A0BB756AD5EE73AC99FEF0 /* VideoStory */ = {
@@ -1543,10 +1653,37 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		2BCBFF9D2B13601B16718EF4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D1847E4079F80C8F1433FFEF /* AuthStoryViewTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C99AA64E011B6E3EB466A75 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				E9F542C488136D61B93B026A /* AuthStoryConfiguratorTests.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
 		317F4048270873BCEA198B1A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		31C83B5B65A426026AF15561 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */,
+				E060D9B417D26811FFBC52D7 /* AuthStoryViewOutput.swift */,
+				6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */,
+				149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1568,6 +1705,24 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		41C231BC1B4903897CFA7137 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				DCECA7DD6CDF214B9109C588 /* AuthStoryInteractorInput.swift */,
+				0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */,
+				B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		49BA12C88EFA4DFC204F4789 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				DE2810D9B20834E7C66A82B3 /* AuthStoryRouterTests.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		4A452AFC09DF77BDA7631B9B /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
@@ -1585,8 +1740,18 @@
 				1417B3441C57E4B9004D6416 /* FakeServices */,
 				24A0BB756AD5EE73AC99FEF0 /* VideoStory */,
 				153556CC5CD4AB9C63F9DDF6 /* ImageGalleryStory */,
+				EDB639C7DE8B4B4C56A3FC6B /* AuthStory */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		555DD871313DE05CB1B1F3AB /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */,
+				036D04FD706443E892936BF0 /* AuthStoryRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		6414E01C8ABDE0BFE0074888 /* Interactor */ = {
@@ -1621,6 +1786,15 @@
 			isa = PBXGroup;
 			children = (
 				AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		A7B2F002B210CAA784038F46 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				50230D5A781F75168CCA1AF4 /* AuthStoryModuleInput.swift */,
+				ACDF899EEC6EBDD23CD862F6 /* AuthStoryPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -1683,6 +1857,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EDB639C7DE8B4B4C56A3FC6B /* AuthStory */ = {
+			isa = PBXGroup;
+			children = (
+				2C99AA64E011B6E3EB466A75 /* Configurator */,
+				2BCBFF9D2B13601B16718EF4 /* View */,
+				FCF712ACFED273577A11AD0F /* Interactor */,
+				22274E388C059BE001CAE2EA /* Presenter */,
+				49BA12C88EFA4DFC204F4789 /* Router */,
+			);
+			path = AuthStory;
+			sourceTree = "<group>";
+		};
 		F3EECC2FCD991E9CEA95067F /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1714,6 +1900,14 @@
 				242CA5506C5490232512450E /* VideoStoryRouterInput.h */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		FCF712ACFED273577A11AD0F /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2290BECE1782295B3A7E6D67 /* AuthStoryInteractorTests.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1913,6 +2107,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149A0D351CA7F02C008FB3A9 /* AuthStory.storyboard in Resources */,
 				14EE3D0F1C6BC03700C451CF /* blox_target.py in Resources */,
 				14EE3D0D1C6BC03700C451CF /* pull.sh in Resources */,
 				14EE3D111C6BC03700C451CF /* build.sh in Resources */,
@@ -1933,6 +2128,7 @@
 				148234021C002DFE0000E9ED /* LaunchScreen.storyboard in Resources */,
 				148234051C002DFE0000E9ED /* Assets.xcassets in Resources */,
 				14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */,
+				149A0D361CA7F02C008FB3A9 /* AuthStory.storyboard in Resources */,
 				14FB2CB71C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2150,10 +2346,12 @@
 				142D138D1C888A8A005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				147A0C761BFE139D0009044A /* QBSignalingChannelTests.m in Sources */,
 				14398F6E1C010C9100F3CE74 /* SVSignalingMessageTests.m in Sources */,
+				1473EAC91CAC607C007F9DF8 /* AuthStoryRouterTests.swift in Sources */,
 				147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */,
-				147A0C7D1BFE159B0009044A /* TestStorageTests.m in Sources */,
+				147A0C7D1BFE159B0009044A /* TestsStorageTests.m in Sources */,
 				14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */,
 				14ADBDE01C73851C003A0C98 /* ImageGalleryStoryRouterTests.swift in Sources */,
+				1473EAC71CAC607C007F9DF8 /* AuthStoryInteractorTests.swift in Sources */,
 				14ADBDDE1C73851C003A0C98 /* ImageGalleryStoryInteractorTests.swift in Sources */,
 				14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */,
 				3772DBD8B200B94BC6C11C61 /* VideoStoryAssemblyTests.m in Sources */,
@@ -2163,10 +2361,14 @@
 				1439F67F1C5A556B00438B48 /* FakeSignalingChannel.m in Sources */,
 				62630B599C72A7D1974F12E0 /* VideoStoryPresenterTests.m in Sources */,
 				14ADBDDC1C73850F003A0C98 /* ImageGalleryStoryViewTests.swift in Sources */,
+				14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
+				1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */,
 				190FDDC34E863B7B25D9DB7A /* VideoStoryInteractorTests.m in Sources */,
+				148A83D61CB0180400F88933 /* FakeQBService.swift in Sources */,
 				E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */,
 				14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */,
-				1439F67C1C5A540000438B48 /* FakeCallServiceDelegate.m in Sources */,
+				1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */,
+				1473EAC81CAC607C007F9DF8 /* AuthStoryPresenterTests.swift in Sources */,
 				1437CF731C63BB4B00CCE1BD /* BaseTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2175,22 +2377,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1473EACB1CAC6090007F9DF8 /* AuthStoryViewInput.swift in Sources */,
+				1473EAD01CAC6090007F9DF8 /* AuthStoryInteractorOutput.swift in Sources */,
+				147546421CAE560D004CCE95 /* RESTServiceProtocol.swift in Sources */,
 				1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */,
+				147546441CAE5649004CCE95 /* QBRESTService.swift in Sources */,
+				1473EACD1CAC6090007F9DF8 /* AuthStoryModuleInput.swift in Sources */,
+				1473EAD41CAC6090007F9DF8 /* AuthStoryConfigurator.swift in Sources */,
 				14A028711BFA541A00BDF2C5 /* SVSignalingMessageSDP.m in Sources */,
 				14ADBDF01C738554003A0C98 /* ImageGalleryStoryInteractorOutput.swift in Sources */,
+				1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				140746481BFB841000506088 /* SVSignalingParams.m in Sources */,
 				14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */,
 				14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */,
 				142D137F1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				14A028751BFA545300BDF2C5 /* QBSignalingChannel.m in Sources */,
 				14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */,
+				1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */,
 				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
 				14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */,
 				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
 				14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */,
+				1473EAD31CAC6090007F9DF8 /* AuthStoryRouter.swift in Sources */,
 				14ADBDE31C73854C003A0C98 /* ImageGalleryStoryViewOutput.swift in Sources */,
 				14ADBDE41C73854C003A0C98 /* ImageGalleryStoryViewController.swift in Sources */,
+				1473EACE1CAC6090007F9DF8 /* AuthStoryPresenter.swift in Sources */,
 				14A0288A1BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m in Sources */,
 				14ADBDE21C73854C003A0C98 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */,
@@ -2200,25 +2412,30 @@
 				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
 				14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */,
 				1452AAD61BF92FA30018DA30 /* AppDelegate.m in Sources */,
+				1473EACF1CAC6090007F9DF8 /* AuthStoryInteractorInput.swift in Sources */,
 				14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */,
 				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
+				1473EAD11CAC6090007F9DF8 /* AuthStoryInteractor.swift in Sources */,
 				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
 				14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */,
 				142D13851C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */,
 				14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */,
+				1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				14A028901BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m in Sources */,
+				1473EAD21CAC6090007F9DF8 /* AuthStoryRouterInput.swift in Sources */,
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
 				14ADBDEE1C738554003A0C98 /* ImageGalleryStoryPresenter.swift in Sources */,
 				14A0286E1BFA53DB00BDF2C5 /* SVSignalingMessageICE.m in Sources */,
 				14ADBDF41C738554003A0C98 /* ImageGalleryStoryConfigurator.swift in Sources */,
 				14EE3D171C6BC7CF00C451CF /* VideoStoryAssembly.m in Sources */,
+				1473EAC51CAC6070007F9DF8 /* AuthStoryViewController.swift in Sources */,
 				14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2229,11 +2446,14 @@
 			files = (
 				1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */,
 				148233851C002DFE0000E9ED /* SVSignalingMessageSDP.m in Sources */,
+				147546411CAE560C004CCE95 /* RESTServiceProtocol.swift in Sources */,
 				14D0A41D1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */,
+				147546451CAE5649004CCE95 /* QBRESTService.swift in Sources */,
 				14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				1482338D1C002DFE0000E9ED /* SVSignalingParams.m in Sources */,
 				148233901C002DFE0000E9ED /* QBSignalingChannel.m in Sources */,
 				142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
+				1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				148233911C002DFE0000E9ED /* SVSignalingMessageType.m in Sources */,
 				148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */,
 				148233931C002DFE0000E9ED /* QBChatMessage+SVSignalingMessage.m in Sources */,
@@ -2272,6 +2492,18 @@
 				34295AF1A7D1C75DF764635D /* ImageGalleryStoryRouter.swift in Sources */,
 				0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */,
 				07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */,
+				7C92BC563CF188F3FDA03D37 /* AuthStoryViewInput.swift in Sources */,
+				A049C3E01A2B5FAE66666F31 /* AuthStoryViewOutput.swift in Sources */,
+				24BCC726FCD00FB50CE99B69 /* AuthStoryViewController.swift in Sources */,
+				B9EC69970C8CCBEF7AF2BA39 /* AuthStoryModuleInput.swift in Sources */,
+				EA81168A4C17567BC162640A /* AuthStoryPresenter.swift in Sources */,
+				24C83F54AD1112D275D087D8 /* AuthStoryInteractorInput.swift in Sources */,
+				0BA1EF8A8A8D529DCD29EDDA /* AuthStoryInteractorOutput.swift in Sources */,
+				63A59E34E800C1A9FCF24C63 /* AuthStoryInteractor.swift in Sources */,
+				6C49A339274F0DC6F59B9512 /* AuthStoryRouterInput.swift in Sources */,
+				CAB1B0BA5443499CF8EF2DFD /* AuthStoryRouter.swift in Sources */,
+				4565B18CED6A7AAC3013F9CA /* AuthStoryConfigurator.swift in Sources */,
+				4DEB82D05EA0A1975DFD6636 /* AuthStoryInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2291,7 +2523,7 @@
 				14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */,
 				14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */,
 				14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */,
-				14E9F5961C6CD317007F58B7 /* TestStorageTests.m in Sources */,
+				14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */,
 				14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */,
 				14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */,
 				14E9F59A1C6CD317007F58B7 /* VideoStoryAssemblyTests.m in Sources */,
@@ -2301,13 +2533,19 @@
 				14E9F59E1C6CD317007F58B7 /* VideoStoryInteractorTests.m in Sources */,
 				14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */,
 				14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */,
-				14E9F5A11C6CD317007F58B7 /* FakeCallServiceDelegate.m in Sources */,
 				14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */,
 				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */,
+				14114A191CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
 				E93D0D88C76A33845273181B /* ImageGalleryStoryInteractorTests.swift in Sources */,
 				279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */,
+				148A83D71CB0180400F88933 /* FakeQBService.swift in Sources */,
 				E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */,
+				A49D4EB8C7F6DF685E7F5B8D /* AuthStoryConfiguratorTests.swift in Sources */,
+				71126378754862BDA35556EB /* AuthStoryViewTests.swift in Sources */,
+				24B87B4B94DFA5D9067F6C69 /* AuthStoryInteractorTests.swift in Sources */,
+				0525A30887D71636FB168713 /* AuthStoryPresenterTests.swift in Sources */,
+				010F6CCF815DCADC3352D1B8 /* AuthStoryRouterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2368,6 +2606,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = QBRTCDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2410,6 +2649,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = QBRTCDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2651,7 +2891,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2695,7 +2935,7 @@
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
 				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

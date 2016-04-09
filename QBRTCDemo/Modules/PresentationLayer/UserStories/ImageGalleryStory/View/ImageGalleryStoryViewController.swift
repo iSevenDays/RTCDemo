@@ -21,31 +21,39 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
         output.viewIsReady()
     }
 
+	@IBAction func didTapStartButton(sender: AnyObject) {
+		output.didTriggerStartButtonTapped()
+	}
+	
     // MARK: ImageGalleryStoryViewInput
     func setupInitialState() {
     }
 	
 	func collectionView() -> ImageGalleryStoryCollectionView {
-		assert(self.imageCollectionView != nil)
+		assert(imageCollectionView != nil)
 		
-		return self.imageCollectionView
+		return imageCollectionView
 	}
 	
 	func configureViewForReceiving() {
-		self.btnStartSynchronization.title = ""
-		self.btnStartSynchronization.enabled = false
-	}
-	
-	@IBAction func didTapStartButton(sender: AnyObject) {
-		self.output.didTriggerStartButtonTaped()
+		btnStartSynchronization.title = ""
+		btnStartSynchronization.enabled = false
 	}
 	
 	func reloadCollectionView() {
-		dispatch_async(dispatch_get_main_queue()) { () -> Void in
+		dispatch_async(dispatch_get_main_queue()) {[weak self] () -> Void in
 			
-			self.imageCollectionView.collectionViewLayout.invalidateLayout()
-			self.imageCollectionView.reloadData()
+			self?.imageCollectionView.collectionViewLayout.invalidateLayout()
+			self?.imageCollectionView.reloadData()
 			
 		}
+	}
+	
+	func showSynchronizationImagesStarted() {
+		
+	}
+	
+	func showSynchronizationImagesFinished() {
+		
 	}
 }

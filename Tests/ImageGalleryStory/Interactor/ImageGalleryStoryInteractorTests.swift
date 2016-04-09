@@ -20,6 +20,7 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 
 	var interactor: ImageGalleryStoryInteractor!
 	var mockOutput: MockPresenter!
+	var mockImagesOutput: MockImagesOutput!
 	
 	let user1: SVUser = CallServiceHelpers.user1()
 	let user2: SVUser = CallServiceHelpers.user2()
@@ -29,6 +30,10 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		self.interactor = ImageGalleryStoryInteractor()
 		self.mockOutput = MockPresenter()
 		self.interactor.output = mockOutput
+		
+		self.mockImagesOutput = MockImagesOutput()
+		self.interactor.imagesOutput = mockImagesOutput
+		
     }
 	
 	// Use when using real CallService is not possible
@@ -78,18 +83,27 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		XCTAssertTrue(self.mockOutput.didReceiveRoleReceiverGotCalled)
 	}
 	
-	func testNotifiesImagesOutputhWhenReceivedNewImage() {
+	// MARK: ImageGalleryStoryInteractorImagesOutput tests
+	
+	func testNotifiesImagesOutputWhenReceivedNewImage() {
 		// given
 		self.useRealCallService()
-		self.interactor.callService.connectWithUser(self.user1, completion: nil)
+		
+		
+		UIGraphicsBeginImageContext(CGSizeMake(1, 1));
+		let newImage = UIGraphicsGetImageFromCurrentImageContext();
+		UIGraphicsEndImageContext();
+		
+		let imageData = UIImagePNGRepresentation(newImage)!
 		
 		// when
-		self.interactor.requestCallerRole()
+		self.interactor.callService(self.interactor.callService, didReceiveData: imageData)
 		
 		// then
-		XCTAssertTrue(self.mockOutput.didReceiveRoleReceiverGotCalled)
+		XCTAssertTrue(self.mockImagesOutput.didReceiveImageGotCalled)
 	}
-
+	
+	
     class MockPresenter: ImageGalleryStoryInteractorOutput {
 		
 		var didStartSynchronizationImagesGotCalled = false
@@ -114,4 +128,12 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 			didReceiveRoleSenderGotCalled = true
 		}
     }
+	
+	class MockImagesOutput : ImageGalleryStoryInteractorImagesOutput {
+		var didReceiveImageGotCalled = false
+		
+		func didReceiveImage(image: UIImage) {
+			didReceiveImageGotCalled = true
+		}
+	}
 }

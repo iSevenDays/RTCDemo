@@ -13,6 +13,7 @@
 
 @class SVSignalingMessage;
 @class RTCPeerConnection;
+@class SVSignalingMessage;
 
 @protocol SVSignalingChannelDelegate;
 
@@ -26,7 +27,7 @@
 
 - (void)sendHangupToUser:(nonnull SVUser *)user completion:(void(^_Nullable)(NSError * _Nullable error))completion;
 - (void)sendRejectToUser:(nonnull SVUser *)user completion:(void(^_Nullable)(NSError * _Nullable error))completion;
-
+- (void)sendSignalingMessage:(nonnull SVSignalingMessage *)message;
 - (void)drainMessageQueueIfReady;
 
 - (void)peerConnection:(nullable RTCPeerConnection *)peerConnection didSetSessionDescriptionWithError:(nullable NSError *)error;

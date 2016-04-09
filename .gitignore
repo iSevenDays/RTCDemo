@@ -24,3 +24,9 @@ DerivedData/
 xcuserdata/*
 UserInterfaceState.xcuserstate
 Breakpoints_v2.xcbkptlist
+
+
+Scripts/webrtc/src
+
+# OS X
+.DS_Store
