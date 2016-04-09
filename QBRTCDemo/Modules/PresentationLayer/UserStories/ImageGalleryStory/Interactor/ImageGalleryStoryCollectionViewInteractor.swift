@@ -17,14 +17,14 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	
 	// MARK: ImageGalleryStoryCollectionViewInteractorInput
 	func addImage(image: UIImage) {
-		self.images.append(image)
+		images.append(image)
 		
-		self.output.didUpdateImages()
+		output.didUpdateImages()
 	}
 	
 	func imageAt(index: Int) -> UIImage? {
 		if images.count > index {
-			return self.images[index]
+			return images[index]
 		}
 		return nil;
 	}
@@ -35,14 +35,14 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	
 	// MARK: UICollectionView
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.imagesCount()
+		return imagesCount()
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(imageGalleryStoryCollectionViewCellIdentifier, forIndexPath: indexPath) as! ImageGalleryStoryCollectionViewCell
 
-		cell.imageView?.image = self.images[indexPath.row]
+		cell.imageView?.image = images[indexPath.row]
 		
 		return cell
 		
@@ -56,6 +56,6 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	// MARK: ImageGalleryStoryInteractorImagesOutput
 	
 	func didReceiveImage(image: UIImage) {
-		self.addImage(image)
+		addImage(image)
 	}
 }

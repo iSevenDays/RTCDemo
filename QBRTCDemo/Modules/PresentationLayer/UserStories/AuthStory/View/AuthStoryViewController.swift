@@ -36,9 +36,9 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
     }
 
 	func setInputEnabled(value: Bool) {
-		self.userNameInput.enabled = value
-		self.roomNameInput.enabled = value
-		self.login.enabled = value
+		userNameInput.enabled = value
+		roomNameInput.enabled = value
+		login.enabled = value
 	}
 	
 	// MAKR: IBActions
@@ -46,7 +46,7 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 	@IBAction func didTapLoginButton(sender: AnyObject) {
 		let userName = userNameInput.text ?? ""
 		let roomName = roomNameInput.text ?? ""
-		self.output.didTriggerLoginButtonTapped(userName, roomName: roomName)
+		output.didTriggerLoginButtonTapped(userName, roomName: roomName)
 	}
 	
     // MARK: AuthStoryViewInput
@@ -54,28 +54,28 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
     }
 	
 	func enableInput() {
-		self.setInputEnabled(true)
+		setInputEnabled(true)
 	}
 	
 	func disableInput() {
-		self.setInputEnabled(true)
+		setInputEnabled(true)
 	}
 	
 	func setUserName(userName: String) {
-		self.userNameInput.text = userName
+		userNameInput.text = userName
 		updateLoginButtonEnabledState()
 	}
 	
 	func setRoomName(roomName: String) {
-		self.roomNameInput.text = roomName
+		roomNameInput.text = roomName
 		updateLoginButtonEnabledState()
 	}
 	
 	func retrieveInformation() {
-		let userName = self.userNameInput.text
-		let roomName = self.roomNameInput.text
+		let userName = userNameInput.text
+		let roomName = roomNameInput.text
 		
-		self.output.didReceiveUserName(userName!, roomName: roomName!)
+		output.didReceiveUserName(userName!, roomName: roomName!)
 	}
 	
 	func showIndicatorLoggingIn() {

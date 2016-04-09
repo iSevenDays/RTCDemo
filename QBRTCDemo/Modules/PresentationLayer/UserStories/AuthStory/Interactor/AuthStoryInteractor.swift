@@ -22,7 +22,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 				return
 			}
 			output.doingLoginWithCachedUser(cachedUser)
-			self.signUpOrLoginWithUserName(cachedUser.fullName, tags: userTags)
+			signUpOrLoginWithUserName(cachedUser.fullName, tags: userTags)
 		}
 	}
 	

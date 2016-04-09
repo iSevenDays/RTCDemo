@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Implements RESTServiceProtocol using QuickBlox API
 class QBRESTService : RESTServiceProtocol {
 	
 	func loginWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?) {
