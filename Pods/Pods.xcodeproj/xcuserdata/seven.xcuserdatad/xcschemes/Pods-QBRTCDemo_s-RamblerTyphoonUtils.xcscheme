@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1EAC02B96410E6887DAE01A1'
-               BlueprintName = 'Pods-QBRTCDemo_s-RamblerTyphoonUtils'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-QBRTCDemo_s-RamblerTyphoonUtils.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "087BDBA3BA598ACD6FD032FA9DC540B3"
+               BlueprintName = "Pods-QBRTCDemo_s-RamblerTyphoonUtils"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libPods-QBRTCDemo_s-RamblerTyphoonUtils.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '958886704BD2FBFCBDA46844'
-               BlueprintName = 'OCHamcrest'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libOCHamcrest.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "738896312A448E0C8F0B44002EB3E99B"
+               BlueprintName = "OCHamcrest"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libOCHamcrest.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

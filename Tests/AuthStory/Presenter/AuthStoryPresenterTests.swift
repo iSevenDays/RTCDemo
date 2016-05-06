@@ -66,7 +66,7 @@ class AuthStoryPresenterTests: XCTestCase {
 		self.presenter.didLoginUser(TestsStorage.svuserTest())
 		
 		// then
-		XCTAssertTrue(self.mockRouter.openVideoStoryGotCalled)
+		XCTAssertTrue(self.mockRouter.openChatUsersStoryGotCalled)
 	}
 	
 	// MARK: AuthStoryViewInput tests
@@ -115,10 +115,10 @@ class AuthStoryPresenterTests: XCTestCase {
     }
 
     class MockRouter: AuthStoryRouterInput {
-		var openVideoStoryGotCalled = false
+		var openChatUsersStoryGotCalled = false
 		
-		func openVideoStory() {
-			openVideoStoryGotCalled = true
+		func openChatUsersStory() {
+			openChatUsersStoryGotCalled = true
 		}
     }
 

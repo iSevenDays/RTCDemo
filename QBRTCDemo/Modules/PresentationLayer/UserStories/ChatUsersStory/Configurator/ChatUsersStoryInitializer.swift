@@ -1,0 +1,22 @@
+//
+//  ChatUsersStoryInitializer.swift
+//  QBRTCDemo
+//
+//  Created by Anton Sokolchenko on 06/05/2016.
+//  Copyright © 2016 Anton Sokolchenko. All rights reserved.
+//
+
+import UIKit
+
+class ChatUsersStoryModuleInitializer: NSObject {
+
+    //Connect with object on storyboard
+    @IBOutlet weak var viewController: ChatUsersStoryTableViewController!
+
+    override func awakeFromNib() {
+
+        let configurator = ChatUsersStoryModuleConfigurator()
+        configurator.configureModuleForViewInput(viewController)
+    }
+
+}

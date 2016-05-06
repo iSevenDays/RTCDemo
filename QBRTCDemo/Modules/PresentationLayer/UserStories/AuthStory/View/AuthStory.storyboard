@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dUt-qD-aec">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dUt-qD-aec">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -178,7 +178,7 @@ You can join existent chat room.</string>
                         <outlet property="login" destination="rmg-X7-ClN" id="gvm-AU-te0"/>
                         <outlet property="roomNameInput" destination="riI-fW-ure" id="sVs-zO-8S1"/>
                         <outlet property="userNameInput" destination="KWX-wJ-HRs" id="FKY-65-iRY"/>
-                        <segue destination="eAG-dp-Jcf" kind="show" identifier="AuthStoryToVideoStorySegue" id="qDo-0n-aaH"/>
+                        <segue destination="eAG-dp-Jcf" kind="show" identifier="AuthStoryToChatUsersStorySegue" id="qDo-0n-aaH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CZt-ri-igM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -190,10 +190,10 @@ You can join existent chat room.</string>
             </objects>
             <point key="canvasLocation" x="1238" y="316"/>
         </scene>
-        <!--VideoStory-->
+        <!--ChatUsersStory-->
         <scene sceneID="ADw-Kk-Hfk">
             <objects>
-                <viewControllerPlaceholder storyboardName="VideoStory" id="eAG-dp-Jcf" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="ChatUsersStory" id="eAG-dp-Jcf" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbK-IJ-E7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1801" y="316"/>

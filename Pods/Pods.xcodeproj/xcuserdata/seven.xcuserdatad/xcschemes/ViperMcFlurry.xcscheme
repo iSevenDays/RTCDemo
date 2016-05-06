@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7955B0AFC8645D2F94908846'
-               BlueprintName = 'ViperMcFlurry'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libViperMcFlurry.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0B9F05F24863EF1B6DDB34D64C0CA50F"
+               BlueprintName = "ViperMcFlurry"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libViperMcFlurry.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
