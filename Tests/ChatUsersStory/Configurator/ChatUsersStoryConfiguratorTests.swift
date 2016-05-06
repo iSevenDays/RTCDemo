@@ -8,6 +8,14 @@
 
 import XCTest
 
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
+
 class ChatUsersStoryModuleConfiguratorTests: XCTestCase {
 
     override func setUp() {
@@ -42,7 +50,7 @@ class ChatUsersStoryModuleConfiguratorTests: XCTestCase {
         XCTAssertNotNil(interactor.output, "output in ChatUsersStoryInteractor is nil after configuration")
     }
 
-    class ChatUsersStoryViewControllerMock: ChatUsersStoryViewController {
+    class ChatUsersStoryViewControllerMock: ChatUsersStoryTableViewController {
 
         var setupInitialStateDidCall = false
 
