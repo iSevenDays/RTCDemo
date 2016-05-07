@@ -12,7 +12,16 @@ class AuthStoryRouter: AuthStoryRouterInput {
 	
 	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!;
 	
-	func openChatUsersStory() {
-		transitionHandler.openModuleUsingSegue?(authStoryToChatUsersStorySegueIdentifier)
+	func openChatUsersStoryWithTag(tag: String) {
+		transitionHandler.openModuleUsingSegue?(authStoryToChatUsersStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
+			
+			guard let chatUsersStoryInput = moduleInput as? ChatUsersStoryModuleInput else {
+				fatalError("moduleInput is not ChatUsersStoryModuleInput")
+			}
+			
+			chatUsersStoryInput.setTag(tag)
+			
+			return nil
+		})
 	}
 }

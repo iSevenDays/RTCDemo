@@ -27,6 +27,9 @@
                             <outlet property="delegate" destination="O2B-ps-Dw2" id="Cjo-V0-HGS"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="tableView" destination="qxk-bk-0Bl" id="wfn-29-dpl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTk-Vh-VmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="0cI-Kt-hem" customClass="ChatUsersStoryModuleInitializer" customModule="QBRTCDemo_s">

@@ -12,7 +12,14 @@
     var interactor: ChatUsersStoryInteractorInput!
     var router: ChatUsersStoryRouterInput!
 
+	// MARK: ChatUsersStoryViewOutput
+	
     func viewIsReady() {
-
+		interactor.tryRetrieveCachedUsersWithTag()
     }
+	
+	// MARK: ChatUsersStoryModuleInput
+	func setTag(tag: String) {
+		
+	}
 }

@@ -18,18 +18,42 @@ import XCTest
 
 class ChatUsersStoryPresenterTest: XCTestCase {
 
+	var presenter: ChatUsersStoryPresenter!
+	var mockInteractor: MockInteractor!
+	var mockRouter: MockRouter!
+	var mockView: MockViewController!
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		presenter = ChatUsersStoryPresenter()
+		
+		mockInteractor = MockInteractor()
+		
+		mockRouter = MockRouter()
+		mockView = MockViewController()
+		
+		presenter.interactor = mockInteractor
+		presenter.router = mockRouter
+		presenter.view = mockView
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	// MARK: ChatUsersStoryViewOutput tests
+	
+	func testTriesToRetrieveCachedUsersWithTag_whenViewIsReady() {
+		// when
+		presenter.viewIsReady()
+		
+		// then
+		XCTAssertTrue(mockInteractor.tryRetrieveCachedUsersWithTagGotCalled)
+	}
+	
 
     class MockInteractor: ChatUsersStoryInteractorInput {
-
+		var tryRetrieveCachedUsersWithTagGotCalled = false
+		
+		func tryRetrieveCachedUsersWithTag() {
+			tryRetrieveCachedUsersWithTagGotCalled = true
+		}
     }
 
     class MockRouter: ChatUsersStoryRouterInput {
@@ -41,5 +65,9 @@ class ChatUsersStoryPresenterTest: XCTestCase {
         func setupInitialState() {
 
         }
+		
+		func reloadData() {
+			
+		}
     }
 }

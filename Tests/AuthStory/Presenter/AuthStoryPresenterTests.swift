@@ -39,7 +39,7 @@ class AuthStoryPresenterTests: XCTestCase {
 		
     }
 	
-	// MARK: AuthStoryInteractorInput tests
+	// MARK: AuthStoryViewOutput tests
 	
 	func testTriesToLoginWithCachedIfAvailable_whenViewIsReady() {
 		// given
@@ -61,15 +61,7 @@ class AuthStoryPresenterTests: XCTestCase {
 		XCTAssertTrue(mockInteractor.signUpOrLoginWithUserNameGotCalled)
 	}
 	
-	func testOpensVideoStory_whenLoggedIn() {
-		// when
-		self.presenter.didLoginUser(TestsStorage.svuserTest())
-		
-		// then
-		XCTAssertTrue(self.mockRouter.openChatUsersStoryGotCalled)
-	}
-	
-	// MARK: AuthStoryViewInput tests
+	// MARK: AuthStoryInteratorOutput tests
 	
 	func testShowsLoggingInIndicator() {
 		// when
@@ -79,7 +71,6 @@ class AuthStoryPresenterTests: XCTestCase {
 		XCTAssertTrue(self.mockView.showIndicatorLoggingInGotCalled)
 		XCTAssertTrue(self.mockView.setUserNameGotCalled)
 		XCTAssertTrue(self.mockView.setRoomNameGotCalled)
-		
 	}
 	
 	func testShowsSigningUpIndicator() {
@@ -90,6 +81,19 @@ class AuthStoryPresenterTests: XCTestCase {
 		XCTAssertTrue(self.mockView.showIndicatorSigningUpGotCalled)
 		XCTAssertTrue(self.mockView.setUserNameGotCalled)
 		XCTAssertTrue(self.mockView.setRoomNameGotCalled)
+	}
+	
+	func testOpensVideoStory_whenLoggedIn() {
+		// given
+		let testUser = TestsStorage.svuserTest()
+		
+		// when
+		self.presenter.didLoginUser(testUser)
+		
+		// then
+		XCTAssertTrue(self.mockRouter.openChatUsersStoryGotCalled)
+		XCTAssertNotNil(self.mockRouter.tag)
+		XCTAssertEqual(self.mockRouter.tag, testUser.tags?.first)
 	}
 	
 	func testShowsError_whenLoginFailed() {
@@ -116,9 +120,11 @@ class AuthStoryPresenterTests: XCTestCase {
 
     class MockRouter: AuthStoryRouterInput {
 		var openChatUsersStoryGotCalled = false
+		var tag: String?
 		
-		func openChatUsersStory() {
+		func openChatUsersStoryWithTag(tag: String) {
 			openChatUsersStoryGotCalled = true
+			self.tag = tag
 		}
     }
 

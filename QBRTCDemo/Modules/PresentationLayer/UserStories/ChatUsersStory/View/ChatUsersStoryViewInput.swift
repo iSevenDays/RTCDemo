@@ -14,4 +14,10 @@ protocol ChatUsersStoryViewInput: class {
     */
 
     func setupInitialState()
+	
+	
+	/**
+	Reload table view data
+	*/
+	func reloadData()
 }

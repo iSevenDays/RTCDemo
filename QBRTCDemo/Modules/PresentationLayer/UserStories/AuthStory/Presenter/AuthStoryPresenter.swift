@@ -28,17 +28,20 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 		
 	}
 	
-	// MARK: AuthStoryInteractorInput
+	// MARK: AuthStoryInteractorOutput
 	
 	func didLoginUser(user: SVUser) {
-		router.openChatUsersStory()
+		guard let firstTag = user.tags?.first else {
+			NSLog("Error user has no tags")
+			return
+		}
+		
+		router.openChatUsersStoryWithTag(firstTag )
 	}
 	
 	func didErrorLogin(error: NSError?) {
 		view.showErrorLogin()
 	}
-	
-	// MARK: AuthStoryInteractorOutput
 	
 	func doingLoginWithUser(user: SVUser) {
 		view.showIndicatorLoggingIn()

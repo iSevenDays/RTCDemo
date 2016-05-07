@@ -10,4 +10,8 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 
     weak var output: ChatUsersStoryInteractorOutput!
 
+	
+	func tryRetrieveCachedUsersWithTag() {
+		
+	}
 }

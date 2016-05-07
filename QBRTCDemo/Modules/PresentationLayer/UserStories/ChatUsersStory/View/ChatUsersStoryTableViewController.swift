@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ChatUsersStoryTableViewController: UITableViewController, ChatUsersStoryViewInput {
+class ChatUsersStoryTableViewController: UIViewController, ChatUsersStoryViewInput {
 
     @objc var output: ChatUsersStoryViewOutput!
-
+	
+	@IBOutlet var tableView: UITableView!
+	
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,5 +23,23 @@ class ChatUsersStoryTableViewController: UITableViewController, ChatUsersStoryVi
 
     // MARK: ChatUsersStoryViewInput
     func setupInitialState() {
+		
     }
+	
+	
+	func reloadData() {
+		tableView.reloadData()
+	}
+	
+}
+
+extension ChatUsersStoryTableViewController: UITableViewDataSource {
+	
+	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 0
+	}
+	
+	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		return UITableViewCell.init()
+	}
 }
