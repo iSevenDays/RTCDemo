@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class ChatUsersStoryPresenter: ChatUsersStoryModuleInput, ChatUsersStoryViewOutput, ChatUsersStoryInteractorOutput{
+@objc class ChatUsersStoryPresenter: NSObject, ChatUsersStoryModuleInput, ChatUsersStoryViewOutput, ChatUsersStoryInteractorOutput {
 
     weak var view: ChatUsersStoryViewInput!
     var interactor: ChatUsersStoryInteractorInput!

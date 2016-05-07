@@ -6,6 +6,6 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-protocol ChatUsersStoryModuleInput: class {
-
+@objc protocol ChatUsersStoryModuleInput: RamblerViperModuleInput {
+	func setTag(tag: String)
 }

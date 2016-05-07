@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-protocol ChatUsersStoryViewOutput {
+@objc protocol ChatUsersStoryViewOutput {
 
     /**
         @author Anton Sokolchenko

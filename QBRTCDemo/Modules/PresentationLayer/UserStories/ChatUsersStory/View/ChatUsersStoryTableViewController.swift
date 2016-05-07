@@ -10,7 +10,7 @@ import UIKit
 
 class ChatUsersStoryTableViewController: UITableViewController, ChatUsersStoryViewInput {
 
-    var output: ChatUsersStoryViewOutput!
+    @objc var output: ChatUsersStoryViewOutput!
 
     // MARK: Life cycle
     override func viewDidLoad() {
