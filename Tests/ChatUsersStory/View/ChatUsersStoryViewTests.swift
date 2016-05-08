@@ -25,35 +25,29 @@ class ChatUsersStoryViewTests: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+		controller = UIStoryboard(name: "ChatUsersStory", bundle: nil).instantiateViewControllerWithIdentifier(String(ChatUsersStoryViewController.self)) as! ChatUsersStoryViewController
+		
+		mockOutput = MockViewControllerOutput()
+		controller.output = mockOutput
     }
 	
-	class MockViewControllerOutput : ChatUsersStoryViewOutput {
-		var viewIsReadyGotCalled = false
-		var loginButtonTapped = false
-		var didReceiveUserNameGotCalled = false
+	func testViewDidLoadTriggersViewIsReadyAction() {
+		// when
+		controller.viewDidLoad()
 		
-		var roomName = ""
-		var userName = ""
+		// then
+		XCTAssertTrue(mockOutput.viewIsReadyGotCalled)
+	}
+	
+	// MARK: IBActions
+	
+	@objc class MockViewControllerOutput : NSObject,  ChatUsersStoryViewOutput {
+		var viewIsReadyGotCalled = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
 		}
 		
-		func didTriggerLoginButtonTapped(userName: String, roomName: String) {
-			loginButtonTapped = true
-		}
-		
-		func didReceiveUserName(userName: String, roomName: String) {
-			didReceiveUserNameGotCalled = true
-			self.userName = userName
-			self.roomName = roomName
-		}
 		
 	}
 

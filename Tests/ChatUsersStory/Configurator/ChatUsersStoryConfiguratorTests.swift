@@ -51,7 +51,7 @@ class ChatUsersStoryModuleConfiguratorTests: XCTestCase {
 		XCTAssertNotNil(interactor.cacheService, "cachedService in ChatUsersStoryInteractor is nil after configuration")
     }
 
-    class ChatUsersStoryViewControllerMock: ChatUsersStoryTableViewController {
+    class ChatUsersStoryViewControllerMock: ChatUsersStoryViewController {
 
         var setupInitialStateDidCall = false
 

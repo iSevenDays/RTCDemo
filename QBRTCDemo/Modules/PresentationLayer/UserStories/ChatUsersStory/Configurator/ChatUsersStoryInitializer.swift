@@ -11,7 +11,7 @@ import UIKit
 class ChatUsersStoryModuleInitializer: NSObject {
 
     //Connect with object on storyboard
-    @IBOutlet weak var viewController: ChatUsersStoryTableViewController!
+    @IBOutlet weak var viewController: ChatUsersStoryViewController!
 
     override func awakeFromNib() {
 

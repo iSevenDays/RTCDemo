@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O2B-ps-Dw2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wHU-O7-fT3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ieM-Mz-QcW">
+        <!--Chat Users Story View Controller-->
+        <scene sceneID="1lN-Nx-nLA">
             <objects>
-                <tableViewController id="O2B-ps-Dw2" customClass="ChatUsersStoryTableViewController" customModule="QBRTCDemo_s" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qxk-bk-0Bl">
+                <viewController storyboardIdentifier="ChatUsersStoryViewController" id="wHU-O7-fT3" customClass="ChatUsersStoryViewController" customModule="QBRTCDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gwf-Oi-wxf"/>
+                        <viewControllerLayoutGuide type="bottom" id="824-GA-mtC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mJj-Va-PEu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pJy-i2-7ab">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wHU-O7-fT3" id="bLv-Me-Qxo"/>
+                                    <outlet property="delegate" destination="wHU-O7-fT3" id="8Wz-lV-JAH"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Hyq-0u-VlH">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hyq-0u-VlH" id="Zxd-mW-loN">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="O2B-ps-Dw2" id="0K2-Ps-7Jn"/>
-                            <outlet property="delegate" destination="O2B-ps-Dw2" id="Cjo-V0-HGS"/>
-                        </connections>
-                    </tableView>
+                        <constraints>
+                            <constraint firstItem="pJy-i2-7ab" firstAttribute="leading" secondItem="mJj-Va-PEu" secondAttribute="leading" id="22R-gQ-OZd"/>
+                            <constraint firstItem="824-GA-mtC" firstAttribute="top" secondItem="pJy-i2-7ab" secondAttribute="bottom" id="Eth-Be-5Wh"/>
+                            <constraint firstItem="pJy-i2-7ab" firstAttribute="top" secondItem="gwf-Oi-wxf" secondAttribute="bottom" id="iZ6-cF-3Sb"/>
+                            <constraint firstAttribute="trailing" secondItem="pJy-i2-7ab" secondAttribute="trailing" id="ld7-gS-05M"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <outlet property="tableView" destination="qxk-bk-0Bl" id="wfn-29-dpl"/>
+                        <outlet property="tableView" destination="pJy-i2-7ab" id="zRF-sy-0No"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lTk-Vh-VmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="0cI-Kt-hem" customClass="ChatUsersStoryModuleInitializer" customModule="QBRTCDemo_s">
-                    <connections>
-                        <outlet property="viewController" destination="O2B-ps-Dw2" id="kaL-ch-fU8"/>
-                    </connections>
-                </customObject>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ugj-Zt-xDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="155" y="384"/>
+            <point key="canvasLocation" x="-223" y="445"/>
         </scene>
     </scenes>
 </document>

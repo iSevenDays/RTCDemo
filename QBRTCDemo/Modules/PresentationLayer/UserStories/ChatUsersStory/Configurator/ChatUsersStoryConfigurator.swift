@@ -12,12 +12,12 @@ class ChatUsersStoryModuleConfigurator {
 
     func configureModuleForViewInput<UITableViewController>(viewInput: UITableViewController) {
 
-        if let viewController = viewInput as? ChatUsersStoryTableViewController {
+        if let viewController = viewInput as? ChatUsersStoryViewController {
             configure(viewController)
         }
     }
 
-    private func configure(viewController: ChatUsersStoryTableViewController) {
+    private func configure(viewController: ChatUsersStoryViewController) {
 
         let router = ChatUsersStoryRouter()
 

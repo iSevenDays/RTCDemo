@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatUsersStoryTableViewController: UIViewController, ChatUsersStoryViewInput {
+class ChatUsersStoryViewController: UIViewController, ChatUsersStoryViewInput {
 
     @objc var output: ChatUsersStoryViewOutput!
 	
@@ -33,7 +33,7 @@ class ChatUsersStoryTableViewController: UIViewController, ChatUsersStoryViewInp
 	
 }
 
-extension ChatUsersStoryTableViewController: UITableViewDataSource {
+extension ChatUsersStoryViewController: UITableViewDataSource {
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 0
