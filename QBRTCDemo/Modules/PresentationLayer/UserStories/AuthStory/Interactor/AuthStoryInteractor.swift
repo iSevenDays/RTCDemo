@@ -11,7 +11,7 @@ import AdSupport // for UDID
 class AuthStoryInteractor: AuthStoryInteractorInput {
 
     weak var output: AuthStoryInteractorOutput!
-	var restService: protocol<RESTServiceProtocol>!
+	internal var restService: protocol<RESTServiceProtocol>!
 	
 	
 	// MARK: AuthStoryInteractorInput
@@ -60,8 +60,22 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		}
 		
 	}
-
-	private func signUpOrLoginWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?) {
+	
+	/**
+	Signup or login with user
+	
+	1. Notify presenter about login
+	2. Login
+	3. Login was successful    -> successBlock
+	4. Login was unsuccessful  -> notify presenter about signup
+	5. Signup was successful   -> successBlock
+	5. Signup was unsuccessful -> error block
+	
+	- parameter user:         SVUser instance
+	- parameter successBlock: success block
+	- parameter errorBlock:   error block
+	*/
+	private func signUpOrLoginWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (NSError?) -> Void) {
 		output.doingLoginWithUser(user)
 		
 		restService.loginWithUser(user, successBlock: successBlock) { [weak self] (error) in

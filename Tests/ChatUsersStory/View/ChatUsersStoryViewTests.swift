@@ -18,6 +18,11 @@ import XCTest
 
 class ChatUsersStoryViewTests: XCTestCase {
 
+	var controller: ChatUsersStoryViewController!
+	var mockOutput: MockViewControllerOutput!
+	
+	let emptySender = UIResponder()
+	
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,5 +32,29 @@ class ChatUsersStoryViewTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+	
+	class MockViewControllerOutput : ChatUsersStoryViewOutput {
+		var viewIsReadyGotCalled = false
+		var loginButtonTapped = false
+		var didReceiveUserNameGotCalled = false
+		
+		var roomName = ""
+		var userName = ""
+		
+		func viewIsReady() {
+			viewIsReadyGotCalled = true
+		}
+		
+		func didTriggerLoginButtonTapped(userName: String, roomName: String) {
+			loginButtonTapped = true
+		}
+		
+		func didReceiveUserName(userName: String, roomName: String) {
+			didReceiveUserNameGotCalled = true
+			self.userName = userName
+			self.roomName = roomName
+		}
+		
+	}
 
 }

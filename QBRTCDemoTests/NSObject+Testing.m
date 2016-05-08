@@ -49,8 +49,6 @@
 		id comparedProperty = [comparedObject valueForKey:propertyName];
 		
 		if (originalProperty != nil || comparedProperty != nil) {
-		
-			XCTAssertEqualObjects(originalProperty, comparedProperty, @"Properties are not equal");
 			
 			// to catch assert add All Exceptions breakpoint
 			NSAssert([originalProperty isEqual:comparedProperty], @"see debugger with print-object");

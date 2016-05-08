@@ -48,6 +48,7 @@ class ChatUsersStoryModuleConfiguratorTests: XCTestCase {
 
         let interactor: ChatUsersStoryInteractor = presenter.interactor as! ChatUsersStoryInteractor
         XCTAssertNotNil(interactor.output, "output in ChatUsersStoryInteractor is nil after configuration")
+		XCTAssertNotNil(interactor.cacheService, "cachedService in ChatUsersStoryInteractor is nil after configuration")
     }
 
     class ChatUsersStoryViewControllerMock: ChatUsersStoryTableViewController {

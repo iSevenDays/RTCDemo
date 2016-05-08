@@ -55,6 +55,8 @@
 		142B50991CDD2CE0005B143C /* ChatUsersStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F19D7324EEBDA40DF4D9D5 /* ChatUsersStoryRouter.swift */; };
 		142B509A1CDD2CE0005B143C /* ChatUsersStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AA542446B1B0E64E393AEB /* ChatUsersStoryConfigurator.swift */; };
 		142B509B1CDD2CE0005B143C /* ChatUsersStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005D7481AA38608B2DC98DA /* ChatUsersStoryInitializer.swift */; };
+		142B51641CDE13E2005B143C /* XCTest+Optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B51631CDE13E2005B143C /* XCTest+Optionals.swift */; };
+		142B51651CDE13E2005B143C /* XCTest+Optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B51631CDE13E2005B143C /* XCTest+Optionals.swift */; };
 		142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */; };
 		142D13791C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */; };
 		142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */; };
@@ -431,6 +433,7 @@
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		141B75D71C93090E0095B818 /* libPods-QBRTCDemoTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-QBRTCDemoTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-QBRTCDemoTests.a"; sourceTree = "<group>"; };
 		142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatUsersStory.storyboard; sourceTree = "<group>"; };
+		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "XCTest+Optionals.swift"; path = "Helpers/XCTest+Optionals.swift"; sourceTree = "<group>"; };
 		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionView.swift; sourceTree = "<group>"; };
 		142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractor.swift; sourceTree = "<group>"; };
@@ -1068,6 +1071,14 @@
 				148A83D51CB0180400F88933 /* FakeQBService.swift */,
 			);
 			path = FakeServices;
+			sourceTree = "<group>";
+		};
+		142B51621CDE13C7005B143C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				142B51631CDE13E2005B143C /* XCTest+Optionals.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		142D137D1C887837005A348D /* CollectionView */ = {
@@ -1817,6 +1828,7 @@
 		5352BD24E023342BA941E49A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				142B51621CDE13C7005B143C /* Helpers */,
 				1437CF711C63BB2600CCE1BD /* Base */,
 				14C534E91C6A310000A0FFE8 /* CallService */,
 				1417B3441C57E4B9004D6416 /* FakeServices */,
@@ -2515,6 +2527,7 @@
 			files = (
 				142D138D1C888A8A005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				142B50751CDD2C7A005B143C /* ChatUsersStoryRouterTests.swift in Sources */,
+				142B51641CDE13E2005B143C /* XCTest+Optionals.swift in Sources */,
 				147A0C761BFE139D0009044A /* QBSignalingChannelTests.m in Sources */,
 				14398F6E1C010C9100F3CE74 /* SVSignalingMessageTests.m in Sources */,
 				142B50721CDD2C7A005B143C /* ChatUsersStoryViewTests.swift in Sources */,
@@ -2720,6 +2733,7 @@
 			files = (
 				142D138C1C888A87005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */,
+				142B51651CDE13E2005B143C /* XCTest+Optionals.swift in Sources */,
 				14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */,
 				14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */,
 				14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */,

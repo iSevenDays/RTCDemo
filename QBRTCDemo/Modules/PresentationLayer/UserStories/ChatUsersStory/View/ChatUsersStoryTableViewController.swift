@@ -27,7 +27,7 @@ class ChatUsersStoryTableViewController: UIViewController, ChatUsersStoryViewInp
     }
 	
 	
-	func reloadData() {
+	func reloadDataWithUsers(users: [SVUser]) {
 		tableView.reloadData()
 	}
 	

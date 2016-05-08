@@ -27,7 +27,8 @@ class ChatUsersStoryModuleConfigurator {
 
         let interactor = ChatUsersStoryInteractor()
         interactor.output = presenter
-
+		interactor.cacheService = NSUserDefaults.standardUserDefaults()
+		
         presenter.interactor = interactor
         viewController.output = presenter
     }

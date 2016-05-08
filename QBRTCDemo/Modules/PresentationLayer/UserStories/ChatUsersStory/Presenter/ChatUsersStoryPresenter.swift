@@ -15,11 +15,20 @@
 	// MARK: ChatUsersStoryViewOutput
 	
     func viewIsReady() {
-		interactor.tryRetrieveCachedUsersWithTag()
+		interactor.retrieveUsersWithTag()
     }
 	
 	// MARK: ChatUsersStoryModuleInput
 	func setTag(tag: String) {
+		
+	}
+	
+	// MARK: ChatUsersStoryInteractorOutput
+	func didRetrieveUsers(users: [SVUser]) {
+		view.reloadDataWithUsers(users)
+	}
+	
+	func didErrorRetrievingUsers(error: NSError?) {
 		
 	}
 }

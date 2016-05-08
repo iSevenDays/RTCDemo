@@ -44,15 +44,29 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		presenter.viewIsReady()
 		
 		// then
-		XCTAssertTrue(mockInteractor.tryRetrieveCachedUsersWithTagGotCalled)
+		XCTAssertTrue(mockInteractor.tryRetrieveUsersWithTagGotCalled)
+	}
+	
+	// MARK: ChatUsersStoryInteractorOutput tests
+	
+	func testViewReloadsData_whenPresenterRetrievesUsers() {
+		// given 
+		let testUsers = [TestsStorage.svuserTest()]
+		
+		// when
+		presenter.didRetrieveUsers(testUsers)
+		
+		// then
+		XCTAssertTrue(mockView.reloadDataGotCalled)
+		XCTAssertEqualOptional(mockView.users, testUsers)
 	}
 	
 
     class MockInteractor: ChatUsersStoryInteractorInput {
-		var tryRetrieveCachedUsersWithTagGotCalled = false
+		var tryRetrieveUsersWithTagGotCalled = false
 		
-		func tryRetrieveCachedUsersWithTag() {
-			tryRetrieveCachedUsersWithTagGotCalled = true
+		func retrieveUsersWithTag() {
+			tryRetrieveUsersWithTagGotCalled = true
 		}
     }
 
@@ -62,12 +76,16 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 
     class MockViewController: ChatUsersStoryViewInput {
 
+		var reloadDataGotCalled = false
+		var users: [SVUser]?
+		
         func setupInitialState() {
 
         }
 		
-		func reloadData() {
-			
+		func reloadDataWithUsers(users: [SVUser]) {
+			reloadDataGotCalled = true
+			self.users = users
 		}
     }
 }

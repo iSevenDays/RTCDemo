@@ -9,5 +9,6 @@
 import Foundation
 
 protocol ChatUsersStoryInteractorOutput: class {
-
+	func didRetrieveUsers(users: [SVUser])
+	func didErrorRetrievingUsers(error: NSError?)
 }

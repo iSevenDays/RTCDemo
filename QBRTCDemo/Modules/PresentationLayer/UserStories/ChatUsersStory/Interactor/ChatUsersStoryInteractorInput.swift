@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ChatUsersStoryInteractorInput {
-	func tryRetrieveCachedUsersWithTag()
+	func retrieveUsersWithTag()
 }

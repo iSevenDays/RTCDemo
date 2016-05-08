@@ -133,7 +133,9 @@ class AuthStoryInteractorTests: XCTestCase {
 		
 		var doingSignUpWithUserGotCalled = false
 		var didLoginUserGotCalled = false
+		
 		var didErrorLoginGotCalled = false
+		var errorLogin: NSError?
 		
 		func doingLoginWithUser(user: SVUser) {
 			doingLoginWithUserGotCalled = true
@@ -153,6 +155,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		
 		func didErrorLogin(error: NSError?) {
 			didErrorLoginGotCalled = true
+			errorLogin = error
 		}
     }
 }
