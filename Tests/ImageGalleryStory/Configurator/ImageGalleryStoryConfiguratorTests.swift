@@ -49,6 +49,7 @@ class ImageGalleryStoryModuleConfiguratorTests: XCTestCase {
         let interactor: ImageGalleryStoryInteractor = presenter.interactor as! ImageGalleryStoryInteractor
         XCTAssertNotNil(interactor.output, "output in ImageGalleryStoryInteractor is nil after configuration")
 		XCTAssertNotNil(interactor.imagesOutput, "imageOutput in ImageGalleryStoryInteractor is nil after configuration")
+		XCTAssertNotNil(interactor.callService, "callService in ImageGalleryStoryInteractor is nil after configuration")
     }
 
     class ImageGalleryStoryViewControllerMock: ImageGalleryStoryViewController {

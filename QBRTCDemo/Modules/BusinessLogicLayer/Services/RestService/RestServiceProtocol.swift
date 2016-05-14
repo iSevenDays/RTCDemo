@@ -7,7 +7,7 @@
 //
 
 
-protocol RESTServiceProtocol {
+protocol RESTServiceProtocol: class {
 	
 	/**
 	Get current user if logged in REST

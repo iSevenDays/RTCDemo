@@ -11,7 +11,8 @@ import AdSupport // for UDID
 class AuthStoryInteractor: AuthStoryInteractorInput {
 
     weak var output: AuthStoryInteractorOutput!
-	internal var restService: protocol<RESTServiceProtocol>!
+	internal weak var restService: protocol<RESTServiceProtocol>!
+	internal weak var callService: protocol<CallServiceProtocol>!
 	
 	// MARK: AuthStoryInteractorInput
 	func tryRetrieveCachedUser() {
@@ -33,7 +34,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		let user = SVUser.init(ID: nil, login: login, password: password, tags: tags)
 		user.fullName = userName
 		
-		signUpOrLoginWithUser(user, successBlock: { [weak self] (user) in
+		signUpOrLoginWithUserInRESTSimulatenouslyWithChat(user, successBlock: { [weak self] (user) in
 			
 			user.password = password
 			self?.cacheUser(user)
@@ -43,6 +44,59 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 				
 				self?.output.didErrorLogin(error)
 		}
+	}
+	
+	/**
+	Sign up or login in REST and connect to chat at the same time to speed up connection
+	
+	- parameter user:         SVUser instance
+	- parameter successBlock: successBlock with SVUser instance
+	- parameter errorBlock:   error block
+	*/
+	func signUpOrLoginWithUserInRESTSimulatenouslyWithChat(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void) {
+		
+		assert(user.password != nil)
+		
+		var loggedInREST = false
+		var connectedToChat = false
+		
+		signUpOrLoginWithUser(user, successBlock: {(restUser) in
+			
+			loggedInREST = true
+			
+			if self.callService.isConnected {
+				successBlock(user: user)
+				return
+			}
+			
+			self.callService.connectWithUser(user, completion: { (error) in
+				if error != nil || !self.callService.isConnected {
+					errorBlock(error: error)
+					return
+				}
+				connectedToChat = true
+				
+				assert(loggedInREST)
+				assert(connectedToChat)
+				
+				successBlock(user: user)
+			})
+			
+		}) { (error) in
+			
+			errorBlock(error: error)
+		}
+		
+		callService.connectWithUser(user) { (error) in
+			if self.callService.isConnected {
+				connectedToChat = true
+			}
+			
+			if loggedInREST {
+				successBlock(user: user)
+			}
+		}
+		
 	}
 }
 
@@ -76,6 +130,7 @@ internal extension AuthStoryInteractor {
 		}
 		
 	}
+	
 	
 	func cacheUser(user: SVUser) {
 		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)

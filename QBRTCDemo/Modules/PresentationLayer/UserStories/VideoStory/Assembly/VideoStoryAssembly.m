@@ -81,10 +81,6 @@ static NSString *const kVideoStoryboardName = @"VideoStory";
 	return [[ServicesProvider currentProvider] callService];
 }
 
-- (id<SVSignalingChannelProtocol>)signalingChannel {
-	return [TyphoonDefinition withClass:[QBSignalingChannel class]];
-}
-
 - (UIStoryboard *)videoStoryStoryboard {
 	return [TyphoonDefinition withClass:[TyphoonStoryboard class]
 						  configuration:^(TyphoonDefinition *definition) {

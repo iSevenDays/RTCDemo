@@ -99,7 +99,18 @@
 	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateConnected]);
 }
 
-- (void)testCorrectlyChangesClientStateToDisconnectedAfterHangup {
+- (void)testCorrectlyChangesClientStateToDisconnectedAfterDisconnectFromChat {
+	// given
+	
+	// when
+	[self.callService connectWithUser:self.user1 completion:nil];
+	[self.callService disconnectWithCompletion:nil];
+	
+	// then
+	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
+}
+
+- (void)testStaysConnectedAfterHangup {
 	// given
 	
 	// when
@@ -107,7 +118,7 @@
 	[self.callService hangup];
 
 	// then
-	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
+	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateConnected]);
 }
 
 - (void)testSendsRejectIfAlreadyHasActiveCall {

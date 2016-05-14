@@ -122,7 +122,14 @@
 - (void)connectWithUser:(SVUser *)user completion:(void(^)(NSError *error))completion {
 	
 	NSParameterAssert(self.signalingChannel);
-	NSCAssert(self.state == kClientStateDisconnected, @"Invalid state");
+	NSCAssert(self.state != kClientStateConnecting, @"Invalid state");
+	
+	if (self.state == kClientStateConnected) {
+		if (completion) {
+			completion(nil);
+		}
+		return;
+	}
 	
 	self.state = kClientStateConnecting;
 	
@@ -134,6 +141,23 @@
 		}
 		if (completion) {
 			completion(error);
+		}
+	}];
+}
+
+- (void)disconnectWithCompletion:(void (^)(NSError * _Nullable))completion {
+	if (self.state == kClientStateDisconnected) {
+		if (completion) {
+			completion(nil);
+		}
+		return;
+	}
+	
+	__weak __typeof(self) weakSelf = self;
+	
+	[self.signalingChannel disconnectWithCompletion:^(NSError * _Nullable error) {
+		if (error == nil) {
+			weakSelf.state = kClientStateDisconnected;
 		}
 	}];
 }

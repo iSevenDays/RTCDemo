@@ -34,7 +34,9 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 
 - (void)addDelegate:(nonnull id<CallServiceDelegate>)delegate;
 
-- (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable )(NSError *_Nullable error))completion;
+- (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError *_Nullable error))completion;
+
+- (void)disconnectWithCompletion:(void(^_Nullable)(NSError *_Nullable error))completion;
 
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
 

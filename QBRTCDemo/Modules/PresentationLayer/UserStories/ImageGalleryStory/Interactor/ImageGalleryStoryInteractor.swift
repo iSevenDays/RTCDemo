@@ -14,7 +14,7 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	
 	weak var imagesOutput: ImageGalleryStoryInteractorImagesOutput!
 
-	private var _callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
+	private weak var _callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
 	
 	var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>! {
 		get {

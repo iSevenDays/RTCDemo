@@ -25,69 +25,77 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 	let user1: SVUser = CallServiceHelpers.user1()
 	let user2: SVUser = CallServiceHelpers.user2()
 	
+	
+	var fakeCallService: FakeCallService!
+	var realCallService: CallService!
+	
     override func setUp() {
         super.setUp()
-		self.interactor = ImageGalleryStoryInteractor()
-		self.mockOutput = MockPresenter()
-		self.interactor.output = mockOutput
+		interactor = ImageGalleryStoryInteractor()
+		mockOutput = MockPresenter()
+		interactor.output = mockOutput
 		
-		self.mockImagesOutput = MockImagesOutput()
-		self.interactor.imagesOutput = mockImagesOutput
+		mockImagesOutput = MockImagesOutput()
 		
+		interactor.imagesOutput = mockImagesOutput
+		
+		let fakeSignalingChannel: SVSignalingChannelProtocol = FakeSignalingChannel()
+		
+		fakeCallService = FakeCallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: interactor)
+		realCallService = CallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: interactor)
     }
 	
 	// Use when using real CallService is not possible
 	func useFakeCallService() {
-		let fakeSignalingChannel:SVSignalingChannelProtocol = FakeSignalingChannel()
-		self.interactor.callService = FakeCallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: self.interactor)
+		interactor.callService = fakeCallService
 	}
 	
 	func useRealCallService() {
-		let fakeSignalingChannel: SVSignalingChannelProtocol = FakeSignalingChannel()
-		self.interactor.callService = CallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: self.interactor)
+		
+		interactor.callService = realCallService
 	}
 	
 	func testStartsAndNotificatesAboutSynchronizationImages() {
 		// given
-		self.useFakeCallService()
+		useFakeCallService()
 		
 		// when
-		self.interactor.startSynchronizationImages()
+		interactor.startSynchronizationImages()
 
 		// then
-		XCTAssertTrue(self.mockOutput.didStartSynchronizationImagesGotCalled)
+		XCTAssertTrue(mockOutput.didStartSynchronizationImagesGotCalled)
 	}
 	
 	func testShowsRoleSenderWhenCallerIsInitiator() {
 		// given
-		self.useRealCallService()
-		self.interactor.callService.connectWithUser(self.user1, completion: nil)
-		self.interactor.callService.startCallWithOpponent(self.user2)
+		useRealCallService()
+		interactor.callService.connectWithUser(user1, completion: nil)
+		interactor.callService.startCallWithOpponent(user2)
 		
 		// when
-		self.interactor.requestCallerRole()
+		interactor.requestCallerRole()
 		
 		// then
-		XCTAssertTrue(self.mockOutput.didReceiveRoleSenderGotCalled)
+		XCTAssertTrue(mockOutput.didReceiveRoleSenderGotCalled)
 	}
 	
 	func testShowsRoleReceiverWhenCallerIsReceiver() {
 		// given
-		self.useRealCallService()
-		self.interactor.callService.connectWithUser(self.user1, completion: nil)
+		useRealCallService()
+		interactor.callService.connectWithUser(user1, completion: nil)
 		
 		// when
-		self.interactor.requestCallerRole()
+		interactor.requestCallerRole()
 		
 		// then
-		XCTAssertTrue(self.mockOutput.didReceiveRoleReceiverGotCalled)
+		XCTAssertTrue(mockOutput.didReceiveRoleReceiverGotCalled)
 	}
 	
 	// MARK: ImageGalleryStoryInteractorImagesOutput tests
 	
 	func testNotifiesImagesOutputWhenReceivedNewImage() {
 		// given
-		self.useRealCallService()
+		useRealCallService()
 		
 		
 		UIGraphicsBeginImageContext(CGSizeMake(1, 1));
@@ -97,10 +105,10 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		let imageData = UIImagePNGRepresentation(newImage)!
 		
 		// when
-		self.interactor.callService(self.interactor.callService, didReceiveData: imageData)
+		interactor.callService(interactor.callService, didReceiveData: imageData)
 		
 		// then
-		XCTAssertTrue(self.mockImagesOutput.didReceiveImageGotCalled)
+		XCTAssertTrue(mockImagesOutput.didReceiveImageGotCalled)
 	}
 	
 	

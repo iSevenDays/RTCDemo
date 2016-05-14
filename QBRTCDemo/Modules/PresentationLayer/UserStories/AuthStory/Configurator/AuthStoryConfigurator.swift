@@ -28,7 +28,8 @@ class AuthStoryModuleConfigurator {
 
         let interactor = AuthStoryInteractor()
         interactor.output = presenter
-		interactor.restService = QBRESTService()
+		interactor.restService = ServicesProvider.currentProvider.restService
+		interactor.callService = ServicesProvider.currentProvider.callService
 
         presenter.interactor = interactor
         viewController.output = presenter
