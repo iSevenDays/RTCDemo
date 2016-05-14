@@ -74,6 +74,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 					errorBlock(error: error)
 					return
 				}
+				
 				connectedToChat = true
 				
 				assert(loggedInREST)
@@ -92,7 +93,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 				connectedToChat = true
 			}
 			
-			if loggedInREST {
+			if loggedInREST && connectedToChat {
 				successBlock(user: user)
 			}
 		}
@@ -121,6 +122,8 @@ internal extension AuthStoryInteractor {
 		output.doingLoginWithUser(user)
 		
 		restService.loginWithUser(user, successBlock: { [unowned self] (downloadedUser) in
+			
+			user.ID = downloadedUser.ID
 			
 			self.restService.updateCurrentUserFieldsIfNeededWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
 			

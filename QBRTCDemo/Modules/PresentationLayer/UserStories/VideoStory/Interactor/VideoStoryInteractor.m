@@ -26,7 +26,6 @@
 
 @interface VideoStoryInteractor()
 
-@property (nonatomic, strong) SVUser *currentUser;
 @property (nonatomic, strong) SVUser *lastOpponentUser;
 
 @property (nonatomic, strong) RTCVideoTrack *localVideoTrack;
@@ -39,26 +38,46 @@
 
 #pragma mark - Методы VideoStoryInteractorInput
 
+- (SVUser *)currentUser {
+	return self.callService.currentUser;
+}
+
 - (void)connectToChatWithUser:(SVUser *)user callOpponent:(SVUser *)opponent {
-	if (self.callService.isConnecting || self.callService.isConnected) {
+	if (self.callService.isConnecting) {
 		return;
 	}
 	
-	[self.callService connectWithUser:user completion:^(NSError * _Nullable error) {
-		if (!error) {
-			self.currentUser = user;
-			self.currentUser.password = user.password;
-			
-			[self.output didConnectToChatWithUser:user];
-			
-			if (opponent != nil) {
-				[self startCallWithOpponent:opponent];
+	void (^connectWithUserAndCallBlock)(SVUser *, SVUser *) = ^(SVUser *user, SVUser *opponent) {
+		[self.callService connectWithUser:user completion:^(NSError * _Nullable error) {
+			if (!error) {
+				
+				[self.output didConnectToChatWithUser:user];
+				
+				if (opponent != nil) {
+					[self startCallWithOpponent:opponent];
+				}
+				
+			} else {
+				[self.output didFailToConnectToChat];
 			}
-			
-		} else {
-			[self.output didFailToConnectToChat];
-		}
-	}];
+		}];
+	};
+	
+	if (self.callService.isConnected && [self.currentUser isEqual:user]) {
+		[self startCallWithOpponent:opponent];
+	} else if (self.callService.isConnected && ![self.currentUser isEqual:user]) {
+		// connected with another user, firstly disconnect
+		DDLogVerbose(@"Connected with another user, doing disconnect");
+		[self.callService disconnectWithCompletion:^(NSError * _Nullable error) {
+			if (error == nil) {
+				connectWithUserAndCallBlock(user, opponent);
+			} else {
+				DDLogError(@"Error disconnecting %@", error);
+			}
+		}];
+	} else {
+		connectWithUserAndCallBlock(user, opponent);
+	}
 }
 
 - (void)startCallWithOpponent:(SVUser *)opponent {
@@ -70,6 +89,7 @@
 	NSAssert(![opponent isEqual:self.currentUser], @"You can not call yourself");
 	
 	self.lastOpponentUser = opponent;
+	NSLog(@"Starting a call with opponent %@", opponent);
 	[self.callService startCallWithOpponent:opponent];
 	
 }

@@ -31,8 +31,7 @@ class AuthStoryViewTests: XCTestCase {
 		self.controller.output = self.mockOutput
     }
 
-	// MARK: IBActions
-	
+	// MARK: AuthStoryViewOutput
 	func testViewDidLoadTriggersViewIsReadyAction() {
 		// when
 		self.controller.viewDidLoad()
@@ -40,6 +39,8 @@ class AuthStoryViewTests: XCTestCase {
 		// then
 		XCTAssertTrue(self.mockOutput.viewIsReadyGotCalled)
 	}
+	
+	// MARK: IBActions
 	
 	func testLoginButtonTriggersAction() {
 		// given

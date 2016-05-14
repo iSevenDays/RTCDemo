@@ -122,7 +122,14 @@
 - (void)connectWithUser:(SVUser *)user completion:(void(^)(NSError *error))completion {
 	
 	NSParameterAssert(self.signalingChannel);
-	NSCAssert(self.state != kClientStateConnecting, @"Invalid state");
+	NSParameterAssert(user.password);
+	
+	if (self.state == kClientStateConnecting) {
+		if (completion) {
+			completion([[NSError alloc] initWithDomain:@"CallServiceErrorDomain" code:-1 userInfo:@{@"Error": @"Trying to connect while already connecting, return"}]);
+		}
+		return;
+	}
 	
 	if (self.state == kClientStateConnected) {
 		if (completion) {
@@ -530,6 +537,10 @@
 	return [self.initiatorUser isEqual:self.signalingChannel.user];
 }
 
+- (SVUser *)currentUser {
+	return self.signalingChannel.user;
+}
+
 #pragma mark - SVSignalingChannel Delegate
 
 - (void)channel:(id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *)message {
@@ -557,6 +568,7 @@
 		[self.peerConnection addStream:[self createLocalMediaStream]];
 		self.peerConnection.delegate = self;
 	}
+	
 	if ([message.type isEqualToString:SVSignalingMessageType.offer] ||
 		[message.type isEqualToString:SVSignalingMessageType.answer]) {
 		self.isReceivedSDP = YES;
@@ -574,6 +586,13 @@
 	}
 	
 	[self drainMessageQueueIfReady];
+}
+
+- (void)channel:(id<SVSignalingChannelProtocol>)channel didChangeState:(NSString *)signalingState {
+	if ([signalingState isEqualToString:SVSignalingChannelState.error] ||
+		[signalingState isEqualToString:SVSignalingChannelState.closed]) {
+		self.state = kClientStateDisconnected;
+	}
 }
 
 #pragma mark Data Channel

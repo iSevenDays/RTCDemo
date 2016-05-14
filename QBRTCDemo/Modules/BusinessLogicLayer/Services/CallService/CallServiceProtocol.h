@@ -51,6 +51,7 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 
 /// @return YES if current user is a call initiator
 - (BOOL)isInitiator;
+- (nullable SVUser *)currentUser;
 
 @property (nonatomic, assign, readonly) CallServiceState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
