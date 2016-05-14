@@ -43,7 +43,7 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 	}
 	
 	func useRealCallService() {
-		let fakeSignalingChannel:SVSignalingChannelProtocol = FakeSignalingChannel()
+		let fakeSignalingChannel: SVSignalingChannelProtocol = FakeSignalingChannel()
 		self.interactor.callService = CallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: self.interactor)
 	}
 	

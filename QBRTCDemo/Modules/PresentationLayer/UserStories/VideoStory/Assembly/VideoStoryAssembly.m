@@ -20,14 +20,18 @@
 #import "WebRTCHelpers.h"
 #import "QBSignalingChannel.h"
 
+#if QBRTCDemo_s
+	#import "QBRTCDemo_s-swift.h"
+#elif QBRTCDemo
+	#import "QBRTCDemo-swift.h"
+#endif
+
+
 static NSString *const kVideoStoryboardName = @"VideoStory";
 
 @implementation VideoStoryAssembly
 
 - (VideoStoryViewController *)viewVideoStoryModule {
-//	return [TyphoonFactoryDefinition withFactory:[self videoStoryStoryboard] selector:@selector(instantiateViewControllerWithIdentifier:) parameters:^(TyphoonMethod *factoryMethod) {
-//		[factoryMethod injectParameterWith:NSStringFromClass([VideoStoryViewController class])];
-//	}];
 	
     return [TyphoonDefinition withClass:[VideoStoryViewController class]
                           configuration:^(TyphoonDefinition *definition) {
@@ -74,32 +78,7 @@ static NSString *const kVideoStoryboardName = @"VideoStory";
 #pragma mark CallService
 
 - (id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)callService {
-	return [TyphoonDefinition withClass:[CallService class] configuration:^(TyphoonDefinition *definition) {
-		[definition useInitializer:@selector(initWithSignalingChannel:callServiceDelegate:dataChannelDelegate:) parameters:^(TyphoonMethod *initializer) {
-			
-			[initializer injectParameterWith:[self signalingChannel]];
-//			[initializer injectParameterWith:nil];
-//			[initializer injectParameterWith:nil];
-			[initializer injectParameterWith:[self interactorVideoStoryModule]];
-			[initializer injectParameterWith:[self interactorVideoStoryModule]];
-		}];
-		
-		[definition injectProperty:@selector(defaultOfferConstraints)
-							  with:[WebRTCHelpers defaultOfferConstraints]];
-		[definition injectProperty:@selector(defaultAnswerConstraints)
-							  with:[WebRTCHelpers defaultAnswerConstraints]];
-		[definition injectProperty:@selector(defaultPeerConnectionConstraints)
-							  with:[WebRTCHelpers defaultPeerConnectionConstraints]];
-		[definition injectProperty:@selector(defaultMediaStreamConstraints)
-							  with:[WebRTCHelpers defaultMediaStreamConstraints]];
-		
-		[definition injectProperty:@selector(iceServers)
-							  with:[WebRTCHelpers defaultIceServers]];
-
-		[definition injectProperty:@selector(defaultConfigurationWithCurrentICEServers) with:[WebRTCHelpers defaultConfigurationWithCurrentICEServers]];
-		
-//		[definition setScope:TyphoonScopeSingleton];
-	}];
+	return [[ServicesProvider currentProvider] callService];
 }
 
 - (id<SVSignalingChannelProtocol>)signalingChannel {

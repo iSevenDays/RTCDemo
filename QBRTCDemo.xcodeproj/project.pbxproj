@@ -35,6 +35,8 @@
 		1417B3471C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1417B3481C57E4E8004D6416 /* FakeCallService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1417B3461C57E4E8004D6416 /* FakeCallService.m */; };
 		1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1418BAEB1C761B0A0085C7E3 /* Photos.framework */; };
+		142154621CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
+		142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		142B50311CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
 		142B50321CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
@@ -159,8 +161,8 @@
 		148233B51C002DFE0000E9ED /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		148234021C002DFE0000E9ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */; };
 		148234051C002DFE0000E9ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADD1BF92FA30018DA30 /* Assets.xcassets */; };
-		148A83D61CB0180400F88933 /* FakeQBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A83D51CB0180400F88933 /* FakeQBService.swift */; };
-		148A83D71CB0180400F88933 /* FakeQBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A83D51CB0180400F88933 /* FakeQBService.swift */; };
+		148A83D61CB0180400F88933 /* FakeQBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A83D51CB0180400F88933 /* FakeQBRESTService.swift */; };
+		148A83D71CB0180400F88933 /* FakeQBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148A83D51CB0180400F88933 /* FakeQBRESTService.swift */; };
 		149A0D351CA7F02C008FB3A9 /* AuthStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */; };
 		149A0D361CA7F02C008FB3A9 /* AuthStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */; };
 		14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */; };
@@ -430,6 +432,7 @@
 		1417B3461C57E4E8004D6416 /* FakeCallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeCallService.m; sourceTree = "<group>"; };
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		141B75D71C93090E0095B818 /* libPods-QBRTCDemoTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-QBRTCDemoTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-QBRTCDemoTests.a"; sourceTree = "<group>"; };
+		142154611CE75ACB003C1C4A /* ServicesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesProvider.swift; sourceTree = "<group>"; };
 		142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatUsersStory.storyboard; sourceTree = "<group>"; };
 		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Optionals.swift"; sourceTree = "<group>"; };
 		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -577,7 +580,7 @@
 		14893AE91C6BA06F00F1D581 /* libisac_fix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_fix.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libisac_fix.a"; sourceTree = "<group>"; };
 		14893AEA1C6BA06F00F1D581 /* libisac_neon.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libisac_neon.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libisac_neon.a"; sourceTree = "<group>"; };
 		14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<group>"; };
-		148A83D51CB0180400F88933 /* FakeQBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeQBService.swift; sourceTree = "<group>"; };
+		148A83D51CB0180400F88933 /* FakeQBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeQBRESTService.swift; sourceTree = "<group>"; };
 		149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStory.storyboard; sourceTree = "<group>"; };
 		14A0281B1BFA43E700BDF2C5 /* SVSignalingChannelState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelState.h; sourceTree = "<group>"; };
 		14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingChannelState.m; sourceTree = "<group>"; };
@@ -1061,7 +1064,7 @@
 			children = (
 				1417B3451C57E4E8004D6416 /* FakeCallService.h */,
 				1417B3461C57E4E8004D6416 /* FakeCallService.m */,
-				148A83D51CB0180400F88933 /* FakeQBService.swift */,
+				148A83D51CB0180400F88933 /* FakeQBRESTService.swift */,
 				1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */,
 				1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */,
 			);
@@ -1574,6 +1577,7 @@
 			children = (
 				14736E821C561284009DFBBC /* CallService */,
 				1475463F1CAE544E004CCE95 /* RESTService */,
+				142154611CE75ACB003C1C4A /* ServicesProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2527,7 +2531,7 @@
 				14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
 				1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */,
 				190FDDC34E863B7B25D9DB7A /* VideoStoryInteractorTests.m in Sources */,
-				148A83D61CB0180400F88933 /* FakeQBService.swift in Sources */,
+				148A83D61CB0180400F88933 /* FakeQBRESTService.swift in Sources */,
 				E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */,
 				14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */,
 				1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */,
@@ -2557,6 +2561,7 @@
 				142B50901CDD2CE0005B143C /* ChatUsersStoryViewInput.swift in Sources */,
 				1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				142B50921CDD2CE0005B143C /* ChatUsersStoryViewController.swift in Sources */,
+				142154621CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
 				140746481BFB841000506088 /* SVSignalingParams.m in Sources */,
 				14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */,
 				14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */,
@@ -2635,6 +2640,7 @@
 				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
 				142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1482339F1C002DFE0000E9ED /* AppDelegate.m in Sources */,
+				142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
 				148233A01C002DFE0000E9ED /* main.m in Sources */,
 				148233A51C002DFE0000E9ED /* SVSignalingChannelState.m in Sources */,
 				14736EE81C567EC5009DFBBC /* CallService.m in Sources */,
@@ -2726,7 +2732,7 @@
 				14114A191CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
 				E93D0D88C76A33845273181B /* ImageGalleryStoryInteractorTests.swift in Sources */,
 				279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */,
-				148A83D71CB0180400F88933 /* FakeQBService.swift in Sources */,
+				148A83D71CB0180400F88933 /* FakeQBRESTService.swift in Sources */,
 				E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */,
 				A49D4EB8C7F6DF685E7F5B8D /* AuthStoryConfiguratorTests.swift in Sources */,
 				71126378754862BDA35556EB /* AuthStoryViewTests.swift in Sources */,

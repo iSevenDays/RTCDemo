@@ -16,12 +16,16 @@
 
 @class SVUser;
 @class RTCICEServer;
+@class RTCMediaConstraints;
+@class RTCConfiguration;
 
 @interface CallService : NSObject<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>
 
 - (nullable instancetype)init NS_UNAVAILABLE;
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nonnull id<CallServiceDelegate>)callServiceDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel;
+
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate;
 
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(nullable id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
 
@@ -45,5 +49,11 @@
 @property (nonatomic, assign, readwrite) BOOL isConnected;
 
 @property (nonatomic, strong, nonnull) NSMutableArray<RTCICEServer *> *iceServers;
+
+@property (nonatomic, strong, nonnull) RTCMediaConstraints *defaultOfferConstraints;
+@property (nonatomic, strong, nonnull) RTCMediaConstraints *defaultAnswerConstraints;
+@property (nonatomic, strong, nonnull) RTCMediaConstraints *defaultPeerConnectionConstraints;
+@property (nonatomic, strong, nonnull) RTCMediaConstraints *defaultMediaStreamConstraints;
+@property (nonatomic, strong, nonnull) RTCConfiguration *defaultConfigurationWithCurrentICEServers;
 
 @end

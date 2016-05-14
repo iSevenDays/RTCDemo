@@ -1,5 +1,5 @@
 //
-//  FakeQBService.swift
+//  FakeQBRESTService.swift
 //  QBRTCDemo
 //
 //  Created by Anton Sokolchenko on 4/2/16.

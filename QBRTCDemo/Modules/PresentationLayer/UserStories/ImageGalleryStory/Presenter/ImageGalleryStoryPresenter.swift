@@ -13,9 +13,7 @@
     var router: ImageGalleryStoryRouterInput!
 
 	// ImageGalleryStoryModuleInput
-	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>){
-		interactor.configureWithCallService(callService)
-		
+	func configureModule(){
 		interactor.requestCallerRole()
 	}
 	

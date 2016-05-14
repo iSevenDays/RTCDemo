@@ -10,7 +10,6 @@ import Foundation
 
 protocol ImageGalleryStoryInteractorInput {
 
-	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)
 	func startSynchronizationImages()
 	
 	func requestCallerRole()

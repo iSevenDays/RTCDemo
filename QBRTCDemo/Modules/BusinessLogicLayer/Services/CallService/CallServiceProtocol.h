@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 @protocol CallServiceProtocol <SVSignalingChannelDelegate>
 @required
 
-- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nonnull id<CallServiceDelegate>)callServiceDelegate;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel;
+- (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate;
 
 - (void)addDelegate:(nonnull id<CallServiceDelegate>)delegate;
 

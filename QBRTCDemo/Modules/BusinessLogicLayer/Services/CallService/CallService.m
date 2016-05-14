@@ -54,12 +54,6 @@
 @property (nonatomic, strong) SVUser *opponentUser;
 @property (nonatomic, strong) SVUser *initiatorUser;
 
-@property (nonatomic, strong) RTCMediaConstraints *defaultOfferConstraints;
-@property (nonatomic, strong) RTCMediaConstraints *defaultAnswerConstraints;
-@property (nonatomic, strong) RTCMediaConstraints *defaultPeerConnectionConstraints;
-@property (nonatomic, strong) RTCMediaConstraints *defaultMediaStreamConstraints;
-@property (nonatomic, strong) RTCConfiguration *defaultConfigurationWithCurrentICEServers;
-
 @end
 
 @implementation CallService
@@ -97,6 +91,10 @@
 		_dataChannelEnabled = YES;
 	}
 	return self;
+}
+
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel {
+	return [self initWithSignalingChannel:signalingChannel callServiceDelegate:nil];
 }
 
 - (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(id<CallServiceDelegate>)callServiceDelegate {

@@ -34,7 +34,7 @@ NSString *kVideoStoryToImageGalleryModuleSegue = @"VideoStoryToImageGalleryModul
 	[[self.transitionHandler openModuleUsingSegue:kVideoStoryToImageGalleryModuleSegue] thenChainUsingBlock:^id<RamblerViperModuleOutput>(id<ImageGalleryStoryModuleInput> moduleInput) {
 		NSCParameterAssert(moduleInput);
 		
-		[moduleInput configureWithCallService:self.callService];
+		[moduleInput configureModule];
 		
 		return nil;
 	}];

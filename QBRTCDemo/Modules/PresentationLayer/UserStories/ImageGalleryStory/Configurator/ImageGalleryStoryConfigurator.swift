@@ -26,6 +26,7 @@ class ImageGalleryStoryModuleConfigurator {
         presenter.router = router
 
         let interactor = ImageGalleryStoryInteractor()
+		interactor.callService = ServicesProvider.currentProvider.callService
         interactor.output = presenter
 		
         presenter.interactor = interactor

@@ -29,7 +29,7 @@ class ChatUsersStoryModuleConfigurator {
         let interactor = ChatUsersStoryInteractor()
         interactor.output = presenter
 		interactor.cacheService = NSUserDefaults.standardUserDefaults()
-		interactor.restService = QBRESTService()
+		interactor.restService = ServicesProvider.currentProvider.restService
 		
         presenter.interactor = interactor
         viewController.output = presenter

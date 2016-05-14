@@ -7,5 +7,5 @@
 //
 
 @objc protocol ImageGalleryStoryModuleInput: RamblerViperModuleInput {
-	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)
+	func configureModule()
 }
