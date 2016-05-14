@@ -280,8 +280,6 @@
 		14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
 		14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
 		14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
-		14D0A3F41C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */; };
-		14D0A3F51C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */; };
 		14D0A41C1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */; };
 		14D0A41D1C543A37005AF958 /* ModuleAssemblyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */; };
 		14D1B5F11C7CA4E6006EB865 /* SVMulticastDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */; };
@@ -420,7 +418,7 @@
 		08A0E3FE5A66384B5CD82017 /* ChatUsersStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryInteractorInput.swift; sourceTree = "<group>"; };
 		0B4FBD265C6E6F8C7EEE6A5E /* ChatUsersStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryPresenterTests.swift; sourceTree = "<group>"; };
 		0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractorOutput.swift; sourceTree = "<group>"; };
-		14015A321BFC6F5C00830618 /* CallServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CallServiceDelegate.h; path = ../../../../Client/CallServiceDelegate.h; sourceTree = "<group>"; };
+		14015A321BFC6F5C00830618 /* CallServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDelegate.h; sourceTree = "<group>"; };
 		14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemo_sTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14015A3D1BFCD08400830618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUserTests.m"; sourceTree = "<group>"; };
@@ -433,7 +431,7 @@
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		141B75D71C93090E0095B818 /* libPods-QBRTCDemoTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-QBRTCDemoTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-QBRTCDemoTests.a"; sourceTree = "<group>"; };
 		142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatUsersStory.storyboard; sourceTree = "<group>"; };
-		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "XCTest+Optionals.swift"; path = "Helpers/XCTest+Optionals.swift"; sourceTree = "<group>"; };
+		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Optionals.swift"; sourceTree = "<group>"; };
 		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionView.swift; sourceTree = "<group>"; };
 		142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractor.swift; sourceTree = "<group>"; };
@@ -442,8 +440,8 @@
 		142D13891C8888AD005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractorTests.swift; sourceTree = "<group>"; };
 		142D138E1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorImagesInput.swift; sourceTree = "<group>"; };
 		1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsProtocol.h; sourceTree = "<group>"; };
-		1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = webrtc_libraries_dummy.m; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.m; sourceTree = SOURCE_ROOT; };
-		1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = webrtc_libraries_dummy.h; path = QBRTCDemo/webrtc_libraries/webrtc_libraries_dummy.h; sourceTree = SOURCE_ROOT; };
+		1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = webrtc_libraries_dummy.m; sourceTree = "<group>"; };
+		1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webrtc_libraries_dummy.h; sourceTree = "<group>"; };
 		1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsDelegate.h; sourceTree = "<group>"; };
 		143608DC1BF943370091071C /* libwebrtc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_common.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_common.a"; sourceTree = "<absolute>"; };
 		143608DD1BF943370091071C /* libwebrtc_h264_video_toolbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_h264_video_toolbox.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libwebrtc_h264_video_toolbox.a"; sourceTree = "<absolute>"; };
@@ -543,7 +541,7 @@
 		1452AAE01BF92FA30018DA30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1452AAE21BF92FA30018DA30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1452ABBB1BF9315E0018DA30 /* CopyWebRTCHeaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyWebRTCHeaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemo copy-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemo copy-Info.plist"; sourceTree = "<absolute>"; };
+		1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "QBRTCDemo copy-Info.plist"; sourceTree = "<group>"; };
 		1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QBRTCDemo-prefix.pch"; sourceTree = "<group>"; };
 		145405291C859167005E3790 /* CallServiceProtocol_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceProtocol_Private.h; sourceTree = "<group>"; };
 		1454052B1C859431005E3790 /* DataChannelMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataChannelMessages.h; sourceTree = "<group>"; };
@@ -556,8 +554,8 @@
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
 		1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVUser+QBUUser.h"; sourceTree = "<group>"; };
 		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
-		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RESTServiceProtocol.swift; path = RestService/RESTServiceProtocol.swift; sourceTree = "<group>"; };
-		147546431CAE5649004CCE95 /* QBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QBRESTService.swift; path = RestService/QBRESTService.swift; sourceTree = "<group>"; };
+		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTServiceProtocol.swift; sourceTree = "<group>"; };
+		147546431CAE5649004CCE95 /* QBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBRESTService.swift; sourceTree = "<group>"; };
 		147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannelTests.m; sourceTree = "<group>"; };
 		147A0C791BFE13FD0009044A /* TestsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsStorage.h; sourceTree = "<group>"; };
 		147A0C7A1BFE13FD0009044A /* TestsStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorage.m; sourceTree = "<group>"; };
@@ -565,7 +563,7 @@
 		1482337C1C002DB80000E9ED /* webrtc-ia32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-ia32.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-ia32.a"; sourceTree = "<group>"; };
 		1482337D1C002DB80000E9ED /* webrtc-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-x86_64.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-x86_64.a"; sourceTree = "<group>"; };
 		148234141C002DFE0000E9ED /* QBRTCDemo_s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QBRTCDemo_s.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemo_s-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemo_s-Info.plist"; sourceTree = "<absolute>"; };
+		148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "QBRTCDemo_s-Info.plist"; sourceTree = "<group>"; };
 		148234181C002E1E0000E9ED /* webrtc-arm.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-arm.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-arm.a"; sourceTree = "<group>"; };
 		148234191C002E1E0000E9ED /* webrtc-arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-arm64.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-arm64.a"; sourceTree = "<group>"; };
 		1483C8CA1C19B7D400C46B0C /* libprotobuf_lite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf_lite.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/chromium/src/third_party/protobuf/../../../../xcodebuild/Debug-iphoneos/libprotobuf_lite.a"; sourceTree = "<absolute>"; };
@@ -711,25 +709,22 @@
 		14C5359E1C6B877700A0FFE8 /* libdesktop_capture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdesktop_capture.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libdesktop_capture.a"; sourceTree = "<group>"; };
 		14C535BF1C6B9C8E00A0FFE8 /* librtc_api_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_api_objc.a; path = "Scripts/webrtc/src/webrtc/api/../../xcodebuild/Debug-iphoneos/librtc_api_objc.a"; sourceTree = "<group>"; };
 		14C535C01C6B9C8E00A0FFE8 /* librtc_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_media.a; path = "Scripts/webrtc/src/webrtc/media/../../xcodebuild/Debug-iphoneos/librtc_media.a"; sourceTree = "<group>"; };
-		14D0A3F11C529F01005AF958 /* ServiceComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceComponents.h; sourceTree = "<group>"; };
-		14D0A3F21C529F01005AF958 /* ServiceComponentsAssembly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceComponentsAssembly.h; sourceTree = "<group>"; };
-		14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceComponentsAssembly.m; sourceTree = "<group>"; };
 		14D0A41A1C543A37005AF958 /* ModuleAssemblyBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleAssemblyBase.h; sourceTree = "<group>"; };
 		14D0A41B1C543A37005AF958 /* ModuleAssemblyBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleAssemblyBase.m; sourceTree = "<group>"; };
-		14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVMulticastDelegate.h; path = Utils/SVMulticastDelegate.h; sourceTree = "<group>"; };
-		14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVMulticastDelegate.m; path = Utils/SVMulticastDelegate.m; sourceTree = "<group>"; };
+		14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMulticastDelegate.h; sourceTree = "<group>"; };
+		14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVMulticastDelegate.m; sourceTree = "<group>"; };
 		14D1B6C21C7DDD74006EB865 /* libcongestion_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcongestion_controller.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libcongestion_controller.a"; sourceTree = "<group>"; };
 		14D1B7A81C7E1DAA006EB865 /* libwebrtc_objc_target.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_objc_target.a; path = "Scripts/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_objc_target.a"; sourceTree = "<group>"; };
 		14D1B7AA1C7E1DB6006EB865 /* libjingle_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_media.a; path = "Scripts/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_media.a"; sourceTree = "<group>"; };
 		14DE29681C92FDA900D5842E /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = "Scripts/webrtc/src/chromium/src/third_party/libvpx/../../../../xcodebuild/Debug-iphoneos/libvpx.a"; sourceTree = "<group>"; };
 		14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "QBRTCDemoTests-Info.plist"; path = "/Users/seven/projects/QBRTCDemo/QBRTCDemoTests-Info.plist"; sourceTree = "<absolute>"; };
-		14EE3D011C6BC03700C451CF /* build_webrtc.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build_webrtc.sh; path = Scripts/build_webrtc.sh; sourceTree = "<group>"; };
-		14EE3D021C6BC03700C451CF /* clone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = clone.sh; path = Scripts/clone.sh; sourceTree = "<group>"; };
-		14EE3D031C6BC03700C451CF /* framework_dance.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = framework_dance.sh; path = Scripts/framework_dance.sh; sourceTree = "<group>"; };
-		14EE3D041C6BC03700C451CF /* pull.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = pull.sh; path = Scripts/pull.sh; sourceTree = "<group>"; };
-		14EE3D051C6BC03700C451CF /* blox_target.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = blox_target.py; path = Scripts/blox_target.py; sourceTree = "<group>"; };
-		14EE3D061C6BC03700C451CF /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = build.sh; path = Scripts/build.sh; sourceTree = "<group>"; };
+		14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "QBRTCDemoTests-Info.plist"; sourceTree = "<group>"; };
+		14EE3D011C6BC03700C451CF /* build_webrtc.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_webrtc.sh; sourceTree = "<group>"; };
+		14EE3D021C6BC03700C451CF /* clone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = clone.sh; sourceTree = "<group>"; };
+		14EE3D031C6BC03700C451CF /* framework_dance.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = framework_dance.sh; sourceTree = "<group>"; };
+		14EE3D041C6BC03700C451CF /* pull.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pull.sh; sourceTree = "<group>"; };
+		14EE3D051C6BC03700C451CF /* blox_target.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = blox_target.py; sourceTree = "<group>"; };
+		14EE3D061C6BC03700C451CF /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		14F6B4481C80690F008D2844 /* libwebrtc_objc_target.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwebrtc_objc_target.dylib; path = "Scripts/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_objc_target.dylib"; sourceTree = "<group>"; };
 		14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageGalleryStory.storyboard; sourceTree = "<group>"; };
 		14FC45721C4EE1B900C1797D /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/talk/../xcodebuild/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<absolute>"; };
@@ -1020,8 +1015,8 @@
 		031B24A414B01ECAF3D6F0B7 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				87D4729CEEA8ACF9D37DF5EF /* ChatUsersStoryRouterInput.swift */,
 				03F19D7324EEBDA40DF4D9D5 /* ChatUsersStoryRouter.swift */,
+				87D4729CEEA8ACF9D37DF5EF /* ChatUsersStoryRouterInput.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1048,15 +1043,15 @@
 			isa = PBXGroup;
 			children = (
 				14015A3D1BFCD08400830618 /* Info.plist */,
+				14114A161CB68FEB0092AA26 /* NSObject+Testing.h */,
+				14114A171CB68FEB0092AA26 /* NSObject+Testing.m */,
 				147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */,
 				14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */,
 				14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */,
 				14398F6B1C010A0800F3CE74 /* SVUserTests.m */,
-				147A0C7C1BFE159B0009044A /* TestsStorageTests.m */,
 				147A0C791BFE13FD0009044A /* TestsStorage.h */,
 				147A0C7A1BFE13FD0009044A /* TestsStorage.m */,
-				14114A161CB68FEB0092AA26 /* NSObject+Testing.h */,
-				14114A171CB68FEB0092AA26 /* NSObject+Testing.m */,
+				147A0C7C1BFE159B0009044A /* TestsStorageTests.m */,
 			);
 			path = QBRTCDemoTests;
 			sourceTree = "<group>";
@@ -1066,9 +1061,9 @@
 			children = (
 				1417B3451C57E4E8004D6416 /* FakeCallService.h */,
 				1417B3461C57E4E8004D6416 /* FakeCallService.m */,
+				148A83D51CB0180400F88933 /* FakeQBService.swift */,
 				1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */,
 				1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */,
-				148A83D51CB0180400F88933 /* FakeQBService.swift */,
 			);
 			path = FakeServices;
 			sourceTree = "<group>";
@@ -1078,27 +1073,27 @@
 			children = (
 				142B51631CDE13E2005B143C /* XCTest+Optionals.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		142D137D1C887837005A348D /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */,
 				142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */,
+				142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */,
 			);
-			name = CollectionView;
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		142D13871C888662005A348D /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */,
-				142D13811C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift */,
 				142D13841C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift */,
 				142D138E1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift */,
+				142D13811C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift */,
 			);
-			name = CollectionView;
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		142D13881C88889B005A348D /* CollectionView */ = {
@@ -1106,7 +1101,7 @@
 			children = (
 				142D13891C8888AD005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift */,
 			);
-			name = CollectionView;
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		143609801BF9C7850091071C /* Frameworks */ = {
@@ -1353,14 +1348,14 @@
 		1452AAC51BF92FA30018DA30 = {
 			isa = PBXGroup;
 			children = (
-				14EE3D001C6BC02D00C451CF /* Scripts */,
-				14A600701C6DEDE700065437 /* webrtc_libraries */,
 				143609801BF9C7850091071C /* Frameworks */,
 				24FA710C5C0D79208F548C05 /* Pods */,
 				1452AACF1BF92FA30018DA30 /* Products */,
 				1452AAD01BF92FA30018DA30 /* QBRTCDemo */,
 				14015A3A1BFCD08400830618 /* QBRTCDemoTests */,
+				14EE3D001C6BC02D00C451CF /* Scripts */,
 				5352BD24E023342BA941E49A /* Tests */,
+				14A600701C6DEDE700065437 /* webrtc_libraries */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1386,13 +1381,13 @@
 				1452AAD41BF92FA30018DA30 /* AppDelegate.h */,
 				1452AAD51BF92FA30018DA30 /* AppDelegate.m */,
 				1452AADD1BF92FA30018DA30 /* Assets.xcassets */,
-				1452AAE21BF92FA30018DA30 /* Info.plist */,
-				1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */,
-				148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */,
-				14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests-Info.plist */,
-				1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */,
-				1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */,
 				144AE6E51C7505B900B7A156 /* BridgingHeader.h */,
+				1452AAE21BF92FA30018DA30 /* Info.plist */,
+				1452AADF1BF92FA30018DA30 /* LaunchScreen.storyboard */,
+				1452ABBC1BF9315E0018DA30 /* QBRTCDemo copy-Info.plist */,
+				1452ABC21BF9360A0018DA30 /* QBRTCDemo-prefix.pch */,
+				14E9F5B51C6CD317007F58B7 /* QBRTCDemoTests-Info.plist */,
+				148234151C002DFE0000E9ED /* QBRTCDemo_s-Info.plist */,
 			);
 			path = QBRTCDemo;
 			sourceTree = "<group>";
@@ -1416,19 +1411,19 @@
 		14736E821C561284009DFBBC /* CallService */ = {
 			isa = PBXGroup;
 			children = (
-				14015A321BFC6F5C00830618 /* CallServiceDelegate.h */,
 				14A028721BFA543A00BDF2C5 /* QBSignaling */,
 				14F4FAF21C52961400E9488C /* Signaling */,
 				14736EEA1C56843F009DFBBC /* WebRTC */,
 				14736EE51C567EC5009DFBBC /* CallService.h */,
 				14736EE61C567EC5009DFBBC /* CallService.m */,
+				1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */,
+				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
+				14015A321BFC6F5C00830618 /* CallServiceDelegate.h */,
 				14C534EC1C6A397100A0FFE8 /* CallServiceHelpers.h */,
 				14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */,
 				14736EE91C56817C009DFBBC /* CallServiceProtocol.h */,
-				14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */,
-				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
-				1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */,
 				145405291C859167005E3790 /* CallServiceProtocol_Private.h */,
+				14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */,
 			);
 			path = CallService;
 			sourceTree = "<group>";
@@ -1453,10 +1448,10 @@
 		1475463F1CAE544E004CCE95 /* RESTService */ = {
 			isa = PBXGroup;
 			children = (
-				147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */,
 				147546431CAE5649004CCE95 /* QBRESTService.swift */,
+				147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */,
 			);
-			name = RESTService;
+			path = RESTService;
 			sourceTree = "<group>";
 		};
 		14A028721BFA543A00BDF2C5 /* QBSignaling */ = {
@@ -1473,8 +1468,8 @@
 		14A600701C6DEDE700065437 /* webrtc_libraries */ = {
 			isa = PBXGroup;
 			children = (
-				1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */,
 				1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */,
+				1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */,
 			);
 			path = webrtc_libraries;
 			sourceTree = "<group>";
@@ -1506,24 +1501,6 @@
 			path = SVSignaling;
 			sourceTree = "<group>";
 		};
-		14D0A3EF1C529EDD005AF958 /* Assemblies */ = {
-			isa = PBXGroup;
-			children = (
-				14D0A3F01C529EE4005AF958 /* ServiceComponentsAssembly */,
-			);
-			path = Assemblies;
-			sourceTree = "<group>";
-		};
-		14D0A3F01C529EE4005AF958 /* ServiceComponentsAssembly */ = {
-			isa = PBXGroup;
-			children = (
-				14D0A3F11C529F01005AF958 /* ServiceComponents.h */,
-				14D0A3F21C529F01005AF958 /* ServiceComponentsAssembly.h */,
-				14D0A3F31C529F01005AF958 /* ServiceComponentsAssembly.m */,
-			);
-			path = ServiceComponentsAssembly;
-			sourceTree = "<group>";
-		};
 		14D0A4161C542D3F005AF958 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1536,10 +1513,10 @@
 		14D0A4171C542D4D005AF958 /* UserStories */ = {
 			isa = PBXGroup;
 			children = (
-				026796DE6A883B4D7DB503D7 /* VideoStory */,
-				F80407DF3A1CB8A2F0595408 /* ImageGalleryStory */,
 				23F82BE9FD8E54B286B07835 /* AuthStory */,
 				9C5D5511F9107C7AE730F2BC /* ChatUsersStory */,
+				F80407DF3A1CB8A2F0595408 /* ImageGalleryStory */,
+				026796DE6A883B4D7DB503D7 /* VideoStory */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -1567,28 +1544,27 @@
 				14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */,
 				14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */,
 			);
-			name = Utils;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		14EE3D001C6BC02D00C451CF /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				14EE3D051C6BC03700C451CF /* blox_target.py */,
+				14EE3D061C6BC03700C451CF /* build.sh */,
 				14EE3D011C6BC03700C451CF /* build_webrtc.sh */,
 				14EE3D021C6BC03700C451CF /* clone.sh */,
 				14EE3D031C6BC03700C451CF /* framework_dance.sh */,
 				14EE3D041C6BC03700C451CF /* pull.sh */,
-				14EE3D051C6BC03700C451CF /* blox_target.py */,
-				14EE3D061C6BC03700C451CF /* build.sh */,
 			);
-			name = Scripts;
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		14F4FAF01C5295CE00E9488C /* BusinessLogicLayer */ = {
 			isa = PBXGroup;
 			children = (
-				14D1B5EE1C7CA4D5006EB865 /* Utils */,
-				14D0A3EF1C529EDD005AF958 /* Assemblies */,
 				14F4FAF11C5295DA00E9488C /* Services */,
+				14D1B5EE1C7CA4D5006EB865 /* Utils */,
 			);
 			path = BusinessLogicLayer;
 			sourceTree = "<group>";
@@ -1596,8 +1572,8 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1475463F1CAE544E004CCE95 /* RESTService */,
 				14736E821C561284009DFBBC /* CallService */,
+				1475463F1CAE544E004CCE95 /* RESTService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1615,18 +1591,18 @@
 			isa = PBXGroup;
 			children = (
 				14D0A3B01C529C52005AF958 /* SVSignaling */,
+				1454052B1C859431005E3790 /* DataChannelMessages.h */,
+				1454052C1C859431005E3790 /* DataChannelMessages.m */,
 				14A028881BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.h */,
 				14A028891BFB1CE500BDF2C5 /* QBChatMessage+SVSignalingMessage.m */,
 				14A028851BFB1A3100BDF2C5 /* QBUUser+SVUser.h */,
 				14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */,
 				14A0288E1BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.h */,
 				14A0288F1BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m */,
-				14A0287F1BFB190800BDF2C5 /* SVUser.h */,
-				14A028801BFB190800BDF2C5 /* SVUser.m */,
-				1454052B1C859431005E3790 /* DataChannelMessages.h */,
-				1454052C1C859431005E3790 /* DataChannelMessages.m */,
 				1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */,
 				1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */,
+				14A0287F1BFB190800BDF2C5 /* SVUser.h */,
+				14A028801BFB190800BDF2C5 /* SVUser.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1635,10 +1611,10 @@
 			isa = PBXGroup;
 			children = (
 				2923FCDDE58704ACFD4A61D9 /* Configurator */,
-				B0ED59F4B0014E8C062F9C60 /* View */,
 				D3BF590081CFE7B3104E0CE1 /* Interactor */,
 				29C7AD027DBF156F961E8134 /* Presenter */,
 				998B1E5FC290BE81663C2750 /* Router */,
+				B0ED59F4B0014E8C062F9C60 /* View */,
 			);
 			path = ImageGalleryStory;
 			sourceTree = "<group>";
@@ -1663,11 +1639,11 @@
 		23F82BE9FD8E54B286B07835 /* AuthStory */ = {
 			isa = PBXGroup;
 			children = (
-				31C83B5B65A426026AF15561 /* View */,
-				A7B2F002B210CAA784038F46 /* Presenter */,
-				41C231BC1B4903897CFA7137 /* Interactor */,
-				555DD871313DE05CB1B1F3AB /* Router */,
 				18FE6C20D2CE11A121B4D264 /* Configurator */,
+				41C231BC1B4903897CFA7137 /* Interactor */,
+				A7B2F002B210CAA784038F46 /* Presenter */,
+				555DD871313DE05CB1B1F3AB /* Router */,
+				31C83B5B65A426026AF15561 /* View */,
 			);
 			path = AuthStory;
 			sourceTree = "<group>";
@@ -1763,10 +1739,10 @@
 		31C83B5B65A426026AF15561 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */,
+				6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */,
 				70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */,
 				E060D9B417D26811FFBC52D7 /* AuthStoryViewOutput.swift */,
-				6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */,
-				149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1774,8 +1750,8 @@
 		39BF6D2F3DCFC792C445A263 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */,
 				FBF28E4660188FA1C009EC65 /* ImageGalleryStoryRouter.swift */,
+				B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1791,9 +1767,9 @@
 		41C231BC1B4903897CFA7137 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */,
 				DCECA7DD6CDF214B9109C588 /* AuthStoryInteractorInput.swift */,
 				0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */,
-				B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1818,9 +1794,9 @@
 		4B6D0894BE15233345192D24 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				C1CEE43CDDDEAE53603580EB /* ChatUsersStoryInteractor.swift */,
 				08A0E3FE5A66384B5CD82017 /* ChatUsersStoryInteractorInput.swift */,
 				568A843E93C7D9B83ACF199B /* ChatUsersStoryInteractorOutput.swift */,
-				C1CEE43CDDDEAE53603580EB /* ChatUsersStoryInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1828,14 +1804,14 @@
 		5352BD24E023342BA941E49A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				142B51621CDE13C7005B143C /* Helpers */,
+				EDB639C7DE8B4B4C56A3FC6B /* AuthStory */,
 				1437CF711C63BB2600CCE1BD /* Base */,
 				14C534E91C6A310000A0FFE8 /* CallService */,
-				1417B3441C57E4B9004D6416 /* FakeServices */,
-				24A0BB756AD5EE73AC99FEF0 /* VideoStory */,
-				153556CC5CD4AB9C63F9DDF6 /* ImageGalleryStory */,
-				EDB639C7DE8B4B4C56A3FC6B /* AuthStory */,
 				64538092DBF4C85B8A8AD0E8 /* ChatUsersStory */,
+				1417B3441C57E4B9004D6416 /* FakeServices */,
+				142B51621CDE13C7005B143C /* Helpers */,
+				153556CC5CD4AB9C63F9DDF6 /* ImageGalleryStory */,
+				24A0BB756AD5EE73AC99FEF0 /* VideoStory */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1843,8 +1819,8 @@
 		555DD871313DE05CB1B1F3AB /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */,
 				036D04FD706443E892936BF0 /* AuthStoryRouter.swift */,
+				992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1861,9 +1837,9 @@
 			isa = PBXGroup;
 			children = (
 				142D13871C888662005A348D /* CollectionView */,
+				82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */,
 				95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */,
 				177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */,
-				82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1872,10 +1848,10 @@
 			isa = PBXGroup;
 			children = (
 				9AB17EC12524C5CDEF3EC969 /* Configurator */,
-				578F2FC058193ACD678EB627 /* View */,
 				114F2ED2FF66D1854B391B23 /* Interactor */,
 				8AA95E5169AB96BFA5170940 /* Presenter */,
 				8D75666FDDF5418F96375BC1 /* Router */,
+				578F2FC058193ACD678EB627 /* View */,
 			);
 			path = ChatUsersStory;
 			sourceTree = "<group>";
@@ -1924,11 +1900,11 @@
 		9C5D5511F9107C7AE730F2BC /* ChatUsersStory */ = {
 			isa = PBXGroup;
 			children = (
-				A137C0E94C78DB347F617DE9 /* View */,
-				D8DE28B94555307D595924E5 /* Presenter */,
-				4B6D0894BE15233345192D24 /* Interactor */,
-				031B24A414B01ECAF3D6F0B7 /* Router */,
 				ACD2B4A73CE25B6885AC0B36 /* Configurator */,
+				4B6D0894BE15233345192D24 /* Interactor */,
+				D8DE28B94555307D595924E5 /* Presenter */,
+				031B24A414B01ECAF3D6F0B7 /* Router */,
+				A137C0E94C78DB347F617DE9 /* View */,
 			);
 			path = ChatUsersStory;
 			sourceTree = "<group>";
@@ -1936,10 +1912,10 @@
 		A137C0E94C78DB347F617DE9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */,
+				8A05F0C5E46B5E9D0A64D509 /* ChatUsersStoryViewController.swift */,
 				8868305B44A9822B6CD1720E /* ChatUsersStoryViewInput.swift */,
 				6418A7D60FA29B0381E95538 /* ChatUsersStoryViewOutput.swift */,
-				8A05F0C5E46B5E9D0A64D509 /* ChatUsersStoryViewController.swift */,
-				142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2029,10 +2005,10 @@
 			isa = PBXGroup;
 			children = (
 				142D137D1C887837005A348D /* CollectionView */,
+				14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */,
+				A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */,
 				B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */,
 				F36D3861BF16D34786FFB54F /* ImageGalleryStoryViewOutput.swift */,
-				A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */,
-				14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2041,10 +2017,10 @@
 			isa = PBXGroup;
 			children = (
 				2C99AA64E011B6E3EB466A75 /* Configurator */,
-				2BCBFF9D2B13601B16718EF4 /* View */,
 				FCF712ACFED273577A11AD0F /* Interactor */,
 				22274E388C059BE001CAE2EA /* Presenter */,
 				49BA12C88EFA4DFC204F4789 /* Router */,
+				2BCBFF9D2B13601B16718EF4 /* View */,
 			);
 			path = AuthStory;
 			sourceTree = "<group>";
@@ -2063,11 +2039,11 @@
 		F80407DF3A1CB8A2F0595408 /* ImageGalleryStory */ = {
 			isa = PBXGroup;
 			children = (
-				E9D450ABF52304EE9E26D5F6 /* View */,
-				83CEB8E898F5043C7BC28B77 /* Presenter */,
-				6414E01C8ABDE0BFE0074888 /* Interactor */,
-				39BF6D2F3DCFC792C445A263 /* Router */,
 				2AC2C440C3943EE0E58DE629 /* Configurator */,
+				6414E01C8ABDE0BFE0074888 /* Interactor */,
+				83CEB8E898F5043C7BC28B77 /* Presenter */,
+				39BF6D2F3DCFC792C445A263 /* Router */,
+				E9D450ABF52304EE9E26D5F6 /* View */,
 			);
 			path = ImageGalleryStory;
 			sourceTree = "<group>";
@@ -2605,7 +2581,6 @@
 				14ADBDE21C73854C003A0C98 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */,
 				142D138F1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
-				14D0A3F41C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */,
 				14736EE71C567EC5009DFBBC /* CallService.m in Sources */,
 				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
 				142B50931CDD2CE0005B143C /* ChatUsersStoryModuleInput.swift in Sources */,
@@ -2667,7 +2642,6 @@
 				148233A71C002DFE0000E9ED /* SVUser.m in Sources */,
 				148233A81C002DFE0000E9ED /* SVSignalingMessageICE.m in Sources */,
 				142D13901C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
-				14D0A3F51C529F01005AF958 /* ServiceComponentsAssembly.m in Sources */,
 				14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				148233A91C002DFE0000E9ED /* SVSignalingMessage.m in Sources */,
 				62B3F09AE08CB2C15B7DB191 /* VideoStoryAssembly.m in Sources */,
@@ -3108,7 +3082,7 @@
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
-				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
+				INFOPLIST_FILE = "QBRTCDemo/QBRTCDemo_s-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3121,6 +3095,7 @@
 					"$(inherited)",
 					"-all_load",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
@@ -3152,7 +3127,7 @@
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 				);
-				INFOPLIST_FILE = "QBRTCDemo_s-Info.plist";
+				INFOPLIST_FILE = "QBRTCDemo/QBRTCDemo_s-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3165,6 +3140,7 @@
 					"$(inherited)",
 					"-all_load",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;

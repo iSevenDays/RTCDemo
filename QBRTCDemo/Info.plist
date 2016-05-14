@@ -27,7 +27,6 @@
 	<key>TyphoonInitialAssemblies</key>
 	<array>
 		<string>VideoStoryAssembly</string>
-		<string>ServiceComponentsAssembly</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
