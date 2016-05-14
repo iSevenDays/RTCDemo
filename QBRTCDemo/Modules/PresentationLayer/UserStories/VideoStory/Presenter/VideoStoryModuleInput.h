@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class SVUser;
+
 @protocol VideoStoryModuleInput <NSObject>
 
 /**
  @author Anton Sokolchenko
 
- Метод инициирует стартовую конфигурацию текущего модуля
+ Configure module and start call with user
  */
-- (void)configureModule;
+- (void)connectToChatWithUser:(SVUser *)user callOpponent:(SVUser *)opponent;
 
 @end

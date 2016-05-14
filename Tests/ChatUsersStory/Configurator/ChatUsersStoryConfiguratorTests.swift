@@ -45,6 +45,7 @@ class ChatUsersStoryModuleConfiguratorTests: XCTestCase {
         XCTAssertNotNil(presenter.view, "view in ChatUsersStoryPresenter is nil after configuration")
         XCTAssertNotNil(presenter.router, "router in ChatUsersStoryPresenter is nil after configuration")
         XCTAssertTrue(presenter.router is ChatUsersStoryRouter, "router is not ChatUsersStoryRouter")
+		XCTAssertNotNil((presenter.router as! ChatUsersStoryRouter).transitionHandler, "transition handler for ChatUsersStoryRouter is nil after configuration, transitionHandler must be ChatUsersStoryViewController")
 
         let interactor: ChatUsersStoryInteractor = presenter.interactor as! ChatUsersStoryInteractor
         XCTAssertNotNil(interactor.output, "output in ChatUsersStoryInteractor is nil after configuration")

@@ -20,4 +20,6 @@ protocol ChatUsersStoryViewInput: class {
 	Reload table view data
 	*/
 	func reloadDataWithUsers(users: [SVUser])
+	
+	func configureViewWithCurrentUser(user: SVUser)
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AuthStoryRouterInput {
-	func openChatUsersStoryWithTag(tag: String)
+	func openChatUsersStoryWithTag(tag: String, currentUser: SVUser)
 }

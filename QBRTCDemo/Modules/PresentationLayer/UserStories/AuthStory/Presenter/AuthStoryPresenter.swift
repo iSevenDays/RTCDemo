@@ -36,7 +36,7 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 			return
 		}
 		
-		router.openChatUsersStoryWithTag(firstTag )
+		router.openChatUsersStoryWithTag(firstTag, currentUser: user)
 	}
 	
 	func didErrorLogin(error: NSError?) {

@@ -51,7 +51,32 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		XCTAssertEqualOptional(mockOutput.retrievedUsers, cachedUsers)
 	}
 	
-	func testDownloadsUsersFromREST() {
+	func testSetsTagIfTagContainMoreThanThreeCharacters() {
+		// given
+		let tag = "tag"
+		let testUser = TestsStorage.svuserTest()
+		
+		// when
+		interactor.setTag(tag, currentUser: testUser)
+		
+		// then
+		XCTAssertNil(mockOutput.error)
+		XCTAssertEqual(interactor.retrieveCurrentUser(), testUser)
+	}
+	
+	func testDoesNOTSetTagIfTagContainLessThanThreeCharacters() {
+		// given
+		let tag = "ta"
+		let testUser = TestsStorage.svuserTest()
+		
+		// when
+		interactor.setTag(tag, currentUser: testUser)
+		
+		// then
+		XCTAssertEqual(mockOutput.error, ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
+	}
+	
+	func testDownloadsUsersFromRESTAndCaches() {
 		// given
 		mockCacheService.cachedUsersArray = nil
 		interactor.tag = "tag"
@@ -61,6 +86,8 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockRESTService.downloadUsersWithTagsGotCalled)
+		XCTAssertEqualOptional(mockCacheService.cachedUsers(), mockOutput.retrievedUsers) // users should be cached
+		XCTAssertEqualOptional(mockOutput.retrievedUsers, mockRESTService.restUsersArray)
 	}
 	
 
@@ -68,15 +95,18 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		var retrievedUsers: [SVUser]?
 		var didRetrieveUsersGotCalled = false
 		
+		var error: ChatUsersStoryInteractorError?
+		
 		func didRetrieveUsers(users: [SVUser]) {
 			didRetrieveUsersGotCalled = true
 			retrievedUsers = users
 		}
 		
-		func didErrorRetrievingUsers(error: NSError?) {
-			
+		func didError(error: ChatUsersStoryInteractorError) {
+			self.error = error
 		}
     }
+	
 	
 	class MockCacheService: CacheServiceProtocol {
 		var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest()]
@@ -92,9 +122,11 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	
 	class MockRESTService: FakeQBRESTService {
 		var downloadUsersWithTagsGotCalled = false
+		var restUsersArray: [SVUser] = [TestsStorage.svuserTest()]
 		
 		override func downloadUsersWithTags(tags: [String], successBlock: ((users: [SVUser]) -> Void)?, errorBlock: ((error: NSError?) -> Void)?) {
 			downloadUsersWithTagsGotCalled = true
+			successBlock?(users: restUsersArray)
 		}
 	}
 }

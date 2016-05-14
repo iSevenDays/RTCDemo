@@ -121,10 +121,12 @@ class AuthStoryPresenterTests: XCTestCase {
     class MockRouter: AuthStoryRouterInput {
 		var openChatUsersStoryGotCalled = false
 		var tag: String?
+		var user: SVUser?
 		
-		func openChatUsersStoryWithTag(tag: String) {
+		func openChatUsersStoryWithTag(tag: String, currentUser: SVUser) {
 			openChatUsersStoryGotCalled = true
 			self.tag = tag
+			self.user = currentUser
 		}
     }
 

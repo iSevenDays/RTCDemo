@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class SVUser;
+
 @protocol VideoStoryInteractorInput <NSObject>
 
-- (void)connectToChatWithUser1;
-- (void)connectToChatWithUser2;
+- (void)connectToChatWithUser:(SVUser *)user callOpponent:(SVUser *)opponent;
 
-- (void)startCall;
+// Pass nil to call the opponent again
+- (void)startCallWithOpponent:(SVUser *)opponent;
 - (void)hangup;
 
 - (void)requestDataChannelState;

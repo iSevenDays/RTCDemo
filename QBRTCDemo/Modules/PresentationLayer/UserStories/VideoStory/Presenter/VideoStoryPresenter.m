@@ -16,8 +16,8 @@
 
 #pragma mark - Methods VideoStoryModuleInput
 
-- (void)configureModule {
-    // Start configuration
+- (void)connectToChatWithUser:(SVUser *)user callOpponent:(SVUser *)opponent {
+	[self.interactor connectToChatWithUser:user callOpponent:opponent];
 }
 
 #pragma mark - Methods VideoStoryViewOutput
@@ -26,16 +26,8 @@
 	[self.view setupInitialState];
 }
 
-- (void)didTriggerConnectWithUser1ButtonTaped {
-	[self.interactor connectToChatWithUser1];
-}
-
-- (void)didTriggerConnectWithUser2ButtonTaped {
-	[self.interactor connectToChatWithUser2];
-}
-
 - (void)didTriggerStartCallButtonTaped {
-	[self.interactor startCall];
+	[self.interactor startCallWithOpponent:nil];
 }
 
 - (void)didTriggerHangupButtonTaped {
@@ -48,12 +40,8 @@
 
 #pragma mark - Methods VideoStoryInteractorOutput
 
-- (void)didConnectToChatWithUser1 {
-	[self.view configureViewWithUser1];
-}
-
-- (void)didConnectToChatWithUser2 {
-	[self.view configureViewWithUser2];
+- (void)didConnectToChatWithUser:(SVUser *)user {
+	[self.view configureViewWithUser:user];
 }
 
 - (void)didHangup {

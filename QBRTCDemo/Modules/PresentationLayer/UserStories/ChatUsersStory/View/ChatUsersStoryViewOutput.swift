@@ -14,4 +14,11 @@
     */
 
     func viewIsReady()
+	
+	/**
+	Triggers tapped on user event (start call)
+	
+	- parameter user: SVUser instance
+	*/
+	func didTriggerUserTapped(user: SVUser)
 }

@@ -28,6 +28,15 @@ class FakeQBRESTService : QBRESTService {
 	private var logined = false
 	private var registered = false
 	
+	internal var updatedUser: SVUser?
+	
+	override init() {
+		QBSettings.setApplicationID(31016)
+		QBSettings.setAuthKey("aqsHa2AhDO5Z9Th")
+		QBSettings.setAuthSecret("825Bv-3ByACjD4O")
+		QBSettings.setAccountKey("ZsFuaKozyNC3yLzvN3Xa")
+	}
+	
 	/**
 	login user if shouldLoginSuccessfully OR registered && shouldLoginAfterSignupSuccessfully, then set 'logined' = true and call success block
 	
@@ -74,6 +83,10 @@ class FakeQBRESTService : QBRESTService {
 		} else {
 			errorBlock?(error: nil)
 		}
+	}
+	
+	override func updateCurrentUserFieldsIfNeededWithUser(requestedUser: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void) {
+		successBlock(user: requestedUser)
 	}
 	
 	func tearDown() {

@@ -39,7 +39,7 @@
     [super tearDown];
 }
 
-- (void)testRouterOpenImageGalleryCallsTransitionHandler {
+- (void)testRouterOpensImageGalleryCallsTransitionHandler {
 	// given
 	id mockTransitionHandler = OCMPartialMock(self.router.transitionHandler);
 	// when

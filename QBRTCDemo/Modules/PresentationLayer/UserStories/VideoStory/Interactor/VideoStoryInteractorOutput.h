@@ -10,11 +10,11 @@
 
 @class RTCVideoTrack;
 @class RTCEAGLVideoView;
+@class SVUser;
 
 @protocol VideoStoryInteractorOutput <NSObject>
 
-- (void)didConnectToChatWithUser1;
-- (void)didConnectToChatWithUser2;
+- (void)didConnectToChatWithUser:(nonnull SVUser *)user;
 
 - (void)didHangup;
 

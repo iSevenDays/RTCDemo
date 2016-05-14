@@ -36,9 +36,6 @@
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg2-SK-YBj">
                                 <rect key="frame" x="143" y="84" width="132" height="30"/>
                                 <state key="normal" title="Connect with user1"/>
-                                <connections>
-                                    <action selector="didTapButtonConnectWithUser1:" destination="YrU-5b-St0" eventType="touchUpInside" id="BjE-yM-rUJ"/>
-                                </connections>
                             </button>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8W-LO-oNF" userLabel="spacer">
                                 <rect key="frame" x="295" y="94" width="10" height="10"/>
@@ -50,9 +47,6 @@
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epV-31-fws">
                                 <rect key="frame" x="325" y="84" width="134" height="30"/>
                                 <state key="normal" title="Connect with user2"/>
-                                <connections>
-                                    <action selector="didTapButtonConnectWithUser2:" destination="YrU-5b-St0" eventType="touchUpInside" id="YD5-W3-z7f"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCe-my-4j2">
                                 <rect key="frame" x="143" y="174" width="60" height="30"/>

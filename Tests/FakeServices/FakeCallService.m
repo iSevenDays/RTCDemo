@@ -21,7 +21,6 @@
 #import "SVSignalingChannelState.h"
 
 @interface FakeCallService()
-@property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
 @end
 
 @implementation FakeCallService

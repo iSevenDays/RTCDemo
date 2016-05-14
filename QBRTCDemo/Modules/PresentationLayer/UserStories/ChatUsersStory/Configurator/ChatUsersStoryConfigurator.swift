@@ -10,7 +10,7 @@ import UIKit
 
 class ChatUsersStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UITableViewController>(viewInput: UITableViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
 
         if let viewController = viewInput as? ChatUsersStoryViewController {
             configure(viewController)
@@ -20,7 +20,8 @@ class ChatUsersStoryModuleConfigurator {
     private func configure(viewController: ChatUsersStoryViewController) {
 
         let router = ChatUsersStoryRouter()
-
+		router.transitionHandler = viewController
+		
         let presenter = ChatUsersStoryPresenter()
         presenter.view = viewController
         presenter.router = router
@@ -28,6 +29,7 @@ class ChatUsersStoryModuleConfigurator {
         let interactor = ChatUsersStoryInteractor()
         interactor.output = presenter
 		interactor.cacheService = NSUserDefaults.standardUserDefaults()
+		interactor.restService = QBRESTService()
 		
         presenter.interactor = interactor
         viewController.output = presenter

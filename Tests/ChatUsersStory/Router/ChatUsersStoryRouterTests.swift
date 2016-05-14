@@ -18,13 +18,40 @@ import XCTest
 
 class ChatUsersStoryRouterTests: XCTestCase {
 
+	var router: ChatUsersStoryRouter!
+	var mockOutput: MockOutput!
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		
+		router = ChatUsersStoryRouter()
+		mockOutput = MockOutput()
+		
+		router.transitionHandler = mockOutput
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	func testRouterOpensVideoStory() {
+		// given
+		let initiator = TestsStorage.svuserRealUser1()
+		let opponent = TestsStorage.svuserRealUser2()
+		
+		// when
+		router.openVideoStoryWithInitiator(initiator, thenCallOpponent: opponent)
+		
+		// then
+		XCTAssertTrue(mockOutput.openModuleUsingSegueGotCalled)
+		XCTAssertEqual(mockOutput.segueIdentifier, router.chatUsersStoryToVideoStorySegueIdentifier)
+	}
+	
+	class MockOutput: NSObject, RamblerViperModuleTransitionHandlerProtocol {
+		var openModuleUsingSegueGotCalled = false
+		var segueIdentifier: String?
+		
+		func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
+			openModuleUsingSegueGotCalled = true
+			self.segueIdentifier = segueIdentifier
+			
+			return RamblerViperOpenModulePromise()
+		}
+	}
 }

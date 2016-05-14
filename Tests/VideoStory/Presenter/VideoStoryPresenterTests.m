@@ -14,6 +14,7 @@
 #import "VideoStoryViewInput.h"
 #import "VideoStoryInteractorInput.h"
 #import "VideoStoryRouterInput.h"
+#import "TestsStorage.h"
 
 @interface VideoStoryPresenterTests : XCTestCase
 
@@ -55,6 +56,18 @@
 
 #pragma mark - Testing methods VideoStoryModuleInput
 
+- (void)testThatPresenterHandlesStartCallWithUserEventFromModuleInput {
+	// given
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	SVUser *testUser2 = [TestsStorage svuserRealUser2];
+	
+	// when
+	[self.presenter connectToChatWithUser:testUser callOpponent:testUser2];
+	
+	// then
+	OCMVerify([self.mockInteractor connectToChatWithUser:testUser callOpponent:testUser2]);
+}
+
 #pragma mark - Testing methods VideoStoryViewOutput
 
 - (void)testThatPresenterHandlesViewReadyEvent {
@@ -65,28 +78,12 @@
     OCMVerify([self.mockView setupInitialState]);
 }
 
-- (void)testThatPresenterHandlesConnectWitUser1ButtonTapped {
-	// when
-	[self.presenter didTriggerConnectWithUser1ButtonTaped];
-	
-	// then
-	OCMVerify([self.mockInteractor connectToChatWithUser1]);
-}
-
-- (void)testThatPresenterHandlesConnectWitUser2ButtonTapped {
-	// when
-	[self.presenter didTriggerConnectWithUser2ButtonTaped];
-	
-	// then
-	OCMVerify([self.mockInteractor connectToChatWithUser2]);
-}
-
 - (void)testThatPresenterHandlesStartCallButtonTapped {
 	// when
 	[self.presenter didTriggerStartCallButtonTaped];
 	
 	// then
-	OCMVerify([self.mockInteractor startCall]);
+	OCMVerify([self.mockInteractor startCallWithOpponent:nil]);
 }
 
 - (void)testThatPresenterHandlesHangupButtonTapped {
@@ -108,20 +105,15 @@
 
 #pragma mark - Testing methods VideoStoryInteractorOutput
 
-- (void)testThatPresenterHandlesDidConnectToChatWithUser1 {
+- (void)testThatPresenterHandlesDidConnectToChatWithTestUser {
+	// given
+	SVUser *testUser = [TestsStorage svuserTest];
+	
 	// when
-	[self.presenter didConnectToChatWithUser1];
+	[self.presenter didConnectToChatWithUser:testUser];
 	
 	// then
-	OCMVerify([self.mockView configureViewWithUser1]);
-}
-
-- (void)testThatPresenterHandlesDidConnectToChatWithUser2 {
-	// when
-	[self.presenter didConnectToChatWithUser2];
-	
-	// then
-	OCMVerify([self.mockView configureViewWithUser2]);
+	OCMVerify([self.mockView configureViewWithUser:testUser]);
 }
 
 - (void)testThatPresenterHandlesConnectionError {

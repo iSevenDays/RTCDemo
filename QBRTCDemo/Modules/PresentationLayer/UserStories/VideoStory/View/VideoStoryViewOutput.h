@@ -17,8 +17,6 @@
  */
 - (void)didTriggerViewReadyEvent;
 
-- (void)didTriggerConnectWithUser1ButtonTaped;
-- (void)didTriggerConnectWithUser2ButtonTaped;
 
 - (void)didTriggerStartCallButtonTaped;
 - (void)didTriggerHangupButtonTaped;

@@ -43,10 +43,6 @@ static NSString *const kVideoStoryboardName = @"VideoStory";
 - (VideoStoryInteractor *)interactorVideoStoryModule {
     return [TyphoonDefinition withClass:[VideoStoryInteractor class]
                           configuration:^(TyphoonDefinition *definition) {
-							  [definition useInitializer:@selector(initWithUsers:) parameters:^(TyphoonMethod *initializer) {
-								  [initializer injectParameterWith:@[[CallServiceHelpers user1],
-																	 [CallServiceHelpers user2]]];
-							  }];
 							  
                               [definition injectProperty:@selector(output)
                                                     with:[self presenterVideoStoryModule]];

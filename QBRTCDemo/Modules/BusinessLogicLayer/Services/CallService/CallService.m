@@ -123,6 +123,7 @@
 
 - (void)connectWithUser:(SVUser *)user completion:(void(^)(NSError *error))completion {
 	
+	NSParameterAssert(self.signalingChannel);
 	NSCAssert(self.state == kClientStateDisconnected, @"Invalid state");
 	
 	self.state = kClientStateConnecting;
@@ -614,5 +615,6 @@
 		}
 	}
 }
+
 
 @end

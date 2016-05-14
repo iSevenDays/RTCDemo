@@ -8,7 +8,14 @@
 
 import Foundation
 
+enum ChatUsersStoryInteractorError: ErrorType {
+	case TagLengthMustBeGreaterThanThreeCharacters
+	case CanNotRetrieveUsers
+}
+
 protocol ChatUsersStoryInteractorOutput: class {
+	
 	func didRetrieveUsers(users: [SVUser])
-	func didErrorRetrievingUsers(error: NSError?)
+	
+	func didError(error: ChatUsersStoryInteractorError)
 }

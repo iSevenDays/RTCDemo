@@ -13,7 +13,37 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 	internal var cacheService: protocol<CacheServiceProtocol>!
 	
 	internal var tag: String?
+	internal var currentUser: SVUser!
 	
+	/**
+	Sets tag (chat room name)
+	
+	- parameter tag: String instance, must be >= 3 characters long
+	- parameter currentUser: current user
+	*/
+	func setTag(tag: String, currentUser: SVUser) {
+		guard tag.characters.count >= 3 else {
+			
+			self.output.didError(ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
+			return
+			
+		}
+		
+		self.tag = tag
+		self.currentUser = currentUser
+	}
+	
+	func retrieveCurrentUser() -> SVUser {
+		return currentUser
+	}
+	
+	/**
+	Retrieves users from cache, then downloads them from REST
+ 
+	Step 1 download users from cache and notify output
+	Step 2 download users from REST and notify output
+	
+	*/
 	func retrieveUsersWithTag() {
 		if let cachedUsers = cacheService.cachedUsers() {
 			output.didRetrieveUsers(cachedUsers)
@@ -22,16 +52,34 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 		downloadUsersWithTag()
 	}
 	
+	/**
+	Download user with tag and cache
+	*/
 	internal func downloadUsersWithTag() {
 		guard let unwrappedTag = tag else {
-			fatalError("Error tag does not set")
+			fatalError("Error tag has not been set")
 		}
 		
-		restService.downloadUsersWithTags([unwrappedTag], successBlock: { (users) in
+		restService.downloadUsersWithTags([unwrappedTag], successBlock: { [unowned self] (users) in
+			
+			let filteredUsers = self.removeCurrentUserFromUsers(users)
+			
+			self.output.didRetrieveUsers(filteredUsers)
+			
+			self.cacheService.cacheUsers(filteredUsers)
 			
 			}) { (error) in
-				
+				self.output.didError(ChatUsersStoryInteractorError.CanNotRetrieveUsers)
 		}
+	}
+	
+	internal func removeCurrentUserFromUsers(users: [SVUser]) -> [SVUser] {
+		guard let currentUserID = restService.currentUser()?.ID else {
+			NSLog("Current user is not presented in users array")
+			return users
+		}
+		
+		return users.filter({$0.ID!.isEqualToNumber(currentUserID) == false})
 	}
 }
 
@@ -49,7 +97,7 @@ extension NSUserDefaults: CacheServiceProtocol {
 	
 	func cachedUsers() -> [SVUser]? {
 		guard let usersData = objectForKey("users") as? NSData else {
-			NSLog("Error: No stored users data")
+			NSLog("Warning: No stored users data")
 			return nil
 		}
 		

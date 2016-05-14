@@ -32,12 +32,8 @@
 	// В этом методе происходит настройка параметров view, зависящих от ее жизненого цикла (создание элементов, анимации и пр.)
 }
 
-- (void)configureViewWithUser1 {
-	self.btnConnectWithUser1.backgroundColor = [UIColor greenColor];
-}
-
-- (void)configureViewWithUser2 {
-	self.btnConnectWithUser2.backgroundColor = [UIColor greenColor];
+- (void)configureViewWithUser:(SVUser *)user {
+//	self.btnConnectWithUser1.backgroundColor = [UIColor greenColor];
 }
 
 - (void)showHangup {
@@ -61,14 +57,6 @@
 }
 
 #pragma mark - VideoStoryViewOutput methods
-
-- (IBAction)didTapButtonConnectWithUser1:(id)sender {
-	[self.output didTriggerConnectWithUser1ButtonTaped];
-}
-
-- (IBAction)didTapButtonConnectWithUser2:(id)sender {
-	[self.output didTriggerConnectWithUser2ButtonTaped];
-}
 
 - (IBAction)didTapButtonStartCall:(id)sender {
 	[self.output didTriggerStartCallButtonTaped];

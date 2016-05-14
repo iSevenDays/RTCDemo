@@ -59,26 +59,6 @@
 
 #pragma mark - IBActions testing
 
-- (void)testSuccessConnectToChatWithUser1ButtonTriggersAction {
-	// given
-	
-	// when
-	[self.controller didTapButtonConnectWithUser1:nil];
-	
-	// then
-	OCMVerify([self.mockOutput didTriggerConnectWithUser1ButtonTaped]);
-}
-
-- (void)testSuccessTapConnectToChatWithUser2ButtonTriggersAction {
-	// given
-	
-	// when
-	[self.controller didTapButtonConnectWithUser2:nil];
-	
-	// then
-	OCMVerify([self.mockOutput didTriggerConnectWithUser2ButtonTaped]);
-}
-
 - (void)testStartCallButtonTriggersAction {
 	// given
 	

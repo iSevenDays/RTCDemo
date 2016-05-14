@@ -13,7 +13,6 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
     weak var output: AuthStoryInteractorOutput!
 	internal var restService: protocol<RESTServiceProtocol>!
 	
-	
 	// MARK: AuthStoryInteractorInput
 	func tryRetrieveCachedUser() {
 		if let cachedUser = cachedUser() {
@@ -24,20 +23,6 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			output.doingLoginWithCachedUser(cachedUser)
 			signUpOrLoginWithUserName(cachedUser.fullName, tags: userTags)
 		}
-	}
-	
-	func cacheUser(user: SVUser) {
-		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
-		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: "user")
-		NSUserDefaults.standardUserDefaults().synchronize()
-	}
-	
-	func cachedUser() -> SVUser? {
-		if let userData = NSUserDefaults.standardUserDefaults().objectForKey("user") {
-			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData as! NSData) as? SVUser
-			return user
-		}
-		return nil
 	}
 	
 	func signUpOrLoginWithUserName(userName: String, tags: [String]) {
@@ -58,9 +43,12 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 				
 				self?.output.didErrorLogin(error)
 		}
-		
 	}
-	
+}
+
+
+// MARK: - Internal
+internal extension AuthStoryInteractor {
 	/**
 	Signup or login with user
 	
@@ -75,13 +63,31 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	- parameter successBlock: success block
 	- parameter errorBlock:   error block
 	*/
-	private func signUpOrLoginWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (NSError?) -> Void) {
+	func signUpOrLoginWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (NSError?) -> Void) {
 		output.doingLoginWithUser(user)
 		
-		restService.loginWithUser(user, successBlock: successBlock) { [weak self] (error) in
+		restService.loginWithUser(user, successBlock: { [unowned self] (downloadedUser) in
+			
+			self.restService.updateCurrentUserFieldsIfNeededWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
+			
+			}) { [weak self] (error) in
 				self?.output.doingSignUpWithUser(user)
 				self?.restService.signUpWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
 		}
+		
 	}
 	
+	func cacheUser(user: SVUser) {
+		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
+		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: "user")
+		NSUserDefaults.standardUserDefaults().synchronize()
+	}
+	
+	func cachedUser() -> SVUser? {
+		if let userData = NSUserDefaults.standardUserDefaults().objectForKey("user") {
+			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData as! NSData) as? SVUser
+			return user
+		}
+		return nil
+	}
 }

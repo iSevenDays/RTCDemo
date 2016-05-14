@@ -23,12 +23,11 @@
 #import <RTCVideoTrack.h>
 #import <RTCEAGLVideoView.h>
 
+
 @interface VideoStoryInteractor()
 
-@property (nonatomic, strong) SVUser *user1;
-@property (nonatomic, strong) SVUser *user2;
-
 @property (nonatomic, strong) SVUser *currentUser;
+@property (nonatomic, strong) SVUser *lastOpponentUser;
 
 @property (nonatomic, strong) RTCVideoTrack *localVideoTrack;
 @property (nonatomic, strong) RTCVideoTrack *remoteVideoTrack;
@@ -40,67 +39,39 @@
 
 #pragma mark - Методы VideoStoryInteractorInput
 
-- (instancetype)init {
-	[NSException raise:@"Unavailable initializer" format:@"init is invalid"];
-	
-	return nil;
-}
-
-- (instancetype)initWithUsers:(NSArray *)users {
-	self = [super init];
-	if (self) {
-		NSLog(@"%@ initWithUsers %p initialized", NSStringFromClass([self class]), self);
-		self.user1 = users[0];
-		self.user2 = users[1];
-	}
-	return self;
-}
-
-- (void)connectToChatWithUser1 {
+- (void)connectToChatWithUser:(SVUser *)user callOpponent:(SVUser *)opponent {
 	if (self.callService.isConnecting || self.callService.isConnected) {
 		return;
 	}
 	
-	SVUser *user = self.user1;
-	
 	[self.callService connectWithUser:user completion:^(NSError * _Nullable error) {
 		if (!error) {
 			self.currentUser = user;
-			[self.output didConnectToChatWithUser1];
+			self.currentUser.password = user.password;
+			
+			[self.output didConnectToChatWithUser:user];
+			
+			if (opponent != nil) {
+				[self startCallWithOpponent:opponent];
+			}
+			
 		} else {
 			[self.output didFailToConnectToChat];
 		}
 	}];
 }
 
-- (void)connectToChatWithUser2 {
-	if (self.callService.isConnecting || self.callService.isConnected) {
-		return;
-	}
-	
-	SVUser *user = self.user2;
-	
-	[self.callService connectWithUser:user completion:^(NSError * _Nullable error) {
-		if (!error) {
-			self.currentUser = user;
-			[self.output didConnectToChatWithUser2];
-		} else {
-			[self.output didFailToConnectToChat];
-		}
-	}];
-}
-
-- (void)startCall {
+- (void)startCallWithOpponent:(SVUser *)opponent {
 	if ([self.callService hasActiveCall]) {
 		DDLogWarn(@"Can not call while already connecting");
 		return;
 	}
 	
-	if ([self.currentUser isEqual:self.user1]) {
-		[self.callService startCallWithOpponent:self.user2];
-	} else {
-		[self.callService startCallWithOpponent:self.user1];
-	}
+	NSAssert(![opponent isEqual:self.currentUser], @"You can not call yourself");
+	
+	self.lastOpponentUser = opponent;
+	[self.callService startCallWithOpponent:opponent];
+	
 }
 
 - (void)sendInvitationMessageAndOpenImageGallery {

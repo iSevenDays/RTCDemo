@@ -1,4 +1,4 @@
-//
+ //
 //  VideoStoryInteractorTests.m
 //  QBRTCDemo
 //
@@ -15,6 +15,8 @@
 #import "CallServiceHelpers.h"
 #import "CallServiceProtocol_Private.h"
 #import "CallServiceDataChannelAdditionsProtocol.h"
+
+#import "TestsStorage.h"
 
 #import "FakeCallService.h"
 #import "FakeSignalingChannel.h"
@@ -56,7 +58,7 @@
 - (void)setUp {
     [super setUp];
 	
-    self.interactor = [[VideoStoryInteractor alloc] initWithUsers:@[[CallServiceHelpers user1], [CallServiceHelpers user2]]];
+	self.interactor = [[VideoStoryInteractor alloc] init];
 	
     self.mockOutput = OCMProtocolMock(@protocol(VideoStoryInteractorOutput));
 	
@@ -89,24 +91,16 @@
 
 #pragma mark - Testing methods VideoStoryInteractorInput
 
-- (void)testConnectingWithUser1 {
+- (void)testConnectingWithTestUser {
 	// given
 	[self useRealCallService];
+	SVUser *testUser = [TestsStorage svuserTest];
+	
 	// when
-	[self.interactor connectToChatWithUser1];
+	[self.interactor connectToChatWithUser:testUser callOpponent:nil];
 	
 	// then
-	OCMVerify([self.mockOutput didConnectToChatWithUser1]);
-}
-
-- (void)testConnectingWithUser2 {
-	// given
-	[self useRealCallService];
-	// when
-	[self.interactor connectToChatWithUser2];
-	
-	// then
-	OCMVerify([self.mockOutput didConnectToChatWithUser2]);
+	OCMVerify([self.mockOutput didConnectToChatWithUser:testUser]);
 }
 
 - (void)testHangup {
@@ -127,6 +121,9 @@
 	// given
 	[self useRealCallService];
 	
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	SVUser *testUser2 = [TestsStorage svuserRealUser2];
+	
 	id mockedInteractor = OCMPartialMock(self.interactor);
 	
 	OCMStub([mockedInteractor callService:[OCMArg any] didReceiveLocalVideoTrack:[OCMArg any]]).andCall(self.interactor.output, @selector(didSetLocalCaptureSession:));
@@ -134,8 +131,7 @@
 	OCMExpect([self.mockOutput didSetLocalCaptureSession:[OCMArg any]]);
 	
 	// when
-	[mockedInteractor connectToChatWithUser1];
-	[mockedInteractor startCall];
+	[mockedInteractor connectToChatWithUser:testUser callOpponent:testUser2];
 	
 	// then
 	OCMVerifyAllWithDelay(self.mockOutput, 10);
@@ -145,12 +141,16 @@
 	// given
 	[self useFakeCallService];
 	
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	SVUser *testUser2 = [TestsStorage svuserRealUser2];
+	
+	OCMExpect([self.mockOutput didReceiveRemoteVideoTrackWithConfigurationBlock:[OCMArg any]]);
+	
 	// when
-	[self.interactor connectToChatWithUser1];
-	[self.interactor startCall];
+	[self.interactor connectToChatWithUser:testUser callOpponent:testUser2];
 	
 	// then
-	OCMVerify([self.mockOutput didReceiveRemoteVideoTrackWithConfigurationBlock:[OCMArg any]]);
+	OCMVerifyAllWithDelay(self.mockOutput, 3);
 }
 
 #pragma mark Data Channel Tests
@@ -158,11 +158,12 @@
 - (void)testTriggersDidOpenDataChannelOpen_whenReceivedDataChannel {
 	// given
 	[self useFakeCallService]; // for fast user connection
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	SVUser *testUser2 = [TestsStorage svuserRealUser2];
 	
 	// when
 	[self.interactor.callService setDataChannelEnabled:YES];
-	[self.interactor connectToChatWithUser1];
-	[self.interactor startCall];
+	[self.interactor connectToChatWithUser:testUser callOpponent:testUser2];
 	
 	// then
 	OCMVerify([self.mockOutput didOpenDataChannel]);
@@ -171,11 +172,12 @@
 - (void)testTriggersDidReceiveDataChannelStateReady_whenReceivedDataChannel {
 	// given
 	[self useFakeCallService]; // for fast user connection
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	SVUser *testUser2 = [TestsStorage svuserRealUser2];
 	
 	// when
 	[self.interactor.callService setDataChannelEnabled:YES];
-	[self.interactor connectToChatWithUser1];
-	[self.interactor startCall];
+	[self.interactor connectToChatWithUser:testUser callOpponent:testUser2];
 	[self.interactor requestDataChannelState];
 	
 	// then
@@ -197,11 +199,13 @@
 - (void)testTriggersDidReceiveInvitationToOpenImageGallery_whenReceivedDataChannelInvitationMessage {
 	// given
 	[self useFakeCallService]; // for fast user connection
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	SVUser *testUser2 = [TestsStorage svuserRealUser2];
 	
 	// when
 	[self.interactor.callService setDataChannelEnabled:YES];
-	[self.interactor connectToChatWithUser1];
-	[self.interactor startCall];
+	[self.interactor connectToChatWithUser:testUser callOpponent:testUser2];
+
 	
 	id <CallServiceProtocol_Private> callService = (id<CallServiceProtocol_Private>)self.interactor.callService;
 	
@@ -217,13 +221,15 @@
 - (void)testTriggersDidSendInvitationToOpenImageGallery_whenRequestedImageGallery {
 	// given
 	[self useFakeCallService]; // for fast user connection
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	SVUser *testUser2 = [TestsStorage svuserRealUser2];
 	
 	OCMExpect([self.mockOutput didSendInvitationToOpenImageGallery]);
 	
 	// when
 	[self.interactor.callService setDataChannelEnabled:YES];
-	[self.interactor connectToChatWithUser1];
-	[self.interactor startCall];
+	[self.interactor connectToChatWithUser:testUser callOpponent:testUser2];
+
 	id<CallServiceProtocol_Private> fakeCallService = (id<CallServiceProtocol_Private>)self.interactor.callService;
 	fakeCallService.hasActiveCall = YES;
 	

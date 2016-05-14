@@ -36,8 +36,6 @@
 
 #pragma mark IBActions
 
-- (IBAction)didTapButtonConnectWithUser1:(id)sender;
-- (IBAction)didTapButtonConnectWithUser2:(id)sender;
 - (IBAction)didTapButtonStartCall:(id)sender;
 - (IBAction)didTapButtonHangup:(id)sender;
 - (IBAction)didTapButtonDataChannelImageGallery:(id)sender;

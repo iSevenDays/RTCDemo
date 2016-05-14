@@ -39,15 +39,69 @@ class ChatUsersStoryViewTests: XCTestCase {
 		XCTAssertTrue(mockOutput.viewIsReadyGotCalled)
 	}
 	
+	func testViewCorrectlyLoadsAndShowsUsers() {
+		// given
+		controller.loadView()
+		let users = [TestsStorage.svuserTest()]
+		let firstUser = users.first!
+		
+		// when
+		controller.reloadDataWithUsers(users)
+		
+		// then
+		let firstCell = controller.tableView.dataSource?.tableView(controller.tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+		let numberOfRows = controller.tableView.dataSource?.tableView(controller.tableView, numberOfRowsInSection: 0)
+		
+		XCTAssertEqual(controller.users.count, 1)
+		XCTAssertEqual(controller.users.count, numberOfRows)
+		XCTAssertEqual(firstCell?.textLabel?.text, firstUser.fullName)
+		XCTAssertEqual(firstCell?.detailTextLabel?.text, String(firstUser.ID))
+	}
+	
+	func testNavigationBarTextWithCurrentUser() {
+		// given
+		controller.loadView()
+		let currentUser = TestsStorage.svuserTest()
+		
+		// when
+		controller.configureViewWithCurrentUser(currentUser)
+		
+		// then
+		XCTAssertEqual(controller.navigationItem.title, "Logged in as " + currentUser.fullName)
+	}
+	
+	func testViewCorrectlyHandlesUserTappedEvent() {
+		// given
+		controller.loadView()
+		let users = [TestsStorage.svuserTest()]
+		let firstUser = users.first!
+		
+		// when
+		controller.reloadDataWithUsers(users)
+		
+		// then
+		controller.tableView.delegate?.tableView?(controller.tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+		
+		XCTAssertTrue(mockOutput.didTriggerUserTappedGotCalled)
+		XCTAssertEqual(mockOutput.user, firstUser)
+	}
+	
 	// MARK: IBActions
 	
 	@objc class MockViewControllerOutput : NSObject,  ChatUsersStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		
+		var didTriggerUserTappedGotCalled = false
+		var user: SVUser?
+		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
 		}
 		
+		func didTriggerUserTapped(user: SVUser) {
+			didTriggerUserTappedGotCalled = true
+			self.user = user
+		}
 		
 	}
 

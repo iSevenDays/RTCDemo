@@ -9,5 +9,21 @@
 import Foundation
 
 protocol ChatUsersStoryInteractorInput {
+	
+	/**
+	Retrieve users with tag
+	
+	didRetrieveUsers will be called if success
+	didErrorRetrievingUsers if error
+	*/
 	func retrieveUsersWithTag()
+	
+	/**
+	Sets tag (chat room name)
+	
+	- parameter tag: String instance, must be >= 3 characters long
+	*/
+	func setTag(tag: String, currentUser: SVUser)
+	
+	func retrieveCurrentUser() -> SVUser
 }

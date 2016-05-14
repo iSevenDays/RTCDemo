@@ -18,17 +18,25 @@
 		interactor.retrieveUsersWithTag()
     }
 	
+	func didTriggerUserTapped(user: SVUser) {
+		router.openVideoStoryWithInitiator(interactor.retrieveCurrentUser(), thenCallOpponent: user)
+	}
+	
 	// MARK: ChatUsersStoryModuleInput
-	func setTag(tag: String) {
-		
+	
+	func setTag(tag: String, currentUser: SVUser) {
+		interactor.setTag(tag, currentUser: currentUser)
+		view.configureViewWithCurrentUser(currentUser)
 	}
 	
 	// MARK: ChatUsersStoryInteractorOutput
+	
 	func didRetrieveUsers(users: [SVUser]) {
 		view.reloadDataWithUsers(users)
 	}
 	
-	func didErrorRetrievingUsers(error: NSError?) {
+	
+	func didError(error: ChatUsersStoryInteractorError) {
 		
 	}
 }

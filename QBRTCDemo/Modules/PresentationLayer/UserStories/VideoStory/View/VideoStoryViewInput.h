@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class RTCEAGLVideoView;
+@class SVUser;
 
 @protocol VideoStoryViewInput <NSObject>
 
@@ -18,8 +19,7 @@
  */
 - (void)setupInitialState;
 
-- (void)configureViewWithUser1;
-- (void)configureViewWithUser2;
+- (void)configureViewWithUser:(nonnull SVUser *)user;
 
 - (void)showHangup;
 
