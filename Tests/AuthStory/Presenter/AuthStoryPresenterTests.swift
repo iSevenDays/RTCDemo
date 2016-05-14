@@ -36,7 +36,6 @@ class AuthStoryPresenterTests: XCTestCase {
 		self.presenter.interactor = self.mockInteractor
 		self.presenter.router = self.mockRouter
 		self.presenter.view = self.mockView
-		
     }
 	
 	// MARK: AuthStoryViewOutput tests

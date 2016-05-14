@@ -46,6 +46,7 @@ class AuthStoryModuleConfiguratorTests: XCTestCase {
         XCTAssertNotNil(presenter.router, "router in AuthStoryPresenter is nil after configuration")
         XCTAssertTrue(presenter.router is AuthStoryRouter, "router is not AuthStoryRouter")
 		XCTAssertNotNil((presenter.router as! AuthStoryRouter).transitionHandler, "router transitionHandler is nil after configuration")
+		
         let interactor: AuthStoryInteractor = presenter.interactor as! AuthStoryInteractor
         XCTAssertNotNil(interactor.output, "output in AuthStoryInteractor is nil after configuration")
 		XCTAssertNotNil(interactor.restService, "restService in AuthStoryInteractor is nil after configuration")

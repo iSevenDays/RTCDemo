@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="X0I-9A-xj8">
+            <objects>
+                <viewController storyboardIdentifier="IncomingCallStoryViewController" id="7yk-1n-wJc" customClass="IncomingCallStoryViewController" customModule="QBRTCDemo_s" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dKl-Jn-qEt"/>
+                        <viewControllerLayoutGuide type="bottom" id="0CJ-0e-apo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rza-Xh-sdU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58o-9I-lgW">
+                                <rect key="frame" x="262" y="285" width="76" height="30"/>
+                                <state key="normal" title="Accept call"/>
+                                <connections>
+                                    <action selector="acceptCall" destination="7yk-1n-wJc" eventType="touchUpInside" id="QtG-3q-VUB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="58o-9I-lgW" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" id="EDI-yd-viJ"/>
+                            <constraint firstItem="58o-9I-lgW" firstAttribute="centerY" secondItem="Rza-Xh-sdU" secondAttribute="centerY" id="Upq-yU-Ac8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnAcceptCall" destination="58o-9I-lgW" id="CkY-58-l8a"/>
+                        <segue destination="ktK-fT-O7G" kind="show" identifier="IncomingCallStoryToVideoStorySegue" id="bCB-Y8-zh1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FYa-Zp-cCf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="756-Ek-E9e" customClass="IncomingCallStoryModuleInitializer" customModule="QBRTCDemo_s">
+                    <connections>
+                        <outlet property="viewController" destination="7yk-1n-wJc" id="pnR-5K-PYi"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="157" y="323"/>
+        </scene>
+        <!--VideoStory-->
+        <scene sceneID="FJl-wr-OLW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="VideoStory" id="ktK-fT-O7G" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kIG-5m-9RJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="662" y="274"/>
+        </scene>
+    </scenes>
+</document>

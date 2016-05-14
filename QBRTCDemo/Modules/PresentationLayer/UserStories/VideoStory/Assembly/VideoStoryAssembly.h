@@ -34,7 +34,6 @@
 - (VideoStoryRouter *)routerVideoStoryModule;
 
 - (id<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>)callService;
-- (id<SVSignalingChannelProtocol>)signalingChannel;
 
 - (UIStoryboard *)videoStoryStoryboard;
 @end

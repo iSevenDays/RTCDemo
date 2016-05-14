@@ -1,22 +1,21 @@
 //
-//  ChatUsersStoryRouter.swift
+//  IncomingCallStoryRouter.swift
 //  QBRTCDemo
 //
-//  Created by Anton Sokolchenko on 06/05/2016.
+//  Created by Anton Sokolchenko on 15/05/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
+class IncomingCallStoryRouter: IncomingCallStoryRouterInput {
 	
-	let chatUsersStoryToVideoStorySegueIdentifier = "ChatUsersStoryToVideoStorySegueIdentifier"
+	let incomingCallStoryToVideoStorySegue = "IncomingCallStoryToVideoStorySegue"
 	
-	// ChatUsersViewController is transitionHandler
+	// AuthStoryViewController is transitionHandler
 	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
-	
 	
 	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
 		
-		transitionHandler.openModuleUsingSegue?(chatUsersStoryToVideoStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
+		transitionHandler.openModuleUsingSegue?(incomingCallStoryToVideoStorySegue).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
 			
 			guard let videoStoryInput = moduleInput as? VideoStoryModuleInput else {
 				fatalError("moduleInput is not VideoStoryModuleInput")
