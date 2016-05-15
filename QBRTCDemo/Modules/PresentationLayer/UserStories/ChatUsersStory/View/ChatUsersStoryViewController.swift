@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ChatUsersStoryViewController: UIViewController, ChatUsersStoryViewInput {
+
+class ChatUsersStoryViewController: UIViewController {
 
     @objc var output: ChatUsersStoryViewOutput!
 	
@@ -21,12 +22,13 @@ class ChatUsersStoryViewController: UIViewController, ChatUsersStoryViewInput {
         super.viewDidLoad()
         output.viewIsReady()
     }
+	
+}
 
-
-    // MARK: ChatUsersStoryViewInput
-    func setupInitialState() {
+extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
+	func setupInitialState() {
 		
-    }
+	}
 	
 	func configureViewWithCurrentUser(user: SVUser) {
 		navigationItem.title = "Logged in as " + user.fullName
@@ -41,7 +43,6 @@ class ChatUsersStoryViewController: UIViewController, ChatUsersStoryViewInput {
 		}
 		
 	}
-	
 }
 
 let cellIdentifier = "ChatUsersCellIdentifier"
@@ -61,8 +62,9 @@ extension ChatUsersStoryViewController: UITableViewDataSource {
 		
 		let user = users[indexPath.row]
 		
+		
 		cell.textLabel?.text = user.fullName
-		cell.detailTextLabel?.text = String(user.ID)
+		cell.detailTextLabel?.text = String(user.ID ?? 0)
 		
 		return cell
 	}
