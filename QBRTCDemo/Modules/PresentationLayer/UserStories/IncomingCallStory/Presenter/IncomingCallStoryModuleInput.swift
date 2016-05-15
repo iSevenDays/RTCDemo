@@ -6,6 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-protocol IncomingCallStoryModuleInput: class {
-
+@objc protocol IncomingCallStoryModuleInput: RamblerViperModuleInput {
+	
+	func configureModuleWithCallInitiator(opponent: SVUser)
 }

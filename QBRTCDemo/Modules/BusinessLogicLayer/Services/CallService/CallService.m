@@ -210,6 +210,10 @@
 
 }
 
+- (void)acceptCallFromOpponent:(SVUser *)opponent {
+	
+}
+
 - (void)hangup {
 	
 	if (self.state == kClientStateDisconnected) {

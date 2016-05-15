@@ -19,4 +19,6 @@
  */
 - (void)connectToChatWithUser:(SVUser *)user callOpponent:(SVUser *)opponent;
 
+- (void)acceptCallFromOpponent:(SVUser *)opponent;
+
 @end

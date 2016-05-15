@@ -88,10 +88,19 @@
 	
 	NSAssert(![opponent isEqual:self.currentUser], @"You can not call yourself");
 	
-	self.lastOpponentUser = opponent;
+	if (opponent != nil) {
+		self.lastOpponentUser = opponent;
+	}
+	
 	NSLog(@"Starting a call with opponent %@", opponent);
 	[self.callService startCallWithOpponent:opponent];
 	
+}
+
+- (void)acceptCallFromOpponent:(SVUser *)opponent {
+	self.lastOpponentUser = opponent;
+	
+	[self.callService acceptCallFromOpponent:opponent];
 }
 
 - (void)sendInvitationMessageAndOpenImageGallery {

@@ -13,7 +13,7 @@ class IncomingCallStoryRouter: IncomingCallStoryRouterInput {
 	// AuthStoryViewController is transitionHandler
 	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
 	
-	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
+	func openVideoStoryWithOpponent(opponent: SVUser) {
 		
 		transitionHandler.openModuleUsingSegue?(incomingCallStoryToVideoStorySegue).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
 			
@@ -21,7 +21,7 @@ class IncomingCallStoryRouter: IncomingCallStoryRouterInput {
 				fatalError("moduleInput is not VideoStoryModuleInput")
 			}
 			
-			videoStoryInput.connectToChatWithUser(initiator, callOpponent: opponent)
+			videoStoryInput.acceptCallFromOpponent(opponent)
 			
 			return nil
 		})

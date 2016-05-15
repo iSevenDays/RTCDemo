@@ -9,5 +9,5 @@
 import Foundation
 
 protocol IncomingCallStoryRouterInput {
-	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser)
+	func openVideoStoryWithOpponent(opponent: SVUser)
 }

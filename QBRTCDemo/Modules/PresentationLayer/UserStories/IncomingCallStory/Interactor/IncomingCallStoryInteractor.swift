@@ -10,4 +10,16 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 
     weak var output: IncomingCallStoryInteractorOutput!
 
+	private(set) var initiator: SVUser!
+	private(set) var opponent: SVUser!
+	
+	// MARK: IncomingCallStoryInteractorInput
+	
+	func setOpponent(opponent: SVUser) {
+		self.opponent = opponent
+	}
+	
+	func retrieveOpponent() -> SVUser {
+		return opponent
+	}
 }

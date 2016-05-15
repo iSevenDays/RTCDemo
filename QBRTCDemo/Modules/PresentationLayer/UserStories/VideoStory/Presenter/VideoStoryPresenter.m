@@ -20,6 +20,10 @@
 	[self.interactor connectToChatWithUser:user callOpponent:opponent];
 }
 
+- (void)acceptCallFromOpponent:(SVUser *)opponent {
+	[self.interactor acceptCallFromOpponent:opponent];
+}
+
 #pragma mark - Methods VideoStoryViewOutput
 
 - (void)didTriggerViewReadyEvent {

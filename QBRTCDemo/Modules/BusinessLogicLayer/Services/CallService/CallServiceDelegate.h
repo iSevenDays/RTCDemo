@@ -11,9 +11,13 @@
 
 enum RTCICEConnectionState : NSInteger;
 enum CallServiceState : NSInteger;
+
 @protocol CallServiceProtocol;
+@class SVUser;
 
 @protocol CallServiceDelegate <NSObject>
+
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveCallRequestFromOpponent:(SVUser *)opponent;
 
 - (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state;
 - (void)callService:(id<CallServiceProtocol>)callService didChangeState:(enum CallServiceState)state;

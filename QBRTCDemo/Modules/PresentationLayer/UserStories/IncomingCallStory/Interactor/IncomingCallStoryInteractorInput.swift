@@ -9,5 +9,17 @@
 import Foundation
 
 protocol IncomingCallStoryInteractorInput {
-
+	/**
+	Set opponent, initiator of the call
+	
+	- parameter opponent: opponent, call initiator
+	*/
+	func setOpponent(opponent: SVUser)
+	
+	/**
+	Retrieve opponent, call initiator
+	
+	- returns: SVUser instance
+	*/
+	func retrieveOpponent() -> SVUser
 }

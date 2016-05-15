@@ -27,25 +27,61 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		
-		self.presenter = IncomingCallStoryPresenter()
+		presenter = IncomingCallStoryPresenter()
 		
-		self.mockInteractor = MockInteractor()
+		mockInteractor = MockInteractor()
 		
-		self.mockRouter = MockRouter()
-		self.mockView = MockViewController()
+		mockRouter = MockRouter()
+		mockView = MockViewController()
 		
-		self.presenter.interactor = self.mockInteractor
-		self.presenter.router = self.mockRouter
-		self.presenter.view = self.mockView
+		presenter.interactor = self.mockInteractor
+		presenter.router = self.mockRouter
+		presenter.view = self.mockView
+	}
+	
+	func testPresenterConfiguresModule() {
+		// given
+		let opponent = TestsStorage.svuserRealUser1()
+		
+		// when
+		presenter.configureModuleWithCallInitiator(opponent)
+		
+		// then
+		XCTAssertEqual(mockInteractor.retrieveOpponent(), opponent)
+	}
+	
+	func testPresenterOpensVideoStory_whenCallHasBeenAccepted() {
+		// given
+		let opponent = TestsStorage.svuserRealUser1()
+		
+		// when
+		presenter.configureModuleWithCallInitiator(opponent)
+		presenter.didTriggerAcceptButtonTapped()
+		
+		// then
+		XCTAssertTrue(mockRouter.openVideoStoryWithOpponentGotCalled)
 	}
 
     class MockInteractor: IncomingCallStoryInteractorInput {
-
+		
+		
+		var opponent: SVUser?
+		
+		func setOpponent(opponent: SVUser) {
+			self.opponent = opponent
+		}
+		
+		func retrieveOpponent() -> SVUser {
+			return opponent ?? SVUser()
+		}
     }
 
 	class MockRouter: IncomingCallStoryRouterInput {
-		func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
-			
+		
+		var openVideoStoryWithOpponentGotCalled = false
+		
+		func openVideoStoryWithOpponent(opponent: SVUser) {
+			openVideoStoryWithOpponentGotCalled = true
 		}
     }
 

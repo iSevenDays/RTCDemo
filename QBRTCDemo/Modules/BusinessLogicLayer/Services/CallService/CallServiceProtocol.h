@@ -34,11 +34,29 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 
 - (void)addDelegate:(nonnull id<CallServiceDelegate>)delegate;
 
+/**
+ *  Connect to Chat with user
+ *
+ *  @param user       SVUser instance
+ *  @param completion completion
+ */
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError *_Nullable error))completion;
 
 - (void)disconnectWithCompletion:(void(^_Nullable)(NSError *_Nullable error))completion;
 
+/**
+ *  Start a call with user
+ *
+ *  @param opponent SVUser instance
+ */
 - (void)startCallWithOpponent:(SVUser *_Nonnull)opponent;
+
+/**
+ *  Accept an existent call from opponent
+ *
+ *  @param opponent SVUser instance
+ */
+- (void)acceptCallFromOpponent:(SVUser *_Nonnull)opponent;
 
 /**
  * Clears session and ends a call

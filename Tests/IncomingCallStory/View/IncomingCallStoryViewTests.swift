@@ -54,7 +54,7 @@ class IncomingCallStoryViewTests: XCTestCase {
 		XCTAssertTrue(self.mockOutput.didTriggerAcceptButtonTappedGotCalled)
 	}
 	
-	class MockViewControllerOutput : IncomingCallStoryViewOutput {
+	class MockViewControllerOutput : NSObject, IncomingCallStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		var didTriggerAcceptButtonTappedGotCalled = false
 		

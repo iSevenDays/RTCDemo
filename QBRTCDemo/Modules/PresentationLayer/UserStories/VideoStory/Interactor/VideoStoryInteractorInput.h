@@ -16,6 +16,13 @@
 
 // Pass nil to call the opponent again
 - (void)startCallWithOpponent:(SVUser *)opponent;
+
+/**
+ *  Accept existent call request from opponent
+ *
+ *  @param opponent SVUser instance
+ */
+- (void)acceptCallFromOpponent:(SVUser *)opponent;
 - (void)hangup;
 
 - (void)requestDataChannelState;

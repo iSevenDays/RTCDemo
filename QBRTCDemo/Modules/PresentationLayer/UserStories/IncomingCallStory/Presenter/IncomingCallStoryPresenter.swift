@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class IncomingCallStoryPresenter: IncomingCallStoryModuleInput, IncomingCallStoryViewOutput, IncomingCallStoryInteractorOutput{
+@objc class IncomingCallStoryPresenter: NSObject, IncomingCallStoryModuleInput, IncomingCallStoryViewOutput, IncomingCallStoryInteractorOutput{
 
     weak var view: IncomingCallStoryViewInput!
     var interactor: IncomingCallStoryInteractorInput!
@@ -16,9 +16,15 @@ class IncomingCallStoryPresenter: IncomingCallStoryModuleInput, IncomingCallStor
 
     }
 	
+	// MARK: IncomingCallStoryModuleInput
+	
+	func configureModuleWithCallInitiator(opponent: SVUser) {
+		interactor.setOpponent(opponent)
+	}
+	
 	// MARK: IncomingCallStoryViewOutput
 	
 	func didTriggerAcceptButtonTapped() {
-		
+		router.openVideoStoryWithOpponent(interactor.retrieveOpponent())
 	}
 }
