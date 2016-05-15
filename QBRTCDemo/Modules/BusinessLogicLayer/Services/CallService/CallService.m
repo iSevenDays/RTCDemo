@@ -7,6 +7,7 @@
 //
 
 #import "CallService.h"
+
 #import "CallServiceDelegate.h"
 #import "CallServiceDataChannelAdditionsDelegate.h"
 
@@ -37,12 +38,17 @@
 #import "WebRTCHelpers.h"
 #import "RTCMediaStream.h"
 
+#if QBRTCDemo_s
+#import "QBRTCDemo_s-swift.h"
+#elif QBRTCDemo
+#import "QBRTCDemo-swift.h"
+#endif
+
 @interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
 
-@property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
 @property (atomic, strong) NSMutableArray *messageQueue;
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
-@property (nonatomic, strong) RTCPeerConnection *peerConnection;
+
 
 @property (nonatomic, strong) RTCDataChannel *dataChannel;
 
@@ -53,6 +59,8 @@
 
 @property (nonatomic, strong) SVUser *opponentUser;
 @property (nonatomic, strong) SVUser *initiatorUser;
+
+@property (nonatomic, strong) NSMutableArray<CallServicePendingRequest *> *pendingRequests;
 
 @end
 
@@ -82,6 +90,7 @@
 		}
 		
 		_messageQueue = [NSMutableArray array];
+		_pendingRequests = [NSMutableArray array];
 		_factory = [[RTCPeerConnectionFactory alloc] init];
 		
 		_state = kClientStateDisconnected;
@@ -104,6 +113,10 @@
 - (void)addDelegate:(id<CallServiceDelegate>)delegate {
 	DDLogInfo(@"Added call delegate: %@", delegate);
 	[self.multicastDelegate addDelegate:delegate];
+}
+
+- (NSArray *)delegates {
+	return [self.multicastDelegate delegates].allObjects;
 }
 
 - (void)addDataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
@@ -212,7 +225,32 @@
 
 - (void)acceptCallFromOpponent:(SVUser *)opponent {
 	
+	SVUser *initiator = nil;
+	SVSignalingMessage *offerSignalingMessage = nil;
+	
+	for (CallServicePendingRequest *request in self.pendingRequests) {
+		if ([request.initiator isEqual:opponent]) {
+			initiator = request.initiator;
+			offerSignalingMessage = request.offerSignalingMessage;
+		}
+	}
+	
+	NSParameterAssert(initiator);
+	NSParameterAssert(offerSignalingMessage);
+	
+	self.opponentUser = initiator;
+	self.initiatorUser = initiator;
+	
+	self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
+	[self.peerConnection addStream:[self createLocalMediaStream]];
+	self.peerConnection.delegate = self;
+	
+	[_messageQueue insertObject:offerSignalingMessage atIndex:0];
+	self.isReceivedSDP = YES;
+
+	[self drainMessageQueueIfReady];
 }
+
 
 - (void)hangup {
 	
@@ -565,16 +603,15 @@
 		NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
 		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");
 		
-		self.opponentUser = message.sender;
-		self.initiatorUser = self.opponentUser;
+		CallServicePendingRequest *pendingRequest = [[CallServicePendingRequest alloc] initWithOfferSignalingMessage:message];
 		
-		self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
-		[self.peerConnection addStream:[self createLocalMediaStream]];
-		self.peerConnection.delegate = self;
+		[self.pendingRequests addObject:pendingRequest];
+		
+		[self.multicastDelegate callService:self didReceiveCallRequestFromOpponent:pendingRequest.initiator];
+		
 	}
 	
-	if ([message.type isEqualToString:SVSignalingMessageType.offer] ||
-		[message.type isEqualToString:SVSignalingMessageType.answer]) {
+	if ([message.type isEqualToString:SVSignalingMessageType.answer]) {
 		self.isReceivedSDP = YES;
 		// Offers and answers must be processed before any other message, so we
 		// place them at the front of the queue.

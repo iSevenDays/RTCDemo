@@ -55,6 +55,8 @@
 		1420E4921CE7CE9C0043EFF9 /* IncomingCallStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35B72A9ED5841ADBC0215F /* IncomingCallStoryRouter.swift */; };
 		1420E4961CE7CEA20043EFF9 /* IncomingCallStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361464D06D62F94236E40641 /* IncomingCallStoryConfigurator.swift */; };
 		1420E4971CE7CEA20043EFF9 /* IncomingCallStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578BAA0A38C9280E6FB1CAEE /* IncomingCallStoryInitializer.swift */; };
+		1420E4FF1CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */; };
+		1420E5001CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */; };
 		142154621CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
 		142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
@@ -470,6 +472,7 @@
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		141B75D71C93090E0095B818 /* libPods-QBRTCDemoTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-QBRTCDemoTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-QBRTCDemoTests.a"; sourceTree = "<group>"; };
 		1420E4541CE7CA750043EFF9 /* IncomingCallStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IncomingCallStory.storyboard; sourceTree = "<group>"; };
+		1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallServicePendingRequest.swift; sourceTree = "<group>"; };
 		142154611CE75ACB003C1C4A /* ServicesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesProvider.swift; sourceTree = "<group>"; };
 		142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatUsersStory.storyboard; sourceTree = "<group>"; };
 		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Optionals.swift"; sourceTree = "<group>"; };
@@ -1481,6 +1484,7 @@
 				14736EE91C56817C009DFBBC /* CallServiceProtocol.h */,
 				145405291C859167005E3790 /* CallServiceProtocol_Private.h */,
 				14C534F01C6A3F3300A0FFE8 /* CallService_Private.h */,
+				1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */,
 			);
 			path = CallService;
 			sourceTree = "<group>";
@@ -2744,6 +2748,7 @@
 				142B50991CDD2CE0005B143C /* ChatUsersStoryRouter.swift in Sources */,
 				142D137F1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				14A028751BFA545300BDF2C5 /* QBSignalingChannel.m in Sources */,
+				1420E4FF1CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */,
 				1420E48B1CE7CE920043EFF9 /* IncomingCallStoryInteractorInput.swift in Sources */,
 				142B50941CDD2CE0005B143C /* ChatUsersStoryPresenter.swift in Sources */,
 				14A0282A1BFA470C00BDF2C5 /* SVSignalingMessageType.m in Sources */,
@@ -2835,6 +2840,7 @@
 				148233A71C002DFE0000E9ED /* SVUser.m in Sources */,
 				148233A81C002DFE0000E9ED /* SVSignalingMessageICE.m in Sources */,
 				142D13901C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
+				1420E5001CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */,
 				14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				148233A91C002DFE0000E9ED /* SVSignalingMessage.m in Sources */,
 				62B3F09AE08CB2C15B7DB191 /* VideoStoryAssembly.m in Sources */,

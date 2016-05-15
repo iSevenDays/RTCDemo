@@ -90,10 +90,34 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		XCTAssertEqualOptional(mockOutput.retrievedUsers, mockRESTService.restUsersArray)
 	}
 	
+	// MARK: ChatUsersStoryInteractor CallServiceDelegate tests
+	
+	func testNotifiesPresenterAboutIncomingCall() {
+		// given
+		let tag = "tag"
+		let currentUser = TestsStorage.svuserTest()
+		let opponentUser = TestsStorage.svuserRealUser1()
+		
+		let fakeCallService = FakeCallService(signalingChannel: FakeSignalingChannel())
+		
+		// when
+		interactor.setTag(tag, currentUser: currentUser)
+		
+		interactor.callService(fakeCallService, didReceiveCallRequestFromOpponent: opponentUser)
+		
+		// then
+		
+		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
+		XCTAssertEqual(mockOutput.opponent, opponentUser)
+	}
+	
 
     class MockPresenter: ChatUsersStoryInteractorOutput {
 		var retrievedUsers: [SVUser]?
 		var didRetrieveUsersGotCalled = false
+		
+		var didReceiveCallRequestFromOpponentGotCalled = false
+		var opponent: SVUser?
 		
 		var error: ChatUsersStoryInteractorError?
 		
@@ -104,6 +128,11 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		func didError(error: ChatUsersStoryInteractorError) {
 			self.error = error
+		}
+		
+		func didReceiveCallRequestFromOpponent(opponent: SVUser) {
+			self.opponent = opponent
+			didReceiveCallRequestFromOpponentGotCalled = true
 		}
     }
 	

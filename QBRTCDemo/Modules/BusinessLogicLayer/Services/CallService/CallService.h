@@ -18,6 +18,7 @@
 @class RTCICEServer;
 @class RTCMediaConstraints;
 @class RTCConfiguration;
+@class RTCPeerConnection;
 
 @interface CallService : NSObject<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>
 
@@ -55,5 +56,7 @@
 @property (nonatomic, strong, nonnull) RTCMediaConstraints *defaultPeerConnectionConstraints;
 @property (nonatomic, strong, nonnull) RTCMediaConstraints *defaultMediaStreamConstraints;
 @property (nonatomic, strong, nonnull) RTCConfiguration *defaultConfigurationWithCurrentICEServers;
+@property (nonatomic, strong, nonnull) id<SVSignalingChannelProtocol> signalingChannel;
+@property (nonatomic, strong, nullable) RTCPeerConnection *peerConnection;
 
 @end

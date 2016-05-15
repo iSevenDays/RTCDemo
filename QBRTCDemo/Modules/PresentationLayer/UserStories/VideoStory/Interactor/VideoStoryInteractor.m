@@ -92,6 +92,9 @@
 		self.lastOpponentUser = opponent;
 	}
 	
+	[self.callService addDelegate:self];
+	[self.callService addDataChannelDelegate:self];
+	
 	NSLog(@"Starting a call with opponent %@", opponent);
 	[self.callService startCallWithOpponent:opponent];
 	
@@ -99,6 +102,9 @@
 
 - (void)acceptCallFromOpponent:(SVUser *)opponent {
 	self.lastOpponentUser = opponent;
+	
+	[self.callService addDelegate:self];
+	[self.callService addDataChannelDelegate:self];
 	
 	[self.callService acceptCallFromOpponent:opponent];
 }
@@ -132,6 +138,10 @@
 }
 
 #pragma mark CallServiceDelegate methods
+
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveCallRequestFromOpponent:(SVUser *)opponent {
+	// do nothing
+}
 
 - (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state {
 	

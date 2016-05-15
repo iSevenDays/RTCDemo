@@ -62,6 +62,7 @@
                     <connections>
                         <outlet property="tableView" destination="pJy-i2-7ab" id="zRF-sy-0No"/>
                         <segue destination="3bv-Lq-0pq" kind="show" identifier="ChatUsersStoryToVideoStorySegueIdentifier" id="NvK-96-iiQ"/>
+                        <segue destination="pme-U0-dcE" kind="show" identifier="ChatUsersStoryToIncomingCallStorySegueIdentifier" id="XrM-qt-yCx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugj-Zt-xDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -71,7 +72,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="-265" y="363"/>
+            <point key="canvasLocation" x="-242" y="379"/>
         </scene>
         <!--VideoStory-->
         <scene sceneID="msn-0b-EOe">
@@ -79,7 +80,15 @@
                 <viewControllerPlaceholder storyboardName="VideoStory" id="3bv-Lq-0pq" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZw-t4-OIr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="216" y="363"/>
+            <point key="canvasLocation" x="225" y="226"/>
+        </scene>
+        <!--IncomingCallStory-->
+        <scene sceneID="Q6C-Bl-kFc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="IncomingCallStory" id="pme-U0-dcE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Faz-MI-lFm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="257.5" y="511"/>
         </scene>
     </scenes>
 </document>

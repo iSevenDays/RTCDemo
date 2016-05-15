@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate;
 
 - (void)addDelegate:(nonnull id<CallServiceDelegate>)delegate;
-
+- (nullable NSArray<id<CallServiceDelegate>> *)delegates;
 /**
  *  Connect to Chat with user
  *

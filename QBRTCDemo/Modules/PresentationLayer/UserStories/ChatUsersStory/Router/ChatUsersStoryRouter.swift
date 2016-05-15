@@ -9,10 +9,10 @@
 class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
 	
 	let chatUsersStoryToVideoStorySegueIdentifier = "ChatUsersStoryToVideoStorySegueIdentifier"
+	let chatUsersStoryToIncomingCallStorySegueIdentifier = "ChatUsersStoryToIncomingCallStorySegueIdentifier"
 	
 	// ChatUsersViewController is transitionHandler
 	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
-	
 	
 	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
 		
@@ -26,6 +26,21 @@ class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
 			
 			return nil
 		})
+	}
+	
+	func openIncomingCallStoryWithOpponent(opponent: SVUser) {
+		
+		transitionHandler.openModuleUsingSegue?(chatUsersStoryToIncomingCallStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
+			
+			guard let incomingCallStoryInput = moduleInput as? IncomingCallStoryModuleInput else {
+				fatalError("moduleInput is not IncomingCallStoryModuleInput")
+			}
+			
+			incomingCallStoryInput.configureModuleWithCallInitiator(opponent)
+			
+			return nil
+		})
+		
 	}
 	
 }

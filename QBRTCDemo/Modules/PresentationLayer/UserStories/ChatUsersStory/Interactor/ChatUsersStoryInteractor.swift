@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
+class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 
     weak var output: ChatUsersStoryInteractorOutput!
 	internal weak var restService: protocol<RESTServiceProtocol>!
@@ -80,6 +80,12 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 		}
 		
 		return users.filter({$0.ID!.isEqualToNumber(currentUserID) == false})
+	}
+}
+
+extension ChatUsersStoryInteractor: CallServiceDelegate {
+	func callService(callService: CallServiceProtocol!, didReceiveCallRequestFromOpponent opponent: SVUser!) {
+		output.didReceiveCallRequestFromOpponent(opponent)
 	}
 }
 

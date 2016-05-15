@@ -186,7 +186,31 @@
 	OCMVerifyAll(self.mockCallService);
 }
 
-- (void)testCorrectlyProcessesSignalingMessageOfferFromOpponent_andCreatesAnswer {
+- (void)testCorrectlyProcessesSignalingMessageOfferFromOpponent_andSavesCallRequest {
+	// given
+	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
+	[[self.mockCallService reject] processSignalingMessage:[OCMArg any]]; // we shouldn't accept call immediately
+	
+	RTCSessionDescription *rtcofferSDP = [[RTCSessionDescription alloc] initWithType:SVSignalingMessageType.offer sdp:[CallServiceHelpers offerSDP]];
+	
+	SVSignalingMessage *offerSDP = [[SVSignalingMessageSDP alloc] initWithSessionDescription:rtcofferSDP];
+	
+	offerSDP.sender = self.user2;
+	
+	OCMExpect([[self.mockCallService peerConnection] createAnswerWithDelegate:[OCMArg any] constraints:[OCMArg any]]);
+	
+	// when
+	[self.callService connectWithUser:self.user1 completion:nil];
+	
+	[self.callService channel:self.callService.signalingChannel didReceiveMessage:offerSDP];
+	
+	// then
+	[self.mockOutput callService:self.callService didReceiveCallRequestFromOpponent:offerSDP.sender];
+	
+	OCMVerifyAll(self.mockCallService);
+}
+
+- (void)testCorrectlyAcceptsSavedCallRequest {
 	// given
 	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
 	
@@ -202,6 +226,9 @@
 	[self.callService connectWithUser:self.user1 completion:nil];
 	
 	[self.callService channel:self.callService.signalingChannel didReceiveMessage:offerSDP];
+	
+	[self.callService acceptCallFromOpponent:offerSDP.sender];
+	
 	
 	// then
 	OCMVerify([self.mockCallService processSignalingMessage:offerSDP]);
@@ -235,6 +262,8 @@
 	[self.callService connectWithUser:self.user1 completion:nil];
 	
 	[self.callService channel:self.callService.signalingChannel didReceiveMessage:offerSDP];
+	
+	[self.callService acceptCallFromOpponent:offerSDP.sender];
 	
 	[self.callService channel:self.callService.signalingChannel didReceiveMessage:iceAudio];
 	[self.callService channel:self.callService.signalingChannel didReceiveMessage:iceVideo];

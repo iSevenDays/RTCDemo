@@ -31,6 +31,8 @@ class ChatUsersStoryModuleConfigurator {
 		interactor.cacheService = NSUserDefaults.standardUserDefaults()
 		interactor.restService = ServicesProvider.currentProvider.restService
 		
+		ServicesProvider.currentProvider.callService.addDelegate(interactor)
+		
         presenter.interactor = interactor
         viewController.output = presenter
     }

@@ -19,6 +19,7 @@ enum CallServiceState : NSInteger;
 
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveCallRequestFromOpponent:(SVUser *)opponent;
 
+@optional
 - (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state;
 - (void)callService:(id<CallServiceProtocol>)callService didChangeState:(enum CallServiceState)state;
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;

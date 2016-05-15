@@ -35,6 +35,10 @@
 		view.reloadDataWithUsers(users)
 	}
 	
+	func didReceiveCallRequestFromOpponent(opponent: SVUser) {
+		router.openIncomingCallStoryWithOpponent(opponent)
+	}
+	
 	
 	func didError(error: ChatUsersStoryInteractorError) {
 		

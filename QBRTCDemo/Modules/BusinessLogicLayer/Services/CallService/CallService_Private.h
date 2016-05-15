@@ -20,9 +20,6 @@
 
 @interface CallService ()
 
-@property (nonatomic, strong, nullable) id<SVSignalingChannelProtocol> signalingChannel;
-@property (nonatomic, strong, nullable) RTCPeerConnection *peerConnection;
-
 - (void)processSignalingMessage:(nonnull SVSignalingMessage *)message;
 - (void)clearSession;
 

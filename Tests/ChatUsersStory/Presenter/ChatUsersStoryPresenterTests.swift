@@ -47,6 +47,22 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(mockInteractor.retrieveUsersWithTagGotCalled)
 	}
 	
+	func testPresentedOpensVideoStory_whenOpponentHasBeenSelected() {
+		// given
+		let tag = "test chatroom name"
+		let testUser = TestsStorage.svuserTest()
+		let opponentUser = TestsStorage.svuserRealUser1()
+		
+		// when
+		presenter.setTag(tag, currentUser: testUser)
+		presenter.didTriggerUserTapped(opponentUser)
+		
+		// then
+		XCTAssertTrue(mockRouter.openVideoStoryWithInitiatorGotCalled)
+		XCTAssertEqual(mockRouter.initiator, testUser)
+		XCTAssertEqual(mockRouter.opponent, opponentUser)
+	}
+	
 	// MARK: ChatUsersStoryInteractorOutput tests
 	
 	func testViewReloadsData_whenPresenterRetrievesUsers() {
@@ -59,6 +75,21 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		// then
 		XCTAssertTrue(mockView.reloadDataGotCalled)
 		XCTAssertEqualOptional(mockView.users, testUsers)
+	}
+	
+	func testPresentedOpensIncomingCallStory_whenCallRequestHasBeenReceived() {
+		// given
+		let tag = "test chatroom name"
+		let currentUser = TestsStorage.svuserTest()
+		let opponentUser = TestsStorage.svuserRealUser1()
+		
+		// when
+		presenter.setTag(tag, currentUser: currentUser)
+		presenter.didReceiveCallRequestFromOpponent(opponentUser)
+		
+		// then
+		XCTAssertTrue(mockRouter.openIncomingCallStoryWithOpponentGotCalled)
+		XCTAssertEqual(mockRouter.opponent, opponentUser)
 	}
 	
 	// MARK: ChatUsersStoryModuleInput tests
@@ -75,6 +106,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		XCTAssertEqual(mockInteractor.user, testUser)
 		XCTAssertTrue(mockView.configureViewWithCurrentUserGotCalled)
 	}
+	
 
     class MockInteractor: ChatUsersStoryInteractorInput {
 		var retrieveUsersWithTagGotCalled = false
@@ -97,8 +129,21 @@ class ChatUsersStoryPresenterTest: XCTestCase {
     }
 
     class MockRouter: ChatUsersStoryRouterInput {
+		var initiator: SVUser?
+		var opponent: SVUser?
+		
+		var openVideoStoryWithInitiatorGotCalled = false
+		var openIncomingCallStoryWithOpponentGotCalled = false
+		
 		func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
-			
+			self.initiator = initiator
+			self.opponent = opponent
+			openVideoStoryWithInitiatorGotCalled = true
+		}
+		
+		func openIncomingCallStoryWithOpponent(opponent: SVUser) {
+			openIncomingCallStoryWithOpponentGotCalled = true
+			self.opponent = opponent
 		}
     }
 
