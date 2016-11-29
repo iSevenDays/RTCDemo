@@ -55,7 +55,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 		XCTAssertEqual(controller.users.count, 1)
 		XCTAssertEqual(controller.users.count, numberOfRows)
 		XCTAssertEqual(firstCell?.textLabel?.text, firstUser.fullName)
-		XCTAssertEqual(firstCell?.detailTextLabel?.text, String(firstUser.ID))
+		XCTAssertEqual(firstCell?.detailTextLabel?.text, String(firstUser.ID!))
 	}
 	
 	func testNavigationBarTextWithCurrentUser() {

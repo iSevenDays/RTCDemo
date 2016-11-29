@@ -102,7 +102,7 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		let newImage = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();
 		
-		let imageData = UIImagePNGRepresentation(newImage)!
+		let imageData = UIImagePNGRepresentation(newImage!)!
 		
 		// when
 		interactor.callService(interactor.callService, didReceiveData: imageData)
