@@ -1,6 +1,6 @@
 //
 //  VideoStoryPresenter.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 20/01/2016.
 //  Copyright 2016 Anton Sokolchenko. All rights reserved.

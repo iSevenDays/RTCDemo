@@ -1,6 +1,6 @@
 //
 //  SVMulticastDelegate.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 2/23/16.
 //  Copyright © 2016 anton. All rights reserved.

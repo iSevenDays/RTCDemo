@@ -1,6 +1,6 @@
 //
 //  VideoStoryViewController.h
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 20/01/2016.
 //  Copyright 2016 Anton Sokolchenko. All rights reserved.
@@ -22,8 +22,6 @@
 
 #pragma mark IBOutlets
 
-@property (weak, nonatomic) IBOutlet UIButton *btnConnectWithUser1;
-@property (weak, nonatomic) IBOutlet UIButton *btnConnectWithUser2;
 @property (weak, nonatomic) IBOutlet UIButton *btnStartCall;
 @property (weak, nonatomic) IBOutlet UIButton *btnOpenDataChannel;
 @property (weak, nonatomic) IBOutlet UIButton *btnHangup;

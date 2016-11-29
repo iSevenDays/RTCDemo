@@ -1,6 +1,6 @@
 //
 //  FakeQBRESTService.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 4/2/16.
 //  Copyright © 2016 anton. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  TestsStorage.h
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11/19/15.
 //  Copyright © 2015 anton. All rights reserved.

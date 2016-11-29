@@ -1,6 +1,6 @@
 //
 //  CallService.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 1/25/16.
 //  Copyright © 2016 anton. All rights reserved.

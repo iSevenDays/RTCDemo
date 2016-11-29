@@ -1,6 +1,6 @@
 //
 //  FakeCallService.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 1/26/16.
 //  Copyright © 2016 anton. All rights reserved.

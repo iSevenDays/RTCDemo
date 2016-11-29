@@ -1,6 +1,6 @@
 //
 //  VideoStoryViewController.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 20/01/2016.
 //  Copyright 2016 Anton Sokolchenko. All rights reserved.
@@ -18,7 +18,7 @@
 
 @implementation VideoStoryViewController
 
-#pragma mark - Методы жизненного цикла
+#pragma mark - Lifecycle methods
 
 - (void)viewDidLoad {
 	[super viewDidLoad];

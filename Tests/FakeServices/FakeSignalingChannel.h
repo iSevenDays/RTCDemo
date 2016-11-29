@@ -1,6 +1,6 @@
 //
 //  FakeSignalingChannel.h
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 1/28/16.
 //  Copyright © 2016 anton. All rights reserved.

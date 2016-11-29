@@ -1,6 +1,6 @@
 //
 //  NSObject+Testing.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 4/7/16.
 //  Copyright © 2016 anton. All rights reserved.

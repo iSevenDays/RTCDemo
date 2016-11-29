@@ -1,6 +1,6 @@
 //
 //  SVUserTests.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11/21/15.
 //  Copyright © 2015 anton. All rights reserved.

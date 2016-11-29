@@ -1,6 +1,6 @@
 //
 //  XCTest+Optionals.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 07/05/16.
 //  Copyright © 2016 anton. All rights reserved.
