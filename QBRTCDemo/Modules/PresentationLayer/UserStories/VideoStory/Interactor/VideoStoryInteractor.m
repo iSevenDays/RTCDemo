@@ -8,8 +8,6 @@
 
 #import "VideoStoryInteractor.h"
 
-#import "VideoStoryInteractorOutput.h"
-
 #import "SVUser.h"
 #import "CallServiceProtocol.h"
 #import "CallServiceDataChannelAdditionsProtocol.h"
@@ -23,6 +21,11 @@
 #import <RTCVideoTrack.h>
 #import <RTCEAGLVideoView.h>
 
+#if QBRTCDemo_s
+#import "QBRTCDemo_s-Swift.h"
+#elif QBRTCDemo
+#import "QBRTCDemo-Swift.h"
+#endif
 
 @interface VideoStoryInteractor()
 
@@ -46,19 +49,20 @@
 	if (self.callService.isConnecting) {
 		return;
 	}
-	
+	__weak __typeof(self) weakSelf = self;
 	void (^connectWithUserAndCallBlock)(SVUser *, SVUser *) = ^(SVUser *user, SVUser *opponent) {
-		[self.callService connectWithUser:user completion:^(NSError * _Nullable error) {
+		__typeof(self)strongSelf = weakSelf;
+		[strongSelf.callService connectWithUser:user completion:^(NSError * _Nullable error) {
 			if (!error) {
 				
-				[self.output didConnectToChatWithUser:user];
+				[strongSelf.output didConnectToChatWithUser:user];
 				
 				if (opponent != nil) {
-					[self startCallWithOpponent:opponent];
+					[strongSelf startCallWithOpponent:opponent];
 				}
 				
 			} else {
-				[self.output didFailToConnectToChat];
+				[strongSelf.output didFailToConnectToChat];
 			}
 		}];
 	};
@@ -95,7 +99,7 @@
 	[self.callService addDelegate:self];
 	[self.callService addDataChannelDelegate:self];
 	
-	NSLog(@"Starting a call with opponent %@", opponent);
+	DDLogInfo(@"Starting a call with opponent %@", opponent);
 	[self.callService startCallWithOpponent:opponent];
 	
 }
@@ -156,8 +160,12 @@
 }
 
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
-	if (self.localVideoTrack == localVideoTrack) {
-		return;
+	
+	// allow nil localVideoTrack in test mode
+	if (NSClassFromString(@"XCTest") == nil) {
+		if (self.localVideoTrack == localVideoTrack) {
+			return;
+		}
 	}
 	
 	RTCAVFoundationVideoSource *source = nil;
@@ -171,6 +179,8 @@
 
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
 	__weak __typeof(self)weakSelf = self;
+	
+	DDLogVerbose(@"Call service %@ didReceiveRemoteVideoTrack: %@", callService,  remoteVideoTrack);
 	
 	[self.output didReceiveRemoteVideoTrackWithConfigurationBlock:^(RTCEAGLVideoView *renderer) {
 		__typeof(self)strongSelf = weakSelf;

@@ -43,7 +43,7 @@
 @property (nonatomic, strong, nonnull) SVMulticastDelegate<CallServiceDelegate> *multicastDelegate;
 @property (nonatomic, strong, nonnull) SVMulticastDelegate<CallServiceDataChannelAdditionsDelegate> *multicastDataChannelDelegate;
 
-@property (nonatomic, assign, readonly) CallServiceState state;
+@property (nonatomic, assign) CallServiceState state;
 /// @return YES if signaling channel state is open
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 /// @return YES if signaling channel state is established

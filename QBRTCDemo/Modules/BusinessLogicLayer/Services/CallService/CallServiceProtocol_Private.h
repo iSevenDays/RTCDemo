@@ -22,8 +22,6 @@
 @property (nonatomic, assign) CallServiceState state;
 @property (nonatomic, assign) BOOL hasActiveCall; // used in FakeCallService
 
-- (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer;
-
 @end
 
 #endif /* CallServiceProtocol_Private_h */

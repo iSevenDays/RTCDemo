@@ -39,9 +39,9 @@
 #import "RTCMediaStream.h"
 
 #if QBRTCDemo_s
-#import "QBRTCDemo_s-swift.h"
+#import "QBRTCDemo_s-Swift.h"
 #elif QBRTCDemo
-#import "QBRTCDemo-swift.h"
+#import "QBRTCDemo-Swift.h"
 #endif
 
 @interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
@@ -52,7 +52,6 @@
 
 @property (nonatomic, strong) RTCDataChannel *dataChannel;
 
-@property (nonatomic, assign, readwrite) CallServiceState state;
 @property (nonatomic, assign) BOOL isReceivedSDP;
 @property (nonatomic, assign, getter=isInitiator) BOOL initiator;
 @property (nonatomic, assign) BOOL isAudioOnly;

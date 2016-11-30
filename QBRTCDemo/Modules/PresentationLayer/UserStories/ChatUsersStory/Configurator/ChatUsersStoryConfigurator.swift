@@ -10,11 +10,8 @@ import UIKit
 
 class ChatUsersStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
-        if let viewController = viewInput as? ChatUsersStoryViewController {
-            configure(viewController)
-        }
+    func configureModuleForViewInput(viewInput: ChatUsersStoryViewController) {
+		configure(viewInput)
     }
 
     private func configure(viewController: ChatUsersStoryViewController) {

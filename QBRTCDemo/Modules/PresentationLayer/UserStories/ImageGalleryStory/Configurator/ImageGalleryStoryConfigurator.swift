@@ -10,11 +10,8 @@ import UIKit
 
 class ImageGalleryStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
-        if let viewController = viewInput as? ImageGalleryStoryViewController {
-            configure(viewController)
-        }
+    func configureModuleForViewInput(viewInput: ImageGalleryStoryViewController) {
+		configure(viewInput)
     }
 
     private func configure(viewController: ImageGalleryStoryViewController) {

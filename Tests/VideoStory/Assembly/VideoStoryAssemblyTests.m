@@ -9,6 +9,12 @@
 #import <RamblerTyphoonUtils/AssemblyTesting.h>
 #import <Typhoon/Typhoon.h>
 
+#if QBRTCDemo_s
+#import "QBRTCDemo_s-Swift.h"
+#elif QBRTCDemo
+#import "QBRTCDemo-Swift.h"
+#endif
+
 #import "VideoStoryAssembly.h"
 #import "VideoStoryAssembly_Testable.h"
 
@@ -78,7 +84,7 @@
     // given
     Class targetClass = [VideoStoryInteractor class];
     NSArray *dependencies = @[
-                              RamblerSelector(output),
+                              /*RamblerSelector(output) Swift protocols not supported */
 							  RamblerSelector(callService)
                               ];
     // when

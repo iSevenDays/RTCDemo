@@ -7,11 +7,17 @@
 //
 
 #import "VideoStoryViewOutput.h"
-#import "VideoStoryInteractorOutput.h"
 #import "VideoStoryModuleInput.h"
+
+#if QBRTCDemo_s
+#import "QBRTCDemo_s-Swift.h"
+#elif QBRTCDemo
+#import "QBRTCDemo-Swift.h"
+#endif
 
 @protocol VideoStoryViewInput;
 @protocol VideoStoryInteractorInput;
+@protocol VideoStoryInteractorOutput;
 @protocol VideoStoryRouterInput;
 
 @interface VideoStoryPresenter : NSObject <VideoStoryModuleInput, VideoStoryViewOutput, VideoStoryInteractorOutput>

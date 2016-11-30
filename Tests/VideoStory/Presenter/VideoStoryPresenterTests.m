@@ -16,6 +16,12 @@
 #import "VideoStoryRouterInput.h"
 #import "TestsStorage.h"
 
+#if QBRTCDemo_s
+#import "QBRTCDemo_s-Swift.h"
+#elif QBRTCDemo
+#import "QBRTCDemo-Swift.h"
+#endif
+
 @interface VideoStoryPresenterTests : XCTestCase
 
 @property (strong, nonatomic) VideoStoryPresenter *presenter;

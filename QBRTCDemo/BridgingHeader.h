@@ -25,10 +25,14 @@
 #import "TestsStorage.h"
 #import <ViperMcFlurry/ViperMcFlurry.h>
 #import "VideoStoryModuleInput.h"
+#import "VideoStoryInteractor.h"
 #import "WebRTCHelpers.h"
+#import "DataChannelMessages.h"
 
 #import "RTCMediaConstraints.h"
+#import "RTCDataChannel.h"
 #import "RTCICEServer.h"
 #import "RTCPeerConnectionInterface.h"
+#import "RTCEAGLVideoView.h"
 
 #endif /* BridgingHeader_h */

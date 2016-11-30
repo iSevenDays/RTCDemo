@@ -10,11 +10,8 @@ import UIKit
 
 class AuthStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
-        if let viewController = viewInput as? AuthStoryViewController {
-            configure(viewController)
-        }
+    func configureModuleForViewInput(viewInput: AuthStoryViewController) {
+		configure(viewInput)
     }
 
     private func configure(viewController: AuthStoryViewController) {

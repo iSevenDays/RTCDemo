@@ -82,13 +82,11 @@
 	[[QBChat instance] disconnectWithCompletionBlock:^(NSError * _Nullable error) {
 		if (!error) {
 			self.state = SVSignalingChannelState.closed;
-			
-			[[QBChat instance] removeDelegate:self];
 		} else {
 			self.state = SVSignalingChannelState.error;
 		}
 		
-		if (completion) {
+		if (completion != nil) {
 			completion(error);
 		}
 	}];

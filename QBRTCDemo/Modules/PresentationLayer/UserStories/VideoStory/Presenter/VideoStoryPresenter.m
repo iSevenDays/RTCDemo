@@ -61,6 +61,7 @@
 }
 
 - (void)didReceiveRemoteVideoTrackWithConfigurationBlock:(void (^_Nullable)(RTCEAGLVideoView * _Nullable))block {
+	DDLogVerbose(@"didReceiveRemoteVideoTrackWithConfigurationBlock");
 	[self.view configureRemoteVideoViewWithBlock:block];
 }
 

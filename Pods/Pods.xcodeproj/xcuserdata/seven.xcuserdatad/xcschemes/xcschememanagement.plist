@@ -4,161 +4,185 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CocoaLumberjack.xcscheme</key>
+		<key>CocoaLumberjack-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
-		<key>OCHamcrest.xcscheme</key>
+		<key>CocoaLumberjack-iOS9.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
-		<key>OCMock.xcscheme</key>
+		<key>OCHamcrest-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
-		<key>Pods-QBRTCDemo-RamblerTyphoonUtils.xcscheme</key>
+		<key>OCHamcrest-iOS9.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
+		</dict>
+		<key>OCMock-iOS8.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OCMock-iOS9.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-QBRTCDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
-		</dict>
-		<key>Pods-QBRTCDemoTests-RamblerTyphoonUtils.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>15</integer>
 		</dict>
 		<key>Pods-QBRTCDemoTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
-		</dict>
-		<key>Pods-QBRTCDemo_s-RamblerTyphoonUtils.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
 		</dict>
 		<key>Pods-QBRTCDemo_s.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
-		</dict>
-		<key>Pods-QBRTCDemo_sTests-RamblerTyphoonUtils.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
 		</dict>
 		<key>Pods-QBRTCDemo_sTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
 		</dict>
-		<key>Typhoon.xcscheme</key>
+		<key>RamblerTyphoonUtils-AssemblyCollector-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>16</integer>
 		</dict>
-		<key>ViperMcFlurry.xcscheme</key>
+		<key>RamblerTyphoonUtils-AssemblyCollector-iOS9.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>17</integer>
+		</dict>
+		<key>RamblerTyphoonUtils-AssemblyTesting-iOS8.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RamblerTyphoonUtils-AssemblyTesting-iOS9.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Typhoon-iOS8.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Typhoon-iOS9.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ViperMcFlurry-iOS8.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ViperMcFlurry-iOS9.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>087BDBA3BA598ACD6FD032FA9DC540B3</key>
+		<key>063FF49268C78647D433678DE127BF1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0B9F05F24863EF1B6DDB34D64C0CA50F</key>
+		<key>06476A5DDA7363798294B191A5DDD664</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
+		<key>14BEF80633AA94F86078DE22BA94CA0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4A2CAA839F2722C796C6F1DFDC806B92</key>
+		<key>1AF6139AFF931BD6CC638268CF15E56F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>738896312A448E0C8F0B44002EB3E99B</key>
+		<key>2F4F5FD2BAC682631E89EDE8900A8C18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>911EAA7790657CEF34786210606959B3</key>
+		<key>459ACD297FD65A00F79E14A5A3BB0FA9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC03CA0B0EFE1E8062940D1C52D84AF9</key>
+		<key>53F50C5F1702ECF10EF8C1D27B82BFEA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D706E3B1A4F12FFB62A66E4A05B22F50</key>
+		<key>5B869161F8B54CE17623F2C2D545F494</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E2E91F546441E689D2DEE99077B5B748</key>
+		<key>662EC110B3E8856C0DB48E4B4C93BB7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E7DFE01DFD16CCEC234E02DAF8656599</key>
+		<key>6F1B02AFE45D851320A4209830E39B1C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ED166BF6D21249FEB250996F90791EEF</key>
+		<key>7565E3820E24EC09EBA6F86B555D96D5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F354F302F6279CE3FB7E33EE2AB6FA04</key>
+		<key>7D6BDCAA2EC83AFEB3A71FFCEBD2D4FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FD6F78A34C368ABBABC6DCE96AAEFBF7</key>
+		<key>9BB3400BD91A29A65CEE8130CDC0EA01</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AE56AB27E2E814DA65AC3BA5CBF3719E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE0C90C89BFDC97698AE4281F10CCF7A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E21CBEEEEB40A4F3B436DB96127BB03A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E88B74854F4C8B0C82EF96294FCBB26B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F39124148C083AB170675684905E1D05</key>
 		<dict>
 			<key>primary</key>
 			<true/>

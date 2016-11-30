@@ -21,9 +21,9 @@
 #import "QBSignalingChannel.h"
 
 #if QBRTCDemo_s
-	#import "QBRTCDemo_s-swift.h"
+	#import "QBRTCDemo_s-Swift.h"
 #elif QBRTCDemo
-	#import "QBRTCDemo-swift.h"
+	#import "QBRTCDemo-Swift.h"
 #endif
 
 

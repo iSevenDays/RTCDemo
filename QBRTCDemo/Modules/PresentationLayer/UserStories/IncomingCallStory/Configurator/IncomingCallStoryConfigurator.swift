@@ -10,12 +10,9 @@ import UIKit
 
 class IncomingCallStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
-        if let viewController = viewInput as? IncomingCallStoryViewController {
-            configure(viewController)
-        }
-    }
+	func configureModuleForViewInput(viewInput: IncomingCallStoryViewController) {
+		configure(viewInput)
+	}
 
     private func configure(viewController: IncomingCallStoryViewController) {
 

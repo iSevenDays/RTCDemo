@@ -53,7 +53,9 @@
 }
 
 - (void)configureRemoteVideoViewWithBlock:(void (^)(RTCEAGLVideoView *_Nullable renderer))block {
-	block(self.viewRemote);
+	if (block != nil) {
+		block(self.viewRemote);
+	}
 }
 
 #pragma mark - VideoStoryViewOutput methods

@@ -9,7 +9,6 @@
 #import <Typhoon/Typhoon.h>
 #import <RamblerTyphoonUtils/AssemblyCollector.h>
 
-#import "ModuleAssemblyBase.h"
 
 /**
  @author Anton Sokolchenko
@@ -26,7 +25,7 @@
 @protocol CallServiceDataChannelAdditionsProtocol;
 @protocol SVSignalingChannelProtocol;
 
-@interface VideoStoryAssembly : ModuleAssemblyBase
+@interface VideoStoryAssembly : TyphoonAssembly
 
 - (VideoStoryViewController *)viewVideoStoryModule;
 - (VideoStoryInteractor *)interactorVideoStoryModule;

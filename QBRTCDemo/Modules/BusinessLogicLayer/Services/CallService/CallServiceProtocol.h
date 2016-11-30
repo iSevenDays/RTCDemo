@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 @protocol CallServiceDelegate;
 @protocol CallServiceDataChannelAdditionsDelegate;
 
+@class RTCDataChannel;
+@class RTCDataBuffer;
 @class SVUser;
 
 @protocol CallServiceProtocol <SVSignalingChannelDelegate>
@@ -42,6 +44,11 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
  */
 - (void)connectWithUser:(SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError *_Nullable error))completion;
 
+/**
+ *  Disconnect from Chat
+ *
+ *  @param completion completion
+ */
 - (void)disconnectWithCompletion:(void(^_Nullable)(NSError *_Nullable error))completion;
 
 /**
@@ -71,9 +78,11 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 - (BOOL)isInitiator;
 - (nullable SVUser *)currentUser;
 
-@property (nonatomic, assign, readonly) CallServiceState state;
+@property (nonatomic, assign) CallServiceState state;
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
+
+- (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer;
 
 @optional
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(nonnull id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;
