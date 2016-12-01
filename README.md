@@ -10,7 +10,10 @@ Targets information
 
 
 Adding new VIPER module:
+```Shell
 gem install generamba
 
 cd `folder with Rambafile`
+
 generamba gen VideoCallStory swifty_viper
+```
