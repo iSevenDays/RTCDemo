@@ -48,7 +48,7 @@ class AuthStoryPresenterTests: XCTestCase {
 		presenter.viewIsReady();
 		
 		// then
-		XCTAssertTrue(mockInteractor.tryRetrieveCachedUserGotCalled)
+		XCTAssertTrue(mockInteractor.tryLoginWithCachedUserGotCalled)
 		XCTAssertTrue(mockInteractor.signUpOrLoginWithUserNameGotCalled)
 	}
 	
@@ -104,11 +104,11 @@ class AuthStoryPresenterTests: XCTestCase {
 	}
 	
     class MockInteractor: AuthStoryInteractorInput {
-		var tryRetrieveCachedUserGotCalled = false
+		var tryLoginWithCachedUserGotCalled = false
 		var signUpOrLoginWithUserNameGotCalled = false
 		
-		func tryRetrieveCachedUser() {
-			tryRetrieveCachedUserGotCalled = true
+		func tryLoginWithCachedUser() {
+			tryLoginWithCachedUserGotCalled = true
 		}
 		
 		func signUpOrLoginWithUserName(userName: String, tags: [String]) {

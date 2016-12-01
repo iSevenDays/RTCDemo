@@ -48,8 +48,6 @@
 
 @property (atomic, strong) NSMutableArray *messageQueue;
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
-
-
 @property (nonatomic, strong) RTCDataChannel *dataChannel;
 
 @property (nonatomic, assign) BOOL isReceivedSDP;
@@ -144,7 +142,7 @@
 	}
 	
 	if (self.state == kClientStateConnected) {
-		if (completion) {
+		if (completion != nil) {
 			completion(nil);
 		}
 		return;
@@ -183,7 +181,7 @@
 
 - (void)startCallWithOpponent:(SVUser *)opponent {
 	if ([self hasActiveCall]) {
-		DDLogWarn(@"Trying to call while already calling. Returning.");
+		DDLogError(@"Trying to call while already calling. Returning.");
 		return;
 	}
 	

@@ -68,10 +68,9 @@ class VideoStoryInteractorTests: XCTestCase {
 		// given
 		useRealCallService()
 		
-		let callService = interactor.callService
-		callService.state = CallServiceState.ClientStateConnected
 		
 		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
 		interactor.hangup()
 		
 		// then

@@ -30,10 +30,6 @@
 	[self.view setupInitialState];
 }
 
-- (void)didTriggerStartCallButtonTaped {
-	[self.interactor startCallWithOpponent:nil];
-}
-
 - (void)didTriggerHangupButtonTaped {
 	[self.interactor hangup];
 }

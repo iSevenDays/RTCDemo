@@ -60,9 +60,6 @@
 
 #pragma mark - VideoStoryViewOutput methods
 
-- (IBAction)didTapButtonStartCall:(id)sender {
-	[self.output didTriggerStartCallButtonTaped];
-}
 
 - (IBAction)didTapButtonHangup:(id)sender {
 	[self.output didTriggerHangupButtonTaped];

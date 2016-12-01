@@ -16,7 +16,7 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 	// MARK: AuthStoryViewOutput
 	
     func viewIsReady() {
-		interactor.tryRetrieveCachedUser()
+		interactor.tryLoginWithCachedUser()
     }
 	
 	

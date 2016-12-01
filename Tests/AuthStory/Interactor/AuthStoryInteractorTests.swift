@@ -97,7 +97,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		
 		// when
 		interactor.cacheUser(SVUser.init(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
-		interactor.tryRetrieveCachedUser()
+		interactor.tryLoginWithCachedUser()
 		
 		// then
 		XCTAssertTrue(mockOutput.doingLoginWithCachedUserGotCalled)

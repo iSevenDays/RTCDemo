@@ -18,7 +18,6 @@
 - (void)didTriggerViewReadyEvent;
 
 
-- (void)didTriggerStartCallButtonTaped;
 - (void)didTriggerHangupButtonTaped;
 
 - (void)didTriggerDataChannelButtonTaped;

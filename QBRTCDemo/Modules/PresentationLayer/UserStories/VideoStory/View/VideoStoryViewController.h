@@ -34,7 +34,6 @@
 
 #pragma mark IBActions
 
-- (IBAction)didTapButtonStartCall:(id)sender;
 - (IBAction)didTapButtonHangup:(id)sender;
 - (IBAction)didTapButtonDataChannelImageGallery:(id)sender;
 

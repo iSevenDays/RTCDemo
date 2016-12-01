@@ -82,18 +82,19 @@ class QBRESTService : RESTServiceProtocol {
 		
 		guard !userPassword.isEmpty else {
 			print("user password must not be empty")
+			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsEmpty.rawValue, userInfo: nil))
 			return
 		}
-		
-		QBRequest.signUp(QBUUser.init(SVUser: user), successBlock: { (response, user) in
+		let qbUser = QBUUser(SVUser: user)
+		QBRequest.signUp(qbUser, successBlock: { (response, restUser) in
 			
-			guard user != nil else {
+			guard restUser != nil else {
 				errorBlock(error: response.error?.error)
 				return
 			}
 			
-			let svUser = SVUser.init(QBUUser: user)
-			svUser.password = user?.password
+			let svUser = SVUser(QBUUser: restUser)
+			svUser.password = qbUser.password
 			
 			successBlock(user: svUser)
 			
@@ -154,8 +155,9 @@ class QBRESTService : RESTServiceProtocol {
 			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.NoTags.rawValue, userInfo: nil))
 			return
 		}
+		let page = QBGeneralResponsePage(currentPage: 1, perPage: 100)
 		
-		QBRequest.usersWithTags(tags, successBlock: { (response, page, users) in
+		QBRequest.usersWithTags(tags, page: page, successBlock: { (response, page, users) in
 			
 			guard let unwrappedUsers = users else {
 				errorBlock(error: response.error?.error)

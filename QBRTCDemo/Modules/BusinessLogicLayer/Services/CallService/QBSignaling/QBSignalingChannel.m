@@ -32,6 +32,7 @@
 	NSCAssert(self.state == SVSignalingChannelState.error || SVSignalingChannelState.closed, @"Invalid channel state");
 	
 	if (svuser.ID == nil || svuser.ID == 0) {
+		NSLog(@"Error connectWithUser, user id is nil or 0");
 		completion([NSError errorWithDomain:@"QBSignalingChannelErrorDomain" code:-1 userInfo:@{@"Error" : @"User id is nil or 0"}]);
 		return;
 	}

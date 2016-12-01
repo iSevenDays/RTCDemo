@@ -310,6 +310,8 @@
 		14CC91EF1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91ED1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift */; };
 		14CC91F01DEF6AB200BABE45 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
 		14CC91F11DEF6AB200BABE45 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
+		14CC91F31DEF772000BABE45 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91F21DEF772000BABE45 /* KeychainSwift.swift */; };
+		14CC91F41DEF772000BABE45 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91F21DEF772000BABE45 /* KeychainSwift.swift */; };
 		14D1B5F11C7CA4E6006EB865 /* SVMulticastDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */; };
 		14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
 		14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
@@ -755,6 +757,7 @@
 		14C535C01C6B9C8E00A0FFE8 /* librtc_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_media.a; path = "Scripts/webrtc/src/webrtc/media/../../xcodebuild/Debug-iphoneos/librtc_media.a"; sourceTree = "<group>"; };
 		14CC91EA1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStoryInteractorTests.swift; sourceTree = "<group>"; };
 		14CC91ED1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStoryInteractorOutput.swift; sourceTree = "<group>"; };
+		14CC91F21DEF772000BABE45 /* KeychainSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwift.swift; sourceTree = "<group>"; };
 		14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMulticastDelegate.h; sourceTree = "<group>"; };
 		14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVMulticastDelegate.m; sourceTree = "<group>"; };
 		14D1B6C21C7DDD74006EB865 /* libcongestion_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcongestion_controller.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libcongestion_controller.a"; sourceTree = "<group>"; };
@@ -1586,6 +1589,7 @@
 			children = (
 				14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */,
 				14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */,
+				14CC91F21DEF772000BABE45 /* KeychainSwift.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2784,6 +2788,7 @@
 				14ADBDED1C738554003A0C98 /* ImageGalleryStoryModuleInput.swift in Sources */,
 				1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */,
 				1452AAD31BF92FA30018DA30 /* main.m in Sources */,
+				14CC91F31DEF772000BABE45 /* KeychainSwift.swift in Sources */,
 				14A0281D1BFA43E700BDF2C5 /* SVSignalingChannelState.m in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				14A028901BFB24DF00BDF2C5 /* SVSignalingMessage+QBChatMessage.m in Sources */,
@@ -2876,6 +2881,7 @@
 				AB835C55A6EC843E214CAFC2 /* ChatUsersStoryInteractorInput.swift in Sources */,
 				0909F9104C8B2CCC1DF7F4DB /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				303F608B74B20BF8FD4C0D2D /* ChatUsersStoryInteractor.swift in Sources */,
+				14CC91F41DEF772000BABE45 /* KeychainSwift.swift in Sources */,
 				3FB6E2C773C33D251FF9991C /* ChatUsersStoryRouterInput.swift in Sources */,
 				8AA2EC4850501B343EE9F092 /* ChatUsersStoryRouter.swift in Sources */,
 				3D143C528847477690AADFA0 /* ChatUsersStoryConfigurator.swift in Sources */,

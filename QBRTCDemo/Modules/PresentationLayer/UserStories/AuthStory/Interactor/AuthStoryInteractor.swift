@@ -16,7 +16,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	internal weak var callService: protocol<CallServiceProtocol>!
 	
 	// MARK: AuthStoryInteractorInput
-	func tryRetrieveCachedUser() {
+	func tryLoginWithCachedUser() {
 		if let cachedUser = cachedUser() {
 			guard let userTags = cachedUser.tags else {
 				print("error: cached user has not tags")
@@ -29,11 +29,19 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	
 	func signUpOrLoginWithUserName(userName: String, tags: [String]) {
 		
-		let login = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString
+		let login = NSUUID().UUIDString
 		let password = "zZc64fj13$_1=fx%"
 		
-		let user = SVUser.init(ID: nil, login: login, password: password, tags: tags)
+		let user = SVUser(ID: nil, login: login, password: password, tags: tags)
 		user.fullName = userName
+		
+		if let cachedUser = cachedUser() {
+			// update current user instead of creating new one
+			if cachedUser.tags != nil {
+				user.ID = cachedUser.ID
+				user.login = cachedUser.login
+			}
+		}
 		
 		signUpOrLoginWithUserInRESTSimulatenouslyWithChat(user, successBlock: { [weak self] (user) in
 			
@@ -61,16 +69,16 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		var loggedInREST = false
 		var connectedToChat = false
 		
-		signUpOrLoginWithUser(user, successBlock: {(restUser) in
+		signUpOrLoginWithUser(user, successBlock: { [unowned self] (restUser) in
 			
 			loggedInREST = true
 			
 			if self.callService.isConnected {
-				successBlock(user: user)
+				successBlock(user: restUser)
 				return
 			}
 			
-			self.callService.connectWithUser(user, completion: { (error) in
+			self.callService.connectWithUser(restUser, completion: { (error) in
 				if error != nil || !self.callService.isConnected {
 					errorBlock(error: error)
 					return
@@ -129,8 +137,9 @@ internal extension AuthStoryInteractor {
 			self.restService.updateCurrentUserFieldsIfNeededWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
 			
 			}) { [weak self] (error) in
-				self?.output.doingSignUpWithUser(user)
-				self?.restService.signUpWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
+				guard let strongSelf = self else { return }
+				strongSelf.output.doingSignUpWithUser(user)
+				strongSelf.restService.signUpWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
 		}
 		
 	}
@@ -138,13 +147,21 @@ internal extension AuthStoryInteractor {
 	
 	func cacheUser(user: SVUser) {
 		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
-		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: "user")
+		let key = "user"
+		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: key)
 		NSUserDefaults.standardUserDefaults().synchronize()
+		
+		KeychainSwift().set(userData, forKey: key)
 	}
 	
 	func cachedUser() -> SVUser? {
-		if let userData = NSUserDefaults.standardUserDefaults().objectForKey("user") {
-			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData as! NSData) as? SVUser
+		let key = "user"
+		var userData = NSUserDefaults.standardUserDefaults().objectForKey(key) as? NSData
+		if userData == nil {
+			userData = KeychainSwift().getData(key)
+		}
+		if let userData = userData {
+			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? SVUser
 			return user
 		}
 		return nil

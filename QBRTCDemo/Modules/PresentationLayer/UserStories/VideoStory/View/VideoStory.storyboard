@@ -44,12 +44,9 @@
                                     <constraint firstAttribute="height" constant="10" id="VI6-Zk-ZjS"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCe-my-4j2">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCe-my-4j2">
                                 <rect key="frame" x="15" y="124.5" width="60" height="30"/>
                                 <state key="normal" title="StartCall"/>
-                                <connections>
-                                    <action selector="didTapButtonStartCall:" destination="YrU-5b-St0" eventType="touchUpInside" id="hdV-Tx-ebR"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected with user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wlW-Iv-xHo">
                                 <rect key="frame" x="15" y="84" width="158.5" height="20.5"/>

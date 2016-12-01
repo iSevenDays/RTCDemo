@@ -85,11 +85,14 @@
 }
 
 - (void)testThatPresenterHandlesStartCallButtonTapped {
+	// given
+	SVUser *testUser = [TestsStorage svuserRealUser1];
+	
 	// when
 	[self.presenter didTriggerStartCallButtonTaped];
 	
 	// then
-	OCMVerify([self.mockInteractor startCallWithOpponent:nil]);
+	OCMVerify([self.mockInteractor startCallWithOpponent:testUser]);
 }
 
 - (void)testThatPresenterHandlesHangupButtonTapped {

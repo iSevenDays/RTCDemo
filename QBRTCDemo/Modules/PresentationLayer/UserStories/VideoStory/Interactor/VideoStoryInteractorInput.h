@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class SVUser;
 
 @protocol VideoStoryInteractorInput <NSObject>
 
-- (void)connectToChatWithUser:(SVUser *)user callOpponent:(SVUser *)opponent;
+- (void)connectToChatWithUser:(SVUser *)user callOpponent:(nullable SVUser *)opponent;
 
-// Pass nil to call the opponent again
 - (void)startCallWithOpponent:(SVUser *)opponent;
 
 /**
@@ -23,11 +24,15 @@
  *  @param opponent SVUser instance
  */
 - (void)acceptCallFromOpponent:(SVUser *)opponent;
+
+/// Hangup an active call
 - (void)hangup;
 
 - (void)requestDataChannelState;
 
-// Triggers didSendInvitationToOpenImageGallery if successful
+/// Triggers didSendInvitationToOpenImageGallery if successful
 - (void)sendInvitationMessageAndOpenImageGallery;
 
 @end
+
+NS_ASSUME_NONNULL_END

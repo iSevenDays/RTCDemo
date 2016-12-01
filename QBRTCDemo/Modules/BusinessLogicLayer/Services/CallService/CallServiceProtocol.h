@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
 @property (nonatomic, assign, readonly) BOOL isConnecting;
 @property (nonatomic, assign, readwrite) BOOL isConnected;
 
-- (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer;
+- (void)channel:(RTCDataChannel *_Nullable)channel didReceiveMessageWithBuffer:(RTCDataBuffer *_Nonnull)buffer;
 
 @optional
 - (nullable instancetype)initWithSignalingChannel:(nonnull id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(nullable id<CallServiceDelegate>)callServiceDelegate dataChannelDelegate:(nonnull id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate;

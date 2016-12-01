@@ -48,8 +48,6 @@
 #pragma mark - Testing life cycle
 
 - (void)testThatViewNotifiesPresenterOnDidLoad {
-	// given
-
 	// when
 	[self.controller viewDidLoad];
 
@@ -59,19 +57,7 @@
 
 #pragma mark - IBActions testing
 
-- (void)testStartCallButtonTriggersAction {
-	// given
-	
-	// when
-	[self.controller didTapButtonStartCall:nil];
-	
-	// then
-	OCMVerify([self.mockOutput didTriggerStartCallButtonTaped]);
-}
-
 - (void)testHangupButtonTriggersAction {
-	// given
-	
 	// when
 	[self.controller didTapButtonHangup:nil];
 	
@@ -80,8 +66,6 @@
 }
 
 - (void)testSuccessDataChannelButton_ImageGalleryTriggersAction {
-	// given
-	
 	// when
 	[self.controller didTapButtonDataChannelImageGallery:nil];
 	

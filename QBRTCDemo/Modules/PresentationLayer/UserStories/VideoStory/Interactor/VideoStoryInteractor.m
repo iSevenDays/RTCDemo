@@ -122,6 +122,11 @@
 }
 
 - (void)hangup {
+	if (![self.callService hasActiveCall]) {
+		DDLogWarn(@"There is no active call at the momment, can not hangup");
+		return;
+	}
+	
 	[self.callService hangup];
 	self.localVideoTrack = nil;
 	self.remoteVideoTrack = nil;
