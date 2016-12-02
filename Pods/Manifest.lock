@@ -9,7 +9,6 @@ PODS:
     - CocoaLumberjack/Default
   - OCMock (3.3.1)
   - RamblerTyphoonUtils/AssemblyCollector (1.5.0)
-  - RamblerTyphoonUtils/AssemblyTesting (1.5.0)
   - Typhoon (3.4.5):
     - Typhoon/no-arc (= 3.4.5)
   - Typhoon/no-arc (3.4.5)
@@ -19,7 +18,6 @@ DEPENDENCIES:
   - CocoaLumberjack
   - OCMock (~> 3.3.1)
   - RamblerTyphoonUtils/AssemblyCollector (= 1.5.0)
-  - RamblerTyphoonUtils/AssemblyTesting (= 1.5.0)
   - Typhoon (~> 3.4.5)
   - ViperMcFlurry (~> 1.5.2)
 
@@ -30,6 +28,6 @@ SPEC CHECKSUMS:
   Typhoon: 200100687af3233ec5ed019064df3c9ffe350475
   ViperMcFlurry: 701bc3ad8d188b1f1e157ec0ddf4e77184de88b5
 
-PODFILE CHECKSUM: 6a5af9d877e6de6807f2c677536297859e755e2c
+PODFILE CHECKSUM: 84b431d7ef9ad273e245fbb78f92763a0b053760
 
 COCOAPODS: 1.1.1

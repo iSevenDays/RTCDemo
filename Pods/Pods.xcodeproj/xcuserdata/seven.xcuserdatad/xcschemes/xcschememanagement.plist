@@ -44,22 +44,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>RamblerTyphoonUtils-AssemblyCollector-iOS8.0.xcscheme</key>
+		<key>RamblerTyphoonUtils-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>RamblerTyphoonUtils-AssemblyCollector-iOS9.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>RamblerTyphoonUtils-AssemblyTesting-iOS8.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>RamblerTyphoonUtils-AssemblyTesting-iOS9.0.xcscheme</key>
+		<key>RamblerTyphoonUtils-iOS9.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -87,57 +77,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>063FF49268C78647D433678DE127BF1F</key>
+		<key>1781FDCFD65983BFA34C4CA0C29D12D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>06476A5DDA7363798294B191A5DDD664</key>
+		<key>18C3D09833F11D039E6FA1D85F04A91B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>14BEF80633AA94F86078DE22BA94CA0F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1649C2FBA5727A2C8A70338BF98AE707</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1AF6139AFF931BD6CC638268CF15E56F</key>
+		<key>42E85C16304E6A56A0679A568A1738D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>459ACD297FD65A00F79E14A5A3BB0FA9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>53F50C5F1702ECF10EF8C1D27B82BFEA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5D01E94B776ADDBAF5EDCA33E3FE9EE4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6DE0B1996331F1F3A9E534CA3E35393D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6F1B02AFE45D851320A4209830E39B1C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>702250665A6C2CBAF552066238220C92</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,12 +107,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9BB3400BD91A29A65CEE8130CDC0EA01</key>
+		<key>99633B5CE9EE879910E8493E175693DD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E21CBEEEEB40A4F3B436DB96127BB03A</key>
+		<key>A957ADD773157C6F3666089967C6614D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9E6460B266E3FB8D9FA8E979C5EEB24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF5E3A63B33487D978286E8212CBC123</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE6F6A3C4DBBD6197F1055853A26179D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0F390493C4ABDE83BC442D7EBEF349C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F25F3D0E13BC24477E19A4B619469B10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
