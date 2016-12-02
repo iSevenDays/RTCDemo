@@ -15,7 +15,6 @@ target :QBRTCDemo do
 end
 
 def tests_pods
-	pod 'OCHamcrest', '~> 5.0'
 	pod 'OCMock', '~> 3.3.1'
 	pod 'RamblerTyphoonUtils/AssemblyTesting', '1.5.0'
 end

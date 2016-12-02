@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CE0C90C89BFDC97698AE4281F10CCF7A'
+               BlueprintIdentifier = '5D01E94B776ADDBAF5EDCA33E3FE9EE4'
                BlueprintName = 'RamblerTyphoonUtils-AssemblyTesting-iOS9.0'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libRamblerTyphoonUtils-AssemblyTesting-iOS9.0.a'>

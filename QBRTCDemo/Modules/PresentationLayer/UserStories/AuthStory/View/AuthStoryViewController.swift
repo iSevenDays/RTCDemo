@@ -8,14 +8,6 @@
 
 import UIKit
 
-#if QBRTCDemo_s
-	@testable
-	import QBRTCDemo_s
-#elseif QBRTCDemo
-	@testable
-	import QBRTCDemo
-#endif
-
 class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthStoryViewInput {
 
     var output: AuthStoryViewOutput!

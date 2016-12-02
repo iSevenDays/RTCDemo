@@ -43,6 +43,10 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 		}
 		
 	}
+	
+	@IBAction func prepareForUnwindFromVideoStoryToChatUsersStory(segue: UIStoryboardSegue) {
+		
+	}
 }
 
 let cellIdentifier = "ChatUsersCellIdentifier"

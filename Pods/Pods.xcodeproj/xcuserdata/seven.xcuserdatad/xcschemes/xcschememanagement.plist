@@ -14,16 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>OCHamcrest-iOS8.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>OCHamcrest-iOS9.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>OCMock-iOS8.0.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,12 +102,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1AF6139AFF931BD6CC638268CF15E56F</key>
+		<key>1649C2FBA5727A2C8A70338BF98AE707</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F4F5FD2BAC682631E89EDE8900A8C18</key>
+		<key>1AF6139AFF931BD6CC638268CF15E56F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,17 +122,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B869161F8B54CE17623F2C2D545F494</key>
+		<key>5D01E94B776ADDBAF5EDCA33E3FE9EE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>662EC110B3E8856C0DB48E4B4C93BB7E</key>
+		<key>6DE0B1996331F1F3A9E534CA3E35393D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6F1B02AFE45D851320A4209830E39B1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>702250665A6C2CBAF552066238220C92</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,22 +157,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AE56AB27E2E814DA65AC3BA5CBF3719E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE0C90C89BFDC97698AE4281F10CCF7A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E21CBEEEEB40A4F3B436DB96127BB03A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E88B74854F4C8B0C82EF96294FCBB26B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

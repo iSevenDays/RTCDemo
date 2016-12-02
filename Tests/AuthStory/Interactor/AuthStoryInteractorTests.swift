@@ -96,7 +96,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		fakeService.shouldLoginSuccessfully = true
 		
 		// when
-		interactor.cacheUser(SVUser.init(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
+		interactor.cacheUser(SVUser(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
 		interactor.tryLoginWithCachedUser()
 		
 		// then

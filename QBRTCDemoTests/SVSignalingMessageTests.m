@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCHamcrest/OCHamcrest.h>
 
 #import "SVUser.h"
 #import "TestsStorage.h"
@@ -34,10 +33,10 @@
 	
 	SVSignalingMessage *hangup = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
 	
-	assertThat(answer.type, equalTo(SVSignalingMessageType.answer));
-	assertThat(offer.type, equalTo(SVSignalingMessageType.offer));
-	assertThat(candidate.type, equalTo(SVSignalingMessageType.candidate));
-	assertThat(hangup.type, equalTo(SVSignalingMessageType.hangup));
+	XCTAssertEqual(answer.type, SVSignalingMessageType.answer);
+	XCTAssertEqual(offer.type, SVSignalingMessageType.offer);
+	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidate);
+	XCTAssertEqual(hangup.type, SVSignalingMessageType.hangup);
 }
 
 - (void)testMessagesFromQBChatMessageHaveCorrectType {
@@ -65,19 +64,19 @@
 	
 	SVSignalingMessage *hangup = [SVSignalingMessage messageWithQBChatMessage:hangupMsg];
 	
-	assertThat(answer.type, equalTo(SVSignalingMessageType.answer));
-	assertThat(offer.type, equalTo(SVSignalingMessageType.offer));
-	assertThat(candidate.type, equalTo(SVSignalingMessageType.candidate));
-	assertThat(hangup.type, equalTo(SVSignalingMessageType.hangup));
+	XCTAssertEqual(answer.type, SVSignalingMessageType.answer);
+	XCTAssertEqual(offer.type, SVSignalingMessageType.offer);
+	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidate);
+	XCTAssertEqual(hangup.type, SVSignalingMessageType.hangup);
 }
 
 - (void)testMessagesSaveParamsDictionary {
 	SVSignalingMessage *signalMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.answer params:@{@"custom_param":@"param"}];
 	
-	assertThat(signalMessage.type, equalTo(SVSignalingMessageType.answer));
-	assertThat(signalMessage.params, notNilValue());
+	XCTAssertEqual(signalMessage.type, SVSignalingMessageType.answer);
+	XCTAssertNotNil(signalMessage.params);
 	
-	assertThat(signalMessage.params[@"custom_param"], equalTo(@"param"));
+	XCTAssertEqual(signalMessage.params[@"custom_param"], @"param");
 	
 }
 

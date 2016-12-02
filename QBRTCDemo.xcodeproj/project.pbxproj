@@ -99,6 +99,12 @@
 		1431CE151C6F97A600DCED6D /* webrtc_libraries_dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */; };
 		1431CE161C6F97A600DCED6D /* webrtc_libraries_dummy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */; };
 		1431CE181C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */; };
+		1433C5F41DF16C7A00A2CED6 /* VideoCallStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1433C5F31DF16C7A00A2CED6 /* VideoCallStory.storyboard */; };
+		1433C5F51DF16C7A00A2CED6 /* VideoCallStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1433C5F31DF16C7A00A2CED6 /* VideoCallStory.storyboard */; };
+		1433C5F71DF1735100A2CED6 /* VideoCallStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3559AC46A82E58384F0BD0E /* VideoCallStoryPresenterTests.swift */; };
+		1433C5F81DF17A2F00A2CED6 /* VideoCallStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFAB002BEDFE37184ABF7A5 /* VideoCallStoryViewTests.swift */; };
+		1433C5F91DF17A3000A2CED6 /* VideoCallStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFAB002BEDFE37184ABF7A5 /* VideoCallStoryViewTests.swift */; };
+		1433C5FA1DF1956100A2CED6 /* VideoCallStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D0585AB388B567E46F8CA /* VideoCallStoryRouterTests.swift */; };
 		143609751BF944C50091071C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		143609771BF944D60091071C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		143609791BF9450A0091071C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
@@ -304,12 +310,6 @@
 		14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
 		14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
 		14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
-		14CC91EB1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91EA1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift */; };
-		14CC91EC1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91EA1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift */; };
-		14CC91EE1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91ED1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift */; };
-		14CC91EF1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91ED1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift */; };
-		14CC91F01DEF6AB200BABE45 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
-		14CC91F11DEF6AB200BABE45 /* VideoStoryAssemblyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */; };
 		14CC91F31DEF772000BABE45 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91F21DEF772000BABE45 /* KeychainSwift.swift */; };
 		14CC91F41DEF772000BABE45 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91F21DEF772000BABE45 /* KeychainSwift.swift */; };
 		14D1B5F11C7CA4E6006EB865 /* SVMulticastDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */; };
@@ -322,9 +322,7 @@
 		14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestsStorageTests.m */; };
 		14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
-		14E9F59B1C6CD317007F58B7 /* VideoStoryViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */; };
 		14E9F59C1C6CD317007F58B7 /* FakeSignalingChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */; };
-		14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
 		14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */; };
 		14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437CF721C63BB4B00CCE1BD /* BaseTestCase.m */; };
 		14E9F5A41C6CD317007F58B7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
@@ -347,22 +345,16 @@
 		14EE3D141C6BC5BE00C451CF /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
 		14EE3D151C6BC5BE00C451CF /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
 		14EE3D161C6BC5BE00C451CF /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
-		14EE3D171C6BC7CF00C451CF /* VideoStoryAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */; };
-		14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */; };
-		14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
-		14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */; };
-		14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
 		14FB2CB61C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */; };
 		14FB2CB71C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */; };
-		14FC46841C5029D400C1797D /* VideoStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC46831C5029D400C1797D /* VideoStory.storyboard */; };
-		14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC46831C5029D400C1797D /* VideoStory.storyboard */; };
 		16C21CF70892193C327274F6 /* libPods-QBRTCDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4DEC287CF193360700F2F8 /* libPods-QBRTCDemo.a */; };
-		16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */; };
 		1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */; };
 		24B87B4B94DFA5D9067F6C69 /* AuthStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290BECE1782295B3A7E6D67 /* AuthStoryInteractorTests.swift */; };
 		24BCC726FCD00FB50CE99B69 /* AuthStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */; };
 		24C83F54AD1112D275D087D8 /* AuthStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCECA7DD6CDF214B9109C588 /* AuthStoryInteractorInput.swift */; };
+		275383DC6208D349187975DB /* VideoCallStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4D4D38C26FF91662CC939 /* VideoCallStoryInteractor.swift */; };
 		279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */; };
+		28FFDBE56651FC0FAE43A114 /* VideoCallStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B4F1E0079574567788F47 /* VideoCallStoryInteractorOutput.swift */; };
 		303F608B74B20BF8FD4C0D2D /* ChatUsersStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CEE43CDDDEAE53603580EB /* ChatUsersStoryInteractor.swift */; };
 		314F6B4A1ECA1547669BBE6E /* IncomingCallStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1522E3B95A19D464FD5934B /* IncomingCallStoryInteractorTests.swift */; };
 		3179BD737E1FD9AF9F11F04C /* ImageGalleryStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */; };
@@ -378,14 +370,16 @@
 		481C7D41CEFC8198398F2DF6 /* IncomingCallStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3BE877C35A398231F5713B /* IncomingCallStoryRouterInput.swift */; };
 		48B1CE3633C739410F016D43 /* IncomingCallStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5CBAC5EC73601A1B9CF320 /* IncomingCallStoryConfiguratorTests.swift */; };
 		498E6D248A49287DF48D4F7C /* ChatUsersStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2369DE6A31C60325ACEF431 /* ChatUsersStoryViewTests.swift */; };
+		4BB2DADCF0A8097BEFBCF0E2 /* VideoCallStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E092EABD6A28D0039B08744 /* VideoCallStoryRouterInput.swift */; };
 		4DEB82D05EA0A1975DFD6636 /* AuthStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */; };
+		4F50B9724B39F9BB99555E1E /* VideoCallStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3559AC46A82E58384F0BD0E /* VideoCallStoryPresenterTests.swift */; };
 		5079BE98F80CCB1AB4538F64 /* ChatUsersStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8868305B44A9822B6CD1720E /* ChatUsersStoryViewInput.swift */; };
 		54812A272B7245DEF2065942 /* ChatUsersStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6418A7D60FA29B0381E95538 /* ChatUsersStoryViewOutput.swift */; };
-		5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */; };
+		574FE6CEF8B57721BF1E2332 /* VideoCallStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1725FFF717A70A5A872304 /* VideoCallStoryViewController.swift */; };
 		61AEFD94F186E7F57E40512C /* IncomingCallStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A87F8F07DE8F98483AB51C /* IncomingCallStoryRouterTests.swift */; };
-		62B3F09AE08CB2C15B7DB191 /* VideoStoryAssembly.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */; };
 		63A59E34E800C1A9FCF24C63 /* AuthStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */; };
 		6C49A339274F0DC6F59B9512 /* AuthStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */; };
+		6E0B7CC250A6438C925FCEFC /* VideoCallStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6911A838FE16AFD33192469 /* VideoCallStoryPresenter.swift */; };
 		6F6512DEC824BA1A844C24BE /* IncomingCallStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578BAA0A38C9280E6FB1CAEE /* IncomingCallStoryInitializer.swift */; };
 		7111201798DAC61369DDCDCB /* ChatUsersStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A05F0C5E46B5E9D0A64D509 /* ChatUsersStoryViewController.swift */; };
 		71126378754862BDA35556EB /* AuthStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1847E4079F80C8F1433FFEF /* AuthStoryViewTests.swift */; };
@@ -393,36 +387,42 @@
 		7C92BC563CF188F3FDA03D37 /* AuthStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */; };
 		7F248002D66048D4B85FFAF5 /* IncomingCallStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F846E0D4182794E6D1D981 /* IncomingCallStoryViewInput.swift */; };
 		7F3BC726A2105AE0E9948DF7 /* ChatUsersStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01FFC4BA161D5D13A3E7389 /* ChatUsersStoryModuleInput.swift */; };
-		88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */; };
 		8AA2EC4850501B343EE9F092 /* ChatUsersStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F19D7324EEBDA40DF4D9D5 /* ChatUsersStoryRouter.swift */; };
 		8B72C8631230F2191AB28244 /* IncomingCallStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D150332E90E86163B9BEE941 /* IncomingCallStoryPresenter.swift */; };
-		924ECF4B68125FDFF008BAF4 /* VideoStoryViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */; };
 		9396181D114E7EEE8893901C /* libPods-QBRTCDemo_sTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3FF3AA759C6930D8C4EE522 /* libPods-QBRTCDemo_sTests.a */; };
 		A049C3E01A2B5FAE66666F31 /* AuthStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E060D9B417D26811FFBC52D7 /* AuthStoryViewOutput.swift */; };
 		A3FEE651ABB25B1FAEE6BB9C /* IncomingCallStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B4A33981C35885E730CF4 /* IncomingCallStoryViewController.swift */; };
 		A49D4EB8C7F6DF685E7F5B8D /* AuthStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F542C488136D61B93B026A /* AuthStoryConfiguratorTests.swift */; };
 		AB835C55A6EC843E214CAFC2 /* ChatUsersStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0E3FE5A66384B5CD82017 /* ChatUsersStoryInteractorInput.swift */; };
 		ADF1997937235A27C7014D90 /* IncomingCallStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A97B047FAFB85A52112F813 /* IncomingCallStoryPresenterTests.swift */; };
+		B4BE4AD1D3B879CB1653A21A /* VideoCallStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488BE81DC7147E8DE7C2709B /* VideoCallStoryInitializer.swift */; };
 		B635663DE1E845E0D9279993 /* IncomingCallStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC61158A64FB93DAEADDC38 /* IncomingCallStoryInteractorOutput.swift */; };
+		B6B2202C1D8FC2AC870DC0DE /* VideoCallStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D85FBF25FEC7FF2FFE4DC3 /* VideoCallStoryModuleInput.swift */; };
 		B9EC69970C8CCBEF7AF2BA39 /* AuthStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50230D5A781F75168CCA1AF4 /* AuthStoryModuleInput.swift */; };
 		BA8E216CAF4AC916539D5A5A /* IncomingCallStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361464D06D62F94236E40641 /* IncomingCallStoryConfigurator.swift */; };
+		BAB08E2D4CF91FC06652B4EE /* VideoCallStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836C8EB4AAF0152D75F9FA5 /* VideoCallStoryInteractorInput.swift */; };
 		C39E99EF43065B34302624F5 /* ImageGalleryStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */; };
 		C59FD89A1B77494DB23DF2DA /* ChatUsersStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B47F2DE7513D25AA74EB25 /* ChatUsersStoryInteractorTests.swift */; };
 		C5B88A9762BC867C6913394A /* libPods-QBRTCDemo_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11EA8185D819CC4ACCEE81C0 /* libPods-QBRTCDemo_s.a */; };
+		C5CEA1B5101DF205C1D0E4B1 /* VideoCallStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49538A929AF1E1CD79AE1C42 /* VideoCallStoryConfiguratorTests.swift */; };
 		C60A08C75492C388C89D86BC /* libPods-QBRTCDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 875BDD9BED81B036C964945D /* libPods-QBRTCDemoTests.a */; };
 		CA0E7FA1C1007C0399606B63 /* ImageGalleryStoryInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */; };
 		CAB1B0BA5443499CF8EF2DFD /* AuthStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D04FD706443E892936BF0 /* AuthStoryRouter.swift */; };
 		CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */; };
-		D4E7B9D497E6D08669C82C98 /* VideoStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBD696A140459D4AB81A /* VideoStoryViewController.m */; };
+		CD56A4E200CD5C22E43D7421 /* VideoCallStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBDD0626DF5BF6EFA8BFB10 /* VideoCallStoryViewOutput.swift */; };
 		DA504752039A0FB1064FE384 /* ImageGalleryStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */; };
 		DF7ADEC8C37383A49E28A647 /* ChatUsersStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58291E799972188318902B7 /* ChatUsersStoryPresenter.swift */; };
+		E4FBAEB769B3C7F83FA0CEC7 /* VideoCallStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35FB849083829B4BE185C5E /* VideoCallStoryRouter.swift */; };
 		E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */; };
 		E6A676059F334DB2D23B66F5 /* IncomingCallStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35B72A9ED5841ADBC0215F /* IncomingCallStoryRouter.swift */; };
-		E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */; };
 		E93D0D88C76A33845273181B /* ImageGalleryStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */; };
+		EA082B2C7B859A871F8D9396 /* VideoCallStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE586A8E9C4E3FE09B1DE94A /* VideoCallStoryInteractorTests.swift */; };
 		EA81168A4C17567BC162640A /* AuthStoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDF899EEC6EBDD23CD862F6 /* AuthStoryPresenter.swift */; };
 		EA9CF6AB1FA92C2F5E51DDB2 /* IncomingCallStoryViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD0BB50B2AC1D3660BF6D8 /* IncomingCallStoryViewOutput.swift */; };
+		EAA4E764EA4EFF7810DB4CB9 /* VideoCallStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B2FEACD05AB4E9E58D862 /* VideoCallStoryConfigurator.swift */; };
 		EBD85514205FCE9B285A1F6A /* IncomingCallStoryInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A8760E22EE83C6302628C /* IncomingCallStoryInteractorInput.swift */; };
+		ED69F39761EF6C34B0E8C3EC /* VideoCallStoryViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781279EEE07A5B1BA941EE2B /* VideoCallStoryViewInput.swift */; };
+		ED8F2D3F0D50AD79C7BAD699 /* VideoCallStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1D0585AB388B567E46F8CA /* VideoCallStoryRouterTests.swift */; };
 		FB1E8AB7DC92437B7C30CF91 /* IncomingCallStoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD9D224C44678C6B824C9E /* IncomingCallStoryInteractor.swift */; };
 		FBF0C170A58C76BCF9BA87D9 /* ChatUsersStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005D7481AA38608B2DC98DA /* ChatUsersStoryInitializer.swift */; };
 		FE45657E836EB08B8F461C1E /* IncomingCallStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72827168DC273DD301C7CD84 /* IncomingCallStoryViewTests.swift */; };
@@ -456,6 +456,7 @@
 		036D04FD706443E892936BF0 /* AuthStoryRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryRouter.swift; sourceTree = "<group>"; };
 		03F19D7324EEBDA40DF4D9D5 /* ChatUsersStoryRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryRouter.swift; sourceTree = "<group>"; };
 		05463F9E6E85CE20B25C9DC2 /* Pods-QBRTCDemo_sTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_sTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0836C8EB4AAF0152D75F9FA5 /* VideoCallStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryInteractorInput.swift; sourceTree = "<group>"; };
 		08A0E3FE5A66384B5CD82017 /* ChatUsersStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryInteractorInput.swift; sourceTree = "<group>"; };
 		0ABD0BB50B2AC1D3660BF6D8 /* IncomingCallStoryViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryViewOutput.swift; sourceTree = "<group>"; };
 		0B4FBD265C6E6F8C7EEE6A5E /* ChatUsersStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryPresenterTests.swift; sourceTree = "<group>"; };
@@ -489,6 +490,7 @@
 		1431CE131C6F97A600DCED6D /* webrtc_libraries_dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = webrtc_libraries_dummy.m; sourceTree = "<group>"; };
 		1431CE141C6F97A600DCED6D /* webrtc_libraries_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webrtc_libraries_dummy.h; sourceTree = "<group>"; };
 		1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceDataChannelAdditionsDelegate.h; sourceTree = "<group>"; };
+		1433C5F31DF16C7A00A2CED6 /* VideoCallStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VideoCallStory.storyboard; sourceTree = "<group>"; };
 		143608DC1BF943370091071C /* libwebrtc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_common.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_common.a"; sourceTree = "<absolute>"; };
 		143608DD1BF943370091071C /* libwebrtc_h264_video_toolbox.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_h264_video_toolbox.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libwebrtc_h264_video_toolbox.a"; sourceTree = "<absolute>"; };
 		143608DE1BF943370091071C /* libwebrtc_h264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_h264.a; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libwebrtc_h264.a"; sourceTree = "<absolute>"; };
@@ -755,8 +757,6 @@
 		14C5359E1C6B877700A0FFE8 /* libdesktop_capture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdesktop_capture.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libdesktop_capture.a"; sourceTree = "<group>"; };
 		14C535BF1C6B9C8E00A0FFE8 /* librtc_api_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_api_objc.a; path = "Scripts/webrtc/src/webrtc/api/../../xcodebuild/Debug-iphoneos/librtc_api_objc.a"; sourceTree = "<group>"; };
 		14C535C01C6B9C8E00A0FFE8 /* librtc_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_media.a; path = "Scripts/webrtc/src/webrtc/media/../../xcodebuild/Debug-iphoneos/librtc_media.a"; sourceTree = "<group>"; };
-		14CC91EA1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStoryInteractorTests.swift; sourceTree = "<group>"; };
-		14CC91ED1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStoryInteractorOutput.swift; sourceTree = "<group>"; };
 		14CC91F21DEF772000BABE45 /* KeychainSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwift.swift; sourceTree = "<group>"; };
 		14D1B5EF1C7CA4E6006EB865 /* SVMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMulticastDelegate.h; sourceTree = "<group>"; };
 		14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVMulticastDelegate.m; sourceTree = "<group>"; };
@@ -788,30 +788,26 @@
 		14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-x86_64.a"; path = "Scripts/webrtc/lib/webrtc-x86_64.a"; sourceTree = "<group>"; };
 		14FC46751C500D1700C1797D /* libquickblox_webrtc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libquickblox_webrtc.dylib; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc.dylib"; sourceTree = "<absolute>"; };
 		14FC46771C500EC900C1797D /* libquickblox_webrtc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libquickblox_webrtc.dylib; path = "/Users/seven/Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libquickblox_webrtc.dylib"; sourceTree = "<absolute>"; };
-		14FC46831C5029D400C1797D /* VideoStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VideoStory.storyboard; sourceTree = "<group>"; };
 		177DDA173FCA5ACE984661B9 /* ImageGalleryStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorOutput.swift; sourceTree = "<group>"; };
+		1B6B2FEACD05AB4E9E58D862 /* VideoCallStoryConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryConfigurator.swift; sourceTree = "<group>"; };
 		1E979D19A33587E93B35ADA1 /* AuthStoryConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryConfigurator.swift; sourceTree = "<group>"; };
 		2005D7481AA38608B2DC98DA /* ChatUsersStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryInitializer.swift; sourceTree = "<group>"; };
 		2290BECE1782295B3A7E6D67 /* AuthStoryInteractorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractorTests.swift; sourceTree = "<group>"; };
-		242CA5506C5490232512450E /* VideoStoryRouterInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryRouterInput.h; sourceTree = "<group>"; };
-		2B2950E2BA569568389A3E95 /* VideoStoryInteractorInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractorInput.h; sourceTree = "<group>"; };
 		2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorTests.swift; sourceTree = "<group>"; };
 		32A87F8F07DE8F98483AB51C /* IncomingCallStoryRouterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryRouterTests.swift; sourceTree = "<group>"; };
 		361464D06D62F94236E40641 /* IncomingCallStoryConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryConfigurator.swift; sourceTree = "<group>"; };
-		3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryInteractor.m; sourceTree = "<group>"; };
 		37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryPresenter.swift; sourceTree = "<group>"; };
 		3BC85DF52F0B63140BE327EE /* ChatUsersStoryRouterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryRouterTests.swift; sourceTree = "<group>"; };
 		3D3BE877C35A398231F5713B /* IncomingCallStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryRouterInput.swift; sourceTree = "<group>"; };
-		3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryRouterTests.m; sourceTree = "<group>"; };
+		3E092EABD6A28D0039B08744 /* VideoCallStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryRouterInput.swift; sourceTree = "<group>"; };
 		3F5CBAC5EC73601A1B9CF320 /* IncomingCallStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryConfiguratorTests.swift; sourceTree = "<group>"; };
 		3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryConfigurator.swift; sourceTree = "<group>"; };
-		416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssemblyTests.m; sourceTree = "<group>"; };
 		43BEB17F353CD2390F719786 /* IncomingCallStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryModuleInput.swift; sourceTree = "<group>"; };
+		488BE81DC7147E8DE7C2709B /* VideoCallStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryInitializer.swift; sourceTree = "<group>"; };
+		49538A929AF1E1CD79AE1C42 /* VideoCallStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryConfiguratorTests.swift; sourceTree = "<group>"; };
 		4DC61158A64FB93DAEADDC38 /* IncomingCallStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryInteractorOutput.swift; sourceTree = "<group>"; };
-		4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryViewControllerTests.m; sourceTree = "<group>"; };
 		4EDD9D224C44678C6B824C9E /* IncomingCallStoryInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryInteractor.swift; sourceTree = "<group>"; };
 		50230D5A781F75168CCA1AF4 /* AuthStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryModuleInput.swift; sourceTree = "<group>"; };
-		5629FBD696A140459D4AB81A /* VideoStoryViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryViewController.m; sourceTree = "<group>"; };
 		568A843E93C7D9B83ACF199B /* ChatUsersStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryInteractorOutput.swift; sourceTree = "<group>"; };
 		56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInitializer.swift; sourceTree = "<group>"; };
 		578BAA0A38C9280E6FB1CAEE /* IncomingCallStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryInitializer.swift; sourceTree = "<group>"; };
@@ -819,49 +815,46 @@
 		6418A7D60FA29B0381E95538 /* ChatUsersStoryViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryViewOutput.swift; sourceTree = "<group>"; };
 		6A4DEC287CF193360700F2F8 /* libPods-QBRTCDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB663B0CAE9230663A56D99 /* AuthStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryViewController.swift; sourceTree = "<group>"; };
-		6E8FF503DFB4C6FBA61B978F /* VideoStoryAssembly.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryAssembly.h; sourceTree = "<group>"; };
 		70E0DD241B608BED2DDE9410 /* AuthStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryViewInput.swift; sourceTree = "<group>"; };
 		72827168DC273DD301C7CD84 /* IncomingCallStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryViewTests.swift; sourceTree = "<group>"; };
-		748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryRouter.m; sourceTree = "<group>"; };
-		7B02AC1A790D8B10AF844A71 /* VideoStoryViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryViewController.h; sourceTree = "<group>"; };
-		7FBAF35FD623A0445B6E7BCB /* VideoStoryViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryViewInput.h; sourceTree = "<group>"; };
-		80BD790ED0AA90A637D44374 /* VideoStoryAssembly_Testable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryAssembly_Testable.h; sourceTree = "<group>"; };
+		781279EEE07A5B1BA941EE2B /* VideoCallStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryViewInput.swift; sourceTree = "<group>"; };
 		80F846E0D4182794E6D1D981 /* IncomingCallStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryViewInput.swift; sourceTree = "<group>"; };
-		813BE7391A0AB394F65B4605 /* VideoStoryViewOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryViewOutput.h; sourceTree = "<group>"; };
 		82F88C8A4620DD6A067562E8 /* ImageGalleryStoryInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractor.swift; sourceTree = "<group>"; };
-		85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryPresenter.m; sourceTree = "<group>"; };
 		875BDD9BED81B036C964945D /* libPods-QBRTCDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D4729CEEA8ACF9D37DF5EF /* ChatUsersStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryRouterInput.swift; sourceTree = "<group>"; };
 		8868305B44A9822B6CD1720E /* ChatUsersStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryViewInput.swift; sourceTree = "<group>"; };
 		8A05F0C5E46B5E9D0A64D509 /* ChatUsersStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryViewController.swift; sourceTree = "<group>"; };
+		8D1725FFF717A70A5A872304 /* VideoCallStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryViewController.swift; sourceTree = "<group>"; };
 		8E35B72A9ED5841ADBC0215F /* IncomingCallStoryRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryRouter.swift; sourceTree = "<group>"; };
-		93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryAssembly.m; sourceTree = "<group>"; };
 		95A26A200BBFEAFC5F3EADB0 /* ImageGalleryStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryInteractorInput.swift; sourceTree = "<group>"; };
 		992A2BC913941FCB477E090F /* AuthStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryRouterInput.swift; sourceTree = "<group>"; };
 		9A97B047FAFB85A52112F813 /* IncomingCallStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryPresenterTests.swift; sourceTree = "<group>"; };
-		9CCA2B14A51BFE81BA93CE52 /* VideoStoryInteractor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryInteractor.h; sourceTree = "<group>"; };
+		9D1D0585AB388B567E46F8CA /* VideoCallStoryRouterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryRouterTests.swift; sourceTree = "<group>"; };
 		9DF13B31BD38FA86783B7AF7 /* Pods-QBRTCDemo_sTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_sTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_sTests/Pods-QBRTCDemo_sTests.release.xcconfig"; sourceTree = "<group>"; };
 		A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryConfiguratorTests.swift; sourceTree = "<group>"; };
 		A01FFC4BA161D5D13A3E7389 /* ChatUsersStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryModuleInput.swift; sourceTree = "<group>"; };
 		A2369DE6A31C60325ACEF431 /* ChatUsersStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryViewTests.swift; sourceTree = "<group>"; };
 		A32778D4D7DC526112C156C3 /* ImageGalleryStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewController.swift; sourceTree = "<group>"; };
+		A35FB849083829B4BE185C5E /* VideoCallStoryRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryRouter.swift; sourceTree = "<group>"; };
 		A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryModuleInput.swift; sourceTree = "<group>"; };
 		A66974BFE6A2ACBB27AB9001 /* Pods-QBRTCDemo_s.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_s.release.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.release.xcconfig"; sourceTree = "<group>"; };
-		AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = VideoStoryPresenterTests.m; sourceTree = "<group>"; };
+		ABFAB002BEDFE37184ABF7A5 /* VideoCallStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryViewTests.swift; sourceTree = "<group>"; };
 		ACDF899EEC6EBDD23CD862F6 /* AuthStoryPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryPresenter.swift; sourceTree = "<group>"; };
+		AE586A8E9C4E3FE09B1DE94A /* VideoCallStoryInteractorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryInteractorTests.swift; sourceTree = "<group>"; };
 		B1522E3B95A19D464FD5934B /* IncomingCallStoryInteractorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryInteractorTests.swift; sourceTree = "<group>"; };
 		B929B34BB6E9BF7440B7E71B /* ImageGalleryStoryRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouterInput.swift; sourceTree = "<group>"; };
 		B9CB11F3492767C4796ECCBA /* ImageGalleryStoryViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewInput.swift; sourceTree = "<group>"; };
 		B9E7ECC5B7644A3CAB71C225 /* AuthStoryInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractor.swift; sourceTree = "<group>"; };
+		BAE4D4D38C26FF91662CC939 /* VideoCallStoryInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryInteractor.swift; sourceTree = "<group>"; };
 		BC7A8760E22EE83C6302628C /* IncomingCallStoryInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryInteractorInput.swift; sourceTree = "<group>"; };
-		BFCAB06BC01A11FABE6C03E6 /* VideoStoryPresenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryPresenter.h; sourceTree = "<group>"; };
 		C1CEE43CDDDEAE53603580EB /* ChatUsersStoryInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryInteractor.swift; sourceTree = "<group>"; };
-		C6835E0812DE2752A0BEDC72 /* VideoStoryRouter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryRouter.h; sourceTree = "<group>"; };
+		C3559AC46A82E58384F0BD0E /* VideoCallStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryPresenterTests.swift; sourceTree = "<group>"; };
 		C838C207280F893ECF0AF820 /* Pods-QBRTCDemo_s.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo_s.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.debug.xcconfig"; sourceTree = "<group>"; };
 		CBF0B11DA03F8E9D8D53ECFD /* AuthStoryPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryPresenterTests.swift; sourceTree = "<group>"; };
-		D11B754886679B217E8FEAA2 /* VideoStoryModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = VideoStoryModuleInput.h; sourceTree = "<group>"; };
+		D0D85FBF25FEC7FF2FFE4DC3 /* VideoCallStoryModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryModuleInput.swift; sourceTree = "<group>"; };
 		D150332E90E86163B9BEE941 /* IncomingCallStoryPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryPresenter.swift; sourceTree = "<group>"; };
 		D1847E4079F80C8F1433FFEF /* AuthStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryViewTests.swift; sourceTree = "<group>"; };
+		D23B4F1E0079574567788F47 /* VideoCallStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryInteractorOutput.swift; sourceTree = "<group>"; };
 		D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInitializer.swift; sourceTree = "<group>"; };
 		D51B4A33981C35885E730CF4 /* IncomingCallStoryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IncomingCallStoryViewController.swift; sourceTree = "<group>"; };
 		D58291E799972188318902B7 /* ChatUsersStoryPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryPresenter.swift; sourceTree = "<group>"; };
@@ -878,9 +871,11 @@
 		F3FF3AA759C6930D8C4EE522 /* libPods-QBRTCDemo_sTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QBRTCDemo_sTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryViewTests.swift; sourceTree = "<group>"; };
 		F5AF627DD317FC96DF9898B4 /* ImageGalleryStoryRouterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouterTests.swift; sourceTree = "<group>"; };
+		F6911A838FE16AFD33192469 /* VideoCallStoryPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryPresenter.swift; sourceTree = "<group>"; };
 		FA4059657CE380D4685B03C8 /* Pods-QBRTCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		FBF28E4660188FA1C009EC65 /* ImageGalleryStoryRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryRouter.swift; sourceTree = "<group>"; };
 		FE0F9475886B8F27BE37B399 /* Pods-QBRTCDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QBRTCDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QBRTCDemoTests/Pods-QBRTCDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FFBDD0626DF5BF6EFA8BFB10 /* VideoCallStoryViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCallStoryViewOutput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1063,18 +1058,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		026796DE6A883B4D7DB503D7 /* VideoStory */ = {
-			isa = PBXGroup;
-			children = (
-				4A452AFC09DF77BDA7631B9B /* Assembly */,
-				F3EECC2FCD991E9CEA95067F /* Interactor */,
-				08161C30699E303A836D51E5 /* Presenter */,
-				FA34D2D1401A5665B16EE109 /* Router */,
-				DC745E65212C7A94C4AFAB38 /* View */,
-			);
-			path = VideoStory;
-			sourceTree = "<group>";
-		};
 		031B24A414B01ECAF3D6F0B7 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -1082,16 +1065,6 @@
 				87D4729CEEA8ACF9D37DF5EF /* ChatUsersStoryRouterInput.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		08161C30699E303A836D51E5 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				D11B754886679B217E8FEAA2 /* VideoStoryModuleInput.h */,
-				BFCAB06BC01A11FABE6C03E6 /* VideoStoryPresenter.h */,
-				85EF5D82267171DCBBEEA00F /* VideoStoryPresenter.m */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		114F2ED2FF66D1854B391B23 /* Interactor */ = {
@@ -1517,6 +1490,14 @@
 			path = RESTService;
 			sourceTree = "<group>";
 		};
+		149CB7E55BB7E649BB4EF53F /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				9D1D0585AB388B567E46F8CA /* VideoCallStoryRouterTests.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		14A028721BFA543A00BDF2C5 /* QBSignaling */ = {
 			isa = PBXGroup;
 			children = (
@@ -1578,8 +1559,8 @@
 				23F82BE9FD8E54B286B07835 /* AuthStory */,
 				9C5D5511F9107C7AE730F2BC /* ChatUsersStory */,
 				F80407DF3A1CB8A2F0595408 /* ImageGalleryStory */,
-				026796DE6A883B4D7DB503D7 /* VideoStory */,
 				26233EC026F49905AF85A068 /* IncomingCallStory */,
+				48600BD58DC33E3EC2CDD41D /* VideoCallStory */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -1717,16 +1698,13 @@
 			path = AuthStory;
 			sourceTree = "<group>";
 		};
-		24A0BB756AD5EE73AC99FEF0 /* VideoStory */ = {
+		2414F2F822233E2C4EFAED64 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
-				ACEABB7EF55083F9C2EE8C4B /* Assembly */,
-				4148FDA270892B0DC9D9D729 /* Interactor */,
-				A20A2D5D766D5C024C690748 /* Presenter */,
-				B3E7514767E0618C84730499 /* Router */,
-				317F4048270873BCEA198B1A /* View */,
+				1B6B2FEACD05AB4E9E58D862 /* VideoCallStoryConfigurator.swift */,
+				488BE81DC7147E8DE7C2709B /* VideoCallStoryInitializer.swift */,
 			);
-			path = VideoStory;
+			path = Configurator;
 			sourceTree = "<group>";
 		};
 		26233EC026F49905AF85A068 /* IncomingCallStory */ = {
@@ -1792,14 +1770,6 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		317F4048270873BCEA198B1A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				4EB8053FAA18439F4CD26309 /* VideoStoryViewControllerTests.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		31C83B5B65A426026AF15561 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1820,14 +1790,6 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
-		4148FDA270892B0DC9D9D729 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				14CC91EA1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
 		41C231BC1B4903897CFA7137 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1836,6 +1798,18 @@
 				0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		48600BD58DC33E3EC2CDD41D /* VideoCallStory */ = {
+			isa = PBXGroup;
+			children = (
+				F005B98875974B56F598A606 /* View */,
+				F0B15638291E493EA49BC74B /* Presenter */,
+				8344B60D5AF732B064261023 /* Interactor */,
+				7E9494F0BD5EA0535B3144DE /* Router */,
+				2414F2F822233E2C4EFAED64 /* Configurator */,
+			);
+			path = VideoCallStory;
 			sourceTree = "<group>";
 		};
 		49BA12C88EFA4DFC204F4789 /* Router */ = {
@@ -1853,15 +1827,6 @@
 				578BAA0A38C9280E6FB1CAEE /* IncomingCallStoryInitializer.swift */,
 			);
 			path = Configurator;
-			sourceTree = "<group>";
-		};
-		4A452AFC09DF77BDA7631B9B /* Assembly */ = {
-			isa = PBXGroup;
-			children = (
-				6E8FF503DFB4C6FBA61B978F /* VideoStoryAssembly.h */,
-				93EBE2BEC977EBB75BDF2D97 /* VideoStoryAssembly.m */,
-			);
-			path = Assembly;
 			sourceTree = "<group>";
 		};
 		4A4A7FB3C6D0274E08F20E75 /* View */ = {
@@ -1895,8 +1860,8 @@
 				1417B3441C57E4B9004D6416 /* FakeServices */,
 				142B51621CDE13C7005B143C /* Helpers */,
 				153556CC5CD4AB9C63F9DDF6 /* ImageGalleryStory */,
-				24A0BB756AD5EE73AC99FEF0 /* VideoStory */,
 				20F955EEE158BDB55E759A74 /* IncomingCallStory */,
+				89E98207054A64ED84C4C25B /* VideoCallStory */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1914,6 +1879,14 @@
 			isa = PBXGroup;
 			children = (
 				A2369DE6A31C60325ACEF431 /* ChatUsersStoryViewTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5DFFBBB507721B72E74FC600 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ABFAB002BEDFE37184ABF7A5 /* VideoCallStoryViewTests.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1949,12 +1922,39 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		787F5B57CC189FFA3FEEDBC8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C3559AC46A82E58384F0BD0E /* VideoCallStoryPresenterTests.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7E9494F0BD5EA0535B3144DE /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				3E092EABD6A28D0039B08744 /* VideoCallStoryRouterInput.swift */,
+				A35FB849083829B4BE185C5E /* VideoCallStoryRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		7EE64E6419B9C9CEAA06AE33 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
 				BC7A8760E22EE83C6302628C /* IncomingCallStoryInteractorInput.swift */,
 				4DC61158A64FB93DAEADDC38 /* IncomingCallStoryInteractorOutput.swift */,
 				4EDD9D224C44678C6B824C9E /* IncomingCallStoryInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8344B60D5AF732B064261023 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				0836C8EB4AAF0152D75F9FA5 /* VideoCallStoryInteractorInput.swift */,
+				D23B4F1E0079574567788F47 /* VideoCallStoryInteractorOutput.swift */,
+				BAE4D4D38C26FF91662CC939 /* VideoCallStoryInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1966,6 +1966,18 @@
 				37515B71D03ECD6601ABD433 /* ImageGalleryStoryPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		89E98207054A64ED84C4C25B /* VideoCallStory */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1216D3DBC729A40E64134 /* Configurator */,
+				5DFFBBB507721B72E74FC600 /* View */,
+				9C4290C4E39FFAC567ECFF05 /* Interactor */,
+				787F5B57CC189FFA3FEEDBC8 /* Presenter */,
+				149CB7E55BB7E649BB4EF53F /* Router */,
+			);
+			path = VideoCallStory;
 			sourceTree = "<group>";
 		};
 		8AA95E5169AB96BFA5170940 /* Presenter */ = {
@@ -1982,6 +1994,14 @@
 				3BC85DF52F0B63140BE327EE /* ChatUsersStoryRouterTests.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		8EE1216D3DBC729A40E64134 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				49538A929AF1E1CD79AE1C42 /* VideoCallStoryConfiguratorTests.swift */,
+			);
+			path = Configurator;
 			sourceTree = "<group>";
 		};
 		998B1E5FC290BE81663C2750 /* Router */ = {
@@ -2015,6 +2035,14 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		9C4290C4E39FFAC567ECFF05 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				AE586A8E9C4E3FE09B1DE94A /* VideoCallStoryInteractorTests.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		9C5D5511F9107C7AE730F2BC /* ChatUsersStory */ = {
 			isa = PBXGroup;
 			children = (
@@ -2046,14 +2074,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		A20A2D5D766D5C024C690748 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				AB9E621F47861EF6477CB26F /* VideoStoryPresenterTests.m */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
 		A7B2F002B210CAA784038F46 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -2080,29 +2100,12 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		ACEABB7EF55083F9C2EE8C4B /* Assembly */ = {
-			isa = PBXGroup;
-			children = (
-				416EABF468D8CC64190200A5 /* VideoStoryAssemblyTests.m */,
-				80BD790ED0AA90A637D44374 /* VideoStoryAssembly_Testable.h */,
-			);
-			path = Assembly;
-			sourceTree = "<group>";
-		};
 		B0ED59F4B0014E8C062F9C60 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		B3E7514767E0618C84730499 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				3E2796B68C5FB9A5D6F1B516 /* VideoStoryRouterTests.m */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		D3BF590081CFE7B3104E0CE1 /* Interactor */ = {
@@ -2121,18 +2124,6 @@
 				D58291E799972188318902B7 /* ChatUsersStoryPresenter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		DC745E65212C7A94C4AFAB38 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				14FC46831C5029D400C1797D /* VideoStory.storyboard */,
-				7B02AC1A790D8B10AF844A71 /* VideoStoryViewController.h */,
-				5629FBD696A140459D4AB81A /* VideoStoryViewController.m */,
-				7FBAF35FD623A0445B6E7BCB /* VideoStoryViewInput.h */,
-				813BE7391A0AB394F65B4605 /* VideoStoryViewOutput.h */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E9D450ABF52304EE9E26D5F6 /* View */ = {
@@ -2159,15 +2150,24 @@
 			path = AuthStory;
 			sourceTree = "<group>";
 		};
-		F3EECC2FCD991E9CEA95067F /* Interactor */ = {
+		F005B98875974B56F598A606 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9CCA2B14A51BFE81BA93CE52 /* VideoStoryInteractor.h */,
-				3729F3468FD4D8EDF962E114 /* VideoStoryInteractor.m */,
-				2B2950E2BA569568389A3E95 /* VideoStoryInteractorInput.h */,
-				14CC91ED1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift */,
+				1433C5F31DF16C7A00A2CED6 /* VideoCallStory.storyboard */,
+				781279EEE07A5B1BA941EE2B /* VideoCallStoryViewInput.swift */,
+				FFBDD0626DF5BF6EFA8BFB10 /* VideoCallStoryViewOutput.swift */,
+				8D1725FFF717A70A5A872304 /* VideoCallStoryViewController.swift */,
 			);
-			path = Interactor;
+			path = View;
+			sourceTree = "<group>";
+		};
+		F0B15638291E493EA49BC74B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D0D85FBF25FEC7FF2FFE4DC3 /* VideoCallStoryModuleInput.swift */,
+				F6911A838FE16AFD33192469 /* VideoCallStoryPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		F5DE5B755EDC15A5F6BFE84C /* Presenter */ = {
@@ -2205,16 +2205,6 @@
 				3F5CBAC5EC73601A1B9CF320 /* IncomingCallStoryConfiguratorTests.swift */,
 			);
 			path = Configurator;
-			sourceTree = "<group>";
-		};
-		FA34D2D1401A5665B16EE109 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				C6835E0812DE2752A0BEDC72 /* VideoStoryRouter.h */,
-				748FE329B306692C3AD1F7C5 /* VideoStoryRouter.m */,
-				242CA5506C5490232512450E /* VideoStoryRouterInput.h */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		FCF712ACFED273577A11AD0F /* Interactor */ = {
@@ -2366,7 +2356,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = anton;
 				TargetAttributes = {
 					14015A381BFCD08400830618 = {
@@ -2445,7 +2435,7 @@
 				142B50311CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */,
 				14EE3D0B1C6BC03700C451CF /* framework_dance.sh in Resources */,
 				14FB2CB61C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */,
-				14FC46841C5029D400C1797D /* VideoStory.storyboard in Resources */,
+				1433C5F41DF16C7A00A2CED6 /* VideoCallStory.storyboard in Resources */,
 				14EE3D071C6BC03700C451CF /* build_webrtc.sh in Resources */,
 				1420E4551CE7CA750043EFF9 /* IncomingCallStory.storyboard in Resources */,
 			);
@@ -2459,7 +2449,7 @@
 				142B50321CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */,
 				1420E4561CE7CA750043EFF9 /* IncomingCallStory.storyboard in Resources */,
 				148234051C002DFE0000E9ED /* Assets.xcassets in Resources */,
-				14FC46851C5029D400C1797D /* VideoStory.storyboard in Resources */,
+				1433C5F51DF16C7A00A2CED6 /* VideoCallStory.storyboard in Resources */,
 				149A0D361CA7F02C008FB3A9 /* AuthStory.storyboard in Resources */,
 				14FB2CB71C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */,
 			);
@@ -2693,19 +2683,18 @@
 				14ADBDDE1C73851C003A0C98 /* ImageGalleryStoryInteractorTests.swift in Sources */,
 				14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */,
 				1420E4691CE7CE6E0043EFF9 /* IncomingCallStoryInteractorTests.swift in Sources */,
+				1433C5FA1DF1956100A2CED6 /* VideoCallStoryRouterTests.swift in Sources */,
+				1433C5F71DF1735100A2CED6 /* VideoCallStoryPresenterTests.swift in Sources */,
 				1420E4681CE7CE6E0043EFF9 /* IncomingCallStoryViewTests.swift in Sources */,
 				14ADBDDD1C738514003A0C98 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				14ADBDDF1C73851C003A0C98 /* ImageGalleryStoryPresenterTests.swift in Sources */,
-				924ECF4B68125FDFF008BAF4 /* VideoStoryViewControllerTests.m in Sources */,
 				1439F67F1C5A556B00438B48 /* FakeSignalingChannel.m in Sources */,
-				14CC91EB1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift in Sources */,
 				142B50711CDD2C7A005B143C /* ChatUsersStoryConfiguratorTests.swift in Sources */,
+				1433C5F81DF17A2F00A2CED6 /* VideoCallStoryViewTests.swift in Sources */,
 				14ADBDDC1C73850F003A0C98 /* ImageGalleryStoryViewTests.swift in Sources */,
 				14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
 				1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */,
-				14CC91F01DEF6AB200BABE45 /* VideoStoryAssemblyTests.m in Sources */,
 				148A83D61CB0180400F88933 /* FakeQBRESTService.swift in Sources */,
-				E6E8B1AF06EBE9451EC92CE4 /* VideoStoryRouterTests.m in Sources */,
 				14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */,
 				1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */,
 				1420E46B1CE7CE6E0043EFF9 /* IncomingCallStoryRouterTests.swift in Sources */,
@@ -2732,7 +2721,6 @@
 				142B509B1CDD2CE0005B143C /* ChatUsersStoryInitializer.swift in Sources */,
 				1473EAD41CAC6090007F9DF8 /* AuthStoryConfigurator.swift in Sources */,
 				14A028711BFA541A00BDF2C5 /* SVSignalingMessageSDP.m in Sources */,
-				14CC91EE1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift in Sources */,
 				14ADBDF01C738554003A0C98 /* ImageGalleryStoryInteractorOutput.swift in Sources */,
 				142B50901CDD2CE0005B143C /* ChatUsersStoryViewInput.swift in Sources */,
 				1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
@@ -2751,7 +2739,6 @@
 				142B50981CDD2CE0005B143C /* ChatUsersStoryRouterInput.swift in Sources */,
 				1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */,
 				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
-				14EE3D181C6BC7D300C451CF /* VideoStoryInteractor.m in Sources */,
 				142B50961CDD2CE0005B143C /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1420E4911CE7CE9C0043EFF9 /* IncomingCallStoryRouterInput.swift in Sources */,
@@ -2766,7 +2753,6 @@
 				14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */,
 				142D138F1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
 				14736EE71C567EC5009DFBBC /* CallService.m in Sources */,
-				14EE3D1A1C6BC7DA00C451CF /* VideoStoryRouter.m in Sources */,
 				1420E4861CE7CE8D0043EFF9 /* IncomingCallStoryModuleInput.swift in Sources */,
 				1420E4871CE7CE8D0043EFF9 /* IncomingCallStoryPresenter.swift in Sources */,
 				1420E48C1CE7CE920043EFF9 /* IncomingCallStoryInteractorOutput.swift in Sources */,
@@ -2779,9 +2765,7 @@
 				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				1420E47C1CE7CE860043EFF9 /* IncomingCallStoryViewOutput.swift in Sources */,
 				142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
-				14EE3D1B1C6BC7DE00C451CF /* VideoStoryViewController.m in Sources */,
 				1473EAD11CAC6090007F9DF8 /* AuthStoryInteractor.swift in Sources */,
-				14EE3D191C6BC7D600C451CF /* VideoStoryPresenter.m in Sources */,
 				14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */,
 				142D13851C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */,
@@ -2801,7 +2785,6 @@
 				14ADBDEE1C738554003A0C98 /* ImageGalleryStoryPresenter.swift in Sources */,
 				14A0286E1BFA53DB00BDF2C5 /* SVSignalingMessageICE.m in Sources */,
 				14ADBDF41C738554003A0C98 /* ImageGalleryStoryConfigurator.swift in Sources */,
-				14EE3D171C6BC7CF00C451CF /* VideoStoryAssembly.m in Sources */,
 				1473EAC51CAC6070007F9DF8 /* AuthStoryViewController.swift in Sources */,
 				1420E4971CE7CEA20043EFF9 /* IncomingCallStoryInitializer.swift in Sources */,
 				14A028271BFA46F900BDF2C5 /* SVSignalingMessage.m in Sources */,
@@ -2825,7 +2808,6 @@
 				148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */,
 				148233931C002DFE0000E9ED /* QBChatMessage+SVSignalingMessage.m in Sources */,
 				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
-				14CC91EF1DEF4EE100BABE45 /* VideoStoryInteractorOutput.swift in Sources */,
 				142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1482339F1C002DFE0000E9ED /* AppDelegate.m in Sources */,
 				142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
@@ -2839,12 +2821,7 @@
 				1420E5001CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */,
 				14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				148233A91C002DFE0000E9ED /* SVSignalingMessage.m in Sources */,
-				62B3F09AE08CB2C15B7DB191 /* VideoStoryAssembly.m in Sources */,
-				D4E7B9D497E6D08669C82C98 /* VideoStoryViewController.m in Sources */,
-				16D44D383B4F13A3186FEE16 /* VideoStoryPresenter.m in Sources */,
-				88BC5460D1C160FB01C8EF15 /* VideoStoryInteractor.m in Sources */,
 				142D13831C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
-				5D5C514A58C66CFFECF1FB36 /* VideoStoryRouter.m in Sources */,
 				32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
 				1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */,
@@ -2898,6 +2875,18 @@
 				E6A676059F334DB2D23B66F5 /* IncomingCallStoryRouter.swift in Sources */,
 				BA8E216CAF4AC916539D5A5A /* IncomingCallStoryConfigurator.swift in Sources */,
 				6F6512DEC824BA1A844C24BE /* IncomingCallStoryInitializer.swift in Sources */,
+				ED69F39761EF6C34B0E8C3EC /* VideoCallStoryViewInput.swift in Sources */,
+				CD56A4E200CD5C22E43D7421 /* VideoCallStoryViewOutput.swift in Sources */,
+				574FE6CEF8B57721BF1E2332 /* VideoCallStoryViewController.swift in Sources */,
+				B6B2202C1D8FC2AC870DC0DE /* VideoCallStoryModuleInput.swift in Sources */,
+				6E0B7CC250A6438C925FCEFC /* VideoCallStoryPresenter.swift in Sources */,
+				BAB08E2D4CF91FC06652B4EE /* VideoCallStoryInteractorInput.swift in Sources */,
+				28FFDBE56651FC0FAE43A114 /* VideoCallStoryInteractorOutput.swift in Sources */,
+				275383DC6208D349187975DB /* VideoCallStoryInteractor.swift in Sources */,
+				4BB2DADCF0A8097BEFBCF0E2 /* VideoCallStoryRouterInput.swift in Sources */,
+				E4FBAEB769B3C7F83FA0CEC7 /* VideoCallStoryRouter.swift in Sources */,
+				EAA4E764EA4EFF7810DB4CB9 /* VideoCallStoryConfigurator.swift in Sources */,
+				B4BE4AD1D3B879CB1653A21A /* VideoCallStoryInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2917,13 +2906,12 @@
 				14E9F5931C6CD317007F58B7 /* QBSignalingChannelTests.m in Sources */,
 				142B51651CDE13E2005B143C /* XCTest+Optionals.swift in Sources */,
 				14E9F5941C6CD317007F58B7 /* SVSignalingMessageTests.m in Sources */,
+				1433C5F91DF17A3000A2CED6 /* VideoCallStoryViewTests.swift in Sources */,
 				14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */,
 				14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */,
 				14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */,
 				14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */,
-				14E9F59B1C6CD317007F58B7 /* VideoStoryViewControllerTests.m in Sources */,
 				14E9F59C1C6CD317007F58B7 /* FakeSignalingChannel.m in Sources */,
-				14E9F59F1C6CD317007F58B7 /* VideoStoryRouterTests.m in Sources */,
 				14E9F5A01C6CD317007F58B7 /* CallServiceTests.m in Sources */,
 				14E9F5A21C6CD317007F58B7 /* BaseTestCase.m in Sources */,
 				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
@@ -2934,14 +2922,12 @@
 				148A83D71CB0180400F88933 /* FakeQBRESTService.swift in Sources */,
 				E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */,
 				A49D4EB8C7F6DF685E7F5B8D /* AuthStoryConfiguratorTests.swift in Sources */,
-				14CC91EC1DEF4D3B00BABE45 /* VideoStoryInteractorTests.swift in Sources */,
 				71126378754862BDA35556EB /* AuthStoryViewTests.swift in Sources */,
 				24B87B4B94DFA5D9067F6C69 /* AuthStoryInteractorTests.swift in Sources */,
 				0525A30887D71636FB168713 /* AuthStoryPresenterTests.swift in Sources */,
 				010F6CCF815DCADC3352D1B8 /* AuthStoryRouterTests.swift in Sources */,
 				755AB6765BB94E408F1700D8 /* ChatUsersStoryConfiguratorTests.swift in Sources */,
 				498E6D248A49287DF48D4F7C /* ChatUsersStoryViewTests.swift in Sources */,
-				14CC91F11DEF6AB200BABE45 /* VideoStoryAssemblyTests.m in Sources */,
 				C59FD89A1B77494DB23DF2DA /* ChatUsersStoryInteractorTests.swift in Sources */,
 				45898464F3103B713BA7D5A8 /* ChatUsersStoryPresenterTests.swift in Sources */,
 				403A73252BFABF603298069C /* ChatUsersStoryRouterTests.swift in Sources */,
@@ -2950,6 +2936,10 @@
 				314F6B4A1ECA1547669BBE6E /* IncomingCallStoryInteractorTests.swift in Sources */,
 				ADF1997937235A27C7014D90 /* IncomingCallStoryPresenterTests.swift in Sources */,
 				61AEFD94F186E7F57E40512C /* IncomingCallStoryRouterTests.swift in Sources */,
+				C5CEA1B5101DF205C1D0E4B1 /* VideoCallStoryConfiguratorTests.swift in Sources */,
+				EA082B2C7B859A871F8D9396 /* VideoCallStoryInteractorTests.swift in Sources */,
+				4F50B9724B39F9BB99555E1E /* VideoCallStoryPresenterTests.swift in Sources */,
+				ED8F2D3F0D50AD79C7BAD699 /* VideoCallStoryRouterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2991,6 +2981,7 @@
 			baseConfigurationReference = 05463F9E6E85CE20B25C9DC2 /* Pods-QBRTCDemo_sTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",
@@ -3036,6 +3027,7 @@
 			baseConfigurationReference = 9DF13B31BD38FA86783B7AF7 /* Pods-QBRTCDemo_sTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",
@@ -3089,8 +3081,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3132,8 +3126,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3162,6 +3158,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3208,6 +3205,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3286,6 +3284,7 @@
 			baseConfigurationReference = C838C207280F893ECF0AF820 /* Pods-QBRTCDemo_s.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3334,6 +3333,7 @@
 			baseConfigurationReference = A66974BFE6A2ACBB27AB9001 /* Pods-QBRTCDemo_s.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3425,6 +3425,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",
@@ -3472,6 +3473,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",

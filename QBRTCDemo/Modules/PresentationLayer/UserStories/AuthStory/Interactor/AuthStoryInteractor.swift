@@ -73,11 +73,12 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			
 			loggedInREST = true
 			
-			if self.callService.isConnected {
+			guard !self.callService.isConnected else {
 				successBlock(user: restUser)
 				return
 			}
 			
+			assert(restUser.password != nil)
 			self.callService.connectWithUser(restUser, completion: { (error) in
 				if error != nil || !self.callService.isConnected {
 					errorBlock(error: error)
@@ -96,8 +97,8 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			
 			errorBlock(error: error)
 		}
-		
-		callService.connectWithUser(user) { (error) in
+		assert(user.password != nil)
+		callService.connectWithUser(user) { [unowned self] (error) in
 			if self.callService.isConnected {
 				connectedToChat = true
 			}
@@ -120,8 +121,9 @@ internal extension AuthStoryInteractor {
 	2. Login
 	3. Login was successful    -> successBlock
 	4. Login was unsuccessful  -> notify presenter about signup
-	5. Signup was successful   -> successBlock
-	5. Signup was unsuccessful -> error block
+	5. Signup
+	6. Signup was successful   -> successBlock
+	7. Signup was unsuccessful -> error block
 	
 	- parameter user:         SVUser instance
 	- parameter successBlock: success block
@@ -146,6 +148,7 @@ internal extension AuthStoryInteractor {
 	
 	
 	func cacheUser(user: SVUser) {
+		assert(user.password != nil)
 		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
 		let key = "user"
 		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: key)
@@ -160,8 +163,9 @@ internal extension AuthStoryInteractor {
 		if userData == nil {
 			userData = KeychainSwift().getData(key)
 		}
-		if let userData = userData {
-			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? SVUser
+		if let userData = userData,
+			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? SVUser {
+			assert(user.password != nil)
 			return user
 		}
 		return nil

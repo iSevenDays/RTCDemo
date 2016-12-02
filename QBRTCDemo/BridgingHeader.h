@@ -24,8 +24,6 @@
 #import "SVUser+QBUUser.h"
 #import "TestsStorage.h"
 #import <ViperMcFlurry/ViperMcFlurry.h>
-#import "VideoStoryModuleInput.h"
-#import "VideoStoryInteractor.h"
 #import "WebRTCHelpers.h"
 #import "DataChannelMessages.h"
 
@@ -34,5 +32,10 @@
 #import "RTCICEServer.h"
 #import "RTCPeerConnectionInterface.h"
 #import "RTCEAGLVideoView.h"
+#import "RTCVideoRenderer.h"
+
+#import "RTCVideoTrack.h"
+#import "RTCAVFoundationVideoSource.h"
+#import "RTCCameraPreviewView.h"
 
 #endif /* BridgingHeader_h */

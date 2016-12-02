@@ -38,12 +38,6 @@
 #import "WebRTCHelpers.h"
 #import "RTCMediaStream.h"
 
-#if QBRTCDemo_s
-#import "QBRTCDemo_s-Swift.h"
-#elif QBRTCDemo
-#import "QBRTCDemo-Swift.h"
-#endif
-
 @interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
 
 @property (atomic, strong) NSMutableArray *messageQueue;
@@ -149,14 +143,15 @@
 	}
 	
 	self.state = kClientStateConnecting;
-	
+	__weak __typeof(self)weakSelf = self;
 	[self.signalingChannel connectWithUser:user completion:^(NSError * _Nullable error) {
-		if (error) {
-			self.state = kClientStateDisconnected;
+		__typeof(self)strongSelf = weakSelf;
+		if (error != nil) {
+			strongSelf.state = kClientStateDisconnected;
 		} else {
-			self.state = kClientStateConnected;
+			strongSelf.state = kClientStateConnected;
 		}
-		if (completion) {
+		if (completion != nil) {
 			completion(error);
 		}
 	}];

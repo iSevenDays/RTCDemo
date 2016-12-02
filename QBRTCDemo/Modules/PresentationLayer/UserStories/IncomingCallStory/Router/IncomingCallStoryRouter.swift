@@ -17,7 +17,7 @@ class IncomingCallStoryRouter: IncomingCallStoryRouterInput {
 		
 		transitionHandler.openModuleUsingSegue?(incomingCallStoryToVideoStorySegue).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
 			
-			guard let videoStoryInput = moduleInput as? VideoStoryModuleInput else {
+			guard let videoStoryInput = moduleInput as? VideoCallStoryModuleInput else {
 				fatalError("moduleInput is not VideoStoryModuleInput")
 			}
 			

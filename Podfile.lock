@@ -7,7 +7,6 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.2.0):
     - CocoaLumberjack/Default
-  - OCHamcrest (5.2.0)
   - OCMock (3.3.1)
   - RamblerTyphoonUtils/AssemblyCollector (1.5.0)
   - RamblerTyphoonUtils/AssemblyTesting (1.5.0)
@@ -18,7 +17,6 @@ PODS:
 
 DEPENDENCIES:
   - CocoaLumberjack
-  - OCHamcrest (~> 5.0)
   - OCMock (~> 3.3.1)
   - RamblerTyphoonUtils/AssemblyCollector (= 1.5.0)
   - RamblerTyphoonUtils/AssemblyTesting (= 1.5.0)
@@ -27,12 +25,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  OCHamcrest: 218dc4022a5e928a275771da70c5dbea9f859287
   OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
   RamblerTyphoonUtils: 08a6b5592e045a490cd4550aa9ea4a581308d482
   Typhoon: 200100687af3233ec5ed019064df3c9ffe350475
   ViperMcFlurry: 701bc3ad8d188b1f1e157ec0ddf4e77184de88b5
 
-PODFILE CHECKSUM: 99b3b03b172ae77cc56f0d0a0156eab6d7978101
+PODFILE CHECKSUM: 6a5af9d877e6de6807f2c677536297859e755e2c
 
 COCOAPODS: 1.1.1

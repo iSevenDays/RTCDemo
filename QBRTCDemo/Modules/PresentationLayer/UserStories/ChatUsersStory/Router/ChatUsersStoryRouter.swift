@@ -8,7 +8,7 @@
 
 class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
 	
-	let chatUsersStoryToVideoStorySegueIdentifier = "ChatUsersStoryToVideoStorySegueIdentifier"
+	let chatUsersStoryToVideoCallStorySegueIdentifier = "ChatUsersStoryToVideoCallStorySegueIdentifier"
 	let chatUsersStoryToIncomingCallStorySegueIdentifier = "ChatUsersStoryToIncomingCallStorySegueIdentifier"
 	
 	// ChatUsersViewController is transitionHandler
@@ -16,9 +16,9 @@ class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
 	
 	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
 		
-		transitionHandler.openModuleUsingSegue?(chatUsersStoryToVideoStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
+		transitionHandler.openModuleUsingSegue?(chatUsersStoryToVideoCallStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
 			
-			guard let videoStoryInput = moduleInput as? VideoStoryModuleInput else {
+			guard let videoStoryInput = moduleInput as? VideoCallStoryModuleInput else {
 				fatalError("moduleInput is not VideoStoryModuleInput")
 			}
 			

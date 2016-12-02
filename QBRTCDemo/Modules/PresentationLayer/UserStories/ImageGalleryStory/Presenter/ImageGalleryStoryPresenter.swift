@@ -22,7 +22,7 @@
 	func viewIsReady() {
 		view.setupInitialState()
 		
-		interactor.configureCollectionView(self.view.collectionView())
+		interactor.configureCollectionView(view.collectionView())
 	}
 	
 	func didTriggerStartButtonTapped() {

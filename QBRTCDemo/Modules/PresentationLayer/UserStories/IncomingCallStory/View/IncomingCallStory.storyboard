@@ -48,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="157" y="323"/>
         </scene>
-        <!--VideoStory-->
+        <!--VideoCallStory-->
         <scene sceneID="FJl-wr-OLW">
             <objects>
-                <viewControllerPlaceholder storyboardName="VideoStory" id="ktK-fT-O7G" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="VideoCallStory" id="ktK-fT-O7G" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIG-5m-9RJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="872" y="322"/>

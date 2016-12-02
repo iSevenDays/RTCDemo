@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCHamcrest/OCHamcrest.h>
 
 #import "SVUser.h"
 #import "QBUUser+SVUser.h"
@@ -25,16 +24,15 @@
 	
 	SVUser *svuser = [TestsStorage svuserTest];
 
-	assertThat(qbuser, notNilValue());
+	XCTAssertNotNil(qbuser);
+	XCTAssertEqual(qbuser.login, @"testlogin");
+	XCTAssertEqual(qbuser.password, @"testpass");
+	XCTAssertEqual(qbuser.ID, 777);
 	
-	assertThat(qbuser.login, equalTo(@"testlogin"));
-	assertThat(qbuser.password, equalTo(@"testpass"));
-	assertThat(@(qbuser.ID), equalTo(@(777)));
-	
-	assertThat(svuser, notNilValue());
-	assertThat(svuser.login, equalTo(@"svlogin"));
-	assertThat(svuser.password, equalTo(@"svpass"));
-	assertThat(svuser.ID, equalTo(@(123)));
+	XCTAssertNotNil(svuser);
+	XCTAssertEqual(svuser.login, @"svlogin");
+	XCTAssertEqual(svuser.password, @"svpass");
+	XCTAssertEqualObjects(svuser.ID, @(123));
 }
 
 - (void)testCorrectChangingPropertiesOfQBUUser {
@@ -44,10 +42,9 @@
 	qbuser.password = @"testrpgmr3497^F%ST*G&YFIU";
 	qbuser.ID = 12943050;
 	
-	assertThat(qbuser.login, equalTo(@"testlogin2%cerm23er34r"));
-	assertThat(qbuser.password, equalTo(@"testrpgmr3497^F%ST*G&YFIU"));
-	assertThat(@(qbuser.ID), equalTo(@(12943050)));
-	
+	XCTAssertEqual(qbuser.login, @"testlogin2%cerm23er34r");
+	XCTAssertEqual(qbuser.password, @"testrpgmr3497^F%ST*G&YFIU");
+	XCTAssertEqual(qbuser.ID, 12943050);
 }
 
 - (void)testCorrectChangingPropertiesOfSVUser {
@@ -62,17 +59,15 @@
 	svuser.fullName = fullName;
 	svuser.ID = @(4785909);
 	
-	assertThat(svuser, notNilValue());
-	assertThat(svuser.login, equalTo(login));
-	assertThat(svuser.password, equalTo(password));
-	assertThat(svuser.fullName, equalTo(fullName));
-	
-	assertThat(svuser.ID, equalTo(@(4785909)));
+	XCTAssertNotNil(svuser);
+	XCTAssertEqual(svuser.login, login);
+	XCTAssertEqual(svuser.password, password);
+	XCTAssertEqualObjects(svuser.ID, @(4785909));
 }
 
 - (void)testStorageAreAlwaysInitialized {
-	assertThat([TestsStorage svuserTest], notNilValue());
-	assertThat([TestsStorage qbuserTest], notNilValue());
+	XCTAssertNotNil([TestsStorage svuserTest]);
+	XCTAssertNotNil([TestsStorage qbuserTest]);
 }
 
 

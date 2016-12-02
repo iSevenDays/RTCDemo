@@ -40,7 +40,7 @@ class ChatUsersStoryRouterTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.openModuleUsingSegueGotCalled)
-		XCTAssertEqual(mockOutput.segueIdentifier, router.chatUsersStoryToVideoStorySegueIdentifier)
+		XCTAssertEqual(mockOutput.segueIdentifier, router.chatUsersStoryToVideoCallStorySegueIdentifier)
 	}
 	
 	class MockOutput: NSObject, RamblerViperModuleTransitionHandlerProtocol {

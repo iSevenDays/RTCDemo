@@ -6,31 +6,31 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-@objc class ChatUsersStoryPresenter: NSObject, ChatUsersStoryModuleInput, ChatUsersStoryViewOutput, ChatUsersStoryInteractorOutput {
+@objc class ChatUsersStoryPresenter: NSObject {
 
     weak var view: ChatUsersStoryViewInput!
     var interactor: ChatUsersStoryInteractorInput!
     var router: ChatUsersStoryRouterInput!
+}
 
-	// MARK: ChatUsersStoryViewOutput
-	
-    func viewIsReady() {
+extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
+	func viewIsReady() {
 		interactor.retrieveUsersWithTag()
-    }
+	}
 	
 	func didTriggerUserTapped(user: SVUser) {
 		router.openVideoStoryWithInitiator(interactor.retrieveCurrentUser(), thenCallOpponent: user)
 	}
-	
-	// MARK: ChatUsersStoryModuleInput
-	
+}
+
+extension ChatUsersStoryPresenter: ChatUsersStoryModuleInput {
 	func setTag(tag: String, currentUser: SVUser) {
 		interactor.setTag(tag, currentUser: currentUser)
 		view.configureViewWithCurrentUser(currentUser)
 	}
-	
-	// MARK: ChatUsersStoryInteractorOutput
-	
+}
+
+extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 	func didRetrieveUsers(users: [SVUser]) {
 		view.reloadDataWithUsers(users)
 	}

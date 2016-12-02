@@ -22,7 +22,7 @@ class QBRESTService : RESTServiceProtocol {
 	
 	func currentUser() -> SVUser? {
 		if let qbuser = QBSession.currentSession().currentUser {
-			return SVUser.init(QBUUser: qbuser)
+			return SVUser(QBUUser: qbuser)
 		}
 		
 		return nil
@@ -37,17 +37,17 @@ class QBRESTService : RESTServiceProtocol {
 	*/
 	func loginWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void) {
 		guard !user.login.isEmpty else {
-			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserLoginIsEmpty.rawValue, userInfo: nil))
+			errorBlock(error: NSError(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserLoginIsEmpty.rawValue, userInfo: nil))
 			return
 		}
 		
 		guard let userPassword = user.password else {
-			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsNil.rawValue, userInfo: nil))
+			errorBlock(error: NSError(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsNil.rawValue, userInfo: nil))
 			return
 		}
 		
 		guard !userPassword.isEmpty else {
-			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsEmpty.rawValue, userInfo: nil))
+			errorBlock(error: NSError(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsEmpty.rawValue, userInfo: nil))
 			return
 		}
 		
@@ -58,7 +58,7 @@ class QBRESTService : RESTServiceProtocol {
 				return
 			}
 			
-			let svUser = SVUser.init(QBUUser: user)
+			let svUser = SVUser(QBUUser: user)
 			svUser.password = user?.password
 			
 			successBlock(user: svUser)
@@ -71,18 +71,18 @@ class QBRESTService : RESTServiceProtocol {
 	func signUpWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void) {
 		
 		guard !user.login.isEmpty else {
-			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserLoginIsEmpty.rawValue, userInfo: nil))
+			errorBlock(error: NSError(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserLoginIsEmpty.rawValue, userInfo: nil))
 			return
 		}
 		
 		guard let userPassword = user.password else {
-			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsNil.rawValue, userInfo: nil))
+			errorBlock(error: NSError(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsNil.rawValue, userInfo: nil))
 			return
 		}
 		
 		guard !userPassword.isEmpty else {
 			print("user password must not be empty")
-			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsEmpty.rawValue, userInfo: nil))
+			errorBlock(error: NSError(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.UserPasswordIsEmpty.rawValue, userInfo: nil))
 			return
 		}
 		let qbUser = QBUUser(SVUser: user)
@@ -122,6 +122,12 @@ class QBRESTService : RESTServiceProtocol {
 			return
 		}
 		
+		guard requestedUser.password != nil else {
+			NSLog("Error requestedUser must have a password set")
+			errorBlock(error: nil)
+			return
+		}
+		
 		let qbTags = qbCurrentUser.tags ?? []
 		let svTags = NSMutableArray(array:  requestedUser.tags!)
 		
@@ -133,14 +139,14 @@ class QBRESTService : RESTServiceProtocol {
 		}
 		
 		
-		let params = QBUpdateUserParameters.init()
+		let params = QBUpdateUserParameters()
 		params.fullName = requestedUser.fullName
 		params.tags = NSMutableArray(array: requestedUser.tags!)
 		
 		QBRequest.updateCurrentUser(params, successBlock: { (response, qbuser) in
 			
-			let svUser = SVUser.init(QBUUser: qbuser)
-			
+			let svUser = SVUser(QBUUser: qbuser)
+			svUser.password = requestedUser.password
 			successBlock(user: svUser)
 			
 			}) { (response) in
@@ -152,7 +158,7 @@ class QBRESTService : RESTServiceProtocol {
 	func downloadUsersWithTags(tags: [String], successBlock: (users: [SVUser]) -> Void, errorBlock: (error: NSError?) -> Void) {
 		
 		guard tags.count > 0 else {
-			errorBlock(error: NSError.init(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.NoTags.rawValue, userInfo: nil))
+			errorBlock(error: NSError(domain: QBRESTServiceErrorDomain, code: QBRESTServiceErrorCode.NoTags.rawValue, userInfo: nil))
 			return
 		}
 		let page = QBGeneralResponsePage(currentPage: 1, perPage: 100)
@@ -167,7 +173,7 @@ class QBRESTService : RESTServiceProtocol {
 			var svUsers: [SVUser] = []
 			
 			for qbUser in unwrappedUsers {
-				let svUser = SVUser.init(QBUUser: qbUser)
+				let svUser = SVUser(QBUUser: qbUser)
 				svUsers.append(svUser)
 			}
 			

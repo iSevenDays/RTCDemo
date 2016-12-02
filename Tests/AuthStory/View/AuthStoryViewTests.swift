@@ -25,32 +25,35 @@ class AuthStoryViewTests: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-		self.controller = UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewControllerWithIdentifier(String(AuthStoryViewController.self)) as! AuthStoryViewController
+		controller = UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewControllerWithIdentifier(String(AuthStoryViewController.self)) as! AuthStoryViewController
 		
-		self.mockOutput = MockViewControllerOutput()
-		self.controller.output = self.mockOutput
+		mockOutput = MockViewControllerOutput()
+		controller.output = mockOutput
     }
 
 	// MARK: AuthStoryViewOutput
 	func testViewDidLoadTriggersViewIsReadyAction() {
+		// given
+		controller.loadView()
+		
 		// when
-		self.controller.viewDidLoad()
+		controller.viewDidLoad()
 		
 		// then
-		XCTAssertTrue(self.mockOutput.viewIsReadyGotCalled)
+		XCTAssertTrue(mockOutput.viewIsReadyGotCalled)
 	}
 	
 	// MARK: IBActions
 	
 	func testLoginButtonTriggersAction() {
 		// given
-		self.controller.loadView()
+		controller.loadView()
 		
 		// when
-		self.controller.didTapLoginButton(emptySender)
+		controller.didTapLoginButton(emptySender)
 		
 		// then
-		XCTAssertTrue(self.mockOutput.loginButtonTapped)
+		XCTAssertTrue(mockOutput.loginButtonTapped)
 	}
 	
 	func testReturnsUserNameAndRoomName() {
@@ -58,18 +61,18 @@ class AuthStoryViewTests: XCTestCase {
 		let userName = "user"
 		let roomName = "room"
 		
-		self.controller.loadView()
+		controller.loadView()
 		
-		self.controller.setUserName(userName)
-		self.controller.setRoomName(roomName)
+		controller.setUserName(userName)
+		controller.setRoomName(roomName)
 		
 		// when
-		self.controller.retrieveInformation()
+		controller.retrieveInformation()
 		
 		// then
-		XCTAssertEqual(self.mockOutput.userName, userName)
-		XCTAssertEqual(self.mockOutput.roomName, roomName)
-		XCTAssertTrue(self.mockOutput.didReceiveUserNameGotCalled)
+		XCTAssertEqual(mockOutput.userName, userName)
+		XCTAssertEqual(mockOutput.roomName, roomName)
+		XCTAssertTrue(mockOutput.didReceiveUserNameGotCalled)
 	}
 	
 	class MockViewControllerOutput : AuthStoryViewOutput {
@@ -93,7 +96,6 @@ class AuthStoryViewTests: XCTestCase {
 			self.userName = userName
 			self.roomName = roomName
 		}
-	
 	}
 
 
