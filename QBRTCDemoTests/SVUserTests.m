@@ -30,7 +30,7 @@
 - (void)testThatIsEqualMethodCorrectlyComparesEqualObjects {
 	SVUser *testUser = [TestsStorage svuserTest];
 	
-	SVUser *equalUser = [[SVUser alloc] initWithID:testUser.ID login:testUser.login fullName:@"full_name" password:testUser.password tags:@[@"svtag"]];
+	SVUser *equalUser = [[SVUser alloc] initWithID:testUser.ID login:testUser.login fullName:@"full_name_sv" password:testUser.password tags:@[@"svtag"]];
 	
 	XCTAssertEqualObjects(testUser, equalUser);
 }

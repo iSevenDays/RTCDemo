@@ -14,11 +14,11 @@ static QBUUser *qbuser = nil;
 static SVUser *svuser = nil;
 
 + (SVUser *)svuserRealUser1 {
-	return [[SVUser alloc] initWithID:@(6942802) login:@"rtcuser1" password:@"rtcuser1"];
+	return [[SVUser alloc] initWithID:@(6942802) login:@"UUID_CUSTOM" fullName:@"rtcuser1_fullname" password:@"rtcuser1" tags:@[@"tag1"]];
 }
 
 + (SVUser *)svuserRealUser2 {
-	return [[SVUser alloc] initWithID:@(6942819) login:@"rtcuser2" password:@"rtcuser2"];
+	return [[SVUser alloc] initWithID:@(6942802) login:@"UUID_CUSTOM2" fullName:@"rtcuser2_fullname" password:@"rtcuser2" tags:@[@"tag2"]];
 }
 
 + (QBUUser *)qbuserTest {

@@ -17,6 +17,7 @@
 #import "SVSignalingMessageSDP.h"
 #import "SVSignalingParams.h"
 #import "CallServiceHelpers.h"
+#import "QBChatMessage+SVSignalingMessage.h"
 
 @interface SVSignalingMessageTests : XCTestCase
 
@@ -77,7 +78,24 @@
 	XCTAssertNotNil(signalMessage.params);
 	
 	XCTAssertEqual(signalMessage.params[@"custom_param"], @"param");
+}
+
+- (void)testSVMessageFromQBChatMessageHasCorrectUserInformation {
+	// given
+	SVSignalingMessage *preparedToSendMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
+	SVUser *sender = [TestsStorage svuserRealUser1];
+	sender.password = nil;
+	sender.tags = nil;
+	preparedToSendMessage.sender = sender;
 	
+	// when
+	QBChatMessage *sentMessage = [QBChatMessage messageWithSVSignalingMessage:preparedToSendMessage];
+	sentMessage.senderID = sender.ID.unsignedIntegerValue;
+	sentMessage.recipientID = 111;
+	
+	SVSignalingMessage *receivedMessage = [SVSignalingMessage messageWithQBChatMessage:sentMessage];
+	
+	XCTAssertEqualObjects(sender, receivedMessage.sender);
 }
 
 @end

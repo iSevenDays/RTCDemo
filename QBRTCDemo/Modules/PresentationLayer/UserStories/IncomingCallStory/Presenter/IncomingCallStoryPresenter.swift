@@ -13,13 +13,14 @@
     var router: IncomingCallStoryRouterInput!
 
     func viewIsReady() {
-
+		
     }
 	
 	// MARK: IncomingCallStoryModuleInput
 	
 	func configureModuleWithCallInitiator(opponent: SVUser) {
 		interactor.setOpponent(opponent)
+		view.configureViewWithCallInitiator(opponent)
 	}
 	
 	// MARK: IncomingCallStoryViewOutput

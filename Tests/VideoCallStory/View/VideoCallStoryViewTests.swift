@@ -75,7 +75,6 @@ class VideoCallStoryViewTests: XCTestCase {
 	
 	func testSetLocalVideoCaptureSession_setsCaptureSession() {
 		// given
-		controller.loadView()
 		let testCaptureSession = AVCaptureSession()
 		
 		// when
@@ -85,7 +84,7 @@ class VideoCallStoryViewTests: XCTestCase {
 		XCTAssertEqual(controller.viewLocal.captureSession, testCaptureSession)
 	}
 
-	class MockViewControllerOutput : VideoCallStoryViewOutput {
+	class MockViewControllerOutput: NSObject, VideoCallStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		var hangupButtonTapped = false
 		var dataChannelButtonTapped = false

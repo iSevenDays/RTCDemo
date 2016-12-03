@@ -34,9 +34,9 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		mockRouter = MockRouter()
 		mockView = MockViewController()
 		
-		presenter.interactor = self.mockInteractor
-		presenter.router = self.mockRouter
-		presenter.view = self.mockView
+		presenter.interactor = mockInteractor
+		presenter.router = mockRouter
+		presenter.view = mockView
 	}
 	
 	func testPresenterConfiguresModule() {
@@ -48,6 +48,8 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		
 		// then
 		XCTAssertEqual(mockInteractor.retrieveOpponent(), opponent)
+		XCTAssertTrue(mockView.configureViewWithCallInitiatorGotCalled)
+		XCTAssertEqual(mockView.callInitiator, opponent)
 	}
 	
 	func testPresenterOpensVideoStory_whenCallHasBeenAccepted() {
@@ -87,8 +89,16 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 
     class MockViewController: IncomingCallStoryViewInput {
 
+		var configureViewWithCallInitiatorGotCalled = false
+		var callInitiator: SVUser?
+		
         func setupInitialState() {
 
         }
+		
+		func configureViewWithCallInitiator(callInitiator: SVUser) {
+			configureViewWithCallInitiatorGotCalled = true
+			self.callInitiator = callInitiator
+		}
     }
 }

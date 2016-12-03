@@ -50,8 +50,9 @@
 	SVUser *obj = object;
 	return [self.ID isEqualToNumber:obj.ID] &&
 	[self.login isEqualToString:obj.login] &&
-	[self.password isEqualToString:obj.password] &&
-	((!self.tags && !obj.tags) || [self.tags isEqual:obj.tags]);
+	((!self.password && !obj.password) || [self.password isEqualToString:obj.password]) &&
+	((!self.tags && !obj.tags) || [self.tags isEqual:obj.tags]) &&
+	((!self.fullName && !obj.fullName) || [self.fullName isEqual:obj.fullName]);
 }
 
 - (NSString *)description {

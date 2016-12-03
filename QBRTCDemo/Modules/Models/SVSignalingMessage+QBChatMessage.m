@@ -34,7 +34,8 @@
 	
 	// restore user back from dictionary
 	NSString *login = params[SVSignalingParams.senderLogin];
-	svmessage.sender = [SVUser userWithID:@(qbmessage.senderID) login:login password:@""];
+	NSString *fullName = params[SVSignalingParams.senderFullName];
+	svmessage.sender = [[SVUser alloc] initWithID:@(qbmessage.senderID) login:login fullName:fullName password:nil tags:nil];
 	
 	return svmessage;
 }

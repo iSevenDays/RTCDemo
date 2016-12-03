@@ -27,15 +27,24 @@
                                     <action selector="acceptCall" destination="7yk-1n-wJc" eventType="touchUpInside" id="QtG-3q-VUB"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming call from:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7F4-P2-FbP">
+                                <rect key="frame" x="87" y="208" width="146" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="58o-9I-lgW" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" id="EDI-yd-viJ"/>
+                            <constraint firstItem="58o-9I-lgW" firstAttribute="top" secondItem="7F4-P2-FbP" secondAttribute="bottom" constant="40" id="Rpw-BN-Jyw"/>
                             <constraint firstItem="58o-9I-lgW" firstAttribute="centerY" secondItem="Rza-Xh-sdU" secondAttribute="centerY" id="Upq-yU-Ac8"/>
+                            <constraint firstItem="7F4-P2-FbP" firstAttribute="centerX" secondItem="58o-9I-lgW" secondAttribute="centerX" id="iBc-sm-Qbu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnAcceptCall" destination="58o-9I-lgW" id="CkY-58-l8a"/>
+                        <outlet property="lblIncomingCall" destination="7F4-P2-FbP" id="Vte-Cl-nSz"/>
                         <segue destination="ktK-fT-O7G" kind="show" identifier="IncomingCallStoryToVideoStorySegue" id="bCB-Y8-zh1"/>
                     </connections>
                 </viewController>

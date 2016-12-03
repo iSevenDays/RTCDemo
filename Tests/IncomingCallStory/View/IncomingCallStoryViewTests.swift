@@ -25,33 +25,43 @@ class IncomingCallStoryViewTests: XCTestCase {
 	
 	override func setUp() {
 		super.setUp()
-		self.controller = UIStoryboard(name: "IncomingCallStory", bundle: nil).instantiateViewControllerWithIdentifier(String(IncomingCallStoryViewController.self)) as! IncomingCallStoryViewController
+		controller = UIStoryboard(name: "IncomingCallStory", bundle: nil).instantiateViewControllerWithIdentifier(String(IncomingCallStoryViewController.self)) as! IncomingCallStoryViewController
 		
-		self.mockOutput = MockViewControllerOutput()
-		self.controller.output = self.mockOutput
+		mockOutput = MockViewControllerOutput()
+		controller.output = mockOutput
 	}
 
 	// MARK: AuthStoryViewOutput
 	
 	func testViewDidLoadTriggersViewIsReadyAction() {
 		// when
-		self.controller.viewDidLoad()
+		controller.viewDidLoad()
 		
 		// then
-		XCTAssertTrue(self.mockOutput.viewIsReadyGotCalled)
+		XCTAssertTrue(mockOutput.viewIsReadyGotCalled)
 	}
 	
 	// MARK: IBActions
 	
 	func testAcceptButtonTriggersAction() {
-		// given
-		self.controller.loadView()
-		
 		// when
-		self.controller.acceptCall()
+		controller.acceptCall()
 		
 		// then
-		XCTAssertTrue(self.mockOutput.didTriggerAcceptButtonTappedGotCalled)
+		XCTAssertTrue(mockOutput.didTriggerAcceptButtonTappedGotCalled)
+	}
+	
+	// MARK: - Testing methods of IncomingCallStoryViewInput
+	
+	func testConfigureViewWithUser() {
+		// given
+		let callInitiator = TestsStorage.svuserRealUser1()
+		
+		// when
+		controller.configureViewWithCallInitiator(callInitiator)
+		
+		// then
+		XCTAssertEqual(controller.lblIncomingCall.text, "Incoming call from: " + callInitiator.fullName)
 	}
 	
 	class MockViewControllerOutput : NSObject, IncomingCallStoryViewOutput {

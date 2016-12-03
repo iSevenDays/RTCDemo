@@ -14,5 +14,6 @@ extern const struct SVSignalingParams {
 	__unsafe_unretained NSString *mid;
 	__unsafe_unretained NSString *index;
 	__unsafe_unretained NSString *senderLogin;
+	__unsafe_unretained NSString *senderFullName;
 	
 } SVSignalingParams;

@@ -8,11 +8,12 @@
 
 import UIKit
 
-class IncomingCallStoryViewController: UIViewController, IncomingCallStoryViewInput {
+class IncomingCallStoryViewController: UIViewController {
 
     @objc var output: IncomingCallStoryViewOutput!
 
 	@IBOutlet weak var btnAcceptCall: UIButton!
+	@IBOutlet weak var lblIncomingCall: UILabel!
 	
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -20,14 +21,22 @@ class IncomingCallStoryViewController: UIViewController, IncomingCallStoryViewIn
         output.viewIsReady()
     }
 	
-
-    // MARK: IncomingCallStoryViewInput
-    func setupInitialState() {
-    }
-	
 	// MARK: IBActions
 	
 	@IBAction func acceptCall() {
+		loadViewIfNeeded()
 		output.didTriggerAcceptButtonTapped()
+	}
+}
+
+extension IncomingCallStoryViewController: IncomingCallStoryViewInput {
+	func setupInitialState() {
+		
+	}
+	
+	func configureViewWithCallInitiator(callInitiator: SVUser) {
+		loadViewIfNeeded()
+		lblIncomingCall.text = "Incoming call from: " + callInitiator.fullName
+		lblIncomingCall.hidden = false
 	}
 }

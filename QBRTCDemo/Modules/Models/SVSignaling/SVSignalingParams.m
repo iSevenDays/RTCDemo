@@ -16,4 +16,5 @@ const struct SVSignalingParams SVSignalingParams = {
 	.mid = @"mid",
 	.index = @"index",
 	.senderLogin = @"login",
+	.senderFullName = @"fullname"
 };

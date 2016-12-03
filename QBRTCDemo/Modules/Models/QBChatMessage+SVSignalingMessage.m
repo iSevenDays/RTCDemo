@@ -51,7 +51,8 @@
 	
 	// Fill sender
 	NSParameterAssert(signalingMessage.sender);
-	message.customParameters[SVSignalingParams.senderLogin] = [signalingMessage.sender.ID stringValue];
+	message.customParameters[SVSignalingParams.senderLogin] = [signalingMessage.sender.login copy];
+	message.customParameters[SVSignalingParams.senderFullName] = [signalingMessage.sender.fullName copy];
 	
 	return message;
 }
