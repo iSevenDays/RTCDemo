@@ -121,7 +121,9 @@ extension VideoCallStoryInteractor: CallServiceDelegate {
 		let source = localVideoTrack.source as? RTCAVFoundationVideoSource
 		
 		if let source = source {
-			output.didSetLocalCaptureSession(source.captureSession)
+			if source.captureSession != nil {
+				output.didSetLocalCaptureSession(source.captureSession)
+			}
 		}
 	}
 	

@@ -6,6 +6,6 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-protocol AuthStoryModuleInput: class {
+@objc protocol AuthStoryModuleInput: RamblerViperModuleInput {
 
 }

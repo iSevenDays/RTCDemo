@@ -97,6 +97,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			
 			errorBlock(error: error)
 		}
+		assert(user.ID != nil)
 		assert(user.password != nil)
 		callService.connectWithUser(user) { [unowned self] (error) in
 			if self.callService.isConnected {

@@ -54,7 +54,10 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 					continue
 				}
 				
-				sendData(imageData)
+				guard sendData(imageData) else {
+					output.didFinishSynchronizationImages()
+					return
+				}
 			}
 			
 			output.didFinishSynchronizationImages()
