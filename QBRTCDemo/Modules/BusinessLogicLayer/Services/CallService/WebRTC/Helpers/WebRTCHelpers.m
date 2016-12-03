@@ -1,6 +1,6 @@
 //
 //  WebRTCHelpers.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 1/25/16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -99,8 +99,8 @@
 
 + (RTCMediaConstraints *)defaultOfferConstraints {
 	NSArray *mandatoryConstraints = @[
-									  [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"false"],
-									  [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"false"]
+									  [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"],
+									  [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"]
 									  ];
 	RTCMediaConstraints* constraints =
 	[[RTCMediaConstraints alloc]

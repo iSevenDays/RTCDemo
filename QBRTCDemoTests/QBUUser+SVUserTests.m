@@ -1,13 +1,12 @@
 //
 //  QBUUser_SVUserTests.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11/18/15.
 //  Copyright © 2015 anton. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
-#import <OCHamcrest/OCHamcrest.h>
 
 #import "SVUser.h"
 #import "QBUUser+SVUser.h"
@@ -38,17 +37,17 @@
 - (void)testQBUUserCorrectlyInitWithSVUser {
 	QBUUser *user = [QBUUser userWithSVUser:self.svuser];
 	
-	assertThat(@(user.ID), equalTo(self.svuser.ID));
-	assertThat(user.login, equalTo(self.svuser.login));
-	assertThat(user.password, equalTo(self.svuser.password));
+	XCTAssertEqual(user.ID, self.svuser.ID.unsignedIntegerValue);
+	XCTAssertEqual(user.login, self.svuser.login);
+	XCTAssertEqual(user.password, self.svuser.password);
 }
 
 - (void)testSVUserCorrectlyInit {
 	SVUser *user = [SVUser userWithID:@(self.qbuser.ID) login:self.qbuser.login password:self.qbuser.password];
 	
-	assertThat(user.ID, equalTo(@(self.qbuser.ID)));
-	assertThat(user.login, equalTo(self.qbuser.login));
-	assertThat(user.password, equalTo(self.qbuser.password));
+	XCTAssertEqual(user.ID.unsignedIntegerValue, self.qbuser.ID);
+	XCTAssertEqual(user.login, self.qbuser.login);
+	XCTAssertEqual(user.password, self.qbuser.password);
 }
 
 @end

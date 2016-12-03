@@ -1,6 +1,6 @@
 //
 //  ImageGalleryStoryInteractor.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 15/02/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -14,17 +14,22 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	
 	weak var imagesOutput: ImageGalleryStoryInteractorImagesOutput!
 
-	var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
+	private weak var _callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
+	
+	var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>! {
+		get {
+			return _callService
+		}
+		set (value){
+			_callService = value
+			_callService.addDataChannelDelegate(self)
+		}
+	}
 	
 	var collectionViewConfigurationBlock: ((collectionView: ImageGalleryStoryCollectionView) -> Void)!
 	
 	func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {
 		collectionViewConfigurationBlock(collectionView: collectionView)
-	}
-	
-	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>) {
-		self.callService = callService
-		callService.addDataChannelDelegate(self)
 	}
 	
 	func startSynchronizationImages() {
@@ -49,7 +54,10 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 					continue
 				}
 				
-				sendData(imageData)
+				guard sendData(imageData) else {
+					output.didFinishSynchronizationImages()
+					return
+				}
 			}
 			
 			output.didFinishSynchronizationImages()

@@ -1,13 +1,12 @@
 //
 //  SVUserTests.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11/21/15.
 //  Copyright © 2015 anton. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
-#import <OCHamcrest/OCHamcrest.h>
 
 #import "SVUser.h"
 #import "TestsStorage.h"
@@ -25,7 +24,7 @@
 	
 	SVUser *notEqualUser = [SVUser userWithID:@(13) login:@"nologin" password:@"somepass"];
 	
-	assertThat(testUser, isNot(equalTo(notEqualUser)));
+	XCTAssertNotEqual(testUser, notEqualUser);
 }
 
 - (void)testThatIsEqualMethodCorrectlyComparesEqualObjects {
@@ -33,7 +32,7 @@
 	
 	SVUser *equalUser = [[SVUser alloc] initWithID:testUser.ID login:testUser.login fullName:@"full_name" password:testUser.password tags:@[@"svtag"]];
 	
-	assertThat(testUser, equalTo(equalUser));
+	XCTAssertEqualObjects(testUser, equalUser);
 }
 
 - (void)testSVUserSupportsNSCoding {

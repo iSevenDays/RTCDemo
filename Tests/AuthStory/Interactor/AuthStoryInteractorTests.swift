@@ -1,6 +1,6 @@
 //
 //  AuthStoryInteractorTests.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 27/03/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -22,6 +22,7 @@ class AuthStoryInteractorTests: XCTestCase {
 	var mockOutput: MockPresenter!
 	
 	let fakeService = FakeQBRESTService()
+	let fakeCallService = FakeCallService(signalingChannel: FakeSignalingChannel())
 	//let realService = QBRESTService()
 	
 	let userName = "test"
@@ -33,6 +34,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
 		
+		interactor.callService = fakeCallService
 		interactor.restService = fakeService
     }
 
@@ -94,8 +96,8 @@ class AuthStoryInteractorTests: XCTestCase {
 		fakeService.shouldLoginSuccessfully = true
 		
 		// when
-		interactor.cacheUser(SVUser.init(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
-		interactor.tryRetrieveCachedUser()
+		interactor.cacheUser(SVUser(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
+		interactor.tryLoginWithCachedUser()
 		
 		// then
 		XCTAssertTrue(mockOutput.doingLoginWithCachedUserGotCalled)
@@ -133,7 +135,9 @@ class AuthStoryInteractorTests: XCTestCase {
 		
 		var doingSignUpWithUserGotCalled = false
 		var didLoginUserGotCalled = false
+		
 		var didErrorLoginGotCalled = false
+		var errorLogin: NSError?
 		
 		func doingLoginWithUser(user: SVUser) {
 			doingLoginWithUserGotCalled = true
@@ -153,6 +157,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		
 		func didErrorLogin(error: NSError?) {
 			didErrorLoginGotCalled = true
+			errorLogin = error
 		}
     }
 }

@@ -1,6 +1,6 @@
 //
 //  ImageGalleryStoryPresenterTests.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 15/02/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -59,13 +59,10 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	}
 	
 	func testPresenterConfiguresModule() {
-		// given
-		let callService = CallService(signalingChannel: FakeSignalingChannel(), callServiceDelegate: nil, dataChannelDelegate: nil)
 		// when
-		self.presenter.configureWithCallService(callService!)
+		self.presenter.configureModule()
 		
 		// then
-		XCTAssertTrue(self.mockInteractor.configureWithCallServiceGotCalled)
 		XCTAssertTrue(self.mockInteractor.requestCallerRoleGotCalled)
 	}
 	
@@ -113,10 +110,6 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		var configureWithCallServiceGotCalled = false
 		var configureCollectionViewGotCalled = false
 		var requestCallerRoleGotCalled = false
-		
-		func configureWithCallService(callService: protocol<CallServiceDataChannelAdditionsProtocol, CallServiceProtocol>) {
-			configureWithCallServiceGotCalled = true
-		}
 		
 		func startSynchronizationImages() {
 			startSynchronizationImagesGotCalled = true

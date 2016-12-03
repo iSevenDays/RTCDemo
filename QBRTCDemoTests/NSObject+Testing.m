@@ -1,6 +1,6 @@
 //
 //  NSObject+Testing.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 4/7/16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -49,7 +49,6 @@
 		id comparedProperty = [comparedObject valueForKey:propertyName];
 		
 		if (originalProperty != nil || comparedProperty != nil) {
-			XCTAssertTrue([originalProperty isEqual:comparedProperty]);
 			
 			// to catch assert add All Exceptions breakpoint
 			NSAssert([originalProperty isEqual:comparedProperty], @"see debugger with print-object");

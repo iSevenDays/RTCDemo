@@ -1,6 +1,6 @@
 //
 //  FakeSignalingChannel.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 1/28/16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -19,7 +19,7 @@
 - (instancetype)init {
 	self = [super init];
 	if (self) {
-		self.shouldSendMessagesSuccessfully = YES;
+		_shouldSendMessagesSuccessfully = YES;
 	}
 	return self;
 }
@@ -31,7 +31,7 @@
 	
 	self.state = SVSignalingChannelState.established;
 	
-	if (completion) {
+	if (completion != nil) {
 		completion(nil);
 	}
 }

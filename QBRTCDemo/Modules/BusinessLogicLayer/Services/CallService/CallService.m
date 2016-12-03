@@ -1,12 +1,13 @@
 //
 //  CallService.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 1/25/16.
 //  Copyright © 2016 anton. All rights reserved.
 //
 
 #import "CallService.h"
+
 #import "CallServiceDelegate.h"
 #import "CallServiceDataChannelAdditionsDelegate.h"
 
@@ -39,14 +40,10 @@
 
 @interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
 
-@property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
 @property (atomic, strong) NSMutableArray *messageQueue;
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
-@property (nonatomic, strong) RTCPeerConnection *peerConnection;
-
 @property (nonatomic, strong) RTCDataChannel *dataChannel;
 
-@property (nonatomic, assign, readwrite) CallServiceState state;
 @property (nonatomic, assign) BOOL isReceivedSDP;
 @property (nonatomic, assign, getter=isInitiator) BOOL initiator;
 @property (nonatomic, assign) BOOL isAudioOnly;
@@ -54,11 +51,7 @@
 @property (nonatomic, strong) SVUser *opponentUser;
 @property (nonatomic, strong) SVUser *initiatorUser;
 
-@property (nonatomic, strong) RTCMediaConstraints *defaultOfferConstraints;
-@property (nonatomic, strong) RTCMediaConstraints *defaultAnswerConstraints;
-@property (nonatomic, strong) RTCMediaConstraints *defaultPeerConnectionConstraints;
-@property (nonatomic, strong) RTCMediaConstraints *defaultMediaStreamConstraints;
-@property (nonatomic, strong) RTCConfiguration *defaultConfigurationWithCurrentICEServers;
+@property (nonatomic, strong) NSMutableArray<CallServicePendingRequest *> *pendingRequests;
 
 @end
 
@@ -88,6 +81,7 @@
 		}
 		
 		_messageQueue = [NSMutableArray array];
+		_pendingRequests = [NSMutableArray array];
 		_factory = [[RTCPeerConnectionFactory alloc] init];
 		
 		_state = kClientStateDisconnected;
@@ -99,6 +93,10 @@
 	return self;
 }
 
+- (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel {
+	return [self initWithSignalingChannel:signalingChannel callServiceDelegate:nil];
+}
+
 - (instancetype)initWithSignalingChannel:(id<SVSignalingChannelProtocol>)signalingChannel callServiceDelegate:(id<CallServiceDelegate>)callServiceDelegate {
 	return [self initWithSignalingChannel:signalingChannel callServiceDelegate:callServiceDelegate dataChannelDelegate:nil];
 }
@@ -106,6 +104,10 @@
 - (void)addDelegate:(id<CallServiceDelegate>)delegate {
 	DDLogInfo(@"Added call delegate: %@", delegate);
 	[self.multicastDelegate addDelegate:delegate];
+}
+
+- (NSArray *)delegates {
+	return [self.multicastDelegate delegates].allObjects;
 }
 
 - (void)addDataChannelDelegate:(id<CallServiceDataChannelAdditionsDelegate>)dataChannelDelegate {
@@ -123,25 +125,58 @@
 
 - (void)connectWithUser:(SVUser *)user completion:(void(^)(NSError *error))completion {
 	
-	NSCAssert(self.state == kClientStateDisconnected, @"Invalid state");
+	NSParameterAssert(self.signalingChannel);
+	NSParameterAssert(user.password);
+	
+	if (self.state == kClientStateConnecting) {
+		if (completion) {
+			completion([[NSError alloc] initWithDomain:@"CallServiceErrorDomain" code:-1 userInfo:@{@"Error": @"Trying to connect while already connecting, return"}]);
+		}
+		return;
+	}
+	
+	if (self.state == kClientStateConnected) {
+		if (completion != nil) {
+			completion(nil);
+		}
+		return;
+	}
 	
 	self.state = kClientStateConnecting;
-	
+	__weak __typeof(self)weakSelf = self;
 	[self.signalingChannel connectWithUser:user completion:^(NSError * _Nullable error) {
-		if (error) {
-			self.state = kClientStateDisconnected;
+		__typeof(self)strongSelf = weakSelf;
+		if (error != nil) {
+			strongSelf.state = kClientStateDisconnected;
 		} else {
-			self.state = kClientStateConnected;
+			strongSelf.state = kClientStateConnected;
 		}
-		if (completion) {
+		if (completion != nil) {
 			completion(error);
+		}
+	}];
+}
+
+- (void)disconnectWithCompletion:(void (^)(NSError * _Nullable))completion {
+	if (self.state == kClientStateDisconnected) {
+		if (completion) {
+			completion(nil);
+		}
+		return;
+	}
+	
+	__weak __typeof(self) weakSelf = self;
+	
+	[self.signalingChannel disconnectWithCompletion:^(NSError * _Nullable error) {
+		if (error == nil) {
+			weakSelf.state = kClientStateDisconnected;
 		}
 	}];
 }
 
 - (void)startCallWithOpponent:(SVUser *)opponent {
 	if ([self hasActiveCall]) {
-		DDLogWarn(@"Trying to call while already calling. Returning.");
+		DDLogError(@"Trying to call while already calling. Returning.");
 		return;
 	}
 	
@@ -179,6 +214,35 @@
 	[self.peerConnection createOfferWithDelegate:self constraints:[self defaultOfferConstraints]];
 
 }
+
+- (void)acceptCallFromOpponent:(SVUser *)opponent {
+	
+	SVUser *initiator = nil;
+	SVSignalingMessage *offerSignalingMessage = nil;
+	
+	for (CallServicePendingRequest *request in self.pendingRequests) {
+		if ([request.initiator isEqual:opponent]) {
+			initiator = request.initiator;
+			offerSignalingMessage = request.offerSignalingMessage;
+		}
+	}
+	
+	NSParameterAssert(initiator);
+	NSParameterAssert(offerSignalingMessage);
+	
+	self.opponentUser = initiator;
+	self.initiatorUser = initiator;
+	
+	self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
+	[self.peerConnection addStream:[self createLocalMediaStream]];
+	self.peerConnection.delegate = self;
+	
+	[_messageQueue insertObject:offerSignalingMessage atIndex:0];
+	self.isReceivedSDP = YES;
+
+	[self drainMessageQueueIfReady];
+}
+
 
 - (void)hangup {
 	
@@ -507,6 +571,10 @@
 	return [self.initiatorUser isEqual:self.signalingChannel.user];
 }
 
+- (SVUser *)currentUser {
+	return self.signalingChannel.user;
+}
+
 #pragma mark - SVSignalingChannel Delegate
 
 - (void)channel:(id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *)message {
@@ -527,15 +595,15 @@
 		NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
 		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");
 		
-		self.opponentUser = message.sender;
-		self.initiatorUser = self.opponentUser;
+		CallServicePendingRequest *pendingRequest = [[CallServicePendingRequest alloc] initWithOfferSignalingMessage:message];
 		
-		self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
-		[self.peerConnection addStream:[self createLocalMediaStream]];
-		self.peerConnection.delegate = self;
+		[self.pendingRequests addObject:pendingRequest];
+		
+		[self.multicastDelegate callService:self didReceiveCallRequestFromOpponent:pendingRequest.initiator];
+		
 	}
-	if ([message.type isEqualToString:SVSignalingMessageType.offer] ||
-		[message.type isEqualToString:SVSignalingMessageType.answer]) {
+	
+	if ([message.type isEqualToString:SVSignalingMessageType.answer]) {
 		self.isReceivedSDP = YES;
 		// Offers and answers must be processed before any other message, so we
 		// place them at the front of the queue.
@@ -551,6 +619,13 @@
 	}
 	
 	[self drainMessageQueueIfReady];
+}
+
+- (void)channel:(id<SVSignalingChannelProtocol>)channel didChangeState:(NSString *)signalingState {
+	if ([signalingState isEqualToString:SVSignalingChannelState.error] ||
+		[signalingState isEqualToString:SVSignalingChannelState.closed]) {
+		self.state = kClientStateDisconnected;
+	}
 }
 
 #pragma mark Data Channel
@@ -614,5 +689,6 @@
 		}
 	}
 }
+
 
 @end

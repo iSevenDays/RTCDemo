@@ -1,23 +1,23 @@
 //
 //  AuthStoryPresenter.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 27/03/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryInteractorOutput{
-
-    weak var view: AuthStoryViewInput!
-    var interactor: AuthStoryInteractorInput!
-    var router: AuthStoryRouterInput!
-
+class AuthStoryPresenter: NSObject {
 	
-	// MARK: AuthStoryViewOutput
+	weak var view: AuthStoryViewInput!
+	var interactor: AuthStoryInteractorInput!
+	var router: AuthStoryRouterInput!
 	
-    func viewIsReady() {
-		interactor.tryRetrieveCachedUser()
-    }
+}
+
+extension AuthStoryPresenter: AuthStoryViewOutput {
+	func viewIsReady() {
+		interactor.tryLoginWithCachedUser()
+	}
 	
 	
 	func didTriggerLoginButtonTapped(userName: String, roomName: String) {
@@ -27,18 +27,22 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 	func didReceiveUserName(userName: String, roomName: String) {
 		
 	}
-	
-	// MARK: AuthStoryInteractorInput
+}
+
+extension AuthStoryPresenter: AuthStoryInteractorOutput {
 	
 	func didLoginUser(user: SVUser) {
-		router.openVideoStory()
+		guard let firstTag = user.tags?.first else {
+			NSLog("Error user has no tags")
+			return
+		}
+		
+		router.openChatUsersStoryWithTag(firstTag, currentUser: user)
 	}
 	
 	func didErrorLogin(error: NSError?) {
 		view.showErrorLogin()
 	}
-	
-	// MARK: AuthStoryInteractorOutput
 	
 	func doingLoginWithUser(user: SVUser) {
 		view.showIndicatorLoggingIn()
@@ -57,4 +61,7 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 		view.setUserName(user.fullName)
 		view.setRoomName(user.tags!.joinWithSeparator(","))
 	}
+}
+
+extension AuthStoryPresenter: AuthStoryModuleInput {
 }

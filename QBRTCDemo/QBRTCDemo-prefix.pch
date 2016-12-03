@@ -1,6 +1,6 @@
 //
-//  QBRTCDemo-prefix.pch
-//  QBRTCDemo
+//  RTCDemo-prefix.pch
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11/15/15.
 //  Copyright © 2015 anton. All rights reserved.
@@ -13,6 +13,12 @@
 #import <Quickblox/Quickblox.h>
 #import <Foundation/Foundation.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
+
+#if QBRTCDemo_s
+#import "QBRTCDemo_s-Swift.h"
+#elif QBRTCDemo
+#import "QBRTCDemo-Swift.h"
+#endif
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 

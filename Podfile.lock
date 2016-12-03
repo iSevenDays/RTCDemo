@@ -7,35 +7,27 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.2.0):
     - CocoaLumberjack/Default
-  - OCHamcrest (5.2.0)
-  - OCMock (3.2.2)
-  - RamblerTyphoonUtils/AssemblyCollector (1.2.0)
-  - RamblerTyphoonUtils/AssemblyTesting (1.2.0)
+  - OCMock (3.3.1)
+  - RamblerTyphoonUtils/AssemblyCollector (1.5.0)
   - Typhoon (3.4.5):
     - Typhoon/no-arc (= 3.4.5)
   - Typhoon/no-arc (3.4.5)
-  - ViperMcFlurry (1.2.0):
-    - ViperMcFlurry/Core (= 1.2.0)
-    - ViperMcFlurry/IntermoduleDataTransfer (= 1.2.0)
-  - ViperMcFlurry/Core (1.2.0)
-  - ViperMcFlurry/IntermoduleDataTransfer (1.2.0):
-    - ViperMcFlurry/Core
+  - ViperMcFlurry (1.5.2)
 
 DEPENDENCIES:
   - CocoaLumberjack
-  - OCHamcrest (~> 5.0)
-  - OCMock (~> 3.2)
-  - RamblerTyphoonUtils/AssemblyCollector (= 1.2.0)
-  - RamblerTyphoonUtils/AssemblyTesting (= 1.2.0)
+  - OCMock (~> 3.3.1)
+  - RamblerTyphoonUtils/AssemblyCollector (= 1.5.0)
   - Typhoon (~> 3.4.5)
-  - ViperMcFlurry (~> 1.2)
+  - ViperMcFlurry (~> 1.5.2)
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  OCHamcrest: 218dc4022a5e928a275771da70c5dbea9f859287
-  OCMock: 18c9b7e67d4c2770e95bb77a9cc1ae0c91fe3835
-  RamblerTyphoonUtils: 814c02d7a0136a164efaae1133f47db1e4579cd0
+  OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
+  RamblerTyphoonUtils: 08a6b5592e045a490cd4550aa9ea4a581308d482
   Typhoon: 200100687af3233ec5ed019064df3c9ffe350475
-  ViperMcFlurry: dc0aed190c3485fc6c95a50375d2e9812c9adb7e
+  ViperMcFlurry: 701bc3ad8d188b1f1e157ec0ddf4e77184de88b5
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 84b431d7ef9ad273e245fbb78f92763a0b053760
+
+COCOAPODS: 1.1.1

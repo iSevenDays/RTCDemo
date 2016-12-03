@@ -1,6 +1,6 @@
 //
 //  ImageGalleryStoryViewTests.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 15/02/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -25,28 +25,28 @@ class ImageGalleryStoryViewTests: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-		self.controller = UIStoryboard(name: "ImageGalleryStory", bundle: nil).instantiateViewControllerWithIdentifier(String( ImageGalleryStoryViewController.self)) as! ImageGalleryStoryViewController
+		controller = UIStoryboard(name: "ImageGalleryStory", bundle: nil).instantiateViewControllerWithIdentifier(String( ImageGalleryStoryViewController.self)) as! ImageGalleryStoryViewController
 		
-		self.mockOutput = MockViewControllerOutput()
-		self.controller.output = self.mockOutput
+		mockOutput = MockViewControllerOutput()
+		controller.output = mockOutput
+	}
+	
+	func testViewDidLoadTriggersViewIsReadyAction() {
+		// when
+		controller.viewDidLoad()
+		
+		// then
+		XCTAssertTrue(mockOutput.viewIsReadyGotCalled)
 	}
 	
 	// MARK: IBActions
 	
-	func testViewDidLoadTriggersViewIsReadyAction() {
-		// when
-		self.controller.viewDidLoad()
-		
-		// then
-		XCTAssertTrue(self.mockOutput.viewIsReadyGotCalled)
-	}
-	
 	func testStartButtonTriggersAction() {
 		// when
-		self.controller.didTapStartButton(emptySender)
+		controller.didTapStartButton(emptySender)
 		
 		// then
-		XCTAssertTrue(self.mockOutput.startButtonTapped)
+		XCTAssertTrue(mockOutput.startButtonTapped)
 	}
 	
 	@objc class MockViewControllerOutput : NSObject,  ImageGalleryStoryViewOutput {

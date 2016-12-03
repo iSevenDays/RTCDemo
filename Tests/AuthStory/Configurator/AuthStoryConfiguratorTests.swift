@@ -1,6 +1,6 @@
 //
 //  AuthStoryConfiguratorTests.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 27/03/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -46,9 +46,11 @@ class AuthStoryModuleConfiguratorTests: XCTestCase {
         XCTAssertNotNil(presenter.router, "router in AuthStoryPresenter is nil after configuration")
         XCTAssertTrue(presenter.router is AuthStoryRouter, "router is not AuthStoryRouter")
 		XCTAssertNotNil((presenter.router as! AuthStoryRouter).transitionHandler, "router transitionHandler is nil after configuration")
+		
         let interactor: AuthStoryInteractor = presenter.interactor as! AuthStoryInteractor
         XCTAssertNotNil(interactor.output, "output in AuthStoryInteractor is nil after configuration")
-		 XCTAssertNotNil(interactor.restService, "restService in AuthStoryInteractor is nil after configuration")
+		XCTAssertNotNil(interactor.restService, "restService in AuthStoryInteractor is nil after configuration")
+		XCTAssertNotNil(interactor.callService, "callService in AuthStoryInteractor is nil after configuration")
     }
 
     class AuthStoryViewControllerMock: AuthStoryViewController {

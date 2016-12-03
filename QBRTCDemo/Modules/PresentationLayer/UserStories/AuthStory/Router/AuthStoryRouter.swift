@@ -1,6 +1,6 @@
 //
 //  AuthStoryRouter.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 27/03/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -8,11 +8,22 @@
 
 class AuthStoryRouter: AuthStoryRouterInput {
 	
-	let authStoryToVideoStorySegueIdentifier = "AuthStoryToVideoStorySegue"
+	let authStoryToChatUsersStorySegueIdentifier = "AuthStoryToChatUsersStorySegue"
 	
-	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!;
+	// AuthStoryViewController is transitionHandler
+	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
 	
-	func openVideoStory() {
-		transitionHandler.openModuleUsingSegue?(authStoryToVideoStorySegueIdentifier)
+	func openChatUsersStoryWithTag(tag: String, currentUser: SVUser) {
+		
+		transitionHandler.openModuleUsingSegue?(authStoryToChatUsersStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
+			
+			guard let chatUsersStoryInput = moduleInput as? ChatUsersStoryModuleInput else {
+				fatalError("moduleInput is not ChatUsersStoryModuleInput")
+			}
+			
+			chatUsersStoryInput.setTag(tag, currentUser: currentUser)
+			
+			return nil
+		})
 	}
 }

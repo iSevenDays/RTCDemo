@@ -1,6 +1,6 @@
 //
 //  CallServiceProtocol_Private.h
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 3/1/16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -21,8 +21,6 @@
 @property (nonatomic, strong) id<SVSignalingChannelProtocol> signalingChannel;
 @property (nonatomic, assign) CallServiceState state;
 @property (nonatomic, assign) BOOL hasActiveCall; // used in FakeCallService
-
-- (void)channel:(RTCDataChannel *)channel didReceiveMessageWithBuffer:(RTCDataBuffer *)buffer;
 
 @end
 

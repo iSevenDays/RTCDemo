@@ -1,6 +1,6 @@
 //
 //  CallService_Private.h
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 2/9/16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -15,12 +15,10 @@
 @class RTCPeerConnection;
 @class SVSignalingMessage;
 
+
 @protocol SVSignalingChannelDelegate;
 
 @interface CallService ()
-
-@property (nonatomic, strong, nullable) id<SVSignalingChannelProtocol> signalingChannel;
-@property (nonatomic, strong, nullable) RTCPeerConnection *peerConnection;
 
 - (void)processSignalingMessage:(nonnull SVSignalingMessage *)message;
 - (void)clearSession;

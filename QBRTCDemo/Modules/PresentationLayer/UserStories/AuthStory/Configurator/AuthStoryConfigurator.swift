@@ -1,6 +1,6 @@
 //
 //  AuthStoryConfigurator.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 27/03/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -10,11 +10,8 @@ import UIKit
 
 class AuthStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
-        if let viewController = viewInput as? AuthStoryViewController {
-            configure(viewController)
-        }
+    func configureModuleForViewInput(viewInput: AuthStoryViewController) {
+		configure(viewInput)
     }
 
     private func configure(viewController: AuthStoryViewController) {
@@ -28,7 +25,8 @@ class AuthStoryModuleConfigurator {
 
         let interactor = AuthStoryInteractor()
         interactor.output = presenter
-		interactor.restService = QBRESTService()
+		interactor.restService = ServicesProvider.currentProvider.restService
+		interactor.callService = ServicesProvider.currentProvider.callService
 
         presenter.interactor = interactor
         viewController.output = presenter

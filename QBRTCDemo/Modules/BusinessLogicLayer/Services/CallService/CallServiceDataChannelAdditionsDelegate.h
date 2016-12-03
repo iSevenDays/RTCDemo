@@ -1,6 +1,6 @@
 //
 //  CallServiceDataChannelAdditionsDelegate.h
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 2/14/16.
 //  Copyright © 2016 anton. All rights reserved.

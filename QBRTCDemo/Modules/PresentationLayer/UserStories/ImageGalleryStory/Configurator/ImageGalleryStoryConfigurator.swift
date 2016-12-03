@@ -1,6 +1,6 @@
 //
 //  ImageGalleryStoryConfigurator.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 15/02/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -10,11 +10,8 @@ import UIKit
 
 class ImageGalleryStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
-        if let viewController = viewInput as? ImageGalleryStoryViewController {
-            configure(viewController)
-        }
+    func configureModuleForViewInput(viewInput: ImageGalleryStoryViewController) {
+		configure(viewInput)
     }
 
     private func configure(viewController: ImageGalleryStoryViewController) {
@@ -26,6 +23,7 @@ class ImageGalleryStoryModuleConfigurator {
         presenter.router = router
 
         let interactor = ImageGalleryStoryInteractor()
+		interactor.callService = ServicesProvider.currentProvider.callService
         interactor.output = presenter
 		
         presenter.interactor = interactor

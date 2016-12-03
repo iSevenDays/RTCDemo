@@ -1,6 +1,6 @@
 //
 //  ImageGalleryStoryPresenter.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 15/02/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -12,10 +12,8 @@
     var interactor: ImageGalleryStoryInteractorInput!
     var router: ImageGalleryStoryRouterInput!
 
-	
-	func configureWithCallService(callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>){
-		interactor.configureWithCallService(callService)
-		
+	// ImageGalleryStoryModuleInput
+	func configureModule(){
 		interactor.requestCallerRole()
 	}
 	
@@ -24,7 +22,7 @@
 	func viewIsReady() {
 		view.setupInitialState()
 		
-		interactor.configureCollectionView(self.view.collectionView())
+		interactor.configureCollectionView(view.collectionView())
 	}
 	
 	func didTriggerStartButtonTapped() {

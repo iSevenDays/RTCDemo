@@ -1,6 +1,6 @@
 //
 //  QBSignalingChannel.m
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11/16/15.
 //  Copyright © 2015 anton. All rights reserved.
@@ -17,7 +17,7 @@
 @implementation QBSignalingChannel
 @synthesize state = _state;
 @synthesize delegate;
-@synthesize user;
+@synthesize user = _user;
 
 - (instancetype)init {
 	self = [super init];
@@ -31,12 +31,19 @@
 - (void)connectWithUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
 	NSCAssert(self.state == SVSignalingChannelState.error || SVSignalingChannelState.closed, @"Invalid channel state");
 	
+	if (svuser.ID == nil || svuser.ID == 0) {
+		NSLog(@"Error connectWithUser, user id is nil or 0");
+		completion([NSError errorWithDomain:@"QBSignalingChannelErrorDomain" code:-1 userInfo:@{@"Error" : @"User id is nil or 0"}]);
+		return;
+	}
+	
 	self.state = SVSignalingChannelState.open;
 	
 	[[QBChat instance] connectWithUser:[QBUUser userWithSVUser:svuser] completion:^(NSError *error) {
 		if (error) {
 			self.state = SVSignalingChannelState.error;
 		} else {
+			self.user = svuser;
 			[QBChat instance].currentUser.password = svuser.password;
 			self.state = SVSignalingChannelState.established;
 		}
@@ -65,9 +72,9 @@
 }
 
 - (SVUser *)user {
-	QBUUser *currentUser = [[QBChat instance] currentUser];
-	if (currentUser) {
-		return [SVUser userWithID:@(currentUser.ID) login:currentUser.login password:currentUser.password];
+	NSUInteger currentUserID = [[[QBChat instance] currentUser] ID];
+	if (currentUserID == _user.ID.unsignedIntegerValue) {
+		return _user;
 	}
 	return nil;
 }
@@ -76,13 +83,11 @@
 	[[QBChat instance] disconnectWithCompletionBlock:^(NSError * _Nullable error) {
 		if (!error) {
 			self.state = SVSignalingChannelState.closed;
-			
-			[[QBChat instance] removeDelegate:self];
 		} else {
 			self.state = SVSignalingChannelState.error;
 		}
 		
-		if (completion) {
+		if (completion != nil) {
 			completion(error);
 		}
 	}];

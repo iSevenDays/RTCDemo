@@ -1,6 +1,6 @@
 //
 //  CallServiceHelpers.h
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 2/9/16.
 //  Copyright © 2016 anton. All rights reserved.
