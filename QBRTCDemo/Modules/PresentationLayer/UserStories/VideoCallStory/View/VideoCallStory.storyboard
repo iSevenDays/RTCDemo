@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-361" y="397"/>
         </scene>
-        <!--Video Call Story View Controller-->
+        <!--View Controller-->
         <scene sceneID="EYw-yq-Vuq">
             <objects>
                 <viewController storyboardIdentifier="VideoCallStoryViewController" id="YrU-5b-St0" customClass="VideoCallStoryViewController" customModule="QBRTCDemo_s" sceneMemberID="viewController">
@@ -150,6 +150,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sx2-lb-2Lf" sceneMemberID="firstResponder"/>
+                <customObject id="gZb-4r-1Hr" customClass="VideoCallStoryModuleInitializer" customModule="QBRTCDemo_s">
+                    <connections>
+                        <outlet property="viewController" destination="YrU-5b-St0" id="mqt-wf-xR4"/>
+                    </connections>
+                </customObject>
                 <exit id="2b5-9W-oA8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="352" y="397"/>

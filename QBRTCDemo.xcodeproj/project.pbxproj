@@ -2370,6 +2370,7 @@
 					};
 					148233801C002DFE0000E9ED = {
 						DevelopmentTeam = 77JDVA6Z54;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3284,6 +3285,7 @@
 			baseConfigurationReference = C838C207280F893ECF0AF820 /* Pods-QBRTCDemo_s.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;
@@ -3333,6 +3335,7 @@
 			baseConfigurationReference = A66974BFE6A2ACBB27AB9001 /* Pods-QBRTCDemo_s.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;

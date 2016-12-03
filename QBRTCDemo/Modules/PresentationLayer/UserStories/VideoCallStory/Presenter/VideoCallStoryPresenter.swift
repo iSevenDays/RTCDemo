@@ -59,7 +59,6 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 		view.setLocalVideoCaptureSession(localCaptureSession)
 	}
 	
-	
 	func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?) {
 		view.configureRemoteVideoViewWithBlock(block)
 	}

@@ -6,18 +6,18 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryInteractorOutput{
-
-    weak var view: AuthStoryViewInput!
-    var interactor: AuthStoryInteractorInput!
-    var router: AuthStoryRouterInput!
-
+class AuthStoryPresenter: NSObject {
 	
-	// MARK: AuthStoryViewOutput
+	weak var view: AuthStoryViewInput!
+	var interactor: AuthStoryInteractorInput!
+	var router: AuthStoryRouterInput!
 	
-    func viewIsReady() {
+}
+
+extension AuthStoryPresenter: AuthStoryViewOutput {
+	func viewIsReady() {
 		interactor.tryLoginWithCachedUser()
-    }
+	}
 	
 	
 	func didTriggerLoginButtonTapped(userName: String, roomName: String) {
@@ -27,8 +27,9 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 	func didReceiveUserName(userName: String, roomName: String) {
 		
 	}
-	
-	// MARK: AuthStoryInteractorOutput
+}
+
+extension AuthStoryPresenter: AuthStoryInteractorOutput {
 	
 	func didLoginUser(user: SVUser) {
 		guard let firstTag = user.tags?.first else {
@@ -60,4 +61,7 @@ class AuthStoryPresenter: AuthStoryModuleInput, AuthStoryViewOutput, AuthStoryIn
 		view.setUserName(user.fullName)
 		view.setRoomName(user.tags!.joinWithSeparator(","))
 	}
+}
+
+extension AuthStoryPresenter: AuthStoryModuleInput {
 }

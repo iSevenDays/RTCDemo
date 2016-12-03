@@ -10,7 +10,7 @@ import UIKit
 
 class VideoCallStoryViewController: UIViewController {
 
-    var output: VideoCallStoryViewOutput!
+    @objc var output: VideoCallStoryViewOutput!
 
 	// MARK - IBOutlets
 	@IBOutlet weak var btnStartCall: UIButton!
@@ -61,6 +61,7 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func setLocalVideoCaptureSession(captureSession: AVCaptureSession) {
+		loadViewIfNeeded()
 		viewLocal.captureSession = captureSession
 	}
 	

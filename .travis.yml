@@ -1,5 +1,0 @@
-language: objective-c
-osx_image: xcode7.3
-xcode_workspace: QBRTCDemo.xcworkspace
-xcode_scheme: QBRTCDemo_s
-xcode_sdk: iphonesimulator9.3

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-protocol VideoCallStoryModuleInput: class {
+@objc protocol VideoCallStoryModuleInput: RamblerViperModuleInput {
 	
 	/**
 	 @author Anton Sokolchenko
