@@ -10,7 +10,13 @@ import Foundation
 
 @objc protocol VideoCallStoryInteractorOutput: class {
 	func didConnectToChatWithUser(user: SVUser)
+	
+	// Current user called hangup
 	func didHangup()
+	
+	// Method is called when hangup is received from opponent user in a current call
+	func didReceiveHangupFromOpponent(opponent: SVUser)
+	
 	func didFailToConnectToChat()
 	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession)
 	func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?)

@@ -17,6 +17,7 @@ protocol VideoCallStoryViewInput: class {
 	func configureViewWithUser(user: SVUser)
 	
 	func showHangup()
+	func showOpponentHangup()
 	
 	func showErrorConnect()
 	func showErrorDataChannelNotReady()

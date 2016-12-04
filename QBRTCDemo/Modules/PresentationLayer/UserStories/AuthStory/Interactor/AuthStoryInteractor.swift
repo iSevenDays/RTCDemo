@@ -97,8 +97,10 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			
 			errorBlock(error: error)
 		}
-		assert(user.ID != nil)
-		assert(user.password != nil)
+		
+		// If user ID is not nil, then the user has been logged in previously
+		guard user.ID != nil else { return }
+		
 		callService.connectWithUser(user) { [unowned self] (error) in
 			if self.callService.isConnected {
 				connectedToChat = true
@@ -108,7 +110,6 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 				successBlock(user: user)
 			}
 		}
-		
 	}
 }
 

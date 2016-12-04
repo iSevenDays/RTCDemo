@@ -118,6 +118,13 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(mockView.showHangupGotCalled)
 	}
 	
+	func testPresenterHandlesOpponentHangupAndCallsViewShowOpponentHangup() {
+		// when
+		presenter.didReceiveHangupFromOpponent(testUser2)
+		
+		// then
+		XCTAssertTrue(mockView.showOpponentHangupGotCalled)
+	}
 	
 	func testPresenterHandlesLocalVideoTrack() {
 		// given
@@ -221,6 +228,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		var setupInitialStateGotCalled = false
 		var configureViewWithUserGotCalled = false
 		var showHangupGotCalled = false
+		var showOpponentHangupGotCalled = false
 		var showErrorConnectGotCalled = false
 		var showErrorDataChannelNotReadyGotCalled = false
 		var localCaptureSession: AVCaptureSession?
@@ -237,6 +245,10 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		
 		func showHangup() {
 			showHangupGotCalled = true
+		}
+		
+		func showOpponentHangup() {
+			showOpponentHangupGotCalled = true
 		}
 		
 		func showErrorConnect() {

@@ -32,6 +32,9 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			return
 		}
 		
+		callService.addDelegate(self)
+		callService.addDataChannelDelegate(self)
+		
 		let connectWithUserAndCallOpponent = { [weak self] in
 			guard let strongSelf = self else { return }
 			
@@ -115,10 +118,15 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 }
 
 extension VideoCallStoryInteractor: CallServiceDelegate {
-	func callService(callService: CallServiceProtocol!, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack!) {
+	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack?) {
+		guard NSClassFromString("XCTest") == nil else {
+			output.didSetLocalCaptureSession(AVCaptureSession())
+			return
+		}
+		
 		guard self.localVideoTrack != localVideoTrack else { return }
 		
-		let source = localVideoTrack.source as? RTCAVFoundationVideoSource
+		let source = localVideoTrack?.source as? RTCAVFoundationVideoSource
 		
 		if let source = source {
 			if source.captureSession != nil {
@@ -127,7 +135,11 @@ extension VideoCallStoryInteractor: CallServiceDelegate {
 		}
 	}
 	
-	func callService(callService: CallServiceProtocol!, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack!) {
+	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
+		output.didReceiveHangupFromOpponent(opponent)
+	}
+	
+	func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
 		
 		//DDLogVerbose(@"Call service %@ didReceiveRemoteVideoTrack: %@", callService,  remoteVideoTrack);
 		
@@ -146,26 +158,26 @@ extension VideoCallStoryInteractor: CallServiceDelegate {
 		}
 	}
 	
-	func callService(callService: CallServiceProtocol!, didReceiveCallRequestFromOpponent opponent: SVUser!) {
+	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		// do nothing
 	}
 	
-	func callService(callService: CallServiceProtocol!, didChangeConnectionState state: RTCICEConnectionState) {
+	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCICEConnectionState) {
 		
 	}
 	
-	func callService(callService: CallServiceProtocol!, didChangeState state: CallServiceState) {
+	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
 		
 	}
 	
-	func callService(callService: CallServiceProtocol!, didError error: NSError!) {
+	func callService(callService: CallServiceProtocol, didError error: NSError) {
 		
 	}
 }
 
 extension VideoCallStoryInteractor: CallServiceDataChannelAdditionsDelegate {
 	func callService(callService: CallServiceProtocol!, didOpenDataChannel dataChannel: RTCDataChannel!) {
-		
+		output.didOpenDataChannel()
 	}
 	
 	func callService(callService: CallServiceProtocol!, didReceiveMessage message: String!) {

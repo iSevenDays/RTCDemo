@@ -84,8 +84,12 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 }
 
 extension ChatUsersStoryInteractor: CallServiceDelegate {
-	func callService(callService: CallServiceProtocol!, didReceiveCallRequestFromOpponent opponent: SVUser!) {
+	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		output.didReceiveCallRequestFromOpponent(opponent)
+	}
+	
+	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
+		
 	}
 }
 

@@ -71,6 +71,14 @@ class VideoCallStoryViewTests: XCTestCase {
 		XCTAssertTrue(mockOutput.closeButtonTapped)
 	}
 	
+	func testShowOpponentHangupEventuallyCallsCloseAction() {
+		// when
+		controller.showOpponentHangup()
+		
+		// then
+		XCTAssertTrue(mockOutput.closeButtonTapped)
+	}
+	
 	// MARK: Testing methods of VideoCallStoryViewInput
 	
 	func testSetLocalVideoCaptureSession_setsCaptureSession() {

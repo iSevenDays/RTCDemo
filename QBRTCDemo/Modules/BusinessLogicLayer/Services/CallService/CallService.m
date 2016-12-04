@@ -254,7 +254,7 @@
 	if ([self hasActiveCall] && [self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]) {
 		[self sendHangupToUser:self.opponentUser completion:^(NSError * _Nullable error) {
 			if (error) {
-				DDLogWarn(@"Did not send hangup to user");
+				DDLogWarn(@"Did not send hangup to the opponent");
 			}
 		}];
 	}
@@ -304,7 +304,6 @@
 	
 	self.opponentUser = nil;
 	self.initiatorUser = nil;
-	self.state = kClientStateDisconnected;
 	for (RTCMediaStream *stream in self.peerConnection.localStreams) {
 		[self.peerConnection removeStream:stream];
 	}
@@ -372,7 +371,9 @@
 		
 		[self.peerConnection addICECandidate:candidateMessage.iceCandidate];
 	} else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
-		// Other client disconnected.
+		if ([self.multicastDelegate respondsToSelector:@selector(callService:didReceiveHangupFromOpponent:)]) {
+			[self.multicastDelegate callService:self didReceiveHangupFromOpponent:self.opponentUser];
+		}
 		[self clearSession];
 	}
 }
@@ -559,7 +560,8 @@
 		}
 		// If we're answering and we've just set the remote offer we need to create
 		// an answer and set the local description.
-		if (!self.isInitiator && !self.peerConnection.localDescription) {
+		// If self.opponentUser is nil, it means that opponent did immediately hangup
+		if (!self.isInitiator && !self.peerConnection.localDescription && self.opponentUser != nil) {
 			NSCAssert(self.peerConnection, @"Peer connection must exist");
 			[self.peerConnection createAnswerWithDelegate:self
 											  constraints:[self defaultAnswerConstraints]];
@@ -614,8 +616,12 @@
 		[_messageQueue addObject:message];
 	} else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
 		
-		// Disconnects can be processed immediately.
-		[self processSignalingMessage:message];
+		// Handle only messages from current call (if exists)
+		// Everybody is able to send current user hangup messages
+		if ([message.sender.ID isEqualToNumber:self.opponentUser.ID]) {
+			// Disconnects can be processed immediately.
+			[self processSignalingMessage:message];
+		}
 	}
 	
 	[self drainMessageQueueIfReady];

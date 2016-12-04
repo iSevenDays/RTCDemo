@@ -55,8 +55,8 @@
 }
 
 - (void)tearDown {
-	[self.callService hangup];
 	self.callService = nil;
+	self.signalingChannel = nil;
 	self.mockCallService = nil;
 	self.mockOutput = nil;
 }
@@ -112,6 +112,7 @@
 
 - (void)testStaysConnectedAfterHangup {
 	// given
+	OCMReject([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
 	
 	// when
 	[self.callService connectWithUser:self.user1 completion:nil];
@@ -143,20 +144,41 @@
 
 #pragma mark Signaling messages processing
 
-- (void)testCorrectlyProcessesHangupSignalingMessage {
+- (void)testDoesntClearSessionAferHangupSignalingMessageFromUndefinedOpponent {
 	// given
 	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
+	[[self.mockCallService reject] clearSession];
+	[[self.mockCallService reject] processSignalingMessage:[OCMArg any]];
 	
 	SVSignalingMessage *hangup = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
+	
+	hangup.sender = self.user3;
 	
 	// when
 	[self.callService connectWithUser:self.user1 completion:nil];
 	[self.callService startCallWithOpponent:self.user2];
 	
-	[self.callService processSignalingMessage:hangup];
+	[self.callService channel:self.callService.signalingChannel didReceiveMessage:hangup];
+	
+	// then
+	OCMVerify([self.mockCallService drainMessageQueueIfReady]);
+}
+
+- (void)testCallsHangupDelegateMethod_whenHangupIsReceived {
+	// given
+	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
+	
+	SVSignalingMessage *hangup = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
+	hangup.sender = self.user2;
+	// when
+	[self.callService connectWithUser:self.user1 completion:nil];
+	[self.callService startCallWithOpponent:self.user2];
+	
+	[self.callService channel:self.callService.signalingChannel didReceiveMessage:hangup];
 	
 	// then
 	OCMVerify([self.mockCallService clearSession]);
+	OCMVerify([self.mockOutput callService:self.callService didReceiveHangupFromOpponent:self.user2]);
 }
 
 - (void)testCorrectlyProcessesSignalingMessageIceWithAudioAndVideoFromOpponent {

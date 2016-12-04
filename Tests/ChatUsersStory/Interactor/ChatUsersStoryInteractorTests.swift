@@ -103,15 +103,14 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		// when
 		interactor.setTag(tag, currentUser: currentUser)
 		
-		interactor.callService(fakeCallService, didReceiveCallRequestFromOpponent: opponentUser)
+		interactor.callService(fakeCallService!, didReceiveCallRequestFromOpponent: opponentUser)
 		
 		// then
-		
 		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
 		XCTAssertEqual(mockOutput.opponent, opponentUser)
 	}
 	
-
+	
     class MockPresenter: ChatUsersStoryInteractorOutput {
 		var retrievedUsers: [SVUser]?
 		var didRetrieveUsersGotCalled = false

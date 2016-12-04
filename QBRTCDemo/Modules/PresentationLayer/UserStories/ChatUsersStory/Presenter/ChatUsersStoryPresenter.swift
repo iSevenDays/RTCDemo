@@ -39,6 +39,9 @@ extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 		router.openIncomingCallStoryWithOpponent(opponent)
 	}
 	
+	func didReceiveHangupFromOpponent(opponent: SVUser) {
+		
+	}
 	
 	func didError(error: ChatUsersStoryInteractorError) {
 		

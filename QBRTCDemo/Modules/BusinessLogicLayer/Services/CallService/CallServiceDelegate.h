@@ -9,6 +9,8 @@
 #import <RTCVideoTrack.h>
 #import <RTCTypes.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 enum RTCICEConnectionState : NSInteger;
 enum CallServiceState : NSInteger;
 
@@ -18,12 +20,15 @@ enum CallServiceState : NSInteger;
 @protocol CallServiceDelegate <NSObject>
 
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveCallRequestFromOpponent:(SVUser *)opponent;
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveHangupFromOpponent:(SVUser *)opponent;
 
 @optional
 - (void)callService:(id<CallServiceProtocol>)callService didChangeConnectionState:(RTCICEConnectionState)state;
 - (void)callService:(id<CallServiceProtocol>)callService didChangeState:(enum CallServiceState)state;
-- (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
+- (void)callService:(id<CallServiceProtocol>)callService didReceiveLocalVideoTrack:(nullable RTCVideoTrack *)localVideoTrack;
 - (void)callService:(id<CallServiceProtocol>)callService didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
 - (void)callService:(id<CallServiceProtocol>)callService didError:(NSError *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

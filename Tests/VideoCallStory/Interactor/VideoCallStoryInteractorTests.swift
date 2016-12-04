@@ -20,7 +20,7 @@ import XCTest
 // Note: when possible, useRealCallService is used
 class VideoCallStoryInteractorTests: XCTestCase {
 	
-	var interactor: VideoStoryInteractor!
+	var interactor: VideoCallStoryInteractor!
 	var mockOutput: MockPresenter!
 	var testUser: SVUser!
 	var testUser2: SVUser!
@@ -29,7 +29,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		super.setUp()
 		testUser = TestsStorage.svuserRealUser1()
 		testUser2 = TestsStorage.svuserRealUser2()
-		interactor = VideoStoryInteractor()
+		interactor = VideoCallStoryInteractor()
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
 	}
@@ -74,6 +74,19 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didHangupGotCalled)
+	}
+	
+	func testHangupFromOpponent() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService(interactor.callService, didReceiveHangupFromOpponent: testUser2)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveHangupFromOpponentGotCalled)
+		XCTAssertEqual(mockOutput.opponent, testUser2)
 	}
 	
 	func testSuccessfullySetsLocalCaptureSession() {
@@ -179,8 +192,11 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	class MockPresenter: NSObject,  VideoCallStoryInteractorOutput {
 		var didConnectToChatWithUserGotCalled = false
 		var connectedToChatUser: SVUser?
+		var opponent: SVUser?
 		
 		var didHangupGotCalled = false
+		var didReceiveHangupFromOpponentGotCalled = false
+		
 		var didFailToConnectToChatGotCalled = false
 		var didSetLocalCaptureSessionGotCalled = false
 		var didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled = false
@@ -197,6 +213,11 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		func didHangup() {
 			didHangupGotCalled = true
+		}
+		
+		func didReceiveHangupFromOpponent(opponent: SVUser) {
+			didReceiveHangupFromOpponentGotCalled = true
+			self.opponent = opponent
 		}
 		
 		func didFailToConnectToChat() {

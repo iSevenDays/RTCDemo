@@ -122,6 +122,7 @@
 		1454052D1C859431005E3790 /* DataChannelMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 1454052B1C859431005E3790 /* DataChannelMessages.h */; };
 		1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
 		1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
+		146A2CB51DF35E4D00711F32 /* VideoCallStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE586A8E9C4E3FE09B1DE94A /* VideoCallStoryInteractorTests.swift */; };
 		146CA9F01C62643400F768C8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		146CA9F11C62643C00F768C8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
@@ -2698,6 +2699,7 @@
 				148A83D61CB0180400F88933 /* FakeQBRESTService.swift in Sources */,
 				14C534EB1C6A315800A0FFE8 /* CallServiceTests.m in Sources */,
 				1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */,
+				146A2CB51DF35E4D00711F32 /* VideoCallStoryInteractorTests.swift in Sources */,
 				1420E46B1CE7CE6E0043EFF9 /* IncomingCallStoryRouterTests.swift in Sources */,
 				142B50731CDD2C7A005B143C /* ChatUsersStoryInteractorTests.swift in Sources */,
 				1473EAC81CAC607C007F9DF8 /* AuthStoryPresenterTests.swift in Sources */,
