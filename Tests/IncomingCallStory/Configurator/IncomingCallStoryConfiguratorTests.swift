@@ -49,6 +49,7 @@ class IncomingCallStoryModuleConfiguratorTests: XCTestCase {
 
         let interactor: IncomingCallStoryInteractor = presenter.interactor as! IncomingCallStoryInteractor
         XCTAssertNotNil(interactor.output, "output in IncomingCallStoryInteractor is nil after configuration")
+		XCTAssertNotNil(interactor.callService, "callService in IncomingCallStoryInteractor is nil after configuration")
     }
 
     class IncomingCallStoryViewControllerMock: IncomingCallStoryViewController {

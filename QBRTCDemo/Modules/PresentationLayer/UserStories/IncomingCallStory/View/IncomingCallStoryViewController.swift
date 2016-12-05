@@ -12,7 +12,6 @@ class IncomingCallStoryViewController: UIViewController {
 
     @objc var output: IncomingCallStoryViewOutput!
 
-	@IBOutlet weak var btnAcceptCall: UIButton!
 	@IBOutlet weak var lblIncomingCall: UILabel!
 	
     // MARK: Life cycle
@@ -23,9 +22,14 @@ class IncomingCallStoryViewController: UIViewController {
 	
 	// MARK: IBActions
 	
-	@IBAction func acceptCall() {
+	@IBAction func acceptCall(sender: AnyObject) {
 		loadViewIfNeeded()
 		output.didTriggerAcceptButtonTapped()
+	}
+	
+	@IBAction func declineCall(sender: AnyObject) {
+		loadViewIfNeeded()
+		output.didTriggerDeclineButtonTapped()
 	}
 }
 

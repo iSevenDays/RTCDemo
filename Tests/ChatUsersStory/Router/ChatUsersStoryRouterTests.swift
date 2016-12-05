@@ -16,7 +16,7 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class ChatUsersStoryRouterTests: XCTestCase {
+class ChatUsersStoryRouterTests: BaseTestCase {
 
 	var router: ChatUsersStoryRouter!
 	var mockOutput: MockOutput!
@@ -26,7 +26,6 @@ class ChatUsersStoryRouterTests: XCTestCase {
 		
 		router = ChatUsersStoryRouter()
 		mockOutput = MockOutput()
-		
 		router.transitionHandler = mockOutput
     }
 
@@ -43,11 +42,20 @@ class ChatUsersStoryRouterTests: XCTestCase {
 		XCTAssertEqual(mockOutput.segueIdentifier, router.chatUsersStoryToVideoCallStorySegueIdentifier)
 	}
 	
-	class MockOutput: NSObject, RamblerViperModuleTransitionHandlerProtocol {
+	
+	func testSegues() {
+		// given
+		let identifiers = segues(ofViewController: UIStoryboard(name: "ChatUsersStory", bundle: nil).instantiateInitialViewController()!)
+		
+		// then
+		XCTAssertTrue(identifiers.contains(router.chatUsersStoryToVideoCallStorySegueIdentifier))
+	}
+	
+	class MockOutput: ChatUsersStoryViewController {
 		var openModuleUsingSegueGotCalled = false
 		var segueIdentifier: String?
 		
-		func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
+		override func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
 			openModuleUsingSegueGotCalled = true
 			self.segueIdentifier = segueIdentifier
 			

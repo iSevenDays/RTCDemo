@@ -64,10 +64,8 @@ class ChatUsersStoryModuleConfiguratorTests: XCTestCase {
 
     class ChatUsersStoryViewControllerMock: ChatUsersStoryViewController {
 
-        var setupInitialStateDidCall = false
-
         override func setupInitialState() {
-            setupInitialStateDidCall = true
+			
         }
     }
 }

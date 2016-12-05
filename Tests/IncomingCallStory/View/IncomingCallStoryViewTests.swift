@@ -45,10 +45,18 @@ class IncomingCallStoryViewTests: XCTestCase {
 	
 	func testAcceptButtonTriggersAction() {
 		// when
-		controller.acceptCall()
+		controller.acceptCall(emptySender)
 		
 		// then
 		XCTAssertTrue(mockOutput.didTriggerAcceptButtonTappedGotCalled)
+	}
+	
+	func testDeclineButtonTriggersAction() {
+		// when
+		controller.declineCall(emptySender)
+		
+		// then
+		XCTAssertTrue(mockOutput.didTriggerDeclineButtonTappedGotCalled)
 	}
 	
 	// MARK: - Testing methods of IncomingCallStoryViewInput
@@ -67,6 +75,7 @@ class IncomingCallStoryViewTests: XCTestCase {
 	class MockViewControllerOutput : NSObject, IncomingCallStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		var didTriggerAcceptButtonTappedGotCalled = false
+		var didTriggerDeclineButtonTappedGotCalled = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
@@ -76,6 +85,8 @@ class IncomingCallStoryViewTests: XCTestCase {
 			didTriggerAcceptButtonTappedGotCalled = true
 		}
 		
-		
+		func didTriggerDeclineButtonTapped() {
+			didTriggerDeclineButtonTappedGotCalled = true
+		}
 	}
 }

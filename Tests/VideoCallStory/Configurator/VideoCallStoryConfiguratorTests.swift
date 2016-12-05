@@ -45,10 +45,8 @@ class VideoCallStoryModuleConfiguratorTests: XCTestCase {
 
     class VideoCallStoryViewControllerMock: VideoCallStoryViewController {
 
-        var setupInitialStateDidCall = false
-
         override func setupInitialState() {
-            setupInitialStateDidCall = true
+			
         }
     }
 }

@@ -24,16 +24,16 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-		self.presenter = ImageGalleryStoryPresenter()
+		presenter = ImageGalleryStoryPresenter()
 		
-		self.mockInteractor = MockInteractor()
+		mockInteractor = MockInteractor()
 		
-		self.mockRouter = MockRouter()
-		self.mockView = MockViewController()
+		mockRouter = MockRouter()
+		mockView = MockViewController()
 		
-		self.presenter.interactor = self.mockInteractor
-		self.presenter.router = self.mockRouter
-		self.presenter.view = self.mockView
+		presenter.interactor = mockInteractor
+		presenter.router = mockRouter
+		presenter.view = mockView
     }
 	
 	//
@@ -42,20 +42,20 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	
 	func testPresenterHandlesViewReadyEvent() {
 		// when
-		self.presenter.viewIsReady()
+		presenter.viewIsReady()
 		
 		// then
-		XCTAssertTrue(self.mockView.setupInitialStateGotCalled)
-		XCTAssertTrue(self.mockView.collectionViewGotCalled)
-		XCTAssertTrue(self.mockInteractor.configureCollectionViewGotCalled)
+		XCTAssertTrue(mockView.setupInitialStateGotCalled)
+		XCTAssertTrue(mockView.collectionViewGotCalled)
+		XCTAssertTrue(mockInteractor.configureCollectionViewGotCalled)
 	}
 	
 	func testPresenterHandlesStartButtonTapedEvent() {
 		// when
-		self.presenter.didTriggerStartButtonTapped()
+		presenter.didTriggerStartButtonTapped()
 		
 		// then
-		XCTAssertTrue(self.mockInteractor.startSynchronizationImagesGotCalled)
+		XCTAssertTrue(mockInteractor.startSynchronizationImagesGotCalled)
 	}
 	
 	func testPresenterConfiguresModule() {
@@ -63,7 +63,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 		self.presenter.configureModule()
 		
 		// then
-		XCTAssertTrue(self.mockInteractor.requestCallerRoleGotCalled)
+		XCTAssertTrue(mockInteractor.requestCallerRoleGotCalled)
 	}
 	
 	//
@@ -72,36 +72,36 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 	
 	func testPresenterConfiguresView_whenReceiver() {
 		// when
-		self.presenter.didReceiveRoleReceiver();
+		presenter.didReceiveRoleReceiver();
 		
 		// then
-		XCTAssertTrue(self.mockView.configureViewForReceivingGotCalled)
+		XCTAssertTrue(mockView.configureViewForReceivingGotCalled)
 	}
 	
 	func testPresentedHandlesDidStartSynchronizationImages() {
 		// when
-		self.presenter.didStartSynchronizationImages()
+		presenter.didStartSynchronizationImages()
 		
 		// then
-		XCTAssertTrue(self.mockView.showSynchronizationImagesStartedGotCalled)
+		XCTAssertTrue(mockView.showSynchronizationImagesStartedGotCalled)
 	}
 	
 	func testPresentedHandlesDidFinishSynchronizationImages() {
 		// when
-		self.presenter.didFinishSynchronizationImages()
+		presenter.didFinishSynchronizationImages()
 		
 		// then
-		XCTAssertTrue(self.mockView.showSynchronizationImagesFinishedGotCalled)
+		XCTAssertTrue(mockView.showSynchronizationImagesFinishedGotCalled)
 	}
 	
 	// MARK: ImageGalleryStoryCollectionViewInteractorOutput
 	
 	func testPresenterCallsReloadCollectionView_onDidUpdateImages() {
 		// when
-		self.presenter.didUpdateImages();
+		presenter.didUpdateImages();
 		
 		// then
-		XCTAssertTrue(self.mockView.reloadCollectionViewGotCalled)
+		XCTAssertTrue(mockView.reloadCollectionViewGotCalled)
 	}
 
     class MockInteractor: ImageGalleryStoryInteractorInput {

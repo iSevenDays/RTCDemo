@@ -23,7 +23,6 @@ class AuthStoryInteractorTests: XCTestCase {
 	
 	let fakeService = FakeQBRESTService()
 	let fakeCallService = FakeCallService(signalingChannel: FakeSignalingChannel())
-	//let realService = QBRESTService()
 	
 	let userName = "test"
 	let tags = ["tag"]

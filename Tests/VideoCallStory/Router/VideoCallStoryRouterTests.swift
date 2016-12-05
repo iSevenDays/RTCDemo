@@ -16,7 +16,7 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class VideoCallStoryRouterTests: XCTestCase {
+class VideoCallStoryRouterTests: BaseTestCase {
 
 	var router: VideoCallStoryRouter!
 	var mockTransitionHandler: MockTransitionHandler!
@@ -26,11 +26,6 @@ class VideoCallStoryRouterTests: XCTestCase {
 		mockTransitionHandler = MockTransitionHandler()
 		router.transitionHandler = mockTransitionHandler
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
 	
 	func testRouterOpensImageGalleryCallsTransitionHandler() {
 		// when
@@ -38,6 +33,23 @@ class VideoCallStoryRouterTests: XCTestCase {
 		
 		// then
 		XCTAssertEqual(mockTransitionHandler.openedModuleSegueIdentifier, router.videoStoryToImageGalleryModuleSegue)
+	}
+	
+	func testRouterUnwindsToChatStoryCallsTransitionHandler() {
+		// when
+		router.unwindToChatsUserStory()
+		
+		// then
+		XCTAssertEqual(mockTransitionHandler.openedModuleSegueIdentifier, router.videoStoryToChatsUserStoryModuleSegue)
+	}
+	
+	func testSegues() {
+		// given
+		let identifiers = segues(ofViewController: UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewControllerWithIdentifier("VideoCallStoryViewController"))
+		
+		// then
+		XCTAssertTrue(identifiers.contains(router.videoStoryToImageGalleryModuleSegue))
+		XCTAssertTrue(identifiers.contains(router.videoStoryToChatsUserStoryModuleSegue))
 	}
 	
 	class MockTransitionHandler: NSObject, RamblerViperModuleTransitionHandlerProtocol {

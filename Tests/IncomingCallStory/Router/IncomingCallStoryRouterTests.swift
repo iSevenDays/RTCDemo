@@ -16,15 +16,47 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class IncomingCallStoryRouterTests: XCTestCase {
+class IncomingCallStoryRouterTests: BaseTestCase {
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	var router: IncomingCallStoryRouter!
+	var mockOutput: MockOutput!
+	override func setUp() {
+		super.setUp()
+		router = IncomingCallStoryRouter()
+		mockOutput = MockOutput()
+		router.transitionHandler = mockOutput
+	}
+	
+	func testRouterOpensVideoCallStoryCallsTransitionHandler() {
+		// when
+		router.openVideoStoryWithOpponent(TestsStorage.svuserRealUser1())
+		
+		// then
+		XCTAssertEqual(mockOutput.openedModuleSegueIdentifier, router.incomingCallStoryToVideoStorySegue)
+	}
+	
+	func testRouterUnwindsToChatStoryCallsTransitionHandler() {
+		// when
+		router.unwindToChatsUserStory()
+		
+		// then
+		XCTAssertEqual(mockOutput.openedModuleSegueIdentifier, router.incomingCallStoryToChatsUserStoryModuleSegue)
+	}
+	
+	func testSegues() {
+		// given
+		let identifiers = segues(ofViewController: UIStoryboard(name: "IncomingCallStory", bundle: nil).instantiateInitialViewController()!)
+		
+		// then
+		XCTAssertTrue(identifiers.contains(router.incomingCallStoryToVideoStorySegue))
+		XCTAssertTrue(identifiers.contains(router.incomingCallStoryToChatsUserStoryModuleSegue))
+	}
+	
+	class MockOutput: IncomingCallStoryViewController {
+		var openedModuleSegueIdentifier: String?
+		override func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
+			openedModuleSegueIdentifier = segueIdentifier
+			return RamblerViperOpenModulePromise()
+		}
+	}
 }

@@ -13,7 +13,7 @@
     var router: IncomingCallStoryRouterInput!
 
     func viewIsReady() {
-		
+		view.setupInitialState()
     }
 	
 	// MARK: IncomingCallStoryModuleInput
@@ -27,5 +27,10 @@
 	
 	func didTriggerAcceptButtonTapped() {
 		router.openVideoStoryWithOpponent(interactor.retrieveOpponent())
+	}
+	
+	func didTriggerDeclineButtonTapped() {
+		interactor.hangup()
+		router.unwindToChatsUserStory()
 	}
 }

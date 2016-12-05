@@ -18,17 +18,32 @@ import XCTest
 
 class IncomingCallStoryInteractorTests: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
-    class MockPresenter: IncomingCallStoryInteractorOutput {
-
-    }
+	var interactor: IncomingCallStoryInteractor!
+	var mockOutput: MockOutput!
+	
+	override func setUp() {
+		super.setUp()
+		interactor = IncomingCallStoryInteractor()
+		mockOutput = MockOutput(signalingChannel: FakeSignalingChannel())
+		interactor.callService = mockOutput
+	}
+	
+	func testHangupSendsHangupMessage() {
+		// given
+		let testUser = TestsStorage.svuserRealUser1()
+		interactor.opponent = testUser
+		
+		// when
+		interactor.hangup()
+		
+		// then
+		XCTAssertEqual(testUser, mockOutput.opponent)
+	}
+	
+	class MockOutput: FakeCallService {
+		var opponent: SVUser?
+		override func sendHangupToUser(user: SVUser, completion: ((NSError?) -> Void)?) {
+			opponent = user
+		}
+	}
 }

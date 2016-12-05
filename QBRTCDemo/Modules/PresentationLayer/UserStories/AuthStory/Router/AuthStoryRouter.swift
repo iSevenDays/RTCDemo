@@ -11,7 +11,7 @@ class AuthStoryRouter: AuthStoryRouterInput {
 	let authStoryToChatUsersStorySegueIdentifier = "AuthStoryToChatUsersStorySegue"
 	
 	// AuthStoryViewController is transitionHandler
-	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
+	@objc weak var transitionHandler: RamblerViperModuleTransitionHandlerProtocol!
 	
 	func openChatUsersStoryWithTag(tag: String, currentUser: SVUser) {
 		

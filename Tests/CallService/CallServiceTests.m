@@ -6,8 +6,9 @@
 //  Copyright © 2016 anton. All rights reserved.
 //
 
-#import "BaseTestCase.h"
 #import <OCMock.h>
+#import <XCTest/XCTest.h>
+
 
 #import <RTCICECandidate.h>
 #import <RTCSessionDescription.h>
@@ -25,7 +26,7 @@
 #import "SVSignalingMessageICE.h"
 #import "SVSignalingParams.h"
 
-@interface CallServiceTests : BaseTestCase
+@interface CallServiceTests : XCTestCase
 
 @property (nonatomic, strong) CallService<SVSignalingChannelDelegate, CallServiceProtocol, CallServiceDataChannelAdditionsProtocol> *callService;
 @property (nonatomic, strong) id mockOutput;
@@ -41,7 +42,6 @@
 @implementation CallServiceTests
 
 - (void)setUp {
-	[super setUp];
 	self.user1 = [CallServiceHelpers user1];
 	self.user2 = [CallServiceHelpers user2];
 	self.user3 = [[SVUser alloc] initWithID:@1 login:@"login" password:@""];
@@ -60,6 +60,19 @@
 	self.mockCallService = nil;
 	self.mockOutput = nil;
 }
+
+#pragma mark - Expectations
+- (XCTestExpectation *)currentSelectorTestExpectation {
+	NSInvocation *invocation = self.invocation;
+	NSString *selectorName = invocation ? NSStringFromSelector(invocation.selector) : @"testExpectation";
+	return [self expectationWithDescription:selectorName];
+}
+
+- (void)waitForTestExpectations {
+	[self waitForExpectationsWithTimeout:10.0 handler:nil];
+}
+
+
 
 - (void)testCanConnectWithUserAndHaveConnectedState {
 	// given

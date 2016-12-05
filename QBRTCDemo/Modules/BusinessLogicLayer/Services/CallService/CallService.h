@@ -37,6 +37,9 @@
 /// Clears session and sends hangup if -hasActiveCall YES
 - (void)hangup;
 
+/// Sends hangup message
+- (void)sendHangupToUser:(SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError * _Nullable error))completion;
+
 /// @return YES if both initiatorUser and opponentUser are set
 - (BOOL)hasActiveCall;
 
