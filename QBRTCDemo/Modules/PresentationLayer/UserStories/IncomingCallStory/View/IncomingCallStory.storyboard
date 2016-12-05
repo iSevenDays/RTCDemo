@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,10 +22,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58o-9I-lgW">
-                                <rect key="frame" x="122" y="269" width="76" height="30"/>
-                                <state key="normal" title="Accept call"/>
+                                <rect key="frame" x="55.5" y="269" width="49" height="30"/>
+                                <color key="tintColor" red="0.0" green="0.74901960779999999" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Accept"/>
                                 <connections>
-                                    <action selector="acceptCall" destination="7yk-1n-wJc" eventType="touchUpInside" id="QtG-3q-VUB"/>
+                                    <action selector="acceptCall:" destination="7yk-1n-wJc" eventType="touchUpInside" id="wAp-ET-qjg"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming call from:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7F4-P2-FbP">
@@ -33,29 +35,40 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BaA-Nv-q13">
+                                <rect key="frame" x="214" y="269" width="52" height="30"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Decline"/>
+                                <connections>
+                                    <action selector="declineCall:" destination="7yk-1n-wJc" eventType="touchUpInside" id="rhY-AQ-H6F"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="58o-9I-lgW" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" id="EDI-yd-viJ"/>
+                            <constraint firstItem="7F4-P2-FbP" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" id="IWh-yb-i8G"/>
                             <constraint firstItem="58o-9I-lgW" firstAttribute="top" secondItem="7F4-P2-FbP" secondAttribute="bottom" constant="40" id="Rpw-BN-Jyw"/>
                             <constraint firstItem="58o-9I-lgW" firstAttribute="centerY" secondItem="Rza-Xh-sdU" secondAttribute="centerY" id="Upq-yU-Ac8"/>
-                            <constraint firstItem="7F4-P2-FbP" firstAttribute="centerX" secondItem="58o-9I-lgW" secondAttribute="centerX" id="iBc-sm-Qbu"/>
+                            <constraint firstItem="BaA-Nv-q13" firstAttribute="centerY" secondItem="58o-9I-lgW" secondAttribute="centerY" id="XHI-tZ-6qI"/>
+                            <constraint firstItem="58o-9I-lgW" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" multiplier="0.5" id="iE6-sV-xvC"/>
+                            <constraint firstItem="BaA-Nv-q13" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" multiplier="1.5" id="pfW-Er-QsI"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnAcceptCall" destination="58o-9I-lgW" id="CkY-58-l8a"/>
                         <outlet property="lblIncomingCall" destination="7F4-P2-FbP" id="Vte-Cl-nSz"/>
                         <segue destination="ktK-fT-O7G" kind="show" identifier="IncomingCallStoryToVideoStorySegue" id="bCB-Y8-zh1"/>
+                        <segue destination="bBe-z8-jRT" kind="unwind" identifier="IncomingCallStoryToChatsUserStoryModuleUnwindSegue" unwindAction="prepareForUnwindFromVideoStoryToChatUsersStory:" id="YyY-k4-Ng6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FYa-Zp-cCf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bBe-z8-jRT" userLabel="Exit" sceneMemberID="exit"/>
                 <customObject id="756-Ek-E9e" customClass="IncomingCallStoryModuleInitializer" customModule="QBRTCDemo_s">
                     <connections>
                         <outlet property="viewController" destination="7yk-1n-wJc" id="pnR-5K-PYi"/>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="157" y="323"/>
+            <point key="canvasLocation" x="155.625" y="322.18309859154931"/>
         </scene>
         <!--VideoCallStory-->
         <scene sceneID="FJl-wr-OLW">

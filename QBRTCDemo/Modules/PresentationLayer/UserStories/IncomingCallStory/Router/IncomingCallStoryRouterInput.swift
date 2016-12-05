@@ -10,4 +10,7 @@ import Foundation
 
 protocol IncomingCallStoryRouterInput {
 	func openVideoStoryWithOpponent(opponent: SVUser)
+	
+	// When call is declined
+	func unwindToChatsUserStory()
 }

@@ -9,17 +9,22 @@
 class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 
     weak var output: IncomingCallStoryInteractorOutput!
-
-	private(set) var initiator: SVUser!
-	private(set) var opponent: SVUser!
+	internal weak var callService: CallServiceProtocol!
+	
+	internal var opponent: SVUser!
 	
 	// MARK: IncomingCallStoryInteractorInput
 	
+	/// Set opponent, initiator of a call
 	func setOpponent(opponent: SVUser) {
 		self.opponent = opponent
 	}
 	
 	func retrieveOpponent() -> SVUser {
 		return opponent
+	}
+	
+	func hangup() {
+		callService.sendHangupToUser(opponent, completion: nil)
 	}
 }

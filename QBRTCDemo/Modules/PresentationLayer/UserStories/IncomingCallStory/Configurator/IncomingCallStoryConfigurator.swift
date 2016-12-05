@@ -25,7 +25,8 @@ class IncomingCallStoryModuleConfigurator {
 
         let interactor = IncomingCallStoryInteractor()
         interactor.output = presenter
-
+		interactor.callService = ServicesProvider.currentProvider.callService
+		
         presenter.interactor = interactor
         viewController.output = presenter
     }

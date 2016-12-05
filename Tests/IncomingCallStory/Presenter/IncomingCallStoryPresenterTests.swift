@@ -39,6 +39,14 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		presenter.view = mockView
 	}
 	
+	func testPresenterHandlesViewReadyEvent() {
+		// when
+		presenter.viewIsReady()
+		
+		// then
+		XCTAssertTrue(mockView.setupInitialStateGotCalled)
+	}
+	
 	func testPresenterConfiguresModule() {
 		// given
 		let opponent = TestsStorage.svuserRealUser1()
@@ -63,10 +71,23 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		// then
 		XCTAssertTrue(mockRouter.openVideoStoryWithOpponentGotCalled)
 	}
+	
+	func testPresenterCallsRouterUnwindToChatsStory_whenCallHasBeenDeclined() {
+		// given
+		let opponent = TestsStorage.svuserRealUser1()
+		
+		// when
+		presenter.configureModuleWithCallInitiator(opponent)
+		presenter.didTriggerDeclineButtonTapped()
+		
+		// then
+		XCTAssertTrue(mockInteractor.hangupGotCalled)
+		XCTAssertTrue(mockRouter.unwindToChatsUserStoryGotCalled)
+	}
 
     class MockInteractor: IncomingCallStoryInteractorInput {
 		
-		
+		var hangupGotCalled = false
 		var opponent: SVUser?
 		
 		func setOpponent(opponent: SVUser) {
@@ -76,24 +97,35 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		func retrieveOpponent() -> SVUser {
 			return opponent ?? SVUser()
 		}
+		
+		func hangup() {
+			hangupGotCalled = true
+		}
     }
 
 	class MockRouter: IncomingCallStoryRouterInput {
 		
 		var openVideoStoryWithOpponentGotCalled = false
+		var unwindToChatsUserStoryGotCalled = false
 		
 		func openVideoStoryWithOpponent(opponent: SVUser) {
 			openVideoStoryWithOpponentGotCalled = true
+		}
+		
+		func unwindToChatsUserStory() {
+			unwindToChatsUserStoryGotCalled = true
 		}
     }
 
     class MockViewController: IncomingCallStoryViewInput {
 
+		var setupInitialStateGotCalled = false
+		
 		var configureViewWithCallInitiatorGotCalled = false
 		var callInitiator: SVUser?
 		
         func setupInitialState() {
-
+			setupInitialStateGotCalled = true
         }
 		
 		func configureViewWithCallInitiator(callInitiator: SVUser) {

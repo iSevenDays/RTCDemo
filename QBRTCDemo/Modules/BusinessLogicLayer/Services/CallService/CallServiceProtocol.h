@@ -65,12 +65,20 @@ typedef NS_ENUM(NSInteger, CallServiceState) {
  */
 - (void)acceptCallFromOpponent:(SVUser *_Nonnull)opponent;
 
+
 /**
- * Clears session and ends a call
+ * Clears session and ends a call. Do nothing if there is no active call at the moment
  *
  * @note sends hangup message when -hasActiveCall YES
  */
 - (void)hangup;
+
+/*
+ * Send hangup to a user
+ * Should be called only when incoming call is received from
+ * undefined user, otherwise - user -hangup
+ */
+- (void)sendHangupToUser:(SVUser *_Nonnull)user completion:(void(^_Nullable)(NSError * _Nullable error))completion;
 
 - (BOOL)hasActiveCall;
 

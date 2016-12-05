@@ -10,8 +10,8 @@ class VideoCallStoryRouter {
 
 	// VideoCallStoryViewController is transitionHandler
 	@objc weak var transitionHandler: RamblerViperModuleTransitionHandlerProtocol!
-	let videoStoryToImageGalleryModuleSegue = "VideoStoryToImageGalleryModuleSegue";
-	let videoStoryToChatsUserStoryModuleSegue = "VideoStoryToChatsUserStoryModuleUnwindSegue";
+	let videoStoryToImageGalleryModuleSegue = "VideoStoryToImageGalleryModuleSegue"
+	let videoStoryToChatsUserStoryModuleSegue = "VideoStoryToChatsUserStoryModuleUnwindSegue"
 }
 
 extension VideoCallStoryRouter: VideoCallStoryRouterInput {
@@ -27,7 +27,6 @@ extension VideoCallStoryRouter: VideoCallStoryRouterInput {
 			
 			return nil
 		}
-		
 	}
 	
 	func unwindToChatsUserStory() {

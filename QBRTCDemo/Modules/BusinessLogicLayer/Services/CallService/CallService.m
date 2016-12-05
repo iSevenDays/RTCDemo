@@ -618,7 +618,8 @@
 		
 		// Handle only messages from current call (if exists)
 		// Everybody is able to send current user hangup messages
-		if ([message.sender.ID isEqualToNumber:self.opponentUser.ID]) {
+		NSNumber *opponentID = [self.opponentUser ID];
+		if (opponentID != nil && [message.sender.ID isEqualToNumber:opponentID]) {
 			// Disconnects can be processed immediately.
 			[self processSignalingMessage:message];
 		}

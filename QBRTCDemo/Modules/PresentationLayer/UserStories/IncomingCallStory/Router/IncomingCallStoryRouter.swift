@@ -9,9 +9,10 @@
 class IncomingCallStoryRouter: IncomingCallStoryRouterInput {
 	
 	let incomingCallStoryToVideoStorySegue = "IncomingCallStoryToVideoStorySegue"
+	let incomingCallStoryToChatsUserStoryModuleSegue = "IncomingCallStoryToChatsUserStoryModuleUnwindSegue"
 	
 	// AuthStoryViewController is transitionHandler
-	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
+	@objc weak var transitionHandler: RamblerViperModuleTransitionHandlerProtocol!
 	
 	func openVideoStoryWithOpponent(opponent: SVUser) {
 		
@@ -27,4 +28,7 @@ class IncomingCallStoryRouter: IncomingCallStoryRouterInput {
 		})
 	}
 	
+	func unwindToChatsUserStory() {
+		transitionHandler.openModuleUsingSegue?(incomingCallStoryToChatsUserStoryModuleSegue)
+	}
 }
