@@ -21,5 +21,7 @@
 	
 	func didTriggerCloseButtonTapped()
 	
-	func didTriggerSwitchButtonTapped()
+	func didTriggerSwitchCameraButtonTapped()
+	
+	func didTriggerSwitchAudioRouteButtonTapped()
 }

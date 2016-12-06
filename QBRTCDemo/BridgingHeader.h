@@ -33,7 +33,8 @@
 #import "RTCPeerConnectionInterface.h"
 #import "RTCEAGLVideoView.h"
 #import "RTCVideoRenderer.h"
-
+#import "RTCDispatcher.h"
+#import "RTCAudioSession.h"
 #import "RTCVideoTrack.h"
 #import "RTCAVFoundationVideoSource.h"
 #import "RTCCameraPreviewView.h"

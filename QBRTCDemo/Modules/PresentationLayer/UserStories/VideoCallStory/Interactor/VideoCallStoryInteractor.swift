@@ -16,6 +16,7 @@ class VideoCallStoryInteractor: NSObject {
 	var remoteVideoTrack: RTCVideoTrack?
 	var connectingToChat = false
 	var lastOpponent: SVUser?
+	var audioSessionPortOverride: AVAudioSessionPortOverride = .None
 	
 	var currentUser: SVUser? {
 		return callService.currentUser()
@@ -116,9 +117,29 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		}
 	}
 	
+	/// MARK: - Switch camera
 	func switchCamera() {
 		if let videoSource = localVideoTrack?.source as? RTCAVFoundationVideoSource {
 			videoSource.useBackCamera = !videoSource.useBackCamera
+		}
+	}
+	
+	/// MARK: - Switch audio route
+	func switchAudioRoute() {
+		var desiredRoute = AVAudioSessionPortOverride.None
+		if audioSessionPortOverride == desiredRoute {
+			desiredRoute = .Speaker
+		}
+		RTCDispatcher.dispatchAsyncOnType(.TypeAudioSession) { [unowned self] in
+			let session = RTCAudioSession.sharedInstance()
+			session.lockForConfiguration()
+			do {
+				try session.overrideOutputAudioPort(desiredRoute)
+				self.audioSessionPortOverride = desiredRoute
+			} catch let error {
+				NSLog("%@", "Error overriding output port: \(error)")
+			}
+			session.unlockForConfiguration()
 		}
 	}
 }

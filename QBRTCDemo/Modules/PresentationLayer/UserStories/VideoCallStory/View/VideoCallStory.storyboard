@@ -77,12 +77,21 @@
                                     <action selector="didTapButtonSwitchCamera:" destination="YrU-5b-St0" eventType="touchUpInside" id="Lks-89-Z2S"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQz-PG-RMx">
+                                <rect key="frame" x="23" y="518" width="88" height="30"/>
+                                <state key="normal" title="Switch audio"/>
+                                <connections>
+                                    <action selector="didTapButtonSwitchAudioRoute:" destination="YrU-5b-St0" eventType="touchUpInside" id="P7P-HY-5sH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wgw-bV-rb3" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="20" id="1w9-LC-2UH"/>
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="top" secondItem="wgw-bV-rb3" secondAttribute="bottom" constant="5" id="36G-dh-gFn"/>
+                            <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="YQz-PG-RMx" secondAttribute="trailing" constant="20" id="9hJ-2V-idm"/>
                             <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="NNT-dN-5QY" secondAttribute="bottom" id="Ajn-LF-XSe"/>
+                            <constraint firstItem="YQz-PG-RMx" firstAttribute="centerY" secondItem="hSW-Wr-uX2" secondAttribute="centerY" id="GPR-zv-if1"/>
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="trailing" secondItem="4cX-0I-S3D" secondAttribute="trailing" constant="10" id="HIc-Ya-2Ac"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="centerY" secondItem="hSW-Wr-uX2" secondAttribute="centerY" id="Lpv-GS-BvM"/>
                             <constraint firstItem="wgw-bV-rb3" firstAttribute="top" secondItem="ok7-Kn-klu" secondAttribute="bottom" constant="20" id="Ngf-cW-zPQ"/>

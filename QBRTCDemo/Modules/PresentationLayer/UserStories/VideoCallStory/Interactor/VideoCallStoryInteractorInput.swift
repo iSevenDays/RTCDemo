@@ -28,5 +28,9 @@ protocol VideoCallStoryInteractorInput {
 	func requestDataChannelState()
 	func sendInvitationMessageAndOpenImageGallery()
 	
+	/// Switch between back and front camera
 	func switchCamera()
+	
+	// Switch between speaker and headset
+	func switchAudioRoute()
 }

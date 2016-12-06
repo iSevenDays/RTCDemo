@@ -60,7 +60,15 @@ class VideoCallStoryViewTests: XCTestCase {
 		controller.didTapButtonSwitchCamera(emptySender)
 		
 		// then
-		XCTAssertTrue(mockOutput.switchButtonTapped)
+		XCTAssertTrue(mockOutput.switchCameraButtonTapped)
+	}
+	
+	func testSwitchAudioRouteButtonTriggersAction() {
+		// when
+		controller.didTapButtonSwitchAudioRoute(emptySender)
+		
+		// then
+		XCTAssertTrue(mockOutput.switchAudioRouteButtonTapped)
 	}
 	
 	func testSuccessDataChannelButton_ImageGalleryTriggersAction() {
@@ -105,7 +113,8 @@ class VideoCallStoryViewTests: XCTestCase {
 		var hangupButtonTapped = false
 		var dataChannelButtonTapped = false
 		var closeButtonTapped = false
-		var switchButtonTapped = false
+		var switchCameraButtonTapped = false
+		var switchAudioRouteButtonTapped = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
@@ -123,9 +132,14 @@ class VideoCallStoryViewTests: XCTestCase {
 			closeButtonTapped = true
 		}
 		
-		func didTriggerSwitchButtonTapped() {
-			switchButtonTapped = true
+		func didTriggerSwitchCameraButtonTapped() {
+			switchCameraButtonTapped = true
 		}
+		
+		func didTriggerSwitchAudioRouteButtonTapped() {
+			switchAudioRouteButtonTapped = true
+		}
+		
 	}
 }
 
