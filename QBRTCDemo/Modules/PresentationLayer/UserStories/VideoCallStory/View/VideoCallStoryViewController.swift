@@ -13,17 +13,12 @@ class VideoCallStoryViewController: UIViewController {
     @objc var output: VideoCallStoryViewOutput!
 
 	// MARK - IBOutlets
-	@IBOutlet weak var btnStartCall: UIButton!
-	@IBOutlet weak var btnOpenDataChannel: UIButton!
-	@IBOutlet weak var btnHangup: UIButton!
-	@IBOutlet weak var lblConnected: UILabel!
 	@IBOutlet weak var lblState: UILabel!
-	@IBOutlet weak var lblIceState: UILabel!
 	@IBOutlet weak var viewRemote: RTCEAGLVideoView!
 	@IBOutlet weak var viewLocal: RTCCameraPreviewView!
 	
-	
     // MARK: Life cycle
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
@@ -31,12 +26,16 @@ class VideoCallStoryViewController: UIViewController {
 	
 	// MARK: - IBActions
 	
-	func didTapButtonHangup(sender: UIButton) {
+	@IBAction func didTapButtonHangup(sender: UIButton) {
 		output.didTriggerHangupButtonTapped()
 	}
 	
-	func didTapButtonDataChannelImageGallery(sender: UIButton) {
+	@IBAction func didTapButtonDataChannelImageGallery(sender: UIButton) {
 		output.didTriggerDataChannelButtonTapped()
+	}
+	
+	@IBAction func didTapButtonSwitchCamera(sender: UIButton) {
+		output.didTriggerSwitchButtonTapped()
 	}
 }
 

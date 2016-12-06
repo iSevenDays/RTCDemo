@@ -170,6 +170,14 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(mockRouter.openImageGalleryGotCalled)
 	}
 	
+	func testPresenterSwitchesCamera() {
+		// when
+		presenter.didTriggerSwitchButtonTapped()
+		
+		// then
+		XCTAssertTrue(mockInteractor.switchCameraGotCalled)
+	}
+	
 	
     class MockInteractor: VideoCallStoryInteractorInput {
 		var connectedUser: SVUser?
@@ -181,6 +189,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		var hangupGotCalled = false
 		var requestDataChannelStateGotCalled = false
 		var sendInvitationMessageAndOpenImageGalleryGotCalled = false
+		var switchCameraGotCalled = false
 		
 		func connectToChatWithUser(user: SVUser, callOpponent opponent: SVUser?) {
 			self.connectedUser = user
@@ -208,6 +217,10 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		
 		func sendInvitationMessageAndOpenImageGallery() {
 			sendInvitationMessageAndOpenImageGalleryGotCalled = true
+		}
+		
+		func switchCamera() {
+			switchCameraGotCalled = true
 		}
     }
 

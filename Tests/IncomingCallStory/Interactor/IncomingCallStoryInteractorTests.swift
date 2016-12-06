@@ -31,7 +31,7 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 	func testHangupSendsHangupMessage() {
 		// given
 		let testUser = TestsStorage.svuserRealUser1()
-		interactor.opponent = testUser
+		interactor.setOpponent(testUser)
 		
 		// when
 		interactor.hangup()

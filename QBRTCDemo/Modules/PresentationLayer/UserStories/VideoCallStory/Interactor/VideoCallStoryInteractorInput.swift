@@ -27,4 +27,6 @@ protocol VideoCallStoryInteractorInput {
 	
 	func requestDataChannelState()
 	func sendInvitationMessageAndOpenImageGallery()
+	
+	func switchCamera()
 }

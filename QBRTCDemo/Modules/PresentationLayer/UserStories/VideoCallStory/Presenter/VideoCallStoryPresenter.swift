@@ -40,6 +40,10 @@ extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 	func didTriggerCloseButtonTapped() {
 		router.unwindToChatsUserStory()
 	}
+	
+	func didTriggerSwitchButtonTapped() {
+		interactor.switchCamera()
+	}
 }
 
 extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {

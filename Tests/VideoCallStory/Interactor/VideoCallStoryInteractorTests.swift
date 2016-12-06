@@ -36,7 +36,6 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	
 	override func tearDown() {
 		interactor.output = nil
-		interactor = nil
 		mockOutput = nil
 		super.tearDown()
 	}
@@ -98,6 +97,17 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
+	}
+	
+	func testStoresLocalVideoTrack() {
+		// given
+		useFakeCallService()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		
+		// then
+		XCTAssertNotNil(interactor.localVideoTrack)
 	}
 	
 	func testReceivesRemoteVideoTrack_whenConnectedAndStartedCall() {

@@ -20,4 +20,6 @@
 	func didTriggerDataChannelButtonTapped()
 	
 	func didTriggerCloseButtonTapped()
+	
+	func didTriggerSwitchButtonTapped()
 }

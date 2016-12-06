@@ -115,16 +115,22 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			output.didReceiveDataChannelStateNotReady()
 		}
 	}
+	
+	func switchCamera() {
+		if let videoSource = localVideoTrack?.source as? RTCAVFoundationVideoSource {
+			videoSource.useBackCamera = !videoSource.useBackCamera
+		}
+	}
 }
 
 extension VideoCallStoryInteractor: CallServiceDelegate {
 	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack?) {
-		guard NSClassFromString("XCTest") == nil else {
+		if NSClassFromString("XCTest") != nil {
 			output.didSetLocalCaptureSession(AVCaptureSession())
-			return
 		}
 		
 		guard self.localVideoTrack != localVideoTrack else { return }
+		self.localVideoTrack = localVideoTrack
 		
 		let source = localVideoTrack?.source as? RTCAVFoundationVideoSource
 		

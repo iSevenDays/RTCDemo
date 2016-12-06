@@ -243,7 +243,6 @@
 	[self drainMessageQueueIfReady];
 }
 
-
 - (void)hangup {
 	
 	if (self.state == kClientStateDisconnected) {
