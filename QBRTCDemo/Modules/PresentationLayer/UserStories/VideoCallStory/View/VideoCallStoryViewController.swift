@@ -63,6 +63,10 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 		
 	}
 	
+	func showErrorCallServiceDisconnected() {
+		output.didTriggerCloseButtonTapped()
+	}
+	
 	func showErrorDataChannelNotReady() {
 		
 	}

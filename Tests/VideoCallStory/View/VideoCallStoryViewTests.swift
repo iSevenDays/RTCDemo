@@ -95,6 +95,14 @@ class VideoCallStoryViewTests: XCTestCase {
 		XCTAssertTrue(mockOutput.closeButtonTapped)
 	}
 	
+	func testShowCallServiceFailureEventuallyCallsCloseAction() {
+		// when
+		controller.showErrorCallServiceDisconnected()
+		
+		// then
+		XCTAssertTrue(mockOutput.closeButtonTapped)
+	}
+	
 	// MARK: Testing methods of VideoCallStoryViewInput
 	
 	func testSetLocalVideoCaptureSession_setsCaptureSession() {

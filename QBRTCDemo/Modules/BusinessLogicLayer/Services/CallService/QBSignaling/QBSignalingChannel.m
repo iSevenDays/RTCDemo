@@ -57,7 +57,13 @@
 - (void)sendMessage:(SVSignalingMessage *)message toUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
 	NSParameterAssert(svuser);
 	NSParameterAssert(self.user);
-	NSCAssert([self.state isEqualToString:SVSignalingChannelState.established], @"Connection is not established");
+	if (![self.state isEqualToString:SVSignalingChannelState.established]) {
+		if (completion != nil) {
+			NSError *error = [NSError errorWithDomain:@"QBSignalingChannelErrorDomain" code:-1 userInfo:@{@"Error": @"Can not send message, connection is not established", @"SignalingMessage": message}];
+			completion(error);
+		}
+		return;
+	}
 	
 	message.sender = self.user;
 	

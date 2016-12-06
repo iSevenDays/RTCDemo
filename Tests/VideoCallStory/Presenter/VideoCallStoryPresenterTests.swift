@@ -94,12 +94,20 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(mockView.configureViewWithUserGotCalled)
 	}
 	
-	func testPresenterHandlesConnectionError() {
+	func testPresenterHandlesChatConnectionError() {
 		// when
 		presenter.didFailToConnectToChat()
 		
 		// then
 		XCTAssertTrue(mockView.showErrorConnectGotCalled)
+	}
+	
+	func testPresenterHandlesCallServiceError() {
+		// when
+		presenter.didFailCallService()
+		
+		// then
+		XCTAssertTrue(mockView.showErrorCallServiceDisconnectedGotCalled)
 	}
 	
 	func testPresenterHandlesCloseActionAndCallsRouterUnwindSegue() {
@@ -256,6 +264,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		var showHangupGotCalled = false
 		var showOpponentHangupGotCalled = false
 		var showErrorConnectGotCalled = false
+		var showErrorCallServiceDisconnectedGotCalled = false
 		var showErrorDataChannelNotReadyGotCalled = false
 		var localCaptureSession: AVCaptureSession?
 		var setLocalVideoCaptureSessionGotCalled = false
@@ -279,6 +288,10 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		
 		func showErrorConnect() {
 			showErrorConnectGotCalled = true
+		}
+		
+		func showErrorCallServiceDisconnected() {
+			showErrorCallServiceDisconnectedGotCalled = true
 		}
 		
 		func showErrorDataChannelNotReady() {

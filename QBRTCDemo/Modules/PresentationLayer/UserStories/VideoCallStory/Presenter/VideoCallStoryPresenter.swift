@@ -67,6 +67,10 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 		view.showErrorConnect()
 	}
 	
+	func didFailCallService() {
+		view.showErrorCallServiceDisconnected()
+	}
+	
 	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession) {
 		view.setLocalVideoCaptureSession(localCaptureSession)
 	}

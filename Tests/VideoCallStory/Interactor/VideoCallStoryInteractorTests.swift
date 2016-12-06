@@ -198,6 +198,17 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		XCTAssertTrue(mockOutput.didSendInvitationToOpenImageGalleryGotCalled)
 	}
 	
+	func testNotifiesPresenterAboutCallServiceOccuredFailure() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: nil)
+		interactor.callService(interactor.callService, didChangeState: CallServiceState.ClientStateDisconnected)
+		
+		// then
+		XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
+	}
 	
 	class MockPresenter: NSObject,  VideoCallStoryInteractorOutput {
 		var didConnectToChatWithUserGotCalled = false
@@ -208,6 +219,8 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		var didReceiveHangupFromOpponentGotCalled = false
 		
 		var didFailToConnectToChatGotCalled = false
+		var didFailCallServiceGotCalled = false
+		
 		var didSetLocalCaptureSessionGotCalled = false
 		var didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled = false
 		var didOpenDataChannelGotCalled = false
@@ -232,6 +245,10 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		func didFailToConnectToChat() {
 			
+		}
+		
+		func didFailCallService() {
+			didFailCallServiceGotCalled = true
 		}
 		
 		func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession) {

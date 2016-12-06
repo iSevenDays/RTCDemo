@@ -194,7 +194,9 @@ extension VideoCallStoryInteractor: CallServiceDelegate {
 	}
 	
 	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
-		
+		if state == CallServiceState.ClientStateDisconnected {
+			output.didFailCallService()
+		}
 	}
 	
 	func callService(callService: CallServiceProtocol, didError error: NSError) {

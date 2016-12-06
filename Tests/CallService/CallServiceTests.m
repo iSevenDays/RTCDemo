@@ -113,14 +113,26 @@
 }
 
 - (void)testCorrectlyChangesClientStateToDisconnectedAfterDisconnectFromChat {
-	// given
-	
 	// when
 	[self.callService connectWithUser:self.user1 completion:nil];
 	[self.callService disconnectWithCompletion:nil];
 	
 	// then
 	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
+}
+
+- (void)testCorrectlyCleanupsSessionAfterDisconnectFromChat {
+	// given
+	OCMExpect([self.mockCallService clearSession]);
+	
+	// when
+	[self.callService connectWithUser:self.user1 completion:nil];
+	[self.callService channel:self.callService.signalingChannel didChangeState:SVSignalingChannelState.error];
+	
+	// then
+	XCTAssertEqual(self.callService.state, kClientStateDisconnected);
+	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
+	OCMVerifyAll(self.mockCallService);
 }
 
 - (void)testStaysConnectedAfterHangup {
@@ -133,6 +145,7 @@
 
 	// then
 	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateConnected]);
+	OCMVerifyAll(self.mockCallService);
 }
 
 - (void)testSendsRejectIfAlreadyHasActiveCall {

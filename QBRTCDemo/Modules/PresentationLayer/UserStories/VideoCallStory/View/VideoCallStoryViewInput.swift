@@ -16,9 +16,16 @@ protocol VideoCallStoryViewInput: class {
 	
 	func configureViewWithUser(user: SVUser)
 	
+	/// Show current user hang up a call
 	func showHangup()
+	
+	/// Show an opponent hang up a call
 	func showOpponentHangup()
 	
+	/// There might be a call at the moment, but call service was disconnected
+	func showErrorCallServiceDisconnected()
+	
+	/// Failed to connect to chat
 	func showErrorConnect()
 	func showErrorDataChannelNotReady()
 	func setLocalVideoCaptureSession(captureSession: AVCaptureSession)

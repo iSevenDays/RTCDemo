@@ -29,4 +29,10 @@ import Foundation
 	
 	/// We have sent to a receiver an invitation to open image gallery and start sync
 	func didSendInvitationToOpenImageGallery()
+	
+	/* 
+	 * Call service work interrupted due to errors in signaling channel
+	 * a call must be closed
+	*/
+	func didFailCallService()
 }

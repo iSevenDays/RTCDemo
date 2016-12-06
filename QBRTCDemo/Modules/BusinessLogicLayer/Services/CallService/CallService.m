@@ -159,7 +159,7 @@
 
 - (void)disconnectWithCompletion:(void (^)(NSError * _Nullable))completion {
 	if (self.state == kClientStateDisconnected) {
-		if (completion) {
+		if (completion != nil) {
 			completion(nil);
 		}
 		return;
@@ -170,6 +170,9 @@
 	[self.signalingChannel disconnectWithCompletion:^(NSError * _Nullable error) {
 		if (error == nil) {
 			weakSelf.state = kClientStateDisconnected;
+		}
+		if (completion != nil) {
+			completion(error);
 		}
 	}];
 }
@@ -631,6 +634,7 @@
 	if ([signalingState isEqualToString:SVSignalingChannelState.error] ||
 		[signalingState isEqualToString:SVSignalingChannelState.closed]) {
 		self.state = kClientStateDisconnected;
+		[self clearSession];
 	}
 }
 
