@@ -83,7 +83,7 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 	}
 }
 
-extension ChatUsersStoryInteractor: CallServiceDelegate {
+extension ChatUsersStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		output.didReceiveCallRequestFromOpponent(opponent)
 	}
@@ -91,12 +91,17 @@ extension ChatUsersStoryInteractor: CallServiceDelegate {
 	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
 		
 	}
+	
+	func callService(callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser) {
+		
+	}
 }
 
 
-protocol CacheServiceProtocol {
+@objc protocol CacheServiceProtocol: class {
 	func cacheUsers(users: [SVUser])
 	func cachedUsers() -> [SVUser]?
+	func cachedUserWithID(id: Int) -> SVUser?
 }
 
 extension NSUserDefaults: CacheServiceProtocol {
@@ -112,5 +117,9 @@ extension NSUserDefaults: CacheServiceProtocol {
 		}
 		
 		return NSKeyedUnarchiver.unarchiveObjectWithData(usersData) as? [SVUser]
+	}
+	
+	func cachedUserWithID(id: Int) -> SVUser? {
+		return self.cachedUsers()?.filter({$0.ID?.integerValue == id}).first
 	}
 }

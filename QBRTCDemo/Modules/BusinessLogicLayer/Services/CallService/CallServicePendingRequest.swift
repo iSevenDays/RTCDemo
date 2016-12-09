@@ -10,17 +10,16 @@ import UIKit
 
 class CallServicePendingRequest: NSObject {
 	
-	var offerSignalingMessage: SVSignalingMessage!
-	var initiator: SVUser!
+	var offerSignalingMessage: SVSignalingMessageSDP
+	var initiator: SVUser
 	
-	init(offerSignalingMessage: SVSignalingMessage) {
-		super.init()
-		
+	init(offerSignalingMessage: SVSignalingMessageSDP) {
 		assert(offerSignalingMessage.type == SVSignalingMessageType.offer.takeUnretainedValue())
 		
 		initiator = offerSignalingMessage.sender
 		self.offerSignalingMessage = offerSignalingMessage
 		
+		super.init()
 	}
 	
 }

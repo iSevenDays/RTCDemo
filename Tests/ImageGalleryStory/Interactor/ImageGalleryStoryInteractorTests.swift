@@ -41,8 +41,11 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		
 		let fakeSignalingChannel: SVSignalingChannelProtocol = FakeSignalingChannel()
 		
-		fakeCallService = FakeCallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: interactor)
-		realCallService = CallService(signalingChannel: fakeSignalingChannel, callServiceDelegate: nil, dataChannelDelegate: interactor)
+		fakeCallService = FakeCallService()
+		fakeCallService.signalingChannel = fakeSignalingChannel
+		realCallService = CallService()
+		
+		realCallService.signalingChannel = fakeSignalingChannel
     }
 	
 	// Use when using real CallService is not possible
@@ -70,7 +73,7 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		// given
 		useRealCallService()
 		interactor.callService.connectWithUser(user1, completion: nil)
-		interactor.callService.startCallWithOpponent(user2)
+		_ = try? interactor.callService.startCallWithOpponent(user2)
 		
 		// when
 		interactor.requestCallerRole()

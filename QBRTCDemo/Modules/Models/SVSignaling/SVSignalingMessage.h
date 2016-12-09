@@ -18,5 +18,8 @@
 @property (nonatomic, copy, readonly, nonnull) NSDictionary<NSString *, NSString *> *params;
 
 @property (nonatomic, strong, nonnull) SVUser *sender;
+@property (nonatomic, strong, nonnull) NSNumber *initiatorID;
+@property (nonatomic, strong, nonnull) NSString *sessionID;
+@property (nonatomic, strong, nonnull) NSArray<NSNumber *> *membersIDs;
 
 @end

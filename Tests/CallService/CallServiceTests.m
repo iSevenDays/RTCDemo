@@ -73,10 +73,10 @@
 }
 
 
-
 - (void)testCanConnectWithUserAndHaveConnectedState {
 	// given
 	XCTestExpectation *expectation = [self currentSelectorTestExpectation];
+	
 	// when
 	[self.callService connectWithUser:self.user1 completion:^(NSError * _Nullable error) {
 		XCTAssertNil(error);
@@ -135,12 +135,14 @@
 	OCMVerifyAll(self.mockCallService);
 }
 
-- (void)testStaysConnectedAfterHangup {
+- (void)testCorrectlyStopsJustStartedCall_andStopsDialing {
 	// given
 	OCMReject([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
+	OCMExpect([self.mockCallService stopDialing]);
 	
 	// when
 	[self.callService connectWithUser:self.user1 completion:nil];
+	[self.callService startCallWithOpponent:self.user2];
 	[self.callService hangup];
 
 	// then
@@ -190,7 +192,7 @@
 	OCMVerify([self.mockCallService drainMessageQueueIfReady]);
 }
 
-- (void)testCallsHangupDelegateMethod_whenHangupIsReceived {
+- (void)testCorrectlyProcessesHangupDelegateMethod_whenHangupIsReceived {
 	// given
 	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
 	

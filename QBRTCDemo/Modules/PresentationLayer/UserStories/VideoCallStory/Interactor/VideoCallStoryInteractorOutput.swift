@@ -17,6 +17,12 @@ import Foundation
 	// Method is called when hangup is received from opponent user in a current call
 	func didReceiveHangupFromOpponent(opponent: SVUser)
 	
+	// Method is called when reject for a call is received from opponent user
+	func didReceiveRejectFromOpponent(opponent: SVUser)
+	
+	// Method is called when answer timeout occured for calling the given opponent
+	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser)
+	
 	func didFailToConnectToChat()
 	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession)
 	func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?)

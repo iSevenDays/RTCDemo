@@ -63,6 +63,14 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 		view.showOpponentHangup()
 	}
 	
+	func didReceiveRejectFromOpponent(opponent: SVUser) {
+		view.showOpponentReject()
+	}
+	
+	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser) {
+		view.showOpponentAnswerTimeout()
+	}
+	
 	func didFailToConnectToChat() {
 		view.showErrorConnect()
 	}

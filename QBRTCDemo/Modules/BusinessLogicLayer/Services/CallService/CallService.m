@@ -38,7 +38,9 @@
 #import "WebRTCHelpers.h"
 #import "RTCMediaStream.h"
 
-@interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate>
+#import "QBRTCDemo_s-Swift.h"
+
+@interface CallService()<SVSignalingChannelDelegate, RTCPeerConnectionDelegate, RTCSessionDescriptionDelegate, RTCDataChannelDelegate, SignalingProcessorObserver>
 
 @property (atomic, strong) NSMutableArray *messageQueue;
 @property (nonatomic, strong) RTCPeerConnectionFactory *factory;
@@ -48,10 +50,20 @@
 @property (nonatomic, assign, getter=isInitiator) BOOL initiator;
 @property (nonatomic, assign) BOOL isAudioOnly;
 
-@property (nonatomic, strong) SVUser *opponentUser;
-@property (nonatomic, strong) SVUser *initiatorUser;
+/// Local offer to send to opponent
+@property (nonatomic, strong) SVSignalingMessageSDP *localPendingSDPSignalingMessage;
+@property (nonatomic, strong) SVTimer *dialingTimer;
+@property (nonatomic, assign) NSUInteger dialingTimerTimeout;
+@property (nonatomic, assign) NSUInteger dialingInterval;
 
-@property (nonatomic, strong) NSMutableArray<CallServicePendingRequest *> *pendingRequests;
+// SVUser ID : pending request
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *, CallServicePendingRequest *> *pendingRequests;
+
+// Currently supported only 1 active session at a time
+// Session Identifier : sessionDetails
+@property (nonatomic, strong) NSMutableDictionary<NSString *, SessionDetails *> *sessions;
+
+@property (nonatomic, strong) SignalingProcessor *signalingProcessor;
 
 @end
 
@@ -67,9 +79,12 @@
 	
 	if (self) {
 		_signalingChannel = signalingChannel;
-		_signalingChannel.delegate = self;
+		[_signalingChannel addDelegate:self];
 		_multicastDelegate = (SVMulticastDelegate<CallServiceDelegate>*)[[SVMulticastDelegate alloc] init];
 		
+		_signalingProcessor = [[SignalingProcessor alloc] init];
+		[_signalingChannel addDelegate:_signalingProcessor];
+		_signalingProcessor.observer = self;
 		if (callServiceDelegate) {
 			[self addDelegate:callServiceDelegate];
 		}
@@ -81,7 +96,8 @@
 		}
 		
 		_messageQueue = [NSMutableArray array];
-		_pendingRequests = [NSMutableArray array];
+		_pendingRequests = [NSMutableDictionary dictionary];
+		_sessions = [NSMutableDictionary dictionary];
 		_factory = [[RTCPeerConnectionFactory alloc] init];
 		
 		_state = kClientStateDisconnected;
@@ -89,6 +105,9 @@
 		_isAudioOnly = NO;
 		
 		_dataChannelEnabled = YES;
+		
+		_dialingInterval = 9;
+		_dialingTimerTimeout = 10;
 	}
 	return self;
 }
@@ -123,13 +142,25 @@
 	return self.signalingChannel.state == SVSignalingChannelState.open;
 }
 
+- (SessionDetails *)activeSession {
+	NSMutableArray *activeSessions = [NSMutableArray array];
+	
+	for (SessionDetails *sessionDetails in [self.sessions allValues]) {
+		if ([sessionDetails sessionState] != SessionDetailsStateClosed || [sessionDetails sessionState] != SessionDetailsStateRejected) {
+			[activeSessions addObject:sessionDetails];
+		}
+	}
+	NSAssert(activeSessions.count == 0 || activeSessions.count == 1, @"Wrong number of active session");
+	return activeSessions.firstObject;
+}
+
 - (void)connectWithUser:(SVUser *)user completion:(void(^)(NSError *error))completion {
 	
 	NSParameterAssert(self.signalingChannel);
 	NSParameterAssert(user.password);
 	
 	if (self.state == kClientStateConnecting) {
-		if (completion) {
+		if (completion != nil) {
 			completion([[NSError alloc] initWithDomain:@"CallServiceErrorDomain" code:-1 userInfo:@{@"Error": @"Trying to connect while already connecting, return"}]);
 		}
 		return;
@@ -191,8 +222,8 @@
 		return;
 	}
 	
-	self.opponentUser = opponent;
-	self.initiatorUser = self.signalingChannel.user;
+	SessionDetails *sessionDetails = [[SessionDetails alloc] initWithInitiator:self.currentUser membersIDs:@[opponent.ID, self.currentUser.ID]];
+	self.sessions[sessionDetails.sessionID] = sessionDetails;
 	
 	// Create peer connection.
 	RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
@@ -220,21 +251,18 @@
 
 - (void)acceptCallFromOpponent:(SVUser *)opponent {
 	
-	SVUser *initiator = nil;
 	SVSignalingMessage *offerSignalingMessage = nil;
 	
-	for (CallServicePendingRequest *request in self.pendingRequests) {
+	for (CallServicePendingRequest *request in self.pendingRequests.allValues) {
 		if ([request.initiator isEqual:opponent]) {
-			initiator = request.initiator;
 			offerSignalingMessage = request.offerSignalingMessage;
 		}
 	}
-	
-	NSParameterAssert(initiator);
 	NSParameterAssert(offerSignalingMessage);
 	
-	self.opponentUser = initiator;
-	self.initiatorUser = initiator;
+	SessionDetails *sessionDetails = [[SessionDetails alloc] initWithSignalingMessage:offerSignalingMessage];
+	sessionDetails.sessionState = SessionDetailsStateOfferReceived;
+	self.sessions[sessionDetails.sessionID] = sessionDetails;
 	
 	self.peerConnection = [self.factory peerConnectionWithConfiguration:[self defaultConfigurationWithCurrentICEServers] constraints:[self defaultAnswerConstraints] delegate:self];
 	[self.peerConnection addStream:[self createLocalMediaStream]];
@@ -254,11 +282,17 @@
 	}
 	
 	if ([self hasActiveCall] && [self.signalingChannel.state isEqualToString:SVSignalingChannelState.established]) {
-		[self sendHangupToUser:self.opponentUser completion:^(NSError * _Nullable error) {
-			if (error) {
-				DDLogWarn(@"Did not send hangup to the opponent");
+		
+		for (NSNumber *opponentID in [self.activeSession membersIDs]) {
+			SVUser *opponent = [self.cacheService cachedUserWithID:opponentID.intValue];
+			if (opponent != nil) {
+				[self sendHangupToUser:opponent completion:^(NSError * _Nullable error) {
+					if (error) {
+						DDLogWarn(@"Did not send hangup to the opponent %@", opponent);
+					}
+				}];
 			}
-		}];
+		}
 	}
 	
 	[self clearSession];
@@ -271,16 +305,42 @@
 }
 
 - (void)sendRejectToUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {
-	SVSignalingMessage *rejectMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.reject params:nil];
 	
+	for (SessionDetails *sessionDetails in [self.sessions allValues]) {
+		if ([sessionDetails initiatorID] == user.ID.unsignedIntegerValue) {
+			sessionDetails.sessionState = SessionDetailsStateRejected;
+		}
+	}
+	
+	SVSignalingMessage *rejectMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.reject params:nil];
 	[self sendSignalingMessage:rejectMessage toUser:user completion:completion];
 }
 
+- (void)sendSignalingMessageToActiveSessionUsers:(SVSignalingMessage *)signalingMessage {
+	
+	NSParameterAssert(self.activeSession);
+	
+	for (NSNumber *opponentID in [self.activeSession membersIDs]) {
+		SVUser *opponent = [self.cacheService cachedUserWithID:opponentID.intValue];
+		if (opponent != nil && ![opponent.ID isEqualToNumber:self.currentUser.ID]) {
+			signalingMessage.sessionID = self.activeSession.sessionID;
+			signalingMessage.membersIDs = self.activeSession.membersIDs;
+			signalingMessage.initiatorID = @(self.activeSession.initiatorID);
+			
+			[self.signalingChannel sendMessage:signalingMessage toUser:opponent completion:^(NSError * _Nullable error) {
+				if (error) {
+					DDLogWarn(@"Error sending signaling message: %@ error: %@", signalingMessage, error);
+				}
+			}];
+		}
+	}
+}
+
 - (void)sendSignalingMessage:(SVSignalingMessage *)signalingMessage toUser:(SVUser *)user completion:(void(^)(NSError * _Nullable error))completion {
+	
 	[self.signalingChannel sendMessage:signalingMessage toUser:user completion:^(NSError * _Nullable error) {
 		if (error) {
 			DDLogWarn(@"Error sending signaling message: %@ error: %@", signalingMessage, error);
-			return;
 		}
 		if (completion) {
 			completion(error);
@@ -303,9 +363,8 @@
 
 - (void)clearSession {
 	DDLogInfo(@"Clear session");
+	[self stopDialing];
 	
-	self.opponentUser = nil;
-	self.initiatorUser = nil;
 	for (RTCMediaStream *stream in self.peerConnection.localStreams) {
 		[self.peerConnection removeStream:stream];
 	}
@@ -317,10 +376,12 @@
 	
 	self.isReceivedSDP = NO;
 	self.messageQueue = [NSMutableArray array];
+	
+	self.localPendingSDPSignalingMessage = nil;
 }
 
 - (BOOL)hasActiveCall {
-	return self.initiatorUser && self.opponentUser;
+	return [self activeSession] != nil;
 }
 
 - (void)drainMessageQueueIfReady {
@@ -366,7 +427,7 @@
 		[self.peerConnection setRemoteDescriptionWithDelegate:self
 										   sessionDescription:sdpPreferringH264];
 		
-	} else if ([message.type isEqualToString:SVSignalingMessageType.candidate] ) {
+	} else if ([message.type isEqualToString:SVSignalingMessageType.candidates] ) {
 		
 		SVSignalingMessageICE *candidateMessage = (SVSignalingMessageICE *)message;
 		NSAssert([message isKindOfClass:[SVSignalingMessageICE class]], @"Incorrect class");
@@ -374,22 +435,15 @@
 		[self.peerConnection addICECandidate:candidateMessage.iceCandidate];
 	} else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
 		if ([self.multicastDelegate respondsToSelector:@selector(callService:didReceiveHangupFromOpponent:)]) {
-			[self.multicastDelegate callService:self didReceiveHangupFromOpponent:self.opponentUser];
+			[self.multicastDelegate callService:self didReceiveHangupFromOpponent:message.sender];
+		}
+		[self clearSession];
+	} else if ([message.type isEqualToString:SVSignalingMessageType.reject]) {
+		if ([self.multicastDelegate respondsToSelector:@selector(callService:didReceiveRejectFromOpponent:)]) {
+			[self.multicastDelegate callService:self didReceiveRejectFromOpponent:message.sender];
 		}
 		[self clearSession];
 	}
-}
-
-- (void)sendSignalingMessage:(SVSignalingMessage *)message {
-	__weak __typeof(self)weakSelf = self;
-	
-	[self.signalingChannel sendMessage:message toUser:self.opponentUser completion:^(NSError * _Nullable error) {
-		if (error) {
-			if ([weakSelf.multicastDelegate respondsToSelector:@selector(callService:didError:)]) {
-				[weakSelf.multicastDelegate callService:self didError:error];
-			}
-		}
-	}];
 }
 
 - (RTCMediaStream *)createLocalMediaStream {
@@ -439,194 +493,94 @@
 	return localVideoTrack;
 }
 
-#pragma mark - RTCPeerConnectionDelegate
-// Callbacks for this delegate occur on non-main thread and need to be
-// dispatched back to main queue as needed.
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection signalingStateChanged:(RTCSignalingState)stateChanged {
-	RTCLog(@"Signaling state changed: %d", stateChanged);
-}
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection addedStream:(RTCMediaStream *)stream {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		RTCLog(@"Received %lu video tracks and %lu audio tracks",
-			   (unsigned long)stream.videoTracks.count,
-			   (unsigned long)stream.audioTracks.count);
-		if (stream.videoTracks.count) {
-			RTCVideoTrack *videoTrack = stream.videoTracks[0];
-			
-			[self.multicastDelegate callService:self didReceiveRemoteVideoTrack:videoTrack];
-		}
-	});
-}
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection removedStream:(RTCMediaStream *)stream {
-	RTCLog(@"Stream was removed.");
-}
-
-- (void)peerConnectionOnRenegotiationNeeded:(RTCPeerConnection *)peerConnection {
-	RTCLog(@"WARNING: Renegotiation needed but unimplemented.");
-}
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection iceConnectionChanged:(RTCICEConnectionState)newState {
-	RTCLog(@"ICE state changed: %d", newState);
-	
-	switch (newState) {
-		case RTCICEConnectionChecking:
-			self.state = kClientStateConnecting;
-		case RTCICEConnectionCompleted:
-			self.state = kClientStateConnected;
-			break;
-		case RTCICEConnectionDisconnected:
-			self.state = kClientStateDisconnected;
-			break;
-		case RTCICEConnectionFailed:
-			self.state = kClientStateDisconnected;
-			[self clearSession];
-		default:
-			break;
-	}
-	
-	dispatch_async(dispatch_get_main_queue(), ^{
-		if ([self.multicastDelegate respondsToSelector:@selector(callService:didChangeConnectionState:)]) {
-			[self.multicastDelegate callService:self didChangeConnectionState:newState];
-		}
-	});
-}
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection iceGatheringChanged:(RTCICEGatheringState)newState {
-	RTCLog(@"ICE gathering state changed: %d", newState);
-	[self drainMessageQueueIfReady];
-}
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection gotICECandidate:(RTCICECandidate *)candidate {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		SVSignalingMessageICE *message = [[SVSignalingMessageICE alloc] initWithICECandidate:candidate];
-		[self sendSignalingMessage:message];
-	});
-}
-
-//#pragma mark - RTCStatsDelegate
-//- (void)peerConnection:(RTCPeerConnection *)peerConnection didGetStats:(NSArray *)stats {
-//	dispatch_async(dispatch_get_main_queue(), ^{
-//				[self.delegate client:self didGetStats:stats];
-//	});
-//}
-
-#pragma mark - RTCSessionDescriptionDelegate
-// Callbacks for this delegate occur on non-main thread and need to be
-// dispatched back to main queue as needed.
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection didCreateSessionDescription:(RTCSessionDescription *)sdp error:(NSError *)error {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		if (error) {
-			RTCLogError(@"Failed to create session description. Error: %@", error);
-			//[self disconnect];
-			NSDictionary *userInfo = @{
-									   NSLocalizedDescriptionKey: @"Failed to create session description.",
-									   };
-			NSError *sdpError = [[NSError alloc] initWithDomain:@"error"
-														   code:-1
-													   userInfo:userInfo];
-			if ([self.multicastDelegate respondsToSelector:@selector(callService:didError:)]) {
-				[self.multicastDelegate callService:self didError:sdpError];
-			}
-			return;
-		}
-		NSParameterAssert(sdp);
-		//		 Prefer H264 if available.
-		RTCSessionDescription *sdpPreferringH264 = [WebRTCHelpers descriptionForDescription:sdp preferredVideoCodec:@"H264"];
-
-		NSParameterAssert(self.peerConnection);
-		
-		[self.peerConnection setLocalDescriptionWithDelegate:self sessionDescription:sdpPreferringH264];
-		SVSignalingMessageSDP *message = [[SVSignalingMessageSDP alloc]
-										  initWithSessionDescription:sdp];
-		[self sendSignalingMessage:message];
-	});
-}
-
-- (void)peerConnection:(RTCPeerConnection *)peerConnection didSetSessionDescriptionWithError:(NSError *)error {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		if (error) {
-			RTCLogError(@"Failed to set session description. Error: %@", error);
-			NSDictionary *userInfo = @{
-									   NSLocalizedDescriptionKey: @"Failed to set session description.",
-									   };
-			NSError *sdpError = [[NSError alloc] initWithDomain:@"" code:-1
-													   userInfo:userInfo];
-			if ([self.multicastDelegate respondsToSelector:@selector(callService:didError:)]) {
-				[self.multicastDelegate callService:self didError:sdpError];
-			}
-			return;
-		}
-		// If we're answering and we've just set the remote offer we need to create
-		// an answer and set the local description.
-		// If self.opponentUser is nil, it means that opponent did immediately hangup
-		if (!self.isInitiator && !self.peerConnection.localDescription && self.opponentUser != nil) {
-			NSCAssert(self.peerConnection, @"Peer connection must exist");
-			[self.peerConnection createAnswerWithDelegate:self
-											  constraints:[self defaultAnswerConstraints]];
-		}
-	});
-}
-
-- (BOOL)isInitiator {
-	return [self.initiatorUser isEqual:self.signalingChannel.user];
-}
-
 - (SVUser *)currentUser {
 	return self.signalingChannel.user;
 }
 
-#pragma mark - SVSignalingChannel Delegate
+#pragma mark - SignalingProcessor observer
 
-- (void)channel:(id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *)message {
+- (void)didReceiveICECandidates:(SignalingProcessor * _Nonnull)signalingProcessor fromOpponent:(SVUser * _Nonnull)fromOpponent sessionDetails:(SessionDetails * _Nonnull)sessionDetails signalingMessage:(SVSignalingMessageICE * _Nonnull)signalingMessage {
+	[_messageQueue addObject:signalingMessage];
+}
+
+- (void)didReceiveOffer:(SignalingProcessor * _Nonnull)signalingProcessor fromOpponent:(SVUser * _Nonnull)fromOpponent sessionDetails:(SessionDetails * _Nonnull)sessionDetails signalingMessage:(SVSignalingMessageSDP * _Nonnull)signalingMessage {
+	SessionDetails *existentSession = self.sessions[sessionDetails.sessionID];
+	if (existentSession == nil) {
+		self.sessions[sessionDetails.sessionID] = sessionDetails;
+	}
+	BOOL shouldRejectCall = [self hasActiveCall] ;
 	
-	if ([message.type isEqualToString:SVSignalingMessageType.offer]) {
+	if (!shouldRejectCall) {
+		shouldRejectCall = existentSession.sessionState == SessionDetailsStateRejected;
+	}
+	
+	if (shouldRejectCall) {
+		[self sendRejectToUser:fromOpponent completion:^(NSError * _Nullable error) {
+			if (!error) {
+				DDLogInfo(@"Sent reject to: %@", fromOpponent);
+			}
+		}];
 		
-		if ([self hasActiveCall]) {
-			[self sendRejectToUser:message.sender completion:^(NSError * _Nullable error) {
-				if (!error) {
-					DDLogInfo(@"Sent reject to: %@", message.sender);
-				}
-			}];
-			
-			return;
-		}
+		return;
+	}
+	
+	NSCAssert(self.peerConnection == nil, @"At the time of answer there should be no active peerconnection");
+	NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
+	
+	if (self.pendingRequests[fromOpponent.ID] == nil) {
+		CallServicePendingRequest *pendingRequest = [[CallServicePendingRequest alloc] initWithOfferSignalingMessage:signalingMessage];
+		self.pendingRequests[fromOpponent.ID] = pendingRequest;
 		
-		NSCAssert(self.peerConnection == nil, @"At the time of answer there should be no active peerconnection");
-		NSCAssert(!self.isInitiator, @"Invalid state, you should be answering side");
-		NSCAssert(self.opponentUser == nil, @"Opponent is not nil");
-		
-		CallServicePendingRequest *pendingRequest = [[CallServicePendingRequest alloc] initWithOfferSignalingMessage:message];
-		
-		[self.pendingRequests addObject:pendingRequest];
 		
 		[self.multicastDelegate callService:self didReceiveCallRequestFromOpponent:pendingRequest.initiator];
-		
 	}
 	
-	if ([message.type isEqualToString:SVSignalingMessageType.answer]) {
-		self.isReceivedSDP = YES;
-		// Offers and answers must be processed before any other message, so we
-		// place them at the front of the queue.
-		[_messageQueue insertObject:message atIndex:0];
-		
-	} else if ([message.type isEqualToString:SVSignalingMessageType.candidate] ) {
-		
-		[_messageQueue addObject:message];
-	} else if ([message.type isEqualToString:SVSignalingMessageType.hangup] ) {
-		
-		// Handle only messages from current call (if exists)
-		// Everybody is able to send current user hangup messages
-		NSNumber *opponentID = [self.opponentUser ID];
-		if (opponentID != nil && [message.sender.ID isEqualToNumber:opponentID]) {
-			// Disconnects can be processed immediately.
-			[self processSignalingMessage:message];
-		}
+	[self drainMessageQueueIfReady];
+}
+
+- (void)didReceiveAnswer:(SignalingProcessor * _Nonnull)signalingProcessor fromOpponent:(SVUser * _Nonnull)fromOpponent sessionDetails:(SessionDetails * _Nonnull)sessionDetails signalingMessage:(SVSignalingMessageSDP * _Nonnull)signalingMessage {
+	SessionDetails *existentSession = self.sessions[sessionDetails.sessionID];
+	if (existentSession == nil) {
+		NSLog(@"Warning: received answer for undefined session %@", existentSession);
+		return;
 	}
-	
+	existentSession.sessionState = SessionDetailsStateAnswerReceived;
+	self.isReceivedSDP = YES;
+	// Offers and answers must be processed before any other message, so we
+	// place them at the front of the queue.
+	[_messageQueue insertObject:signalingMessage atIndex:0];
+ 
+	[self drainMessageQueueIfReady];
+}
+
+- (void)didReceiveHangup:(SignalingProcessor * _Nonnull)signalingProcessor fromOpponent:(SVUser * _Nonnull)fromOpponent sessionDetails:(SessionDetails * _Nonnull)sessionDetails signalingMessage:(SVSignalingMessage * _Nonnull)signalingMessage {
+	// Handle only messages from current call (if exists)
+	// Everybody is able to send current user hangup messages
+	SessionDetails *existentSessionDetails = self.sessions[sessionDetails.sessionID];
+	if (existentSessionDetails == nil) {
+		// Hangup for undefined session
+		return;
+	}
+	if (existentSessionDetails.sessionState != SessionDetailsStateClosed && existentSessionDetails.sessionState != SessionDetailsStateRejected) {
+		// Disconnects can be processed immediately.
+		[self processSignalingMessage:signalingMessage];
+	}
+	[self drainMessageQueueIfReady];
+}
+
+- (void)didReceiveReject:(SignalingProcessor * _Nonnull)signalingProcessor fromOpponent:(SVUser * _Nonnull)fromOpponent sessionDetails:(SessionDetails * _Nonnull)sessionDetails signalingMessage:(SVSignalingMessage * _Nonnull)signalingMessage {
+	// Handle only messages from current call (if exists)
+	// Everybody is able to send current user reject messages
+	SessionDetails *existentSessionDetails = self.sessions[sessionDetails.sessionID];
+	if (existentSessionDetails == nil) {
+		// Reject for undefined session
+		return;
+	}
+	if (existentSessionDetails.sessionState != SessionDetailsStateClosed && existentSessionDetails.sessionState != SessionDetailsStateRejected) {
+		// Disconnects can be processed immediately.
+		[self processSignalingMessage:signalingMessage];
+	}
+	[self.sessions[sessionDetails.sessionID] setSessionState:SessionDetailsStateRejected];
 	[self drainMessageQueueIfReady];
 }
 
@@ -700,5 +654,41 @@
 	}
 }
 
+#pragma mark - Timed actions, dialing, waiting etc
+
+/// Will repeatedly send offer signaling messages in case user was not in application or just launch it
+- (void)startDialing {
+	
+	NSParameterAssert([self activeSession]);
+	SessionDetails *sessionDetails = [self activeSession];
+	NSAssert(self.sessions.allKeys.count > 0, @"Session details must be saved to 'sessions' dictionary");
+	NSDate *startedDialingDate = [NSDate date];
+	__weak __typeof(self)weakSelf = self;
+	self.dialingTimer = [[SVTimer alloc] initWithInterval:self.dialingInterval tolerance:1000 repeats:YES queue:dispatch_get_main_queue() block: ^{
+		
+		__typeof(self)strongSelf = weakSelf;
+		
+		if ([strongSelf activeSession] == nil) {
+			[strongSelf stopDialing];
+			return;
+		}
+		
+		NSTimeInterval passedSeconds = [[NSDate date] timeIntervalSinceDate:startedDialingDate];
+		if (passedSeconds > strongSelf.dialingTimerTimeout) {
+			if ([strongSelf.multicastDelegate respondsToSelector:@selector(callService:didAnswerTimeoutForOpponent:)]) {
+				//TODO: fix[strongSelf.multicastDelegate callService:strongSelf didAnswerTimeoutForOpponent:strongSelf.opponentUser];
+			}
+			[strongSelf stopDialing];
+		} else {
+			sessionDetails.sessionState = SessionDetailsStateOfferSent;
+			[strongSelf sendSignalingMessageToActiveSessionUsers:strongSelf.localPendingSDPSignalingMessage];
+		}
+	}];
+	[self.dialingTimer start];
+}
+
+- (void)stopDialing {
+	[self.dialingTimer cancel];
+}
 
 @end

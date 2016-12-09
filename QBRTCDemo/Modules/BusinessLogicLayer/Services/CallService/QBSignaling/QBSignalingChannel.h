@@ -1,5 +1,5 @@
 //
-//  QBSignalingChannel.ht
+//  QBSignalingChannel.h
 //  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11/16/15.

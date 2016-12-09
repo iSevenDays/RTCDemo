@@ -18,7 +18,7 @@ class ServicesProvider: NSObject {
 	static let currentProvider = ServicesProvider(zone: Zone.Production)
 	
 	
-	private(set) var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
+	private(set) var callService: protocol<CallServiceProtocol>!
 	private(set) var restService: protocol<RESTServiceProtocol>!
 	
 	init(zone: Zone) {
@@ -32,7 +32,9 @@ class ServicesProvider: NSObject {
 			
 		case .Production:
 			let signalingChannel = QBSignalingChannel()
-			let callService = CallService(signalingChannel: signalingChannel)!
+			let callService = CallService()
+			callService.signalingChannel = signalingChannel
+			callService.cacheService = NSUserDefaults.standardUserDefaults()
 			let restService = QBRESTService()
 			
 			ServicesConfigurator().configureCallService(callService)
@@ -55,7 +57,7 @@ class ServicesConfigurator {
 		callService.defaultAnswerConstraints = WebRTCHelpers.defaultAnswerConstraints()
 		callService.defaultPeerConnectionConstraints = WebRTCHelpers.defaultPeerConnectionConstraints()
 		callService.defaultMediaStreamConstraints = WebRTCHelpers.defaultMediaStreamConstraints()
-		callService.iceServers = NSMutableArray(array: WebRTCHelpers.defaultIceServers())
+		callService.ICEServers = WebRTCHelpers.defaultIceServers()
 		callService.defaultConfigurationWithCurrentICEServers = WebRTCHelpers.defaultConfigurationWithCurrentICEServers()
 	}
 	

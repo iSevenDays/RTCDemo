@@ -24,7 +24,7 @@
 	NSCAssert([type isEqualToString:SVSignalingMessageType.answer] ||
 			  [type isEqualToString:SVSignalingMessageType.offer] ||
 			  [type isEqualToString:SVSignalingMessageType.hangup] ||
-			  [type isEqualToString:SVSignalingMessageType.candidate] ||
+			  [type isEqualToString:SVSignalingMessageType.candidates] ||
 			  [type isEqualToString:SVSignalingMessageType.reject], @"Unknown type");
 	
 	if (self) {

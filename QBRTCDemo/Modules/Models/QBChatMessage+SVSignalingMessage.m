@@ -54,6 +54,18 @@
 	message.customParameters[SVSignalingParams.senderLogin] = [signalingMessage.sender.login copy];
 	message.customParameters[SVSignalingParams.senderFullName] = [signalingMessage.sender.fullName copy];
 	
+	NSString *initiatorID = [signalingMessage.initiatorID stringValue];
+	NSParameterAssert(initiatorID);
+	message.customParameters[SVSignalingParams.initiatorID] = initiatorID;
+	
+	NSString *sessionID = [signalingMessage.sessionID copy];
+	NSParameterAssert(sessionID);
+	message.customParameters[SVSignalingParams.sessionID] = sessionID;
+	
+	NSString *membersIDs = [signalingMessage.membersIDs componentsJoinedByString:@","];
+	NSParameterAssert(membersIDs);
+	message.customParameters[SVSignalingParams.membersIDs] = membersIDs;
+	
 	return message;
 }
 

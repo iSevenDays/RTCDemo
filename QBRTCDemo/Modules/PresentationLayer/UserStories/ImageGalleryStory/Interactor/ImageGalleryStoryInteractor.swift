@@ -14,15 +14,15 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	
 	weak var imagesOutput: ImageGalleryStoryInteractorImagesOutput!
 
-	private weak var _callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
+	private weak var _callService: protocol<CallServiceProtocol>!
 	
-	var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>! {
+	var callService: protocol<CallServiceProtocol>! {
 		get {
 			return _callService
 		}
 		set (value){
 			_callService = value
-			_callService.addDataChannelDelegate(self)
+			//_callService.addDataChannelDelegate(self)
 		}
 	}
 	
@@ -38,38 +38,38 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 			return
 		}
 		
-		if callService.isInitiator() {
-			output.didStartSynchronizationImages()
-			
-			let assets = allAssets()
-			
-			for asset in assets {
-				
-				guard let image = imageWithAsset(asset) else {
-					print("can not retrieve image from asset")
-					continue
-				}
-				
-				guard let imageData = dataWithUIImage(image) else {
-					continue
-				}
-				
-				guard sendData(imageData) else {
-					output.didFinishSynchronizationImages()
-					return
-				}
-			}
-			
-			output.didFinishSynchronizationImages()
-		}
+//		if callService.isInitiator() {
+//			output.didStartSynchronizationImages()
+//			
+//			let assets = allAssets()
+//			
+//			for asset in assets {
+//				
+//				guard let image = imageWithAsset(asset) else {
+//					print("can not retrieve image from asset")
+//					continue
+//				}
+//				
+//				guard let imageData = dataWithUIImage(image) else {
+//					continue
+//				}
+//				
+//				guard sendData(imageData) else {
+//					output.didFinishSynchronizationImages()
+//					return
+//				}
+//			}
+//			
+//			output.didFinishSynchronizationImages()
+//		}
 	}
 	
 	func requestCallerRole() {
-		if callService.isInitiator() {
-			output.didReceiveRoleSender()
-		} else {
-			output.didReceiveRoleReceiver()
-		}
+//		if callService.isInitiator() {
+//			output.didReceiveRoleSender()
+//		} else {
+//			output.didReceiveRoleReceiver()
+//		}
 	}
 	
 	/**
@@ -166,18 +166,19 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	}
 	
 	func sendData(data: NSData) -> Bool {
-		let success = callService.sendData(data)
-		if success {
-			print("Successfully sent image data")
-		} else {
-			print("Error sending image data")
-		}
-		return success
+		return false
+//		let success = callService.sendData(data)
+//		if success {
+//			print("Successfully sent image data")
+//		} else {
+//			print("Error sending image data")
+//		}
+//		return success
 	}
 	
 	func sendDataObjects(data: [NSData]) {
 		for dataObject in data {
-			callService.sendData(dataObject)
+//			callService.sendData(dataObject)
 		}
 	}
 	

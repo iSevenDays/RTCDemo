@@ -30,13 +30,13 @@
 	
 	SVSignalingMessage *offer = [SVSignalingMessage messageWithType:SVSignalingMessageType.offer params:nil];
 	
-	SVSignalingMessage *candidate = [SVSignalingMessage messageWithType:SVSignalingMessageType.candidate params:nil];
+	SVSignalingMessage *candidate = [SVSignalingMessage messageWithType:SVSignalingMessageType.candidates params:nil];
 	
 	SVSignalingMessage *hangup = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
 	
 	XCTAssertEqual(answer.type, SVSignalingMessageType.answer);
 	XCTAssertEqual(offer.type, SVSignalingMessageType.offer);
-	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidate);
+	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidates);
 	XCTAssertEqual(hangup.type, SVSignalingMessageType.hangup);
 }
 
@@ -51,7 +51,7 @@
 	offerMsg.customParameters = [NSMutableDictionary dictionary];
 	offerMsg.customParameters[SVSignalingParams.sdp] = [CallServiceHelpers offerSDP];
 	
-	candidateMsg.text = SVSignalingMessageType.candidate;
+	candidateMsg.text = SVSignalingMessageType.candidates;
 	candidateMsg.customParameters = [NSMutableDictionary dictionary];
 	candidateMsg.customParameters[SVSignalingParams.sdp] = @"candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG";
 	candidateMsg.customParameters[SVSignalingParams.index] = @"3";
@@ -67,7 +67,7 @@
 	
 	XCTAssertEqual(answer.type, SVSignalingMessageType.answer);
 	XCTAssertEqual(offer.type, SVSignalingMessageType.offer);
-	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidate);
+	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidates);
 	XCTAssertEqual(hangup.type, SVSignalingMessageType.hangup);
 }
 

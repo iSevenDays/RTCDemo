@@ -30,7 +30,7 @@
 	}
 	
 	func didTriggerDeclineButtonTapped() {
-		interactor.hangup()
+		interactor.rejectCall()
 		router.unwindToChatsUserStory()
 	}
 }

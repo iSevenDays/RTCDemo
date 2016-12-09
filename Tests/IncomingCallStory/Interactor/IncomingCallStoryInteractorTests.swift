@@ -24,7 +24,8 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		interactor = IncomingCallStoryInteractor()
-		mockOutput = MockOutput(signalingChannel: FakeSignalingChannel())
+		mockOutput = MockOutput()
+		mockOutput.signalingChannel = FakeSignalingChannel()
 		interactor.callService = mockOutput
 	}
 	
@@ -34,7 +35,7 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 		interactor.setOpponent(testUser)
 		
 		// when
-		interactor.hangup()
+		interactor.rejectCall()
 		
 		// then
 		XCTAssertEqual(testUser, mockOutput.opponent)
@@ -42,8 +43,8 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 	
 	class MockOutput: FakeCallService {
 		var opponent: SVUser?
-		override func sendHangupToUser(user: SVUser, completion: ((NSError?) -> Void)?) {
-			opponent = user
-		}
+//		override func sendRejectToUser(user: SVUser, completion: ((NSError?) -> Void)?) {
+//			opponent = user
+//		}
 	}
 }

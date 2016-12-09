@@ -75,7 +75,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		XCTAssertTrue(mockOutput.didHangupGotCalled)
 	}
 	
-	func testHangupFromOpponent() {
+	func testDidReceiveHangupFromOpponent() {
 		// given
 		useRealCallService()
 		
@@ -85,6 +85,19 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveHangupFromOpponentGotCalled)
+		XCTAssertEqual(mockOutput.opponent, testUser2)
+	}
+	
+	func testDidReceiveRejectFromOpponent() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService(interactor.callService, didReceiveRejectFromOpponent: testUser2)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveRejectFromOpponentGotCalled)
 		XCTAssertEqual(mockOutput.opponent, testUser2)
 	}
 	
@@ -122,92 +135,118 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	}
 	
 	// MARK:- Data Channel Tests
-	func testTriggersDidOpenDataChannelOpen_whenReceivedDataChannel() {
-		// given
-		useFakeCallService()
-		
-		// when
-		interactor.callService.dataChannelEnabled = true
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
-		
-		// then
-		XCTAssertTrue(mockOutput.didOpenDataChannelGotCalled)
-	}
+//	func testTriggersDidOpenDataChannelOpen_whenReceivedDataChannel() {
+//		// given
+//		useFakeCallService()
+//		
+//		// when
+//		interactor.callService.dataChannelEnabled = true
+//		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+//		
+//		// then
+//		XCTAssertTrue(mockOutput.didOpenDataChannelGotCalled)
+//	}
+//	
+//	func testTriggersDidReceiveDataChannelStateReady_whenReceivedDataChannel() {
+//		// given
+//		useFakeCallService()
+//		
+//		// when
+//		interactor.callService.dataChannelEnabled = true
+//		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+//		interactor.requestDataChannelState()
+//		
+//		// then
+//		XCTAssertTrue(mockOutput.didReceiveDataChannelStateReadyGotCalled)
+//	}
+//	
+//	func testTriggersDidReceiveDataChannelStateNotReady_whenNoDataChannel() {
+//		// given
+//		useRealCallService()
+//		
+//		// when
+//		interactor.callService.dataChannelEnabled = true
+//		interactor.requestDataChannelState()
+//		
+//		// then
+//		
+//		XCTAssertTrue(mockOutput.didReceiveDataChannelStateNotReadyGotCalled)
+//	}
+//	
+//	func testTriggersDidReceiveInvitationToOpenImageGallery_whenReceivedDataChannelInvitationMessage() {
+//		// given
+//		useFakeCallService()
+//		
+//		// when
+//		interactor.callService.dataChannelEnabled = true
+//		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+//		
+//		let invitationData = DataChannelMessages.invitationToOpenImageGallery().dataUsingEncoding(NSUTF8StringEncoding)
+//		let invitationMessage = RTCDataBuffer(data: invitationData, isBinary: false)
+//		
+//		interactor.callService.channel(nil, didReceiveMessageWithBuffer: invitationMessage)
+//		
+//		// then
+//		XCTAssertTrue(mockOutput.didReceiveInvitationToOpenImageGalleryGotCalled)
+//	}
+//	
+//	func testTriggersSendInvitationToOpenImageGallery_whenRequestedImageGallery() {
+//		// given
+//		useFakeCallService()
+//		
+//		// when
+//		interactor.callService.dataChannelEnabled = true
+//		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+//		
+//		guard let fakeCallService = interactor.callService as? FakeCallService else {
+//			XCTFail("We have to use fakeCallService here")
+//			return
+//		}
+//		
+//		fakeCallService.setHasActiveCall(true)
+//		
+//		interactor.sendInvitationMessageAndOpenImageGallery()
+//		
+//		// then
+//		XCTAssertTrue(mockOutput.didSendInvitationToOpenImageGalleryGotCalled)
+//	}
 	
-	func testTriggersDidReceiveDataChannelStateReady_whenReceivedDataChannel() {
-		// given
-		useFakeCallService()
-		
-		// when
-		interactor.callService.dataChannelEnabled = true
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
-		interactor.requestDataChannelState()
-		
-		// then
-		XCTAssertTrue(mockOutput.didReceiveDataChannelStateReadyGotCalled)
-	}
+//	func testNotifiesPresenterAboutCallServiceOccuredFailure() {
+//		// given
+//		useRealCallService()
+//		
+//		// when
+//		interactor.connectToChatWithUser(testUser, callOpponent: nil)
+//		interactor.callService(interactor.callService, didChangeState: CallServiceState.ClientStateDisconnected)
+//		
+//		// then
+//		XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
+//	}
 	
-	func testTriggersDidReceiveDataChannelStateNotReady_whenNoDataChannel() {
+	func testNotifiesPresenterAboutCallServiceAnswerTimeout() {
 		// given
 		useRealCallService()
 		
 		// when
-		interactor.callService.dataChannelEnabled = true
-		interactor.requestDataChannelState()
-		
-		// then
-		
-		XCTAssertTrue(mockOutput.didReceiveDataChannelStateNotReadyGotCalled)
-	}
-	
-	func testTriggersDidReceiveInvitationToOpenImageGallery_whenReceivedDataChannelInvitationMessage() {
-		// given
-		useFakeCallService()
-		
-		// when
-		interactor.callService.dataChannelEnabled = true
 		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
-		
-		let invitationData = DataChannelMessages.invitationToOpenImageGallery().dataUsingEncoding(NSUTF8StringEncoding)
-		let invitationMessage = RTCDataBuffer(data: invitationData, isBinary: false)
-		
-		interactor.callService.channel(nil, didReceiveMessageWithBuffer: invitationMessage)
+		interactor.callService(interactor.callService, didAnswerTimeoutForOpponent: testUser2)
 		
 		// then
-		XCTAssertTrue(mockOutput.didReceiveInvitationToOpenImageGalleryGotCalled)
+		XCTAssertTrue(mockOutput.didReceiveAnswerTimeoutForOpponentGotCalled)
 	}
 	
-	func testTriggersSendInvitationToOpenImageGallery_whenRequestedImageGallery() {
-		// given
-		useFakeCallService()
-		
-		// when
-		interactor.callService.dataChannelEnabled = true
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
-		
-		guard let fakeCallService = interactor.callService as? FakeCallService else {
-			XCTFail("We have to use fakeCallService here")
-			return
-		}
-		
-		fakeCallService.setHasActiveCall(true)
-		
-		interactor.sendInvitationMessageAndOpenImageGallery()
-		
-		// then
-		XCTAssertTrue(mockOutput.didSendInvitationToOpenImageGalleryGotCalled)
-	}
-	
-	func testNotifiesPresenterAboutCallServiceOccuredFailure() {
+	// TODO: this case should be handle also
+	func DISABLED_testRejectsIncomingCallWhenAnotherCallIsActive() {
 		// given
 		useRealCallService()
+		let undefinedUser = TestsStorage.svuserTest()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: nil)
-		interactor.callService(interactor.callService, didChangeState: CallServiceState.ClientStateDisconnected)
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService(interactor.callService, didReceiveCallRequestFromOpponent: undefinedUser)
 		
 		// then
-		XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
+		//XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
 	}
 	
 	class MockPresenter: NSObject,  VideoCallStoryInteractorOutput {
@@ -217,6 +256,8 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		var didHangupGotCalled = false
 		var didReceiveHangupFromOpponentGotCalled = false
+		var didReceiveRejectFromOpponentGotCalled = false
+		var didReceiveAnswerTimeoutForOpponentGotCalled = false
 		
 		var didFailToConnectToChatGotCalled = false
 		var didFailCallServiceGotCalled = false
@@ -240,6 +281,16 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		func didReceiveHangupFromOpponent(opponent: SVUser) {
 			didReceiveHangupFromOpponentGotCalled = true
+			self.opponent = opponent
+		}
+		
+		func didReceiveRejectFromOpponent(opponent: SVUser) {
+			didReceiveRejectFromOpponentGotCalled = true
+			self.opponent = opponent
+		}
+		
+		func didReceiveAnswerTimeoutForOpponent(opponent: SVUser) {
+			didReceiveAnswerTimeoutForOpponentGotCalled = true
 			self.opponent = opponent
 		}
 		
@@ -278,5 +329,4 @@ class VideoCallStoryInteractorTests: XCTestCase {
 			didSendInvitationToOpenImageGalleryGotCalled = true
 		}
 	}
-	
 }

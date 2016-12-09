@@ -55,7 +55,15 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 		output.didTriggerCloseButtonTapped()
 	}
 	
+	func showOpponentReject() {
+		output.didTriggerCloseButtonTapped()
+	}
+	
 	func showOpponentHangup() {
+		output.didTriggerCloseButtonTapped()
+	}
+	
+	func showOpponentAnswerTimeout() {
 		output.didTriggerCloseButtonTapped()
 	}
 	

@@ -25,7 +25,7 @@
 		
 		svmessage = [SVSignalingMessageSDP messageWithType:signalingType params:qbmessage.customParameters];
 		
-	} else if([signalingType isEqualToString:SVSignalingMessageType.candidate]) {
+	} else if([signalingType isEqualToString:SVSignalingMessageType.candidates]) {
 		
 		svmessage = [SVSignalingMessageICE messageWithType:signalingType params:params];
 	} else {
@@ -35,8 +35,20 @@
 	// restore user back from dictionary
 	NSString *login = params[SVSignalingParams.senderLogin];
 	NSString *fullName = params[SVSignalingParams.senderFullName];
-	svmessage.sender = [[SVUser alloc] initWithID:@(qbmessage.senderID) login:login fullName:fullName password:nil tags:nil];
 	
+	NSString *initiatorID = params[SVSignalingParams.initiatorID];
+	NSString *sessionID = params[SVSignalingParams.sessionID];
+	NSArray<NSString *> *membersIDsStr = [params[SVSignalingParams.membersIDs] componentsSeparatedByString:@","];
+	NSMutableArray<NSNumber *> *membersIDs = [NSMutableArray arrayWithCapacity:membersIDsStr.count];
+	NSAssert(membersIDsStr.count != 0, @"Members IDs array must not be empty");
+	for (NSString *memberID in membersIDsStr) {
+		[membersIDs addObject:@([memberID intValue])];
+	}
+	svmessage.membersIDs = [membersIDs copy];
+	
+	svmessage.sender = [[SVUser alloc] initWithID:@(qbmessage.senderID) login:login fullName:fullName password:nil tags:nil];
+	svmessage.initiatorID = @([initiatorID integerValue]);
+	svmessage.sessionID = sessionID;
 	return svmessage;
 }
 

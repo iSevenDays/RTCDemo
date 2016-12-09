@@ -95,6 +95,22 @@ class VideoCallStoryViewTests: XCTestCase {
 		XCTAssertTrue(mockOutput.closeButtonTapped)
 	}
 	
+	func testShowOpponentRejectEventuallyCallsCloseAction() {
+		// when
+		controller.showOpponentReject()
+		
+		// then
+		XCTAssertTrue(mockOutput.closeButtonTapped)
+	}
+	
+	func testShowOpponentAnswerTimeoutEventuallyCallsCloseAction() {
+		// when
+		controller.showOpponentAnswerTimeout()
+		
+		// then
+		XCTAssertTrue(mockOutput.closeButtonTapped)
+	}
+	
 	func testShowCallServiceFailureEventuallyCallsCloseAction() {
 		// when
 		controller.showErrorCallServiceDisconnected()

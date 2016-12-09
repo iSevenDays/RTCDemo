@@ -9,7 +9,7 @@
 #import "SVSignalingMessageType.h"
 
 const struct SVSignalingMessageType SVSignalingMessageType = {
-	.candidate = @"candidate",
+	.candidates = @"candidates",
 	.offer = @"offer",
 	.answer = @"answer",
 	.hangup = @"hangup",
