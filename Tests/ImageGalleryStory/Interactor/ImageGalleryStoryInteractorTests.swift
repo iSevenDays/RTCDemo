@@ -96,23 +96,23 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 	
 	// MARK: ImageGalleryStoryInteractorImagesOutput tests
 	
-	func testNotifiesImagesOutputWhenReceivedNewImage() {
-		// given
-		useRealCallService()
-		
-		
-		UIGraphicsBeginImageContext(CGSizeMake(1, 1));
-		let newImage = UIGraphicsGetImageFromCurrentImageContext();
-		UIGraphicsEndImageContext();
-		
-		let imageData = UIImagePNGRepresentation(newImage!)!
-		
-		// when
-		interactor.callService(interactor.callService, didReceiveData: imageData)
-		
-		// then
-		XCTAssertTrue(mockImagesOutput.didReceiveImageGotCalled)
-	}
+//	func testNotifiesImagesOutputWhenReceivedNewImage() {
+//		// given
+//		useRealCallService()
+//		
+//		
+//		UIGraphicsBeginImageContext(CGSizeMake(1, 1));
+//		let newImage = UIGraphicsGetImageFromCurrentImageContext();
+//		UIGraphicsEndImageContext();
+//		
+//		let imageData = UIImagePNGRepresentation(newImage!)!
+//		
+//		// when
+//		interactor.callService(interactor.callService, didReceiveData: imageData)
+//		
+//		// then
+//		XCTAssertTrue(mockImagesOutput.didReceiveImageGotCalled)
+//	}
 	
 	
     class MockPresenter: ImageGalleryStoryInteractorOutput {

@@ -41,11 +41,13 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	}
 	
 	func useFakeCallService() {
-		interactor.callService = FakeCallService(signalingChannel: FakeSignalingChannel(), callServiceDelegate: interactor, dataChannelDelegate: interactor)
+		interactor.callService = FakeCallService()
+		interactor.callService.signalingChannel = FakeSignalingChannel()
 	}
 	
 	func useRealCallService() {
-		interactor.callService = CallService(signalingChannel: FakeSignalingChannel(), callServiceDelegate: interactor, dataChannelDelegate: interactor)
+		interactor.callService = CallService()
+		interactor.callService.signalingChannel = FakeSignalingChannel()
 	}
 	
 	// MARK: - Testing methods VideoStoryInteractorInput

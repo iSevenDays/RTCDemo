@@ -177,27 +177,27 @@ class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDele
 	}
 	
 	func sendDataObjects(data: [NSData]) {
-		for dataObject in data {
+//		for dataObject in data {
 //			callService.sendData(dataObject)
-		}
+//		}
 	}
 	
 	///
 	/// CallServiceDataChannelAdditionsDelegate
 	///
-	func callService(callService: CallServiceProtocol, didReceiveMessage message: String) {
-		print("Received message \(message)")
-	}
+//	func callService(callService: CallServiceProtocol, didReceiveMessage message: String) {
+//		print("Received message \(message)")
+//	}
 	
-	func callService(callService: CallServiceProtocol, didReceiveData data: NSData) {
-		print("Received data, size in bytes \(data.length)")
-		
-		if let image = UIImage(data: data) {
-			print("Received data is UIImage")
-			imagesOutput.didReceiveImage(image)
-		} else {
-			print("Received data that is not convertible to UIImage")
-		}
-	}
+//	func callService(callService: CallServiceProtocol, didReceiveData data: NSData) {
+//		print("Received data, size in bytes \(data.length)")
+//		
+//		if let image = UIImage(data: data) {
+//			print("Received data is UIImage")
+//			imagesOutput.didReceiveImage(image)
+//		} else {
+//			print("Received data that is not convertible to UIImage")
+//		}
+//	}
 
 }

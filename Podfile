@@ -13,15 +13,3 @@ end
 target :QBRTCDemo do
 	available_pods
 end
-
-def tests_pods
-	pod 'OCMock', '~> 3.3.1'
-end
-
-target :QBRTCDemoTests do
-	tests_pods
-end
-
-target :QBRTCDemo_sTests do
-	tests_pods
-end

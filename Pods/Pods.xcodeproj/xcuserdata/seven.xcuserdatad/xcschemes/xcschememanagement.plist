@@ -14,32 +14,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>OCMock-iOS8.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>OCMock-iOS9.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-QBRTCDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-QBRTCDemoTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-QBRTCDemo_s.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-QBRTCDemo_sTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -77,11 +57,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1781FDCFD65983BFA34C4CA0C29D12D0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>18C3D09833F11D039E6FA1D85F04A91B</key>
 		<dict>
 			<key>primary</key>
@@ -97,17 +72,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7565E3820E24EC09EBA6F86B555D96D5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7D6BDCAA2EC83AFEB3A71FFCEBD2D4FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>99633B5CE9EE879910E8493E175693DD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -138,11 +103,6 @@
 			<true/>
 		</dict>
 		<key>F25F3D0E13BC24477E19A4B619469B10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F39124148C083AB170675684905E1D05</key>
 		<dict>
 			<key>primary</key>
 			<true/>
