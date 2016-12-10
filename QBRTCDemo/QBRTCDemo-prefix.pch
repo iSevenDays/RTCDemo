@@ -12,15 +12,13 @@
 #ifdef __OBJC__
 #import <Quickblox/Quickblox.h>
 #import <Foundation/Foundation.h>
-#import <CocoaLumberjack/CocoaLumberjack.h>
 
 #if QBRTCDemo_s
+
 #import "QBRTCDemo_s-Swift.h"
 #elif QBRTCDemo
 #import "QBRTCDemo-Swift.h"
 #endif
-
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 #endif
 

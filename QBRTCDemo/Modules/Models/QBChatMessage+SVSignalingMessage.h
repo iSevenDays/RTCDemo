@@ -12,4 +12,6 @@
 
 + (nullable instancetype)messageWithSVSignalingMessage:(__kindof SVSignalingMessage *_Nonnull)signalingMessage;
 
++ (nonnull NSString *)compressedCustomParams:(nonnull NSDictionary *)params;
+
 @end

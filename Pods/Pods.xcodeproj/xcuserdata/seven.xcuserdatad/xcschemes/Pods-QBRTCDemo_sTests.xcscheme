@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F7EE7C977449BE00C3E67B2AEB941238'
-               BlueprintName = 'Typhoon-iOS8.0'
+               BlueprintIdentifier = 'C44CC022915A6EE092BAE54D4E9E712C'
+               BlueprintName = 'Pods-QBRTCDemo_sTests'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libTyphoon-iOS8.0.a'>
+               BuildableName = 'libPods-QBRTCDemo_sTests.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -30,7 +30,7 @@
 }
 
 - (void)addDelegate:(id<SVSignalingChannelDelegate>)delegate {
-	DDLogInfo(@"Added signaling channel delegate: %@", delegate);
+	NSLog(@"Added signaling channel delegate: %@", delegate);
 	[self.multicastDelegate addDelegate:delegate];
 }
 

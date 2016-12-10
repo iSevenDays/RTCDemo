@@ -4,22 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CocoaLumberjack-iOS8.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>CocoaLumberjack-iOS9.0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-QBRTCDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-QBRTCDemoTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-QBRTCDemo_s.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-QBRTCDemo_sTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,52 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>18C3D09833F11D039E6FA1D85F04A91B</key>
+		<key>20AF88DB0E4B27086DD2AABA99B7DA7D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>42E85C16304E6A56A0679A568A1738D0</key>
+		<key>29631DC3E8B411A0E680E8912A16F6A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>459ACD297FD65A00F79E14A5A3BB0FA9</key>
+		<key>42E3DBEB678056F23B140FDB206B8B6D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D6BDCAA2EC83AFEB3A71FFCEBD2D4FC</key>
+		<key>7C496A82D74857B51CDBC92B8D07A30B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A957ADD773157C6F3666089967C6614D</key>
+		<key>AC67C9E19F3A47C0A16B787B1F8C33C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C9E6460B266E3FB8D9FA8E979C5EEB24</key>
+		<key>C44CC022915A6EE092BAE54D4E9E712C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF5E3A63B33487D978286E8212CBC123</key>
+		<key>C549312C091A6968FF8D713D3DA159E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EE6F6A3C4DBBD6197F1055853A26179D</key>
+		<key>C5D5C4C3487485A36074E195534F4E22</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F0F390493C4ABDE83BC442D7EBEF349C</key>
+		<key>F1AB51447196A36BF830C448FDC02C3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F25F3D0E13BC24477E19A4B619469B10</key>
+		<key>F7EE7C977449BE00C3E67B2AEB941238</key>
 		<dict>
 			<key>primary</key>
 			<true/>

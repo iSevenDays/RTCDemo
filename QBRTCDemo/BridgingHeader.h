@@ -10,7 +10,6 @@
 #define BridgingHeader_h
 
 #import <Quickblox/Quickblox.h>
-#import <CocoaLumberjack/CocoaLumberjack.h>
 #import "CallServiceDataChannelAdditionsDelegate.h"
 #import "CallServiceDataChannelAdditionsProtocol.h"
 #import "QBSignalingChannel.h"
@@ -22,6 +21,8 @@
 #import "SVSignalingMessageICE.h"
 #import "SVSignalingParams.h"
 #import "SVSignalingChannelDelegate.h"
+#import "SVSignalingChannelProtocol.h"
+#import "SVSignalingChannelState.h"
 #import "TestsStorage.h"
 #import <ViperMcFlurry/ViperMcFlurry.h>
 #import "WebRTCHelpers.h"

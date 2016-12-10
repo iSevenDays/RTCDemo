@@ -19,4 +19,7 @@ extern const struct SVSignalingParams {
 	__unsafe_unretained NSString *senderLogin;
 	__unsafe_unretained NSString *senderFullName;
 	
+	/// Contains all of the possible above
+	__unsafe_unretained NSString *compressedData;
+	
 } SVSignalingParams;

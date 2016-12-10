@@ -18,8 +18,6 @@
 	[QBSettings setAuthSecret:@"825Bv-3ByACjD4O"];
 	[QBSettings setAccountKey:@"ZsFuaKozyNC3yLzvN3Xa"];
 	
-	[DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
-	
 //	[QBSettings setTLS NO
 	return YES;
 }
