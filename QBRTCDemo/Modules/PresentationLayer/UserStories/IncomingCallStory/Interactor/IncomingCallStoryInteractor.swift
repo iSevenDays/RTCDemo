@@ -25,6 +25,6 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 	}
 	
 	func rejectCall() {
-		//callService.sendRejectToUser(opponent, completion: nil)
+		callService.sendRejectCallToOpponent(opponent)
 	}
 }

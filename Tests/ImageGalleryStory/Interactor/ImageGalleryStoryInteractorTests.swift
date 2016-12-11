@@ -43,8 +43,8 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		
 		fakeCallService = FakeCallService()
 		fakeCallService.signalingChannel = fakeSignalingChannel
-		realCallService = CallService()
 		
+		realCallService = ServiceProviderd
 		realCallService.signalingChannel = fakeSignalingChannel
     }
 	

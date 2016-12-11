@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 #if QBRTCDemo_s
 	@testable
 	import QBRTCDemo_s
@@ -16,7 +17,8 @@ import Foundation
 	import QBRTCDemo
 #endif
 
-class FakeCallSevice: CallService {
+
+public class FakeCallSevice: CallService {
 	
 	override func startCallWithOpponent(user: SVUser) throws {
 		let factory = RTCPeerConnectionFactory()

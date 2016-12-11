@@ -10,18 +10,8 @@
 #define BridgingHeader_h
 
 #import <Quickblox/Quickblox.h>
-#import "CallServiceDataChannelAdditionsDelegate.h"
-#import "CallServiceDataChannelAdditionsProtocol.h"
-#import "QBSignalingChannel.h"
-#import "FakeSignalingChannel.h"
 #import "CallServiceHelpers.h"
 #import "SVUser+QBUUser.h"
-#import "SVSignalingMessage.h"
-#import "SVSignalingMessageSDP.h"
-#import "SVSignalingMessageICE.h"
-#import "SVSignalingParams.h"
-#import "SVSignalingChannelDelegate.h"
-#import "SVSignalingChannelProtocol.h"
 #import "SVSignalingChannelState.h"
 #import "TestsStorage.h"
 #import <ViperMcFlurry/ViperMcFlurry.h>
@@ -59,5 +49,8 @@
 #import <RTCMediaConstraints.h>
 #import <RTCPair.h>
 #import <RTCLogging.h>
+#import "NSData+GZIP.h"
+
+#import "QBUUser+SVUser.h"
 
 #endif /* BridgingHeader_h */

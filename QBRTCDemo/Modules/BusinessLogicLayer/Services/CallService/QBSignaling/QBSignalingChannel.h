@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SVSignalingChannelProtocol.h"
 #import "QBUUser+SVUser.h"
 
 @interface QBSignalingChannel : NSObject  <SVSignalingChannelProtocol>

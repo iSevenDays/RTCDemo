@@ -22,7 +22,7 @@ class AuthStoryInteractorTests: XCTestCase {
 	var mockOutput: MockPresenter!
 	
 	let fakeService = FakeQBRESTService()
-	let fakeCallService = FakeCallService()
+	let fakeCallService = FakeCallSevice()
 	
 	let userName = "test"
 	let tags = ["tag"]
@@ -33,6 +33,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
 		fakeCallService.signalingChannel = FakeSignalingChannel()
+		ServicesConfigurator().configureCallService(fakeCallService)
 		interactor.callService = fakeCallService
 		interactor.restService = fakeService
     }

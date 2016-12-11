@@ -12,24 +12,29 @@ enum CallServiceState {
 	case Undefined
 	case Connecting
 	case Connected
+	case Disconnected
 	case Error
 }
 
-class CallService: NSObject {
+public class CallService: NSObject {
 	
 	internal var observers: MulticastDelegate<CallServiceObserver>?
 	
-	private var sessions: [String: SessionDetails] = [:]
+	internal var sessions: [String: SessionDetails] = [:]
 	/// SessionID: Connections
 	var connections: [String: [PeerConnection]] = [:]
 	var pendingRequests: [SVUser: CallServicePendingRequest] = [:]
 	
-	var state = CallServiceState.Undefined
+	var state = CallServiceState.Undefined {
+		didSet(oldValue) {
+			assert(state != oldValue)
+			observers => { $0.callService(self, didChangeState: self.state) }
+		}
+	}
 	
 	// MARK: - RTC properties
-	private let factory = RTCPeerConnectionFactory()
-	private let signalingProcessor = SignalingProcessor()
-	private var messagesQueue: [SVSignalingMessage] = []
+	internal let factory = RTCPeerConnectionFactory()
+	internal let signalingProcessor = SignalingProcessor()
 	
 	// Injected dependencies
 	var cacheService: CacheServiceProtocol!
@@ -38,7 +43,7 @@ class CallService: NSObject {
 	var defaultPeerConnectionConstraints: RTCMediaConstraints!
 	var defaultMediaStreamConstraints: RTCMediaConstraints!
 	var defaultConfigurationWithCurrentICEServers: RTCConfiguration!
-	var signalingChannel: SVSignalingChannelProtocol!
+	var signalingChannel: SignalingChannelProtocol!
 	var ICEServers: [RTCICEServer]!
 	
 	/// Return active connection for opponenID with given session ID
@@ -53,11 +58,20 @@ enum CallServiceError: ErrorType {
 
 extension CallService: CallServiceProtocol {
 	var isConnected: Bool {
-		return signalingChannel.isConnected()
+		return signalingChannel.isConnected
+	}
+	
+	var isConnecting: Bool {
+		return signalingChannel.isConnecting
 	}
 	
 	var currentUser: SVUser? {
 		return signalingChannel.user
+	}
+	
+	var hasActiveCall: Bool {
+		let peerConnections = connections.flatMap({$0.1})
+		return peerConnections.contains({$0.state == PeerConnectionState.Initial})
 	}
 	
 	func addObserver(observer: CallServiceObserver) {
@@ -68,17 +82,30 @@ extension CallService: CallServiceProtocol {
 		assert(user.password != nil)
 		state = .Connecting
 		
-		signalingChannel.connectWithUser(user) { [unowned self] (error) in
-			self.state = (error == nil) ? .Connected : .Error
+		do{
+			try signalingChannel.connectWithUser(user) { [unowned self] (error) in
+				self.state = (error == nil) ? .Connected : .Error
+				completion?(error: error)
+			}
+		} catch let error {
+			NSLog("%@", "Error conencting with user \(error)")
+		}
+	}
+	
+	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?) {
+		signalingChannel.disconnectWithCompletion { [unowned self] (error) in
+			if error == nil {
+				self.state = .Disconnected
+			}
 			completion?(error: error)
 		}
 	}
 	
 	func startCallWithOpponent(user: SVUser) throws {
-		guard let currentUser = self.currentUser else {
+		guard let currentUserID = self.currentUser?.ID?.unsignedIntegerValue else {
 			throw CallServiceError.notLogined
 		}
-		let sessionDetails = SessionDetails(initiator: currentUser, membersIDs: [currentUser.ID!.unsignedIntegerValue, user.ID!.unsignedIntegerValue])
+		let sessionDetails = SessionDetails(initiatorID: currentUserID, membersIDs: [currentUserID, user.ID!.unsignedIntegerValue])
 		sessions[sessionDetails.sessionID] = sessionDetails
 		
 		let connection = PeerConnection(opponent: user, sessionID: sessionDetails.sessionID, ICEServers: ICEServers, factory: factory, mediaStreamConstraints: defaultMediaStreamConstraints, peerConnectionConstraints: defaultPeerConnectionConstraints, offerAnswerConstraints: defaultOfferConstraints)
@@ -89,7 +116,7 @@ extension CallService: CallServiceProtocol {
 	}
 	
 	func acceptCallFromOpponent(opponent: SVUser) {
-		let sessionDetails = SessionDetails(initiator: opponent, membersIDs: [currentUser!.ID!.unsignedIntegerValue, opponent.ID!.unsignedIntegerValue])
+		let sessionDetails = SessionDetails(initiatorID: opponent.ID!.unsignedIntegerValue, membersIDs: [currentUser!.ID!.unsignedIntegerValue, opponent.ID!.unsignedIntegerValue])
 		sessions[sessionDetails.sessionID] = sessionDetails
 		
 		let connection = PeerConnection(opponent: opponent, sessionID: sessionDetails.sessionID, ICEServers: ICEServers, factory: factory, mediaStreamConstraints: defaultMediaStreamConstraints, peerConnectionConstraints: defaultPeerConnectionConstraints, offerAnswerConstraints: defaultOfferConstraints)
@@ -101,21 +128,31 @@ extension CallService: CallServiceProtocol {
 			NSLog("Error: no pending offer for opponent")
 			return
 		}
-		guard let sdp = pendingRequest.offerSignalingMessage.sdp else {
-			NSLog("Error: pending offer for opponent has no SDP")
-			return
-		}
-		connection.applyRemoteSDP(sdp)
+		connection.applyRemoteSDP(pendingRequest.pendingSessionDescription)
+	}
+	
+	func hangup() {
+		let peerConnections = connections.flatMap({$0.1})
+		peerConnections.filter({$0.state == PeerConnectionState.Initial}).forEach({ $0.close() })
+	}
+	
+	func sendRejectCallToOpponent(user: SVUser) {
+		
 	}
 }
 
 extension CallService: SignalingProcessorObserver {
-	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails, signalingMessage: SVSignalingMessageICE) {
-		connectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyICECandidates([signalingMessage.iceCandidate])
+	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCICECandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
+		connectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyICECandidates(ICECandidates)
 	}
 	
-	func didReceiveOffer(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails, signalingMessage: SVSignalingMessageSDP) {
+	func didReceiveOffer(signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveOffer")
+		guard !hasActiveCall else {
+			sendRejectCallToOpponent(opponent)
+			return
+		}
+		
 		if let session = sessions[sessionDetails.sessionID] {
 			guard session.sessionState != SessionDetailsState.Rejected else {
 				// Skip
@@ -123,32 +160,57 @@ extension CallService: SignalingProcessorObserver {
 				return
 			}
 		} else {
-			pendingRequests[opponent] = CallServicePendingRequest(offerSignalingMessage: signalingMessage)
+			pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer)
 			observers => { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
 		}
 	}
 	
-	func didReceiveAnswer(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails, signalingMessage: SVSignalingMessageSDP) {
+	func didReceiveAnswer(signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveAnswer")
-		guard let sdp = signalingMessage.sdp else {
-			NSLog("Error: answer offer for opponent has no SDP")
-			return
-		}
-		connectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyRemoteSDP(sdp)
+		connectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyRemoteSDP(answer)
 	}
 	
-	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails, signalingMessage: SVSignalingMessage) {
+	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveHangup")
 		pendingRequests[opponent] = nil
 	}
 	
-	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails, signalingMessage: SVSignalingMessage) {
+	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveReject")
 		pendingRequests[opponent] = nil
 	}
 }
 
 extension CallService: PeerConnectionObserver {
+	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionOfferDescription: RTCSessionDescription) {
+		let sessionDetails = sessions[peerConnection.sessionID]!
+		let offerSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: localSessionOfferDescription.description)
+		let signalingMessage = SignalingMessage.offer(sdp: offerSDP)
+		let opponent = peerConnection.opponent
+		
+		signalingChannel.sendMessage(signalingMessage, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in
+			if let error = error {
+				self.observers => { $0.callService(self, didErrorSendingLocalSessionDescriptionMessage: signalingMessage, toOpponent: opponent, error: error) }
+			} else {
+				self.observers => { $0.callService(self, didSendLocalSessionDescriptionMessage: signalingMessage, toOpponent: opponent) }
+			}
+		}
+	}
+	
+	func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCICECandidate) {
+		let sessionDetails = sessions[peerConnection.sessionID]!
+		let signalingMessage = SignalingMessage.candidates(candidates: [localICECandidates])
+		let opponent = peerConnection.opponent
+		
+		signalingChannel.sendMessage(signalingMessage, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in
+			if let error = error {
+				self.observers => { $0.callService(self, didErrorSendingLocalICECandidates: [localICECandidates], toOpponent: opponent, error: error) }
+			} else {
+				self.observers => { $0.callService(self, didSendLocalICECandidates: [localICECandidates], toOpponent: opponent) }
+			}
+		}
+	}
+	
 	func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
 		observers => { $0.callService(self, didReceiveLocalVideoTrack: localVideoTrack) }
 	}

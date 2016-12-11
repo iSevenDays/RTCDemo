@@ -92,24 +92,25 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	
 	// MARK: ChatUsersStoryInteractor CallServiceDelegate tests
 	
-//	func testNotifiesPresenterAboutIncomingCall() {
-//		// given
-//		let tag = "tag"
-//		let currentUser = TestsStorage.svuserTest()
-//		let opponentUser = TestsStorage.svuserRealUser1()
-//		
-//		let fakeCallService = FakeCallService()
-//		fakeCallService.signalingChannel = FakeSignalingChannel()
-//		
-//		// when
-//		interactor.setTag(tag, currentUser: currentUser)
-//		
-//		interactor.callService(fakeCallService!, didReceiveCallRequestFromOpponent: opponentUser)
-//		
-//		// then
-//		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
-//		XCTAssertEqual(mockOutput.opponent, opponentUser)
-//	}
+	func testNotifiesPresenterAboutIncomingCall() {
+		// given
+		let tag = "tag"
+		let currentUser = TestsStorage.svuserTest()
+		let opponentUser = TestsStorage.svuserRealUser1()
+		
+		let fakeCallService = FakeCallSevice()
+		ServicesConfigurator().configureCallService(fakeCallService)
+		fakeCallService.signalingChannel = FakeSignalingChannel()
+		
+		// when
+		interactor.setTag(tag, currentUser: currentUser)
+		
+		interactor.callService(fakeCallService, didReceiveCallRequestFromOpponent: opponentUser)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
+		XCTAssertEqual(mockOutput.opponent, opponentUser)
+	}
 	
 	
     class MockPresenter: ChatUsersStoryInteractorOutput {

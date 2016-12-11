@@ -21,45 +21,39 @@ class FakeSignalingChannel: NSObject {
 	/// Should send messages successfully or with error
 	var shouldSensMessagesSuccessfully = true
 	
-	var state: String = SVSignalingChannelState.open.takeRetainedValue() as String
+	var state = SignalingChannelState.open
 	var user: SVUser?
 	
-	var observer: MulticastDelegate<SVSignalingChannelDelegate>?
-	
-	override init() {
-		super.init()
-	}
-	
+	var observer: MulticastDelegate<SignalingChannelObserver>?
 }
 
-extension FakeSignalingChannel: SVSignalingChannelProtocol {
-	func addDelegate(delegate: SVSignalingChannelDelegate) {
-		observer += delegate
-	}
+extension FakeSignalingChannel: SignalingChannelProtocol {
 	
-	func delegates() -> [SVSignalingChannelDelegate]? {
-		return self.delegates()
-	}
-	
-	func connectWithUser(user: SVUser, completion: ((NSError?) -> Void)?) {
-		self.state = SVSignalingChannelState.open.takeRetainedValue() as String
+	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) {
+		self.state = .open
 		
 		self.user = user
 		
-		self.state = SVSignalingChannelState.established.takeRetainedValue() as String
+		self.state = .established
 		
-		completion?(nil)
+		completion?(error: nil)
 	}
 	
-	func disconnectWithCompletion(user: SVUser, completion: ((NSError?) -> Void)?) {
-		completion?(nil)
+	func sendMessage(message: SignalingMessage, withSessionDetails: SessionDetails, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
+		let error: NSError? = shouldSensMessagesSuccessfully ? nil : NSError(domain: "", code: -1, userInfo: nil)
+		completion?(error: error)
 	}
 	
-	func sendMessage(message: SVSignalingMessage, toUser user: SVUser, completion: ((NSError?) -> Void)?) {
-		completion?(shouldSensMessagesSuccessfully ? nil : NSError(domain: "", code: -1, userInfo: nil))
+	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?) {
+		self.state = .closed
+		completion?(error: nil)
 	}
 	
-	func isConnected() -> Bool {
+	var isConnected: Bool {
 		return true
+	}
+	
+	var isConnecting: Bool {
+		return false
 	}
 }

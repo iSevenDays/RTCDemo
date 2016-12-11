@@ -12,13 +12,18 @@
 
 @implementation SVSignalingMessageSDP
 
-- (instancetype)initWithSessionDescription:(RTCSessionDescription *)sessionDescription {
-	self = [super initWithType:sessionDescription.type params:nil];
+- (instancetype)initWithSessionDescription:(RTCSessionDescription *)sessionDescription sessionDetails:(SessionDetails *)sessiondetails {
+	NSString *type = sessionDescription.type;
+	
+	NSCAssert([type isEqualToString:SVSignalingMessageType.offer] || [type isEqualToString:SVSignalingMessageType.answer],
+			  @"Type must be offer or answer");
+	
+	self = [super initWithType:type params:nil];
 	
 	if (self) {
 		_sdp = sessionDescription;
+		[self populateParametersWithSessionDetails:sessiondetails];
 	}
-	
 	return self;
 }
 

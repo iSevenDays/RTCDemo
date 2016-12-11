@@ -29,18 +29,24 @@ class SessionDetails: NSObject {
 	// all users in current session including initiator
 	var membersIDs: [UInt]
 	
-	init(initiator: SVUser, membersIDs: [UInt]) {
+	// Generate new SessionDetails
+	init(initiatorID: UInt, membersIDs: [UInt]) {
 		sessionID = NSUUID().UUIDString
-		self.initiatorID = initiator.ID!.unsignedIntegerValue
+		self.initiatorID = initiatorID
 		self.membersIDs = membersIDs
 	}
 	
-	init(signalingMessage: SVSignalingMessage) {
-		sessionID = signalingMessage.params[SVSignalingParams.sessionID.takeUnretainedValue() as String]!
-		initiatorID = UInt(signalingMessage.params[SVSignalingParams.initiatorID.takeUnretainedValue() as String]!)!
-		let membersSeparatedByComma = signalingMessage.params[SVSignalingParams.membersIDs.takeUnretainedValue() as String]!
-		membersIDs = membersSeparatedByComma.componentsSeparatedByString(",").flatMap({UInt($0)})
-		super.init()
+	// Init existing SessionDetails
+	init(initiatorID: UInt, membersIDs: [UInt], sessionID: String) {
+		self.initiatorID = initiatorID
+		self.membersIDs = membersIDs
+		self.sessionID = sessionID
 	}
 	
+	override func isEqual(object: AnyObject?) -> Bool {
+		guard let anotherSession = object as? SessionDetails else {
+			return false
+		}
+		return sessionID == anotherSession.sessionID && membersIDs == anotherSession.membersIDs && anotherSession.initiatorID == anotherSession.initiatorID
+	}
 }

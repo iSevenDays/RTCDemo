@@ -12,11 +12,25 @@ protocol PeerConnectionObserver: class {
 	func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack)
 	func peerConnection(peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack)
 	func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError)
+	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionDescription: RTCSessionDescription)
+	func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCICECandidate)
 }
 
 enum PeerConnectionState {
 	case Initial
 	case Closed
+}
+
+func SVRTCSignalingState(state: RTCSignalingState) -> String {
+	switch state {
+	case RTCSignalingStable: return "RTCSignalingStable"
+	case RTCSignalingHaveLocalOffer: return "RTCSignalingHaveLocalOffer"
+	case RTCSignalingHaveLocalPrAnswer: return "RTCSignalingHaveLocalPrAnswer"
+	case RTCSignalingHaveRemoteOffer: return "RTCSignalingHaveRemoteOffer"
+	case RTCSignalingHaveRemotePrAnswer: return "RTCSignalingHaveRemotePrAnswer"
+	case RTCSignalingClosed: return "RTCSignalingClosed"
+	default: return "Undefined"
+	}
 }
 
 class PeerConnection: NSObject {
@@ -86,7 +100,8 @@ class PeerConnection: NSObject {
 	// Processign incoming events from opponent
 	func applyRemoteSDP(sdp: RTCSessionDescription) {
 		NSLog("Received remote SDP for opponent \(opponent)")
-		peerConnection?.setRemoteDescriptionWithDelegate(self, sessionDescription: sdp)
+		let answerSDP = RTCSessionDescription(type: SignalingMessageType.answer.rawValue, sdp: sdp.description)
+		peerConnection?.setRemoteDescriptionWithDelegate(self, sessionDescription: answerSDP)
 	}
 	
 	func applyICECandidates(ICECandidates: [RTCICECandidate]) {
@@ -94,11 +109,13 @@ class PeerConnection: NSObject {
 			peerConnection?.addICECandidate(candidate)
 		}
 	}
+	var latestSDP: String = ""
 }
 
 extension PeerConnection: RTCPeerConnectionDelegate {
 	func peerConnection(peerConnection: RTCPeerConnection!, signalingStateChanged stateChanged: RTCSignalingState) {
-		NSLog("Signaling state changed: \(stateChanged)");
+		let signalingState = SVRTCSignalingState(stateChanged)
+		NSLog("Signaling state changed: \(signalingState)");
 	}
 	
 	func peerConnection(peerConnection: RTCPeerConnection!, addedStream stream: RTCMediaStream!) {
@@ -131,8 +148,14 @@ extension PeerConnection: RTCPeerConnectionDelegate {
 		
 	}
 	
+	
 	func peerConnection(peerConnection: RTCPeerConnection!, gotICECandidate candidate: RTCICECandidate!) {
+		// TODO: make a queue and send when local ICE candidates have been collected
 		ICECandidates += candidate
+		observers => { $0.peerConnection(self, didSetLocalICECandidates: candidate) }
+		ICECandidates.removeAll()
+		
+		latestSDP = candidate.sdp
 	}
 }
 
@@ -144,15 +167,20 @@ extension PeerConnection: RTCSessionDescriptionDelegate {
 	}
 	
 	func peerConnection(peerConnection: RTCPeerConnection!, didSetSessionDescriptionWithError error: NSError!) {
+		NSLog("Signaling state: \(SVRTCSignalingState(peerConnection.signalingState))");
+		
 		guard error == nil else {
+			NSLog("%@", "Error: didSetSessionDescriptionWithError \(error)")
 			observers => { $0.peerConnection(self, didCreateSessionWithError: error) }
 			return
 		}
 		
 		if peerConnection.signalingState == RTCSignalingHaveLocalOffer {
-			// send signaling offer
+			observers => { $0.peerConnection(self, didSetLocalSessionOfferDescription: peerConnection.localDescription) }
 		} else if peerConnection.signalingState == RTCSignalingHaveRemoteOffer {
 			peerConnection.createAnswerWithDelegate(self, constraints: offerAnswerConstraints)
+		} else {
+			NSLog("Not offer and not answer");
 		}
 	}
 }
@@ -164,6 +192,15 @@ private extension PeerConnection {
 		if let localVideoTrack = createLocalVideoTrack() {
 			localStream.addVideoTrack(localVideoTrack)
 			observers => {$0.peerConnection(self, didReceiveLocalVideoTrack: localVideoTrack)}
+		} else if NSClassFromString("XCTest") != nil {
+			// For test purposes let's just create an empty video track
+			let videoSourceClass: AnyClass = RTCVideoSource.self
+			let videoSourceInitializable = videoSourceClass as! NSObject.Type
+			let videoSource = videoSourceInitializable.init() as! RTCVideoSource
+			
+			let emptyVideoTrack = RTCVideoTrack(factory: factory, source: videoSource, trackId: "trackID")
+			
+			observers => {$0.peerConnection(self, didReceiveLocalVideoTrack: emptyVideoTrack)}
 		}
 		localStream.addAudioTrack(factory.audioTrackWithID("ARDAMSa0"))
 		return localStream

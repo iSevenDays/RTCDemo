@@ -7,8 +7,6 @@
 //
 
 #import "QBSignalingChannel.h"
-#import "QBChatMessage+SVSignalingMessage.h"
-#import "SVSignalingMessage+QBChatMessage.h"
 #import "SVMulticastDelegate.h"
 
 @interface QBSignalingChannel() <QBChatDelegate>
@@ -64,7 +62,7 @@
 	}];
 }
 
-- (void)sendMessage:(SVSignalingMessage *)message toUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
+- (void)sendMessage:(SignalingMessage *)message toUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
 	NSParameterAssert(svuser);
 	NSParameterAssert(self.user);
 	if (![self.state isEqualToString:SVSignalingChannelState.established]) {
@@ -85,6 +83,10 @@
 
 - (BOOL)isConnected {
 	return [[QBChat instance] isConnected];
+}
+
+- (BOOL)isConnecting {
+	return [[QBChat instance] isConnecting];
 }
 
 - (SVUser *)user {

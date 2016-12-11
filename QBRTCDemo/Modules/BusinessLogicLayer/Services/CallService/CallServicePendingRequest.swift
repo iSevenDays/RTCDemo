@@ -10,14 +10,14 @@ import UIKit
 
 class CallServicePendingRequest: NSObject {
 	
-	var offerSignalingMessage: SVSignalingMessageSDP
+	var pendingSessionDescription: RTCSessionDescription
 	var initiator: SVUser
 	
-	init(offerSignalingMessage: SVSignalingMessageSDP) {
-		assert(offerSignalingMessage.type == SVSignalingMessageType.offer.takeUnretainedValue())
+	init(initiator: SVUser, pendingSessionDescription: RTCSessionDescription) {
+		assert(pendingSessionDescription.type == SignalingMessageType.offer.rawValue)
 		
-		initiator = offerSignalingMessage.sender
-		self.offerSignalingMessage = offerSignalingMessage
+		self.initiator = initiator
+		self.pendingSessionDescription = pendingSessionDescription
 		
 		super.init()
 	}

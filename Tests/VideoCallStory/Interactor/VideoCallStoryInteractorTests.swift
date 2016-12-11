@@ -41,7 +41,8 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	}
 	
 	func useFakeCallService() {
-		let callService = FakeCallService()
+		let callService = FakeCallSevice()
+		ServicesConfigurator().configureCallService(callService)
 		callService.signalingChannel = FakeSignalingChannel()
 		interactor.callService = callService
 	}
@@ -49,6 +50,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	func useRealCallService() {
 		let callService = CallService()
 		callService.signalingChannel = FakeSignalingChannel()
+		ServicesConfigurator().configureCallService(callService)
 		interactor.callService = callService
 	}
 	
@@ -138,6 +140,44 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		XCTAssertTrue(mockOutput.didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled)
 	}
 	
+	func testNotifiesPresenterAboutCallServiceOccuredFailure() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: nil)
+		interactor.callService(interactor.callService, didChangeState: .Error)
+		
+		// then
+		XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutCallServiceAnswerTimeout() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService(interactor.callService, didAnswerTimeoutForOpponent: testUser2)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveAnswerTimeoutForOpponentGotCalled)
+	}
+	
+	// TODO: this case should be handle also
+	func DISABLED_testRejectsIncomingCallWhenAnotherCallIsActive() {
+		// given
+		useRealCallService()
+		let undefinedUser = TestsStorage.svuserTest()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService(interactor.callService, didReceiveCallRequestFromOpponent: undefinedUser)
+		
+		// then
+		//XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
+	}
+	
 	// MARK:- Data Channel Tests
 //	func testTriggersDidOpenDataChannelOpen_whenReceivedDataChannel() {
 //		// given
@@ -214,44 +254,6 @@ class VideoCallStoryInteractorTests: XCTestCase {
 //		// then
 //		XCTAssertTrue(mockOutput.didSendInvitationToOpenImageGalleryGotCalled)
 //	}
-	
-//	func testNotifiesPresenterAboutCallServiceOccuredFailure() {
-//		// given
-//		useRealCallService()
-//		
-//		// when
-//		interactor.connectToChatWithUser(testUser, callOpponent: nil)
-//		interactor.callService(interactor.callService, didChangeState: CallServiceState.ClientStateDisconnected)
-//		
-//		// then
-//		XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
-//	}
-	
-	func testNotifiesPresenterAboutCallServiceAnswerTimeout() {
-		// given
-		useRealCallService()
-		
-		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
-		interactor.callService(interactor.callService, didAnswerTimeoutForOpponent: testUser2)
-		
-		// then
-		XCTAssertTrue(mockOutput.didReceiveAnswerTimeoutForOpponentGotCalled)
-	}
-	
-	// TODO: this case should be handle also
-	func DISABLED_testRejectsIncomingCallWhenAnotherCallIsActive() {
-		// given
-		useRealCallService()
-		let undefinedUser = TestsStorage.svuserTest()
-		
-		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
-		interactor.callService(interactor.callService, didReceiveCallRequestFromOpponent: undefinedUser)
-		
-		// then
-		//XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
-	}
 	
 	class MockPresenter: NSObject,  VideoCallStoryInteractorOutput {
 		var didConnectToChatWithUserGotCalled = false

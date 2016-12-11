@@ -8,10 +8,11 @@
 
 #import "SVSignalingMessage.h"
 @class RTCSessionDescription;
+@class SessionDetails;
 
 @interface SVSignalingMessageSDP : SVSignalingMessage
 
-- (nullable instancetype)initWithSessionDescription:(RTCSessionDescription *_Nonnull)sessionDescription;
+- (nonnull instancetype)initWithSessionDescription:(RTCSessionDescription *_Nonnull)sessionDescription sessionDetails:(SessionDetails *_Nonnull)sessiondetails;
 
 @property (nonatomic, strong, readonly, nullable) RTCSessionDescription *sdp;
 

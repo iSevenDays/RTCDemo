@@ -34,7 +34,8 @@ class ServicesProvider: NSObject {
 			let signalingChannel = QBSignalingChannel()
 			let callService = CallService()
 			callService.signalingChannel = signalingChannel
-			callService.cacheService = NSUserDefaults.standardUserDefaults()
+			callService.signalingProcessor.observer = callService
+			signalingChannel.addObserver(callService.signalingProcessor)
 			let restService = QBRESTService()
 			
 			ServicesConfigurator().configureCallService(callService)
@@ -52,7 +53,7 @@ class ServicesProvider: NSObject {
 class ServicesConfigurator {
 	
 	func configureCallService(callService: CallService) {
-		
+		callService.cacheService = NSUserDefaults.standardUserDefaults()
 		callService.defaultOfferConstraints = WebRTCHelpers.defaultOfferConstraints()
 		callService.defaultAnswerConstraints = WebRTCHelpers.defaultAnswerConstraints()
 		callService.defaultPeerConnectionConstraints = WebRTCHelpers.defaultPeerConnectionConstraints()

@@ -8,7 +8,7 @@
 
 import Photos
 
-class ImageGalleryStoryInteractor: NSObject, CallServiceDataChannelAdditionsDelegate, ImageGalleryStoryInteractorInput {
+class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 
     weak var output: ImageGalleryStoryInteractorOutput!
 	
