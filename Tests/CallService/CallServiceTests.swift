@@ -66,6 +66,7 @@ class CallServiceTests: XCTestCase {
 		waitForTestExpectations()
 	}
 	
+	
 	//MARK: - CallClientObserver tests
 	
 	func testHasLocalVideoTrackAfterStartCall() {
@@ -98,6 +99,9 @@ class CallServiceTests: XCTestCase {
 		XCTAssertEqual(mockOutput.callServiceState, CallServiceState.Disconnected)
 	}
 	
+	
+	//MARK: - Signaling Processor observer methods processing
+ 
 	func testSendsRejectIfAlreadyHasActiveCall() {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
@@ -132,7 +136,53 @@ class CallServiceTests: XCTestCase {
 		XCTAssertEqual(callService.sessions[sessionDetails.sessionID], sessionDetails)
 	}
 	
-	// PeerConnection observer tests
+	func testCorrectlyProcessesHangupMessage_whenHangupIsReceivedForActiveCall() {
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		_ = try? callService.startCallWithOpponent(user2)
+		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
+			XCTFail()
+			return
+		}
+		
+		callService.didReceiveHangup(callService.signalingProcessor, fromOpponent: user2, sessionDetails: callService.sessions[createdConnectionWithUser2.sessionID]!)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveHangupFromOpponentGotCalled)
+	}
+	
+	func testDoesntProcessHangupSignalingMessageFromUndefinedOpponent() {
+		// given
+		let sessionDetailsForUndefinedConnection = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
+		
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		_ = try? callService.startCallWithOpponent(user2)
+		
+		callService.didReceiveHangup(callService.signalingProcessor, fromOpponent: user3, sessionDetails: sessionDetailsForUndefinedConnection)
+		
+		// then
+		XCTAssertFalse(mockOutput.didReceiveHangupFromOpponentGotCalled)
+	}
+	
+	func testCorrectlyProcessesRejectMessage_whenRejectIsReceivedForSentOffer() {
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		_ = try? callService.startCallWithOpponent(user2)
+		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
+			XCTFail()
+			return
+		}
+		
+		callService.didReceiveReject(callService.signalingProcessor, fromOpponent: user2, sessionDetails: callService.sessions[createdConnectionWithUser2.sessionID]!)
+		
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveRejectFromOpponentGotCalled)
+		XCTAssertEqual(createdConnectionWithUser2.state, PeerConnectionState.Closed)
+	}
+	
+	//MARK: - PeerConnection observer tests
 	
 	func testsSendsLocalSessionDescription() {
 		// given
@@ -156,12 +206,36 @@ class CallServiceTests: XCTestCase {
 		
 		XCTAssertEqual(callService.connections.count, 1)
 		XCTAssertEqual(callService.sessions.count, 1)
-		
 	}
+	
+	func testsDoesntSendLocalSessionDescription_whenNetworkConnectionIsUnavailable() {
+		// given
+		let localSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
+		
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		_ = try? callService.startCallWithOpponent(user2)
+		
+		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
+			XCTFail()
+			return
+		}
+		let peerConnection = PeerConnection(opponent: user2, sessionID: createdConnectionWithUser2.sessionID, ICEServers: callService.ICEServers, factory: callService.factory, mediaStreamConstraints: callService.defaultMediaStreamConstraints, peerConnectionConstraints: callService.defaultPeerConnectionConstraints, offerAnswerConstraints: callService.defaultOfferConstraints)
+		
+		fakeSignalingChannel.shouldSensMessagesSuccessfully = false
+		callService.peerConnection(peerConnection, didSetLocalSessionOfferDescription: localSDP)
+		
+		// then
+		XCTAssertTrue(mockOutput.didErrorSendingLocalSessionDescriptionMessageGotCalled)
+		XCTAssertFalse(mockOutput.didSendLocalSessionDescriptionMessageGotCalled)
+		
+		XCTAssertEqual(callService.connections.count, 1)
+		XCTAssertEqual(callService.sessions.count, 1)
+	}
+	
 	
 	func testsSendsLocalICECandidates() {
 		// given
-		
 		let localICECandidateAudio = RTCICECandidate(mid: "audio", index: 0, sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG")
 		
 		let sessionDetails = SessionDetails(initiatorID: 1, membersIDs: [1])

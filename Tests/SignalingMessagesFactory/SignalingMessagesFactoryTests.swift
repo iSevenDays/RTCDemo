@@ -125,4 +125,42 @@ class SignalingMessagesFactoryTests: XCTestCase {
 		}
 	}
 	
+	func testConvertsSignalingOfferMessageToQBMessageAndBack() {
+		// given
+		let sessionDescription = RTCSessionDescription(type: "offer", sdp: CallServiceHelpers.offerSDP())
+		let signalingMessage = SignalingMessage.offer(sdp: sessionDescription)
+		let sessionID = NSUUID().UUIDString
+		let sessionDetails = SessionDetails(initiatorID: sender.ID!.unsignedIntegerValue, membersIDs: [sender.ID!.unsignedIntegerValue, testUser.ID!.unsignedIntegerValue], sessionID: sessionID)
+		
+		do {
+			// when
+			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
+			convertedQBMessage.senderID = sender.ID!.unsignedIntegerValue
+			
+			// then
+			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
+			
+			XCTAssertNotNil(receivedSignalingMessage)
+			XCTAssertNotNil(receivedSender)
+			XCTAssertNotNil(receivedSessionDetails)
+			
+			XCTAssertEqual(sender.ID, receivedSender.ID)
+			XCTAssertEqual(sender.fullName, receivedSender.fullName)
+			XCTAssertEqual(sender.login, receivedSender.login)
+			XCTAssertEqual(sessionDetails, receivedSessionDetails)
+			
+			switch receivedSignalingMessage {
+			case .answer(sdp: _): XCTFail()
+			case let .offer(sdp: offerSDP):
+				XCTAssertEqual(sessionDescription.description, offerSDP.description)
+			case .reject: XCTFail()
+			case .candidates(candidates: _): XCTFail()
+			case .hangup: XCTFail()
+			}
+			
+		} catch let error {
+			XCTAssertNil(error)
+		}
+	}
+	
 }

@@ -173,11 +173,20 @@ extension CallService: SignalingProcessorObserver {
 	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveHangup")
 		pendingRequests[opponent] = nil
+		if let activeConnection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
+			activeConnection.close()
+			observers => { $0.callService(self, didReceiveHangupFromOpponent: opponent) }
+		}
+		
 	}
 	
 	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveReject")
 		pendingRequests[opponent] = nil
+		if let activeConnection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
+			activeConnection.close()
+			observers => { $0.callService(self, didReceiveRejectFromOpponent: opponent) }
+		}
 	}
 }
 

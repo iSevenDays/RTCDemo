@@ -70,53 +70,7 @@
 }
 
 
-//- (void)testCanConnectWithUserAndHaveConnectedState {
-//	// given
-//	XCTestExpectation *expectation = [self currentSelectorTestExpectation];
-//	
-//	// when
-//	[self.callService connectWithUser:self.user1 completion:^(NSError * _Nullable error) {
-//		XCTAssertNil(error);
-//		XCTAssertEqual(self.callService.state, kClientStateConnected);
-//		[expectation fulfill];
-//	}];
-//	
-//	// then
-//	[self waitForTestExpectations];
-//}
-
 #pragma mark CallClientDelegate tests
-
-//- (void)testHasLocalVideoTrackAfterStartCall {
-//	// given
-//	
-//	// when
-//	[self.callService connectWithUser:self.user1 completion:nil];
-//	
-//	[self.callService startCallWithOpponent:self.user2];
-//
-//	// then
-//	OCMVerify([self.mockOutput callService:[OCMArg any] didReceiveLocalVideoTrack:[OCMArg any]]);
-//}
-
-//- (void)testCorrectlyChangesClientStateToConnected {
-//	// given
-//	
-//	// when
-//	[self.callService connectWithUser:self.user1 completion:nil];
-//	
-//	// then
-//	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateConnected]);
-//}
-
-//- (void)testCorrectlyChangesClientStateToDisconnectedAfterDisconnectFromChat {
-//	// when
-//	[self.callService connectWithUser:self.user1 completion:nil];
-//	[self.callService disconnectWithCompletion:nil];
-//	
-//	// then
-//	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateDisconnected]);
-//}
 
 - (void)testCorrectlyCleanupsSessionAfterDisconnectFromChat {
 	// given
@@ -146,26 +100,6 @@
 	OCMVerify([self.mockOutput callService:[OCMArg any] didChangeState:kClientStateConnected]);
 	OCMVerifyAll(self.mockCallService);
 }
-//
-//- (void)testSendsRejectIfAlreadyHasActiveCall {
-//	// given
-//	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
-//	
-//	RTCSessionDescription *rtcofferSDP = [[RTCSessionDescription alloc] initWithType:SVSignalingMessageType.offer sdp:[CallServiceHelpers offerSDP]];
-//	SVSignalingMessage *offer = [[SVSignalingMessageSDP alloc] initWithSessionDescription:rtcofferSDP];
-//	offer.sender = self.user3;
-//	
-//	OCMExpect([self.mockCallService sendRejectToUser:self.user3 completion:[OCMArg any]]);
-//	
-//	// when
-//	[self.callService connectWithUser:self.user1 completion:nil];
-//	[self.callService startCallWithOpponent:self.user2];
-//	
-//	[self.callService channel:self.callService.signalingChannel didReceiveMessage:offer];
-//	
-//	// then
-//	OCMVerifyAll(self.mockCallService);
-//}
 
 #pragma mark Signaling messages processing
 
@@ -187,23 +121,6 @@
 	
 	// then
 	OCMVerify([self.mockCallService drainMessageQueueIfReady]);
-}
-
-- (void)testCorrectlyProcessesHangupDelegateMethod_whenHangupIsReceived {
-	// given
-	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
-	
-	SVSignalingMessage *hangup = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
-	hangup.sender = self.user2;
-	// when
-	[self.callService connectWithUser:self.user1 completion:nil];
-	[self.callService startCallWithOpponent:self.user2];
-	
-	[self.callService channel:self.callService.signalingChannel didReceiveMessage:hangup];
-	
-	// then
-	OCMVerify([self.mockCallService clearSession]);
-	OCMVerify([self.mockOutput callService:self.callService didReceiveHangupFromOpponent:self.user2]);
 }
 
 - (void)testCorrectlyProcessesSignalingMessageIceWithAudioAndVideoFromOpponent {
@@ -230,56 +147,6 @@
 	[self.callService channel:self.callService.signalingChannel didReceiveMessage:iceVideo];
 	
 	// then
-	OCMVerifyAll(self.mockCallService);
-}
-
-//- (void)testCorrectlyProcessesSignalingMessageOfferFromOpponent_andSavesCallRequest {
-//	// given
-//	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
-//	[[self.mockCallService reject] processSignalingMessage:[OCMArg any]]; // we shouldn't accept call immediately
-//	
-//	RTCSessionDescription *rtcofferSDP = [[RTCSessionDescription alloc] initWithType:SVSignalingMessageType.offer sdp:[CallServiceHelpers offerSDP]];
-//	
-//	SVSignalingMessage *offerSDP = [[SVSignalingMessageSDP alloc] initWithSessionDescription:rtcofferSDP];
-//	
-//	offerSDP.sender = self.user2;
-//	
-//	OCMExpect([[self.mockCallService peerConnection] createAnswerWithDelegate:[OCMArg any] constraints:[OCMArg any]]);
-//	
-//	// when
-//	[self.callService connectWithUser:self.user1 completion:nil];
-//	
-//	[self.callService channel:self.callService.signalingChannel didReceiveMessage:offerSDP];
-//	
-//	// then
-//	[self.mockOutput callService:self.callService didReceiveCallRequestFromOpponent:offerSDP.sender];
-//	
-//	OCMVerifyAll(self.mockCallService);
-//}
-
-- (void)testCorrectlyAcceptsSavedCallRequest {
-	// given
-	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
-	
-	RTCSessionDescription *rtcofferSDP = [[RTCSessionDescription alloc] initWithType:SVSignalingMessageType.offer sdp:[CallServiceHelpers offerSDP]];
-	
-	SVSignalingMessage *offerSDP = [[SVSignalingMessageSDP alloc] initWithSessionDescription:rtcofferSDP];
-	
-	offerSDP.sender = self.user2;
-	
-	OCMExpect([[self.mockCallService peerConnection] createAnswerWithDelegate:[OCMArg any] constraints:[OCMArg any]]);
-	
-	// when
-	[self.callService connectWithUser:self.user1 completion:nil];
-	
-	[self.callService channel:self.callService.signalingChannel didReceiveMessage:offerSDP];
-	
-	[self.callService acceptCallFromOpponent:offerSDP.sender];
-	
-	
-	// then
-	OCMVerify([self.mockCallService processSignalingMessage:offerSDP]);
-	
 	OCMVerifyAll(self.mockCallService);
 }
 

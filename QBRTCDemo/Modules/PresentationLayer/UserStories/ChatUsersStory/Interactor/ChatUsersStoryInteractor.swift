@@ -87,14 +87,6 @@ extension ChatUsersStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		output.didReceiveCallRequestFromOpponent(opponent)
 	}
-	
-	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
-		
-	}
-	
-	func callService(callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser) {
-		
-	}
 }
 
 
