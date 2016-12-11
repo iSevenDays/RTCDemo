@@ -14,6 +14,4 @@ enum SignalingMessage {
 	case hangup
 	case reject
 	case candidates(candidates: [RTCICECandidate])
-	
-	
 }

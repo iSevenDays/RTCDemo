@@ -12,8 +12,13 @@ protocol PeerConnectionObserver: class {
 	func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack)
 	func peerConnection(peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack)
 	func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError)
-	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionDescription: RTCSessionDescription)
 	func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCICECandidate)
+	
+	// User has an offer to send
+	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionDescription: RTCSessionDescription)
+	
+	// User has an answer to send
+	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionDescription: RTCSessionDescription)
 }
 
 enum PeerConnectionState {
@@ -100,8 +105,7 @@ class PeerConnection: NSObject {
 	// Processign incoming events from opponent
 	func applyRemoteSDP(sdp: RTCSessionDescription) {
 		NSLog("Received remote SDP for opponent \(opponent)")
-		let answerSDP = RTCSessionDescription(type: SignalingMessageType.answer.rawValue, sdp: sdp.description)
-		peerConnection?.setRemoteDescriptionWithDelegate(self, sessionDescription: answerSDP)
+		peerConnection?.setRemoteDescriptionWithDelegate(self, sessionDescription: sdp)
 	}
 	
 	func applyICECandidates(ICECandidates: [RTCICECandidate]) {
@@ -179,8 +183,10 @@ extension PeerConnection: RTCSessionDescriptionDelegate {
 			observers => { $0.peerConnection(self, didSetLocalSessionOfferDescription: peerConnection.localDescription) }
 		} else if peerConnection.signalingState == RTCSignalingHaveRemoteOffer {
 			peerConnection.createAnswerWithDelegate(self, constraints: offerAnswerConstraints)
-		} else {
-			NSLog("Not offer and not answer");
+		} else if peerConnection.signalingState == RTCSignalingStable {
+			// RTCSignalingStable means that we applied remote offer SDP, created answer, applied local SDP
+			// and now local SPD has been set
+			observers => { $0.peerConnection(self, didSetLocalSessionAnswerDescription: peerConnection.localDescription) }
 		}
 	}
 }

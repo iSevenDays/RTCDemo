@@ -24,10 +24,14 @@ class FakeSignalingChannel: NSObject {
 	var state = SignalingChannelState.open
 	var user: SVUser?
 	
-	var observer: MulticastDelegate<SignalingChannelObserver>?
+	var observers: MulticastDelegate<SignalingChannelObserver>?
 }
 
 extension FakeSignalingChannel: SignalingChannelProtocol {
+	
+	func addObserver(observer: SignalingChannelObserver) {
+		observers += observer
+	}
 	
 	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) {
 		self.state = .open

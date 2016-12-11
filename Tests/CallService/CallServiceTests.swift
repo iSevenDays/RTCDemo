@@ -98,27 +98,23 @@ class CallServiceTests: XCTestCase {
 		XCTAssertEqual(mockOutput.callServiceState, CallServiceState.Disconnected)
 	}
 	
-//	func testSendsRejectIfAlreadyHasActiveCall() {
-//		// given
-//		let rtcOfferSDP = RTCSessionDescription(type: SVSignalingMessageType.offer.takeUnretainedValue() as String, sdp: CallServiceHelpers.offerSDP())
-//		
-//		let signalingOffer = SVSignalingMessageSDP(sessionDescription: rtcOfferSDP)
-//		signalingOffer.sender = user3
-//		signalingOffer.sessionID = NSUUID().UUIDString
-//		
-//		let sessionDetails = SessionDetails(signalingMessage: signalingOffer)
-//		
-//		// when
-//		callService.connectWithUser(user1, completion: nil)
-//		_ = try? callService.startCallWithOpponent(user2)
-//		
-//		callService.didReceiveOffer(callService.signalingProcessor, fromOpponent: user3, sessionDetails: sessionDetails, signalingMessage: signalingOffer)
-//		
-//		// then
-//		XCTAssertFalse(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
-//	}
+	func testSendsRejectIfAlreadyHasActiveCall() {
+		// given
+		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
+		
+		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
+		
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		_ = try? callService.startCallWithOpponent(user2)
+		
+		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user3, sessionDetails: sessionDetails)
+		
+		// then
+		XCTAssertFalse(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
+	}
 	
-	func testCorrectlyProcessesSignalingMessageOfferFromOpponent_andSavesCallRequest() {
+	func testCorrectlyAcceptsOfferFromOpponent() {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
 	
@@ -127,9 +123,13 @@ class CallServiceTests: XCTestCase {
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user1, sessionDetails: sessionDetails)
+		callService.acceptCallFromOpponent(user1)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
+		XCTAssertEqual(callService.sessions.count, 1)
+		XCTAssertEqual(callService.connections.count, 1)
+		XCTAssertEqual(callService.sessions[sessionDetails.sessionID], sessionDetails)
 	}
 	
 	// PeerConnection observer tests
@@ -138,19 +138,25 @@ class CallServiceTests: XCTestCase {
 		// given
 		let localSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
 		
-		let sessionDetails = SessionDetails(initiatorID: 1, membersIDs: [1])
-		callService.sessions[sessionDetails.sessionID] = sessionDetails
-		
-		let peerConnection = PeerConnection(opponent: user2, sessionID: sessionDetails.sessionID, ICEServers: callService.ICEServers, factory: callService.factory, mediaStreamConstraints: callService.defaultMediaStreamConstraints, peerConnectionConstraints: callService.defaultPeerConnectionConstraints, offerAnswerConstraints: callService.defaultOfferConstraints)
-		
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		_ = try? callService.startCallWithOpponent(user2)
+		
+		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
+			XCTFail()
+			return
+		}
+		let peerConnection = PeerConnection(opponent: user2, sessionID: createdConnectionWithUser2.sessionID, ICEServers: callService.ICEServers, factory: callService.factory, mediaStreamConstraints: callService.defaultMediaStreamConstraints, peerConnectionConstraints: callService.defaultPeerConnectionConstraints, offerAnswerConstraints: callService.defaultOfferConstraints)
+		
 		callService.peerConnection(peerConnection, didSetLocalSessionOfferDescription: localSDP)
 		
 		// then
 		XCTAssertTrue(mockOutput.didSendLocalSessionDescriptionMessageGotCalled)
 		XCTAssertFalse(mockOutput.didErrorSendingLocalSessionDescriptionMessageGotCalled)
+		
+		XCTAssertEqual(callService.connections.count, 1)
+		XCTAssertEqual(callService.sessions.count, 1)
+		
 	}
 	
 	func testsSendsLocalICECandidates() {

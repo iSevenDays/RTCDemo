@@ -116,7 +116,12 @@ extension CallService: CallServiceProtocol {
 	}
 	
 	func acceptCallFromOpponent(opponent: SVUser) {
-		let sessionDetails = SessionDetails(initiatorID: opponent.ID!.unsignedIntegerValue, membersIDs: [currentUser!.ID!.unsignedIntegerValue, opponent.ID!.unsignedIntegerValue])
+		guard let pendingRequest = pendingRequests[opponent] else {
+			NSLog("Error: no pending offer for opponent")
+			return
+		}
+		
+		let sessionDetails = pendingRequest.sessionDetails
 		sessions[sessionDetails.sessionID] = sessionDetails
 		
 		let connection = PeerConnection(opponent: opponent, sessionID: sessionDetails.sessionID, ICEServers: ICEServers, factory: factory, mediaStreamConstraints: defaultMediaStreamConstraints, peerConnectionConstraints: defaultPeerConnectionConstraints, offerAnswerConstraints: defaultOfferConstraints)
@@ -124,10 +129,6 @@ extension CallService: CallServiceProtocol {
 		connections[sessionDetails.sessionID] = [connection]
 		
 		connection.acceptCall()
-		guard let pendingRequest = pendingRequests[opponent] else {
-			NSLog("Error: no pending offer for opponent")
-			return
-		}
 		connection.applyRemoteSDP(pendingRequest.pendingSessionDescription)
 	}
 	
@@ -155,12 +156,11 @@ extension CallService: SignalingProcessorObserver {
 		
 		if let session = sessions[sessionDetails.sessionID] {
 			guard session.sessionState != SessionDetailsState.Rejected else {
-				// Skip
 				NSLog("declined rejected session")
 				return
 			}
 		} else {
-			pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer)
+			pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer, sessionDetails: sessionDetails)
 			observers => { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
 		}
 	}
@@ -182,17 +182,31 @@ extension CallService: SignalingProcessorObserver {
 }
 
 extension CallService: PeerConnectionObserver {
+	
+	// User has an offer to send
 	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionOfferDescription: RTCSessionDescription) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let offerSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: localSessionOfferDescription.description)
 		let signalingMessage = SignalingMessage.offer(sdp: offerSDP)
 		let opponent = peerConnection.opponent
-		
-		signalingChannel.sendMessage(signalingMessage, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in
+		sendSignalingMessage(signalingMessage, withSessionDetails: sessionDetails, toOpponent: opponent)
+	}
+	
+	// User has an answer to send
+	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionAnswerDescription: RTCSessionDescription) {
+		let sessionDetails = sessions[peerConnection.sessionID]!
+		let answerSDP = RTCSessionDescription(type: SignalingMessageType.answer.rawValue, sdp: localSessionAnswerDescription.description)
+		let signalingMessage = SignalingMessage.answer(sdp: answerSDP)
+		let opponent = peerConnection.opponent
+		sendSignalingMessage(signalingMessage, withSessionDetails: sessionDetails, toOpponent: opponent)
+	}
+	
+	func sendSignalingMessage(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toOpponent opponent: SVUser) {
+		signalingChannel.sendMessage(message, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in
 			if let error = error {
-				self.observers => { $0.callService(self, didErrorSendingLocalSessionDescriptionMessage: signalingMessage, toOpponent: opponent, error: error) }
+				self.observers => { $0.callService(self, didErrorSendingLocalSessionDescriptionMessage: message, toOpponent: opponent, error: error) }
 			} else {
-				self.observers => { $0.callService(self, didSendLocalSessionDescriptionMessage: signalingMessage, toOpponent: opponent) }
+				self.observers => { $0.callService(self, didSendLocalSessionDescriptionMessage: message, toOpponent: opponent) }
 			}
 		}
 	}

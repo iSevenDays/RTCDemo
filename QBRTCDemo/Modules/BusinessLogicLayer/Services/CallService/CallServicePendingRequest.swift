@@ -10,14 +10,16 @@ import UIKit
 
 class CallServicePendingRequest: NSObject {
 	
-	var pendingSessionDescription: RTCSessionDescription
-	var initiator: SVUser
+	private(set) var pendingSessionDescription: RTCSessionDescription
+	private(set) var initiator: SVUser
+	private(set) var sessionDetails: SessionDetails
 	
-	init(initiator: SVUser, pendingSessionDescription: RTCSessionDescription) {
+	init(initiator: SVUser, pendingSessionDescription: RTCSessionDescription, sessionDetails: SessionDetails) {
 		assert(pendingSessionDescription.type == SignalingMessageType.offer.rawValue)
 		
 		self.initiator = initiator
 		self.pendingSessionDescription = pendingSessionDescription
+		self.sessionDetails = sessionDetails
 		
 		super.init()
 	}

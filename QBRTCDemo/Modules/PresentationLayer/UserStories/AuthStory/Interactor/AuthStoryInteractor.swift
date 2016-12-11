@@ -105,7 +105,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		
 		// If user ID is not nil, then the user has been logged in previously
 		guard user.ID != nil else { return }
-		
+		guard !callService.isConnecting else { return }
 		callService.connectWithUser(user) { [unowned self] (error) in
 			
 			if loggedInREST && self.callService.isConnected {
