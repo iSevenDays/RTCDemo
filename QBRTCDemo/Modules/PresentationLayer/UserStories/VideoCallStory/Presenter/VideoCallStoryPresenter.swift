@@ -1,6 +1,6 @@
 //
 //  VideoCallStoryPresenter.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 01/12/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -61,6 +61,14 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	
 	func didReceiveHangupFromOpponent(opponent: SVUser) {
 		view.showOpponentHangup()
+	}
+	
+	func didReceiveRejectFromOpponent(opponent: SVUser) {
+		view.showOpponentReject()
+	}
+	
+	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser) {
+		view.showOpponentAnswerTimeout()
 	}
 	
 	func didFailToConnectToChat() {

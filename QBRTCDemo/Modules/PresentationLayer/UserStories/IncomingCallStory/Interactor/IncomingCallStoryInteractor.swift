@@ -24,7 +24,7 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 		return opponent
 	}
 	
-	func hangup() {
-		callService.sendHangupToUser(opponent, completion: nil)
+	func rejectCall() {
+		callService.sendRejectCallToOpponent(opponent)
 	}
 }

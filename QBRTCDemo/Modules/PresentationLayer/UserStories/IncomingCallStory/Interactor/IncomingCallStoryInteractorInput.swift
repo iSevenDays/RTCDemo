@@ -23,6 +23,6 @@ protocol IncomingCallStoryInteractorInput {
 	*/
 	func retrieveOpponent() -> SVUser
 	
-	/// Notifies opponent that current user hangup a call
-	func hangup()
+	/// Notifies opponent that current user rejected a call
+	func rejectCall()
 }

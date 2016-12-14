@@ -38,6 +38,14 @@
 	return self;
 }
 
+- (NSUInteger)hash {
+	if (self.ID != nil) {
+		return self.ID.unsignedIntegerValue;
+	} else {
+		return self.login.hash;
+	}
+}
+
 - (BOOL)isEqual:(id)object {
 	if (self == object) {
 		return YES;

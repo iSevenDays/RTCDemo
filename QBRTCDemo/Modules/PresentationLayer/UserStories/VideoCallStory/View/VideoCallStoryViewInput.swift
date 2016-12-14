@@ -1,6 +1,6 @@
 //
 //  VideoCallStoryViewInput.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 01/12/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -21,6 +21,12 @@ protocol VideoCallStoryViewInput: class {
 	
 	/// Show an opponent hang up a call
 	func showOpponentHangup()
+	
+	/// Show an opponent rejected a call
+	func showOpponentReject()
+	
+	/// Show timeout occured calling the opponent
+	func showOpponentAnswerTimeout()
 	
 	/// There might be a call at the moment, but call service was disconnected
 	func showErrorCallServiceDisconnected()

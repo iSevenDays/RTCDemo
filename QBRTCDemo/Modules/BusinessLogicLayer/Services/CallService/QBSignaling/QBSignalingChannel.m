@@ -7,25 +7,33 @@
 //
 
 #import "QBSignalingChannel.h"
-#import "QBChatMessage+SVSignalingMessage.h"
-#import "SVSignalingMessage+QBChatMessage.h"
+#import "SVMulticastDelegate.h"
 
 @interface QBSignalingChannel() <QBChatDelegate>
-
+@property (nonatomic, strong, nonnull) SVMulticastDelegate<SVSignalingChannelDelegate> *multicastDelegate;
 @end
 
 @implementation QBSignalingChannel
 @synthesize state = _state;
-@synthesize delegate;
 @synthesize user = _user;
 
 - (instancetype)init {
 	self = [super init];
 	if (self) {
+		_multicastDelegate = (SVMulticastDelegate<SVSignalingChannelDelegate>*)[[SVMulticastDelegate alloc] init];
 		self.state = SVSignalingChannelState.closed;
 		[[QBChat instance] addDelegate:self];
 	}
 	return self;
+}
+
+- (void)addDelegate:(id<SVSignalingChannelDelegate>)delegate {
+	NSLog(@"Added signaling channel delegate: %@", delegate);
+	[self.multicastDelegate addDelegate:delegate];
+}
+
+- (NSArray *)delegates {
+	return [self.multicastDelegate delegates].allObjects;
 }
 
 - (void)connectWithUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
@@ -54,7 +62,7 @@
 	}];
 }
 
-- (void)sendMessage:(SVSignalingMessage *)message toUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
+- (void)sendMessage:(SignalingMessage *)message toUser:(SVUser *)svuser completion:(void (^)(NSError *error))completion {
 	NSParameterAssert(svuser);
 	NSParameterAssert(self.user);
 	if (![self.state isEqualToString:SVSignalingChannelState.established]) {
@@ -75,6 +83,10 @@
 
 - (BOOL)isConnected {
 	return [[QBChat instance] isConnected];
+}
+
+- (BOOL)isConnecting {
+	return [[QBChat instance] isConnecting];
 }
 
 - (SVUser *)user {
@@ -100,11 +112,10 @@
 }
 
 - (void)notifyDelegateWithCurrentState {
-	if (self.delegate) {
-		if ([self.delegate respondsToSelector:@selector(channel:didChangeState:)]) {
-			[self.delegate channel:self didChangeState:self.state];
-		}
+	if ([self.multicastDelegate respondsToSelector:@selector(channel:didChangeState:)]) {
+		[self.multicastDelegate channel:self didChangeState:self.state];
 	}
+	
 }
 
 - (void)setState:(NSString *)state {
@@ -138,8 +149,10 @@
 	if ([type isEqualToString:SVSignalingMessageType.answer] ||
 		[type isEqualToString:SVSignalingMessageType.offer] ||
 		[type isEqualToString:SVSignalingMessageType.hangup] ||
-		[type isEqualToString:SVSignalingMessageType.candidate]) {
-		[self.delegate channel:self didReceiveMessage:[SVSignalingMessage messageWithQBChatMessage:message]];
+		[type isEqualToString:SVSignalingMessageType.candidates]) {
+		if ([self.multicastDelegate respondsToSelector:@selector(channel:didReceiveMessage:)]) {
+			[self.multicastDelegate channel:self didReceiveMessage:[SVSignalingMessage messageWithQBChatMessage:message]];
+		}
 	}
 }
 

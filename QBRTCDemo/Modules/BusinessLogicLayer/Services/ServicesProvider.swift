@@ -18,7 +18,7 @@ class ServicesProvider: NSObject {
 	static let currentProvider = ServicesProvider(zone: Zone.Production)
 	
 	
-	private(set) var callService: protocol<CallServiceProtocol, CallServiceDataChannelAdditionsProtocol>!
+	private(set) var callService: protocol<CallServiceProtocol>!
 	private(set) var restService: protocol<RESTServiceProtocol>!
 	
 	init(zone: Zone) {
@@ -32,10 +32,14 @@ class ServicesProvider: NSObject {
 			
 		case .Production:
 			let signalingChannel = QBSignalingChannel()
-			let callService = CallService(signalingChannel: signalingChannel)!
-			let restService = QBRESTService()
-			
+			let callService = CallService()
 			ServicesConfigurator().configureCallService(callService)
+			
+			callService.signalingChannel = signalingChannel
+			callService.signalingProcessor.observer = callService
+			signalingChannel.addObserver(callService.signalingProcessor)
+			
+			let restService = QBRESTService()
 			ServicesConfigurator().configureRESTService(restService)
 			
 			self.callService = callService
@@ -50,13 +54,15 @@ class ServicesProvider: NSObject {
 class ServicesConfigurator {
 	
 	func configureCallService(callService: CallService) {
-		
+		callService.cacheService = NSUserDefaults.standardUserDefaults()
 		callService.defaultOfferConstraints = WebRTCHelpers.defaultOfferConstraints()
 		callService.defaultAnswerConstraints = WebRTCHelpers.defaultAnswerConstraints()
 		callService.defaultPeerConnectionConstraints = WebRTCHelpers.defaultPeerConnectionConstraints()
 		callService.defaultMediaStreamConstraints = WebRTCHelpers.defaultMediaStreamConstraints()
-		callService.iceServers = NSMutableArray(array: WebRTCHelpers.defaultIceServers())
+		callService.ICEServers = WebRTCHelpers.defaultIceServers()
 		callService.defaultConfigurationWithCurrentICEServers = WebRTCHelpers.defaultConfigurationWithCurrentICEServers()
+		callService.signalingProcessor = SignalingProcessor()
+		callService.timersFactory = TimersFactory()
 	}
 	
 	func configureRESTService(restService: QBRESTService) {

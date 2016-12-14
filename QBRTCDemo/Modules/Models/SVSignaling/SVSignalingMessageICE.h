@@ -8,11 +8,12 @@
 
 #import "SVSignalingMessage.h"
 @class RTCICECandidate;
+@class SessionDetails;
 
 @interface SVSignalingMessageICE : SVSignalingMessage
 
-- (instancetype)initWithICECandidate:(RTCICECandidate *)iceCandidate;
+- (nonnull instancetype)initWithICECandidate:(nonnull RTCICECandidate *)iceCandidate sessionDetails:(SessionDetails *_Nonnull)sessiondetails;
 
-@property (nonatomic, strong, readonly) RTCICECandidate *iceCandidate;
+@property (nonatomic, strong, readonly, nonnull) RTCICECandidate *iceCandidate;
 
 @end

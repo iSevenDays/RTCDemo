@@ -13,10 +13,9 @@
 @class SVSignalingMessage;
 
 @protocol SVSignalingChannelDelegate <NSObject>
-@required
-- (void)channel:(nonnull id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *_Nonnull)message;
 
 @optional
+- (void)channel:(nonnull id<SVSignalingChannelProtocol>)channel didReceiveMessage:(SVSignalingMessage *_Nonnull)message;
 - (void)channel:(nonnull id<SVSignalingChannelProtocol>)channel didChangeState:(NSString *_Nonnull)signalingState;
 
 @end

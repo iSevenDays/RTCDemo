@@ -81,13 +81,13 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		presenter.didTriggerDeclineButtonTapped()
 		
 		// then
-		XCTAssertTrue(mockInteractor.hangupGotCalled)
+		XCTAssertTrue(mockInteractor.rejectCallGotCalled)
 		XCTAssertTrue(mockRouter.unwindToChatsUserStoryGotCalled)
 	}
 
     class MockInteractor: IncomingCallStoryInteractorInput {
 		
-		var hangupGotCalled = false
+		var rejectCallGotCalled = false
 		var opponent: SVUser?
 		
 		func setOpponent(opponent: SVUser) {
@@ -98,8 +98,8 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 			return opponent ?? SVUser()
 		}
 		
-		func hangup() {
-			hangupGotCalled = true
+		func rejectCall() {
+			rejectCallGotCalled = true
 		}
     }
 

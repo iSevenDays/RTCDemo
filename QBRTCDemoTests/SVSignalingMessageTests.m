@@ -30,13 +30,13 @@
 	
 	SVSignalingMessage *offer = [SVSignalingMessage messageWithType:SVSignalingMessageType.offer params:nil];
 	
-	SVSignalingMessage *candidate = [SVSignalingMessage messageWithType:SVSignalingMessageType.candidate params:nil];
+	SVSignalingMessage *candidate = [SVSignalingMessage messageWithType:SVSignalingMessageType.candidates params:nil];
 	
 	SVSignalingMessage *hangup = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
 	
 	XCTAssertEqual(answer.type, SVSignalingMessageType.answer);
 	XCTAssertEqual(offer.type, SVSignalingMessageType.offer);
-	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidate);
+	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidates);
 	XCTAssertEqual(hangup.type, SVSignalingMessageType.hangup);
 }
 
@@ -47,17 +47,34 @@
 	QBChatMessage *candidateMsg = [QBChatMessage message];
 	QBChatMessage *hangupMsg = [QBChatMessage message];
 	
-	offerMsg.text = SVSignalingMessageType.offer;
-	offerMsg.customParameters = [NSMutableDictionary dictionary];
-	offerMsg.customParameters[SVSignalingParams.sdp] = [CallServiceHelpers offerSDP];
+	NSString *initiatorID = @"1";
+	NSString *messageIDs = @"1,2";
+	NSString *sessionID = [NSUUID UUID].UUIDString;
 	
-	candidateMsg.text = SVSignalingMessageType.candidate;
-	candidateMsg.customParameters = [NSMutableDictionary dictionary];
-	candidateMsg.customParameters[SVSignalingParams.sdp] = @"candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG";
-	candidateMsg.customParameters[SVSignalingParams.index] = @"3";
-	candidateMsg.customParameters[SVSignalingParams.mid] = @"4";
+	offerMsg.text = SVSignalingMessageType.offer;
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	params[SVSignalingParams.sdp] = [CallServiceHelpers offerSDP];
+	params[SVSignalingParams.membersIDs] = messageIDs;
+	params[SVSignalingParams.initiatorID] = initiatorID;
+	params[SVSignalingParams.sessionID] = sessionID;
+	offerMsg.customParameters[SVSignalingParams.compressedData] = [QBChatMessage compressedCustomParams:params];
+	
+	candidateMsg.text = SVSignalingMessageType.candidates;
+	params = [NSMutableDictionary dictionary];
+	params[SVSignalingParams.sdp] = @"candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG";
+	params[SVSignalingParams.index] = @"3";
+	params[SVSignalingParams.mid] = @"4";
+	params[SVSignalingParams.membersIDs] = messageIDs;
+	params[SVSignalingParams.initiatorID] = initiatorID;
+	params[SVSignalingParams.sessionID] = sessionID;
+	candidateMsg.customParameters[SVSignalingParams.compressedData] = [QBChatMessage compressedCustomParams:params];
 	
 	hangupMsg.text = SVSignalingMessageType.hangup;
+	params = [NSMutableDictionary dictionary];
+	params[SVSignalingParams.membersIDs] = messageIDs;
+	params[SVSignalingParams.initiatorID] = initiatorID;
+	params[SVSignalingParams.sessionID] = sessionID;
+	hangupMsg.customParameters[SVSignalingParams.compressedData] = [QBChatMessage compressedCustomParams:params];
 	
 	SVSignalingMessage *offer = [SVSignalingMessage messageWithQBChatMessage:offerMsg];
 	
@@ -67,7 +84,7 @@
 	
 	XCTAssertEqual(answer.type, SVSignalingMessageType.answer);
 	XCTAssertEqual(offer.type, SVSignalingMessageType.offer);
-	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidate);
+	XCTAssertEqual(candidate.type, SVSignalingMessageType.candidates);
 	XCTAssertEqual(hangup.type, SVSignalingMessageType.hangup);
 }
 
@@ -83,6 +100,9 @@
 - (void)testSVMessageFromQBChatMessageHasCorrectUserInformation {
 	// given
 	SVSignalingMessage *preparedToSendMessage = [SVSignalingMessage messageWithType:SVSignalingMessageType.hangup params:nil];
+	preparedToSendMessage.initiatorID = @1;
+	preparedToSendMessage.membersIDs = @[@1, @2];
+	preparedToSendMessage.sessionID = [NSUUID UUID].UUIDString;
 	SVUser *sender = [TestsStorage svuserRealUser1];
 	sender.password = nil;
 	sender.tags = nil;

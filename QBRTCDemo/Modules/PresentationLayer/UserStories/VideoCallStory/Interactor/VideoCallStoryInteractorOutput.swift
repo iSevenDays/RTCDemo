@@ -1,6 +1,6 @@
 //
 //  VideoCallStoryInteractorOutput.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 01/12/2016.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
@@ -16,6 +16,12 @@ import Foundation
 	
 	// Method is called when hangup is received from opponent user in a current call
 	func didReceiveHangupFromOpponent(opponent: SVUser)
+	
+	// Method is called when reject for a call is received from opponent user
+	func didReceiveRejectFromOpponent(opponent: SVUser)
+	
+	// Method is called when answer timeout occured for calling the given opponent
+	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser)
 	
 	func didFailToConnectToChat()
 	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession)

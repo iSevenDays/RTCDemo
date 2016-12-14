@@ -2,7 +2,6 @@ def available_pods
 	pod 'ViperMcFlurry', '~> 1.5.2'
 	pod 'Typhoon', '~> 3.4.5'
 	pod 'RamblerTyphoonUtils/AssemblyCollector', '1.5.0'
-	pod 'CocoaLumberjack'
 end
 
 
@@ -15,7 +14,7 @@ target :QBRTCDemo do
 end
 
 def tests_pods
-	pod 'OCMock', '~> 3.3.1'
+	inherit! :search_paths
 end
 
 target :QBRTCDemoTests do

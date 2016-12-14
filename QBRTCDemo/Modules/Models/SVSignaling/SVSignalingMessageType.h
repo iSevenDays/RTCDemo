@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern const struct SVSignalingMessageType {
-	__unsafe_unretained NSString *candidate;
+	__unsafe_unretained NSString *candidates;
 	__unsafe_unretained NSString *offer;
 	__unsafe_unretained NSString *answer;
 	__unsafe_unretained NSString *hangup;

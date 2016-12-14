@@ -67,30 +67,35 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		assert(user.password != nil)
 		
 		var loggedInREST = false
-		var connectedToChat = false
+		
+		// mutableSuccessBlock will be called and then set to nil after connection established
+		var mutableSuccessBlock: ((user: SVUser) -> Void)? = successBlock
 		
 		signUpOrLoginWithUser(user, successBlock: { [unowned self] (restUser) in
 			
 			loggedInREST = true
 			
+			guard !self.callService.isConnecting else {
+				// successBlock will be called later
+				return
+			}
 			guard !self.callService.isConnected else {
-				successBlock(user: restUser)
+				mutableSuccessBlock?(user: restUser)
+				mutableSuccessBlock = nil
 				return
 			}
 			
 			assert(restUser.password != nil)
+			assert(restUser.ID != nil)
+			
 			self.callService.connectWithUser(restUser, completion: { (error) in
 				if error != nil || !self.callService.isConnected {
 					errorBlock(error: error)
 					return
 				}
 				
-				connectedToChat = true
-				
-				assert(loggedInREST)
-				assert(connectedToChat)
-				
-				successBlock(user: user)
+				mutableSuccessBlock?(user: user)
+				mutableSuccessBlock = nil
 			})
 			
 		}) { (error) in
@@ -100,14 +105,12 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		
 		// If user ID is not nil, then the user has been logged in previously
 		guard user.ID != nil else { return }
-		
+		guard !callService.isConnecting else { return }
 		callService.connectWithUser(user) { [unowned self] (error) in
-			if self.callService.isConnected {
-				connectedToChat = true
-			}
 			
-			if loggedInREST && connectedToChat {
-				successBlock(user: user)
+			if loggedInREST && self.callService.isConnected {
+				mutableSuccessBlock?(user: user)
+				mutableSuccessBlock = nil
 			}
 		}
 	}

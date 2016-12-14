@@ -12,18 +12,18 @@
 
 @implementation SVSignalingMessageICE
 
-- (instancetype)initWithICECandidate:(RTCICECandidate *)iceCandidate {
-	self = [super initWithType:SVSignalingMessageType.candidate params:nil];
+- (instancetype)initWithICECandidate:(RTCICECandidate *)iceCandidate sessionDetails:(SessionDetails *)sessiondetails {
+	self = [super initWithType:SVSignalingMessageType.candidates params:nil];
 	if (self) {
-		// make [iceCandidate copy]
 		_iceCandidate = [[RTCICECandidate alloc] initWithMid:iceCandidate.sdpMid index:iceCandidate.sdpMLineIndex sdp:iceCandidate.sdp];
+		[self populateParametersWithSessionDetails:sessiondetails];
 	}
 	return self;
 }
 
 - (instancetype)initWithType:(NSString *)type params:(NSDictionary *)params {
 	self = [super initWithType:type params:params];
-	NSCAssert([type isEqualToString:SVSignalingMessageType.candidate],
+	NSCAssert([type isEqualToString:SVSignalingMessageType.candidates],
 			  @"Type must be candidate");
 	if (self) {
 		

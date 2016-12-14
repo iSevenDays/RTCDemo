@@ -98,12 +98,14 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		let currentUser = TestsStorage.svuserTest()
 		let opponentUser = TestsStorage.svuserRealUser1()
 		
-		let fakeCallService = FakeCallService(signalingChannel: FakeSignalingChannel())
+		let fakeCallService = FakeCallSevice()
+		ServicesConfigurator().configureCallService(fakeCallService)
+		fakeCallService.signalingChannel = FakeSignalingChannel()
 		
 		// when
 		interactor.setTag(tag, currentUser: currentUser)
 		
-		interactor.callService(fakeCallService!, didReceiveCallRequestFromOpponent: opponentUser)
+		interactor.callService(fakeCallService, didReceiveCallRequestFromOpponent: opponentUser)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
@@ -136,8 +138,12 @@ class ChatUsersStoryInteractorTests: XCTestCase {
     }
 	
 	
-	class MockCacheService: CacheServiceProtocol {
+	class MockCacheService: NSObject, CacheServiceProtocol {
 		var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest()]
+		
+		func cachedUserWithID(id: Int) -> SVUser? {
+			return nil
+		}
 		
 		func cacheUsers(users: [SVUser]) {
 			cachedUsersArray = users
