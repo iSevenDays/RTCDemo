@@ -33,6 +33,11 @@ protocol CallServiceObserver: class {
 	// Sending local ICE candidates
 	func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser)
 	func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser, error: NSError)
+	
+	// Send reject to a user
+	// Also reject is send when CallService has active call by the moment
+	// New offer for a call is received
+	func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser)
 }
 
 extension CallServiceObserver {
@@ -57,4 +62,6 @@ extension CallServiceObserver {
 	// Sending local ICE candidates
 	func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser) {}
 	func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser, error: NSError) {}
+	
+	func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {}
 }

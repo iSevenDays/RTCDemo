@@ -17,7 +17,7 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class CallServiceTests: XCTestCase {
+class CallServiceTests: BaseTestCase {
 	
 	let user1 = CallServiceHelpers.user1()
 	let user2 = CallServiceHelpers.user2()
@@ -130,6 +130,28 @@ class CallServiceTests: XCTestCase {
 		XCTAssertFalse(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
 	}
 	
+	/**
+	Do not reject double offer, user may send many message with offer SDP
+	*/
+	func testDoesntSendRejectIfAlreadyHasActiveCallWithTheSameUserAndSessionID() {
+		// given
+		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
+		
+		let sessionDetails = SessionDetails(initiatorID: user2.ID!.unsignedIntegerValue, membersIDs: [user2.ID!.unsignedIntegerValue])
+		
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
+		waitForTimeInterval(1)
+		callService.acceptCallFromOpponent(user2)
+		waitForTimeInterval(1)
+		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
+		XCTAssertFalse(mockOutput.didSendRejectToOpponentGotCalled)
+	}
+	
 	func testCorrectlyAcceptsOfferFromOpponent() {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
@@ -233,11 +255,7 @@ class CallServiceTests: XCTestCase {
 			return
 		}
 		
-		var waitForApplyingLocalSession = true
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-			waitForApplyingLocalSession = false
-		}
-		while(waitForApplyingLocalSession) { NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture()) }
+		waitForTimeInterval(3)
 		
 		callService.didReceiveAnswer(callService.signalingProcessor, answer: unusedSessionSDP, fromOpponent: user2, sessionDetails: callService.sessions[createdConnectionWithUser2.sessionID]!)
 		
@@ -332,6 +350,8 @@ class CallServiceTests: XCTestCase {
 		var didSendLocalICECandidatesGotCalled = false
 		var didErrorSendingLocalICECandidatesGotCalled = false
 		
+		var didSendRejectToOpponentGotCalled = false
+		
 		var callServiceState = CallServiceState.Undefined
 		var videoTrack: RTCVideoTrack?
 		
@@ -385,6 +405,10 @@ class CallServiceTests: XCTestCase {
 		}
 		func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser, error: NSError) {
 			didErrorSendingLocalICECandidatesGotCalled = true
+		}
+		
+		func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {
+			didSendRejectToOpponentGotCalled = true
 		}
 	}
 	

@@ -18,14 +18,6 @@ class TimersFactory {
 	let tolerance: UInt64 = 500
 	
 	/*
-	 * @param block - will be called repeatedly with time interval
-     * specified in dialingTimeInterval
-	 */
-	func createDialingTimerWithBlock(block: () -> Void) -> SVTimer {
-		return SVTimer(interval: dialingTimeInterval, tolerance: tolerance, repeats: true, queue: dispatch_get_main_queue(), block: block)
-	}
-	
-	/*
 	* @param block - will be called repeatedly with time interval (in milliseconds)
 	* specified in dialingTimeInterval
 	* 

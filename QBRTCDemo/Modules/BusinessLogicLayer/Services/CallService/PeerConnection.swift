@@ -135,7 +135,7 @@ extension PeerConnection: RTCPeerConnectionDelegate {
 	
 	func peerConnection(peerConnection: RTCPeerConnection!, iceConnectionChanged newState: RTCICEConnectionState) {
 		if newState == RTCICEConnectionFailed {
-			NSLog("ICE connecttion failed")
+			NSLog("ICE connection failed")
 		}
 	}
 	

@@ -73,6 +73,10 @@ extension CallService: CallServiceProtocol {
 		return signalingChannel.user
 	}
 	
+	/**
+	Return true when at least one connection is active (not closed)
+	Currently if hasActiveCall is true, incoming calls are rejected
+	*/
 	var hasActiveCall: Bool {
 		let peerConnections = connections.flatMap({$0.1})
 		return peerConnections.contains({$0.state == PeerConnectionState.Initial})
@@ -92,7 +96,7 @@ extension CallService: CallServiceProtocol {
 				completion?(error: error)
 			}
 		} catch let error {
-			NSLog("%@", "Error conencting with user \(error)")
+			NSLog("%@", "Error connecting with user \(error)")
 		}
 	}
 	
@@ -105,6 +109,17 @@ extension CallService: CallServiceProtocol {
 		}
 	}
 	
+	/**
+	Start call with an opponent
+	
+	Creates SessionDetails instance, creates new PeerConnection
+	After PeerConnection initialized, peerConnection:didSetLocalSessionOfferDescription: will be called
+	And then method startDialing with the opponent will be executed
+	
+	- parameter user: SVUser instance
+	
+	- throws: throws CallServiceError.notLogined exception in case user is not logged in
+	*/
 	func startCallWithOpponent(user: SVUser) throws {
 		guard let currentUserID = self.currentUser?.ID?.unsignedIntegerValue else {
 			throw CallServiceError.notLogined
@@ -144,6 +159,13 @@ extension CallService: CallServiceProtocol {
 		}
 	}
 	
+	/**
+	Reject an incoming call
+	Marks a session details for the incoming call as .Rejected
+	Messages for the rejected session will be ignored
+	
+	- parameter opponent: SVUser instance
+	*/
 	func sendRejectCallToOpponent(opponent: SVUser) {
 		guard let pendingRequest = pendingRequests[opponent] else {
 			NSLog("Error: can not reject a call, no pending offer for opponent")
@@ -156,9 +178,22 @@ extension CallService: CallServiceProtocol {
 		signalingChannel.sendMessage(SignalingMessage.reject, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
 		
 		pendingRequests[opponent] = nil
+		
+		observers => { $0.callService(self, didSendRejectToOpponent: opponent) }
 	}
 	
 	// MARK: - Repeated actions
+	
+	/**
+	Start dialing an opponent with a message and session details
+	
+	The message will be repeatedly sent to the opponent
+	If the opponent will not answer within 20 seconds, didAnswerTimeoutForOpponent: will be called
+	
+	- parameter opponent:       SVUser instance
+	- parameter message:        SignalingMessage instance
+	- parameter sessionDetails: SessionDetails instance
+	*/
 	func startDialingOpponent(opponent: SVUser, withMessage message: SignalingMessage, sessionDetails: SessionDetails) {
 		let sendMessageBlock = { [weak self] in
 			self?.signalingChannel.sendMessage(message, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
@@ -175,6 +210,12 @@ extension CallService: CallServiceProtocol {
 		dialingTimers[opponent] = dialingTimer
 	}
 	
+	/**
+	Stop dialing an opponent
+	In case there was a dialing, didStopDialingOpponent: will be called
+	
+	- parameter opponent: SVUser instance
+	*/
 	func stopDialingOpponent(opponent: SVUser) {
 		if let timer = dialingTimers[opponent] {
 			if timer.isValid {
@@ -193,6 +234,13 @@ extension CallService: SignalingProcessorObserver {
 	
 	func didReceiveOffer(signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveOffer")
+		guard connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) == nil else {
+			// The second and further offer for a call for the same user for the same session
+			// We already have connection, so just skip it
+			// User may send many requests for one call in case some messages may be not delivered
+			return
+		}
+		
 		pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer, sessionDetails: sessionDetails)
 		
 		guard !hasActiveCall else {
