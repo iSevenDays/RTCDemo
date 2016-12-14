@@ -99,18 +99,20 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertEqual(mockOutput.callServiceState, CallServiceState.Disconnected)
 	}
 	
-	
-	func testCorrectlyStopsDialingTimersWhenStartedCallAndHangup() {
+	func testCorrectlyHangupsJustStartedCall() {
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		_ = try? callService.startCallWithOpponent(user2)
+		waitForTimeInterval(1)
 		callService.hangup()
 		
 		// then
 		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
+		XCTAssertTrue(mockOutput.didStopDialingOpponentGotCalled)
+		XCTAssertTrue(mockOutput.didSendHangupToOpponentGotCalled)
 		XCTAssertEqual(callService.dialingTimers.count, 0)
+		XCTAssertFalse(callService.connections.values.flatten().contains({$0.state == PeerConnectionState.Initial}))
 	}
-	
 	
 	//MARK: - Signaling Processor observer methods processing
  
@@ -351,6 +353,7 @@ class CallServiceTests: BaseTestCase {
 		var didErrorSendingLocalICECandidatesGotCalled = false
 		
 		var didSendRejectToOpponentGotCalled = false
+		var didSendHangupToOpponentGotCalled = false
 		
 		var callServiceState = CallServiceState.Undefined
 		var videoTrack: RTCVideoTrack?
@@ -409,6 +412,10 @@ class CallServiceTests: BaseTestCase {
 		
 		func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {
 			didSendRejectToOpponentGotCalled = true
+		}
+		
+		func callService(callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser) {
+			didSendHangupToOpponentGotCalled = true
 		}
 	}
 	

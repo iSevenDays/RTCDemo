@@ -51,8 +51,8 @@ public class CallService: NSObject {
 	internal var dialingTimers: [SVUser: SVTimer] = [:]
 	
 	/// Return active connection for opponenID with given session ID
-	func connectionWithSessionID(sessionID: String, opponent: SVUser) -> PeerConnection? {
-		return connections[sessionID]?.filter({$0.opponent.ID == opponent.ID}).first
+	func activeConnectionWithSessionID(sessionID: String, opponent: SVUser) -> PeerConnection? {
+		return connections[sessionID]?.filter({$0.opponent.ID == opponent.ID && $0.state == PeerConnectionState.Initial}).first
 	}
 }
 
@@ -109,6 +109,8 @@ extension CallService: CallServiceProtocol {
 		}
 	}
 	
+	// MARK: - Call start
+	
 	/**
 	Start call with an opponent
 	
@@ -151,38 +153,7 @@ extension CallService: CallServiceProtocol {
 		connection.applyRemoteSDP(pendingRequest.pendingSessionDescription)
 	}
 	
-	func hangup() {
-		let peerConnections = connections.flatMap({$0.1})
-		peerConnections.filter({$0.state == PeerConnectionState.Initial}).forEach({ $0.close() })
-		dialingTimers.forEach { [unowned self] (user, timer) in
-			self.stopDialingOpponent(user)
-		}
-	}
-	
-	/**
-	Reject an incoming call
-	Marks a session details for the incoming call as .Rejected
-	Messages for the rejected session will be ignored
-	
-	- parameter opponent: SVUser instance
-	*/
-	func sendRejectCallToOpponent(opponent: SVUser) {
-		guard let pendingRequest = pendingRequests[opponent] else {
-			NSLog("Error: can not reject a call, no pending offer for opponent")
-			return
-		}
-		let sessionDetails = pendingRequest.sessionDetails
-		sessionDetails.sessionState = .Rejected
-		sessions[sessionDetails.sessionID] = sessionDetails
-		
-		signalingChannel.sendMessage(SignalingMessage.reject, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
-		
-		pendingRequests[opponent] = nil
-		
-		observers => { $0.callService(self, didSendRejectToOpponent: opponent) }
-	}
-	
-	// MARK: - Repeated actions
+	// MARK: - Dialing
 	
 	/**
 	Start dialing an opponent with a message and session details
@@ -225,16 +196,58 @@ extension CallService: CallServiceProtocol {
 			observers => { $0.callService(self, didStopDialingOpponent: opponent) }
 		}
 	}
+	
+	// MARK: - Ending a call
+	
+	/**
+	Reject an incoming call
+	Marks a session details for the incoming call as .Rejected
+	Messages for the rejected session will be ignored
+	
+	- parameter opponent: SVUser instance
+	*/
+	func sendRejectCallToOpponent(opponent: SVUser) {
+		guard let pendingRequest = pendingRequests[opponent] else {
+			NSLog("Error: can not reject a call, no pending offer for opponent")
+			return
+		}
+		let sessionDetails = pendingRequest.sessionDetails
+		sessionDetails.sessionState = .Rejected
+		sessions[sessionDetails.sessionID] = sessionDetails
+		
+		signalingChannel.sendMessage(SignalingMessage.reject, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
+		
+		pendingRequests[opponent] = nil
+		
+		observers => { $0.callService(self, didSendRejectToOpponent: opponent) }
+	}
+	
+	func hangup() {
+		for user in dialingTimers.keys {
+			self.stopDialingOpponent(user)
+		}
+		
+		for connection in connections.values.flatten() where connection.state == PeerConnectionState.Initial {
+			connection.close()
+			guard let sessionDetails = sessions[connection.sessionID] else {
+				NSLog("Error: no session details for connection with session ID: \(connection.sessionID))")
+				continue
+			}
+			signalingChannel.sendMessage(SignalingMessage.hangup, withSessionDetails: sessionDetails, toUser: connection.opponent, completion: nil)
+			observers => { $0.callService(self, didSendHangupToOpponent: connection.opponent) }
+		}
+	}	
 }
 
+// MARK: - SignalingProcessorObserver
 extension CallService: SignalingProcessorObserver {
 	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCICECandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
-		connectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyICECandidates(ICECandidates)
+		activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyICECandidates(ICECandidates)
 	}
 	
 	func didReceiveOffer(signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveOffer")
-		guard connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) == nil else {
+		guard activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) == nil else {
 			// The second and further offer for a call for the same user for the same session
 			// We already have connection, so just skip it
 			// User may send many requests for one call in case some messages may be not delivered
@@ -260,7 +273,7 @@ extension CallService: SignalingProcessorObserver {
 	
 	func didReceiveAnswer(signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveAnswer")
-		if let connection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
+		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
 			connection.applyRemoteSDP(answer)
 			observers => { $0.callService(self, didReceiveAnswerFromOpponent: opponent) }
 			stopDialingOpponent(opponent)
@@ -270,8 +283,8 @@ extension CallService: SignalingProcessorObserver {
 	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveHangup")
 		pendingRequests[opponent] = nil
-		if let activeConnection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
-			activeConnection.close()
+		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
+			connection.close()
 			observers => { $0.callService(self, didReceiveHangupFromOpponent: opponent) }
 			stopDialingOpponent(opponent)
 		}
@@ -280,13 +293,15 @@ extension CallService: SignalingProcessorObserver {
 	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveReject")
 		pendingRequests[opponent] = nil
-		if let activeConnection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
-			activeConnection.close()
+		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
+			connection.close()
 			observers => { $0.callService(self, didReceiveRejectFromOpponent: opponent) }
 			stopDialingOpponent(opponent)
 		}
 	}
 }
+
+// MARK: - PeerConnectionObserver
 
 extension CallService: PeerConnectionObserver {
 	

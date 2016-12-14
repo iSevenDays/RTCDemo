@@ -38,6 +38,8 @@ protocol CallServiceObserver: class {
 	// Also reject is send when CallService has active call by the moment
 	// New offer for a call is received
 	func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser)
+	
+	func callService(callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser)
 }
 
 extension CallServiceObserver {
@@ -64,4 +66,5 @@ extension CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser, error: NSError) {}
 	
 	func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {}
+	func callService(callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser) {}
 }

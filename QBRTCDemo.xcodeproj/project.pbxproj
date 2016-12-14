@@ -300,6 +300,8 @@
 		14ADBDF31C738554003A0C98 /* ImageGalleryStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF28E4660188FA1C009EC65 /* ImageGalleryStoryRouter.swift */; };
 		14ADBDF41C738554003A0C98 /* ImageGalleryStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */; };
 		14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D91D920A6AA4941714330F /* ImageGalleryStoryInitializer.swift */; };
+		14B697F01E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */; };
+		14B697F11E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */; };
 		14C3FE3D1C7F1FF70077877C /* librtc_pc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C3FE3C1C7F1FF70077877C /* librtc_pc.a */; };
 		14C3FE3F1C7F20290077877C /* libcongestion_controller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C3FE3E1C7F20290077877C /* libcongestion_controller.a */; };
 		14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
@@ -784,6 +786,7 @@
 		14A600D71C6DEDF400065437 /* libwebrtc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libwebrtc.a"; sourceTree = "<group>"; };
 		14A600D81C6DEDF400065437 /* libyuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyuv.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libyuv.a"; sourceTree = "<group>"; };
 		14A601321C6DEE1D00065437 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libicucore.tbd; sourceTree = DEVELOPER_DIR; };
+		14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeerConnectionTests.swift; path = PeerConnection/PeerConnectionTests.swift; sourceTree = "<group>"; };
 		14C3FE3C1C7F1FF70077877C /* librtc_pc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_pc.a; path = "Scripts/webrtc/src/webrtc/pc/../../xcodebuild/Debug-iphoneos/librtc_pc.a"; sourceTree = "<group>"; };
 		14C3FE3E1C7F20290077877C /* libcongestion_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcongestion_controller.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libcongestion_controller.a"; sourceTree = "<group>"; };
 		14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServiceTests.m; sourceTree = "<group>"; };
@@ -1584,9 +1587,18 @@
 			path = webrtc_libraries;
 			sourceTree = "<group>";
 		};
+		14B697EE1E01FBE30053A79C /* PeerConnection */ = {
+			isa = PBXGroup;
+			children = (
+				14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */,
+			);
+			name = PeerConnection;
+			sourceTree = "<group>";
+		};
 		14C534E91C6A310000A0FFE8 /* CallService */ = {
 			isa = PBXGroup;
 			children = (
+				14B697EE1E01FBE30053A79C /* PeerConnection */,
 				14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */,
 				14EBDD371DFC7D3C00A1EEB5 /* CallServiceTests.swift */,
 			);
@@ -2754,6 +2766,7 @@
 				1420E46A1CE7CE6E0043EFF9 /* IncomingCallStoryPresenterTests.swift in Sources */,
 				14EBDD321DFC7C4E00A1EEB5 /* VideoCallStoryConfiguratorTests.swift in Sources */,
 				1473EAC91CAC607C007F9DF8 /* AuthStoryRouterTests.swift in Sources */,
+				14B697F01E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */,
 				147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */,
 				142B50741CDD2C7A005B143C /* ChatUsersStoryPresenterTests.swift in Sources */,
 				14EBDD231DFC154E00A1EEB5 /* VideoCallStoryInteractorTests.swift in Sources */,
@@ -3004,6 +3017,7 @@
 				14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */,
 				14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */,
 				14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */,
+				14B697F11E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */,
 				14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */,
 				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				14EBDD2C1DFC170F00A1EEB5 /* FakeCallService.swift in Sources */,

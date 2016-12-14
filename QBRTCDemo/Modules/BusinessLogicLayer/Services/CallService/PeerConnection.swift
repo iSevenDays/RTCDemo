@@ -91,7 +91,7 @@ class PeerConnection: NSObject {
 	
 	func close() {
 		state = .Closed
-		
+		peerConnection?.delegate = nil
 		if let localStreams = peerConnection?.localStreams as? [RTCMediaStream] {
 			for stream in localStreams {
 				peerConnection?.removeStream(stream)
