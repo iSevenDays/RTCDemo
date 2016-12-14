@@ -50,7 +50,8 @@ class SVTimer: NSObject {
 		timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
 		dispatch_source_set_event_handler(timer!, block)
 		// repeatedInterval - The nanosecond interval for the timer. Use DISPATCH_TIME_FOREVER for a one-shot timer.
-		let repeatedInterval = repeats ? interval : DISPATCH_TIME_FOREVER
+		
+		let repeatedInterval = repeats ? UInt64(interval * NSEC_PER_MSEC) : DISPATCH_TIME_FOREVER
 		dispatch_source_set_timer(timer!, dispatch_time(DISPATCH_TIME_NOW, Int64(interval * NSEC_PER_MSEC)), repeatedInterval, UInt64(leeway * NSEC_PER_MSEC))
 		dispatch_resume(timer!)	
 	}
