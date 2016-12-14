@@ -1,6 +1,6 @@
 //
 //  SignalingMessage.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 11.12.16.
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.

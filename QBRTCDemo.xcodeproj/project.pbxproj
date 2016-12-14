@@ -56,6 +56,8 @@
 		1420E5001CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */; };
 		142154621CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
 		142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
+		142582D71E00792E00BA9F21 /* TimersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142582D61E00792E00BA9F21 /* TimersFactory.swift */; };
+		142582D81E00792E00BA9F21 /* TimersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142582D61E00792E00BA9F21 /* TimersFactory.swift */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		142B50311CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
 		142B50321CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
@@ -110,9 +112,7 @@
 		14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
 		1448B7721DF87BC0002D5371 /* SVTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7711DF87BC0002D5371 /* SVTimer.swift */; };
 		1448B7731DF87BC0002D5371 /* SVTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7711DF87BC0002D5371 /* SVTimer.swift */; };
-		1448B7751DF89C0A002D5371 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; };
 		1448B7761DF89C0A002D5371 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1448B7781DF89C0E002D5371 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; };
 		1448B7791DF89C0E002D5371 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1448B77F1DF9D17A002D5371 /* SessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B77E1DF9D17A002D5371 /* SessionDetails.swift */; };
 		1448B7801DF9D17A002D5371 /* SessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B77E1DF9D17A002D5371 /* SessionDetails.swift */; };
@@ -512,6 +512,7 @@
 		1420E4541CE7CA750043EFF9 /* IncomingCallStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IncomingCallStory.storyboard; sourceTree = "<group>"; };
 		1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallServicePendingRequest.swift; sourceTree = "<group>"; };
 		142154611CE75ACB003C1C4A /* ServicesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesProvider.swift; sourceTree = "<group>"; };
+		142582D61E00792E00BA9F21 /* TimersFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimersFactory.swift; sourceTree = "<group>"; };
 		142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatUsersStory.storyboard; sourceTree = "<group>"; };
 		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Optionals.swift"; sourceTree = "<group>"; };
 		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -959,7 +960,6 @@
 				143609771BF944D60091071C /* CoreVideo.framework in Frameworks */,
 				143609751BF944C50091071C /* libstdc++.tbd in Frameworks */,
 				16C21CF70892193C327274F6 /* libPods-QBRTCDemo.a in Frameworks */,
-				1448B7781DF89C0E002D5371 /* Quickblox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,7 +972,6 @@
 				148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */,
 				148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */,
 				148233AE1C002DFE0000E9ED /* MobileCoreServices.framework in Frameworks */,
-				1448B7751DF89C0A002D5371 /* Quickblox.framework in Frameworks */,
 				148233AF1C002DFE0000E9ED /* libxml2.tbd in Frameworks */,
 				148233B01C002DFE0000E9ED /* GLKit.framework in Frameworks */,
 				148233B11C002DFE0000E9ED /* OpenGLES.framework in Frameworks */,
@@ -1149,6 +1148,14 @@
 				14EBDD151DFB5DD900A1EEB5 /* FakeSignalingChannel.swift */,
 			);
 			path = FakeServices;
+			sourceTree = "<group>";
+		};
+		142582D51E00791C00BA9F21 /* TimersFactory */ = {
+			isa = PBXGroup;
+			children = (
+				142582D61E00792E00BA9F21 /* TimersFactory.swift */,
+			);
+			path = TimersFactory;
 			sourceTree = "<group>";
 		};
 		142B51621CDE13C7005B143C /* Helpers */ = {
@@ -1502,6 +1509,7 @@
 		14736E821C561284009DFBBC /* CallService */ = {
 			isa = PBXGroup;
 			children = (
+				142582D51E00791C00BA9F21 /* TimersFactory */,
 				1448B77D1DF9D161002D5371 /* SessionDetails */,
 				14A028721BFA543A00BDF2C5 /* QBSignaling */,
 				14F4FAF21C52961400E9488C /* Signaling */,
@@ -2815,6 +2823,7 @@
 				1448B7821DF9D95C002D5371 /* SignalingProcessor.swift in Sources */,
 				1448B78F1DFAE950002D5371 /* MulticastDelegate.swift in Sources */,
 				142B50981CDD2CE0005B143C /* ChatUsersStoryRouterInput.swift in Sources */,
+				142582D71E00792E00BA9F21 /* TimersFactory.swift in Sources */,
 				1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */,
 				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
 				142B50961CDD2CE0005B143C /* ChatUsersStoryInteractorOutput.swift in Sources */,
@@ -2901,6 +2910,7 @@
 				142D13861C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */,
 				0550609609147ED123C2CC1A /* ImageGalleryStoryViewOutput.swift in Sources */,
 				1448B7831DF9D95C002D5371 /* SignalingProcessor.swift in Sources */,
+				142582D81E00792E00BA9F21 /* TimersFactory.swift in Sources */,
 				3FA698C85BC1C35878F3106E /* ImageGalleryStoryViewController.swift in Sources */,
 				1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */,
 				142D13791C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
@@ -3142,7 +3152,7 @@
 				OTHER_SWIFT_FLAGS = "-DQBRTCDemo_s";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemo_sTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo_s.app/QBRTCDemo_s";
 			};
@@ -3228,6 +3238,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3593,7 +3604,7 @@
 				OTHER_SWIFT_FLAGS = "-DQBRTCDemo";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.QBRTCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QBRTCDemo.app/QBRTCDemo";
 			};

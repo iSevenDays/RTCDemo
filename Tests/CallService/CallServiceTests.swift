@@ -100,6 +100,18 @@ class CallServiceTests: XCTestCase {
 	}
 	
 	
+	func testCorrectlyStopsDialingTimersWhenStartedCallAndHangup() {
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		_ = try? callService.startCallWithOpponent(user2)
+		callService.hangup()
+		
+		// then
+		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
+		XCTAssertEqual(callService.dialingTimers.count, 0)
+	}
+	
+	
 	//MARK: - Signaling Processor observer methods processing
  
 	func testSendsRejectIfAlreadyHasActiveCall() {
@@ -133,7 +145,7 @@ class CallServiceTests: XCTestCase {
 		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
 		XCTAssertEqual(callService.sessions.count, 1)
 		XCTAssertEqual(callService.connections.count, 1)
-		XCTAssertEqual(callService.sessions[sessionDetails.sessionID], sessionDetails)
+		XCTAssert(callService.sessions[sessionDetails.sessionID]! == sessionDetails)
 	}
 	
 	func testCorrectlyProcessesHangupMessage_whenHangupIsReceivedForActiveCall() {
@@ -149,6 +161,7 @@ class CallServiceTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveHangupFromOpponentGotCalled)
+		XCTAssertEqual(callService.dialingTimers.count, 0)
 	}
 	
 	func testDoesntProcessHangupSignalingMessageFromUndefinedOpponent() {
@@ -180,11 +193,83 @@ class CallServiceTests: XCTestCase {
 		// then
 		XCTAssertTrue(mockOutput.didReceiveRejectFromOpponentGotCalled)
 		XCTAssertEqual(createdConnectionWithUser2.state, PeerConnectionState.Closed)
+		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
+		XCTAssertTrue(mockOutput.didStopDialingOpponentGotCalled)
+		XCTAssertEqual(callService.dialingTimers.count, 0)
+	}
+	
+	func testRejectsIncomingCallOfferForTheAlreadyRejectedCall_andTheSameSession() {
+		// given
+		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
+		
+		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
+		sessionDetails.sessionState = .Rejected
+		callService.sessions[sessionDetails.sessionID] = sessionDetails
+		
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user1, sessionDetails: sessionDetails)
+		
+		// then
+		XCTAssertFalse(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
+		XCTAssertEqual(callService.sessions.count, 1)
+		XCTAssertEqual(callService.connections.count, 0)
+		XCTAssert(callService.sessions[sessionDetails.sessionID]! == sessionDetails)
+	}
+	
+	func testCorrectlyProcessesAnswerMessage_whenAnswerIsReceivedForActiveCall() {
+		// given
+		let unusedSessionSDP = RTCSessionDescription(type: SignalingMessageType.answer.rawValue, sdp: CallServiceHelpers.offerSDP())
+		
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		do {
+			try callService.startCallWithOpponent(user2)
+		} catch let error {
+			XCTFail("\(error)")
+		}
+		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
+			XCTFail()
+			return
+		}
+		
+		var waitForApplyingLocalSession = true
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+			waitForApplyingLocalSession = false
+		}
+		while(waitForApplyingLocalSession) { NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture()) }
+		
+		callService.didReceiveAnswer(callService.signalingProcessor, answer: unusedSessionSDP, fromOpponent: user2, sessionDetails: callService.sessions[createdConnectionWithUser2.sessionID]!)
+		
+		// then
+		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
+		XCTAssertTrue(mockOutput.didStopDialingOpponentGotCalled)
+		XCTAssertFalse(mockOutput.didAnswerTimeoutForOpponentGotCalled)
+		XCTAssertTrue(mockOutput.didReceiveAnswerFromOpponentGotCalled)
+		XCTAssertEqual(callService.dialingTimers.count, 0)
+	}
+	
+	func testStoresRejectedSession() {
+		// given
+		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
+		
+		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [user1.ID!.unsignedIntegerValue, user2.ID!.unsignedIntegerValue])
+		callService.sessions[sessionDetails.sessionID] = sessionDetails
+		
+		// when
+		callService.connectWithUser(user1, completion: nil)
+		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
+		callService.sendRejectCallToOpponent(user2)
+		
+		// then
+		XCTAssertEqual(callService.sessions.count, 1)
+		XCTAssertEqual(callService.connections.count, 0)
+		XCTAssertEqual(callService.sessions[sessionDetails.sessionID]!.sessionState, SessionDetailsState.Rejected)
 	}
 	
 	//MARK: - PeerConnection observer tests
 	
-	func testsSendsLocalSessionDescription() {
+	func testsStartsDialingOpponentWithLocalSessionDescription() {
 		// given
 		let localSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
 		
@@ -201,38 +286,13 @@ class CallServiceTests: XCTestCase {
 		callService.peerConnection(peerConnection, didSetLocalSessionOfferDescription: localSDP)
 		
 		// then
-		XCTAssertTrue(mockOutput.didSendLocalSessionDescriptionMessageGotCalled)
-		XCTAssertFalse(mockOutput.didErrorSendingLocalSessionDescriptionMessageGotCalled)
+		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
+		XCTAssertFalse(mockOutput.didStopDialingOpponentGotCalled)
 		
+		XCTAssertEqual(callService.dialingTimers.count, 1)
 		XCTAssertEqual(callService.connections.count, 1)
 		XCTAssertEqual(callService.sessions.count, 1)
 	}
-	
-	func testsDoesntSendLocalSessionDescription_whenNetworkConnectionIsUnavailable() {
-		// given
-		let localSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP())
-		
-		// when
-		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
-		
-		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
-			XCTFail()
-			return
-		}
-		let peerConnection = PeerConnection(opponent: user2, sessionID: createdConnectionWithUser2.sessionID, ICEServers: callService.ICEServers, factory: callService.factory, mediaStreamConstraints: callService.defaultMediaStreamConstraints, peerConnectionConstraints: callService.defaultPeerConnectionConstraints, offerAnswerConstraints: callService.defaultOfferConstraints)
-		
-		fakeSignalingChannel.shouldSensMessagesSuccessfully = false
-		callService.peerConnection(peerConnection, didSetLocalSessionOfferDescription: localSDP)
-		
-		// then
-		XCTAssertTrue(mockOutput.didErrorSendingLocalSessionDescriptionMessageGotCalled)
-		XCTAssertFalse(mockOutput.didSendLocalSessionDescriptionMessageGotCalled)
-		
-		XCTAssertEqual(callService.connections.count, 1)
-		XCTAssertEqual(callService.sessions.count, 1)
-	}
-	
 	
 	func testsSendsLocalICECandidates() {
 		// given
@@ -255,6 +315,7 @@ class CallServiceTests: XCTestCase {
 	
 	class MockOutput: CallServiceObserver {
 		var didReceiveCallRequestFromOpponentGotCalled = false
+		var didReceiveAnswerFromOpponentGotCalled = false
 		var didReceiveHangupFromOpponentGotCalled = false
 		var didReceiveRejectFromOpponentGotCalled = false
 		var didAnswerTimeoutForOpponentGotCalled = false
@@ -264,8 +325,9 @@ class CallServiceTests: XCTestCase {
 		var didReceiveRemoteVideoTrackGotCalled = false
 		var didErrorGotCalled = false
 		
-		var didSendLocalSessionDescriptionMessageGotCalled = false
-		var didErrorSendingLocalSessionDescriptionMessageGotCalled = false
+		var didStartDialingOpponentGotCalled = false
+		var didStopDialingOpponentGotCalled = false
+		var opponent: SVUser?
 		
 		var didSendLocalICECandidatesGotCalled = false
 		var didErrorSendingLocalICECandidatesGotCalled = false
@@ -275,6 +337,9 @@ class CallServiceTests: XCTestCase {
 		
 		func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 			didReceiveCallRequestFromOpponentGotCalled = true
+		}
+		func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
+			didReceiveAnswerFromOpponentGotCalled = true
 		}
 		func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
 			didReceiveHangupFromOpponentGotCalled = true
@@ -304,13 +369,16 @@ class CallServiceTests: XCTestCase {
 			didErrorGotCalled = true
 		}
 		
-		// Sending local SDP
-		func callService(callService: CallServiceProtocol, didSendLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser) {
-			didSendLocalSessionDescriptionMessageGotCalled = true
+		func callService(callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
+			self.opponent = opponent
+			didStartDialingOpponentGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didErrorSendingLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser, error: NSError) {
-			didErrorSendingLocalSessionDescriptionMessageGotCalled = true
+		
+		func callService(callService: CallServiceProtocol, didStopDialingOpponent opponent: SVUser) {
+			self.opponent = opponent
+			didStopDialingOpponentGotCalled = true
 		}
+		
 		// Sending local ICE candidates
 		func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser) {
 			didSendLocalICECandidatesGotCalled = true

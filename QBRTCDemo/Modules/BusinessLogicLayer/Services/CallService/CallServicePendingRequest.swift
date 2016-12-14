@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CallServicePendingRequest: NSObject {
+class CallServicePendingRequest {
 	
 	private(set) var pendingSessionDescription: RTCSessionDescription
 	private(set) var initiator: SVUser
@@ -20,8 +20,5 @@ class CallServicePendingRequest: NSObject {
 		self.initiator = initiator
 		self.pendingSessionDescription = pendingSessionDescription
 		self.sessionDetails = sessionDetails
-		
-		super.init()
 	}
-	
 }

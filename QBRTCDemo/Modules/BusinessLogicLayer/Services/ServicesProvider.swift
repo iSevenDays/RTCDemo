@@ -33,12 +33,13 @@ class ServicesProvider: NSObject {
 		case .Production:
 			let signalingChannel = QBSignalingChannel()
 			let callService = CallService()
+			ServicesConfigurator().configureCallService(callService)
+			
 			callService.signalingChannel = signalingChannel
 			callService.signalingProcessor.observer = callService
 			signalingChannel.addObserver(callService.signalingProcessor)
-			let restService = QBRESTService()
 			
-			ServicesConfigurator().configureCallService(callService)
+			let restService = QBRESTService()
 			ServicesConfigurator().configureRESTService(restService)
 			
 			self.callService = callService
@@ -60,6 +61,8 @@ class ServicesConfigurator {
 		callService.defaultMediaStreamConstraints = WebRTCHelpers.defaultMediaStreamConstraints()
 		callService.ICEServers = WebRTCHelpers.defaultIceServers()
 		callService.defaultConfigurationWithCurrentICEServers = WebRTCHelpers.defaultConfigurationWithCurrentICEServers()
+		callService.signalingProcessor = SignalingProcessor()
+		callService.timersFactory = TimersFactory()
 	}
 	
 	func configureRESTService(restService: QBRESTService) {

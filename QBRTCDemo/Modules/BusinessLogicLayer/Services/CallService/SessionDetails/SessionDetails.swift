@@ -1,6 +1,6 @@
 //
 //  SessionDetails.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 08.12.16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc enum SessionDetailsState: Int {
+enum SessionDetailsState {
 	case Undefined
 	case OfferSent
 	case OfferReceived
@@ -19,7 +19,7 @@ import Foundation
 	case Closed
 }
 
-class SessionDetails: NSObject {
+class SessionDetails {
 	
 	/// Unique session identifier
 	var sessionID: String
@@ -42,11 +42,12 @@ class SessionDetails: NSObject {
 		self.membersIDs = membersIDs
 		self.sessionID = sessionID
 	}
+}
+
+extension SessionDetailsState: Equatable {
+}
+
+func ==(lhs: SessionDetails, rhs: SessionDetails) -> Bool {
 	
-	override func isEqual(object: AnyObject?) -> Bool {
-		guard let anotherSession = object as? SessionDetails else {
-			return false
-		}
-		return sessionID == anotherSession.sessionID && membersIDs == anotherSession.membersIDs && anotherSession.initiatorID == anotherSession.initiatorID
-	}
+	return lhs.sessionID == rhs.sessionID && lhs.membersIDs == rhs.membersIDs && lhs.initiatorID == rhs.initiatorID
 }

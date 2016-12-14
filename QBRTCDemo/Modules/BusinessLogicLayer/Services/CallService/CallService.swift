@@ -1,6 +1,6 @@
 //
 //  CallService.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 09.12.16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -32,9 +32,11 @@ public class CallService: NSObject {
 		}
 	}
 	
+	var signalingProcessor: SignalingProcessor!
+	var timersFactory: TimersFactory!
+	
 	// MARK: - RTC properties
 	internal let factory = RTCPeerConnectionFactory()
-	internal let signalingProcessor = SignalingProcessor()
 	
 	// Injected dependencies
 	var cacheService: CacheServiceProtocol!
@@ -45,6 +47,8 @@ public class CallService: NSObject {
 	var defaultConfigurationWithCurrentICEServers: RTCConfiguration!
 	var signalingChannel: SignalingChannelProtocol!
 	var ICEServers: [RTCICEServer]!
+	
+	internal var dialingTimers: [SVUser: SVTimer] = [:]
 	
 	/// Return active connection for opponenID with given session ID
 	func connectionWithSessionID(sessionID: String, opponent: SVUser) -> PeerConnection? {
@@ -135,10 +139,50 @@ extension CallService: CallServiceProtocol {
 	func hangup() {
 		let peerConnections = connections.flatMap({$0.1})
 		peerConnections.filter({$0.state == PeerConnectionState.Initial}).forEach({ $0.close() })
+		dialingTimers.forEach { [unowned self] (user, timer) in
+			self.stopDialingOpponent(user)
+		}
 	}
 	
-	func sendRejectCallToOpponent(user: SVUser) {
+	func sendRejectCallToOpponent(opponent: SVUser) {
+		guard let pendingRequest = pendingRequests[opponent] else {
+			NSLog("Error: can not reject a call, no pending offer for opponent")
+			return
+		}
+		let sessionDetails = pendingRequest.sessionDetails
+		sessionDetails.sessionState = .Rejected
+		sessions[sessionDetails.sessionID] = sessionDetails
 		
+		signalingChannel.sendMessage(SignalingMessage.reject, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
+		
+		pendingRequests[opponent] = nil
+	}
+	
+	// MARK: - Repeated actions
+	func startDialingOpponent(opponent: SVUser, withMessage message: SignalingMessage, sessionDetails: SessionDetails) {
+		let sendMessageBlock = { [weak self] in
+			self?.signalingChannel.sendMessage(message, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
+		}
+		sendMessageBlock()
+		
+		observers => { $0.callService(self, didStartDialingOpponent: opponent) }
+		
+		let dialingTimer = timersFactory.createDialingTimerWithExpirationTime(20000, block: sendMessageBlock) { [unowned self] in
+			self.observers => { $0.callService(self, didAnswerTimeoutForOpponent: opponent) }
+		}
+		dialingTimer.start()
+		sendMessageBlock()
+		dialingTimers[opponent] = dialingTimer
+	}
+	
+	func stopDialingOpponent(opponent: SVUser) {
+		if let timer = dialingTimers[opponent] {
+			if timer.isValid {
+				timer.cancel()
+			}
+			dialingTimers[opponent] = nil
+			observers => { $0.callService(self, didStopDialingOpponent: opponent) }
+		}
 	}
 }
 
@@ -149,6 +193,8 @@ extension CallService: SignalingProcessorObserver {
 	
 	func didReceiveOffer(signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveOffer")
+		pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer, sessionDetails: sessionDetails)
+		
 		guard !hasActiveCall else {
 			sendRejectCallToOpponent(opponent)
 			return
@@ -160,14 +206,17 @@ extension CallService: SignalingProcessorObserver {
 				return
 			}
 		} else {
-			pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer, sessionDetails: sessionDetails)
 			observers => { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
 		}
 	}
 	
 	func didReceiveAnswer(signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveAnswer")
-		connectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyRemoteSDP(answer)
+		if let connection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
+			connection.applyRemoteSDP(answer)
+			observers => { $0.callService(self, didReceiveAnswerFromOpponent: opponent) }
+			stopDialingOpponent(opponent)
+		}
 	}
 	
 	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
@@ -176,8 +225,8 @@ extension CallService: SignalingProcessorObserver {
 		if let activeConnection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
 			activeConnection.close()
 			observers => { $0.callService(self, didReceiveHangupFromOpponent: opponent) }
+			stopDialingOpponent(opponent)
 		}
-		
 	}
 	
 	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
@@ -186,31 +235,31 @@ extension CallService: SignalingProcessorObserver {
 		if let activeConnection = connectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
 			activeConnection.close()
 			observers => { $0.callService(self, didReceiveRejectFromOpponent: opponent) }
+			stopDialingOpponent(opponent)
 		}
 	}
 }
 
 extension CallService: PeerConnectionObserver {
 	
-	// User has an offer to send
+	// Current User has an offer to send
 	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionOfferDescription: RTCSessionDescription) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
-		let offerSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: localSessionOfferDescription.description)
-		let signalingMessage = SignalingMessage.offer(sdp: offerSDP)
 		let opponent = peerConnection.opponent
-		sendSignalingMessage(signalingMessage, withSessionDetails: sessionDetails, toOpponent: opponent)
+		let offerSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: localSessionOfferDescription.description)
+		let offerMessage = SignalingMessage.offer(sdp: offerSDP)
+		startDialingOpponent(opponent, withMessage: offerMessage, sessionDetails: sessionDetails)
 	}
 	
-	// User has an answer to send
+	// Current User has an answer to send
 	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionAnswerDescription: RTCSessionDescription) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let answerSDP = RTCSessionDescription(type: SignalingMessageType.answer.rawValue, sdp: localSessionAnswerDescription.description)
-		let signalingMessage = SignalingMessage.answer(sdp: answerSDP)
 		let opponent = peerConnection.opponent
-		sendSignalingMessage(signalingMessage, withSessionDetails: sessionDetails, toOpponent: opponent)
+		sendSignalingMessageSDP(SignalingMessage.answer(sdp: answerSDP), withSessionDetails: sessionDetails, toOpponent: opponent)
 	}
 	
-	func sendSignalingMessage(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toOpponent opponent: SVUser) {
+	func sendSignalingMessageSDP(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toOpponent opponent: SVUser) {
 		signalingChannel.sendMessage(message, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in
 			if let error = error {
 				self.observers => { $0.callService(self, didErrorSendingLocalSessionDescriptionMessage: message, toOpponent: opponent, error: error) }

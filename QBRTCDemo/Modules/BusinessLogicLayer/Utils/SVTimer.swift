@@ -1,6 +1,6 @@
 //
 //  SVTimer.swift
-//  QBRTCDemo
+//  RTCDemo
 //
 //  Created by Anton Sokolchenko on 07.12.16.
 //  Copyright © 2016 anton. All rights reserved.
@@ -9,13 +9,18 @@
 import Foundation
 
 class SVTimer: NSObject {
-	private var timer: dispatch_source_t
+	private var timer: dispatch_source_t?
 	private(set) var interval: UInt64 // milliseconds
 	private(set) var repeats: Bool
+	private(set) var block: dispatch_block_t
+	private(set) var queue: dispatch_queue_t
 	var leeway: UInt64
 	
 	var isValid: Bool {
-		return dispatch_source_testcancel(timer) != 0
+		if let timer = timer {
+			return dispatch_source_testcancel(timer) != 0
+		}
+		return false
 	}
 	
 	/*
@@ -31,8 +36,8 @@ class SVTimer: NSObject {
 		self.interval = interval
 		leeway = tolerance
 		self.repeats = repeats
-		timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
-		dispatch_source_set_event_handler(timer, block)
+		self.queue = queue
+		self.block = block
 	}
 	
 	/**
@@ -40,14 +45,27 @@ class SVTimer: NSObject {
 	The timer fires once after the specified delay plus the specified tolerance.
 	*/
 	func start() {
+		guard timer == nil else { return } // double start
+		
+		timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+		dispatch_source_set_event_handler(timer!, block)
 		// repeatedInterval - The nanosecond interval for the timer. Use DISPATCH_TIME_FOREVER for a one-shot timer.
 		let repeatedInterval = repeats ? interval : DISPATCH_TIME_FOREVER
-		dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, Int64(interval * NSEC_PER_MSEC)), repeatedInterval, UInt64(leeway * NSEC_PER_MSEC))
-		dispatch_resume(timer)
+		dispatch_source_set_timer(timer!, dispatch_time(DISPATCH_TIME_NOW, Int64(interval * NSEC_PER_MSEC)), repeatedInterval, UInt64(leeway * NSEC_PER_MSEC))
+		dispatch_resume(timer!)	
 	}
 	
 	/// Cancel the timer
 	func cancel() {
-		dispatch_source_cancel(timer)
+		if let timer = timer {
+			if isValid {
+				dispatch_source_cancel(timer)
+			}
+		}
+		timer = nil
+	}
+	
+	deinit {
+		cancel()
 	}
 }

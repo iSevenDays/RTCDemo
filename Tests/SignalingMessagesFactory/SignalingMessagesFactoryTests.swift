@@ -51,7 +51,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
-			XCTAssertEqual(sessionDetails, receivedSessionDetails)
+			XCTAssert(sessionDetails == receivedSessionDetails)
 			
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
@@ -91,7 +91,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
-			XCTAssertEqual(sessionDetails, receivedSessionDetails)
+			XCTAssert(sessionDetails == receivedSessionDetails)
 			
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
@@ -147,7 +147,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
-			XCTAssertEqual(sessionDetails, receivedSessionDetails)
+			XCTAssert(sessionDetails == receivedSessionDetails)
 			
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
