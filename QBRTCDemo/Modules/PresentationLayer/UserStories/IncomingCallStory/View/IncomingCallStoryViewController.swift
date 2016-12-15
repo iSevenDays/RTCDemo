@@ -23,12 +23,12 @@ class IncomingCallStoryViewController: UIViewController {
 	// MARK: IBActions
 	
 	@IBAction func acceptCall(sender: AnyObject) {
-		loadViewIfNeeded()
+		_ = view
 		output.didTriggerAcceptButtonTapped()
 	}
 	
 	@IBAction func declineCall(sender: AnyObject) {
-		loadViewIfNeeded()
+		_ = view
 		output.didTriggerDeclineButtonTapped()
 	}
 }
@@ -39,7 +39,7 @@ extension IncomingCallStoryViewController: IncomingCallStoryViewInput {
 	}
 	
 	func configureViewWithCallInitiator(callInitiator: SVUser) {
-		loadViewIfNeeded()
+		_ = view
 		lblIncomingCall.text = "Incoming call from: " + callInitiator.fullName
 		lblIncomingCall.hidden = false
 	}

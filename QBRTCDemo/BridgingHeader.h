@@ -9,7 +9,6 @@
 #ifndef BridgingHeader_h
 #define BridgingHeader_h
 
-#import <Quickblox/Quickblox.h>
 #import "CallServiceHelpers.h"
 #import "SVUser+QBUUser.h"
 #import "SVSignalingChannelState.h"
