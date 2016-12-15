@@ -1,6 +1,15 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## QuickBlox
+
+
+QuickBlox iOS SDK is licensed under the QuickBlox SDK License.
+
+Copyright (c) 2014 QuickBlox
+
+
+
 ## RamblerTyphoonUtils
 
 Copyright (c) 2015 Rambler Digital Solutions

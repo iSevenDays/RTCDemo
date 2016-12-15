@@ -112,8 +112,6 @@
 		14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
 		1448B7721DF87BC0002D5371 /* SVTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7711DF87BC0002D5371 /* SVTimer.swift */; };
 		1448B7731DF87BC0002D5371 /* SVTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7711DF87BC0002D5371 /* SVTimer.swift */; };
-		1448B7761DF89C0A002D5371 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1448B7791DF89C0E002D5371 /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1448B77F1DF9D17A002D5371 /* SessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B77E1DF9D17A002D5371 /* SessionDetails.swift */; };
 		1448B7801DF9D17A002D5371 /* SessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B77E1DF9D17A002D5371 /* SessionDetails.swift */; };
 		1448B7821DF9D95C002D5371 /* SignalingProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7811DF9D95C002D5371 /* SignalingProcessor.swift */; };
@@ -164,7 +162,6 @@
 		1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
 		1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
 		1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
-		1473F3711BFF6BFE00ABA7E6 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; };
 		1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
 		1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
 		147546411CAE560C004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
@@ -178,7 +175,6 @@
 		1482339F1C002DFE0000E9ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD51BF92FA30018DA30 /* AppDelegate.m */; };
 		148233A01C002DFE0000E9ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1452AAD21BF92FA30018DA30 /* main.m */; };
 		148233A71C002DFE0000E9ED /* SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028801BFB190800BDF2C5 /* SVUser.m */; };
-		148233AB1C002DFE0000E9ED /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609811BF9C9FC0091071C /* Quickblox.framework */; };
 		148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287C1BFB092800BDF2C5 /* libresolv.tbd */; };
 		148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287A1BFB090C00BDF2C5 /* SystemConfiguration.framework */; };
 		148233AE1C002DFE0000E9ED /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A028781BFB08F900BDF2C5 /* MobileCoreServices.framework */; };
@@ -474,7 +470,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1448B7761DF89C0A002D5371 /* Quickblox.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,7 +480,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1448B7791DF89C0E002D5371 /* Quickblox.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,7 +605,6 @@
 		1436097A1BF945280091071C /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		1436097C1BF9453C0091071C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		1436097E1BF945490091071C /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		143609811BF9C9FC0091071C /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
 		14398F6B1C010A0800F3CE74 /* SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUserTests.m; sourceTree = "<group>"; };
 		14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessageTests.m; sourceTree = "<group>"; };
 		1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSignalingChannel.h; sourceTree = "<group>"; };
@@ -952,7 +945,6 @@
 			files = (
 				1431CE121C6F959F00DCED6D /* libwebrtc_libraries.a in Frameworks */,
 				14A601351C6DEFFB00065437 /* libicucore.tbd in Frameworks */,
-				1473F3711BFF6BFE00ABA7E6 /* Quickblox.framework in Frameworks */,
 				14A0287D1BFB092800BDF2C5 /* libresolv.tbd in Frameworks */,
 				14A0287B1BFB090C00BDF2C5 /* SystemConfiguration.framework in Frameworks */,
 				14A028791BFB08F900BDF2C5 /* MobileCoreServices.framework in Frameworks */,
@@ -971,7 +963,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */,
-				148233AB1C002DFE0000E9ED /* Quickblox.framework in Frameworks */,
 				148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */,
 				148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */,
 				148233AE1C002DFE0000E9ED /* MobileCoreServices.framework in Frameworks */,
@@ -1504,7 +1495,6 @@
 			children = (
 				14EBDD1F1DFBFB9900A1EEB5 /* NSData+GZIP.h */,
 				14EBDD201DFBFB9900A1EEB5 /* NSData+GZIP.m */,
-				143609811BF9C9FC0091071C /* Quickblox.framework */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";

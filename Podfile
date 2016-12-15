@@ -2,6 +2,7 @@ def available_pods
 	pod 'ViperMcFlurry', '~> 1.5.2'
 	pod 'Typhoon', '~> 3.4.5'
 	pod 'RamblerTyphoonUtils/AssemblyCollector', '1.5.0'
+	pod 'QuickBlox'
 end
 
 
@@ -14,6 +15,7 @@ target :QBRTCDemo do
 end
 
 def tests_pods
+	pod 'QuickBlox'
 	inherit! :search_paths
 end
 
