@@ -1,32 +1,16 @@
 //
-//  CallServiceHelpers.m
-//  RTCDemo
+//  CallServiceHelpers.swift
+//  QBRTCDemo
 //
-//  Created by Anton Sokolchenko on 2/9/16.
-//  Copyright © 2016 anton. All rights reserved.
+//  Created by Anton Sokolchenko on 16.12.16.
+//  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-#import "CallServiceHelpers.h"
-#import "SVUser.h"
+import Foundation
 
-@implementation CallServiceHelpers
-
-// prod
-//		self.user1 = [[SVUser alloc] initWithID:@(8662991) login:@"rtcuser1" password:@"rtcuser1"];
-//		self.user2 = [[SVUser alloc] initWithID:@(8663016 login:@"rtcuser2" password:@"rtcuser2"];
-
-
-+ (SVUser *)user1 {
-	return [[SVUser alloc] initWithID:@(6942802) login:@"rtcuser1" password:@"rtcuser1"];
-}
-
-+ (SVUser *)user2 {
-	return [[SVUser alloc] initWithID:@(6942819) login:@"rtcuser2" password:@"rtcuser2"];
-}
-
-+ (NSString *)offerSDP {
-	return
-	@"v=0\n"
+class CallServiceHelpers {
+	class var offerSDP: String {
+	return "v=0\n"
 	"o=- 5585842076786974405 2 IN IP4 127.0.0.1\n"
 	"s=-\n"
 	"t=0 0\n"
@@ -97,7 +81,5 @@
 	"a=rtpmap:117 ulpfec/90000\n"
 	"a=rtpmap:96 rtx/90000\n"
 	"a=fmtp:96 apt=100\n";
+	}
 }
-
-
-@end

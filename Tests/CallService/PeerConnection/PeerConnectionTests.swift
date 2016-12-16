@@ -20,10 +20,10 @@ import XCTest
 
 class PeerConnectionTests: BaseTestCase {
 	
-	let user1 = CallServiceHelpers.user1()
+	let user1 = TestsStorage.svuserRealUser1
 	
 	// Always PeerConnection opponent
-	let user2 = CallServiceHelpers.user2()
+	let user2 = TestsStorage.svuserRealUser2
 	
 	let user3 = SVUser(ID: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
 	
@@ -42,7 +42,7 @@ class PeerConnectionTests: BaseTestCase {
 	
 	func testDoesntCreateAnswerSDPWhenPeerConnectionIsClosed() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: "offer", sdp: CallServiceHelpers.offerSDP())
+		let rtcOfferSDP = RTCSessionDescription(type: "offer", sdp: CallServiceHelpers.offerSDP)
 		
 		// when
 		peerConnection.acceptCall()

@@ -9,7 +9,6 @@
 #ifndef BridgingHeader_h
 #define BridgingHeader_h
 
-#import "CallServiceHelpers.h"
 #import "SVUser+QBUUser.h"
 #import <ViperMcFlurry/ViperMcFlurry.h>
 #import "WebRTCHelpers.h"
@@ -32,14 +31,12 @@
 
 
 // TODO: review
-#import <RTCAVFoundationVideoSource.h>
 #import <RTCMediaStream.h>
 #import <RTCPeerConnection.h>
 #import <RTCPeerConnectionFactory.h>
 #import <RTCICEServer.h>
 #import <RTCSessionDescriptionDelegate.h>
 #import <RTCPeerConnectionInterface.h>
-#import <RTCSessionDescriptionDelegate.h>
 #import <RTCMediaStream.h>
 #import <RTCPeerConnection.h>
 #import <RTCPeerConnectionFactory.h>

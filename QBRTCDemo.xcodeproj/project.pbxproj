@@ -108,6 +108,8 @@
 		143609791BF9450A0091071C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
 		1436097D1BF9453C0091071C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097C1BF9453C0091071C /* OpenGLES.framework */; };
 		1436097F1BF945490091071C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
+		1439A9051E04705E00741460 /* CallServiceHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A9041E04705E00741460 /* CallServiceHelpers.swift */; };
+		1439A9061E04705E00741460 /* CallServiceHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1439A9041E04705E00741460 /* CallServiceHelpers.swift */; };
 		1445F1901E0327FE0040F8ED /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1445F18F1E0327FE0040F8ED /* Quickblox.framework */; };
 		1445F1911E0328040040F8ED /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1445F18F1E0327FE0040F8ED /* Quickblox.framework */; };
 		1445F1921E0328040040F8ED /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1445F18F1E0327FE0040F8ED /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -305,8 +307,6 @@
 		14B697F11E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */; };
 		14C3FE3D1C7F1FF70077877C /* librtc_pc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C3FE3C1C7F1FF70077877C /* librtc_pc.a */; };
 		14C3FE3F1C7F20290077877C /* libcongestion_controller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C3FE3E1C7F20290077877C /* libcongestion_controller.a */; };
-		14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
-		14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */; };
 		14C970B01DFCB5E000462981 /* SignalingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970AF1DFCB5E000462981 /* SignalingMessage.swift */; };
 		14C970B11DFCB5E000462981 /* SignalingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970AF1DFCB5E000462981 /* SignalingMessage.swift */; };
 		14C970B31DFCC09600462981 /* SignalingMessagesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970B21DFCC09600462981 /* SignalingMessagesFactory.swift */; };
@@ -609,7 +609,7 @@
 		1436097C1BF9453C0091071C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		1436097E1BF945490091071C /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		14398F6B1C010A0800F3CE74 /* SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUserTests.m; sourceTree = "<group>"; };
-		14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessageTests.m; sourceTree = "<group>"; };
+		1439A9041E04705E00741460 /* CallServiceHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallServiceHelpers.swift; sourceTree = "<group>"; };
 		1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSignalingChannel.h; sourceTree = "<group>"; };
 		1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeSignalingChannel.m; sourceTree = "<group>"; };
 		1445F18F1E0327FE0040F8ED /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
@@ -636,7 +636,7 @@
 		1454052B1C859431005E3790 /* DataChannelMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataChannelMessages.h; sourceTree = "<group>"; };
 		1454052C1C859431005E3790 /* DataChannelMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataChannelMessages.m; sourceTree = "<group>"; };
 		146CA9F21C62644000F768C8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		14736EE61C567EC5009DFBBC /* CallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService.m; sourceTree = "<group>"; };
+		14736EE61C567EC5009DFBBC /* CallService_old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService_old.m; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
 		14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -646,7 +646,6 @@
 		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
 		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTServiceProtocol.swift; sourceTree = "<group>"; };
 		147546431CAE5649004CCE95 /* QBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBRESTService.swift; sourceTree = "<group>"; };
-		147A0C7C1BFE159B0009044A /* TestsStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorageTests.m; sourceTree = "<group>"; };
 		147C35981DFB51DA0019C298 /* FakeCallService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCallService.swift; sourceTree = "<group>"; };
 		1482337C1C002DB80000E9ED /* webrtc-ia32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-ia32.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-ia32.a"; sourceTree = "<group>"; };
 		1482337D1C002DB80000E9ED /* webrtc-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-x86_64.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-x86_64.a"; sourceTree = "<group>"; };
@@ -779,8 +778,6 @@
 		14C3FE3C1C7F1FF70077877C /* librtc_pc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_pc.a; path = "Scripts/webrtc/src/webrtc/pc/../../xcodebuild/Debug-iphoneos/librtc_pc.a"; sourceTree = "<group>"; };
 		14C3FE3E1C7F20290077877C /* libcongestion_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcongestion_controller.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libcongestion_controller.a"; sourceTree = "<group>"; };
 		14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServiceTests.m; sourceTree = "<group>"; };
-		14C534EC1C6A397100A0FFE8 /* CallServiceHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceHelpers.h; sourceTree = "<group>"; };
-		14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServiceHelpers.m; sourceTree = "<group>"; };
 		14C5356B1C6B86E500A0FFE8 /* libsocketrocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsocketrocket.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libsocketrocket.a"; sourceTree = "<group>"; };
 		14C5356C1C6B86E500A0FFE8 /* libstunprober.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstunprober.a; path = "Scripts/webrtc/src/webrtc/p2p/../../xcodebuild/Debug-iphoneos/libstunprober.a"; sourceTree = "<group>"; };
 		14C5359E1C6B877700A0FFE8 /* libdesktop_capture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdesktop_capture.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libdesktop_capture.a"; sourceTree = "<group>"; };
@@ -1121,9 +1118,7 @@
 				14114A161CB68FEB0092AA26 /* NSObject+Testing.h */,
 				14114A171CB68FEB0092AA26 /* NSObject+Testing.m */,
 				14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */,
-				14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */,
 				14398F6B1C010A0800F3CE74 /* SVUserTests.m */,
-				147A0C7C1BFE159B0009044A /* TestsStorageTests.m */,
 				1445F1991E040AB60040F8ED /* TestsStorage.swift */,
 			);
 			path = QBRTCDemoTests;
@@ -1496,11 +1491,9 @@
 				14A028721BFA543A00BDF2C5 /* QBSignaling */,
 				14F4FAF21C52961400E9488C /* Signaling */,
 				14736EEA1C56843F009DFBBC /* WebRTC */,
-				14736EE61C567EC5009DFBBC /* CallService.m */,
+				14736EE61C567EC5009DFBBC /* CallService_old.m */,
 				1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */,
 				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
-				14C534EC1C6A397100A0FFE8 /* CallServiceHelpers.h */,
-				14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */,
 				1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */,
 				1448B78B1DFAE849002D5371 /* CallService.swift */,
 				1448B7911DFAF5DE002D5371 /* CallServiceProtocol.swift */,
@@ -1585,6 +1578,7 @@
 				14B697EE1E01FBE30053A79C /* PeerConnection */,
 				14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */,
 				14EBDD371DFC7D3C00A1EEB5 /* CallServiceTests.swift */,
+				1439A9041E04705E00741460 /* CallServiceHelpers.swift */,
 			);
 			path = CallService;
 			sourceTree = "<group>";
@@ -2759,6 +2753,7 @@
 				142B51641CDE13E2005B143C /* XCTest+Optionals.swift in Sources */,
 				142B50721CDD2C7A005B143C /* ChatUsersStoryViewTests.swift in Sources */,
 				14EBDD2D1DFC171100A1EEB5 /* FakeCallService.swift in Sources */,
+				1439A9051E04705E00741460 /* CallServiceHelpers.swift in Sources */,
 				14EBDD3A1DFC7D4100A1EEB5 /* CallServiceTests.swift in Sources */,
 				1420E46A1CE7CE6E0043EFF9 /* IncomingCallStoryPresenterTests.swift in Sources */,
 				14EBDD321DFC7C4E00A1EEB5 /* VideoCallStoryConfiguratorTests.swift in Sources */,
@@ -2858,7 +2853,6 @@
 				14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */,
 				1473EACF1CAC6090007F9DF8 /* AuthStoryInteractorInput.swift in Sources */,
 				14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */,
-				14C534EE1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				1420E47C1CE7CE860043EFF9 /* IncomingCallStoryViewOutput.swift in Sources */,
 				142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				1473EAD11CAC6090007F9DF8 /* AuthStoryInteractor.swift in Sources */,
@@ -2910,7 +2904,6 @@
 				14C970BE1DFCEBEF00462981 /* SignalingChannelProtocol.swift in Sources */,
 				142D13901C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
 				1420E5001CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */,
-				14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
 				14740A7D1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */,
 				14740A771E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */,
 				142D13831C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
@@ -3011,6 +3004,7 @@
 				14EBDD301DFC7B7A00A1EEB5 /* AuthStoryInteractorTests.swift in Sources */,
 				14EBDD241DFC154E00A1EEB5 /* VideoCallStoryInteractorTests.swift in Sources */,
 				1433C5F91DF17A3000A2CED6 /* VideoCallStoryViewTests.swift in Sources */,
+				1439A9061E04705E00741460 /* CallServiceHelpers.swift in Sources */,
 				14EBDD3B1DFC7D4200A1EEB5 /* CallServiceTests.swift in Sources */,
 				14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */,
 				14B697F11E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */,
