@@ -113,6 +113,8 @@
 		1445F1921E0328040040F8ED /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1445F18F1E0327FE0040F8ED /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1445F1941E0329750040F8ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1931E0329750040F8ED /* AppDelegate.swift */; };
 		1445F1951E0329750040F8ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1931E0329750040F8ED /* AppDelegate.swift */; };
+		1445F1971E032F5C0040F8ED /* FakeQBPushNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1961E032F5C0040F8ED /* FakeQBPushNotificationsService.swift */; };
+		1445F1981E032F5C0040F8ED /* FakeQBPushNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1961E032F5C0040F8ED /* FakeQBPushNotificationsService.swift */; };
 		1445F19A1E040AB60040F8ED /* TestsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1991E040AB60040F8ED /* TestsStorage.swift */; };
 		1445F19B1E040AB60040F8ED /* TestsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1991E040AB60040F8ED /* TestsStorage.swift */; };
 		1448B7721DF87BC0002D5371 /* SVTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7711DF87BC0002D5371 /* SVTimer.swift */; };
@@ -165,6 +167,12 @@
 		1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
 		1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
 		1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
+		14740A761E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */; };
+		14740A771E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */; };
+		14740A791E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A781E031A0E00557FB3 /* QBPushNotificationsService.swift */; };
+		14740A7A1E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A781E031A0E00557FB3 /* QBPushNotificationsService.swift */; };
+		14740A7C1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A7B1E031B2700557FB3 /* PushNotificationsServiceObserver.swift */; };
+		14740A7D1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A7B1E031B2700557FB3 /* PushNotificationsServiceObserver.swift */; };
 		1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
 		1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
 		147546411CAE560C004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
@@ -606,6 +614,7 @@
 		1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeSignalingChannel.m; sourceTree = "<group>"; };
 		1445F18F1E0327FE0040F8ED /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
 		1445F1931E0329750040F8ED /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1445F1961E032F5C0040F8ED /* FakeQBPushNotificationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeQBPushNotificationsService.swift; sourceTree = "<group>"; };
 		1445F1991E040AB60040F8ED /* TestsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsStorage.swift; sourceTree = "<group>"; };
 		1448B7711DF87BC0002D5371 /* SVTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVTimer.swift; sourceTree = "<group>"; };
 		1448B77E1DF9D17A002D5371 /* SessionDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionDetails.swift; path = SessionDetails/SessionDetails.swift; sourceTree = "<group>"; };
@@ -630,6 +639,9 @@
 		14736EE61C567EC5009DFBBC /* CallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService.m; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
+		14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsServiceProtocol.swift; sourceTree = "<group>"; };
+		14740A781E031A0E00557FB3 /* QBPushNotificationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBPushNotificationsService.swift; sourceTree = "<group>"; };
+		14740A7B1E031B2700557FB3 /* PushNotificationsServiceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsServiceObserver.swift; sourceTree = "<group>"; };
 		1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVUser+QBUUser.h"; sourceTree = "<group>"; };
 		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
 		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTServiceProtocol.swift; sourceTree = "<group>"; };
@@ -1125,6 +1137,7 @@
 				1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */,
 				147C35981DFB51DA0019C298 /* FakeCallService.swift */,
 				14EBDD151DFB5DD900A1EEB5 /* FakeSignalingChannel.swift */,
+				1445F1961E032F5C0040F8ED /* FakeQBPushNotificationsService.swift */,
 			);
 			path = FakeServices;
 			sourceTree = "<group>";
@@ -1514,6 +1527,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		14740A741E03197B00557FB3 /* PushNotificationsService */ = {
+			isa = PBXGroup;
+			children = (
+				14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */,
+				14740A781E031A0E00557FB3 /* QBPushNotificationsService.swift */,
+				14740A7B1E031B2700557FB3 /* PushNotificationsServiceObserver.swift */,
+			);
+			path = PushNotificationsService;
+			sourceTree = "<group>";
+		};
 		1475463F1CAE544E004CCE95 /* RESTService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1651,6 +1674,7 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				14740A741E03197B00557FB3 /* PushNotificationsService */,
 				14736E821C561284009DFBBC /* CallService */,
 				1475463F1CAE544E004CCE95 /* RESTService */,
 				142154611CE75ACB003C1C4A /* ServicesProvider.swift */,
@@ -2761,6 +2785,7 @@
 				14A321A11DF5E03600B7AEE3 /* BaseTestCase.swift in Sources */,
 				14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */,
 				1473EACA1CAC6082007F9DF8 /* AuthStoryConfiguratorTests.swift in Sources */,
+				1445F1971E032F5C0040F8ED /* FakeQBPushNotificationsService.swift in Sources */,
 				148A83D61CB0180400F88933 /* FakeQBRESTService.swift in Sources */,
 				1473EAC61CAC607C007F9DF8 /* AuthStoryViewTests.swift in Sources */,
 				1420E46B1CE7CE6E0043EFF9 /* IncomingCallStoryRouterTests.swift in Sources */,
@@ -2773,6 +2798,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14740A761E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */,
 				14EBDD211DFBFB9900A1EEB5 /* NSData+GZIP.m in Sources */,
 				1473EACB1CAC6090007F9DF8 /* AuthStoryViewInput.swift in Sources */,
 				1420E4961CE7CEA20043EFF9 /* IncomingCallStoryConfigurator.swift in Sources */,
@@ -2810,6 +2836,7 @@
 				142582D71E00792E00BA9F21 /* TimersFactory.swift in Sources */,
 				1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */,
 				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
+				14740A791E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */,
 				142B50961CDD2CE0005B143C /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1420E4911CE7CE9C0043EFF9 /* IncomingCallStoryRouterInput.swift in Sources */,
@@ -2847,6 +2874,7 @@
 				14EBDD341DFC7C9000A1EEB5 /* VideoCallStoryViewController.swift in Sources */,
 				1448B79B1DFB231E002D5371 /* ArrayAppendOperator.swift in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
+				14740A7C1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */,
 				1420E47D1CE7CE860043EFF9 /* IncomingCallStoryViewController.swift in Sources */,
 				1473EAD21CAC6090007F9DF8 /* AuthStoryRouterInput.swift in Sources */,
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
@@ -2873,6 +2901,7 @@
 				142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
+				14740A7A1E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */,
 				142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
 				1448B7801DF9D17A002D5371 /* SessionDetails.swift in Sources */,
@@ -2882,6 +2911,8 @@
 				142D13901C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
 				1420E5001CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */,
 				14C534EF1C6A397100A0FFE8 /* CallServiceHelpers.m in Sources */,
+				14740A7D1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */,
+				14740A771E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */,
 				142D13831C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				32C6CA136AAEAC874131B630 /* ImageGalleryStoryViewInput.swift in Sources */,
 				14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */,
@@ -3006,6 +3037,7 @@
 				FE45657E836EB08B8F461C1E /* IncomingCallStoryViewTests.swift in Sources */,
 				14A321A21DF5E03600B7AEE3 /* BaseTestCase.swift in Sources */,
 				ADF1997937235A27C7014D90 /* IncomingCallStoryPresenterTests.swift in Sources */,
+				1445F1981E032F5C0040F8ED /* FakeQBPushNotificationsService.swift in Sources */,
 				14EBDD2A1DFC170000A1EEB5 /* FakeSignalingChannel.swift in Sources */,
 				61AEFD94F186E7F57E40512C /* IncomingCallStoryRouterTests.swift in Sources */,
 				C5CEA1B5101DF205C1D0E4B1 /* VideoCallStoryConfiguratorTests.swift in Sources */,

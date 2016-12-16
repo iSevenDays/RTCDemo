@@ -10,7 +10,8 @@ class VideoCallStoryInteractor: NSObject {
 
     weak var output: VideoCallStoryInteractorOutput!
 	
-	var callService: protocol<CallServiceProtocol>!
+	var callService: CallServiceProtocol!
+	var pushService: PushNotificationsServiceProtocol!
 	
 	var localVideoTrack: RTCVideoTrack?
 	var remoteVideoTrack: RTCVideoTrack?
@@ -211,6 +212,13 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		if state == CallServiceState.Error {
 			output.didFailCallService()
 		}
+	}
+	
+	func callService(callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
+		guard let currentUserFullName = self.currentUser?.fullName else { return }
+		
+		pushService.sendPushNotificationMessage("\(currentUserFullName) is calling you", toOpponent: opponent)
+		output.didSendPushNotificationAboutNewCallToOpponent(opponent)
 	}
 	
 	func callService(callService: CallServiceProtocol, didError error: NSError) {

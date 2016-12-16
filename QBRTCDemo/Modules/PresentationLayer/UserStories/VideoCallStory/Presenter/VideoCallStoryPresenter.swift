@@ -106,4 +106,8 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	func didOpenDataChannel() {
 		
 	}
+	
+	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
+		
+	}
 }

@@ -75,8 +75,10 @@ public class MulticastDelegate<T>
 	private init(delegates: Array<WeakRef>, delegate: AnyObject)
 	{
 		var copy = delegates
-		
-		copy.append(WeakRef(value: delegate))
+		let weakDelegate = WeakRef(value: delegate)
+		if !copy.contains(weakDelegate) {
+			copy.append(weakDelegate)
+		}
 		
 		self.delegates = copy
 	}

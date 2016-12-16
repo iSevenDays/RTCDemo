@@ -18,8 +18,9 @@ class ServicesProvider: NSObject {
 	static let currentProvider = ServicesProvider(zone: Zone.Production)
 	
 	
-	private(set) var callService: protocol<CallServiceProtocol>!
-	private(set) var restService: protocol<RESTServiceProtocol>!
+	private(set) var callService: CallServiceProtocol!
+	private(set) var restService: RESTServiceProtocol!
+	private(set) var pushService: PushNotificationsServiceProtocol!
 	
 	init(zone: Zone) {
 		super.init()
@@ -44,6 +45,7 @@ class ServicesProvider: NSObject {
 			
 			self.callService = callService
 			self.restService = restService
+			self.pushService = QBPushNotificationsService()
 			
 			break
 		}
