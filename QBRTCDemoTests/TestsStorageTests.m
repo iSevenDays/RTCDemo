@@ -10,7 +10,6 @@
 
 #import "SVUser.h"
 #import "QBUUser+SVUser.h"
-#import "TestsStorage.h"
 
 @interface TestStorageTests : XCTestCase
 

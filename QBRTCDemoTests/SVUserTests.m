@@ -9,7 +9,6 @@
 #import <XCTest/XCTest.h>
 
 #import "SVUser.h"
-#import "TestsStorage.h"
 #import "NSObject+Testing.h"
 
 @interface SVUserTests : XCTestCase

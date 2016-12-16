@@ -32,7 +32,7 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 	
 	func testHangupSendsHangupMessage() {
 		// given
-		let testUser = TestsStorage.svuserRealUser1()
+		let testUser = TestsStorage.svuserRealUser1
 		interactor.setOpponent(testUser)
 		
 		// when

@@ -108,12 +108,13 @@
 		143609791BF9450A0091071C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
 		1436097D1BF9453C0091071C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097C1BF9453C0091071C /* OpenGLES.framework */; };
 		1436097F1BF945490091071C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
-		14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
 		1445F1901E0327FE0040F8ED /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1445F18F1E0327FE0040F8ED /* Quickblox.framework */; };
 		1445F1911E0328040040F8ED /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1445F18F1E0327FE0040F8ED /* Quickblox.framework */; };
 		1445F1921E0328040040F8ED /* Quickblox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1445F18F1E0327FE0040F8ED /* Quickblox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1445F1941E0329750040F8ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1931E0329750040F8ED /* AppDelegate.swift */; };
 		1445F1951E0329750040F8ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1931E0329750040F8ED /* AppDelegate.swift */; };
+		1445F19A1E040AB60040F8ED /* TestsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1991E040AB60040F8ED /* TestsStorage.swift */; };
+		1445F19B1E040AB60040F8ED /* TestsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1445F1991E040AB60040F8ED /* TestsStorage.swift */; };
 		1448B7721DF87BC0002D5371 /* SVTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7711DF87BC0002D5371 /* SVTimer.swift */; };
 		1448B7731DF87BC0002D5371 /* SVTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7711DF87BC0002D5371 /* SVTimer.swift */; };
 		1448B77F1DF9D17A002D5371 /* SessionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B77E1DF9D17A002D5371 /* SessionDetails.swift */; };
@@ -170,9 +171,6 @@
 		147546421CAE560D004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
 		147546441CAE5649004CCE95 /* QBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRESTService.swift */; };
 		147546451CAE5649004CCE95 /* QBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRESTService.swift */; };
-		147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
-		147A0C7D1BFE159B0009044A /* TestsStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestsStorageTests.m */; };
-		148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0288C1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m */; };
 		1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */; };
 		148233A71C002DFE0000E9ED /* SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028801BFB190800BDF2C5 /* SVUser.m */; };
 		148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287C1BFB092800BDF2C5 /* libresolv.tbd */; };
@@ -197,7 +195,6 @@
 		14A0287D1BFB092800BDF2C5 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287C1BFB092800BDF2C5 /* libresolv.tbd */; };
 		14A028811BFB190800BDF2C5 /* SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028801BFB190800BDF2C5 /* SVUser.m */; };
 		14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */; };
-		14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A0288C1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m */; };
 		14A321A11DF5E03600B7AEE3 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A321A01DF5E03600B7AEE3 /* BaseTestCase.swift */; };
 		14A321A21DF5E03600B7AEE3 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A321A01DF5E03600B7AEE3 /* BaseTestCase.swift */; };
 		14A600781C6DEDF300065437 /* libaudioproc_debug_proto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483C8D41C19B7F700C46B0C /* libaudioproc_debug_proto.a */; };
@@ -318,10 +315,7 @@
 		14D1B5F21C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
 		14D1B5F31C7CA4E6006EB865 /* SVMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1B5F01C7CA4E6006EB865 /* SVMulticastDelegate.m */; };
 		14DE29691C92FDA900D5842E /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DE29681C92FDA900D5842E /* libvpx.a */; };
-		14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7A1BFE13FD0009044A /* TestsStorage.m */; };
-		14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A0C7C1BFE159B0009044A /* TestsStorageTests.m */; };
 		14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
-		14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14398F6B1C010A0800F3CE74 /* SVUserTests.m */; };
 		14E9F5A41C6CD317007F58B7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
 		14E9F5A51C6CD317007F58B7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
 		14E9F5A61C6CD317007F58B7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
@@ -612,6 +606,7 @@
 		1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeSignalingChannel.m; sourceTree = "<group>"; };
 		1445F18F1E0327FE0040F8ED /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
 		1445F1931E0329750040F8ED /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1445F1991E040AB60040F8ED /* TestsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsStorage.swift; sourceTree = "<group>"; };
 		1448B7711DF87BC0002D5371 /* SVTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVTimer.swift; sourceTree = "<group>"; };
 		1448B77E1DF9D17A002D5371 /* SessionDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionDetails.swift; path = SessionDetails/SessionDetails.swift; sourceTree = "<group>"; };
 		1448B7811DF9D95C002D5371 /* SignalingProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingProcessor.swift; sourceTree = "<group>"; };
@@ -633,16 +628,12 @@
 		1454052C1C859431005E3790 /* DataChannelMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataChannelMessages.m; sourceTree = "<group>"; };
 		146CA9F21C62644000F768C8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		14736EE61C567EC5009DFBBC /* CallService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService.m; sourceTree = "<group>"; };
-		14736EE91C56817C009DFBBC /* CallServiceProtocol_old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallServiceProtocol_old.h; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
 		1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVUser+QBUUser.h"; sourceTree = "<group>"; };
 		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
 		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTServiceProtocol.swift; sourceTree = "<group>"; };
 		147546431CAE5649004CCE95 /* QBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBRESTService.swift; sourceTree = "<group>"; };
-		147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannelTests.m; sourceTree = "<group>"; };
-		147A0C791BFE13FD0009044A /* TestsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsStorage.h; sourceTree = "<group>"; };
-		147A0C7A1BFE13FD0009044A /* TestsStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorage.m; sourceTree = "<group>"; };
 		147A0C7C1BFE159B0009044A /* TestsStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsStorageTests.m; sourceTree = "<group>"; };
 		147C35981DFB51DA0019C298 /* FakeCallService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCallService.swift; sourceTree = "<group>"; };
 		1482337C1C002DB80000E9ED /* webrtc-ia32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "webrtc-ia32.a"; path = "../../Documents/work/SDK-ios-WebRTC/main/QuickbloxWebRTC/build_webrtc/webrtc/lib/webrtc-ia32.a"; sourceTree = "<group>"; };
@@ -664,9 +655,6 @@
 		14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjingle_peerconnection_objc.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libjingle_peerconnection_objc.a"; sourceTree = "<group>"; };
 		148A83D51CB0180400F88933 /* FakeQBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeQBRESTService.swift; sourceTree = "<group>"; };
 		149A0D341CA7F02C008FB3A9 /* AuthStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AuthStory.storyboard; sourceTree = "<group>"; };
-		14A0281B1BFA43E700BDF2C5 /* SVSignalingChannelState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelState.h; sourceTree = "<group>"; };
-		14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingChannelState.m; sourceTree = "<group>"; };
-		14A028221BFA468A00BDF2C5 /* SVSignalingChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingChannelDelegate.h; sourceTree = "<group>"; };
 		14A028251BFA46F900BDF2C5 /* SVSignalingMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingMessage.h; sourceTree = "<group>"; };
 		14A028261BFA46F900BDF2C5 /* SVSignalingMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessage.m; sourceTree = "<group>"; };
 		14A028281BFA470C00BDF2C5 /* SVSignalingMessageType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingMessageType.h; sourceTree = "<group>"; };
@@ -675,8 +663,6 @@
 		14A0286D1BFA53DB00BDF2C5 /* SVSignalingMessageICE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessageICE.m; sourceTree = "<group>"; };
 		14A0286F1BFA541A00BDF2C5 /* SVSignalingMessageSDP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSignalingMessageSDP.h; sourceTree = "<group>"; };
 		14A028701BFA541A00BDF2C5 /* SVSignalingMessageSDP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSignalingMessageSDP.m; sourceTree = "<group>"; };
-		14A028731BFA545300BDF2C5 /* QBSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBSignalingChannel.h; sourceTree = "<group>"; };
-		14A028741BFA545300BDF2C5 /* QBSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannel.m; sourceTree = "<group>"; };
 		14A028761BFB089600BDF2C5 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		14A028781BFB08F900BDF2C5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		14A0287A1BFB090C00BDF2C5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -685,8 +671,6 @@
 		14A028801BFB190800BDF2C5 /* SVUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUser.m; sourceTree = "<group>"; };
 		14A028851BFB1A3100BDF2C5 /* QBUUser+SVUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QBUUser+SVUser.h"; sourceTree = "<group>"; };
 		14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUser.m"; sourceTree = "<group>"; };
-		14A0288B1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBSignalingChannelDelegate.h; sourceTree = "<group>"; };
-		14A0288C1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBSignalingChannelDelegate.m; sourceTree = "<group>"; };
 		14A321A01DF5E03600B7AEE3 /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwebrtc_libraries.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A600801C6DEDF400065437 /* libapprtc_common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libapprtc_common.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libapprtc_common.a"; sourceTree = "<group>"; };
@@ -1124,13 +1108,11 @@
 				14015A3D1BFCD08400830618 /* Info.plist */,
 				14114A161CB68FEB0092AA26 /* NSObject+Testing.h */,
 				14114A171CB68FEB0092AA26 /* NSObject+Testing.m */,
-				147A0C751BFE139D0009044A /* QBSignalingChannelTests.m */,
 				14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */,
 				14398F6D1C010C9100F3CE74 /* SVSignalingMessageTests.m */,
 				14398F6B1C010A0800F3CE74 /* SVUserTests.m */,
-				147A0C791BFE13FD0009044A /* TestsStorage.h */,
-				147A0C7A1BFE13FD0009044A /* TestsStorage.m */,
 				147A0C7C1BFE159B0009044A /* TestsStorageTests.m */,
+				1445F1991E040AB60040F8ED /* TestsStorage.swift */,
 			);
 			path = QBRTCDemoTests;
 			sourceTree = "<group>";
@@ -1506,7 +1488,6 @@
 				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
 				14C534EC1C6A397100A0FFE8 /* CallServiceHelpers.h */,
 				14C534ED1C6A397100A0FFE8 /* CallServiceHelpers.m */,
-				14736EE91C56817C009DFBBC /* CallServiceProtocol_old.h */,
 				1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */,
 				1448B78B1DFAE849002D5371 /* CallService.swift */,
 				1448B7911DFAF5DE002D5371 /* CallServiceProtocol.swift */,
@@ -1553,10 +1534,6 @@
 		14A028721BFA543A00BDF2C5 /* QBSignaling */ = {
 			isa = PBXGroup;
 			children = (
-				14A028731BFA545300BDF2C5 /* QBSignalingChannel.h */,
-				14A028741BFA545300BDF2C5 /* QBSignalingChannel.m */,
-				14A0288B1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.h */,
-				14A0288C1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m */,
 				14C970B91DFCEB5B00462981 /* QBSignalingChannel.swift */,
 			);
 			path = QBSignaling;
@@ -1600,8 +1577,6 @@
 		14D0A3B01C529C52005AF958 /* SVSignaling */ = {
 			isa = PBXGroup;
 			children = (
-				14A0281B1BFA43E700BDF2C5 /* SVSignalingChannelState.h */,
-				14A0281C1BFA43E700BDF2C5 /* SVSignalingChannelState.m */,
 				14A028251BFA46F900BDF2C5 /* SVSignalingMessage.h */,
 				14A028261BFA46F900BDF2C5 /* SVSignalingMessage.m */,
 				14A0286C1BFA53DB00BDF2C5 /* SVSignalingMessageICE.h */,
@@ -1686,7 +1661,6 @@
 		14F4FAF21C52961400E9488C /* Signaling */ = {
 			isa = PBXGroup;
 			children = (
-				14A028221BFA468A00BDF2C5 /* SVSignalingChannelDelegate.h */,
 				1448B7811DF9D95C002D5371 /* SignalingProcessor.swift */,
 				14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */,
 			);
@@ -2766,17 +2740,15 @@
 				14EBDD321DFC7C4E00A1EEB5 /* VideoCallStoryConfiguratorTests.swift in Sources */,
 				1473EAC91CAC607C007F9DF8 /* AuthStoryRouterTests.swift in Sources */,
 				14B697F01E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */,
-				147A0C7B1BFE13FD0009044A /* TestsStorage.m in Sources */,
 				142B50741CDD2C7A005B143C /* ChatUsersStoryPresenterTests.swift in Sources */,
 				14EBDD231DFC154E00A1EEB5 /* VideoCallStoryInteractorTests.swift in Sources */,
-				147A0C7D1BFE159B0009044A /* TestsStorageTests.m in Sources */,
 				1420E4671CE7CE6E0043EFF9 /* IncomingCallStoryConfiguratorTests.swift in Sources */,
 				14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */,
 				14ADBDE01C73851C003A0C98 /* ImageGalleryStoryRouterTests.swift in Sources */,
-				14398F6C1C010A0800F3CE74 /* SVUserTests.m in Sources */,
 				14EBDD2E1DFC77CE00A1EEB5 /* IncomingCallStoryInteractorTests.swift in Sources */,
 				14EBDD311DFC7B7B00A1EEB5 /* AuthStoryInteractorTests.swift in Sources */,
 				1433C5FA1DF1956100A2CED6 /* VideoCallStoryRouterTests.swift in Sources */,
+				1445F19A1E040AB60040F8ED /* TestsStorage.swift in Sources */,
 				1433C5F71DF1735100A2CED6 /* VideoCallStoryPresenterTests.swift in Sources */,
 				1420E4681CE7CE6E0043EFF9 /* IncomingCallStoryViewTests.swift in Sources */,
 				14ADBDDD1C738514003A0C98 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
@@ -2841,7 +2813,6 @@
 				142B50961CDD2CE0005B143C /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1420E4911CE7CE9C0043EFF9 /* IncomingCallStoryRouterInput.swift in Sources */,
-				14A0288D1BFB206E00BDF2C5 /* QBSignalingChannelDelegate.m in Sources */,
 				1473EAD31CAC6090007F9DF8 /* AuthStoryRouter.swift in Sources */,
 				1420E47B1CE7CE860043EFF9 /* IncomingCallStoryViewInput.swift in Sources */,
 				14ADBDE31C73854C003A0C98 /* ImageGalleryStoryViewOutput.swift in Sources */,
@@ -2901,7 +2872,6 @@
 				14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
-				148233921C002DFE0000E9ED /* QBSignalingChannelDelegate.m in Sources */,
 				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
 				142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
@@ -3011,11 +2981,8 @@
 				14EBDD241DFC154E00A1EEB5 /* VideoCallStoryInteractorTests.swift in Sources */,
 				1433C5F91DF17A3000A2CED6 /* VideoCallStoryViewTests.swift in Sources */,
 				14EBDD3B1DFC7D4200A1EEB5 /* CallServiceTests.swift in Sources */,
-				14E9F5951C6CD317007F58B7 /* TestsStorage.m in Sources */,
-				14E9F5961C6CD317007F58B7 /* TestsStorageTests.m in Sources */,
 				14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */,
 				14B697F11E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */,
-				14E9F5991C6CD317007F58B7 /* SVUserTests.m in Sources */,
 				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				14EBDD2C1DFC170F00A1EEB5 /* FakeCallService.swift in Sources */,
 				CBCBD0B02BD31DE548AB4327 /* ImageGalleryStoryViewTests.swift in Sources */,
@@ -3026,6 +2993,7 @@
 				E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */,
 				A49D4EB8C7F6DF685E7F5B8D /* AuthStoryConfiguratorTests.swift in Sources */,
 				71126378754862BDA35556EB /* AuthStoryViewTests.swift in Sources */,
+				1445F19B1E040AB60040F8ED /* TestsStorage.swift in Sources */,
 				0525A30887D71636FB168713 /* AuthStoryPresenterTests.swift in Sources */,
 				010F6CCF815DCADC3352D1B8 /* AuthStoryRouterTests.swift in Sources */,
 				755AB6765BB94E408F1700D8 /* ChatUsersStoryConfiguratorTests.swift in Sources */,
@@ -3298,6 +3266,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = QBRTCDemo;
 				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
 				SWIFT_VERSION = 2.3;
+				USE_HEADERMAP = NO;
 				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Debug;
@@ -3346,6 +3315,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = QBRTCDemo;
 				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
 				SWIFT_VERSION = 2.3;
+				USE_HEADERMAP = NO;
 				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Release;
@@ -3410,6 +3380,9 @@
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
+					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/\"",
+					"\"$(SRCROOT)/QBRTCDemo/Modules/Models/\"",
+					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/WebRTC/Helpers/\"",
 				);
 				INFOPLIST_FILE = "QBRTCDemo/QBRTCDemo_s-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3432,6 +3405,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = NO;
 			};
 			name = Debug;
 		};
@@ -3462,6 +3436,9 @@
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
 					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
+					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/\"",
+					"\"$(SRCROOT)/QBRTCDemo/Modules/Models/\"",
+					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/WebRTC/Helpers/\"",
 				);
 				INFOPLIST_FILE = "QBRTCDemo/QBRTCDemo_s-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3483,6 +3460,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = NO;
 			};
 			name = Release;
 		};

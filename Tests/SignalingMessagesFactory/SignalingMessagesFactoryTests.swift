@@ -24,8 +24,8 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	var signalingMessagesFactory: SignalingMessagesFactory!
 	
 	override func setUp() {
-		sender = TestsStorage.svuserRealUser1()
-		testUser = TestsStorage.svuserTest()
+		sender = TestsStorage.svuserRealUser1
+		testUser = TestsStorage.svuserTest
 		signalingMessagesFactory = SignalingMessagesFactory()
 	}
 	

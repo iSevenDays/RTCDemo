@@ -54,7 +54,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	func testSetsTagIfTagContainMoreThanThreeCharacters() {
 		// given
 		let tag = "tag"
-		let testUser = TestsStorage.svuserTest()
+		let testUser = TestsStorage.svuserTest
 		
 		// when
 		interactor.setTag(tag, currentUser: testUser)
@@ -67,7 +67,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	func testDoesNOTSetTagIfTagContainLessThanThreeCharacters() {
 		// given
 		let tag = "ta"
-		let testUser = TestsStorage.svuserTest()
+		let testUser = TestsStorage.svuserTest
 		
 		// when
 		interactor.setTag(tag, currentUser: testUser)
@@ -95,8 +95,8 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	func testNotifiesPresenterAboutIncomingCall() {
 		// given
 		let tag = "tag"
-		let currentUser = TestsStorage.svuserTest()
-		let opponentUser = TestsStorage.svuserRealUser1()
+		let currentUser = TestsStorage.svuserTest
+		let opponentUser = TestsStorage.svuserRealUser1
 		
 		let fakeCallService = FakeCallSevice()
 		ServicesConfigurator().configureCallService(fakeCallService)
@@ -139,7 +139,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	
 	
 	class MockCacheService: NSObject, CacheServiceProtocol {
-		var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest()]
+		var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest]
 		
 		func cachedUserWithID(id: Int) -> SVUser? {
 			return nil
@@ -156,7 +156,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	
 	class MockRESTService: FakeQBRESTService {
 		var downloadUsersWithTagsGotCalled = false
-		var restUsersArray: [SVUser] = [TestsStorage.svuserTest()]
+		var restUsersArray: [SVUser] = [TestsStorage.svuserTest]
 		
 		override func downloadUsersWithTags(tags: [String], successBlock: ((users: [SVUser]) -> Void)?, errorBlock: ((error: NSError?) -> Void)?) {
 			downloadUsersWithTagsGotCalled = true

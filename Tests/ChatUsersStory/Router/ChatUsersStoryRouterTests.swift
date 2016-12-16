@@ -31,8 +31,8 @@ class ChatUsersStoryRouterTests: BaseTestCase {
 
 	func testRouterOpensVideoStory() {
 		// given
-		let initiator = TestsStorage.svuserRealUser1()
-		let opponent = TestsStorage.svuserRealUser2()
+		let initiator = TestsStorage.svuserRealUser1
+		let opponent = TestsStorage.svuserRealUser2
 		
 		// when
 		router.openVideoStoryWithInitiator(initiator, thenCallOpponent: opponent)

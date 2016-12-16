@@ -23,8 +23,8 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	var mockRouter: MockRouter!
 	var mockView: MockViewController!
 	
-	let testUser = TestsStorage.svuserRealUser1()
-	let testUser2 = TestsStorage.svuserRealUser2()
+	let testUser = TestsStorage.svuserRealUser1
+	let testUser2 = TestsStorage.svuserRealUser2
 	
     override func setUp() {
         super.setUp()

@@ -49,7 +49,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	
 	func testPresenterConfiguresModule() {
 		// given
-		let opponent = TestsStorage.svuserRealUser1()
+		let opponent = TestsStorage.svuserRealUser1
 		
 		// when
 		presenter.configureModuleWithCallInitiator(opponent)
@@ -62,7 +62,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	
 	func testPresenterOpensVideoStory_whenCallHasBeenAccepted() {
 		// given
-		let opponent = TestsStorage.svuserRealUser1()
+		let opponent = TestsStorage.svuserRealUser1
 		
 		// when
 		presenter.configureModuleWithCallInitiator(opponent)
@@ -74,7 +74,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	
 	func testPresenterCallsRouterUnwindToChatsStory_whenCallHasBeenDeclined() {
 		// given
-		let opponent = TestsStorage.svuserRealUser1()
+		let opponent = TestsStorage.svuserRealUser1
 		
 		// when
 		presenter.configureModuleWithCallInitiator(opponent)

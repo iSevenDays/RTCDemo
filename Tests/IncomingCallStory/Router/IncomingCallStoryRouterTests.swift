@@ -29,7 +29,7 @@ class IncomingCallStoryRouterTests: BaseTestCase {
 	
 	func testRouterOpensVideoCallStoryCallsTransitionHandler() {
 		// when
-		router.openVideoStoryWithOpponent(TestsStorage.svuserRealUser1())
+		router.openVideoStoryWithOpponent(TestsStorage.svuserRealUser1)
 		
 		// then
 		XCTAssertEqual(mockOutput.openedModuleSegueIdentifier, router.incomingCallStoryToVideoStorySegue)

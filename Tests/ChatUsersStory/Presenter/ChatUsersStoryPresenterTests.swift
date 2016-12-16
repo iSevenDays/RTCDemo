@@ -50,8 +50,8 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 	func testPresentedOpensVideoStory_whenOpponentHasBeenSelected() {
 		// given
 		let tag = "test chatroom name"
-		let testUser = TestsStorage.svuserTest()
-		let opponentUser = TestsStorage.svuserRealUser1()
+		let testUser = TestsStorage.svuserTest
+		let opponentUser = TestsStorage.svuserRealUser1
 		
 		// when
 		presenter.setTag(tag, currentUser: testUser)
@@ -67,7 +67,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 	
 	func testViewReloadsData_whenPresenterRetrievesUsers() {
 		// given 
-		let testUsers = [TestsStorage.svuserTest()]
+		let testUsers = [TestsStorage.svuserTest]
 		
 		// when
 		presenter.didRetrieveUsers(testUsers)
@@ -80,8 +80,8 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 	func testPresentedOpensIncomingCallStory_whenCallRequestHasBeenReceived() {
 		// given
 		let tag = "test chatroom name"
-		let currentUser = TestsStorage.svuserTest()
-		let opponentUser = TestsStorage.svuserRealUser1()
+		let currentUser = TestsStorage.svuserTest
+		let opponentUser = TestsStorage.svuserRealUser1
 		
 		// when
 		presenter.setTag(tag, currentUser: currentUser)
@@ -96,7 +96,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 	func testCallsSetsTagWithInitiatorUser_whenStoryHasBeenLoaded() {
 		// given
 		let tag = "test chatroom name"
-		let testUser = TestsStorage.svuserTest()
+		let testUser = TestsStorage.svuserTest
 		
 		// when
 		presenter.setTag(tag, currentUser: testUser)

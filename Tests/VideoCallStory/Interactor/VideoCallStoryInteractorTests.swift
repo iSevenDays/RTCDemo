@@ -27,8 +27,8 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	
 	override func setUp() {
 		super.setUp()
-		testUser = TestsStorage.svuserRealUser1()
-		testUser2 = TestsStorage.svuserRealUser2()
+		testUser = TestsStorage.svuserRealUser1
+		testUser2 = TestsStorage.svuserRealUser2
 		interactor = VideoCallStoryInteractor()
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
@@ -59,7 +59,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	func testConnectsWithTestUser() {
 		// given
 		useRealCallService()
-		let testUser = TestsStorage.svuserTest()
+		let testUser = TestsStorage.svuserTest
 		
 		// when
 		interactor.connectToChatWithUser(testUser, callOpponent: nil)
@@ -168,7 +168,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	func DISABLED_testRejectsIncomingCallWhenAnotherCallIsActive() {
 		// given
 		useRealCallService()
-		let undefinedUser = TestsStorage.svuserTest()
+		let undefinedUser = TestsStorage.svuserTest
 		
 		// when
 		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)

@@ -63,7 +63,7 @@ class IncomingCallStoryViewTests: XCTestCase {
 	
 	func testConfigureViewWithUser() {
 		// given
-		let callInitiator = TestsStorage.svuserRealUser1()
+		let callInitiator = TestsStorage.svuserRealUser1
 		
 		// when
 		controller.configureViewWithCallInitiator(callInitiator)
