@@ -41,4 +41,6 @@ import Foundation
 	 * a call must be closed
 	*/
 	func didFailCallService()
+	
+	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser)
 }

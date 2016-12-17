@@ -80,7 +80,7 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func setLocalVideoCaptureSession(captureSession: AVCaptureSession) {
-		loadViewIfNeeded()
+		_ = view
 		viewLocal.captureSession = captureSession
 	}
 	

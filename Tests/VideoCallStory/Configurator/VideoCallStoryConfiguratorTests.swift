@@ -39,6 +39,7 @@ class VideoCallStoryModuleConfiguratorTests: XCTestCase {
         let interactor: VideoCallStoryInteractor = presenter.interactor as! VideoCallStoryInteractor
         XCTAssertNotNil(interactor.output, "output in VideoCallStoryInteractor is nil after configuration")
 		XCTAssertNotNil(interactor.callService, "callService in VideoCallStoryInteractor is nil after configuration")
+		XCTAssertNotNil(interactor.pushService, "pushService in VideoCallStoryInteractor is nil after configuration")
     }
 
     class VideoCallStoryViewControllerMock: VideoCallStoryViewController {

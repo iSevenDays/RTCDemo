@@ -1,7 +1,7 @@
+platform :ios, "8.0"
+
 def available_pods
 	pod 'ViperMcFlurry', '~> 1.5.2'
-	pod 'Typhoon', '~> 3.4.5'
-	pod 'RamblerTyphoonUtils/AssemblyCollector', '1.5.0'
 end
 
 

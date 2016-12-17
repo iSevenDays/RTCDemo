@@ -64,7 +64,7 @@ class AuthStoryPresenterTests: XCTestCase {
 	
 	func testShowsLoggingInIndicator() {
 		// when
-		self.presenter.doingLoginWithUser(TestsStorage.svuserTest())
+		self.presenter.doingLoginWithUser(TestsStorage.svuserTest)
 		
 		// then
 		XCTAssertTrue(self.mockView.showIndicatorLoggingInGotCalled)
@@ -74,7 +74,7 @@ class AuthStoryPresenterTests: XCTestCase {
 	
 	func testShowsSigningUpIndicator() {
 		// when
-		self.presenter.doingSignUpWithUser(TestsStorage.svuserTest())
+		self.presenter.doingSignUpWithUser(TestsStorage.svuserTest)
 		
 		// then
 		XCTAssertTrue(self.mockView.showIndicatorSigningUpGotCalled)
@@ -84,7 +84,7 @@ class AuthStoryPresenterTests: XCTestCase {
 	
 	func testOpensVideoStory_whenLoggedIn() {
 		// given
-		let testUser = TestsStorage.svuserTest()
+		let testUser = TestsStorage.svuserTest
 		
 		// when
 		self.presenter.didLoginUser(testUser)

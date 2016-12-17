@@ -24,8 +24,8 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	var signalingMessagesFactory: SignalingMessagesFactory!
 	
 	override func setUp() {
-		sender = TestsStorage.svuserRealUser1()
-		testUser = TestsStorage.svuserTest()
+		sender = TestsStorage.svuserRealUser1
+		testUser = TestsStorage.svuserTest
 		signalingMessagesFactory = SignalingMessagesFactory()
 	}
 	
@@ -127,7 +127,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	
 	func testConvertsSignalingOfferMessageToQBMessageAndBack() {
 		// given
-		let sessionDescription = RTCSessionDescription(type: "offer", sdp: CallServiceHelpers.offerSDP())
+		let sessionDescription = RTCSessionDescription(type: "offer", sdp: CallServiceHelpers.offerSDP)
 		let signalingMessage = SignalingMessage.offer(sdp: sessionDescription)
 		let sessionID = NSUUID().UUIDString
 		let sessionDetails = SessionDetails(initiatorID: sender.ID!.unsignedIntegerValue, membersIDs: [sender.ID!.unsignedIntegerValue, testUser.ID!.unsignedIntegerValue], sessionID: sessionID)

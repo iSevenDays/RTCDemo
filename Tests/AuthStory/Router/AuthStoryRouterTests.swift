@@ -29,7 +29,7 @@ class AuthStoryRouterTests: BaseTestCase {
 	
 	func testRouterOpensChatUsersCallsTransitionHandler() {
 		// when
-		router.openChatUsersStoryWithTag("tag", currentUser: TestsStorage.svuserRealUser1())
+		router.openChatUsersStoryWithTag("tag", currentUser: TestsStorage.svuserRealUser1)
 		
 		// then
 		XCTAssertEqual(mockOutput.openedModuleSegueIdentifier, router.authStoryToChatUsersStorySegueIdentifier)

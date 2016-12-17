@@ -18,7 +18,7 @@ import XCTest
 
 
 // Note: when possible, useRealCallService is used
-class VideoCallStoryInteractorTests: XCTestCase {
+class VideoCallStoryInteractorTests: BaseTestCase {
 	
 	var interactor: VideoCallStoryInteractor!
 	var mockOutput: MockPresenter!
@@ -27,16 +27,15 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	
 	override func setUp() {
 		super.setUp()
-		testUser = TestsStorage.svuserRealUser1()
-		testUser2 = TestsStorage.svuserRealUser2()
+		testUser = TestsStorage.svuserRealUser1
+		testUser2 = TestsStorage.svuserRealUser2
 		interactor = VideoCallStoryInteractor()
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
+		interactor.pushService = FakePushNotificationsService()
 	}
 	
 	override func tearDown() {
-		interactor.output = nil
-		mockOutput = nil
 		super.tearDown()
 	}
 	
@@ -59,7 +58,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	func testConnectsWithTestUser() {
 		// given
 		useRealCallService()
-		let testUser = TestsStorage.svuserTest()
+		let testUser = TestsStorage.svuserTest
 		
 		// when
 		interactor.connectToChatWithUser(testUser, callOpponent: nil)
@@ -118,6 +117,21 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
 	}
 	
+	func testSendsPushNotificationToOpponentAboutNewCall_whenDialingIsStarted() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		// time to apply local SDP and start dialing, dialing must call send push event
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
+		XCTAssertTrue(mockOutput.didSendPushNotificationAboutNewCallToOpponentGotCalled)
+		XCTAssertEqual(mockOutput.opponent, testUser2)
+	}
+	
 	func testStoresLocalVideoTrack() {
 		// given
 		useFakeCallService()
@@ -168,7 +182,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 	func DISABLED_testRejectsIncomingCallWhenAnotherCallIsActive() {
 		// given
 		useRealCallService()
-		let undefinedUser = TestsStorage.svuserTest()
+		let undefinedUser = TestsStorage.svuserTest
 		
 		// when
 		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
@@ -275,6 +289,7 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		var didReceiveDataChannelStateNotReadyGotCalled = false
 		var didReceiveInvitationToOpenImageGalleryGotCalled = false
 		var didSendInvitationToOpenImageGalleryGotCalled = false
+		var didSendPushNotificationAboutNewCallToOpponentGotCalled = false
 		
 		func didConnectToChatWithUser(user: SVUser) {
 			connectedToChatUser = user
@@ -333,6 +348,11 @@ class VideoCallStoryInteractorTests: XCTestCase {
 		
 		func didSendInvitationToOpenImageGallery() {
 			didSendInvitationToOpenImageGalleryGotCalled = true
+		}
+
+		func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
+			didSendPushNotificationAboutNewCallToOpponentGotCalled = true
+			self.opponent = opponent
 		}
 	}
 }

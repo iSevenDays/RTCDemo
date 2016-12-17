@@ -22,6 +22,7 @@ class IncomingCallStoryViewTests: XCTestCase {
 	var mockOutput: MockViewControllerOutput!
 	
 	let emptySender = UIResponder()
+	var callInitiator: SVUser!
 	
 	override func setUp() {
 		super.setUp()
@@ -29,6 +30,8 @@ class IncomingCallStoryViewTests: XCTestCase {
 		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
+		
+		callInitiator = TestsStorage.svuserRealUser1
 	}
 
 	// MARK: AuthStoryViewOutput
@@ -62,9 +65,6 @@ class IncomingCallStoryViewTests: XCTestCase {
 	// MARK: - Testing methods of IncomingCallStoryViewInput
 	
 	func testConfigureViewWithUser() {
-		// given
-		let callInitiator = TestsStorage.svuserRealUser1()
-		
 		// when
 		controller.configureViewWithCallInitiator(callInitiator)
 		
@@ -72,10 +72,20 @@ class IncomingCallStoryViewTests: XCTestCase {
 		XCTAssertEqual(controller.lblIncomingCall.text, "Incoming call from: " + callInitiator.fullName)
 	}
 	
+	func testShowOpponentDeclinedCallEventuallyCallsCloseAction() {
+		// when
+		controller.configureViewWithCallInitiator(callInitiator)
+		controller.showOpponentDecidedToDeclineCall()
+		
+		// then
+		XCTAssertTrue(mockOutput.didTriggerCloseActionGotCalled)
+	}
+	
 	class MockViewControllerOutput : NSObject, IncomingCallStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		var didTriggerAcceptButtonTappedGotCalled = false
 		var didTriggerDeclineButtonTappedGotCalled = false
+		var didTriggerCloseActionGotCalled = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
@@ -87,6 +97,10 @@ class IncomingCallStoryViewTests: XCTestCase {
 		
 		func didTriggerDeclineButtonTapped() {
 			didTriggerDeclineButtonTappedGotCalled = true
+		}
+		
+		func didTriggerCloseAction() {
+			didTriggerCloseActionGotCalled = true
 		}
 	}
 }

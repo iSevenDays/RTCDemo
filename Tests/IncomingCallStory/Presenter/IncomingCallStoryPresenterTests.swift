@@ -24,6 +24,8 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	var mockRouter: MockRouter!
 	var mockView: MockViewController!
 	
+	var opponent: SVUser!
+	
 	override func setUp() {
 		super.setUp()
 		
@@ -37,6 +39,8 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		presenter.interactor = mockInteractor
 		presenter.router = mockRouter
 		presenter.view = mockView
+		
+		opponent = TestsStorage.svuserRealUser1
 	}
 	
 	func testPresenterHandlesViewReadyEvent() {
@@ -48,9 +52,6 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	}
 	
 	func testPresenterConfiguresModule() {
-		// given
-		let opponent = TestsStorage.svuserRealUser1()
-		
 		// when
 		presenter.configureModuleWithCallInitiator(opponent)
 		
@@ -61,9 +62,6 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	}
 	
 	func testPresenterOpensVideoStory_whenCallHasBeenAccepted() {
-		// given
-		let opponent = TestsStorage.svuserRealUser1()
-		
 		// when
 		presenter.configureModuleWithCallInitiator(opponent)
 		presenter.didTriggerAcceptButtonTapped()
@@ -73,9 +71,6 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 	}
 	
 	func testPresenterCallsRouterUnwindToChatsStory_whenCallHasBeenDeclined() {
-		// given
-		let opponent = TestsStorage.svuserRealUser1()
-		
 		// when
 		presenter.configureModuleWithCallInitiator(opponent)
 		presenter.didTriggerDeclineButtonTapped()
@@ -83,6 +78,25 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		// then
 		XCTAssertTrue(mockInteractor.rejectCallGotCalled)
 		XCTAssertTrue(mockRouter.unwindToChatsUserStoryGotCalled)
+	}
+	
+	func testPresenterCallsRouterUnwindToChatsStory_whenReceivedCloseAction() {
+		// when
+		presenter.configureModuleWithCallInitiator(opponent)
+		presenter.didTriggerCloseAction()
+		
+		// then
+		XCTAssertTrue(mockRouter.unwindToChatsUserStoryGotCalled)
+		XCTAssertFalse(mockInteractor.rejectCallGotCalled)
+	}
+	
+	func testPresenterCallsViewShowOpponentDecidedToDeclineCall_whenHangupmessageIsReceivedForIncomingCall() {
+		// when
+		presenter.configureModuleWithCallInitiator(opponent)
+		presenter.didReceiveHangupForIncomingCall()
+		
+		// then
+		XCTAssertTrue(mockView.showOpponentDecidedToDeclineCallGotCalled)
 	}
 
     class MockInteractor: IncomingCallStoryInteractorInput {
@@ -124,6 +138,8 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		var configureViewWithCallInitiatorGotCalled = false
 		var callInitiator: SVUser?
 		
+		var showOpponentDecidedToDeclineCallGotCalled = false
+		
         func setupInitialState() {
 			setupInitialStateGotCalled = true
         }
@@ -131,6 +147,10 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		func configureViewWithCallInitiator(callInitiator: SVUser) {
 			configureViewWithCallInitiatorGotCalled = true
 			self.callInitiator = callInitiator
+		}
+		
+		func showOpponentDecidedToDeclineCall() {
+			showOpponentDecidedToDeclineCallGotCalled = true
 		}
     }
 }

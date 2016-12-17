@@ -9,5 +9,6 @@
 import Foundation
 
 protocol IncomingCallStoryInteractorOutput: class {
-
+	// The opponent decided to cancel the offer
+	func didReceiveHangupForIncomingCall()
 }

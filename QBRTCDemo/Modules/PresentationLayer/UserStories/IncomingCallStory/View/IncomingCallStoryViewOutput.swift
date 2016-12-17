@@ -16,4 +16,10 @@
 	
 	func didTriggerAcceptButtonTapped()
 	func didTriggerDeclineButtonTapped()
+	
+    /**
+	Called only in one case - when an opponent sent hanup message for incoming call
+	It means that the opponent decided to decline the call
+	*/
+	func didTriggerCloseAction()
 }

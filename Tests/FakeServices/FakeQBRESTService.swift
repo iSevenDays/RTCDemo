@@ -23,7 +23,7 @@ class FakeQBRESTService : QBRESTService {
 	var shouldLoginAfterSignupSuccessfully = true
 	
 	var shouldDownloadUsersWithTags = true
-	var usersWithTags: [SVUser] = [TestsStorage.svuserTest()]
+	var usersWithTags: [SVUser] = [TestsStorage.svuserTest]
 	
 	private var logined = false
 	private var registered = false

@@ -29,6 +29,7 @@ class VideoCallStoryModuleConfigurator {
         let interactor = VideoCallStoryInteractor()
         interactor.output = presenter
 		interactor.callService = ServicesProvider.currentProvider.callService
+		interactor.pushService = ServicesProvider.currentProvider.pushService
 		
         presenter.interactor = interactor
         viewController.output = presenter

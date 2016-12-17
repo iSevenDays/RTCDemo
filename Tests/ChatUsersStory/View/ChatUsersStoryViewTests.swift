@@ -42,7 +42,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 	func testViewCorrectlyLoadsAndShowsUsers() {
 		// given
 		controller.loadView()
-		let users = [TestsStorage.svuserTest()]
+		let users = [TestsStorage.svuserTest]
 		let firstUser = users.first!
 		
 		// when
@@ -61,7 +61,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 	func testNavigationBarTextWithCurrentUser() {
 		// given
 		controller.loadView()
-		let currentUser = TestsStorage.svuserTest()
+		let currentUser = TestsStorage.svuserTest
 		
 		// when
 		controller.configureViewWithCurrentUser(currentUser)
@@ -73,7 +73,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 	func testViewCorrectlyHandlesUserTappedEvent() {
 		// given
 		controller.loadView()
-		let users = [TestsStorage.svuserTest()]
+		let users = [TestsStorage.svuserTest]
 		let firstUser = users.first!
 		
 		// when

@@ -6,6 +6,8 @@
 //  Copyright © 2015 anton. All rights reserved.
 //
 
+@import Foundation;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SVUser : NSObject <NSCoding, NSCopying>

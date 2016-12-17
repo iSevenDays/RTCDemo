@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Quickblox
 
 protocol SignalingChannelObserver: class {
 	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails)
@@ -55,11 +56,12 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 			} else {
 				self.user = user
 				QBChat.instance().currentUser()?.password = user.password
+				QBChat.instance().currentUser()?.ID = userID.unsignedIntegerValue
 				self.state = .established
 			}
 			completion?(error: error)
 		}
-	}
+	}   
 	
 	func sendMessage(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
 		let qbMessage = try? signalingMessagesFactory.qbMessageFromSignalingMessage(message, sender: user, sessionDetails: sessionDetails)
@@ -78,7 +80,6 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 			completion?(error: nil)
 		}
 	}
-	
 }
 
 extension QBSignalingChannel: QBChatDelegate {

@@ -29,7 +29,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	
 	func signUpOrLoginWithUserName(userName: String, tags: [String]) {
 		
-		let login = NSUUID().UUIDString
+		let login = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? NSUUID().UUIDString
 		let password = "zZc64fj13$_1=fx%"
 		
 		let user = SVUser(ID: nil, login: login, password: password, tags: tags)
