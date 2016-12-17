@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YLt-n8-hVe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YLt-n8-hVe">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,18 +42,28 @@
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-0I-S3D" userLabel="Local Video View" customClass="RTCCameraPreviewView">
-                                <rect key="frame" x="210" y="388" width="100" height="120"/>
+                                <rect key="frame" x="210" y="368" width="100" height="120"/>
                                 <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Jev-a1-VJc"/>
                                     <constraint firstAttribute="width" constant="100" id="jDp-34-FRQ"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSW-Wr-uX2">
-                                <rect key="frame" x="131" y="518" width="59" height="30"/>
-                                <state key="normal" title="Hung up">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSW-Wr-uX2" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
+                                <rect key="frame" x="124.5" y="484" width="72" height="72"/>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="iHt-r8-VWb"/>
+                                    <constraint firstAttribute="height" constant="72" id="qeY-hM-B5z"/>
+                                </constraints>
+                                <state key="normal" image="call_end">
                                     <color key="titleColor" red="0.96170176630434778" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="36"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didTapButtonHangup:" destination="YrU-5b-St0" eventType="touchUpInside" id="DMU-wn-Ngh"/>
                                 </connections>
@@ -71,14 +82,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KG-gz-qhW">
-                                <rect key="frame" x="210" y="518" width="101" height="30"/>
+                                <rect key="frame" x="216.5" y="505" width="101" height="30"/>
                                 <state key="normal" title="Switch camera"/>
                                 <connections>
                                     <action selector="didTapButtonSwitchCamera:" destination="YrU-5b-St0" eventType="touchUpInside" id="Lks-89-Z2S"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQz-PG-RMx">
-                                <rect key="frame" x="23" y="518" width="88" height="30"/>
+                                <rect key="frame" x="16.5" y="505" width="88" height="30"/>
                                 <state key="normal" title="Switch audio"/>
                                 <connections>
                                     <action selector="didTapButtonSwitchAudioRoute:" destination="YrU-5b-St0" eventType="touchUpInside" id="P7P-HY-5sH"/>
@@ -95,9 +106,9 @@
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="trailing" secondItem="4cX-0I-S3D" secondAttribute="trailing" constant="10" id="HIc-Ya-2Ac"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="centerY" secondItem="hSW-Wr-uX2" secondAttribute="centerY" id="Lpv-GS-BvM"/>
                             <constraint firstItem="wgw-bV-rb3" firstAttribute="top" secondItem="ok7-Kn-klu" secondAttribute="bottom" constant="20" id="Ngf-cW-zPQ"/>
-                            <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="4cX-0I-S3D" secondAttribute="bottom" constant="60" id="O1o-kO-AwN"/>
+                            <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="4cX-0I-S3D" secondAttribute="bottom" constant="80" id="O1o-kO-AwN"/>
                             <constraint firstItem="hSW-Wr-uX2" firstAttribute="centerX" secondItem="OXD-kM-Ds0" secondAttribute="centerX" id="hLj-Ik-I5g"/>
-                            <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="hSW-Wr-uX2" secondAttribute="bottom" constant="20" id="lAC-j9-97H"/>
+                            <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="hSW-Wr-uX2" secondAttribute="bottom" constant="12" id="lAC-j9-97H"/>
                             <constraint firstItem="ZrF-Ed-lsL" firstAttribute="centerY" secondItem="wgw-bV-rb3" secondAttribute="centerY" id="q9T-jB-iQl"/>
                             <constraint firstAttribute="trailing" secondItem="ZrF-Ed-lsL" secondAttribute="trailing" constant="20" id="tSy-0w-wZr"/>
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" id="uH2-mc-RsQ"/>
@@ -133,4 +144,7 @@
             <point key="canvasLocation" x="940" y="396"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="call_end" width="48" height="48"/>
+    </resources>
 </document>

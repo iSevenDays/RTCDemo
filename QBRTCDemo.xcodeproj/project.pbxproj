@@ -57,6 +57,8 @@
 		142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
 		142582D71E00792E00BA9F21 /* TimersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142582D61E00792E00BA9F21 /* TimersFactory.swift */; };
 		142582D81E00792E00BA9F21 /* TimersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142582D61E00792E00BA9F21 /* TimersFactory.swift */; };
+		142866CE1E049DDC00F9AB41 /* DesignableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142866CD1E049DDC00F9AB41 /* DesignableViews.swift */; };
+		142866CF1E049DDC00F9AB41 /* DesignableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142866CD1E049DDC00F9AB41 /* DesignableViews.swift */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		142B50311CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
 		142B50321CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
@@ -510,6 +512,7 @@
 		1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallServicePendingRequest.swift; sourceTree = "<group>"; };
 		142154611CE75ACB003C1C4A /* ServicesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesProvider.swift; sourceTree = "<group>"; };
 		142582D61E00792E00BA9F21 /* TimersFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimersFactory.swift; sourceTree = "<group>"; };
+		142866CD1E049DDC00F9AB41 /* DesignableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableViews.swift; sourceTree = "<group>"; };
 		142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatUsersStory.storyboard; sourceTree = "<group>"; };
 		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Optionals.swift"; sourceTree = "<group>"; };
 		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1135,6 +1138,14 @@
 			path = TimersFactory;
 			sourceTree = "<group>";
 		};
+		142866CC1E049DCF00F9AB41 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				142866CD1E049DDC00F9AB41 /* DesignableViews.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		142B51621CDE13C7005B143C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1593,6 +1604,7 @@
 		14D0A4161C542D3F005AF958 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				142866CC1E049DCF00F9AB41 /* CustomViews */,
 				14D0A4171C542D4D005AF958 /* UserStories */,
 			);
 			path = PresentationLayer;
@@ -2846,6 +2858,7 @@
 				1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */,
 				14CC91F31DEF772000BABE45 /* KeychainSwift.swift in Sources */,
 				14EBDD341DFC7C9000A1EEB5 /* VideoCallStoryViewController.swift in Sources */,
+				142866CE1E049DDC00F9AB41 /* DesignableViews.swift in Sources */,
 				1448B79B1DFB231E002D5371 /* ArrayAppendOperator.swift in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				14740A7C1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */,
@@ -2875,6 +2888,7 @@
 				142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
+				142866CF1E049DDC00F9AB41 /* DesignableViews.swift in Sources */,
 				14740A7A1E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */,
 				142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
@@ -3233,7 +3247,6 @@
 			baseConfigurationReference = FA4059657CE380D4685B03C8 /* Pods-QBRTCDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;
@@ -3282,7 +3295,6 @@
 			baseConfigurationReference = DAF924DB8FD69A9D53C9DBDC /* Pods-QBRTCDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 77JDVA6Z54;
 				ENABLE_BITCODE = NO;

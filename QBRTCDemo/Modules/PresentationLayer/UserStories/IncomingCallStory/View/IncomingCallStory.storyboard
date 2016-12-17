@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7yk-1n-wJc">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7yk-1n-wJc">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,37 +19,56 @@
                         <viewControllerLayoutGuide type="bottom" id="0CJ-0e-apo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Rza-Xh-sdU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58o-9I-lgW">
-                                <rect key="frame" x="55.5" y="269" width="49" height="30"/>
-                                <color key="tintColor" red="0.0" green="0.74901960779999999" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Accept"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58o-9I-lgW" userLabel="decline" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
+                                <rect key="frame" x="58" y="511" width="72" height="72"/>
+                                <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="ima-Gx-Q84"/>
+                                    <constraint firstAttribute="width" constant="72" id="kQE-M2-Mb0"/>
+                                </constraints>
+                                <state key="normal" image="call_end"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="36"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="acceptCall:" destination="7yk-1n-wJc" eventType="touchUpInside" id="wAp-ET-qjg"/>
+                                    <action selector="declineCall:" destination="7yk-1n-wJc" eventType="touchUpInside" id="n2e-d2-ill"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming call from:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7F4-P2-FbP">
-                                <rect key="frame" x="87" y="208" width="146" height="21"/>
+                                <rect key="frame" x="114.5" y="323" width="146" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BaA-Nv-q13">
-                                <rect key="frame" x="214" y="269" width="52" height="30"/>
-                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Decline"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BaA-Nv-q13" userLabel="accept" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
+                                <rect key="frame" x="245.5" y="511" width="72" height="72"/>
+                                <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="D5s-Vd-KLb"/>
+                                    <constraint firstAttribute="width" constant="72" id="WJ4-pf-NmK"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
+                                <state key="normal" image="call_accept"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="36"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="declineCall:" destination="7yk-1n-wJc" eventType="touchUpInside" id="rhY-AQ-H6F"/>
+                                    <action selector="acceptCall:" destination="7yk-1n-wJc" eventType="touchUpInside" id="1nw-qK-vss"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7F4-P2-FbP" firstAttribute="centerY" secondItem="Rza-Xh-sdU" secondAttribute="centerY" id="GIk-0L-k6M"/>
                             <constraint firstItem="7F4-P2-FbP" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" id="IWh-yb-i8G"/>
-                            <constraint firstItem="58o-9I-lgW" firstAttribute="top" secondItem="7F4-P2-FbP" secondAttribute="bottom" constant="40" id="Rpw-BN-Jyw"/>
-                            <constraint firstItem="58o-9I-lgW" firstAttribute="centerY" secondItem="Rza-Xh-sdU" secondAttribute="centerY" id="Upq-yU-Ac8"/>
+                            <constraint firstItem="0CJ-0e-apo" firstAttribute="top" secondItem="58o-9I-lgW" secondAttribute="bottom" constant="84" id="OoK-M9-dJF"/>
                             <constraint firstItem="BaA-Nv-q13" firstAttribute="centerY" secondItem="58o-9I-lgW" secondAttribute="centerY" id="XHI-tZ-6qI"/>
                             <constraint firstItem="58o-9I-lgW" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" multiplier="0.5" id="iE6-sV-xvC"/>
                             <constraint firstItem="BaA-Nv-q13" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" multiplier="1.5" id="pfW-Er-QsI"/>
@@ -79,4 +99,8 @@
             <point key="canvasLocation" x="872" y="322"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="call_accept" width="48" height="48"/>
+        <image name="call_end" width="48" height="48"/>
+    </resources>
 </document>
