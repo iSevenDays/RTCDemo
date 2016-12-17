@@ -146,7 +146,7 @@ public class MulticastDelegate<T>
 					
 					if index > 0
 					{
-						newDelegates = Array(multicastDelegate.delegates[0..<index])
+						newDelegates = multicastDelegate.delegates.filter({$0.value != nil})
 					}
 				}
 			}
