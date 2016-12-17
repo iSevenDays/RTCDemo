@@ -188,20 +188,6 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertEqual(callService.dialingTimers.count, 0)
 	}
 	
-	func testDoesntProcessHangupSignalingMessageFromUndefinedOpponent() {
-		// given
-		let sessionDetailsForUndefinedConnection = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
-		
-		// when
-		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
-		
-		callService.didReceiveHangup(callService.signalingProcessor, fromOpponent: user3, sessionDetails: sessionDetailsForUndefinedConnection)
-		
-		// then
-		XCTAssertFalse(mockOutput.didReceiveHangupFromOpponentGotCalled)
-	}
-	
 	func testCorrectlyProcessesRejectMessage_whenRejectIsReceivedForSentOffer() {
 		// when
 		callService.connectWithUser(user1, completion: nil)

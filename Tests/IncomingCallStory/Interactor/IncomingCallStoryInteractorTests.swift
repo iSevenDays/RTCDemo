@@ -20,14 +20,17 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 
 	var interactor: IncomingCallStoryInteractor!
 	var mockOutput: MockOutput!
+	var mockPresenter: MockPresent!
 	
 	override func setUp() {
 		super.setUp()
 		interactor = IncomingCallStoryInteractor()
 		mockOutput = MockOutput()
+		mockPresenter = MockPresent()
 		mockOutput.signalingChannel = FakeSignalingChannel()
 		ServicesConfigurator().configureCallService(mockOutput)
 		interactor.callService = mockOutput
+		interactor.output = mockPresenter
 	}
 	
 	func testHangupSendsHangupMessage() {
@@ -42,10 +45,43 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 		XCTAssertEqual(testUser, mockOutput.opponent)
 	}
 	
+	// The opponent decided to cancel the offer
+	func testCorrectlyProcessesHangupForIncomingCall() {
+		// given
+		let testUser = TestsStorage.svuserRealUser1
+		interactor.setOpponent(testUser)
+		
+		// when
+		interactor.callService(interactor.callService, didReceiveHangupFromOpponent: testUser)
+		
+		// then
+		XCTAssertTrue(mockPresenter.didReceiveHangupForIncomingCallGotCalled)
+	}
+	
+	// The undefined opponent decided to cancel an offer, not current call opponent
+	func testDoesntCancelIncomingCallWhenHangupForIncomingCallIsReceivedFromUndefinedOpponent() {
+		// given
+		let testUser = TestsStorage.svuserRealUser1
+		interactor.setOpponent(testUser)
+		
+		// when
+		interactor.callService(interactor.callService, didReceiveHangupFromOpponent: TestsStorage.svuserRealUser2)
+		
+		// then
+		XCTAssertFalse(mockPresenter.didReceiveHangupForIncomingCallGotCalled)
+	}
+	
 	class MockOutput: FakeCallSevice {
 		var opponent: SVUser?
 		override func sendRejectCallToOpponent(user: SVUser) {
 			opponent = user
+		}
+	}
+	
+	class MockPresent: IncomingCallStoryInteractorOutput {
+		var didReceiveHangupForIncomingCallGotCalled = false
+		func didReceiveHangupForIncomingCall() {
+			didReceiveHangupForIncomingCallGotCalled = true
 		}
 	}
 }

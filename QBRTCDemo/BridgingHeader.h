@@ -29,8 +29,6 @@
 #import "RTCAVFoundationVideoSource.h"
 #import "RTCCameraPreviewView.h"
 
-
-// TODO: review
 #import <RTCMediaStream.h>
 #import <RTCPeerConnection.h>
 #import <RTCPeerConnectionFactory.h>

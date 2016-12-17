@@ -16,4 +16,6 @@ protocol IncomingCallStoryViewInput: class {
     func setupInitialState()
 	
 	func configureViewWithCallInitiator(callInitiator: SVUser)
+	
+	func showOpponentDecidedToDeclineCall()
 }

@@ -43,4 +43,8 @@ extension IncomingCallStoryViewController: IncomingCallStoryViewInput {
 		lblIncomingCall.text = "Incoming call from: " + callInitiator.fullName
 		lblIncomingCall.hidden = false
 	}
+	
+	func showOpponentDecidedToDeclineCall() {
+		output.didTriggerCloseAction()
+	}
 }

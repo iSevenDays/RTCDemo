@@ -284,10 +284,14 @@ extension CallService: SignalingProcessorObserver {
 		NSLog("didReceiveHangup")
 		pendingRequests[opponent] = nil
 		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
+			// Connection can be nil when we received incoming call and hasn't responded to it yet
 			connection.close()
-			observers => { $0.callService(self, didReceiveHangupFromOpponent: opponent) }
-			stopDialingOpponent(opponent)
 		}
+		// Anyway, If we received hangup for pending offer,
+		// then we should notify IncomingCallStory the opponent decided to decline the offer for a call
+		observers => { $0.callService(self, didReceiveHangupFromOpponent: opponent) }
+		stopDialingOpponent(opponent)
+		
 	}
 	
 	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {

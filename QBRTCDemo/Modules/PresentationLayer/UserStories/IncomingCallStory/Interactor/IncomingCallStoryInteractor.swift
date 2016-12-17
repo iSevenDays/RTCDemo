@@ -28,3 +28,11 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 		callService.sendRejectCallToOpponent(opponent)
 	}
 }
+
+extension IncomingCallStoryInteractor: CallServiceObserver {
+	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
+		if self.opponent == opponent {
+			output.didReceiveHangupForIncomingCall()
+		}
+	}
+}

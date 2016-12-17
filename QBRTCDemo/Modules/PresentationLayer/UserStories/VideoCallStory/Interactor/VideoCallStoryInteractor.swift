@@ -16,7 +16,7 @@ class VideoCallStoryInteractor: NSObject {
 	var localVideoTrack: RTCVideoTrack?
 	var remoteVideoTrack: RTCVideoTrack?
 	var connectingToChat = false
-	var lastOpponent: SVUser?
+	var opponent: SVUser?
 	var audioSessionPortOverride: AVAudioSessionPortOverride = .None
 	
 	var currentUser: SVUser? {
@@ -62,7 +62,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			callService.disconnectWithCompletion({ [weak output] (error) in
 				guard error == nil else {
 					NSLog("%@", "Error disconnecting \(error)")
-					output?.didFailToConnectToChat() // TODO: fix new method add
+					output?.didFailToConnectToChat()
 					return
 				}
 				connectWithUserAndCallOpponent()
@@ -78,7 +78,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			return
 		}
 		
-		lastOpponent = opponent
+		self.opponent = opponent
 		callService.addObserver(self)
 		
 		//DDLogInfo(@"Starting a call with opponent %@", opponent);
@@ -91,7 +91,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 	}
 	
 	func acceptCallFromOpponent(opponent: SVUser) {
-		lastOpponent = opponent
+		self.opponent = opponent
 		callService.addObserver(self)
 		callService.acceptCallFromOpponent(opponent)
 	}
@@ -170,6 +170,8 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 	}
 	
 	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
+		guard let currentOpponent = self.opponent else { return }
+		guard currentOpponent == opponent else { return }
 		output.didReceiveHangupFromOpponent(opponent)
 	}
 	
