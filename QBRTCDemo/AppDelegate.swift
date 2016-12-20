@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		QBSettings.setApplicationID(31016)
 		QBSettings.setAuthKey("aqsHa2AhDO5Z9Th")
 		QBSettings.setAuthSecret("825Bv-3ByACjD4O")
-		
+		QBSettings.setAutoReconnectEnabled(true)
         return true
     }
 

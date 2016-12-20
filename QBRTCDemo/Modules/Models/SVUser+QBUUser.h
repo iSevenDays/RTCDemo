@@ -6,7 +6,7 @@
 //  Copyright © 2016 anton. All rights reserved.
 //
 #import "SVUser.h"
-@import Quickblox;
+@class QBUUser;
 
 @interface SVUser (QBUUser)
 

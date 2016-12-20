@@ -7,6 +7,7 @@
 //
 
 @class SVUser;
+@import Quickblox;
 
 @interface QBUUser (SVUser)
 

@@ -136,14 +136,17 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		}
 		RTCDispatcher.dispatchAsyncOnType(.TypeAudioSession) { [unowned self] in
 			let session = RTCAudioSession.sharedInstance()
-			session.lockForConfiguration()
+			
 			do {
+				session.lockForConfiguration()
+				defer { session.unlockForConfiguration() }
 				try session.overrideOutputAudioPort(desiredRoute)
+				
 				self.audioSessionPortOverride = desiredRoute
 			} catch let error {
 				NSLog("%@", "Error overriding output port: \(error)")
 			}
-			session.unlockForConfiguration()
+			
 		}
 	}
 }

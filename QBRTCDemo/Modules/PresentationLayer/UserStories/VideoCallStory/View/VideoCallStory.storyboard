@@ -38,12 +38,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="NNT-dN-5QY" customClass="RTCEAGLVideoView">
-                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-0I-S3D" userLabel="Local Video View" customClass="RTCCameraPreviewView">
                                 <rect key="frame" x="210" y="354" width="100" height="120"/>
-                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Jev-a1-VJc"/>
                                     <constraint firstAttribute="width" constant="100" id="jDp-34-FRQ"/>
@@ -68,27 +67,16 @@
                                     <action selector="didTapButtonHangup:" destination="YrU-5b-St0" eventType="touchUpInside" id="DMU-wn-Ngh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-Ed-lsL">
-                                <rect key="frame" x="170" y="80" width="130" height="30"/>
-                                <state key="normal" title="Sync image gallery"/>
-                                <connections>
-                                    <action selector="didTapButtonDataChannelImageGallery:" destination="YrU-5b-St0" eventType="touchUpInside" id="7eX-Fg-hRw"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-bV-rb3">
-                                <rect key="frame" x="20" y="84" width="45" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KG-gz-qhW" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
                                 <rect key="frame" x="216.5" y="484" width="72" height="72"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="camera"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="36"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                        <color key="value" red="1" green="0.73071223019999998" blue="0.40453340500000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -97,37 +85,48 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQz-PG-RMx" userLabel="Switch audio route" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
                                 <rect key="frame" x="32.5" y="484" width="72" height="72"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.84705882352941175" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="speaker"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="36"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedBackgroundColor">
+                                        <color key="value" red="1" green="0.54366366376653219" blue="0.045212596610931355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                        <color key="value" red="1" green="0.73071223022631715" blue="0.40453340500031154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didTapButtonSwitchAudioRoute:" destination="YrU-5b-St0" eventType="touchUpInside" id="P7P-HY-5sH"/>
                                 </connections>
                             </button>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="GLU-3S-oMt">
+                                <rect key="frame" x="227" y="495" width="50" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="5Ms-1o-QEh"/>
+                                    <constraint firstAttribute="width" constant="50" id="DXU-45-d8N"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wgw-bV-rb3" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="20" id="1w9-LC-2UH"/>
-                            <constraint firstItem="NNT-dN-5QY" firstAttribute="top" secondItem="wgw-bV-rb3" secondAttribute="bottom" constant="5" id="36G-dh-gFn"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="height" secondItem="hSW-Wr-uX2" secondAttribute="height" id="3du-jX-rC0"/>
+                            <constraint firstItem="NNT-dN-5QY" firstAttribute="top" secondItem="ok7-Kn-klu" secondAttribute="bottom" id="43l-CM-Mol"/>
                             <constraint firstItem="hSW-Wr-uX2" firstAttribute="leading" secondItem="YQz-PG-RMx" secondAttribute="trailing" constant="20" id="9hJ-2V-idm"/>
                             <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="NNT-dN-5QY" secondAttribute="bottom" id="Ajn-LF-XSe"/>
                             <constraint firstItem="YQz-PG-RMx" firstAttribute="centerY" secondItem="hSW-Wr-uX2" secondAttribute="centerY" id="GPR-zv-if1"/>
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="trailing" secondItem="4cX-0I-S3D" secondAttribute="trailing" constant="10" id="HIc-Ya-2Ac"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="centerY" secondItem="hSW-Wr-uX2" secondAttribute="centerY" id="Lpv-GS-BvM"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="width" secondItem="hSW-Wr-uX2" secondAttribute="width" id="Nbm-9a-Zbs"/>
-                            <constraint firstItem="wgw-bV-rb3" firstAttribute="top" secondItem="ok7-Kn-klu" secondAttribute="bottom" constant="20" id="Ngf-cW-zPQ"/>
+                            <constraint firstItem="GLU-3S-oMt" firstAttribute="centerY" secondItem="7KG-gz-qhW" secondAttribute="centerY" constant="4" id="PJh-5P-xO0"/>
                             <constraint firstItem="YQz-PG-RMx" firstAttribute="height" secondItem="hSW-Wr-uX2" secondAttribute="height" id="Qbs-0F-qY0"/>
                             <constraint firstItem="YQz-PG-RMx" firstAttribute="width" secondItem="hSW-Wr-uX2" secondAttribute="width" id="ToV-OP-Umr"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="top" secondItem="4cX-0I-S3D" secondAttribute="bottom" constant="10" id="d0J-0t-k9A"/>
                             <constraint firstItem="hSW-Wr-uX2" firstAttribute="centerX" secondItem="OXD-kM-Ds0" secondAttribute="centerX" id="hLj-Ik-I5g"/>
                             <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="hSW-Wr-uX2" secondAttribute="bottom" constant="12" id="lAC-j9-97H"/>
-                            <constraint firstItem="ZrF-Ed-lsL" firstAttribute="centerY" secondItem="wgw-bV-rb3" secondAttribute="centerY" id="q9T-jB-iQl"/>
-                            <constraint firstAttribute="trailing" secondItem="ZrF-Ed-lsL" secondAttribute="trailing" constant="20" id="tSy-0w-wZr"/>
+                            <constraint firstItem="GLU-3S-oMt" firstAttribute="centerX" secondItem="7KG-gz-qhW" secondAttribute="centerX" id="q1A-ZT-9FH"/>
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" id="uH2-mc-RsQ"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="leading" secondItem="hSW-Wr-uX2" secondAttribute="trailing" constant="20" id="vNf-i8-0MC"/>
                             <constraint firstAttribute="trailing" secondItem="NNT-dN-5QY" secondAttribute="trailing" id="yxi-Vn-O09"/>
@@ -135,7 +134,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="wx3-x7-kZe"/>
                     <connections>
-                        <outlet property="lblState" destination="wgw-bV-rb3" id="okA-Mn-qlc"/>
                         <outlet property="viewLocal" destination="4cX-0I-S3D" id="OhN-oj-xFh"/>
                         <outlet property="viewRemote" destination="NNT-dN-5QY" id="LGx-gS-LxT"/>
                         <segue destination="g5Y-RD-1bS" kind="show" identifier="VideoStoryToImageGalleryModuleSegue" id="y5c-le-CC5"/>
@@ -150,7 +148,7 @@
                 </customObject>
                 <exit id="2b5-9W-oA8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="352" y="397"/>
+            <point key="canvasLocation" x="350.625" y="396.12676056338029"/>
         </scene>
         <!--ImageGalleryStory-->
         <scene sceneID="rok-gH-xNB">

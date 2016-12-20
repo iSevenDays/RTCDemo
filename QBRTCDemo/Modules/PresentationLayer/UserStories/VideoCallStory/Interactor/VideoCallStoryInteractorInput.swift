@@ -13,7 +13,7 @@ protocol VideoCallStoryInteractorInput {
 	/**
  	*  Connect to chat with user (if not connected before)
  	*  and then call an opponent (execute -startCallWithOpponent:)
- 	*  if an opponent is nil, call will not happen
+ 	*  if the opponent is nil, call will not happen
  	*
  	*  @param user SVUser instance
  	*  @param opponent SVUser instance
@@ -25,12 +25,15 @@ protocol VideoCallStoryInteractorInput {
 	
 	func hangup()
 	
-	func requestDataChannelState()
-	func sendInvitationMessageAndOpenImageGallery()
-	
 	/// Switch between back and front camera
 	func switchCamera()
 	
-	// Switch between speaker and headset
+	/// Switch between speaker and headset
 	func switchAudioRoute()
+	
+	
+	/// Currently unused. For future use. The feature was working before feature/CallServiceRefactoring
+	/// But currently there is no need
+	func requestDataChannelState()
+	func sendInvitationMessageAndOpenImageGallery()
 }

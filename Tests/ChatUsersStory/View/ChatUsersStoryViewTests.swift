@@ -70,6 +70,23 @@ class ChatUsersStoryViewTests: XCTestCase {
 		XCTAssertEqual(controller.navigationItem.title, "Logged in as " + currentUser.fullName)
 	}
 	
+	func testTableHeaderViewHasHeaderWithCurrentUsersTag() {
+		// given
+		controller.loadView()
+		let currentUser = TestsStorage.svuserTest
+		
+		// when
+		controller.configureViewWithCurrentUser(currentUser)
+		
+		guard let roomName = currentUser.tags?.first else {
+			XCTFail()
+			return
+		}
+		
+		// then
+		XCTAssertEqual(controller.tableHeaderLbl.text, "Users in the room " + roomName)
+	}
+	
 	func testViewCorrectlyHandlesUserTappedEvent() {
 		// given
 		controller.loadView()

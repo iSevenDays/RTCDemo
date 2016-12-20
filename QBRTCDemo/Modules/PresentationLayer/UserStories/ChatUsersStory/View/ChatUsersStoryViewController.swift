@@ -13,16 +13,17 @@ class ChatUsersStoryViewController: UIViewController {
 
     @objc var output: ChatUsersStoryViewOutput!
 	
-	@IBOutlet var tableView: UITableView!
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var tableHeaderLbl: UILabel!
 	
 	internal var users: [SVUser] = []
+	let randomColors = UIColor.randomColors()
 	
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
     }
-	
 }
 
 extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
@@ -32,6 +33,10 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 	
 	func configureViewWithCurrentUser(user: SVUser) {
 		navigationItem.title = "Logged in as " + user.fullName
+		if let roomName = user.tags?.first {
+			_ = view
+			tableHeaderLbl.text = "Users in the room " + roomName
+		}
 	}
 	
 	func reloadDataWithUsers(users: [SVUser]) {
@@ -58,7 +63,7 @@ extension ChatUsersStoryViewController: UITableViewDataSource {
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+		let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ChatUsersTableViewCell
 		
 		guard indexPath.row < users.count else {
 			fatalError("Error: data error, no user at indexPath")
@@ -66,9 +71,13 @@ extension ChatUsersStoryViewController: UITableViewDataSource {
 		
 		let user = users[indexPath.row]
 		
+		cell.userFullName.text = user.fullName
 		
-		cell.textLabel?.text = user.fullName
-		cell.detailTextLabel?.text = String(user.ID ?? 0)
+		let randomColor = randomColors[indexPath.row % randomColors.count]
+		
+		
+		cell.coloredRect.backgroundColor = UIColor(hex: randomColor, alpha: 1.0)
+		cell.contentView.backgroundColor = UIColor(hex: randomColor, alpha: 0.3)
 		
 		return cell
 	}

@@ -28,5 +28,27 @@ class DesignableView: UIView {
 
 @IBDesignable
 class DesignableButton: UIButton {
+	@IBInspectable var normalBackgroundColor: UIColor? {
+		didSet {
+			backgroundColor = normalBackgroundColor
+			setNeedsDisplay()
+		}
+	}
 	
+	@IBInspectable var selectedBackgroundColor: UIColor = UIColor.blackColor() {
+		didSet {
+			setNeedsDisplay()
+		}
+	}
+	
+	override var selected: Bool {
+		didSet {
+			if selected {
+				layer.backgroundColor = selectedBackgroundColor.CGColor
+			} else {
+				layer.backgroundColor = normalBackgroundColor?.CGColor
+			}
+			setNeedsDisplay()
+		}
+	}
 }

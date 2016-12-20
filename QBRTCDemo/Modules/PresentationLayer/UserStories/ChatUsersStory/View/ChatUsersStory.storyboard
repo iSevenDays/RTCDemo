@@ -21,33 +21,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pJy-i2-7ab">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pJy-i2-7ab">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="fux-4s-IMo">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Users in the chat room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxp-4H-je1">
+                                            <rect key="frame" x="8" y="12" width="304" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Lxp-4H-je1" secondAttribute="trailing" constant="8" id="E6P-yH-8XF"/>
+                                        <constraint firstItem="Lxp-4H-je1" firstAttribute="centerY" secondItem="fux-4s-IMo" secondAttribute="centerY" id="EK8-oa-Od2"/>
+                                        <constraint firstItem="Lxp-4H-je1" firstAttribute="leading" secondItem="fux-4s-IMo" secondAttribute="leading" constant="8" id="WmA-EF-pwC"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUsersCellIdentifier" textLabel="0B1-wf-V9b" detailTextLabel="ufo-be-XeE" style="IBUITableViewCellStyleSubtitle" id="TfY-ka-rYT">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUsersCellIdentifier" id="TfY-ka-rYT" customClass="ChatUsersTableViewCell" customModule="QBRTCDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TfY-ka-rYT" id="ZdZ-69-bRh">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0B1-wf-V9b">
-                                                    <rect key="frame" x="15" y="5" width="32" height="20"/>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXC-rA-1na" userLabel="coloredRect">
+                                                    <rect key="frame" x="8" y="4" width="11" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ufo-be-XeE">
-                                                    <rect key="frame" x="15" y="25" width="41" height="14"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Anton Sokolchenko" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n71-Zb-KD9" userLabel="userFullName">
+                                                    <rect key="frame" x="27" y="11" width="148" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="coloredRect" destination="vXC-rA-1na" id="3C9-hz-RqI"/>
+                                            <outlet property="userFullName" destination="n71-Zb-KD9" id="UCP-st-nNq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -65,6 +85,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableHeaderLbl" destination="Lxp-4H-je1" id="G8t-ek-UNz"/>
                         <outlet property="tableView" destination="pJy-i2-7ab" id="zRF-sy-0No"/>
                         <segue destination="3bv-Lq-0pq" kind="show" identifier="ChatUsersStoryToVideoCallStorySegueIdentifier" id="NvK-96-iiQ"/>
                         <segue destination="pme-U0-dcE" kind="presentation" identifier="ChatUsersStoryToIncomingCallStorySegueIdentifier" id="XrM-qt-yCx"/>
@@ -77,7 +98,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="-242" y="379"/>
+            <point key="canvasLocation" x="-243.75" y="378.16901408450707"/>
         </scene>
         <!--VideoCallStory-->
         <scene sceneID="msn-0b-EOe">
