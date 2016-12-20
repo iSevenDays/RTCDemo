@@ -103,9 +103,8 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 	}
 	
 	func hangup() {
-		guard callService.hasActiveCall else {
-			NSLog("There is no active call at the momment, can not hangup");
-			return
+		if !callService.hasActiveCall {
+			NSLog("Warning: There is no active call at the momment, can not hangup");
 		}
 		callService.hangup()
 		localVideoTrack = nil
