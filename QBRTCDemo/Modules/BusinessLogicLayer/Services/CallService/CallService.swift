@@ -151,7 +151,7 @@ extension CallService: CallServiceProtocol {
 		let connection = PeerConnection(opponent: opponent, sessionID: sessionDetails.sessionID, ICEServers: ICEServers, factory: factory, mediaStreamConstraints: defaultMediaStreamConstraints, peerConnectionConstraints: defaultPeerConnectionConstraints, offerAnswerConstraints: defaultOfferConstraints)
 		connection.addObserver(self)
 		connections[sessionDetails.sessionID] = [connection]
-		
+	
 		connection.acceptCall()
 		connection.applyRemoteSDP(pendingRequest.pendingSessionDescription)
 	}
@@ -178,6 +178,8 @@ extension CallService: CallServiceProtocol {
 		
 		let dialingTimer = timersFactory.createDialingTimerWithExpirationTime(20000, block: sendMessageBlock) { [unowned self] in
 			self.observers => { $0.callService(self, didAnswerTimeoutForOpponent: opponent) }
+			self.stopDialingOpponent(opponent)
+			self.activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.close()
 		}
 		dialingTimer.start()
 		sendMessageBlock()
