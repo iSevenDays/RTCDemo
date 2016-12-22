@@ -27,9 +27,11 @@ class TimersFactory {
 		let startTime = CACurrentMediaTime()
 		
 		return SVTimer(interval: dialingTimeInterval, tolerance: tolerance, repeats: true, queue: dispatch_get_main_queue(), block: {
-			let elapsedTime = CACurrentMediaTime() - startTime
 			
-			guard elapsedTime < expirationTime else {
+			let elapsedTimeInSeconds = CACurrentMediaTime() - startTime
+			let elapsedTimeMilliSeconds = elapsedTimeInSeconds * 1000
+			
+			guard elapsedTimeMilliSeconds < expirationTime else {
 				expirationBlock()
 				return
 			}
