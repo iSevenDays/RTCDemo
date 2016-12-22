@@ -124,6 +124,30 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		XCTAssertEqual(mockOutput.opponent, testUser2)
 	}
 	
+	func testNotifiesOutputAboutStartedCall_whenDialingIsStarted() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.callService(interactor.callService, didStartDialingOpponent: testUser2)
+		
+		// then
+		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
+		XCTAssertEqual(mockOutput.opponent, testUser2)
+	}
+	
+	func testNotifiesOutputAboutAnswerForACall_whenAnswerIsReceived() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.callService(interactor.callService, didReceiveAnswerFromOpponent: testUser2)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveAnswerFromOpponentGotCalled)
+		XCTAssertEqual(mockOutput.opponent, testUser2)
+	}
+	
 	func testStoresLocalVideoTrack() {
 		// given
 		useFakeCallService()
@@ -266,7 +290,6 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 //	}
 	
 	class MockPresenter: NSObject,  VideoCallStoryInteractorOutput {
-		var didConnectToChatWithUserGotCalled = false
 		var connectedToChatUser: SVUser?
 		var opponent: SVUser?
 		
@@ -285,12 +308,10 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		var didReceiveDataChannelStateNotReadyGotCalled = false
 		var didReceiveInvitationToOpenImageGalleryGotCalled = false
 		var didSendInvitationToOpenImageGalleryGotCalled = false
-		var didSendPushNotificationAboutNewCallToOpponentGotCalled = false
 		
-		func didConnectToChatWithUser(user: SVUser) {
-			connectedToChatUser = user
-			didConnectToChatWithUserGotCalled = true
-		}
+		var didStartDialingOpponentGotCalled = false
+		var didReceiveAnswerFromOpponentGotCalled = false
+		var didSendPushNotificationAboutNewCallToOpponentGotCalled = false
 		
 		func didHangup() {
 			didHangupGotCalled = true
@@ -346,6 +367,16 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 			didSendInvitationToOpenImageGalleryGotCalled = true
 		}
 
+		func didStartDialingOpponent(opponent: SVUser) {
+			self.opponent = opponent
+			didStartDialingOpponentGotCalled = true
+		}
+		
+		func didReceiveAnswerFromOpponent(opponent: SVUser) {
+			self.opponent = opponent
+			didReceiveAnswerFromOpponentGotCalled = true
+		}
+		
 		func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
 			didSendPushNotificationAboutNewCallToOpponentGotCalled = true
 			self.opponent = opponent

@@ -22,6 +22,8 @@ class VideoCallStoryViewTests: XCTestCase {
 	var mockOutput: MockViewControllerOutput!
 	let emptySender = UIButton()
 	
+	let testUser2 = TestsStorage.svuserRealUser2
+	
     override func setUp() {
         super.setUp()
         controller = UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewControllerWithIdentifier(String(VideoCallStoryViewController.self)) as! VideoCallStoryViewController
@@ -132,6 +134,22 @@ class VideoCallStoryViewTests: XCTestCase {
 		XCTAssertEqual(controller.viewLocal.captureSession, testCaptureSession)
 	}
 
+	func testShowsDialingInformation() {
+		// when
+		controller.showStartDialingOpponent(testUser2)
+		
+		// then
+		XCTAssertEqual(controller.navigationItem.title, "Dialing \(testUser2.fullName)...")
+	}
+	
+	func testShowsConnectedCallInformation() {
+		// when
+		controller.showReceivedAnswerFromOpponent(testUser2)
+		
+		// then
+		XCTAssertEqual(controller.navigationItem.title, "Call with \(testUser2.fullName)")
+	}
+	
 	class MockViewControllerOutput: NSObject, VideoCallStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		var hangupButtonTapped = false

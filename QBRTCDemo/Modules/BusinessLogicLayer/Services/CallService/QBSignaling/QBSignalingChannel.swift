@@ -18,7 +18,12 @@ class QBSignalingChannel: NSObject {
 	var observers: MulticastDelegate<SignalingChannelObserver>?
 	
 	let signalingMessagesFactory = SignalingMessagesFactory()
-	var state = SignalingChannelState.open
+	var state = SignalingChannelState.open {
+		didSet {
+			observers => { $0.signalingChannel(self, didChangeState: self.state) }
+		}
+	}
+	
 	var user: SVUser?
 	override init() {
 		super.init()
@@ -28,7 +33,6 @@ class QBSignalingChannel: NSObject {
 	func addObserver(observer: SignalingChannelObserver) {
 		observers += observer
 	}
-	
 }
 
 extension QBSignalingChannel: SignalingChannelProtocol {
@@ -83,6 +87,17 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 }
 
 extension QBSignalingChannel: QBChatDelegate {
+	func chatDidReconnect() {
+		self.state = .established
+	}
+	func chatDidConnect() {
+		self.state = .established
+	}
+	
+	func chatDidAccidentallyDisconnect() {
+		self.state = .error
+	}
+	
 	func chatDidReceiveSystemMessage(message: QBChatMessage) {
 		do {
 			let (message, sender, sessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(message)
@@ -100,7 +115,5 @@ extension QBSignalingChannel: QBChatDelegate {
 		} catch let error {
 			NSLog("%@", "Error signaling message \(error)")
 		}
-		
 	}
-	
 }

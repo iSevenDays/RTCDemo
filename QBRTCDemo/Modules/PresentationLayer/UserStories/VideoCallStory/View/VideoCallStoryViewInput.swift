@@ -14,7 +14,11 @@ protocol VideoCallStoryViewInput: class {
     */
     func setupInitialState()
 	
-	func configureViewWithUser(user: SVUser)
+	/// Show current user is dialing the opponent
+	func showStartDialingOpponent(opponent: SVUser)
+	
+	/// Show current user has received the answer from the opponent
+	func showReceivedAnswerFromOpponent(opponent: SVUser)
 	
 	/// Show current user hang up a call
 	func showHangup()

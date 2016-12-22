@@ -46,10 +46,19 @@ class VideoCallStoryViewController: UIViewController {
 
 extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	func setupInitialState() {
+		navigationItem.title = "Connecting..."
 	}
 	
 	func configureViewWithUser(user: SVUser) {
 		
+	}
+	
+	func showStartDialingOpponent(opponent: SVUser) {
+		navigationItem.title = "Dialing \(opponent.fullName)..."
+	}
+	
+	func showReceivedAnswerFromOpponent(opponent: SVUser) {
+		navigationItem.title = "Call with \(opponent.fullName)"
 	}
 	
 	func showHangup() {

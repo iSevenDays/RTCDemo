@@ -40,7 +40,6 @@ class ServicesProvider: NSObject {
 			
 			callService.signalingChannel = signalingChannel
 			callService.signalingProcessor.observer = callService
-			signalingChannel.addObserver(callService.signalingProcessor)
 			
 			let restService = QBRESTService()
 			serviceConfigurator.configureRESTService(restService)

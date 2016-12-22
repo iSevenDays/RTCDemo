@@ -1,4 +1,3 @@
-
 //
 //  AuthStoryInteractor.swift
 //  RTCDemo
@@ -10,8 +9,12 @@
 class AuthStoryInteractor: AuthStoryInteractorInput {
 
     weak var output: AuthStoryInteractorOutput!
-	internal weak var restService: protocol<RESTServiceProtocol>!
-	internal weak var callService: protocol<CallServiceProtocol>!
+	internal weak var restService: RESTServiceProtocol!
+	internal weak var callService: CallServiceProtocol!
+	
+	// In case chat is doing reconnect(for example connect is triggered by QBChat), we can only log in to REST
+	//
+	var mutableSuccessBlock: ((user: SVUser) -> Void)? = nil
 	
 	// MARK: AuthStoryInteractorInput
 	func tryLoginWithCachedUser() {
@@ -26,6 +29,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	}
 	
 	func signUpOrLoginWithUserName(userName: String, tags: [String]) {
+		callService.addObserver(self)
 		
 		let login = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? NSUUID().UUIDString
 		let password = "zZc64fj13$_1=fx%"
@@ -64,22 +68,18 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		
 		assert(user.password != nil)
 		
-		var loggedInREST = false
-		
 		// mutableSuccessBlock will be called and then set to nil after connection established
-		var mutableSuccessBlock: ((user: SVUser) -> Void)? = successBlock
+		mutableSuccessBlock = successBlock
 		
 		signUpOrLoginWithUser(user, successBlock: { [unowned self] (restUser) in
-			
-			loggedInREST = true
 			
 			guard !self.callService.isConnecting else {
 				// successBlock will be called later
 				return
 			}
 			guard !self.callService.isConnected else {
-				mutableSuccessBlock?(user: restUser)
-				mutableSuccessBlock = nil
+				self.mutableSuccessBlock?(user: restUser)
+				self.mutableSuccessBlock = nil
 				return
 			}
 			
@@ -92,36 +92,51 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 					return
 				}
 				
-				mutableSuccessBlock?(user: user)
-				mutableSuccessBlock = nil
+				self.mutableSuccessBlock?(user: user)
+				self.mutableSuccessBlock = nil
 			})
 			
 		}) { (error) in
-			
 			errorBlock(error: error)
 		}
 		
 		
 		// If user ID is not nil, then the user has been logged in previously
 		guard user.ID != nil else { return }
-		guard !callService.isConnecting else { return }
+		guard !callService.isConnecting else {
+			return
+		}
 		
 		if restService.currentUser() != nil && callService.isConnected {
-			mutableSuccessBlock?(user: user)
-			mutableSuccessBlock = nil
+			self.mutableSuccessBlock?(user: user)
+			self.mutableSuccessBlock = nil
 			return
 		}
 		
 		callService.connectWithUser(user) { [unowned self] (error) in
 			
-			if loggedInREST && self.callService.isConnected {
-				mutableSuccessBlock?(user: user)
-				mutableSuccessBlock = nil
+			if self.restService.currentUser() != nil && self.callService.isConnected {
+				self.mutableSuccessBlock?(user: user)
+				self.mutableSuccessBlock = nil
 			}
 		}
 	}
 }
 
+extension AuthStoryInteractor: CallServiceObserver {
+	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
+		guard state == .Connected else { return }
+		guard let currentUser = callService.currentUser else {
+			
+			return
+		}
+		
+		if restService.currentUser() != nil {
+			mutableSuccessBlock?(user: currentUser)
+			mutableSuccessBlock = nil
+		}
+	}
+}
 
 // MARK: - Internal
 internal extension AuthStoryInteractor {
@@ -154,7 +169,6 @@ internal extension AuthStoryInteractor {
 				strongSelf.output.doingSignUpWithUser(user)
 				strongSelf.restService.signUpWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
 		}
-		
 	}
 	
 	

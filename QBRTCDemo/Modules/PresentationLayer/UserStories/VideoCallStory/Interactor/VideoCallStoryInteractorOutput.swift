@@ -9,8 +9,6 @@
 import Foundation
 
 @objc protocol VideoCallStoryInteractorOutput: class {
-	func didConnectToChatWithUser(user: SVUser)
-	
 	/// Current user called hangup
 	func didHangup()
 	
@@ -41,6 +39,9 @@ import Foundation
 	 * a call must be closed
 	 */
 	func didFailCallService()
+	
+	func didStartDialingOpponent(opponent: SVUser)
+	func didReceiveAnswerFromOpponent(opponent: SVUser)
 	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser)
 }

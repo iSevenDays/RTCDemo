@@ -16,7 +16,7 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class VideoCallStoryPresenterTest: XCTestCase {
+class VideoCallStoryPresenterTest: BaseTestCase {
 
 	var presenter: VideoCallStoryPresenter!
 	var mockInteractor: MockInteractor!
@@ -85,17 +85,11 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	}
 	
 	// MARK: - Testing methods of VideoCallStoryInteractorOutput
-	func testPresenterHandlesDidConnectToChatWithTestUser() {
-		// when
-		presenter.didConnectToChatWithUser(testUser)
-		
-		// then
-		XCTAssertTrue(mockView.configureViewWithUserGotCalled)
-	}
 	
 	func testPresenterHandlesChatConnectionError() {
 		// when
 		presenter.didFailToConnectToChat()
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.showErrorConnectGotCalled)
@@ -104,6 +98,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	func testPresenterHandlesCallServiceError() {
 		// when
 		presenter.didFailCallService()
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.showErrorCallServiceDisconnectedGotCalled)
@@ -120,6 +115,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	func testPresenterHandlesHangupAndCallsViewShowHangup() {
 		// when
 		presenter.didHangup()
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.showHangupGotCalled)
@@ -128,6 +124,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	func testPresenterHandlesOpponentHangupAndCallsViewShowOpponentHangup() {
 		// when
 		presenter.didReceiveHangupFromOpponent(testUser2)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.showOpponentHangupGotCalled)
@@ -136,6 +133,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	func testPresenterHandlesOpponentRejectAndCallsViewShowOpponentReject() {
 		// when
 		presenter.didReceiveRejectFromOpponent(testUser2)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.showOpponentRejectGotCalled)
@@ -147,6 +145,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		
 		// when
 		presenter.didSetLocalCaptureSession(localCaptureSession)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.setLocalVideoCaptureSessionGotCalled)
@@ -156,6 +155,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	func testPresenterHandlesRemoteVideoTrack() {
 		// when
 		presenter.didReceiveRemoteVideoTrackWithConfigurationBlock(nil)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.configureRemoteVideoViewWithBlockGotCalled)
@@ -164,6 +164,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	func testPresenterHandlesDataChannelNotReadyState() {
 		// when
 		presenter.didReceiveDataChannelStateNotReady()
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.showErrorDataChannelNotReadyGotCalled)
@@ -201,6 +202,23 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(mockInteractor.switchAudioRouteGotCalled)
 	}
 	
+	func testPresenterHandlesDialingOpponent() {
+		// when
+		presenter.didStartDialingOpponent(testUser2)
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showStartDialingOpponentGotCalled)
+	}
+	
+	func testPresenterHandlesReceivedAnswerFromOpponent() {
+		// when
+		presenter.didReceiveAnswerFromOpponent(testUser2)
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showReceivedAnswerFromOpponentGotCalled)
+	}
 	
     class MockInteractor: VideoCallStoryInteractorInput {
 		var connectedUser: SVUser?
@@ -208,6 +226,7 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		
 		var startCallWithOpponentGotCalled = false
 		var acceptCallFromOpponentGotCalled = false
+		var showStartDialingOpponentGotCalled = false
 		var hangupGotCalled = false
 		var requestDataChannelStateGotCalled = false
 		var sendInvitationMessageAndOpenImageGalleryGotCalled = false
@@ -222,6 +241,11 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		func acceptCallFromOpponent(opponent: SVUser) {
 			self.opponent = opponent
 			acceptCallFromOpponentGotCalled = true
+		}
+		
+		func showStartDialingOpponent(opponent: SVUser) {
+			self.opponent = opponent
+			showStartDialingOpponentGotCalled = true
 		}
 		
 		func hangup() {
@@ -261,6 +285,8 @@ class VideoCallStoryPresenterTest: XCTestCase {
 
 		var setupInitialStateGotCalled = false
 		var configureViewWithUserGotCalled = false
+		var showStartDialingOpponentGotCalled = false
+		var showReceivedAnswerFromOpponentGotCalled = false
 		var showHangupGotCalled = false
 		var showOpponentHangupGotCalled = false
 		var showOpponentRejectGotCalled = false
@@ -278,6 +304,14 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		
 		func configureViewWithUser(user: SVUser) {
 			configureViewWithUserGotCalled = true
+		}
+		
+		func showStartDialingOpponent(opponent: SVUser) {
+			showStartDialingOpponentGotCalled = true
+		}
+		
+		func showReceivedAnswerFromOpponent(opponent: SVUser) {
+			showReceivedAnswerFromOpponentGotCalled = true
 		}
 		
 		func showHangup() {

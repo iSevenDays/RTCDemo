@@ -134,10 +134,8 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		
 		let source = localVideoTrack.source as? RTCAVFoundationVideoSource
 		
-		if let source = source {
-			if source.captureSession != nil {
-				output?.didSetLocalCaptureSession(source.captureSession)
-			}
+		if let source = source, let session = source.captureSession {
+			output?.didSetLocalCaptureSession(session)
 		}
 	}
 	
@@ -193,10 +191,15 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 	}
 	
 	func callService(callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
-		guard let currentUserFullName = self.currentUser?.fullName else { return }
+		output?.didStartDialingOpponent(opponent)
 		
+		guard let currentUserFullName = self.currentUser?.fullName else { return }
 		pushService.sendPushNotificationMessage("\(currentUserFullName) is calling you", toOpponent: opponent)
 		output?.didSendPushNotificationAboutNewCallToOpponent(opponent)
+	}
+	
+	func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
+		output?.didReceiveAnswerFromOpponent(opponent)
 	}
 	
 	func callService(callService: CallServiceProtocol, didError error: NSError) {

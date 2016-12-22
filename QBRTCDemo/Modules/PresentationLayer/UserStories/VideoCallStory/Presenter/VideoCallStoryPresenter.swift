@@ -9,7 +9,7 @@
 import Foundation
 
 @objc class VideoCallStoryPresenter: NSObject {
-	weak var view: VideoCallStoryViewInput!
+	weak var view: VideoCallStoryViewInput?
 	var interactor: VideoCallStoryInteractorInput!
 	var router: VideoCallStoryRouterInput!
 }
@@ -26,7 +26,7 @@ extension VideoCallStoryPresenter: VideoCallStoryModuleInput {
 
 extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 	func viewIsReady() {
-		view.setupInitialState()
+		view?.setupInitialState()
 	}
 	
 	func didTriggerHangupButtonTapped() {
@@ -51,40 +51,53 @@ extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 }
 
 extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
-	func didConnectToChatWithUser(user: SVUser) {
-		view.configureViewWithUser(user)
-	}
 	
 	func didHangup() {
-		view.showHangup()
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showHangup()
+			})
 	}
 	
 	func didReceiveHangupFromOpponent(opponent: SVUser) {
-		view.showOpponentHangup()
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showOpponentHangup()
+			})
 	}
 	
 	func didReceiveRejectFromOpponent(opponent: SVUser) {
-		view.showOpponentReject()
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showOpponentReject()
+			})
 	}
 	
 	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser) {
-		view.showOpponentAnswerTimeout()
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showOpponentAnswerTimeout()
+			})
 	}
 	
 	func didFailToConnectToChat() {
-		view.showErrorConnect()
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showErrorConnect()
+			})
 	}
 	
 	func didFailCallService() {
-		view.showErrorCallServiceDisconnected()
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showErrorCallServiceDisconnected()
+			})
 	}
 	
 	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession) {
-		view.setLocalVideoCaptureSession(localCaptureSession)
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.setLocalVideoCaptureSession(localCaptureSession)
+			})
 	}
 	
 	func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?) {
-		view.configureRemoteVideoViewWithBlock(block)
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.configureRemoteVideoViewWithBlock(block)
+			})
 	}
 	
 	func didReceiveDataChannelStateReady() {
@@ -100,11 +113,25 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	}
 	
 	func didReceiveDataChannelStateNotReady() {
-		view.showErrorDataChannelNotReady()
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showErrorDataChannelNotReady()
+			})
 	}
 	
 	func didOpenDataChannel() {
 		
+	}
+	
+	func didStartDialingOpponent(opponent: SVUser) {
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showStartDialingOpponent(opponent)
+			})
+	}
+	
+	func didReceiveAnswerFromOpponent(opponent: SVUser) {
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showReceivedAnswerFromOpponent(opponent)
+			})
 	}
 	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {

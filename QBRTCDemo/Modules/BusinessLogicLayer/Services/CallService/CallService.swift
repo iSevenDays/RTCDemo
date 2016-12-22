@@ -32,7 +32,7 @@ public class CallService: NSObject {
 	var pendingRequests: [SVUser: CallServicePendingRequest] = [:]
 	
 	var state = CallServiceState.Undefined {
-		didSet(oldValue) {
+		didSet {
 			observers => { $0.callService(self, didChangeState: self.state) }
 		}
 	}
@@ -90,6 +90,9 @@ extension CallService: CallServiceProtocol {
 	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) {
 		assert(user.password != nil)
 		state = .Connecting
+		
+		signalingChannel.addObserver(self)
+		signalingChannel.addObserver(signalingProcessor)
 		
 		do{
 			try signalingChannel.connectWithUser(user) { [unowned self] (error) in
@@ -357,5 +360,17 @@ extension CallService: PeerConnectionObserver {
 	}
 	func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError) {
 		observers => { $0.callService(self, didError: error) }
+	}
+}
+
+extension CallService: SignalingChannelObserver {
+	func signalingChannel(channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState) {
+		if state == .established {
+			self.state = .Connected
+		}
+	}
+	
+	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails) {
+		
 	}
 }
