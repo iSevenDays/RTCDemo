@@ -23,9 +23,7 @@ class AuthStoryViewController: UITableViewController {
         output.viewIsReady()
 		
 		userNameInput.addTarget(self, action: #selector(textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
-		roomNameInput.addTarget(self, action: #selector(textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
-		
-		tableView.estimatedRowHeight = 80
+		roomNameInput.addTarget(self, action: #selector(textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)		
     }
 
 	override func viewDidDisappear(animated: Bool) {
@@ -101,8 +99,8 @@ extension AuthStoryViewController: AuthStoryViewInput {
 		AlertControl.showErrorMessage("Can not login, please try again later", overViewController: self)
 	}
 }
-	// Mark: UITextFieldDelegate methods
-	
+
+// MARK: UITextFieldDelegate methods
 extension AuthStoryViewController: UITextFieldDelegate {
 	// Limit max length of tag text field to 15
 	func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -121,14 +119,5 @@ extension AuthStoryViewController: UITextFieldDelegate {
 	
 	func textFieldDidChange(sender: AnyObject) {
 		updateLoginButtonEnabledState()
-	}
-	
-	
-}
-
-// MARK: UITableViewDelegate
-extension AuthStoryViewController {
-	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return UITableViewAutomaticDimension
 	}
 }

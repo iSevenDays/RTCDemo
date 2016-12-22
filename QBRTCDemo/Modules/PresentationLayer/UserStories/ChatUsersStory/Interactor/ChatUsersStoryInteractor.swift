@@ -8,7 +8,7 @@
 
 class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 
-    weak var output: ChatUsersStoryInteractorOutput!
+    weak var output: ChatUsersStoryInteractorOutput?
 	internal weak var restService: RESTServiceProtocol!
 	internal weak var cacheService: CacheServiceProtocol!
 	
@@ -24,7 +24,7 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 	func setTag(tag: String, currentUser: SVUser) {
 		guard tag.characters.count >= 3 else {
 			
-			self.output.didError(ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
+			self.output?.didError(ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
 			return
 			
 		}
@@ -45,8 +45,13 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 	
 	*/
 	func retrieveUsersWithTag() {
-		if let cachedUsers = cacheService.cachedUsers() {
-			output.didRetrieveUsers(cachedUsers)
+		guard let unwrappedTag = tag else {
+			NSLog("%@", "Error: tag is not set")
+			return
+		}
+		
+		if let cachedUsers = cacheService.cachedUsersForRoomWithName(unwrappedTag) {
+			output?.didRetrieveUsers(cachedUsers)
 		}
 		
 		downloadUsersWithTag()
@@ -64,12 +69,12 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 			
 			let filteredUsers = self.removeCurrentUserFromUsers(users)
 			
-			self.output.didRetrieveUsers(filteredUsers)
+			self.output?.didRetrieveUsers(filteredUsers)
 			
-			self.cacheService.cacheUsers(filteredUsers)
+			self.cacheService.cacheUsers(filteredUsers, forRoomName: unwrappedTag)
 			
 			}) { (error) in
-				self.output.didError(ChatUsersStoryInteractorError.CanNotRetrieveUsers)
+				self.output?.didError(ChatUsersStoryInteractorError.CanNotRetrieveUsers)
 		}
 	}
 	
@@ -85,6 +90,6 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 
 extension ChatUsersStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
-		output.didReceiveCallRequestFromOpponent(opponent)
+		output?.didReceiveCallRequestFromOpponent(opponent)
 	}
 }

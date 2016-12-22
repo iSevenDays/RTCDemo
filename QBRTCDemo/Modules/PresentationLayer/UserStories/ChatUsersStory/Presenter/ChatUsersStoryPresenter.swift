@@ -8,7 +8,7 @@
 
 @objc class ChatUsersStoryPresenter: NSObject {
 
-    weak var view: ChatUsersStoryViewInput!
+    weak var view: ChatUsersStoryViewInput?
     var interactor: ChatUsersStoryInteractorInput!
     var router: ChatUsersStoryRouterInput!
 }
@@ -26,13 +26,13 @@ extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
 extension ChatUsersStoryPresenter: ChatUsersStoryModuleInput {
 	func setTag(tag: String, currentUser: SVUser) {
 		interactor.setTag(tag, currentUser: currentUser)
-		view.configureViewWithCurrentUser(currentUser)
+		view?.configureViewWithCurrentUser(currentUser)
 	}
 }
 
 extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 	func didRetrieveUsers(users: [SVUser]) {
-		view.reloadDataWithUsers(users)
+		view?.reloadDataWithUsers(users)
 	}
 	
 	func didReceiveCallRequestFromOpponent(opponent: SVUser) {

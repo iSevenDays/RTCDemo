@@ -37,15 +37,15 @@
                         <sections>
                             <tableViewSection id="I6k-ff-l2p">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ksz-Tw-gil">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="69" id="ksz-Tw-gil">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ksz-Tw-gil" id="NPc-2U-YUc">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="240" translatesAutoresizingMaskIntoConstraints="NO" id="QQT-E7-EVb">
-                                                    <rect key="frame" x="32" y="30" width="256" height="15"/>
+                                                    <rect key="frame" x="32" y="30" width="256" height="39"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="256" id="7FV-LN-I7Q"/>
                                                     </constraints>
@@ -69,11 +69,11 @@ You can join existent chat room.</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="96" id="Ktp-0X-pjX" userLabel="usernameCell">
-                                        <rect key="frame" x="0.0" y="45" width="320" height="96"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="Ktp-0X-pjX" userLabel="usernameCell">
+                                        <rect key="frame" x="0.0" y="69" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ktp-0X-pjX" id="WK6-Xt-lzQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" background="underline" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KWX-wJ-HRs">
@@ -96,11 +96,11 @@ You can join existent chat room.</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="79" id="I7B-MJ-FkF" userLabel="chat room name tagCell">
-                                        <rect key="frame" x="0.0" y="141" width="320" height="79"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="I7B-MJ-FkF" userLabel="chat room name tagCell">
+                                        <rect key="frame" x="0.0" y="145" width="320" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I7B-MJ-FkF" id="gTP-OA-JF4">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Chat room name" minimumFontSize="17" background="underline" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="riI-fW-ure">
@@ -114,17 +114,28 @@ You can join existent chat room.</string>
                                                         <outlet property="delegate" destination="ufz-Jl-6V1" id="U0t-Pi-Ypm"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="enter at least 3 characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lo-bU-5Ah">
+                                                    <rect key="frame" x="118" y="64" width="170" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="ejz-4a-6au"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="riI-fW-ure" secondAttribute="bottom" priority="750" id="asO-R0-BkY"/>
+                                                <constraint firstItem="1lo-bU-5Ah" firstAttribute="top" secondItem="riI-fW-ure" secondAttribute="bottom" constant="4" id="dRA-P3-SP1"/>
                                                 <constraint firstItem="riI-fW-ure" firstAttribute="width" secondItem="gTP-OA-JF4" secondAttribute="width" multiplier="0.8" id="gFO-a5-Z7S"/>
+                                                <constraint firstItem="1lo-bU-5Ah" firstAttribute="trailing" secondItem="riI-fW-ure" secondAttribute="trailing" id="kCO-dg-18A"/>
                                                 <constraint firstItem="riI-fW-ure" firstAttribute="top" secondItem="gTP-OA-JF4" secondAttribute="top" constant="30" id="kXK-Gg-Hce"/>
                                                 <constraint firstItem="riI-fW-ure" firstAttribute="centerX" secondItem="gTP-OA-JF4" secondAttribute="centerX" id="z7U-1d-4fJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="bMb-ev-0Mq" userLabel="loginCell">
-                                        <rect key="frame" x="0.0" y="220" width="320" height="100"/>
+                                        <rect key="frame" x="0.0" y="231" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMb-ev-0Mq" id="pzY-Ec-5dt">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
