@@ -35,8 +35,8 @@ class AlertControl {
 		self.showMessage(message, title: title, overViewController: overViewController, actions: [okAction], completion: completion)
 	}
 	
-	class func showErrorMessage(message: String, overViewController: UIViewController){
+	class func showErrorMessage(message: String, overViewController: UIViewController, completion: (() -> Void)? = nil){
 		
-		self.showMessage(message, title: "Error", overViewController: overViewController)
+		self.showMessage(message, title: "Error", overViewController: overViewController, completion: completion)
 	}
 }

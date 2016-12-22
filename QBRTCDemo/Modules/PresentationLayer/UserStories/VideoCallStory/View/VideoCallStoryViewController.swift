@@ -9,20 +9,20 @@
 import UIKit
 
 class VideoCallStoryViewController: UIViewController {
-
-    @objc var output: VideoCallStoryViewOutput!
-
+	
+	@objc var output: VideoCallStoryViewOutput!
+	
 	// MARK - IBOutlets
 	@IBOutlet weak var lblState: UILabel!
 	@IBOutlet weak var viewRemote: RTCEAGLVideoView!
 	@IBOutlet weak var viewLocal: RTCCameraPreviewView!
 	
-    // MARK: Life cycle
+	// MARK: Life cycle
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        output.viewIsReady()
-    }
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		output.viewIsReady()
+	}
 	
 	// MARK: - IBActions
 	
@@ -66,23 +66,31 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func showOpponentReject() {
-		output.didTriggerCloseButtonTapped()
+		AlertControl.showMessage("Opponent is busy, please call later", title: "Notification", overViewController: self, completion: { [output] in
+			output.didTriggerCloseButtonTapped()
+			})
 	}
 	
 	func showOpponentHangup() {
-		output.didTriggerCloseButtonTapped()
+		AlertControl.showMessage("Opponent ended the call", title: "Notification", overViewController: self, completion: { [output] in
+			output.didTriggerCloseButtonTapped()
+			})
 	}
 	
 	func showOpponentAnswerTimeout() {
-		output.didTriggerCloseButtonTapped()
+		AlertControl.showMessage("Opponent hasn't answered. Please try again later", title: "Notification", overViewController: self, completion: { [output] in
+			output.didTriggerCloseButtonTapped()
+			})
 	}
 	
 	func showErrorConnect() {
-		
+		AlertControl.showErrorMessage("Can not connect. Please try again later", overViewController: self)
 	}
 	
 	func showErrorCallServiceDisconnected() {
-		output.didTriggerCloseButtonTapped()
+		AlertControl.showErrorMessage("Disconnected. Can not connect. Please try again later", overViewController: self, completion: { [output] in
+			output.didTriggerCloseButtonTapped()
+			})
 	}
 	
 	func showErrorDataChannelNotReady() {

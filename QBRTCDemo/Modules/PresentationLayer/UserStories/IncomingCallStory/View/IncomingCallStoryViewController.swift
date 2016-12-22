@@ -40,7 +40,7 @@ extension IncomingCallStoryViewController: IncomingCallStoryViewInput {
 	
 	func configureViewWithCallInitiator(callInitiator: SVUser) {
 		_ = view
-		lblIncomingCall.text = "Incoming call from: " + callInitiator.fullName
+		lblIncomingCall.text = "Incoming call from " + callInitiator.fullName
 		lblIncomingCall.hidden = false
 	}
 	
