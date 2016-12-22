@@ -21,7 +21,7 @@ class AuthStoryViewTests: XCTestCase {
 	var controller: AuthStoryViewController!
 	var mockOutput: MockViewControllerOutput!
 	
-	let emptySender = UIResponder()
+	let emptySender = UIButton()
 	
     override func setUp() {
         super.setUp()

@@ -11,6 +11,9 @@ import Quickblox
 
 class QBPushNotificationsService: PushNotificationsServiceProtocol {
 	internal var observers: MulticastDelegate<PushNotificationsServiceObserver>?
+	internal weak var cacheService: CacheServiceProtocol!
+	
+	internal let pushNotificationsKey = "pushNotificationsKey"
 	
 	func addObserver(observer: PushNotificationsServiceObserver) {
 		observers += observer
@@ -18,11 +21,34 @@ class QBPushNotificationsService: PushNotificationsServiceProtocol {
 	
 	// MARK: - PushNotificationsServiceProtocol
 	
+	func registerForPushNotificationsWithDeviceToken(deviceToken: NSData) {
+		guard !cacheService.boolForKey(pushNotificationsKey) else {
+			// already registered
+			return
+		}
+		
+		let deviceIdentifier = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? NSUUID().UUIDString
+		let subscription = QBMSubscription()
+		
+		subscription.notificationChannel = .APNS
+		subscription.deviceUDID = deviceIdentifier
+		subscription.deviceToken = deviceToken
+		QBRequest.createSubscription(subscription, successBlock: { [cacheService, pushNotificationsKey] (response: QBResponse!, objects: [QBMSubscription]?) in
+			cacheService.setBool(true, forKey: pushNotificationsKey)
+		}) { (response: QBResponse!) in
+		}
+	}
+	
 	// located here because we should be able to override the class
 	func sendPushNotificationMessage(message: String, toOpponent opponent: SVUser) {
+		guard let opponentID = opponent.ID else {
+			NSLog("Error sending push notification: opponentID is nil")
+			return
+		}
+		
 		let event = QBMEvent()
 		event.notificationType = .Push
-		event.usersIDs = String(opponent.ID)
+		event.usersIDs = String(opponentID)
 		event.type = .OneShot
 		
 		// custom params

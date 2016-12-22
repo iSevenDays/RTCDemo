@@ -73,7 +73,7 @@ class CallServiceTests: BaseTestCase {
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		
-		_ = try? callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveLocalVideoTrackGotCalled)
@@ -102,7 +102,7 @@ class CallServiceTests: BaseTestCase {
 	func testCorrectlyHangupsJustStartedCall() {
 		// when
 		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		waitForTimeInterval(1)
 		callService.hangup()
 		
@@ -124,7 +124,7 @@ class CallServiceTests: BaseTestCase {
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user3, sessionDetails: sessionDetails)
 		
@@ -145,7 +145,7 @@ class CallServiceTests: BaseTestCase {
 		callService.connectWithUser(user1, completion: nil)
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
 		waitForTimeInterval(1)
-		callService.acceptCallFromOpponent(user2)
+		XCTAssertNotNil(try? callService.acceptCallFromOpponent(user2))
 		waitForTimeInterval(1)
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
 		
@@ -163,7 +163,7 @@ class CallServiceTests: BaseTestCase {
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user1, sessionDetails: sessionDetails)
-		callService.acceptCallFromOpponent(user1)
+		XCTAssertNotNil(try? callService.acceptCallFromOpponent(user1))
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
@@ -175,7 +175,7 @@ class CallServiceTests: BaseTestCase {
 	func testCorrectlyProcessesHangupMessage_whenHangupIsReceivedForActiveCall() {
 		// when
 		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
 			XCTFail()
 			return
@@ -191,7 +191,7 @@ class CallServiceTests: BaseTestCase {
 	func testCorrectlyProcessesRejectMessage_whenRejectIsReceivedForSentOffer() {
 		// when
 		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
 			XCTFail()
 			return
@@ -265,7 +265,8 @@ class CallServiceTests: BaseTestCase {
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
-		callService.sendRejectCallToOpponent(user2)
+		
+		XCTAssertNotNil(try? callService.sendRejectCallToOpponent(user2))
 		
 		// then
 		XCTAssertEqual(callService.sessions.count, 1)
@@ -281,7 +282,7 @@ class CallServiceTests: BaseTestCase {
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		
 		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
 			XCTFail()
@@ -311,7 +312,7 @@ class CallServiceTests: BaseTestCase {
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
-		_ = try? callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		callService.peerConnection(peerConnection, didSetLocalICECandidates: localICECandidateAudio)
 		
 		// then

@@ -20,9 +20,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		QBSettings.setAuthKey("aqsHa2AhDO5Z9Th")
 		QBSettings.setAuthSecret("825Bv-3ByACjD4O")
 		QBSettings.setAutoReconnectEnabled(true)
+		
+		let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+		
+		application.registerUserNotificationSettings(settings)
+		application.registerForRemoteNotifications()
+		
         return true
     }
-
+	
+	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+		ServicesProvider.currentProvider.pushService.registerForPushNotificationsWithDeviceToken(deviceToken)
+	}
+	
+	
+	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+		NSLog("%@%", "Push failed to register with error: \(error)")
+	}
+	
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

@@ -25,7 +25,13 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 	}
 	
 	func rejectCall() {
-		callService.sendRejectCallToOpponent(opponent)
+		do {
+			try callService.sendRejectCallToOpponent(opponent)
+		} catch CallServiceError.canNotRejectCallWithoutPendingOffer {
+			NSLog("%@", "Error call service can not reject call without pending offer")
+		} catch let error {
+			NSLog("%@", "Error starting a call with user \(error)")
+		}
 	}
 }
 

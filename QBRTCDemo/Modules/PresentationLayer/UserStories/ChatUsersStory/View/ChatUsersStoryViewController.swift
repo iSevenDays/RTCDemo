@@ -35,7 +35,7 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 		navigationItem.title = "Logged in as " + user.fullName
 		if let roomName = user.tags?.first {
 			_ = view
-			tableHeaderLbl.text = "Users in the room " + roomName
+			tableHeaderLbl.text = "Room \"\(roomName)\""
 		}
 	}
 	
@@ -85,6 +85,7 @@ extension ChatUsersStoryViewController: UITableViewDataSource {
 
 extension ChatUsersStoryViewController: UITableViewDelegate {
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		guard indexPath.row < users.count else {
 			fatalError("Error: data error, no user at indexPath")
 		}

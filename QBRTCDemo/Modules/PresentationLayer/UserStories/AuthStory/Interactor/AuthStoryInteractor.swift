@@ -7,8 +7,6 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-import AdSupport // for UDID
-
 class AuthStoryInteractor: AuthStoryInteractorInput {
 
     weak var output: AuthStoryInteractorOutput!
@@ -103,9 +101,17 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			errorBlock(error: error)
 		}
 		
+		
 		// If user ID is not nil, then the user has been logged in previously
 		guard user.ID != nil else { return }
 		guard !callService.isConnecting else { return }
+		
+		if restService.currentUser() != nil && callService.isConnected {
+			mutableSuccessBlock?(user: user)
+			mutableSuccessBlock = nil
+			return
+		}
+		
 		callService.connectWithUser(user) { [unowned self] (error) in
 			
 			if loggedInREST && self.callService.isConnected {
@@ -154,6 +160,7 @@ internal extension AuthStoryInteractor {
 	
 	func cacheUser(user: SVUser) {
 		assert(user.password != nil)
+		assert(user.ID != nil)
 		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
 		let key = "user"
 		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: key)
@@ -171,6 +178,7 @@ internal extension AuthStoryInteractor {
 		if let userData = userData,
 			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? SVUser {
 			assert(user.password != nil)
+			assert(user.ID != nil)
 			return user
 		}
 		return nil

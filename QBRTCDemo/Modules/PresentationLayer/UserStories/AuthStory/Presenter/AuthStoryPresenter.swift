@@ -21,6 +21,7 @@ extension AuthStoryPresenter: AuthStoryViewOutput {
 	
 	
 	func didTriggerLoginButtonTapped(userName: String, roomName: String) {
+		view.disableInput()
 		interactor.signUpOrLoginWithUserName(userName, tags: [roomName])
 	}
 	

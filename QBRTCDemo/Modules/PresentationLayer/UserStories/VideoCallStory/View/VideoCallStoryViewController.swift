@@ -38,7 +38,7 @@ class VideoCallStoryViewController: UIViewController {
 		output.didTriggerSwitchCameraButtonTapped()
 	}
 	
-	@IBAction func didTapButtonSwitchAudioRoute(sender: DesignableButton) {
+	@IBAction func didTapButtonSwitchAudioRoute(sender: UIButton) {
 		sender.selected = !sender.selected
 		output.didTriggerSwitchAudioRouteButtonTapped()
 	}

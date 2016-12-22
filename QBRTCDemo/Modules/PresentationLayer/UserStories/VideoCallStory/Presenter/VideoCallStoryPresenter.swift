@@ -15,8 +15,8 @@ import Foundation
 }
 
 extension VideoCallStoryPresenter: VideoCallStoryModuleInput {
-	func connectToChatWithUser(user: SVUser, callOpponent opponent: SVUser?) {
-		interactor.connectToChatWithUser(user, callOpponent: opponent)
+	func startCallWithOpponent(opponent: SVUser) {
+		interactor.startCallWithOpponent(opponent)
 	}
 	
 	func acceptCallFromOpponent(opponent: SVUser) {

@@ -52,11 +52,10 @@ class VideoCallStoryPresenterTest: XCTestCase {
 	// MARK: - Testing methods of VideoCallStoryModuleInput
 	func testPresenterHandlesStartCallWithUserEventFromModuleInput() {
 		// when
-		presenter.connectToChatWithUser(testUser, callOpponent: testUser2)
+		presenter.startCallWithOpponent(testUser2)
 		
 		// then
-		XCTAssertTrue(mockInteractor.connectToChatWithUserGotCalled)
-		XCTAssertEqual(mockInteractor.connectedUser, testUser)
+		XCTAssertEqual(mockInteractor.connectedUser, nil)
 		XCTAssertEqual(mockInteractor.opponent, testUser2)
 	}
 	
@@ -207,7 +206,6 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		var connectedUser: SVUser?
 		var opponent: SVUser?
 		
-		var connectToChatWithUserGotCalled = false
 		var startCallWithOpponentGotCalled = false
 		var acceptCallFromOpponentGotCalled = false
 		var hangupGotCalled = false
@@ -215,12 +213,6 @@ class VideoCallStoryPresenterTest: XCTestCase {
 		var sendInvitationMessageAndOpenImageGalleryGotCalled = false
 		var switchCameraGotCalled = false
 		var switchAudioRouteGotCalled = false
-		
-		func connectToChatWithUser(user: SVUser, callOpponent opponent: SVUser?) {
-			self.connectedUser = user
-			self.opponent = opponent
-			connectToChatWithUserGotCalled = true
-		}
 		
 		func startCallWithOpponent(opponent: SVUser) {
 			self.opponent = opponent

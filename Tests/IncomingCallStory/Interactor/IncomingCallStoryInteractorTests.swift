@@ -73,7 +73,7 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 	
 	class MockOutput: FakeCallSevice {
 		var opponent: SVUser?
-		override func sendRejectCallToOpponent(user: SVUser) {
+		override func sendRejectCallToOpponent(user: SVUser) throws {
 			opponent = user
 		}
 	}

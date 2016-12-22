@@ -20,7 +20,7 @@ protocol CallServiceProtocol: class {
 	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?)
 	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?)
 	func startCallWithOpponent(user: SVUser) throws
-	func acceptCallFromOpponent(opponent: SVUser)
+	func acceptCallFromOpponent(opponent: SVUser) throws
 	func hangup()
-	func sendRejectCallToOpponent(user: SVUser)
+	func sendRejectCallToOpponent(user: SVUser) throws
 }

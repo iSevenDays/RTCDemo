@@ -16,6 +16,12 @@ enum CallServiceState {
 	case Error
 }
 
+enum CallServiceError: ErrorType {
+	case notLogined
+	case noPendingOfferForOpponent
+	case canNotRejectCallWithoutPendingOffer
+}
+
 public class CallService: NSObject {
 	
 	internal var observers: MulticastDelegate<CallServiceObserver>?
@@ -27,7 +33,6 @@ public class CallService: NSObject {
 	
 	var state = CallServiceState.Undefined {
 		didSet(oldValue) {
-			assert(state != oldValue)
 			observers => { $0.callService(self, didChangeState: self.state) }
 		}
 	}
@@ -54,10 +59,6 @@ public class CallService: NSObject {
 	func activeConnectionWithSessionID(sessionID: String, opponent: SVUser) -> PeerConnection? {
 		return connections[sessionID]?.filter({$0.opponent.ID == opponent.ID && $0.state == PeerConnectionState.Initial}).first
 	}
-}
-
-enum CallServiceError: ErrorType {
-	case notLogined
 }
 
 extension CallService: CallServiceProtocol {
@@ -112,7 +113,7 @@ extension CallService: CallServiceProtocol {
 	// MARK: - Call start
 	
 	/**
-	Start call with an opponent
+	Start call with opponent
 	
 	Creates SessionDetails instance, creates new PeerConnection
 	After PeerConnection initialized, peerConnection:didSetLocalSessionOfferDescription: will be called
@@ -136,10 +137,9 @@ extension CallService: CallServiceProtocol {
 		connection.startCall()
 	}
 	
-	func acceptCallFromOpponent(opponent: SVUser) {
+	func acceptCallFromOpponent(opponent: SVUser) throws {
 		guard let pendingRequest = pendingRequests[opponent] else {
-			NSLog("Error: no pending offer for opponent")
-			return
+			throw CallServiceError.noPendingOfferForOpponent
 		}
 		
 		let sessionDetails = pendingRequest.sessionDetails
@@ -206,10 +206,9 @@ extension CallService: CallServiceProtocol {
 	
 	- parameter opponent: SVUser instance
 	*/
-	func sendRejectCallToOpponent(opponent: SVUser) {
+	func sendRejectCallToOpponent(opponent: SVUser) throws {
 		guard let pendingRequest = pendingRequests[opponent] else {
-			NSLog("Error: can not reject a call, no pending offer for opponent")
-			return
+			throw CallServiceError.canNotRejectCallWithoutPendingOffer
 		}
 		let sessionDetails = pendingRequest.sessionDetails
 		sessionDetails.sessionState = .Rejected
@@ -257,7 +256,7 @@ extension CallService: SignalingProcessorObserver {
 		pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer, sessionDetails: sessionDetails)
 		
 		guard !hasActiveCall else {
-			sendRejectCallToOpponent(opponent)
+			_ = try? sendRejectCallToOpponent(opponent)
 			return
 		}
 		

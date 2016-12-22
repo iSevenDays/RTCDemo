@@ -55,25 +55,13 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	
 	// MARK: - Testing methods VideoStoryInteractorInput
 	
-	func testConnectsWithTestUser() {
-		// given
-		useRealCallService()
-		let testUser = TestsStorage.svuserTest
-		
-		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: nil)
-		
-		// then
-		XCTAssertEqual(testUser, mockOutput.connectedToChatUser)
-		XCTAssertTrue(mockOutput.didConnectToChatWithUserGotCalled)
-	}
-	
 	func testHangup() {
 		// given
 		useRealCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		interactor.hangup()
 		
 		// then
@@ -85,7 +73,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useRealCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		interactor.callService(interactor.callService, didReceiveHangupFromOpponent: testUser2)
 		
 		// then
@@ -98,7 +87,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useRealCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		interactor.callService(interactor.callService, didReceiveRejectFromOpponent: testUser2)
 		
 		// then
@@ -111,7 +101,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useRealCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		
 		// then
 		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
@@ -122,7 +113,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useRealCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		// time to apply local SDP and start dialing, dialing must call send push event
 		waitForTimeInterval(1)
 		
@@ -137,7 +129,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useFakeCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		
 		// then
 		XCTAssertNotNil(interactor.localVideoTrack)
@@ -148,7 +141,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useFakeCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled)
@@ -159,7 +153,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useRealCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: nil)
+		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.callService(interactor.callService, didChangeState: .Error)
 		
 		// then
@@ -171,7 +165,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		useRealCallService()
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		interactor.callService(interactor.callService, didAnswerTimeoutForOpponent: testUser2)
 		
 		// then
@@ -185,7 +180,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		let undefinedUser = TestsStorage.svuserTest
 		
 		// when
-		interactor.connectToChatWithUser(testUser, callOpponent: testUser2)
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
 		interactor.callService(interactor.callService, didReceiveCallRequestFromOpponent: undefinedUser)
 		
 		// then

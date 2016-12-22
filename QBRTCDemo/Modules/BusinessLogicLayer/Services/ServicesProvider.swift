@@ -34,18 +34,23 @@ class ServicesProvider: NSObject {
 		case .Production:
 			let signalingChannel = QBSignalingChannel()
 			let callService = CallService()
-			ServicesConfigurator().configureCallService(callService)
+				
+			let serviceConfigurator = ServicesConfigurator()
+			serviceConfigurator.configureCallService(callService)
 			
 			callService.signalingChannel = signalingChannel
 			callService.signalingProcessor.observer = callService
 			signalingChannel.addObserver(callService.signalingProcessor)
 			
 			let restService = QBRESTService()
-			ServicesConfigurator().configureRESTService(restService)
+			serviceConfigurator.configureRESTService(restService)
 			
 			self.callService = callService
 			self.restService = restService
-			self.pushService = QBPushNotificationsService()
+			
+			let pushService = QBPushNotificationsService()
+			pushService.cacheService = NSUserDefaults.standardUserDefaults()
+			self.pushService = pushService
 			
 			break
 		}

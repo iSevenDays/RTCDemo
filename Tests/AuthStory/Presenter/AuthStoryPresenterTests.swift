@@ -57,6 +57,7 @@ class AuthStoryPresenterTests: XCTestCase {
 		presenter.didTriggerLoginButtonTapped("userName", roomName: "roomName")
 		
 		// then
+		XCTAssertTrue(mockView.disableInputGotCalled)
 		XCTAssertTrue(mockInteractor.signUpOrLoginWithUserNameGotCalled)
 	}
 	

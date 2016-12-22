@@ -11,5 +11,6 @@ import Foundation
 protocol PushNotificationsServiceProtocol: class {
 	func addObserver(observer: PushNotificationsServiceObserver)
 	
+	func registerForPushNotificationsWithDeviceToken(deviceToken: NSData)
 	func sendPushNotificationMessage(message: String, toOpponent opponent: SVUser)
 }

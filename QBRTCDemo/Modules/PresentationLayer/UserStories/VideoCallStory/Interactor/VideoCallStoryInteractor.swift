@@ -8,7 +8,7 @@
 
 class VideoCallStoryInteractor: NSObject {
 
-    weak var output: VideoCallStoryInteractorOutput!
+    weak var output: VideoCallStoryInteractorOutput?
 	
 	var callService: CallServiceProtocol!
 	var pushService: PushNotificationsServiceProtocol!
@@ -30,49 +30,12 @@ class VideoCallStoryInteractor: NSObject {
 }
 
 extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
-	func connectToChatWithUser(user: SVUser, callOpponent opponent: SVUser?) {
-		guard !callService.isConnecting else {
+	func startCallWithOpponent(opponent: SVUser) {
+		guard callService.isConnected else {
+			NSLog("Error: not connected to chat")
 			return
 		}
 		
-		callService.addObserver(self)
-		
-		let connectWithUserAndCallOpponent = { [weak self] in
-			guard let strongSelf = self else { return }
-			
-			strongSelf.callService.connectWithUser(user, completion: { (error) in
-				guard error == nil else {
-					strongSelf.output.didFailToConnectToChat()
-					return
-				}
-				strongSelf.output.didConnectToChatWithUser(user)
-				if let opponent = opponent {
-					strongSelf.startCallWithOpponent(opponent)
-				}
-			})
-		}
-		
-		
-		if callService.isConnected && currentUser == user {
-			if let opponent = opponent {
-				startCallWithOpponent(opponent)
-			}
-		} else if callService.isConnected && currentUser != user {
-			NSLog("Connected with another user, doing disconnect")
-			callService.disconnectWithCompletion({ [weak output] (error) in
-				guard error == nil else {
-					NSLog("%@", "Error disconnecting \(error)")
-					output?.didFailToConnectToChat()
-					return
-				}
-				connectWithUserAndCallOpponent()
-				})
-		} else {
-			connectWithUserAndCallOpponent()
-		}
-	}
-	
-	func startCallWithOpponent(opponent: SVUser) {
 		guard !callService.hasActiveCall else {
 			NSLog("Error: Can not call while already connecting");
 			return
@@ -84,8 +47,9 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		//DDLogInfo(@"Starting a call with opponent %@", opponent);
 		do {
 			try callService.startCallWithOpponent(opponent)
-		}
-		catch let error {
+		} catch CallServiceError.notLogined {
+			NSLog("%@", "Error call service is not connected to chat")
+		} catch let error {
 			NSLog("%@", "Error starting a call with user \(error)")
 		}
 	}
@@ -93,7 +57,14 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 	func acceptCallFromOpponent(opponent: SVUser) {
 		self.opponent = opponent
 		callService.addObserver(self)
-		callService.acceptCallFromOpponent(opponent)
+		do {
+			try callService.acceptCallFromOpponent(opponent)
+		} catch CallServiceError.noPendingOfferForOpponent {
+			NSLog("%@", "Error call service can not accept call because there is no pending offer for the call")
+			output?.didFailCallService()
+		} catch let error {
+			NSLog("%@", "Error starting a call with user \(error)")
+		}
 	}
 	
 	func sendInvitationMessageAndOpenImageGallery() {
@@ -109,14 +80,14 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		callService.hangup()
 		localVideoTrack = nil
 		remoteVideoTrack = nil
-		output.didHangup()
+		output?.didHangup()
 	}
 	
 	func requestDataChannelState() {
 		if isReadyForDataChannel {
-			output.didReceiveDataChannelStateReady()
+			output?.didReceiveDataChannelStateReady()
 		} else {
-			output.didReceiveDataChannelStateNotReady()
+			output?.didReceiveDataChannelStateNotReady()
 		}
 	}
 	
@@ -145,7 +116,6 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			} catch let error {
 				NSLog("%@", "Error overriding output port: \(error)")
 			}
-			
 		}
 	}
 }
@@ -153,7 +123,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 extension VideoCallStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
 		if NSClassFromString("XCTest") != nil {
-			output.didSetLocalCaptureSession(AVCaptureSession())
+			output?.didSetLocalCaptureSession(AVCaptureSession())
 		}
 		
 		guard self.localVideoTrack != localVideoTrack else {
@@ -166,26 +136,30 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		
 		if let source = source {
 			if source.captureSession != nil {
-				output.didSetLocalCaptureSession(source.captureSession)
+				output?.didSetLocalCaptureSession(source.captureSession)
 			}
 		}
 	}
 	
 	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
-		guard let currentOpponent = self.opponent else { return }
-		guard currentOpponent == opponent else { return }
-		output.didReceiveHangupFromOpponent(opponent)
+		guard let currentOpponent = self.opponent else {
+			return
+		}
+		guard currentOpponent == opponent else {
+			return
+		}
+		output?.didReceiveHangupFromOpponent(opponent)
 	}
 	
 	func callService(callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser) {
-		output.didReceiveRejectFromOpponent(opponent)
+		output?.didReceiveRejectFromOpponent(opponent)
 	}
 	
 	func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
 		
 		//DDLogVerbose(@"Call service %@ didReceiveRemoteVideoTrack: %@", callService,  remoteVideoTrack);
 		
-		output.didReceiveRemoteVideoTrackWithConfigurationBlock { [weak self] (renderer) in
+		output?.didReceiveRemoteVideoTrackWithConfigurationBlock { [weak self] (renderer) in
 			guard let strongSelf = self else { return }
 			guard strongSelf.remoteVideoTrack != remoteVideoTrack else { return }
 			
@@ -205,7 +179,7 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 	}
 	
 	func callService(callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser) {
-		output.didReceiveAnswerTimeoutForOpponent(opponent)
+		output?.didReceiveAnswerTimeoutForOpponent(opponent)
 	}
 	
 	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCICEConnectionState) {
@@ -214,7 +188,7 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 	
 	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
 		if state == CallServiceState.Error {
-			output.didFailCallService()
+			output?.didFailCallService()
 		}
 	}
 	
@@ -222,7 +196,7 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		guard let currentUserFullName = self.currentUser?.fullName else { return }
 		
 		pushService.sendPushNotificationMessage("\(currentUserFullName) is calling you", toOpponent: opponent)
-		output.didSendPushNotificationAboutNewCallToOpponent(opponent)
+		output?.didSendPushNotificationAboutNewCallToOpponent(opponent)
 	}
 	
 	func callService(callService: CallServiceProtocol, didError error: NSError) {

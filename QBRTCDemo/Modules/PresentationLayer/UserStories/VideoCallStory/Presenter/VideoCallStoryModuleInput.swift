@@ -13,7 +13,7 @@
 	
  	Configure module and start call with user
  	*/
-	func connectToChatWithUser(user: SVUser, callOpponent: SVUser?)
+	func startCallWithOpponent(opponent: SVUser)
 	
 	func acceptCallFromOpponent(opponent: SVUser)
 }

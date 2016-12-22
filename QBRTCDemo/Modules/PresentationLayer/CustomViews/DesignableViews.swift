@@ -41,6 +41,22 @@ class DesignableButton: UIButton {
 		}
 	}
 	
+	@IBInspectable var highlightedBackgroundColor: UIColor = UIColor.blackColor() {
+		didSet {
+			setNeedsDisplay()
+		}
+	}
+	
+	override var highlighted: Bool {
+		didSet {
+			if highlighted {
+				layer.backgroundColor = highlightedBackgroundColor.CGColor
+			} else {
+				layer.backgroundColor = normalBackgroundColor?.CGColor
+			}
+		}
+	}
+	
 	override var selected: Bool {
 		didSet {
 			if selected {

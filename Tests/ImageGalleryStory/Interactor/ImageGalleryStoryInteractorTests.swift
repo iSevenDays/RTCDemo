@@ -73,7 +73,7 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		// given
 		useRealCallService()
 		interactor.callService.connectWithUser(user1, completion: nil)
-		_ = try? interactor.callService.startCallWithOpponent(user2)
+		XCTAssertNotNil(try? interactor.callService.startCallWithOpponent(user2))
 		
 		// when
 		interactor.requestCallerRole()

@@ -9,8 +9,8 @@
 class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 
     weak var output: ChatUsersStoryInteractorOutput!
-	internal weak var restService: protocol<RESTServiceProtocol>!
-	internal var cacheService: protocol<CacheServiceProtocol>!
+	internal weak var restService: RESTServiceProtocol!
+	internal weak var cacheService: CacheServiceProtocol!
 	
 	internal var tag: String?
 	internal var currentUser: SVUser!
@@ -86,32 +86,5 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 extension ChatUsersStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		output.didReceiveCallRequestFromOpponent(opponent)
-	}
-}
-
-
-@objc protocol CacheServiceProtocol: class {
-	func cacheUsers(users: [SVUser])
-	func cachedUsers() -> [SVUser]?
-	func cachedUserWithID(id: Int) -> SVUser?
-}
-
-extension NSUserDefaults: CacheServiceProtocol {
-	func cacheUsers(users: [SVUser]) {
-		let usersData = NSKeyedArchiver.archivedDataWithRootObject(users)
-		setObject(usersData, forKey: "users")
-	}
-	
-	func cachedUsers() -> [SVUser]? {
-		guard let usersData = objectForKey("users") as? NSData else {
-			NSLog("Warning: No stored users data")
-			return nil
-		}
-		
-		return NSKeyedUnarchiver.unarchiveObjectWithData(usersData) as? [SVUser]
-	}
-	
-	func cachedUserWithID(id: Int) -> SVUser? {
-		return self.cachedUsers()?.filter({$0.ID?.integerValue == id}).first
 	}
 }

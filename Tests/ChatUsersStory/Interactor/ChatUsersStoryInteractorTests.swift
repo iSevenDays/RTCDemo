@@ -141,6 +141,14 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	class MockCacheService: NSObject, CacheServiceProtocol {
 		var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest]
 		
+		func setBool(value: Bool, forKey defaultName: String) {
+			
+		}
+		
+		func boolForKey(defaultName: String) -> Bool {
+			return true
+		}
+		
 		func cachedUserWithID(id: Int) -> SVUser? {
 			return nil
 		}

@@ -48,6 +48,7 @@ class FakeQBRESTService : QBRESTService {
 		if shouldLoginSuccessfully ||
 		(registered && shouldLoginAfterSignupSuccessfully) {
 			logined = true
+			user.ID = 777
 			successBlock?(user: user)
 		} else {
 			errorBlock?(nil)

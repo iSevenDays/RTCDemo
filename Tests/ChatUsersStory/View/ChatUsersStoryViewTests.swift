@@ -49,13 +49,12 @@ class ChatUsersStoryViewTests: XCTestCase {
 		controller.reloadDataWithUsers(users)
 		
 		// then
-		let firstCell = controller.tableView.dataSource?.tableView(controller.tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+		let firstCell = controller.tableView.dataSource?.tableView(controller.tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as? ChatUsersTableViewCell
 		let numberOfRows = controller.tableView.dataSource?.tableView(controller.tableView, numberOfRowsInSection: 0)
 		
 		XCTAssertEqual(controller.users.count, 1)
 		XCTAssertEqual(controller.users.count, numberOfRows)
-		XCTAssertEqual(firstCell?.textLabel?.text, firstUser.fullName)
-		XCTAssertEqual(firstCell?.detailTextLabel?.text, String(firstUser.ID!))
+		XCTAssertEqual(firstCell?.userFullName?.text, firstUser.fullName)
 	}
 	
 	func testNavigationBarTextWithCurrentUser() {
@@ -84,7 +83,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 		}
 		
 		// then
-		XCTAssertEqual(controller.tableHeaderLbl.text, "Users in the room " + roomName)
+		XCTAssertEqual(controller.tableHeaderLbl.text, "Room \"\(roomName)\"")
 	}
 	
 	func testViewCorrectlyHandlesUserTappedEvent() {

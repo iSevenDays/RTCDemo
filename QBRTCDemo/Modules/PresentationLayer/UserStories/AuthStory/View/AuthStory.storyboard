@@ -30,7 +30,7 @@
         <scene sceneID="FAr-7t-DDi">
             <objects>
                 <tableViewController storyboardIdentifier="AuthStoryViewController" id="ufz-Jl-6V1" customClass="AuthStoryViewController" customModule="QBRTCDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" id="mjO-mt-s2Q">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" scrollEnabled="NO" keyboardDismissMode="interactive" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" id="mjO-mt-s2Q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -123,29 +123,35 @@ You can join existent chat room.</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bMb-ev-0Mq" userLabel="loginCell">
-                                        <rect key="frame" x="0.0" y="220" width="320" height="45"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="bMb-ev-0Mq" userLabel="loginCell">
+                                        <rect key="frame" x="0.0" y="220" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMb-ev-0Mq" id="pzY-Ec-5dt">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmg-X7-ClN">
+                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmg-X7-ClN" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
                                                     <rect key="frame" x="64" y="30" width="192" height="44"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="0.56251657882735051" blue="0.067633654964300183" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" identifier="loginBtnHeight" id="Lqm-ef-FVf"/>
                                                     </constraints>
-                                                    <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <state key="normal" title="Login">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <state key="disabled">
-                                                        <color key="titleColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedBackgroundColor">
+                                                            <color key="value" red="1" green="0.56251657879999994" blue="0.067633654959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                            <color key="value" red="1" green="0.56251657879999994" blue="0.067633654959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                            <color key="value" red="0.87707291669999998" green="0.49130052769999999" blue="0.057869986429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -177,9 +183,28 @@ You can join existent chat room.</string>
                             <outlet property="delegate" destination="ufz-Jl-6V1" id="1vE-z5-g1A"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Enter to chat" id="L0j-cn-JNp"/>
+                    <navigationItem key="navigationItem" title="Enter to chat" id="Fhg-1v-vd9">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="5BJ-mh-yhH"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="7bE-H4-0lw">
+                            <view key="customView" opaque="NO" contentMode="scaleToFill" id="4Lh-Ek-zqB">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="j0P-8T-8jk">
+                                        <rect key="frame" x="51" y="0.0" width="20" height="33"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="j0P-8T-8jk" secondAttribute="trailing" id="8wm-J4-J5A"/>
+                                    <constraint firstAttribute="bottom" secondItem="j0P-8T-8jk" secondAttribute="bottom" id="NlE-aI-914"/>
+                                    <constraint firstItem="j0P-8T-8jk" firstAttribute="top" secondItem="4Lh-Ek-zqB" secondAttribute="top" id="tzb-je-3Rs"/>
+                                </constraints>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="j0P-8T-8jk" id="ksf-Wc-PgV"/>
                         <outlet property="login" destination="rmg-X7-ClN" id="gvm-AU-te0"/>
                         <outlet property="roomNameInput" destination="riI-fW-ure" id="sVs-zO-8S1"/>
                         <outlet property="userNameInput" destination="KWX-wJ-HRs" id="FKY-65-iRY"/>

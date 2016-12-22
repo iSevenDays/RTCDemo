@@ -22,7 +22,7 @@ class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
 				fatalError("moduleInput is not VideoStoryModuleInput")
 			}
 			
-			videoStoryInput.connectToChatWithUser(initiator, callOpponent: opponent)
+			videoStoryInput.startCallWithOpponent(opponent)
 			
 			return nil
 		})

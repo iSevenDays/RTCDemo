@@ -85,6 +85,8 @@
 		142B509B1CDD2CE0005B143C /* ChatUsersStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005D7481AA38608B2DC98DA /* ChatUsersStoryInitializer.swift */; };
 		142B51641CDE13E2005B143C /* XCTest+Optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B51631CDE13E2005B143C /* XCTest+Optionals.swift */; };
 		142B51651CDE13E2005B143C /* XCTest+Optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B51631CDE13E2005B143C /* XCTest+Optionals.swift */; };
+		142BC1951E0AFDED00C7ECC0 /* CacheServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BC1941E0AFDED00C7ECC0 /* CacheServiceProtocol.swift */; };
+		142BC1961E0AFDED00C7ECC0 /* CacheServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142BC1941E0AFDED00C7ECC0 /* CacheServiceProtocol.swift */; };
 		142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */; };
 		142D13791C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */; };
 		142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */; };
@@ -323,6 +325,8 @@
 		14C970BB1DFCEB5B00462981 /* QBSignalingChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970B91DFCEB5B00462981 /* QBSignalingChannel.swift */; };
 		14C970BD1DFCEBEF00462981 /* SignalingChannelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */; };
 		14C970BE1DFCEBEF00462981 /* SignalingChannelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */; };
+		14C9EC7F1E0B181600589641 /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C9EC7E1E0B181600589641 /* AlertControl.swift */; };
+		14C9EC801E0B181600589641 /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C9EC7E1E0B181600589641 /* AlertControl.swift */; };
 		14CC91F31DEF772000BABE45 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91F21DEF772000BABE45 /* KeychainSwift.swift */; };
 		14CC91F41DEF772000BABE45 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC91F21DEF772000BABE45 /* KeychainSwift.swift */; };
 		14DE29691C92FDA900D5842E /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DE29681C92FDA900D5842E /* libvpx.a */; };
@@ -518,6 +522,7 @@
 		142866CD1E049DDC00F9AB41 /* DesignableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableViews.swift; sourceTree = "<group>"; };
 		142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatUsersStory.storyboard; sourceTree = "<group>"; };
 		142B51631CDE13E2005B143C /* XCTest+Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Optionals.swift"; sourceTree = "<group>"; };
+		142BC1941E0AFDED00C7ECC0 /* CacheServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheServiceProtocol.swift; sourceTree = "<group>"; };
 		142D13771C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		142D137A1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionView.swift; sourceTree = "<group>"; };
 		142D137E1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageGalleryStoryCollectionViewInteractor.swift; sourceTree = "<group>"; };
@@ -784,6 +789,8 @@
 		14C970B61DFCE1B000462981 /* SignalingMessagesFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignalingMessagesFactoryTests.swift; path = SignalingMessagesFactory/SignalingMessagesFactoryTests.swift; sourceTree = "<group>"; };
 		14C970B91DFCEB5B00462981 /* QBSignalingChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBSignalingChannel.swift; sourceTree = "<group>"; };
 		14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingChannelProtocol.swift; sourceTree = "<group>"; };
+		14C9EC7D1E0B002500589641 /* QBRTCDemo_s.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QBRTCDemo_s.entitlements; sourceTree = "<group>"; };
+		14C9EC7E1E0B181600589641 /* AlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
 		14CC91F21DEF772000BABE45 /* KeychainSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwift.swift; sourceTree = "<group>"; };
 		14D1B6C21C7DDD74006EB865 /* libcongestion_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcongestion_controller.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libcongestion_controller.a"; sourceTree = "<group>"; };
 		14D1B7A81C7E1DAA006EB865 /* libwebrtc_objc_target.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc_objc_target.a; path = "Scripts/webrtc/src/webrtc/../xcodebuild/Debug-iphoneos/libwebrtc_objc_target.a"; sourceTree = "<group>"; };
@@ -1433,6 +1440,7 @@
 		1452AAC51BF92FA30018DA30 = {
 			isa = PBXGroup;
 			children = (
+				14C9EC7D1E0B002500589641 /* QBRTCDemo_s.entitlements */,
 				143609801BF9C7850091071C /* Frameworks */,
 				1452AACF1BF92FA30018DA30 /* Products */,
 				1452AAD01BF92FA30018DA30 /* QBRTCDemo */,
@@ -1631,6 +1639,8 @@
 				1448B78E1DFAE950002D5371 /* MulticastDelegate.swift */,
 				1448B79A1DFB231E002D5371 /* ArrayAppendOperator.swift */,
 				140A57E01E09BC3D0093AC33 /* UIColor+RandomColors.swift */,
+				142BC1941E0AFDED00C7ECC0 /* CacheServiceProtocol.swift */,
+				14C9EC7E1E0B181600589641 /* AlertControl.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2429,10 +2439,13 @@
 						DevelopmentTeam = 77JDVA6Z54;
 					};
 					148233801C002DFE0000E9ED = {
-						DevelopmentTeam = 77JDVA6Z54;
+						DevelopmentTeam = 93LE4543WR;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -2839,6 +2852,7 @@
 				142D138F1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
 				1420E4861CE7CE8D0043EFF9 /* IncomingCallStoryModuleInput.swift in Sources */,
 				1420E4871CE7CE8D0043EFF9 /* IncomingCallStoryPresenter.swift in Sources */,
+				14C9EC7F1E0B181600589641 /* AlertControl.swift in Sources */,
 				1420E48C1CE7CE920043EFF9 /* IncomingCallStoryInteractorOutput.swift in Sources */,
 				142B50931CDD2CE0005B143C /* ChatUsersStoryModuleInput.swift in Sources */,
 				142B50911CDD2CE0005B143C /* ChatUsersStoryViewOutput.swift in Sources */,
@@ -2866,6 +2880,7 @@
 				1420E47D1CE7CE860043EFF9 /* IncomingCallStoryViewController.swift in Sources */,
 				1473EAD21CAC6090007F9DF8 /* AuthStoryRouterInput.swift in Sources */,
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
+				142BC1951E0AFDED00C7ECC0 /* CacheServiceProtocol.swift in Sources */,
 				1420E48D1CE7CE920043EFF9 /* IncomingCallStoryInteractor.swift in Sources */,
 				1420E4921CE7CE9C0043EFF9 /* IncomingCallStoryRouter.swift in Sources */,
 				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
@@ -2936,11 +2951,13 @@
 				4565B18CED6A7AAC3013F9CA /* AuthStoryConfigurator.swift in Sources */,
 				1448B7731DF87BC0002D5371 /* SVTimer.swift in Sources */,
 				4DEB82D05EA0A1975DFD6636 /* AuthStoryInitializer.swift in Sources */,
+				14C9EC801E0B181600589641 /* AlertControl.swift in Sources */,
 				5079BE98F80CCB1AB4538F64 /* ChatUsersStoryViewInput.swift in Sources */,
 				54812A272B7245DEF2065942 /* ChatUsersStoryViewOutput.swift in Sources */,
 				7111201798DAC61369DDCDCB /* ChatUsersStoryViewController.swift in Sources */,
 				7F3BC726A2105AE0E9948DF7 /* ChatUsersStoryModuleInput.swift in Sources */,
 				DF7ADEC8C37383A49E28A647 /* ChatUsersStoryPresenter.swift in Sources */,
+				142BC1961E0AFDED00C7ECC0 /* CacheServiceProtocol.swift in Sources */,
 				AB835C55A6EC843E214CAFC2 /* ChatUsersStoryInteractorInput.swift in Sources */,
 				0909F9104C8B2CCC1DF7F4DB /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				303F608B74B20BF8FD4C0D2D /* ChatUsersStoryInteractor.swift in Sources */,
@@ -3378,9 +3395,10 @@
 			baseConfigurationReference = C838C207280F893ECF0AF820 /* Pods-QBRTCDemo_s.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QBRTCDemo_s.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 77JDVA6Z54;
+				DEVELOPMENT_TEAM = 93LE4543WR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
@@ -3418,7 +3436,7 @@
 					"-all_load",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.RTCDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anton.sokolchenko.instantcall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = QBRTCDemo_s;
 				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;
@@ -3434,9 +3452,10 @@
 			baseConfigurationReference = A66974BFE6A2ACBB27AB9001 /* Pods-QBRTCDemo_s.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QBRTCDemo_s.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 77JDVA6Z54;
+				DEVELOPMENT_TEAM = 93LE4543WR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
@@ -3474,7 +3493,7 @@
 					"-all_load",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = anton.sokolchenko.RTCDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anton.sokolchenko.instantcall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = QBRTCDemo_s;
 				SWIFT_OBJC_BRIDGING_HEADER = QBRTCDemo/BridgingHeader.h;

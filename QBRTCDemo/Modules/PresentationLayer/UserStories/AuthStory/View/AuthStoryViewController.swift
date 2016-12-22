@@ -8,13 +8,14 @@
 
 import UIKit
 
-class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthStoryViewInput {
+class AuthStoryViewController: UITableViewController {
 
     var output: AuthStoryViewOutput!
 
 	@IBOutlet weak var userNameInput: UITextField!
 	@IBOutlet weak var roomNameInput: UITextField!
 	@IBOutlet weak var login: UIButton!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -27,21 +28,37 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 		tableView.estimatedRowHeight = 80
     }
 
-	func setInputEnabled(value: Bool) {
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		activityIndicator.stopAnimating()
+		enableInput()
+	}
+	
+	private func setInputEnabled(value: Bool) {
 		userNameInput.enabled = value
 		roomNameInput.enabled = value
 		login.enabled = value
 	}
 	
+	private func updateLoginButtonEnabledState() {
+		let minCharactersCount = 3
+		let userName = userNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+		let tag = roomNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+		
+		login.enabled = userName?.characters.count >= minCharactersCount && tag?.characters.count >= minCharactersCount
+	}
+	
 	// MAKR: IBActions
 	
-	@IBAction func didTapLoginButton(sender: AnyObject) {
+	@IBAction func didTapLoginButton(sender: UIButton) {
 		let userName = userNameInput.text ?? ""
 		let roomName = roomNameInput.text ?? ""
 		output.didTriggerLoginButtonTapped(userName, roomName: roomName)
 	}
-	
-    // MARK: AuthStoryViewInput
+}
+
+// MARK: AuthStoryViewInput
+extension AuthStoryViewController: AuthStoryViewInput {
     func setupInitialState() {
     }
 	
@@ -50,17 +67,15 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 	}
 	
 	func disableInput() {
-		setInputEnabled(true)
+		setInputEnabled(false)
 	}
 	
 	func setUserName(userName: String) {
 		userNameInput.text = userName
-		updateLoginButtonEnabledState()
 	}
 	
 	func setRoomName(roomName: String) {
 		roomNameInput.text = roomName
-		updateLoginButtonEnabledState()
 	}
 	
 	func retrieveInformation() {
@@ -71,19 +86,24 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 	}
 	
 	func showIndicatorLoggingIn() {
+		activityIndicator.startAnimating()
 		print("Doing login")
 	}
 	
 	func showIndicatorSigningUp() {
+		activityIndicator.startAnimating()
 		print("Doing signup")
 	}
 	
 	func showErrorLogin() {
-		
+		enableInput()
+		activityIndicator.stopAnimating()
+		AlertControl.showErrorMessage("Can not login, please try again later", overViewController: self)
 	}
-	
+}
 	// Mark: UITextFieldDelegate methods
 	
+extension AuthStoryViewController: UITextFieldDelegate {
 	// Limit max length of tag text field to 15
 	func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 		if textField != roomNameInput {
@@ -103,16 +123,11 @@ class AuthStoryViewController: UITableViewController, UITextFieldDelegate, AuthS
 		updateLoginButtonEnabledState()
 	}
 	
-	func updateLoginButtonEnabledState() {
-		let minCharactersCount = 3
-		let userName = userNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-		let tag = roomNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-		
-		login.enabled = userName?.characters.count >= minCharactersCount && tag?.characters.count >= minCharactersCount
-	}
-
-	// MARK: UITableViewDelegate
 	
+}
+
+// MARK: UITableViewDelegate
+extension AuthStoryViewController {
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		return UITableViewAutomaticDimension
 	}
