@@ -68,7 +68,11 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 	}   
 	
 	func sendMessage(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
-		let qbMessage = try? signalingMessagesFactory.qbMessageFromSignalingMessage(message, sender: user, sessionDetails: sessionDetails)
+		guard let currentUser = self.user else {
+			NSLog("%@", "Error failed to send message, current user is nil")
+			return
+		}
+		let qbMessage = try? signalingMessagesFactory.qbMessageFromSignalingMessage(message, sender: currentUser, sessionDetails: sessionDetails)
 		qbMessage!.recipientID = user.ID!.unsignedIntegerValue
 		
 		QBChat.instance().sendSystemMessage(qbMessage!, completion: completion)

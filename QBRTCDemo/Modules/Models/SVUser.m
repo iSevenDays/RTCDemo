@@ -61,11 +61,16 @@
 }
 
 - (NSString *)description {
-	NSString *logString = [NSString stringWithFormat:@"<SVUser %p> id:%@ login:%@ password:%@", self, self.ID, self.login, self.password];
+	NSString *logString = [NSString stringWithFormat:@"<SVUser %p> id:%@ fullName:%@ login:%@", self, self.ID, self.fullName, self.login];
 	
 	if (self.tags != nil) {
 		logString = [logString stringByAppendingFormat:@" tags:%@", self.tags];
 	}
+	
+	if (self.password != nil) {
+		logString = [logString stringByAppendingFormat:@" password: %@", self.password];
+	}
+	
 	return logString;
 }
 
