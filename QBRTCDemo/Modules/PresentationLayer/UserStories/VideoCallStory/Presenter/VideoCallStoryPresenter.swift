@@ -53,51 +53,51 @@ extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	
 	func didHangup() {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showHangup()
-			})
+		}
 	}
 	
 	func didReceiveHangupFromOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showOpponentHangup()
-			})
+		}
 	}
 	
 	func didReceiveRejectFromOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showOpponentReject()
-			})
+		}
 	}
 	
 	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showOpponentAnswerTimeout()
-			})
+		}
 	}
 	
 	func didFailToConnectToChat() {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showErrorConnect()
-			})
+		}
 	}
 	
 	func didFailCallService() {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showErrorCallServiceDisconnected()
-			})
+		}
 	}
 	
 	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.setLocalVideoCaptureSession(localCaptureSession)
-			})
+		}
 	}
 	
 	func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.configureRemoteVideoViewWithBlock(block)
-			})
+		}
 	}
 	
 	func didReceiveDataChannelStateReady() {

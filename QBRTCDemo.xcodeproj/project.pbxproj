@@ -61,10 +61,8 @@
 		142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142154611CE75ACB003C1C4A /* ServicesProvider.swift */; };
 		142582D71E00792E00BA9F21 /* TimersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142582D61E00792E00BA9F21 /* TimersFactory.swift */; };
 		142582D81E00792E00BA9F21 /* TimersFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142582D61E00792E00BA9F21 /* TimersFactory.swift */; };
-		142866CE1E049DDC00F9AB41 /* DesignableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142866CD1E049DDC00F9AB41 /* DesignableViews.swift */; };
 		142866CF1E049DDC00F9AB41 /* DesignableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142866CD1E049DDC00F9AB41 /* DesignableViews.swift */; };
 		1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
-		142B50311CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
 		142B50321CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
 		142B50711CDD2C7A005B143C /* ChatUsersStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC57DD083BC6B8264BF2917 /* ChatUsersStoryConfiguratorTests.swift */; };
 		142B50721CDD2C7A005B143C /* ChatUsersStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2369DE6A31C60325ACEF431 /* ChatUsersStoryViewTests.swift */; };
@@ -315,6 +313,11 @@
 		14B697F11E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */; };
 		14C3FE3D1C7F1FF70077877C /* librtc_pc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C3FE3C1C7F1FF70077877C /* librtc_pc.a */; };
 		14C3FE3F1C7F20290077877C /* libcongestion_controller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C3FE3E1C7F20290077877C /* libcongestion_controller.a */; };
+		14C7DA6E1E0C829A00870C00 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C7DA6D1E0C829A00870C00 /* UIView+Shake.swift */; };
+		14C7DA6F1E0C829A00870C00 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C7DA6D1E0C829A00870C00 /* UIView+Shake.swift */; };
+		14C7DA721E0C876900870C00 /* ChatUsersStoryEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C7DA701E0C876900870C00 /* ChatUsersStoryEmptyView.xib */; };
+		14C7DA741E0C89B400870C00 /* ChatUsersStoryEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C7DA731E0C89B400870C00 /* ChatUsersStoryEmptyView.swift */; };
+		14C7DA751E0C89B400870C00 /* ChatUsersStoryEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C7DA731E0C89B400870C00 /* ChatUsersStoryEmptyView.swift */; };
 		14C970B01DFCB5E000462981 /* SignalingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970AF1DFCB5E000462981 /* SignalingMessage.swift */; };
 		14C970B11DFCB5E000462981 /* SignalingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970AF1DFCB5E000462981 /* SignalingMessage.swift */; };
 		14C970B31DFCC09600462981 /* SignalingMessagesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970B21DFCC09600462981 /* SignalingMessagesFactory.swift */; };
@@ -784,6 +787,9 @@
 		14C5359E1C6B877700A0FFE8 /* libdesktop_capture.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdesktop_capture.a; path = "Scripts/webrtc/src/webrtc/modules/../../xcodebuild/Debug-iphoneos/libdesktop_capture.a"; sourceTree = "<group>"; };
 		14C535BF1C6B9C8E00A0FFE8 /* librtc_api_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_api_objc.a; path = "Scripts/webrtc/src/webrtc/api/../../xcodebuild/Debug-iphoneos/librtc_api_objc.a"; sourceTree = "<group>"; };
 		14C535C01C6B9C8E00A0FFE8 /* librtc_media.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_media.a; path = "Scripts/webrtc/src/webrtc/media/../../xcodebuild/Debug-iphoneos/librtc_media.a"; sourceTree = "<group>"; };
+		14C7DA6D1E0C829A00870C00 /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
+		14C7DA701E0C876900870C00 /* ChatUsersStoryEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatUsersStoryEmptyView.xib; sourceTree = "<group>"; };
+		14C7DA731E0C89B400870C00 /* ChatUsersStoryEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUsersStoryEmptyView.swift; sourceTree = "<group>"; };
 		14C970AF1DFCB5E000462981 /* SignalingMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingMessage.swift; sourceTree = "<group>"; };
 		14C970B21DFCC09600462981 /* SignalingMessagesFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingMessagesFactory.swift; sourceTree = "<group>"; };
 		14C970B61DFCE1B000462981 /* SignalingMessagesFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignalingMessagesFactoryTests.swift; path = SignalingMessagesFactory/SignalingMessagesFactoryTests.swift; sourceTree = "<group>"; };
@@ -1641,6 +1647,7 @@
 				140A57E01E09BC3D0093AC33 /* UIColor+RandomColors.swift */,
 				142BC1941E0AFDED00C7ECC0 /* CacheServiceProtocol.swift */,
 				14C9EC7E1E0B181600589641 /* AlertControl.swift */,
+				14C7DA6D1E0C829A00870C00 /* UIView+Shake.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2139,6 +2146,8 @@
 				8868305B44A9822B6CD1720E /* ChatUsersStoryViewInput.swift */,
 				6418A7D60FA29B0381E95538 /* ChatUsersStoryViewOutput.swift */,
 				140A57DD1E09BA760093AC33 /* ChatUsersTableViewCell.swift */,
+				14C7DA701E0C876900870C00 /* ChatUsersStoryEmptyView.xib */,
+				14C7DA731E0C89B400870C00 /* ChatUsersStoryEmptyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2506,7 +2515,6 @@
 				1452AAE11BF92FA30018DA30 /* LaunchScreen.storyboard in Resources */,
 				1452AADE1BF92FA30018DA30 /* Assets.xcassets in Resources */,
 				14EE3D091C6BC03700C451CF /* clone.sh in Resources */,
-				142B50311CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */,
 				14EE3D0B1C6BC03700C451CF /* framework_dance.sh in Resources */,
 				14FB2CB61C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */,
 				1433C5F41DF16C7A00A2CED6 /* VideoCallStory.storyboard in Resources */,
@@ -2520,6 +2528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				148234021C002DFE0000E9ED /* LaunchScreen.storyboard in Resources */,
+				14C7DA721E0C876900870C00 /* ChatUsersStoryEmptyView.xib in Resources */,
 				142B50321CDD1C93005B143C /* ChatUsersStory.storyboard in Resources */,
 				1420E4561CE7CA750043EFF9 /* IncomingCallStory.storyboard in Resources */,
 				148234051C002DFE0000E9ED /* Assets.xcassets in Resources */,
@@ -2851,6 +2860,7 @@
 				14C970B31DFCC09600462981 /* SignalingMessagesFactory.swift in Sources */,
 				142D138F1C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
 				1420E4861CE7CE8D0043EFF9 /* IncomingCallStoryModuleInput.swift in Sources */,
+				14C7DA741E0C89B400870C00 /* ChatUsersStoryEmptyView.swift in Sources */,
 				1420E4871CE7CE8D0043EFF9 /* IncomingCallStoryPresenter.swift in Sources */,
 				14C9EC7F1E0B181600589641 /* AlertControl.swift in Sources */,
 				1420E48C1CE7CE920043EFF9 /* IncomingCallStoryInteractorOutput.swift in Sources */,
@@ -2873,7 +2883,6 @@
 				1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */,
 				14CC91F31DEF772000BABE45 /* KeychainSwift.swift in Sources */,
 				14EBDD341DFC7C9000A1EEB5 /* VideoCallStoryViewController.swift in Sources */,
-				142866CE1E049DDC00F9AB41 /* DesignableViews.swift in Sources */,
 				1448B79B1DFB231E002D5371 /* ArrayAppendOperator.swift in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				14740A7C1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */,
@@ -2882,6 +2891,7 @@
 				14736EEE1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				142BC1951E0AFDED00C7ECC0 /* CacheServiceProtocol.swift in Sources */,
 				1420E48D1CE7CE920043EFF9 /* IncomingCallStoryInteractor.swift in Sources */,
+				14C7DA6E1E0C829A00870C00 /* UIView+Shake.swift in Sources */,
 				1420E4921CE7CE9C0043EFF9 /* IncomingCallStoryRouter.swift in Sources */,
 				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
 				14ADBDEE1C738554003A0C98 /* ImageGalleryStoryPresenter.swift in Sources */,
@@ -2934,6 +2944,7 @@
 				C39E99EF43065B34302624F5 /* ImageGalleryStoryInteractor.swift in Sources */,
 				DA504752039A0FB1064FE384 /* ImageGalleryStoryRouterInput.swift in Sources */,
 				34295AF1A7D1C75DF764635D /* ImageGalleryStoryRouter.swift in Sources */,
+				14C7DA6F1E0C829A00870C00 /* UIView+Shake.swift in Sources */,
 				14C970BB1DFCEB5B00462981 /* QBSignalingChannel.swift in Sources */,
 				0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */,
 				07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */,
@@ -2991,6 +3002,7 @@
 				1448B78D1DFAE849002D5371 /* CallService.swift in Sources */,
 				28FFDBE56651FC0FAE43A114 /* VideoCallStoryInteractorOutput.swift in Sources */,
 				275383DC6208D349187975DB /* VideoCallStoryInteractor.swift in Sources */,
+				14C7DA751E0C89B400870C00 /* ChatUsersStoryEmptyView.swift in Sources */,
 				4BB2DADCF0A8097BEFBCF0E2 /* VideoCallStoryRouterInput.swift in Sources */,
 				E4FBAEB769B3C7F83FA0CEC7 /* VideoCallStoryRouter.swift in Sources */,
 				14C970B11DFCB5E000462981 /* SignalingMessage.swift in Sources */,

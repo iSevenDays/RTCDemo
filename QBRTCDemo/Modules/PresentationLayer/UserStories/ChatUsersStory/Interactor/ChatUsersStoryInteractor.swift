@@ -84,7 +84,7 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 			return users
 		}
 		
-		return users.filter({$0.ID!.isEqualToNumber(currentUserID) == false})
+		return users.filter({$0.ID?.isEqualToNumber(currentUserID) == false})
 	}
 }
 

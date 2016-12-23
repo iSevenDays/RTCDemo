@@ -22,6 +22,12 @@ extension UIView {
 
 
 @IBDesignable
+class DesignableImageView: UIImageView {
+	
+}
+
+
+@IBDesignable
 class DesignableView: UIView {
 	
 }

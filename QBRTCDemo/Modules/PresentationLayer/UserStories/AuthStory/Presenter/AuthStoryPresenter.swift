@@ -42,25 +42,36 @@ extension AuthStoryPresenter: AuthStoryInteractorOutput {
 	}
 	
 	func didErrorLogin(error: NSError?) {
-		view.showErrorLogin()
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view.showErrorLogin()
+			view.enableInput()
+		}
 	}
 	
 	func doingLoginWithUser(user: SVUser) {
-		view.showIndicatorLoggingIn()
-		view.setUserName(user.fullName)
-		view.setRoomName(user.tags!.joinWithSeparator(","))
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view.showIndicatorLoggingIn()
+			view.setUserName(user.fullName)
+			view.setRoomName(user.tags!.joinWithSeparator(","))
+		}
 	}
 	
 	func doingLoginWithCachedUser(user: SVUser) {
-		view.showIndicatorLoggingIn()
-		view.setUserName(user.fullName)
-		view.setRoomName(user.tags!.joinWithSeparator(","))
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view.showIndicatorLoggingIn()
+			view.setUserName(user.fullName)
+			view.setRoomName(user.tags!.joinWithSeparator(","))
+			view.disableInput()
+		}
 	}
 	
 	func doingSignUpWithUser(user: SVUser) {
-		view.showIndicatorSigningUp()
-		view.setUserName(user.fullName)
-		view.setRoomName(user.tags!.joinWithSeparator(","))
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view.showIndicatorSigningUp()
+			view.setUserName(user.fullName)
+			view.setRoomName(user.tags!.joinWithSeparator(","))
+			view.disableInput()
+		}
 	}
 }
 

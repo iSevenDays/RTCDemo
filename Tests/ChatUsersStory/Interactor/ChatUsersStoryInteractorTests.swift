@@ -39,7 +39,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	// MARK: ChatUsersStoryInteractorInput tests
 	func testRetrievesUsersFromCacheAndDownloadsThemFromREST() {
 		// given
-		let cachedUsers = interactor.cacheService.cachedUsers()
+		let cachedUsers = interactor.cacheService.cachedUsersForRoomWithName("tag")
 		interactor.tag = "tag"
 		
 		// when
@@ -86,7 +86,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockRESTService.downloadUsersWithTagsGotCalled)
-		XCTAssertEqualOptional(mockCacheService.cachedUsers(), mockOutput.retrievedUsers) // users should be cached
+		XCTAssertEqualOptional(mockCacheService.cachedUsersForRoomWithName("tag"), mockOutput.retrievedUsers) // users should be cached
 		XCTAssertEqualOptional(mockOutput.retrievedUsers, mockRESTService.restUsersArray)
 	}
 	
@@ -153,11 +153,11 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 			return nil
 		}
 		
-		func cacheUsers(users: [SVUser]) {
+		func cacheUsers(users: [SVUser], forRoomName roomName: String) {
 			cachedUsersArray = users
 		}
 		
-		func cachedUsers() -> [SVUser]? {
+		func cachedUsersForRoomWithName(roomName: String) -> [SVUser]? {
 			return cachedUsersArray
 		}
 	}

@@ -176,7 +176,7 @@ extension CallService: CallServiceProtocol {
 		
 		observers => { $0.callService(self, didStartDialingOpponent: opponent) }
 		
-		let dialingTimer = timersFactory.createDialingTimerWithExpirationTime(20000, block: sendMessageBlock) { [unowned self] in
+		let dialingTimer = timersFactory.createDialingTimerWithExpirationTime(45000, block: sendMessageBlock) { [unowned self] in
 			self.observers => { $0.callService(self, didAnswerTimeoutForOpponent: opponent) }
 			self.stopDialingOpponent(opponent)
 			self.activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.close()

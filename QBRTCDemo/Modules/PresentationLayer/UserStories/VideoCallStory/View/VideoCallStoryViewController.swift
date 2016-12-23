@@ -78,7 +78,7 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func showOpponentAnswerTimeout() {
-		AlertControl.showMessage("Opponent hasn't answered. Please try again later", title: "Notification", overViewController: self, completion: { [output] in
+		AlertControl.showMessage("Opponent isn't answering. Please try again later", title: "Notification", overViewController: self, completion: { [output] in
 			output.didTriggerCloseButtonTapped()
 			})
 	}

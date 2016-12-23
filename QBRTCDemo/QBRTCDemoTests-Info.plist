@@ -8,6 +8,8 @@
 	<string>App uses camera for video calls</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>App uses microphone to provide audio calls</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>UIStatusBarHidden</key>

@@ -138,7 +138,6 @@ class QBRESTService : RESTServiceProtocol {
 				return
 		}
 		
-		
 		let params = QBUpdateUserParameters()
 		params.fullName = requestedUser.fullName
 		params.tags = NSMutableArray(array: requestedUser.tags!)
@@ -152,7 +151,6 @@ class QBRESTService : RESTServiceProtocol {
 			}) { (response) in
 				errorBlock(error: response.error?.error)
 		}
-		
 	}
 	
 	func downloadUsersWithTags(tags: [String], successBlock: (users: [SVUser]) -> Void, errorBlock: (error: NSError?) -> Void) {

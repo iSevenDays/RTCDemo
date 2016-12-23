@@ -43,6 +43,15 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 		
 		self.users = users
 		
+		guard self.users.count != 0 else {
+			if let emptyView = ChatUsersStoryEmptyView.instanceFromNib() {
+				tableView.backgroundView = emptyView
+			}
+			return
+		}
+		
+		tableView.backgroundView = nil
+		
 		dispatch_async(dispatch_get_main_queue()) { [weak self] in
 			self?.tableView.reloadData()
 		}

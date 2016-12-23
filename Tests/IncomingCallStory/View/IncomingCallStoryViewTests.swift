@@ -69,7 +69,7 @@ class IncomingCallStoryViewTests: XCTestCase {
 		controller.configureViewWithCallInitiator(callInitiator)
 		
 		// then
-		XCTAssertEqual(controller.lblIncomingCall.text, "Incoming call from: " + callInitiator.fullName)
+		XCTAssertEqual(controller.lblIncomingCall.text, "Incoming call from " + callInitiator.fullName)
 	}
 	
 	func testShowOpponentDeclinedCallEventuallyCallsCloseAction() {

@@ -91,7 +91,9 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 					errorBlock(error: error)
 					return
 				}
-				
+				if user.ID == nil {
+					user.ID = self.callService.currentUser?.ID
+				}
 				self.mutableSuccessBlock?(user: user)
 				self.mutableSuccessBlock = nil
 			})

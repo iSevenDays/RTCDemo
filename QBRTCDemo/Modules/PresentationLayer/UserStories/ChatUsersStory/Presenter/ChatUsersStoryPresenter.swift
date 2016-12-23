@@ -44,6 +44,8 @@ extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 	}
 	
 	func didError(error: ChatUsersStoryInteractorError) {
-		
+		if error == .CanNotRetrieveUsers {
+			view?.reloadDataWithUsers([])
+		}
 	}
 }

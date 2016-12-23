@@ -48,7 +48,8 @@ class AuthStoryViewTests: XCTestCase {
 	func testLoginButtonTriggersAction() {
 		// given
 		controller.loadView()
-		
+		controller.setUserName("test")
+		controller.setRoomName("test")
 		// when
 		controller.didTapLoginButton(emptySender)
 		

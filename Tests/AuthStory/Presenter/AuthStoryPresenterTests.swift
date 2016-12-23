@@ -16,7 +16,7 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class AuthStoryPresenterTests: XCTestCase {
+class AuthStoryPresenterTests: BaseTestCase {
 
 	var presenter: AuthStoryPresenter!
 	var mockInteractor: MockInteractor!
@@ -66,6 +66,7 @@ class AuthStoryPresenterTests: XCTestCase {
 	func testShowsLoggingInIndicator() {
 		// when
 		self.presenter.doingLoginWithUser(TestsStorage.svuserTest)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(self.mockView.showIndicatorLoggingInGotCalled)
@@ -76,6 +77,7 @@ class AuthStoryPresenterTests: XCTestCase {
 	func testShowsSigningUpIndicator() {
 		// when
 		self.presenter.doingSignUpWithUser(TestsStorage.svuserTest)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(self.mockView.showIndicatorSigningUpGotCalled)
@@ -99,6 +101,7 @@ class AuthStoryPresenterTests: XCTestCase {
 	func testShowsError_whenLoginFailed() {
 		// when
 		self.presenter.didErrorLogin(nil)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(self.mockView.showErrorLoginGotCalled)
