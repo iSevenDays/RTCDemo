@@ -27,6 +27,20 @@ class VideoCallStoryInteractor: NSObject {
 		return false
 		//return callService.dataChannelEnabled && callService.isDataChannelReady()
 	}
+	
+	// MARK: - Enable/disable local video track
+	
+	internal func isLocalVideoTrackEnabled() -> Bool {
+		return localVideoTrack?.isEnabled() ?? false
+	}
+	
+	internal func enableLocalVideoTrack() {
+		localVideoTrack?.setEnabled(true)
+	}
+	
+	internal func disableLocalVideoTrack() {
+		localVideoTrack?.setEnabled(false)
+	}
 }
 
 extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
@@ -91,14 +105,14 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		}
 	}
 	
-	/// MARK: - Switch camera
+	// MARK: - Switch camera
 	func switchCamera() {
 		if let videoSource = localVideoTrack?.source as? RTCAVFoundationVideoSource {
 			videoSource.useBackCamera = !videoSource.useBackCamera
 		}
 	}
 	
-	/// MARK: - Switch audio route
+	// MARK: - Switch audio route
 	func switchAudioRoute() {
 		var desiredRoute = AVAudioSessionPortOverride.None
 		if audioSessionPortOverride == desiredRoute {
@@ -118,12 +132,28 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			}
 		}
 	}
+	
+	// MARK: - Enable / disable sending a local video track
+	func switchLocalVideoTrackState() {
+		let localVideoTrackEnabled = isLocalVideoTrackEnabled()
+		
+		if localVideoTrackEnabled {
+			disableLocalVideoTrack()
+		} else {
+			enableLocalVideoTrack()
+		}
+		
+		output?.didChangeLocalVideoTrackState(isLocalVideoTrackEnabled())
+	}
 }
 
 extension VideoCallStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
-		if NSClassFromString("XCTest") != nil {
+		guard NSClassFromString("XCTest") == nil else {
+			self.localVideoTrack = localVideoTrack
 			output?.didSetLocalCaptureSession(AVCaptureSession())
+			output?.didChangeLocalVideoTrackState(true)
+			return
 		}
 		
 		guard self.localVideoTrack != localVideoTrack else {
@@ -134,10 +164,13 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		
 		let source = localVideoTrack.source as? RTCAVFoundationVideoSource
 		
-		if let source = source, let session = source.captureSession {
+		if let session = source?.captureSession {
 			output?.didSetLocalCaptureSession(session)
+			output?.didChangeLocalVideoTrackState(true)
+		} else {
+			output?.didChangeLocalVideoTrackState(false)
 		}
-	}
+	}  
 	
 	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
 		guard let currentOpponent = self.opponent else {

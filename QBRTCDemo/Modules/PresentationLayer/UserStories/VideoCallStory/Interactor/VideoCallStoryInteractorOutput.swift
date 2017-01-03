@@ -44,4 +44,7 @@ import Foundation
 	func didReceiveAnswerFromOpponent(opponent: SVUser)
 	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser)
+	
+	/// Called when local video track state is changed
+	func didChangeLocalVideoTrackState(enabled: Bool)
 }

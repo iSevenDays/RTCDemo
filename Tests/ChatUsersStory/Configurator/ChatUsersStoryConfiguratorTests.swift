@@ -29,7 +29,7 @@ class ChatUsersStoryModuleConfiguratorTests: XCTestCase {
         //then
         XCTAssertNotNil(viewController.output, "ChatUsersStoryViewController is nil after configuration")
         XCTAssertTrue(viewController.output is ChatUsersStoryPresenter, "output is not ChatUsersStoryPresenter")
-
+		
         let presenter: ChatUsersStoryPresenter = viewController.output as! ChatUsersStoryPresenter
         XCTAssertNotNil(presenter.view, "view in ChatUsersStoryPresenter is nil after configuration")
         XCTAssertNotNil(presenter.router, "router in ChatUsersStoryPresenter is nil after configuration")

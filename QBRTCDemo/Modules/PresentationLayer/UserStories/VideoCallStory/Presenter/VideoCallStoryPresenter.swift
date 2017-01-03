@@ -48,6 +48,10 @@ extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 	func didTriggerSwitchAudioRouteButtonTapped() {
 		interactor.switchAudioRoute()
 	}
+	
+	func didTriggerSwitchLocalVideoTrackButtonTapped() {
+		interactor.switchLocalVideoTrackState()
+	}
 }
 
 extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
@@ -118,10 +122,6 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 			})
 	}
 	
-	func didOpenDataChannel() {
-		
-	}
-	
 	func didStartDialingOpponent(opponent: SVUser) {
 		dispatch_async(dispatch_get_main_queue(), { [view] in
 			view?.showStartDialingOpponent(opponent)
@@ -134,7 +134,17 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 			})
 	}
 	
+	func didChangeLocalVideoTrackState(enabled: Bool) {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackEnabled(enabled)
+		}
+	}
+	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
+		
+	}
+	
+	func didOpenDataChannel() {
 		
 	}
 }

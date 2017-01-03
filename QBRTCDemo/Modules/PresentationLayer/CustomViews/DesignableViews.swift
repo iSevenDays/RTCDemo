@@ -36,13 +36,15 @@ class DesignableView: UIView {
 class DesignableButton: UIButton {
 	@IBInspectable var normalBackgroundColor: UIColor? {
 		didSet {
-			backgroundColor = normalBackgroundColor
+			layer.backgroundColor = normalBackgroundColor?.CGColor
+			updateSelectedBackgrounColor()
 			setNeedsDisplay()
 		}
 	}
 	
 	@IBInspectable var selectedBackgroundColor: UIColor = UIColor.blackColor() {
 		didSet {
+			updateSelectedBackgrounColor()
 			setNeedsDisplay()
 		}
 	}
@@ -67,12 +69,15 @@ class DesignableButton: UIButton {
 	
 	override var selected: Bool {
 		didSet {
-			if selected {
-				layer.backgroundColor = selectedBackgroundColor.CGColor
-			} else {
-				layer.backgroundColor = normalBackgroundColor?.CGColor
-			}
 			setNeedsDisplay()
+		}
+	}
+	
+	func updateSelectedBackgrounColor() {
+		if selected {
+			layer.backgroundColor = selectedBackgroundColor.CGColor
+		} else {
+			layer.backgroundColor = normalBackgroundColor?.CGColor
 		}
 	}
 }

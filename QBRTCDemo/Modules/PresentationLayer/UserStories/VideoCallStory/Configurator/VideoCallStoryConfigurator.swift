@@ -33,6 +33,7 @@ class VideoCallStoryModuleConfigurator {
 		
         presenter.interactor = interactor
         viewController.output = presenter
+		viewController.alertControl = AlertControl()
     }
 
 }

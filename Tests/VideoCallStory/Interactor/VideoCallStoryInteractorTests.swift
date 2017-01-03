@@ -120,6 +120,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
+		XCTAssertTrue(mockOutput.didChangeLocalVideoTrackStateGotCalled)
+		XCTAssertTrue(mockOutput.localVideoTrackState ?? false)
 		XCTAssertTrue(mockOutput.didSendPushNotificationAboutNewCallToOpponentGotCalled)
 		XCTAssertEqual(mockOutput.opponent, testUser2)
 	}
@@ -195,6 +197,23 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveAnswerTimeoutForOpponentGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutSwitchedLocalVideoTrackState() {
+		// given  
+		useRealCallService()
+		
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
+		let initialLocalVideoTrackState = interactor.isLocalVideoTrackEnabled()
+		interactor.switchLocalVideoTrackState()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockOutput.didChangeLocalVideoTrackStateGotCalled)
+		XCTAssertNotEqual(mockOutput.localVideoTrackState, initialLocalVideoTrackState)
 	}
 	
 	// TODO: this case should be handle also
@@ -312,7 +331,9 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		var didStartDialingOpponentGotCalled = false
 		var didReceiveAnswerFromOpponentGotCalled = false
 		var didSendPushNotificationAboutNewCallToOpponentGotCalled = false
-		
+		var didChangeLocalVideoTrackStateGotCalled = false
+		var localVideoTrackState: Bool?
+
 		func didHangup() {
 			didHangupGotCalled = true
 		}
@@ -380,6 +401,11 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
 			didSendPushNotificationAboutNewCallToOpponentGotCalled = true
 			self.opponent = opponent
+		}
+		
+		func didChangeLocalVideoTrackState(enabled: Bool) {
+			localVideoTrackState = enabled
+			didChangeLocalVideoTrackStateGotCalled = true
 		}
 	}
 }

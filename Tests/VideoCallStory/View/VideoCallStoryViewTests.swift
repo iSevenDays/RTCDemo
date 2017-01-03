@@ -27,8 +27,10 @@ class VideoCallStoryViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
         controller = UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewControllerWithIdentifier(String(VideoCallStoryViewController.self)) as! VideoCallStoryViewController
+		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
+		controller.alertControl = FakeAlertControl()
     }
 
     override func tearDown() {
@@ -71,6 +73,14 @@ class VideoCallStoryViewTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.switchAudioRouteButtonTapped)
+	}
+	
+	func testSwitchLocalVideoTrackButtonTriggersAction() {
+		// when
+		controller.didTapButtonSwitchLocalVideoTrack(emptySender)
+		
+		// then
+		XCTAssertTrue(mockOutput.switchLocalVideoTrackButtonTapped)
 	}
 	
 	func testSuccessDataChannelButton_ImageGalleryTriggersAction() {
@@ -157,6 +167,7 @@ class VideoCallStoryViewTests: XCTestCase {
 		var closeButtonTapped = false
 		var switchCameraButtonTapped = false
 		var switchAudioRouteButtonTapped = false
+		var switchLocalVideoTrackButtonTapped = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
@@ -180,6 +191,10 @@ class VideoCallStoryViewTests: XCTestCase {
 		
 		func didTriggerSwitchAudioRouteButtonTapped() {
 			switchAudioRouteButtonTapped = true
+		}
+		
+		func didTriggerSwitchLocalVideoTrackButtonTapped() {
+			switchLocalVideoTrackButtonTapped = true
 		}
 		
 	}

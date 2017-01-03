@@ -26,4 +26,7 @@ protocol VideoCallStoryInteractorInput {
 	/// But currently there is no need
 	func requestDataChannelState()
 	func sendInvitationMessageAndOpenImageGallery()
+	
+	/// Enable or disable sending local video track to the opponent
+	func switchLocalVideoTrackState()
 }

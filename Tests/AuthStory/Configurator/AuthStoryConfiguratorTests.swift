@@ -30,7 +30,8 @@ class AuthStoryModuleConfiguratorTests: XCTestCase {
         //then
         XCTAssertNotNil(viewController.output, "AuthStoryViewController is nil after configuration")
         XCTAssertTrue(viewController.output is AuthStoryPresenter, "output is not AuthStoryPresenter")
-
+		XCTAssertNotNil(viewController.alertControl, "alertControl in AuthStoryViewController is nil after configuration")
+		
         let presenter: AuthStoryPresenter = viewController.output as! AuthStoryPresenter
         XCTAssertNotNil(presenter.view, "view in AuthStoryPresenter is nil after configuration")
         XCTAssertNotNil(presenter.router, "router in AuthStoryPresenter is nil after configuration")

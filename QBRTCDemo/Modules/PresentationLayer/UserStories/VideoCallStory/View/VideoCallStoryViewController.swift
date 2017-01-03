@@ -10,7 +10,10 @@ import UIKit
 
 class VideoCallStoryViewController: UIViewController {
 	
+	var alertControl: AlertControlProtocol!
+	
 	@objc var output: VideoCallStoryViewOutput!
+	@IBOutlet weak var btnSwitchCamera: UIButton!
 	
 	// MARK - IBOutlets
 	@IBOutlet weak var lblState: UILabel!
@@ -42,6 +45,10 @@ class VideoCallStoryViewController: UIViewController {
 		sender.selected = !sender.selected
 		output.didTriggerSwitchAudioRouteButtonTapped()
 	}
+	
+	@IBAction func didTapButtonSwitchLocalVideoTrack(sender: UIButton) {
+		output.didTriggerSwitchLocalVideoTrackButtonTapped()
+	}
 }
 
 extension VideoCallStoryViewController: VideoCallStoryViewInput {
@@ -66,35 +73,31 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func showOpponentReject() {
-		AlertControl.showMessage("Opponent is busy, please call later", title: "Notification", overViewController: self, completion: { [output] in
+		alertControl.showMessage("Opponent is busy, please call later", title: "Notification", overViewController: self, completion: { [output] in
 			output.didTriggerCloseButtonTapped()
 			})
 	}
 	
 	func showOpponentHangup() {
-		AlertControl.showMessage("Opponent ended the call", title: "Notification", overViewController: self, completion: { [output] in
+		alertControl.showMessage("Opponent ended the call", title: "Notification", overViewController: self, completion: { [output] in
 			output.didTriggerCloseButtonTapped()
 			})
 	}
 	
 	func showOpponentAnswerTimeout() {
-		AlertControl.showMessage("Opponent isn't answering. Please try again later", title: "Notification", overViewController: self, completion: { [output] in
+		alertControl.showMessage("Opponent isn't answering. Please try again later", title: "Notification", overViewController: self, completion: { [output] in
 			output.didTriggerCloseButtonTapped()
 			})
 	}
 	
 	func showErrorConnect() {
-		AlertControl.showErrorMessage("Can not connect. Please try again later", overViewController: self)
+		alertControl.showErrorMessage("Can not connect. Please try again later", overViewController: self, completion: nil)
 	}
 	
 	func showErrorCallServiceDisconnected() {
-		AlertControl.showErrorMessage("Disconnected. Can not connect. Please try again later", overViewController: self, completion: { [output] in
+		alertControl.showErrorMessage("Disconnected. Can not connect. Please try again later", overViewController: self, completion: { [output] in
 			output.didTriggerCloseButtonTapped()
 			})
-	}
-	
-	func showErrorDataChannelNotReady() {
-		
 	}
 	
 	func setLocalVideoCaptureSession(captureSession: AVCaptureSession) {
@@ -104,5 +107,16 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	
 	func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?) {
 		block?(viewRemote)
+	}
+	
+	func showLocalVideoTrackEnabled(enabled: Bool) {
+		let shouldDisplayCameraDeniedState = !enabled
+		btnSwitchCamera.hidden = shouldDisplayCameraDeniedState
+		btnSwitchCamera.selected = shouldDisplayCameraDeniedState
+	}
+	
+	// Currently not used
+	func showErrorDataChannelNotReady() {
+		
 	}
 }

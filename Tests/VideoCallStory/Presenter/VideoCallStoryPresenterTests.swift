@@ -202,6 +202,14 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		XCTAssertTrue(mockInteractor.switchAudioRouteGotCalled)
 	}
 	
+	func testPresenterSwitchesLocalVideoTrackState() {
+		// when
+		presenter.didTriggerSwitchLocalVideoTrackButtonTapped()
+		
+		// then
+		XCTAssertTrue(mockInteractor.switchLocalVideoTrackStateGotCalled)
+	}
+	
 	func testPresenterHandlesDialingOpponent() {
 		// when
 		presenter.didStartDialingOpponent(testUser2)
@@ -232,6 +240,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		var sendInvitationMessageAndOpenImageGalleryGotCalled = false
 		var switchCameraGotCalled = false
 		var switchAudioRouteGotCalled = false
+		var switchLocalVideoTrackStateGotCalled = false
 		
 		func startCallWithOpponent(opponent: SVUser) {
 			self.opponent = opponent
@@ -267,6 +276,10 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		func switchAudioRoute() {
 			switchAudioRouteGotCalled = true
 		}
+		
+		func switchLocalVideoTrackState() {
+			switchLocalVideoTrackStateGotCalled = true
+		}
     }
 
     class MockRouter: VideoCallStoryRouterInput {
@@ -297,6 +310,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		var localCaptureSession: AVCaptureSession?
 		var setLocalVideoCaptureSessionGotCalled = false
 		var configureRemoteVideoViewWithBlockGotCalled = false
+		var showLocalVideoTrackEnabledGotCalled = false
 		
         func setupInitialState() {
 			setupInitialStateGotCalled = true
@@ -349,6 +363,10 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		
 		func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?) {
 			configureRemoteVideoViewWithBlockGotCalled = true
+		}
+		
+		func showLocalVideoTrackEnabled(enabled: Bool) {
+			showLocalVideoTrackEnabledGotCalled = true
 		}
     }
 }

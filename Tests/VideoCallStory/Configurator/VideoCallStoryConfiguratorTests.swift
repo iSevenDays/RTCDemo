@@ -30,7 +30,8 @@ class VideoCallStoryModuleConfiguratorTests: XCTestCase {
         //then
         XCTAssertNotNil(viewController.output, "VideoCallStoryViewController is nil after configuration")
         XCTAssertTrue(viewController.output is VideoCallStoryPresenter, "output is not VideoCallStoryPresenter")
-
+		XCTAssertNotNil(viewController.alertControl, "alertControl in VideoCallStoryViewController is nil after configuration")
+		
         let presenter: VideoCallStoryPresenter = viewController.output as! VideoCallStoryPresenter
         XCTAssertNotNil(presenter.view, "view in VideoCallStoryPresenter is nil after configuration")
         XCTAssertNotNil(presenter.router, "router in VideoCallStoryPresenter is nil after configuration")

@@ -30,6 +30,6 @@ class AuthStoryModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+		viewController.alertControl = AlertControl()
     }
-
 }
