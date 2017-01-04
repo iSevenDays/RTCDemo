@@ -25,6 +25,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	var testUser: SVUser!
 	var testUser2: SVUser!
 	
+	var permissionsService: FakePermissionsService!
+	
 	override func setUp() {
 		super.setUp()
 		testUser = TestsStorage.svuserRealUser1
@@ -33,10 +35,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
 		interactor.pushService = FakePushNotificationsService()
-	}
-	
-	override func tearDown() {
-		super.tearDown()
+		permissionsService = FakePermissionsService()
+		interactor.permissionsService = permissionsService
 	}
 	
 	func useFakeCallService() {
@@ -216,6 +216,46 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		XCTAssertNotEqual(mockOutput.localVideoTrackState, initialLocalVideoTrackState)
 	}
 	
+	func testNotifiesPresenterAboutVideoPermissionsAuthorized() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .authorized
+		
+		// when
+		interactor.requestVideoPermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusAuthorizedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutVideoPermissionsDenied() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .denied
+		
+		// when
+		interactor.requestVideoPermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveVideoStatusAuthorizedGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutVideoPermissionsNotDetermined_asDenied() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .notDetermined
+		
+		// when
+		interactor.requestVideoPermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveVideoStatusAuthorizedGotCalled)
+	}
+	
+	
 	// TODO: this case should be handle also
 	func DISABLED_testRejectsIncomingCallWhenAnotherCallIsActive() {
 		// given
@@ -334,6 +374,10 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		var didChangeLocalVideoTrackStateGotCalled = false
 		var localVideoTrackState: Bool?
 
+		// Permissions
+		var didReceiveVideoStatusAuthorizedGotCalled = false
+		var didReceiveVideoStatusDeniedGotCalled = false
+		
 		func didHangup() {
 			didHangupGotCalled = true
 		}
@@ -406,6 +450,14 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		func didChangeLocalVideoTrackState(enabled: Bool) {
 			localVideoTrackState = enabled
 			didChangeLocalVideoTrackStateGotCalled = true
+		}
+		
+		func didReceiveVideoStatusAuthorized() {
+			didReceiveVideoStatusAuthorizedGotCalled = true
+		}
+		
+		func didReceiveVideoStatusDenied() {
+			didReceiveVideoStatusDeniedGotCalled = true
 		}
 	}
 }

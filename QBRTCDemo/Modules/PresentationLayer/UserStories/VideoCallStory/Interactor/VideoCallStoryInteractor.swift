@@ -12,6 +12,7 @@ class VideoCallStoryInteractor: NSObject {
 	
 	var callService: CallServiceProtocol!
 	var pushService: PushNotificationsServiceProtocol!
+	var permissionsService: PermissionsServiceProtocol!
 	
 	var localVideoTrack: RTCVideoTrack?
 	var remoteVideoTrack: RTCVideoTrack?
@@ -144,6 +145,23 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		}
 		
 		output?.didChangeLocalVideoTrackState(isLocalVideoTrackEnabled())
+	}
+	
+	// MARK: - Permissions
+	func requestVideoPermissionStatus() {
+		let authStatus = permissionsService.authorizationStatusForVideo()
+		switch authStatus {
+		case .authorized: output?.didReceiveVideoStatusAuthorized()
+		case .denied: output?.didReceiveVideoStatusDenied()
+		case .notDetermined:
+			permissionsService.requestAccessForVideo({ [output] (granted) in
+				if granted {
+					output?.didReceiveVideoStatusAuthorized()
+				} else {
+					output?.didReceiveVideoStatusDenied()
+				}
+				})
+		}
 	}
 }
 

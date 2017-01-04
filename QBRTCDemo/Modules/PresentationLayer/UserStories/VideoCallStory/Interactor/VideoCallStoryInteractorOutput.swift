@@ -47,4 +47,10 @@ import Foundation
 	
 	/// Called when local video track state is changed
 	func didChangeLocalVideoTrackState(enabled: Bool)
+	
+	/// Called when the app is authorized to use camera
+	func didReceiveVideoStatusAuthorized()
+	
+	/// Called when the app is denied to use camera
+	func didReceiveVideoStatusDenied()
 }

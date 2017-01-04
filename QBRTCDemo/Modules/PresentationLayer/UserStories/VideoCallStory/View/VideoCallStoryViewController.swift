@@ -115,6 +115,14 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 		btnSwitchCamera.selected = shouldDisplayCameraDeniedState
 	}
 	
+	func showLocalVideoTrackAuthorized() {
+		
+	}
+	
+	func showLocalVideoTrackDenied() {
+		
+	}
+	
 	// Currently not used
 	func showErrorDataChannelNotReady() {
 		

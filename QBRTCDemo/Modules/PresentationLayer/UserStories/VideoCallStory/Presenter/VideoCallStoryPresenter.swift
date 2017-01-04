@@ -27,6 +27,7 @@ extension VideoCallStoryPresenter: VideoCallStoryModuleInput {
 extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 	func viewIsReady() {
 		view?.setupInitialState()
+		interactor.requestVideoPermissionStatus()
 	}
 	
 	func didTriggerHangupButtonTapped() {
@@ -137,6 +138,18 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	func didChangeLocalVideoTrackState(enabled: Bool) {
 		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showLocalVideoTrackEnabled(enabled)
+		}
+	}
+	
+	func didReceiveVideoStatusAuthorized() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackAuthorized()
+		}
+	}
+	
+	func didReceiveVideoStatusDenied() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackDenied()
 		}
 	}
 	

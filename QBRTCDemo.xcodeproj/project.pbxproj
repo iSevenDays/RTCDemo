@@ -293,6 +293,12 @@
 		14A601351C6DEFFB00065437 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
 		14A601361C6DF0B600065437 /* librtc_base_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A600B21C6DEDF400065437 /* librtc_base_objc.a */; };
 		14A601371C6DF0DC00065437 /* libjingle_peerconnection_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14893AF61C6BA1AF00F1D581 /* libjingle_peerconnection_objc.a */; };
+		14A85C6B1E1C38CA00510B2E /* PermissionsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A85C6A1E1C38CA00510B2E /* PermissionsServiceProtocol.swift */; };
+		14A85C6C1E1C38CA00510B2E /* PermissionsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A85C6A1E1C38CA00510B2E /* PermissionsServiceProtocol.swift */; };
+		14A85C6E1E1C4AE200510B2E /* PermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A85C6D1E1C4AE200510B2E /* PermissionsService.swift */; };
+		14A85C6F1E1C4AE200510B2E /* PermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A85C6D1E1C4AE200510B2E /* PermissionsService.swift */; };
+		14A85C731E1CE27C00510B2E /* FakePermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A85C701E1CDFDE00510B2E /* FakePermissionsService.swift */; };
+		14A85C741E1CE27D00510B2E /* FakePermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A85C701E1CDFDE00510B2E /* FakePermissionsService.swift */; };
 		14ADBDDC1C73850F003A0C98 /* ImageGalleryStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56DA889AB21935D197C4049 /* ImageGalleryStoryViewTests.swift */; };
 		14ADBDDD1C738514003A0C98 /* ImageGalleryStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01794FD1B0240981EA769D8 /* ImageGalleryStoryConfiguratorTests.swift */; };
 		14ADBDDF1C73851C003A0C98 /* ImageGalleryStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C9B66FCC08BE483D560DCA /* ImageGalleryStoryPresenterTests.swift */; };
@@ -782,6 +788,9 @@
 		14A600D71C6DEDF400065437 /* libwebrtc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebrtc.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libwebrtc.a"; sourceTree = "<group>"; };
 		14A600D81C6DEDF400065437 /* libyuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyuv.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libyuv.a"; sourceTree = "<group>"; };
 		14A601321C6DEE1D00065437 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libicucore.tbd; sourceTree = DEVELOPER_DIR; };
+		14A85C6A1E1C38CA00510B2E /* PermissionsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsServiceProtocol.swift; path = PermissionsService/PermissionsServiceProtocol.swift; sourceTree = "<group>"; };
+		14A85C6D1E1C4AE200510B2E /* PermissionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsService.swift; path = PermissionsService/PermissionsService.swift; sourceTree = "<group>"; };
+		14A85C701E1CDFDE00510B2E /* FakePermissionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakePermissionsService.swift; sourceTree = "<group>"; };
 		14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeerConnectionTests.swift; path = PeerConnection/PeerConnectionTests.swift; sourceTree = "<group>"; };
 		14C3FE3C1C7F1FF70077877C /* librtc_pc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtc_pc.a; path = "Scripts/webrtc/src/webrtc/pc/../../xcodebuild/Debug-iphoneos/librtc_pc.a"; sourceTree = "<group>"; };
 		14C3FE3E1C7F20290077877C /* libcongestion_controller.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcongestion_controller.a; path = "../../Library/Developer/Xcode/DerivedData/QBRTCDemo-btfoowqgaeyijbddkfxewrwrqclp/Build/Products/Debug-iphoneos/libcongestion_controller.a"; sourceTree = "<group>"; };
@@ -1147,6 +1156,7 @@
 				14EBDD151DFB5DD900A1EEB5 /* FakeSignalingChannel.swift */,
 				1445F1961E032F5C0040F8ED /* FakeQBPushNotificationsService.swift */,
 				14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */,
+				14A85C701E1CDFDE00510B2E /* FakePermissionsService.swift */,
 			);
 			name = FakeClasses;
 			path = FakeServices;
@@ -1588,6 +1598,15 @@
 			path = webrtc_libraries;
 			sourceTree = "<group>";
 		};
+		14A85C691E1C389400510B2E /* PermissionsService */ = {
+			isa = PBXGroup;
+			children = (
+				14A85C6A1E1C38CA00510B2E /* PermissionsServiceProtocol.swift */,
+				14A85C6D1E1C4AE200510B2E /* PermissionsService.swift */,
+			);
+			name = PermissionsService;
+			sourceTree = "<group>";
+		};
 		14B697EE1E01FBE30053A79C /* PeerConnection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1694,6 +1713,7 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				14A85C691E1C389400510B2E /* PermissionsService */,
 				14740A741E03197B00557FB3 /* PushNotificationsService */,
 				14736E821C561284009DFBBC /* CallService */,
 				1475463F1CAE544E004CCE95 /* RESTService */,
@@ -2782,6 +2802,7 @@
 				142D138D1C888A8A005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				142B50751CDD2C7A005B143C /* ChatUsersStoryRouterTests.swift in Sources */,
 				142B51641CDE13E2005B143C /* XCTest+Optionals.swift in Sources */,
+				14A85C741E1CE27D00510B2E /* FakePermissionsService.swift in Sources */,
 				142B50721CDD2C7A005B143C /* ChatUsersStoryViewTests.swift in Sources */,
 				14EBDD2D1DFC171100A1EEB5 /* FakeCallService.swift in Sources */,
 				1439A9051E04705E00741460 /* CallServiceHelpers.swift in Sources */,
@@ -2825,9 +2846,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A85C6E1E1C4AE200510B2E /* PermissionsService.swift in Sources */,
 				14740A761E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */,
 				14EBDD211DFBFB9900A1EEB5 /* NSData+GZIP.m in Sources */,
 				1473EACB1CAC6090007F9DF8 /* AuthStoryViewInput.swift in Sources */,
+				14A85C6B1E1C38CA00510B2E /* PermissionsServiceProtocol.swift in Sources */,
 				1420E4961CE7CEA20043EFF9 /* IncomingCallStoryConfigurator.swift in Sources */,
 				1473EAD01CAC6090007F9DF8 /* AuthStoryInteractorOutput.swift in Sources */,
 				1448B7981DFB1B46002D5371 /* PeerConnection.swift in Sources */,
@@ -2970,6 +2993,7 @@
 				07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */,
 				7C92BC563CF188F3FDA03D37 /* AuthStoryViewInput.swift in Sources */,
 				A049C3E01A2B5FAE66666F31 /* AuthStoryViewOutput.swift in Sources */,
+				14A85C6C1E1C38CA00510B2E /* PermissionsServiceProtocol.swift in Sources */,
 				24BCC726FCD00FB50CE99B69 /* AuthStoryViewController.swift in Sources */,
 				B9EC69970C8CCBEF7AF2BA39 /* AuthStoryModuleInput.swift in Sources */,
 				EA81168A4C17567BC162640A /* AuthStoryPresenter.swift in Sources */,
@@ -3009,6 +3033,7 @@
 				481C7D41CEFC8198398F2DF6 /* IncomingCallStoryRouterInput.swift in Sources */,
 				E6A676059F334DB2D23B66F5 /* IncomingCallStoryRouter.swift in Sources */,
 				BA8E216CAF4AC916539D5A5A /* IncomingCallStoryConfigurator.swift in Sources */,
+				14A85C6F1E1C4AE200510B2E /* PermissionsService.swift in Sources */,
 				6F6512DEC824BA1A844C24BE /* IncomingCallStoryInitializer.swift in Sources */,
 				1448B7991DFB1B46002D5371 /* PeerConnection.swift in Sources */,
 				ED69F39761EF6C34B0E8C3EC /* VideoCallStoryViewInput.swift in Sources */,
@@ -3047,6 +3072,7 @@
 				142D138C1C888A87005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				142B51651CDE13E2005B143C /* XCTest+Optionals.swift in Sources */,
 				14EBDD301DFC7B7A00A1EEB5 /* AuthStoryInteractorTests.swift in Sources */,
+				14A85C731E1CE27C00510B2E /* FakePermissionsService.swift in Sources */,
 				14EBDD241DFC154E00A1EEB5 /* VideoCallStoryInteractorTests.swift in Sources */,
 				1433C5F91DF17A3000A2CED6 /* VideoCallStoryViewTests.swift in Sources */,
 				1439A9061E04705E00741460 /* CallServiceHelpers.swift in Sources */,
