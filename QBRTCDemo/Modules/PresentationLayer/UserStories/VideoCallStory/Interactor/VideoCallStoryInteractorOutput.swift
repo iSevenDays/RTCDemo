@@ -45,8 +45,10 @@ import Foundation
 	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser)
 	
+	func didSwitchCameraPosition(backCamera: Bool)
+	
 	/// Called when local video track state is changed
-	func didChangeLocalVideoTrackState(enabled: Bool)
+	func didSwitchLocalVideoTrackState(enabled: Bool)
 	
 	/// Called when the app is authorized to use camera
 	func didReceiveVideoStatusAuthorized()

@@ -13,12 +13,14 @@ class VideoCallStoryViewController: UIViewController {
 	var alertControl: AlertControlProtocol!
 	
 	@objc var output: VideoCallStoryViewOutput!
-	@IBOutlet weak var btnSwitchCamera: UIButton!
+	@IBOutlet weak var btnSwitchCamera: DesignableButton!
 	
 	// MARK - IBOutlets
 	@IBOutlet weak var lblState: UILabel!
 	@IBOutlet weak var viewRemote: RTCEAGLVideoView!
 	@IBOutlet weak var viewLocal: RTCCameraPreviewView!
+	
+	var localVideoTrackStateAuthorized = true
 	
 	// MARK: Life cycle
 	
@@ -110,17 +112,34 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func showLocalVideoTrackEnabled(enabled: Bool) {
-		let shouldDisplayCameraDeniedState = !enabled
-		btnSwitchCamera.hidden = shouldDisplayCameraDeniedState
-		btnSwitchCamera.selected = shouldDisplayCameraDeniedState
+		// Video can not be enabled until user granted the permission
+		guard localVideoTrackStateAuthorized else { return }
+		
+		btnSwitchCamera.selected = !enabled
 	}
 	
 	func showLocalVideoTrackAuthorized() {
-		
+		viewLocal.hidden = false
 	}
 	
 	func showLocalVideoTrackDenied() {
+		localVideoTrackStateAuthorized = false
 		
+		viewLocal.hidden = true
+		btnSwitchCamera.selected = true
+		btnSwitchCamera.setImage(UIImage(named: "block"), forState: .Normal)
+		btnSwitchCamera.contentVerticalAlignment = .Center
+		btnSwitchCamera.contentHorizontalAlignment = .Center
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+
+		let settingsAction = UIAlertAction(title: "Go To Settings", style: .Cancel) { _ in
+			if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		alertControl.showMessage("Please allow camera access for video calls. If you cancel, the opponent will NOT be able to see you", title: "Permissions warning", overViewController: self, actions: [cancelAction, settingsAction], completion: nil)
 	}
 	
 	// Currently not used

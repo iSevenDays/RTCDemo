@@ -135,7 +135,11 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 			})
 	}
 	
-	func didChangeLocalVideoTrackState(enabled: Bool) {
+	func didSwitchCameraPosition(backCamera: Bool) {
+		
+	}
+	
+	func didSwitchLocalVideoTrackState(enabled: Bool) {
 		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showLocalVideoTrackEnabled(enabled)
 		}

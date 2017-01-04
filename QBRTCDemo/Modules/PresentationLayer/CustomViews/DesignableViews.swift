@@ -23,13 +23,11 @@ extension UIView {
 
 @IBDesignable
 class DesignableImageView: UIImageView {
-	
 }
 
 
 @IBDesignable
 class DesignableView: UIView {
-	
 }
 
 @IBDesignable
@@ -69,6 +67,7 @@ class DesignableButton: UIButton {
 	
 	override var selected: Bool {
 		didSet {
+			updateSelectedBackgrounColor()
 			setNeedsDisplay()
 		}
 	}

@@ -21,7 +21,11 @@ protocol VideoCallStoryInteractorInput {
 	/// Switch between speaker and headset
 	func switchAudioRoute()
 	
-	/// Enable or disable sending local video track to the opponent
+	/**
+	Enable or disable sending local video track to the opponent
+	
+	didReceiveVideoStatusDenied will be called when video is not .authorized
+	*/
 	func switchLocalVideoTrackState()
 	
 	

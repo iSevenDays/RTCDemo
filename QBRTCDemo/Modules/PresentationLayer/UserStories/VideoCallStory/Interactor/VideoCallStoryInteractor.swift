@@ -108,8 +108,17 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 	
 	// MARK: - Switch camera
 	func switchCamera() {
+		guard permissionsService.authorizationStatusForVideo() == .authorized else {
+			output?.didReceiveVideoStatusDenied()
+			return
+		}
+		
 		if let videoSource = localVideoTrack?.source as? RTCAVFoundationVideoSource {
 			videoSource.useBackCamera = !videoSource.useBackCamera
+			output?.didSwitchCameraPosition(videoSource.useBackCamera)
+		} else if NSClassFromString("XCTest") != nil {
+			// We should not received nil localVideoTrack without granted permissions
+			output?.didSwitchCameraPosition(true)
 		}
 	}
 	
@@ -136,6 +145,10 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 	
 	// MARK: - Enable / disable sending a local video track
 	func switchLocalVideoTrackState() {
+		guard permissionsService.authorizationStatusForVideo() == .authorized else {
+			output?.didReceiveVideoStatusDenied()
+			return
+		}
 		let localVideoTrackEnabled = isLocalVideoTrackEnabled()
 		
 		if localVideoTrackEnabled {
@@ -144,7 +157,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			enableLocalVideoTrack()
 		}
 		
-		output?.didChangeLocalVideoTrackState(isLocalVideoTrackEnabled())
+		output?.didSwitchLocalVideoTrackState(isLocalVideoTrackEnabled())
 	}
 	
 	// MARK: - Permissions
@@ -167,10 +180,13 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 
 extension VideoCallStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
-		guard NSClassFromString("XCTest") == nil else {
-			self.localVideoTrack = localVideoTrack
-			output?.didSetLocalCaptureSession(AVCaptureSession())
-			output?.didChangeLocalVideoTrackState(true)
+		if NSClassFromString("XCTest") != nil {
+			// We should not received nil localVideoTrack without granted permissions
+			if permissionsService.authorizationStatusForVideo() == .authorized {
+				self.localVideoTrack = localVideoTrack
+				output?.didSetLocalCaptureSession(AVCaptureSession())
+				output?.didSwitchLocalVideoTrackState(true)
+			}
 			return
 		}
 		
@@ -184,9 +200,9 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		
 		if let session = source?.captureSession {
 			output?.didSetLocalCaptureSession(session)
-			output?.didChangeLocalVideoTrackState(true)
+			output?.didSwitchLocalVideoTrackState(true)
 		} else {
-			output?.didChangeLocalVideoTrackState(false)
+			output?.didSwitchLocalVideoTrackState(false)
 		}
 	}  
 	
