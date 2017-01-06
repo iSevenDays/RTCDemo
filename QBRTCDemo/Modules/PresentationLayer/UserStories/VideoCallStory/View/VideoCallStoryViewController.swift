@@ -13,12 +13,16 @@ class VideoCallStoryViewController: UIViewController {
 	var alertControl: AlertControlProtocol!
 	
 	@objc var output: VideoCallStoryViewOutput!
-	@IBOutlet weak var btnSwitchCamera: UIButton!
+	@IBOutlet weak var btnSwitchCamera: DesignableButton!
+	@IBOutlet weak var btnMute: DesignableButton!
 	
 	// MARK - IBOutlets
 	@IBOutlet weak var lblState: UILabel!
 	@IBOutlet weak var viewRemote: RTCEAGLVideoView!
 	@IBOutlet weak var viewLocal: RTCCameraPreviewView!
+	
+	var localVideoTrackStateAuthorized = true
+	var microphoneStateAuthorized = true
 	
 	// MARK: Life cycle
 	
@@ -47,7 +51,11 @@ class VideoCallStoryViewController: UIViewController {
 	}
 	
 	@IBAction func didTapButtonSwitchLocalVideoTrack(sender: UIButton) {
-		output.didTriggerSwitchLocalVideoTrackButtonTapped()
+		output.didTriggerSwitchLocalVideoTrackStateButtonTapped()
+	}
+	
+	@IBAction func didTapButtonMicrophone(sender: UIButton) {
+		output.didTriggerMicrophoneButtonTapped()
 	}
 }
 
@@ -110,9 +118,57 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func showLocalVideoTrackEnabled(enabled: Bool) {
-		let shouldDisplayCameraDeniedState = !enabled
-		btnSwitchCamera.hidden = shouldDisplayCameraDeniedState
-		btnSwitchCamera.selected = shouldDisplayCameraDeniedState
+		// Video can not be enabled until user granted the permission
+		guard localVideoTrackStateAuthorized else { return }
+		
+		btnSwitchCamera.selected = !enabled
+	}
+	
+	func showLocalVideoTrackAuthorized() {
+		viewLocal.hidden = false
+	}
+	
+	func showLocalVideoTrackDenied() {
+		localVideoTrackStateAuthorized = false
+		
+		viewLocal.hidden = true
+		btnSwitchCamera.selected = true
+		btnSwitchCamera.setImage(UIImage(named: "block"), forState: .Normal)
+		btnSwitchCamera.contentVerticalAlignment = .Center
+		btnSwitchCamera.contentHorizontalAlignment = .Center
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+
+		let settingsAction = UIAlertAction(title: "Go To Settings", style: .Cancel) { _ in
+			if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		alertControl.showMessage("Please allow camera access for video calls. If you cancel, the opponent will NOT be able to see you", title: "Permissions warning", overViewController: self, actions: [cancelAction, settingsAction], completion: nil)
+	}
+	
+	func showMicrophoneAuthorized() {
+		btnMute.hidden = false
+	}
+	
+	func showMicrophoneDenied() {
+		microphoneStateAuthorized = false
+		 
+		btnMute.selected = true
+//		btnMute.setImage(UIImage(named: "block"), forState: .Normal)
+//		btnMute.contentVerticalAlignment = .Center
+//		btnMute.contentHorizontalAlignment = .Center
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+		
+		let settingsAction = UIAlertAction(title: "Go To Settings", style: .Cancel) { _ in
+			if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		alertControl.showMessage("Please allow microphone access for video calls. If you cancel, the opponent will NOT be able to hear you", title: "Permissions warning", overViewController: self, actions: [cancelAction, settingsAction], completion: nil)
 	}
 	
 	// Currently not used

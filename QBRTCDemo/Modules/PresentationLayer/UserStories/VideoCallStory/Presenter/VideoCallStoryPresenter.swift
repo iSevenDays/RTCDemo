@@ -27,6 +27,8 @@ extension VideoCallStoryPresenter: VideoCallStoryModuleInput {
 extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 	func viewIsReady() {
 		view?.setupInitialState()
+		interactor.requestVideoPermissionStatus()
+		interactor.requestMicrophonePermissionStatus()
 	}
 	
 	func didTriggerHangupButtonTapped() {
@@ -49,8 +51,12 @@ extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 		interactor.switchAudioRoute()
 	}
 	
-	func didTriggerSwitchLocalVideoTrackButtonTapped() {
+	func didTriggerSwitchLocalVideoTrackStateButtonTapped() {
 		interactor.switchLocalVideoTrackState()
+	}
+	
+	func didTriggerMicrophoneButtonTapped() {
+		interactor.switchLocalAudioTrackState()
 	}
 }
 
@@ -134,10 +140,38 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 			})
 	}
 	
-	func didChangeLocalVideoTrackState(enabled: Bool) {
+	func didSwitchCameraPosition(backCamera: Bool) {
+		
+	}
+	
+	func didSwitchLocalVideoTrackState(enabled: Bool) {
 		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view?.showLocalVideoTrackEnabled(enabled)
 		}
+	}
+	
+	func didSwitchLocalAudioTrackState(enabled: Bool) {
+		
+	}
+	
+	func didReceiveVideoStatusAuthorized() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackAuthorized()
+		}
+	}
+	
+	func didReceiveVideoStatusDenied() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackDenied()
+		}
+	}
+	
+	func didReceiveMicrophoneStatusAuthorized() {
+		
+	}
+	
+	func didReceiveMicrophoneStatusDenied() {
+		
 	}
 	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {

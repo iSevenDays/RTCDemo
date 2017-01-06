@@ -47,6 +47,17 @@ protocol VideoCallStoryViewInput: class {
 	func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?)
 	
 	/// Show local video track state (enabled/disabled)
-	
 	func showLocalVideoTrackEnabled(enabled: Bool)
+	
+	/// Show the app can use camera
+ 	func showLocalVideoTrackAuthorized()
+	
+	/// Show the app is denied to use camera
+	func showLocalVideoTrackDenied()
+	
+	/// Show the app can use microphone
+	func showMicrophoneAuthorized()
+	
+	/// Show the app is denied to use microphone
+	func showMicrophoneDenied()
 }

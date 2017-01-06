@@ -18,6 +18,7 @@ protocol CallServiceObserver: class {
 	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCICEConnectionState)
 	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState)
 	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack)
+	func callService(callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack)
 	func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack)
 	func callService(callService: CallServiceProtocol, didError error: NSError)
 	
@@ -51,6 +52,7 @@ extension CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCICEConnectionState){}
 	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState){}
 	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack){}
+	func callService(callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack){}
 	func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack){}
 	func callService(callService: CallServiceProtocol, didError error: NSError){}
 	

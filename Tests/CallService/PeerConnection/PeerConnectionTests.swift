@@ -53,8 +53,18 @@ class PeerConnectionTests: BaseTestCase {
 		XCTAssertFalse(mockOutput.didSetLocalSessionAnswerDescriptionGotCalled)
 	}
 	
+	func testCreatesLocalAudioAndVideoTrack_whenStartedCall() {
+		// when
+		peerConnection.startCall()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveLocalVideoTrackGotCalled)
+		XCTAssertTrue(mockOutput.didReceiveLocalAudioTrackGotCalled)
+	}
+	
 	class MockOutput: PeerConnectionObserver {
 		var didReceiveLocalVideoTrackGotCalled = false
+		var didReceiveLocalAudioTrackGotCalled = false
 		var didReceiveRemoteVideoTrackGotCalled = false
 		var didCreateSessionWithErrorGotCalled = false
 		var didSetLocalICECandidatesGotCalled = false
@@ -63,6 +73,9 @@ class PeerConnectionTests: BaseTestCase {
 		
 		func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
 			didReceiveLocalVideoTrackGotCalled = true
+		}
+		func peerConnection(peerConnection: PeerConnection, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
+			didReceiveLocalAudioTrackGotCalled = true
 		}
 		func peerConnection(peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
 			didReceiveRemoteVideoTrackGotCalled = true

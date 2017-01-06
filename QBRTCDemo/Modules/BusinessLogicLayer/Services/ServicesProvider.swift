@@ -21,6 +21,7 @@ class ServicesProvider: NSObject {
 	private(set) var callService: CallServiceProtocol!
 	private(set) var restService: RESTServiceProtocol!
 	private(set) var pushService: PushNotificationsServiceProtocol!
+	private(set) var permissionsService: PermissionsServiceProtocol!
 	
 	init(zone: Zone) {
 		super.init()
@@ -50,6 +51,8 @@ class ServicesProvider: NSObject {
 			let pushService = QBPushNotificationsService()
 			pushService.cacheService = NSUserDefaults.standardUserDefaults()
 			self.pushService = pushService
+			
+			self.permissionsService = PermissionsService()
 			
 			break
 		}

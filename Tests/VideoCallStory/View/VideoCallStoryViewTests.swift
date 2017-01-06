@@ -83,6 +83,14 @@ class VideoCallStoryViewTests: XCTestCase {
 		XCTAssertTrue(mockOutput.switchLocalVideoTrackButtonTapped)
 	}
 	
+	func testMuteButtonTriggersAction() {
+		// when
+		controller.didTapButtonMicrophone(emptySender)
+		
+		// then
+		XCTAssertTrue(mockOutput.microphoneButtonTapped)
+	}
+	
 	func testSuccessDataChannelButton_ImageGalleryTriggersAction() {
 		// when
 		controller.didTapButtonDataChannelImageGallery(emptySender)
@@ -168,6 +176,7 @@ class VideoCallStoryViewTests: XCTestCase {
 		var switchCameraButtonTapped = false
 		var switchAudioRouteButtonTapped = false
 		var switchLocalVideoTrackButtonTapped = false
+		var microphoneButtonTapped = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
@@ -193,10 +202,13 @@ class VideoCallStoryViewTests: XCTestCase {
 			switchAudioRouteButtonTapped = true
 		}
 		
-		func didTriggerSwitchLocalVideoTrackButtonTapped() {
+		func didTriggerSwitchLocalVideoTrackStateButtonTapped() {
 			switchLocalVideoTrackButtonTapped = true
 		}
 		
+		func didTriggerMicrophoneButtonTapped() {
+			microphoneButtonTapped = true
+		}
 	}
 }
 
