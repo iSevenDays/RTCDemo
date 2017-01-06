@@ -98,6 +98,26 @@
                                     <action selector="didTapButtonSwitchLocalVideoTrack:" destination="YrU-5b-St0" eventType="touchUpInside" id="yJQ-Uj-Cg3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chr-tX-qSE" userLabel="Switch microphone" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
+                                <rect key="frame" x="32" y="402" width="72" height="72"/>
+                                <color key="backgroundColor" red="1" green="0.84705882349999995" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="imageEdgeInsets" minX="22" minY="22" maxX="22" maxY="22"/>
+                                <state key="normal" image="microphone"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="36"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedBackgroundColor">
+                                        <color key="value" red="1" green="0.54366366379999997" blue="0.045212596610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                        <color key="value" red="1" green="0.73071223019999998" blue="0.40453340500000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapButtonMicrophone:" destination="YrU-5b-St0" eventType="touchUpInside" id="amb-nn-pNa"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQz-PG-RMx" userLabel="Switch audio route" customClass="DesignableButton" customModule="QBRTCDemo" customModuleProvider="target">
                                 <rect key="frame" x="32" y="484" width="72" height="72"/>
                                 <color key="backgroundColor" red="1" green="0.84705882352941175" blue="0.41568627450980389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -140,19 +160,24 @@
                             <constraint firstItem="GLU-3S-oMt" firstAttribute="centerY" secondItem="7KG-gz-qhW" secondAttribute="centerY" constant="4" id="PJh-5P-xO0"/>
                             <constraint firstItem="YQz-PG-RMx" firstAttribute="height" secondItem="hSW-Wr-uX2" secondAttribute="height" id="Qbs-0F-qY0"/>
                             <constraint firstItem="YQz-PG-RMx" firstAttribute="width" secondItem="hSW-Wr-uX2" secondAttribute="width" id="ToV-OP-Umr"/>
+                            <constraint firstItem="YQz-PG-RMx" firstAttribute="top" secondItem="Chr-tX-qSE" secondAttribute="bottom" constant="10" id="Xhg-j4-Wk7"/>
+                            <constraint firstItem="Chr-tX-qSE" firstAttribute="width" secondItem="YQz-PG-RMx" secondAttribute="width" id="Y4q-4q-E7R"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="top" secondItem="4cX-0I-S3D" secondAttribute="bottom" constant="10" id="d0J-0t-k9A"/>
                             <constraint firstItem="hSW-Wr-uX2" firstAttribute="centerX" secondItem="OXD-kM-Ds0" secondAttribute="centerX" id="hLj-Ik-I5g"/>
                             <constraint firstItem="TTr-2a-VOX" firstAttribute="top" secondItem="hSW-Wr-uX2" secondAttribute="bottom" constant="12" id="lAC-j9-97H"/>
                             <constraint firstItem="msv-rH-fWM" firstAttribute="centerY" secondItem="4cX-0I-S3D" secondAttribute="centerY" id="n2C-7i-NNy"/>
                             <constraint firstItem="msv-rH-fWM" firstAttribute="height" secondItem="4cX-0I-S3D" secondAttribute="height" id="nTa-QV-Fsa"/>
+                            <constraint firstItem="Chr-tX-qSE" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" constant="32" id="oFK-Lx-xHr"/>
                             <constraint firstItem="GLU-3S-oMt" firstAttribute="centerX" secondItem="7KG-gz-qhW" secondAttribute="centerX" id="q1A-ZT-9FH"/>
                             <constraint firstItem="NNT-dN-5QY" firstAttribute="leading" secondItem="OXD-kM-Ds0" secondAttribute="leading" id="uH2-mc-RsQ"/>
                             <constraint firstItem="7KG-gz-qhW" firstAttribute="leading" secondItem="hSW-Wr-uX2" secondAttribute="trailing" constant="20" id="vNf-i8-0MC"/>
                             <constraint firstAttribute="trailing" secondItem="NNT-dN-5QY" secondAttribute="trailing" id="yxi-Vn-O09"/>
+                            <constraint firstItem="Chr-tX-qSE" firstAttribute="height" secondItem="YQz-PG-RMx" secondAttribute="height" id="zmm-0b-esQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wx3-x7-kZe"/>
                     <connections>
+                        <outlet property="btnMute" destination="Chr-tX-qSE" id="Fbc-8m-9Fr"/>
                         <outlet property="btnSwitchCamera" destination="msv-rH-fWM" id="j27-DO-1nl"/>
                         <outlet property="viewLocal" destination="4cX-0I-S3D" id="OhN-oj-xFh"/>
                         <outlet property="viewRemote" destination="NNT-dN-5QY" id="LGx-gS-LxT"/>
@@ -183,6 +208,7 @@
         <image name="BigLogoTransparent" width="480" height="480"/>
         <image name="call_end" width="48" height="48"/>
         <image name="camera" width="48" height="48"/>
+        <image name="microphone" width="48" height="48"/>
         <image name="speaker" width="48" height="48"/>
     </resources>
 </document>

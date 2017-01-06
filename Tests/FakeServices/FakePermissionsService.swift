@@ -24,6 +24,10 @@ class FakePermissionsService: PermissionsServiceProtocol {
 		return authStatus
 	}
 	
+	func authorizationStatusForMicrophone() -> AuthorizationStatus {
+		return authStatus
+	}
+	
 	func requestAccessForVideo(completion: (granted: Bool) -> Void) {
 		switch authStatus {
 		case .authorized:
@@ -33,5 +37,16 @@ class FakePermissionsService: PermissionsServiceProtocol {
 		case .denied:
 			completion(granted: false)
 		}	
+	}
+	
+	func requestAccessForMicrophone(completion: (granted: Bool) -> Void) {
+		switch authStatus {
+		case .authorized:
+			completion(granted: true)
+		case .notDetermined:
+			completion(granted: false)
+		case .denied:
+			completion(granted: false)
+		}
 	}
 }

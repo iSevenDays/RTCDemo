@@ -28,6 +28,13 @@ protocol VideoCallStoryInteractorInput {
 	*/
 	func switchLocalVideoTrackState()
 	
+	/**
+	Enable or disable sending local audio track to the opponent
+	
+	didReceiveMicrophoneStatusDenied will be called when microphone is not .authorized
+	*/
+	func switchLocalAudioTrackState()
+	
 	
 	/// Currently unused. For future use. The feature was working before feature/CallServiceRefactoring
 	/// But currently there is no need
@@ -35,9 +42,16 @@ protocol VideoCallStoryInteractorInput {
 	func sendInvitationMessageAndOpenImageGallery()
 	
     /**
-	Request video permissions status
+	Request video permission status
 	didReceiveVideoStatusAuthorized will be called if authorized
 	didReceiveVideoStatusDenied will be called when .notDetermined or .denied
 	*/
 	func requestVideoPermissionStatus()
+	
+	/**
+	Request microphone permission status
+	didReceiveMicrophoneStatusAuthorized will be called if authorized
+	didReceiveMicrophoneStatusDenied will be called when .notDetermined or .denied
+	*/
+	func requestMicrophonePermissionStatus()
 }

@@ -357,6 +357,9 @@ extension CallService: PeerConnectionObserver {
 	func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
 		observers => { $0.callService(self, didReceiveLocalVideoTrack: localVideoTrack) }
 	}
+	func peerConnection(peerConnection: PeerConnection, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
+		observers => { $0.callService(self, didReceiveLocalAudioTrack: localAudioTrack) }
+	}
 	func peerConnection(peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
 		observers => { $0.callService(self, didReceiveRemoteVideoTrack: remoteVideoTrack) }
 	}

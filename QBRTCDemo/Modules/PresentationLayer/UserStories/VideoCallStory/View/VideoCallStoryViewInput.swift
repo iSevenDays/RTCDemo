@@ -54,4 +54,10 @@ protocol VideoCallStoryViewInput: class {
 	
 	/// Show the app is denied to use camera
 	func showLocalVideoTrackDenied()
+	
+	/// Show the app can use microphone
+	func showMicrophoneAuthorized()
+	
+	/// Show the app is denied to use microphone
+	func showMicrophoneDenied()
 }

@@ -14,6 +14,7 @@ class VideoCallStoryViewController: UIViewController {
 	
 	@objc var output: VideoCallStoryViewOutput!
 	@IBOutlet weak var btnSwitchCamera: DesignableButton!
+	@IBOutlet weak var btnMute: DesignableButton!
 	
 	// MARK - IBOutlets
 	@IBOutlet weak var lblState: UILabel!
@@ -21,6 +22,7 @@ class VideoCallStoryViewController: UIViewController {
 	@IBOutlet weak var viewLocal: RTCCameraPreviewView!
 	
 	var localVideoTrackStateAuthorized = true
+	var microphoneStateAuthorized = true
 	
 	// MARK: Life cycle
 	
@@ -49,7 +51,11 @@ class VideoCallStoryViewController: UIViewController {
 	}
 	
 	@IBAction func didTapButtonSwitchLocalVideoTrack(sender: UIButton) {
-		output.didTriggerSwitchLocalVideoTrackButtonTapped()
+		output.didTriggerSwitchLocalVideoTrackStateButtonTapped()
+	}
+	
+	@IBAction func didTapButtonMicrophone(sender: UIButton) {
+		output.didTriggerMicrophoneButtonTapped()
 	}
 }
 
@@ -140,6 +146,29 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 		}
 		
 		alertControl.showMessage("Please allow camera access for video calls. If you cancel, the opponent will NOT be able to see you", title: "Permissions warning", overViewController: self, actions: [cancelAction, settingsAction], completion: nil)
+	}
+	
+	func showMicrophoneAuthorized() {
+		btnMute.hidden = false
+	}
+	
+	func showMicrophoneDenied() {
+		microphoneStateAuthorized = false
+		 
+		btnMute.selected = true
+//		btnMute.setImage(UIImage(named: "block"), forState: .Normal)
+//		btnMute.contentVerticalAlignment = .Center
+//		btnMute.contentHorizontalAlignment = .Center
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+		
+		let settingsAction = UIAlertAction(title: "Go To Settings", style: .Cancel) { _ in
+			if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		alertControl.showMessage("Please allow microphone access for video calls. If you cancel, the opponent will NOT be able to hear you", title: "Permissions warning", overViewController: self, actions: [cancelAction, settingsAction], completion: nil)
 	}
 	
 	// Currently not used
