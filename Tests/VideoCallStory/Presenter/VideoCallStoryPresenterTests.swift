@@ -238,6 +238,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		XCTAssertTrue(mockView.showReceivedAnswerFromOpponentGotCalled)
 	}
 	
+	// Camera permissions
 	func testPresenterNotifiesViewAboutAuthorizedCamera() {
 		// when
 		presenter.didReceiveVideoStatusAuthorized()
@@ -254,6 +255,45 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockView.showLocalVideoTrackDeniedGotCalled)
+	}
+	
+	// Microphone permissions
+	func testPresenterNotifiesViewAboutAuthorizedMicrophone() {
+		// when
+		presenter.didReceiveMicrophoneStatusAuthorized()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showMicrophoneAuthorizedGotCalled)
+	}
+	
+	func testPresenterNotifiesViewAboutDeniedMicrophone() {
+		// when
+		presenter.didReceiveMicrophoneStatusDenied()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showMicrophoneDeniedGotCalled)
+	}
+	
+	// Video track enabled/disabled
+	func testPresenterNotifiesViewAboutVideoTrackStateChange() {
+		// when
+		presenter.didSwitchLocalVideoTrackState(true)
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showLocalVideoTrackEnabledGotCalled)
+	}
+	
+	// Audio track(microphone) enabled/disabled
+	func testPresenterNotifiesViewAboutAudioTrackStateChange() {
+		// when
+		presenter.didSwitchLocalAudioTrackState(true)
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showLocalAudioTrackEnabledGotCalled)
 	}
 	
     class MockInteractor: VideoCallStoryInteractorInput {
@@ -356,7 +396,9 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		var localCaptureSession: AVCaptureSession?
 		var setLocalVideoCaptureSessionGotCalled = false
 		var configureRemoteVideoViewWithBlockGotCalled = false
+		
 		var showLocalVideoTrackEnabledGotCalled = false
+		var showLocalAudioTrackEnabledGotCalled = false
 		
 		var showLocalVideoTrackAuthorizedGotCalled = false
 		var showLocalVideoTrackDeniedGotCalled = false
@@ -419,6 +461,10 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		
 		func showLocalVideoTrackEnabled(enabled: Bool) {
 			showLocalVideoTrackEnabledGotCalled = true
+		}
+		
+		func showLocalAudioTrackEnabled(enabled: Bool) {
+			showLocalAudioTrackEnabledGotCalled = true
 		}
 		
 		func showLocalVideoTrackAuthorized() {

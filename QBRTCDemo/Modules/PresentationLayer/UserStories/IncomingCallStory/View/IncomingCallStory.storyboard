@@ -81,7 +81,7 @@
                     </view>
                     <connections>
                         <outlet property="lblIncomingCall" destination="7F4-P2-FbP" id="Vte-Cl-nSz"/>
-                        <segue destination="ktK-fT-O7G" kind="show" identifier="IncomingCallStoryToVideoStorySegue" id="bCB-Y8-zh1"/>
+                        <segue destination="ktK-fT-O7G" kind="presentation" identifier="IncomingCallStoryToVideoStorySegue" id="bCB-Y8-zh1"/>
                         <segue destination="bBe-z8-jRT" kind="unwind" identifier="IncomingCallStoryToChatsUserStoryModuleUnwindSegue" unwindAction="prepareForUnwindFromVideoStoryToChatUsersStory:" id="YyY-k4-Ng6"/>
                     </connections>
                 </viewController>

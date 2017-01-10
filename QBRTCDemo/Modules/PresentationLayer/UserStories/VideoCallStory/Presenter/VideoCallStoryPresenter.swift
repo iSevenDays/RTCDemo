@@ -140,8 +140,11 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 			})
 	}
 	
+	// TODO: Add Tests
 	func didSwitchCameraPosition(backCamera: Bool) {
-		
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showCameraPosition(backCamera)
+		})
 	}
 	
 	func didSwitchLocalVideoTrackState(enabled: Bool) {
@@ -151,7 +154,9 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	}
 	
 	func didSwitchLocalAudioTrackState(enabled: Bool) {
-		
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalAudioTrackEnabled(enabled)
+		}
 	}
 	
 	func didReceiveVideoStatusAuthorized() {
@@ -167,11 +172,15 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	}
 	
 	func didReceiveMicrophoneStatusAuthorized() {
-		
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showMicrophoneAuthorized()
+		}
 	}
 	
 	func didReceiveMicrophoneStatusDenied() {
-		
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showMicrophoneDenied()
+		}
 	}
 	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {

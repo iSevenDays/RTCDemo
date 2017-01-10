@@ -33,6 +33,10 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 			NSLog("%@", "Error starting a call with user \(error)")
 		}
 	}
+	
+	func stopHandlingEvents() {
+		callService.removeObserver(self)
+	}
 }
 
 extension IncomingCallStoryInteractor: CallServiceObserver {

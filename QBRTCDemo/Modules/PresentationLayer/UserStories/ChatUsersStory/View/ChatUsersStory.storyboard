@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="1lN-Nx-nLA">
             <objects>
-                <viewController storyboardIdentifier="ChatUsersStoryViewController" automaticallyAdjustsScrollViewInsets="NO" id="wHU-O7-fT3" customClass="ChatUsersStoryViewController" customModule="QBRTCDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatUsersStoryViewController" automaticallyAdjustsScrollViewInsets="NO" id="wHU-O7-fT3" customClass="ChatUsersStoryViewController" customModule="QBRTCDemo_s" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gwf-Oi-wxf"/>
                         <viewControllerLayoutGuide type="bottom" id="824-GA-mtC"/>
@@ -43,7 +43,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUsersCellIdentifier" id="TfY-ka-rYT" customClass="ChatUsersTableViewCell" customModule="QBRTCDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUsersCellIdentifier" id="TfY-ka-rYT" customClass="ChatUsersTableViewCell" customModule="QBRTCDemo_s" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TfY-ka-rYT" id="ZdZ-69-bRh">
@@ -92,7 +92,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugj-Zt-xDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="8ID-UJ-tgC" customClass="ChatUsersStoryModuleInitializer" customModule="QBRTCDemo" customModuleProvider="target">
+                <customObject id="8ID-UJ-tgC" customClass="ChatUsersStoryModuleInitializer" customModule="QBRTCDemo_s" customModuleProvider="target">
                     <connections>
                         <outlet property="viewController" destination="wHU-O7-fT3" id="zJV-S6-2WA"/>
                     </connections>

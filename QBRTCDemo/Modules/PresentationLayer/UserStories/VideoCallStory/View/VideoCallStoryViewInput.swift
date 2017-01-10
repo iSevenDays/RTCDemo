@@ -49,6 +49,9 @@ protocol VideoCallStoryViewInput: class {
 	/// Show local video track state (enabled/disabled)
 	func showLocalVideoTrackEnabled(enabled: Bool)
 	
+	/// Show local audio track(microphone) state (enabled/disabled)
+	func showLocalAudioTrackEnabled(enabled: Bool)
+	
 	/// Show the app can use camera
  	func showLocalVideoTrackAuthorized()
 	
@@ -60,4 +63,6 @@ protocol VideoCallStoryViewInput: class {
 	
 	/// Show the app is denied to use microphone
 	func showMicrophoneDenied()
+	
+	func showCameraPosition(backCamera: Bool)
 }

@@ -87,6 +87,10 @@ extension CallService: CallServiceProtocol {
 		observers += observer
 	}
 	
+	func removeObserver(observer: CallServiceObserver) {
+		observers -= observer
+	}
+	
 	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) {
 		assert(user.password != nil)
 		state = .Connecting
@@ -154,6 +158,8 @@ extension CallService: CallServiceProtocol {
 	
 		connection.acceptCall()
 		connection.applyRemoteSDP(pendingRequest.pendingSessionDescription)
+		
+		pendingRequests[opponent] = nil
 	}
 	
 	// MARK: - Dialing
@@ -258,8 +264,6 @@ extension CallService: SignalingProcessorObserver {
 			return
 		}
 		
-		pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer, sessionDetails: sessionDetails)
-		
 		guard !hasActiveCall else {
 			_ = try? sendRejectCallToOpponent(opponent)
 			return
@@ -271,7 +275,10 @@ extension CallService: SignalingProcessorObserver {
 				return
 			}
 		} else {
-			observers => { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
+			if pendingRequests[opponent] == nil {
+				pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent,  pendingSessionDescription: offer, sessionDetails: sessionDetails)
+				observers => { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
+			}
 		}
 	}
 	

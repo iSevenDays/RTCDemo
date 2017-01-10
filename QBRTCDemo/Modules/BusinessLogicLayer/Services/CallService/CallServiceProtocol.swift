@@ -17,6 +17,7 @@ protocol CallServiceProtocol: class {
 	var observers: MulticastDelegate<CallServiceObserver>? { get }
 	
 	func addObserver(observer: CallServiceObserver)
+	func removeObserver(observer: CallServiceObserver)
 	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?)
 	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?)
 	func startCallWithOpponent(user: SVUser) throws

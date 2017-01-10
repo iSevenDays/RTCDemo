@@ -34,13 +34,12 @@ class DesignableView: UIView {
 class DesignableButton: UIButton {
 	@IBInspectable var normalBackgroundColor: UIColor? {
 		didSet {
-			layer.backgroundColor = normalBackgroundColor?.CGColor
 			updateSelectedBackgrounColor()
 			setNeedsDisplay()
 		}
 	}
 	
-	@IBInspectable var selectedBackgroundColor: UIColor = UIColor.blackColor() {
+	@IBInspectable var selectedBackgroundColor: UIColor? {
 		didSet {
 			updateSelectedBackgrounColor()
 			setNeedsDisplay()
@@ -74,7 +73,7 @@ class DesignableButton: UIButton {
 	
 	func updateSelectedBackgrounColor() {
 		if selected {
-			layer.backgroundColor = selectedBackgroundColor.CGColor
+			layer.backgroundColor = selectedBackgroundColor?.CGColor
 		} else {
 			layer.backgroundColor = normalBackgroundColor?.CGColor
 		}

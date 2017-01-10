@@ -13,13 +13,22 @@ class VideoCallStoryViewController: UIViewController {
 	var alertControl: AlertControlProtocol!
 	
 	@objc var output: VideoCallStoryViewOutput!
-	@IBOutlet weak var btnSwitchCamera: DesignableButton!
-	@IBOutlet weak var btnMute: DesignableButton!
 	
 	// MARK - IBOutlets
+	
+	@IBOutlet weak var btnSwitchCamera: DesignableButton!
+	@IBOutlet weak var imgSwitchCamera: UIImageView!
+	
+	// switch local audio track state
+	@IBOutlet weak var btnMute: DesignableButton!
+	
+	// switch local video track state
+	@IBOutlet weak var btnSwitchLocalVideoTrackState: DesignableButton!
+	
 	@IBOutlet weak var lblState: UILabel!
 	@IBOutlet weak var viewRemote: RTCEAGLVideoView!
 	@IBOutlet weak var viewLocal: RTCCameraPreviewView!
+	@IBOutlet weak var videoCameraImgView: UIImageView!
 	
 	var localVideoTrackStateAuthorized = true
 	var microphoneStateAuthorized = true
@@ -121,7 +130,14 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 		// Video can not be enabled until user granted the permission
 		guard localVideoTrackStateAuthorized else { return }
 		
-		btnSwitchCamera.selected = !enabled
+		imgSwitchCamera.hidden = !enabled
+		viewLocal.hidden = !enabled
+		btnSwitchCamera.hidden = !enabled
+		btnSwitchLocalVideoTrackState.selected = !enabled
+	}
+	
+	func showLocalAudioTrackEnabled(enabled: Bool) {
+		btnMute.selected = !enabled
 	}
 	
 	func showLocalVideoTrackAuthorized() {
@@ -131,11 +147,15 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	func showLocalVideoTrackDenied() {
 		localVideoTrackStateAuthorized = false
 		
+		// Local view area
 		viewLocal.hidden = true
 		btnSwitchCamera.selected = true
 		btnSwitchCamera.setImage(UIImage(named: "block"), forState: .Normal)
 		btnSwitchCamera.contentVerticalAlignment = .Center
 		btnSwitchCamera.contentHorizontalAlignment = .Center
+		
+		// Bottom button
+		btnSwitchLocalVideoTrackState.setImage(UIImage(named: "videoBlock"), forState: .Normal)
 		
 		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
 
@@ -154,11 +174,9 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	
 	func showMicrophoneDenied() {
 		microphoneStateAuthorized = false
-		 
-		btnMute.selected = true
-//		btnMute.setImage(UIImage(named: "block"), forState: .Normal)
-//		btnMute.contentVerticalAlignment = .Center
-//		btnMute.contentHorizontalAlignment = .Center
+		
+		btnMute.setImage(UIImage(named: "microphoneDenied"), forState: .Normal)
+		btnMute.setImage(UIImage(named: "microphoneDenied"), forState: .Selected)
 		
 		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
 		
@@ -169,6 +187,19 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 		}
 		
 		alertControl.showMessage("Please allow microphone access for video calls. If you cancel, the opponent will NOT be able to hear you", title: "Permissions warning", overViewController: self, actions: [cancelAction, settingsAction], completion: nil)
+	}
+	
+	func showCameraPosition(backCamera: Bool) {
+		let animation = CATransition()
+		animation.duration = 0.5
+		animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+		animation.type = "oglFlip"
+		if backCamera {
+			animation.subtype = kCATransitionFromRight
+		} else {
+			animation.subtype = kCATransitionFromLeft
+		}
+		viewLocal.layer.addAnimation(animation, forKey: kCATransition)
 	}
 	
 	// Currently not used

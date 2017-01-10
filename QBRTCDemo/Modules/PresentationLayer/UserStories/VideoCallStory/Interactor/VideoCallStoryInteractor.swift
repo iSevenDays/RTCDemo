@@ -20,7 +20,7 @@ class VideoCallStoryInteractor: NSObject {
 	var remoteVideoTrack: RTCVideoTrack?
 	var connectingToChat = false
 	var opponent: SVUser?
-	var audioSessionPortOverride: AVAudioSessionPortOverride = .None
+	var audioSessionPortOverride: AVAudioSessionPortOverride = .Speaker
 	
 	var currentUser: SVUser? {
 		return callService.currentUser
@@ -93,6 +93,26 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			output?.didFailCallService()
 		} catch let error {
 			NSLog("%@", "Error starting a call with user \(error)")
+		}
+		
+		setupDefaultAudioSessionPort()
+	}
+	
+	func setupDefaultAudioSessionPort() {
+		var desiredRoute = audioSessionPortOverride
+		
+		RTCDispatcher.dispatchAsyncOnType(.TypeAudioSession) { [unowned self] in
+			let session = RTCAudioSession.sharedInstance()
+			
+			do {
+				session.lockForConfiguration()
+				defer { session.unlockForConfiguration() }
+				try session.overrideOutputAudioPort(desiredRoute)
+				
+				self.audioSessionPortOverride = desiredRoute
+			} catch let error {
+				NSLog("%@", "Error overriding output port: \(error)")
+			}
 		}
 	}
 	
@@ -334,6 +354,7 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 	}
 	
 	func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
+		setupDefaultAudioSessionPort()
 		output?.didReceiveAnswerFromOpponent(opponent)
 	}
 	
