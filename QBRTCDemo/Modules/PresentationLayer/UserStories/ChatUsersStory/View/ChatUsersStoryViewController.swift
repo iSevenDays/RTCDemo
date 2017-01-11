@@ -16,6 +16,8 @@ class ChatUsersStoryViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var tableHeaderLbl: UILabel!
 	
+	var alertControl: AlertControlProtocol!
+	
 	internal var users: [SVUser] = []
 	let randomColors = UIColor.randomColors()
 	
@@ -55,7 +57,10 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 		dispatch_async(dispatch_get_main_queue()) { [weak self] in
 			self?.tableView.reloadData()
 		}
-		
+	}
+	
+	func showErrorMessage(message: String) {
+		alertControl.showErrorMessage(message, overViewController: self, completion: nil)
 	}
 	
 	@IBAction func prepareForUnwindFromVideoStoryToChatUsersStory(segue: UIStoryboardSegue) {

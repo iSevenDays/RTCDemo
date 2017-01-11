@@ -11,7 +11,8 @@ import UIKit
 class AuthStoryViewController: UITableViewController {
 
     var output: AuthStoryViewOutput!
-
+	var alertControl: AlertControlProtocol!
+	
 	@IBOutlet weak var userNameInput: UITextField!
 	@IBOutlet weak var roomNameInput: UITextField!
 	@IBOutlet weak var login: UIButton!
@@ -118,7 +119,7 @@ extension AuthStoryViewController: AuthStoryViewInput {
 	
 	func showErrorLogin() {
 		activityIndicator.stopAnimating()
-		AlertControl.showErrorMessage("Can not login, please try again later", overViewController: self)
+		alertControl.showErrorMessage("Can not login, please try again later", overViewController: self, completion: nil)
 	}
 }
 

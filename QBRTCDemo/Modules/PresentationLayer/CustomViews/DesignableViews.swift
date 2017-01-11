@@ -23,26 +23,25 @@ extension UIView {
 
 @IBDesignable
 class DesignableImageView: UIImageView {
-	
 }
 
 
 @IBDesignable
 class DesignableView: UIView {
-	
 }
 
 @IBDesignable
 class DesignableButton: UIButton {
 	@IBInspectable var normalBackgroundColor: UIColor? {
 		didSet {
-			backgroundColor = normalBackgroundColor
+			updateSelectedBackgrounColor()
 			setNeedsDisplay()
 		}
 	}
 	
-	@IBInspectable var selectedBackgroundColor: UIColor = UIColor.blackColor() {
+	@IBInspectable var selectedBackgroundColor: UIColor? {
 		didSet {
+			updateSelectedBackgrounColor()
 			setNeedsDisplay()
 		}
 	}
@@ -67,12 +66,16 @@ class DesignableButton: UIButton {
 	
 	override var selected: Bool {
 		didSet {
-			if selected {
-				layer.backgroundColor = selectedBackgroundColor.CGColor
-			} else {
-				layer.backgroundColor = normalBackgroundColor?.CGColor
-			}
+			updateSelectedBackgrounColor()
 			setNeedsDisplay()
+		}
+	}
+	
+	func updateSelectedBackgrounColor() {
+		if selected {
+			layer.backgroundColor = selectedBackgroundColor?.CGColor
+		} else {
+			layer.backgroundColor = normalBackgroundColor?.CGColor
 		}
 	}
 }

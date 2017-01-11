@@ -11,6 +11,7 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
     weak var output: ChatUsersStoryInteractorOutput?
 	internal weak var restService: RESTServiceProtocol!
 	internal weak var cacheService: CacheServiceProtocol!
+	internal weak var callService: CallServiceProtocol!
 	
 	internal var tag: String?
 	internal var currentUser: SVUser!
@@ -55,6 +56,20 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 		}
 		
 		downloadUsersWithTag()
+	}
+	
+	func requestCallWithOpponent(opponent: SVUser) {
+		if callService.isConnected {
+			output?.didReceiveApprovedRequestForCallWithOpponent(opponent)
+		} else {
+			var message = "No internet connection. Please check your settings and try again later"
+			
+			if callService.isConnecting {
+				message = "Reconnecting...\nPlease try again"
+			}
+			
+			output?.didDeclineRequestForCallWithOpponent(opponent, reason: message)
+		}
 	}
 	
 	/**

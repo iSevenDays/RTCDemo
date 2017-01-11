@@ -8,10 +8,9 @@
 
 import Foundation
 
-
-class AlertControl {
+class AlertControl: AlertControlProtocol {
 	
-	class func showMessage(message: String, title: String, overViewController: UIViewController?, actions: [UIAlertAction] , completion: (() -> Void)? = nil){
+	func showMessage(message: String, title: String, overViewController: UIViewController?, actions: [UIAlertAction] , completion: (() -> Void)? = nil) {
 		
 		let alertControl = UIAlertController(title: title, message: message, preferredStyle: .Alert)
 		
@@ -26,7 +25,7 @@ class AlertControl {
 		}
 	}
 	
-	class func showMessage(message: String, title: String, overViewController: UIViewController?, completion: (() -> Void)? = nil){
+	func showMessage(message: String, title: String, overViewController: UIViewController?, completion: (() -> Void)? = nil) {
 		
 		let okAction = UIAlertAction(title: "Ok" , style: .Default) { action in
 			completion?()
@@ -35,7 +34,7 @@ class AlertControl {
 		self.showMessage(message, title: title, overViewController: overViewController, actions: [okAction], completion: completion)
 	}
 	
-	class func showErrorMessage(message: String, overViewController: UIViewController, completion: (() -> Void)? = nil){
+	func showErrorMessage(message: String, overViewController: UIViewController, completion: (() -> Void)? = nil) {
 		
 		self.showMessage(message, title: "Error", overViewController: overViewController, completion: completion)
 	}

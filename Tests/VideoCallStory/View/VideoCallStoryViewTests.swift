@@ -27,8 +27,10 @@ class VideoCallStoryViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
         controller = UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewControllerWithIdentifier(String(VideoCallStoryViewController.self)) as! VideoCallStoryViewController
+		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
+		controller.alertControl = FakeAlertControl()
     }
 
     override func tearDown() {
@@ -71,6 +73,22 @@ class VideoCallStoryViewTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.switchAudioRouteButtonTapped)
+	}
+	
+	func testSwitchLocalVideoTrackButtonTriggersAction() {
+		// when
+		controller.didTapButtonSwitchLocalVideoTrack(emptySender)
+		
+		// then
+		XCTAssertTrue(mockOutput.switchLocalVideoTrackButtonTapped)
+	}
+	
+	func testMuteButtonTriggersAction() {
+		// when
+		controller.didTapButtonMicrophone(emptySender)
+		
+		// then
+		XCTAssertTrue(mockOutput.microphoneButtonTapped)
 	}
 	
 	func testSuccessDataChannelButton_ImageGalleryTriggersAction() {
@@ -157,6 +175,8 @@ class VideoCallStoryViewTests: XCTestCase {
 		var closeButtonTapped = false
 		var switchCameraButtonTapped = false
 		var switchAudioRouteButtonTapped = false
+		var switchLocalVideoTrackButtonTapped = false
+		var microphoneButtonTapped = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
@@ -182,6 +202,13 @@ class VideoCallStoryViewTests: XCTestCase {
 			switchAudioRouteButtonTapped = true
 		}
 		
+		func didTriggerSwitchLocalVideoTrackStateButtonTapped() {
+			switchLocalVideoTrackButtonTapped = true
+		}
+		
+		func didTriggerMicrophoneButtonTapped() {
+			microphoneButtonTapped = true
+		}
 	}
 }
 

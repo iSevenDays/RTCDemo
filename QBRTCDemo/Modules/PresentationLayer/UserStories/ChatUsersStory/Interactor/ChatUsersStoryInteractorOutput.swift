@@ -15,6 +15,9 @@ enum ChatUsersStoryInteractorError: ErrorType {
 
 protocol ChatUsersStoryInteractorOutput: class {
 	
+	func didReceiveApprovedRequestForCallWithOpponent(opponent: SVUser)
+	func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String)
+	
 	func didRetrieveUsers(users: [SVUser])
 	func didReceiveCallRequestFromOpponent(opponent: SVUser)
 	

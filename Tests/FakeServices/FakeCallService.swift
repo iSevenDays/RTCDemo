@@ -20,6 +20,12 @@ import Foundation
 
 public class FakeCallSevice: CallService {
 	
+	var shouldBeConnected = false
+	
+	override var isConnected: Bool {
+		return shouldBeConnected
+	}
+	
 	override func startCallWithOpponent(user: SVUser) throws {
 		let factory = RTCPeerConnectionFactory()
 		

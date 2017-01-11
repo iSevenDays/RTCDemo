@@ -12,12 +12,15 @@ class VideoCallStoryInteractor: NSObject {
 	
 	var callService: CallServiceProtocol!
 	var pushService: PushNotificationsServiceProtocol!
+	var permissionsService: PermissionsServiceProtocol!
 	
 	var localVideoTrack: RTCVideoTrack?
+	var localAudioTrack: RTCAudioTrack?
+	
 	var remoteVideoTrack: RTCVideoTrack?
 	var connectingToChat = false
 	var opponent: SVUser?
-	var audioSessionPortOverride: AVAudioSessionPortOverride = .None
+	var audioSessionPortOverride: AVAudioSessionPortOverride = .Speaker
 	
 	var currentUser: SVUser? {
 		return callService.currentUser
@@ -26,6 +29,32 @@ class VideoCallStoryInteractor: NSObject {
 	var isReadyForDataChannel: Bool {
 		return false
 		//return callService.dataChannelEnabled && callService.isDataChannelReady()
+	}
+	
+	// MARK: - Enable/disable local video track
+	
+	internal func isLocalAudioTrackEnabled() -> Bool {
+		return localAudioTrack?.isEnabled() ?? false
+	}
+	
+	internal func isLocalVideoTrackEnabled() -> Bool {
+		return localVideoTrack?.isEnabled() ?? false
+	}
+	
+	internal func enableLocalVideoTrack() {
+		localVideoTrack?.setEnabled(true)
+	}
+	
+	internal func disableLocalVideoTrack() {
+		localVideoTrack?.setEnabled(false)
+	}
+	
+	internal func enableLocalAudioTrack() {
+		localAudioTrack?.setEnabled(true)
+	}
+	
+	internal func disableLocalAudioTrack() {
+		localAudioTrack?.setEnabled(false)
 	}
 }
 
@@ -65,6 +94,26 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		} catch let error {
 			NSLog("%@", "Error starting a call with user \(error)")
 		}
+		
+		setupDefaultAudioSessionPort()
+	}
+	
+	func setupDefaultAudioSessionPort() {
+		var desiredRoute = audioSessionPortOverride
+		
+		RTCDispatcher.dispatchAsyncOnType(.TypeAudioSession) { [unowned self] in
+			let session = RTCAudioSession.sharedInstance()
+			
+			do {
+				session.lockForConfiguration()
+				defer { session.unlockForConfiguration() }
+				try session.overrideOutputAudioPort(desiredRoute)
+				
+				self.audioSessionPortOverride = desiredRoute
+			} catch let error {
+				NSLog("%@", "Error overriding output port: \(error)")
+			}
+		}
 	}
 	
 	func sendInvitationMessageAndOpenImageGallery() {
@@ -91,14 +140,23 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		}
 	}
 	
-	/// MARK: - Switch camera
+	// MARK: - Switch camera
 	func switchCamera() {
+		guard permissionsService.authorizationStatusForVideo() == .authorized else {
+			output?.didReceiveVideoStatusDenied()
+			return
+		}
+		
 		if let videoSource = localVideoTrack?.source as? RTCAVFoundationVideoSource {
 			videoSource.useBackCamera = !videoSource.useBackCamera
+			output?.didSwitchCameraPosition(videoSource.useBackCamera)
+		} else if NSClassFromString("XCTest") != nil {
+			// We should not received nil localVideoTrack without granted permissions
+			output?.didSwitchCameraPosition(true)
 		}
 	}
 	
-	/// MARK: - Switch audio route
+	// MARK: - Switch audio route
 	func switchAudioRoute() {
 		var desiredRoute = AVAudioSessionPortOverride.None
 		if audioSessionPortOverride == desiredRoute {
@@ -118,12 +176,84 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			}
 		}
 	}
+	
+	// MARK: - Enable / disable sending a local video track
+	func switchLocalVideoTrackState() {
+		guard permissionsService.authorizationStatusForVideo() == .authorized else {
+			output?.didReceiveVideoStatusDenied()
+			return
+		}
+		let localVideoTrackEnabled = isLocalVideoTrackEnabled()
+		
+		if localVideoTrackEnabled {
+			disableLocalVideoTrack()
+		} else {
+			enableLocalVideoTrack()
+		}
+		
+		output?.didSwitchLocalVideoTrackState(isLocalVideoTrackEnabled())
+	}
+	
+	// MARK: - Permissions
+	func requestVideoPermissionStatus() {
+		let authStatus = permissionsService.authorizationStatusForVideo()
+		switch authStatus {
+		case .authorized: output?.didReceiveVideoStatusAuthorized()
+		case .denied: output?.didReceiveVideoStatusDenied()
+		case .notDetermined:
+			permissionsService.requestAccessForVideo({ [output] (granted) in
+				if granted {
+					output?.didReceiveVideoStatusAuthorized()
+				} else {
+					output?.didReceiveVideoStatusDenied()
+				}
+				})
+		}
+	}
+	
+	func switchLocalAudioTrackState() {
+		guard permissionsService.authorizationStatusForMicrophone() == .authorized else {
+			output?.didReceiveMicrophoneStatusDenied()
+			return
+		}
+		let localAudioTrackEnabled = isLocalAudioTrackEnabled()
+		
+		if localAudioTrackEnabled {
+			disableLocalAudioTrack()
+		} else {
+			enableLocalAudioTrack()
+		}
+		
+		output?.didSwitchLocalAudioTrackState(isLocalAudioTrackEnabled())
+	}
+	
+	func requestMicrophonePermissionStatus() {
+		let authStatus = permissionsService.authorizationStatusForMicrophone()
+		switch authStatus {
+		case .authorized: output?.didReceiveMicrophoneStatusAuthorized()
+		case .denied: output?.didReceiveMicrophoneStatusDenied()
+		case .notDetermined:
+			permissionsService.requestAccessForMicrophone({ [output] (granted) in
+				if granted {
+					output?.didReceiveMicrophoneStatusAuthorized()
+				} else {
+					output?.didReceiveMicrophoneStatusDenied()
+				}
+				})
+		}
+	}
 }
 
 extension VideoCallStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
 		if NSClassFromString("XCTest") != nil {
-			output?.didSetLocalCaptureSession(AVCaptureSession())
+			// We should not received nil localVideoTrack without granted permissions
+			if permissionsService.authorizationStatusForVideo() == .authorized {
+				self.localVideoTrack = localVideoTrack
+				output?.didSetLocalCaptureSession(AVCaptureSession())
+				output?.didSwitchLocalVideoTrackState(true)
+			}
+			return
 		}
 		
 		guard self.localVideoTrack != localVideoTrack else {
@@ -134,8 +264,33 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		
 		let source = localVideoTrack.source as? RTCAVFoundationVideoSource
 		
-		if let source = source, let session = source.captureSession {
+		if let session = source?.captureSession {
 			output?.didSetLocalCaptureSession(session)
+			output?.didSwitchLocalVideoTrackState(true)
+		} else {
+			output?.didSwitchLocalVideoTrackState(false)
+		}
+	}
+	
+	func callService(callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
+		if NSClassFromString("XCTest") != nil {
+			// We should not received nil localVideoTrack without granted permissions
+			if permissionsService.authorizationStatusForMicrophone() == .authorized {
+				self.localAudioTrack = localAudioTrack
+				output?.didSwitchLocalAudioTrackState(true)
+			}
+			return
+		}
+		
+		guard self.localAudioTrack != localAudioTrack else {
+			NSLog("Warning: Received the same local audio track")
+			return
+		}
+		self.localAudioTrack = localAudioTrack
+		if permissionsService.authorizationStatusForMicrophone() == .authorized {
+			output?.didSwitchLocalAudioTrackState(true)
+		} else {
+			output?.didSwitchLocalAudioTrackState(false)
 		}
 	}
 	
@@ -199,6 +354,7 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 	}
 	
 	func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
+		setupDefaultAudioSessionPort()
 		output?.didReceiveAnswerFromOpponent(opponent)
 	}
 	

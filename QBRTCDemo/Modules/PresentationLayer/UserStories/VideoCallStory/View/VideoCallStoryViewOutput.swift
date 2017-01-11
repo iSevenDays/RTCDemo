@@ -24,4 +24,9 @@
 	func didTriggerSwitchCameraButtonTapped()
 	
 	func didTriggerSwitchAudioRouteButtonTapped()
+	
+	// Notify presenter that view wants to switch a state of local video track
+	func didTriggerSwitchLocalVideoTrackStateButtonTapped()
+	
+	func didTriggerMicrophoneButtonTapped()
 }

@@ -10,6 +10,7 @@ import Foundation
 
 protocol PeerConnectionObserver: class {
 	func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack)
+	func peerConnection(peerConnection: PeerConnection, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack)
 	func peerConnection(peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack)
 	func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError)
 	func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCICECandidate)
@@ -208,7 +209,11 @@ private extension PeerConnection {
 			
 			observers => {$0.peerConnection(self, didReceiveLocalVideoTrack: emptyVideoTrack)}
 		}
-		localStream.addAudioTrack(factory.audioTrackWithID("ARDAMSa0"))
+		
+		let localAudioTrack = factory.audioTrackWithID("ARDAMSa0")
+		localStream.addAudioTrack(localAudioTrack)
+		observers => {$0.peerConnection(self, didReceiveLocalAudioTrack: localAudioTrack)}
+		
 		return localStream
 	}
 	

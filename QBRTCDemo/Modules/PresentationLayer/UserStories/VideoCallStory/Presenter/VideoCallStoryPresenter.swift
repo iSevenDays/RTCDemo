@@ -27,6 +27,8 @@ extension VideoCallStoryPresenter: VideoCallStoryModuleInput {
 extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 	func viewIsReady() {
 		view?.setupInitialState()
+		interactor.requestVideoPermissionStatus()
+		interactor.requestMicrophonePermissionStatus()
 	}
 	
 	func didTriggerHangupButtonTapped() {
@@ -47,6 +49,14 @@ extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 	
 	func didTriggerSwitchAudioRouteButtonTapped() {
 		interactor.switchAudioRoute()
+	}
+	
+	func didTriggerSwitchLocalVideoTrackStateButtonTapped() {
+		interactor.switchLocalVideoTrackState()
+	}
+	
+	func didTriggerMicrophoneButtonTapped() {
+		interactor.switchLocalAudioTrackState()
 	}
 }
 
@@ -118,10 +128,6 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 			})
 	}
 	
-	func didOpenDataChannel() {
-		
-	}
-	
 	func didStartDialingOpponent(opponent: SVUser) {
 		dispatch_async(dispatch_get_main_queue(), { [view] in
 			view?.showStartDialingOpponent(opponent)
@@ -134,7 +140,54 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 			})
 	}
 	
+	// TODO: Add Tests
+	func didSwitchCameraPosition(backCamera: Bool) {
+		dispatch_async(dispatch_get_main_queue(), { [view] in
+			view?.showCameraPosition(backCamera)
+		})
+	}
+	
+	func didSwitchLocalVideoTrackState(enabled: Bool) {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackEnabled(enabled)
+		}
+	}
+	
+	func didSwitchLocalAudioTrackState(enabled: Bool) {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalAudioTrackEnabled(enabled)
+		}
+	}
+	
+	func didReceiveVideoStatusAuthorized() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackAuthorized()
+		}
+	}
+	
+	func didReceiveVideoStatusDenied() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showLocalVideoTrackDenied()
+		}
+	}
+	
+	func didReceiveMicrophoneStatusAuthorized() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showMicrophoneAuthorized()
+		}
+	}
+	
+	func didReceiveMicrophoneStatusDenied() {
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.showMicrophoneDenied()
+		}
+	}
+	
 	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
+		
+	}
+	
+	func didOpenDataChannel() {
 		
 	}
 }

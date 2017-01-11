@@ -30,9 +30,11 @@ class VideoCallStoryModuleConfigurator {
         interactor.output = presenter
 		interactor.callService = ServicesProvider.currentProvider.callService
 		interactor.pushService = ServicesProvider.currentProvider.pushService
+		interactor.permissionsService = ServicesProvider.currentProvider.permissionsService
 		
         presenter.interactor = interactor
         viewController.output = presenter
+		viewController.alertControl = AlertControl()
     }
 
 }

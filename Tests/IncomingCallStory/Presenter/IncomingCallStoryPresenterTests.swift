@@ -68,6 +68,8 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockRouter.openVideoStoryWithOpponentGotCalled)
+		XCTAssertTrue(mockInteractor.stopHandlingEventsGotCalled)
+		XCTAssertTrue(mockView.hideViewGotCalled)
 	}
 	
 	func testPresenterCallsRouterUnwindToChatsStory_whenCallHasBeenDeclined() {
@@ -102,6 +104,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
     class MockInteractor: IncomingCallStoryInteractorInput {
 		
 		var rejectCallGotCalled = false
+		var stopHandlingEventsGotCalled = false
 		var opponent: SVUser?
 		
 		func setOpponent(opponent: SVUser) {
@@ -114,6 +117,10 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		
 		func rejectCall() {
 			rejectCallGotCalled = true
+		}
+		
+		func stopHandlingEvents() {
+			stopHandlingEventsGotCalled = true
 		}
     }
 
@@ -139,6 +146,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		var callInitiator: SVUser?
 		
 		var showOpponentDecidedToDeclineCallGotCalled = false
+		var hideViewGotCalled = false
 		
         func setupInitialState() {
 			setupInitialStateGotCalled = true
@@ -151,6 +159,10 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		
 		func showOpponentDecidedToDeclineCall() {
 			showOpponentDecidedToDeclineCallGotCalled = true
+		}
+		
+		func hideView() {
+			hideViewGotCalled = true
 		}
     }
 }

@@ -37,7 +37,32 @@ protocol VideoCallStoryViewInput: class {
 	
 	/// Failed to connect to chat
 	func showErrorConnect()
+	
+	/// Data channel error not ready, currently not used
 	func showErrorDataChannelNotReady()
+	
+	/// Set local video track
 	func setLocalVideoCaptureSession(captureSession: AVCaptureSession)
+	
 	func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?)
+	
+	/// Show local video track state (enabled/disabled)
+	func showLocalVideoTrackEnabled(enabled: Bool)
+	
+	/// Show local audio track(microphone) state (enabled/disabled)
+	func showLocalAudioTrackEnabled(enabled: Bool)
+	
+	/// Show the app can use camera
+ 	func showLocalVideoTrackAuthorized()
+	
+	/// Show the app is denied to use camera
+	func showLocalVideoTrackDenied()
+	
+	/// Show the app can use microphone
+	func showMicrophoneAuthorized()
+	
+	/// Show the app is denied to use microphone
+	func showMicrophoneDenied()
+	
+	func showCameraPosition(backCamera: Bool)
 }

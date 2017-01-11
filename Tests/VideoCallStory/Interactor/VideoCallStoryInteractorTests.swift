@@ -25,6 +25,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	var testUser: SVUser!
 	var testUser2: SVUser!
 	
+	var permissionsService: FakePermissionsService!
+	
 	override func setUp() {
 		super.setUp()
 		testUser = TestsStorage.svuserRealUser1
@@ -33,10 +35,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
 		interactor.pushService = FakePushNotificationsService()
-	}
-	
-	override func tearDown() {
-		super.tearDown()
+		permissionsService = FakePermissionsService()
+		interactor.permissionsService = permissionsService
 	}
 	
 	func useFakeCallService() {
@@ -120,6 +120,8 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
+		XCTAssertTrue(mockOutput.didSwitchLocalVideoTrackStateGotCalled)
+		XCTAssertTrue(mockOutput.localVideoTrackState ?? false)
 		XCTAssertTrue(mockOutput.didSendPushNotificationAboutNewCallToOpponentGotCalled)
 		XCTAssertEqual(mockOutput.opponent, testUser2)
 	}
@@ -155,6 +157,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertNotNil(interactor.localVideoTrack)
@@ -167,6 +170,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled)
@@ -195,6 +199,192 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveAnswerTimeoutForOpponentGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutSwitchedLocalVideoTrackState() {
+		// given  
+		useRealCallService()
+		
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
+		let initialLocalVideoTrackState = interactor.isLocalVideoTrackEnabled()
+		interactor.switchLocalVideoTrackState()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockOutput.didSwitchLocalVideoTrackStateGotCalled)
+		XCTAssertNotNil(mockOutput.localVideoTrackState)
+		XCTAssertNotEqual(mockOutput.localVideoTrackState, initialLocalVideoTrackState)
+	}
+	
+	func testNotifiesPresenterAboutDeniedPermission_whenTryingToSwitchLocalVideoTrackStateWithoutPermission() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .denied
+		
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
+		interactor.switchLocalVideoTrackState()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didSwitchLocalVideoTrackStateGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutSwitchedLocalAudioTrackState() {
+		// given
+		useRealCallService()
+		
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
+		let initialLocalAudioTrackState = interactor.isLocalAudioTrackEnabled()
+		interactor.switchLocalAudioTrackState()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockOutput.didSwitchLocalAudioTrackStateGotCalled)
+		XCTAssertNotNil(mockOutput.localAudioTrackState)
+		XCTAssertNotEqual(mockOutput.localAudioTrackState, initialLocalAudioTrackState)
+	}
+	
+	func testNotifiesPresenterAboutDeniedPermission_whenTryingToSwitchLocalAudioTrackStateWithoutPermission() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .denied
+		
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
+		interactor.switchLocalAudioTrackState()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveMicrophoneStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didSwitchLocalAudioTrackStateGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutSwitchedCameraPosition() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .authorized
+		
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
+		interactor.switchCamera()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockOutput.didSwitchCameraPositionGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutDeniedPermission_whenTryingToSwitchCameraPositionWithoutPermission() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .denied
+		
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
+		interactor.switchCamera()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertFalse(mockOutput.didSwitchCameraPositionGotCalled)
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+	}
+	
+	// MARK: - Video permissions
+	
+	func testNotifiesPresenterAboutVideoPermissionAuthorized() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .authorized
+		
+		// when
+		interactor.requestVideoPermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusAuthorizedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutVideoPermissionDenied() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .denied
+		
+		// when
+		interactor.requestVideoPermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveVideoStatusAuthorizedGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutVideoPermissionNotDetermined_asDenied() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .notDetermined
+		
+		// when
+		interactor.requestVideoPermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveVideoStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveVideoStatusAuthorizedGotCalled)
+	}
+	
+	// MARK: - Microphone permissions
+	
+	func testNotifiesPresenterAboutMicrophonePermissionAuthorized() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .authorized
+		
+		// when
+		interactor.requestMicrophonePermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveMicrophoneStatusAuthorizedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveMicrophoneStatusDeniedGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutMicrophonePermissionsDenied() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .denied
+		
+		// when
+		interactor.requestMicrophonePermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveMicrophoneStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveMicrophoneStatusAuthorizedGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutMicrophonePermissionsNotDetermined_asDenied() {
+		// given
+		useRealCallService()
+		permissionsService.authStatus = .notDetermined
+		
+		// when
+		interactor.requestMicrophonePermissionStatus()
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveMicrophoneStatusDeniedGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveMicrophoneStatusAuthorizedGotCalled)
 	}
 	
 	// TODO: this case should be handle also
@@ -312,6 +502,20 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		var didStartDialingOpponentGotCalled = false
 		var didReceiveAnswerFromOpponentGotCalled = false
 		var didSendPushNotificationAboutNewCallToOpponentGotCalled = false
+		var didSwitchCameraPositionGotCalled = false
+		
+		var didSwitchLocalVideoTrackStateGotCalled = false
+		var localVideoTrackState: Bool?
+		
+		var didSwitchLocalAudioTrackStateGotCalled = false
+		var localAudioTrackState: Bool?
+
+		// Permissions
+		var didReceiveVideoStatusAuthorizedGotCalled = false
+		var didReceiveVideoStatusDeniedGotCalled = false
+		
+		var didReceiveMicrophoneStatusAuthorizedGotCalled = false
+		var didReceiveMicrophoneStatusDeniedGotCalled = false
 		
 		func didHangup() {
 			didHangupGotCalled = true
@@ -380,6 +584,36 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
 			didSendPushNotificationAboutNewCallToOpponentGotCalled = true
 			self.opponent = opponent
+		}
+		
+		func didSwitchCameraPosition(backCamera: Bool) {
+			didSwitchCameraPositionGotCalled = true
+		}
+		
+		func didSwitchLocalVideoTrackState(enabled: Bool) {
+			localVideoTrackState = enabled
+			didSwitchLocalVideoTrackStateGotCalled = true
+		}
+		
+		func didSwitchLocalAudioTrackState(enabled: Bool) {
+			localAudioTrackState = enabled
+			didSwitchLocalAudioTrackStateGotCalled = true
+		}
+		
+		func didReceiveVideoStatusAuthorized() {
+			didReceiveVideoStatusAuthorizedGotCalled = true
+		}
+		
+		func didReceiveVideoStatusDenied() {
+			didReceiveVideoStatusDeniedGotCalled = true
+		}
+		
+		func didReceiveMicrophoneStatusAuthorized() {
+			didReceiveMicrophoneStatusAuthorizedGotCalled = true
+		}
+		
+		func didReceiveMicrophoneStatusDenied() {
+			didReceiveMicrophoneStatusDeniedGotCalled = true
 		}
 	}
 }

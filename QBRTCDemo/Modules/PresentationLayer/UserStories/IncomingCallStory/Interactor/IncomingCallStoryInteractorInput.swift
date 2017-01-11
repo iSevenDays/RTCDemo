@@ -25,4 +25,12 @@ protocol IncomingCallStoryInteractorInput {
 	
 	/// Notifies opponent that current user rejected a call
 	func rejectCall()
+	
+	/**
+	Disable events handling, can be used to disable
+	
+	tracking hangup event and to disable closing IncomingCallStory
+	When hangup is received (VideoCallStory is responsible when active)
+	*/
+	func stopHandlingEvents()
 }

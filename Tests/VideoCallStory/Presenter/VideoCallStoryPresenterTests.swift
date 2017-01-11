@@ -66,6 +66,8 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockView.setupInitialStateGotCalled)
+		XCTAssertTrue(mockInteractor.requestVideoPermissionStatusGotCalled)
+		XCTAssertTrue(mockInteractor.requestMicrophonePermissionStatusGotCalled)
 	}
 	
 	func testPresenterHandlesHangupButtonTapped() {
@@ -202,6 +204,22 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		XCTAssertTrue(mockInteractor.switchAudioRouteGotCalled)
 	}
 	
+	func testPresenterSwitchesLocalVideoTrackState() {
+		// when
+		presenter.didTriggerSwitchLocalVideoTrackStateButtonTapped()
+		
+		// then
+		XCTAssertTrue(mockInteractor.switchLocalVideoTrackStateGotCalled)
+	}
+	
+	func testPresenterSwitchesLocalAudioTrackState() {
+		// when
+		presenter.didTriggerMicrophoneButtonTapped()
+		
+		// then
+		XCTAssertTrue(mockInteractor.switchLocalAudioTrackStateGotCalled)
+	}
+	
 	func testPresenterHandlesDialingOpponent() {
 		// when
 		presenter.didStartDialingOpponent(testUser2)
@@ -220,6 +238,64 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		XCTAssertTrue(mockView.showReceivedAnswerFromOpponentGotCalled)
 	}
 	
+	// Camera permissions
+	func testPresenterNotifiesViewAboutAuthorizedCamera() {
+		// when
+		presenter.didReceiveVideoStatusAuthorized()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showLocalVideoTrackAuthorizedGotCalled)
+	}
+	
+	func testPresenterNotifiesViewAboutDeniedCamera() {
+		// when
+		presenter.didReceiveVideoStatusDenied()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showLocalVideoTrackDeniedGotCalled)
+	}
+	
+	// Microphone permissions
+	func testPresenterNotifiesViewAboutAuthorizedMicrophone() {
+		// when
+		presenter.didReceiveMicrophoneStatusAuthorized()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showMicrophoneAuthorizedGotCalled)
+	}
+	
+	func testPresenterNotifiesViewAboutDeniedMicrophone() {
+		// when
+		presenter.didReceiveMicrophoneStatusDenied()
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showMicrophoneDeniedGotCalled)
+	}
+	
+	// Video track enabled/disabled
+	func testPresenterNotifiesViewAboutVideoTrackStateChange() {
+		// when
+		presenter.didSwitchLocalVideoTrackState(true)
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showLocalVideoTrackEnabledGotCalled)
+	}
+	
+	// Audio track(microphone) enabled/disabled
+	func testPresenterNotifiesViewAboutAudioTrackStateChange() {
+		// when
+		presenter.didSwitchLocalAudioTrackState(true)
+		waitForTimeInterval(1)
+		
+		// then
+		XCTAssertTrue(mockView.showLocalAudioTrackEnabledGotCalled)
+	}
+	
     class MockInteractor: VideoCallStoryInteractorInput {
 		var connectedUser: SVUser?
 		var opponent: SVUser?
@@ -232,6 +308,13 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		var sendInvitationMessageAndOpenImageGalleryGotCalled = false
 		var switchCameraGotCalled = false
 		var switchAudioRouteGotCalled = false
+		
+		var switchLocalVideoTrackStateGotCalled = false
+		var switchLocalAudioTrackStateGotCalled = false
+		
+		// Permissions
+		var requestVideoPermissionStatusGotCalled = false
+		var requestMicrophonePermissionStatusGotCalled = false
 		
 		func startCallWithOpponent(opponent: SVUser) {
 			self.opponent = opponent
@@ -252,6 +335,14 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 			hangupGotCalled = true
 		}
 		
+		func requestVideoPermissionStatus() {
+			requestVideoPermissionStatusGotCalled = true
+		}
+		
+		func requestMicrophonePermissionStatus() {
+			requestMicrophonePermissionStatusGotCalled = true
+		}
+		
 		func requestDataChannelState() {
 			requestDataChannelStateGotCalled = true
 		}
@@ -266,6 +357,14 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		
 		func switchAudioRoute() {
 			switchAudioRouteGotCalled = true
+		}
+		
+		func switchLocalVideoTrackState() {
+			switchLocalVideoTrackStateGotCalled = true
+		}
+		
+		func switchLocalAudioTrackState() {
+			switchLocalAudioTrackStateGotCalled = true
 		}
     }
 
@@ -297,6 +396,15 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		var localCaptureSession: AVCaptureSession?
 		var setLocalVideoCaptureSessionGotCalled = false
 		var configureRemoteVideoViewWithBlockGotCalled = false
+		
+		var showLocalVideoTrackEnabledGotCalled = false
+		var showLocalAudioTrackEnabledGotCalled = false
+		
+		var showLocalVideoTrackAuthorizedGotCalled = false
+		var showLocalVideoTrackDeniedGotCalled = false
+		
+		var showMicrophoneAuthorizedGotCalled = false
+		var showMicrophoneDeniedGotCalled = false
 		
         func setupInitialState() {
 			setupInitialStateGotCalled = true
@@ -350,5 +458,34 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?) {
 			configureRemoteVideoViewWithBlockGotCalled = true
 		}
+		
+		func showLocalVideoTrackEnabled(enabled: Bool) {
+			showLocalVideoTrackEnabledGotCalled = true
+		}
+		
+		func showLocalAudioTrackEnabled(enabled: Bool) {
+			showLocalAudioTrackEnabledGotCalled = true
+		}
+		
+		func showLocalVideoTrackAuthorized() {
+			showLocalVideoTrackAuthorizedGotCalled = true
+		}
+		
+		func showLocalVideoTrackDenied() {
+			showLocalVideoTrackDeniedGotCalled = true
+		}
+		
+		func showMicrophoneAuthorized() {
+			showMicrophoneAuthorizedGotCalled = true
+		}
+		
+		func showMicrophoneDenied() {
+			showMicrophoneDeniedGotCalled = true
+		}
+		
+		func showCameraPosition(backCamera: Bool) {
+			
+		}
+		
     }
 }

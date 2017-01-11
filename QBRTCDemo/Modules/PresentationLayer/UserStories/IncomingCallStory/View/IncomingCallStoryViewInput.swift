@@ -18,4 +18,8 @@ protocol IncomingCallStoryViewInput: class {
 	func configureViewWithCallInitiator(callInitiator: SVUser)
 	
 	func showOpponentDecidedToDeclineCall()
+	
+	/// Hide view, so the view will not be visible on dismiss
+	// TODO: Add Tests
+	func hideView()
 }

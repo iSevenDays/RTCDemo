@@ -26,9 +26,9 @@ class AuthStoryViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
 		controller = UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewControllerWithIdentifier(String(AuthStoryViewController.self)) as! AuthStoryViewController
-		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
+		controller.alertControl = FakeAlertControl()
     }
 
 	// MARK: AuthStoryViewOutput

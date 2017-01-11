@@ -49,14 +49,17 @@ extension AuthStoryPresenter: AuthStoryInteractorOutput {
 	}
 	
 	func doingLoginWithUser(user: SVUser) {
+		NSLog("%@", "doingLoginWithUser")
 		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view.showIndicatorLoggingIn()
 			view.setUserName(user.fullName)
 			view.setRoomName(user.tags!.joinWithSeparator(","))
+			view.disableInput()
 		}
 	}
 	
 	func doingLoginWithCachedUser(user: SVUser) {
+		NSLog("%@", "doingLoginWithCachedUser")
 		dispatch_async(dispatch_get_main_queue()) { [view] in
 			view.showIndicatorLoggingIn()
 			view.setUserName(user.fullName)

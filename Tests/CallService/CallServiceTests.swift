@@ -152,6 +152,7 @@ class CallServiceTests: BaseTestCase {
 		// then
 		XCTAssertTrue(mockOutput.didReceiveCallRequestFromOpponentGotCalled)
 		XCTAssertFalse(mockOutput.didSendRejectToOpponentGotCalled)
+		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
 	func testCorrectlyAcceptsOfferFromOpponent() {
@@ -170,6 +171,7 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertEqual(callService.sessions.count, 1)
 		XCTAssertEqual(callService.connections.count, 1)
 		XCTAssert(callService.sessions[sessionDetails.sessionID]! == sessionDetails)
+		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
 	func testCorrectlyProcessesHangupMessage_whenHangupIsReceivedForActiveCall() {
@@ -186,6 +188,7 @@ class CallServiceTests: BaseTestCase {
 		// then
 		XCTAssertTrue(mockOutput.didReceiveHangupFromOpponentGotCalled)
 		XCTAssertEqual(callService.dialingTimers.count, 0)
+		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
 	func testCorrectlyProcessesRejectMessage_whenRejectIsReceivedForSentOffer() {
@@ -206,6 +209,7 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
 		XCTAssertTrue(mockOutput.didStopDialingOpponentGotCalled)
 		XCTAssertEqual(callService.dialingTimers.count, 0)
+		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
 	func testRejectsIncomingCallOfferForTheAlreadyRejectedCall_andTheSameSession() {
@@ -225,6 +229,7 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertEqual(callService.sessions.count, 1)
 		XCTAssertEqual(callService.connections.count, 0)
 		XCTAssert(callService.sessions[sessionDetails.sessionID]! == sessionDetails)
+		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
 	func testCorrectlyProcessesAnswerMessage_whenAnswerIsReceivedForActiveCall() {
@@ -253,6 +258,7 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertFalse(mockOutput.didAnswerTimeoutForOpponentGotCalled)
 		XCTAssertTrue(mockOutput.didReceiveAnswerFromOpponentGotCalled)
 		XCTAssertEqual(callService.dialingTimers.count, 0)
+		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
 	func testStoresRejectedSession() {
@@ -260,7 +266,6 @@ class CallServiceTests: BaseTestCase {
 		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP)
 		
 		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [user1.ID!.unsignedIntegerValue, user2.ID!.unsignedIntegerValue])
-		callService.sessions[sessionDetails.sessionID] = sessionDetails
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -272,6 +277,7 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertEqual(callService.sessions.count, 1)
 		XCTAssertEqual(callService.connections.count, 0)
 		XCTAssertEqual(callService.sessions[sessionDetails.sessionID]!.sessionState, SessionDetailsState.Rejected)
+		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
 	//MARK: - PeerConnection observer tests

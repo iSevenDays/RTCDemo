@@ -28,6 +28,8 @@ extension IncomingCallStoryPresenter: IncomingCallStoryViewOutput {
 	
 	func didTriggerAcceptButtonTapped() {
 		router.openVideoStoryWithOpponent(interactor.retrieveOpponent())
+		interactor.stopHandlingEvents()
+		view.hideView()
 	}
 	
 	func didTriggerDeclineButtonTapped() {

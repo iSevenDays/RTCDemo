@@ -127,13 +127,24 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 
 extension AuthStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
-		guard state == .Connected else { return }
+		NSLog("%@", "AuthStoryInteractor callService didChangeState \(state)")
+		
+		guard state != .Error else {
+			output?.didErrorLogin(nil)
+			return
+		}
+		
+		guard state == .Connected else {
+			return
+		}
+		
 		guard let currentUser = callService.currentUser else {
 			
 			return
 		}
 		
 		if restService.currentUser() != nil {
+			NSLog("%@", "AuthStoryInteractor callService didChangeState mutableSuccessBlock")
 			mutableSuccessBlock?(user: currentUser)
 			mutableSuccessBlock = nil
 		}

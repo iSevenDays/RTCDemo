@@ -40,11 +40,11 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="51" text="Incoming call from SomeUserSuper user Nickname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7F4-P2-FbP">
-                                <rect key="frame" x="8" y="263.5" width="304" height="41"/>
+                                <rect key="frame" x="12" y="242" width="296" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="Rvh-5r-4XS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -69,19 +69,19 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7F4-P2-FbP" firstAttribute="leading" secondItem="Rza-Xh-sdU" secondAttribute="leading" constant="8" id="9hH-ew-Wse"/>
-                            <constraint firstItem="7F4-P2-FbP" firstAttribute="centerY" secondItem="Rza-Xh-sdU" secondAttribute="centerY" id="GIk-0L-k6M"/>
+                            <constraint firstItem="7F4-P2-FbP" firstAttribute="leading" secondItem="Rza-Xh-sdU" secondAttribute="leading" constant="12" id="9hH-ew-Wse"/>
+                            <constraint firstItem="7F4-P2-FbP" firstAttribute="centerY" secondItem="Rza-Xh-sdU" secondAttribute="centerY" constant="-22" id="GIk-0L-k6M"/>
                             <constraint firstItem="7F4-P2-FbP" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" id="IWh-yb-i8G"/>
                             <constraint firstItem="0CJ-0e-apo" firstAttribute="top" secondItem="58o-9I-lgW" secondAttribute="bottom" constant="84" id="OoK-M9-dJF"/>
                             <constraint firstItem="BaA-Nv-q13" firstAttribute="centerY" secondItem="58o-9I-lgW" secondAttribute="centerY" id="XHI-tZ-6qI"/>
-                            <constraint firstAttribute="trailing" secondItem="7F4-P2-FbP" secondAttribute="trailing" constant="8" id="hNh-UM-cy5"/>
+                            <constraint firstAttribute="trailing" secondItem="7F4-P2-FbP" secondAttribute="trailing" constant="12" id="hNh-UM-cy5"/>
                             <constraint firstItem="58o-9I-lgW" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" multiplier="0.5" id="iE6-sV-xvC"/>
                             <constraint firstItem="BaA-Nv-q13" firstAttribute="centerX" secondItem="Rza-Xh-sdU" secondAttribute="centerX" multiplier="1.5" id="pfW-Er-QsI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="lblIncomingCall" destination="7F4-P2-FbP" id="Vte-Cl-nSz"/>
-                        <segue destination="ktK-fT-O7G" kind="show" identifier="IncomingCallStoryToVideoStorySegue" id="bCB-Y8-zh1"/>
+                        <segue destination="ktK-fT-O7G" kind="presentation" identifier="IncomingCallStoryToVideoStorySegue" id="bCB-Y8-zh1"/>
                         <segue destination="bBe-z8-jRT" kind="unwind" identifier="IncomingCallStoryToChatsUserStoryModuleUnwindSegue" unwindAction="prepareForUnwindFromVideoStoryToChatUsersStory:" id="YyY-k4-Ng6"/>
                     </connections>
                 </viewController>
