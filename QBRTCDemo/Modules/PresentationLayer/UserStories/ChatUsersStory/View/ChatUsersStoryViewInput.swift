@@ -15,6 +15,7 @@ protocol ChatUsersStoryViewInput: class {
 
     func setupInitialState()
 	
+	func showErrorMessage(message: String)
 	
 	/**
 	Reload table view data

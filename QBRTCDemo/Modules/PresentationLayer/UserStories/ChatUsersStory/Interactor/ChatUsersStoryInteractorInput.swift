@@ -10,6 +10,15 @@ import Foundation
 
 protocol ChatUsersStoryInteractorInput {
 	
+ 	/**
+	Request a call with opponent
+	
+	didReceiveApprovedRequestForCall will be called if call can be made
+	didDeclineRequestForCallWithUser: will be called if call can not be made
+	- parameter opponent: SVUser instance
+	*/
+	func requestCallWithOpponent(opponent: SVUser)
+	
 	/**
 	Retrieve users with tag
 	

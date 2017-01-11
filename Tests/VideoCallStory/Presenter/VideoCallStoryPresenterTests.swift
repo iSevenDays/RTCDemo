@@ -483,5 +483,9 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 			showMicrophoneDeniedGotCalled = true
 		}
 		
+		func showCameraPosition(backCamera: Bool) {
+			
+		}
+		
     }
 }

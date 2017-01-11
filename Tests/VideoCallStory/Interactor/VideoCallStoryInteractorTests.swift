@@ -157,6 +157,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertNotNil(interactor.localVideoTrack)
@@ -169,6 +170,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled)

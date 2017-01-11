@@ -27,11 +27,13 @@ class ChatUsersStoryModuleConfigurator {
         interactor.output = presenter
 		interactor.cacheService = NSUserDefaults.standardUserDefaults()
 		interactor.restService = ServicesProvider.currentProvider.restService
+		interactor.callService = ServicesProvider.currentProvider.callService
 		
 		ServicesProvider.currentProvider.callService.addObserver(interactor)
 		
         presenter.interactor = interactor
         viewController.output = presenter
+		viewController.alertControl = AlertControl()
     }
 
 }

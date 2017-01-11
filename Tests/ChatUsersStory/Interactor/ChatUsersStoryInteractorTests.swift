@@ -22,6 +22,10 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	var mockOutput: MockPresenter!
 	var mockCacheService: MockCacheService!
 	var mockRESTService: MockRESTService!
+	var callService: FakeCallSevice!
+	
+	var testUser: SVUser!
+	let tag = "tag"
 	
 	override func setUp() {
 		super.setUp()
@@ -31,16 +35,19 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 
 		mockCacheService = MockCacheService()
 		interactor.cacheService = mockCacheService
-		
+		callService = FakeCallSevice()
+		interactor.callService = callService
 		mockRESTService = MockRESTService()
 		interactor.restService = mockRESTService
+		
+		testUser = TestsStorage.svuserTest
 	}
 	
 	// MARK: ChatUsersStoryInteractorInput tests
 	func testRetrievesUsersFromCacheAndDownloadsThemFromREST() {
 		// given
-		let cachedUsers = interactor.cacheService.cachedUsersForRoomWithName("tag")
-		interactor.tag = "tag"
+		let cachedUsers = interactor.cacheService.cachedUsersForRoomWithName(tag)
+		interactor.tag = tag
 		
 		// when
 		interactor.retrieveUsersWithTag()
@@ -52,10 +59,6 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	}
 	
 	func testSetsTagIfTagContainMoreThanThreeCharacters() {
-		// given
-		let tag = "tag"
-		let testUser = TestsStorage.svuserTest
-		
 		// when
 		interactor.setTag(tag, currentUser: testUser)
 		
@@ -79,7 +82,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	func testDownloadsUsersFromRESTAndCaches() {
 		// given
 		mockCacheService.cachedUsersArray = nil
-		interactor.tag = "tag"
+		interactor.tag = tag
 		
 		// when
 		interactor.retrieveUsersWithTag()
@@ -88,6 +91,30 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		XCTAssertTrue(mockRESTService.downloadUsersWithTagsGotCalled)
 		XCTAssertEqualOptional(mockCacheService.cachedUsersForRoomWithName("tag"), mockOutput.retrievedUsers) // users should be cached
 		XCTAssertEqualOptional(mockOutput.retrievedUsers, mockRESTService.restUsersArray)
+	}
+	
+	func testApprovesRequestedCallForOpponent_whenChatIsConnected() {
+		// given
+		callService.shouldBeConnected = true
+		
+		// when
+		interactor.requestCallWithOpponent(testUser)
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveApprovedRequestForCallWithOpponentGotCalled)
+		XCTAssertFalse(mockOutput.didDeclineRequestForCallWithOpponentGotCalled)
+	}
+	
+	func testDeclinesRequestedCallForOpponent_whenChatIsNOTConnected() {
+		// given
+		callService.shouldBeConnected = false
+		
+		// when
+		interactor.requestCallWithOpponent(testUser)
+		
+		// then
+		XCTAssertTrue(mockOutput.didDeclineRequestForCallWithOpponentGotCalled)
+		XCTAssertFalse(mockOutput.didReceiveApprovedRequestForCallWithOpponentGotCalled)
 	}
 	
 	// MARK: ChatUsersStoryInteractor CallServiceDelegate tests
@@ -122,6 +149,8 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		var error: ChatUsersStoryInteractorError?
 		
+		var didReceiveApprovedRequestForCallWithOpponentGotCalled = false
+		var didDeclineRequestForCallWithOpponentGotCalled = false
 		func didRetrieveUsers(users: [SVUser]) {
 			didRetrieveUsersGotCalled = true
 			retrievedUsers = users
@@ -134,6 +163,14 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		func didReceiveCallRequestFromOpponent(opponent: SVUser) {
 			self.opponent = opponent
 			didReceiveCallRequestFromOpponentGotCalled = true
+		}
+		
+		func didReceiveApprovedRequestForCallWithOpponent(opponent: SVUser) {
+			didReceiveApprovedRequestForCallWithOpponentGotCalled = true
+		}
+		
+		func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String) {
+			didDeclineRequestForCallWithOpponentGotCalled = true
 		}
     }
 	

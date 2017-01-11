@@ -47,7 +47,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		XCTAssertTrue(mockInteractor.retrieveUsersWithTagGotCalled)
 	}
 	
-	func testPresentedOpensVideoStory_whenOpponentHasBeenSelected() {
+	func testPresenterRequestsPermissionsForCall_whenOpponentHasBeenSelected() {
 		// given
 		let tag = "test chatroom name"
 		let testUser = TestsStorage.svuserTest
@@ -58,10 +58,42 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		presenter.didTriggerUserTapped(opponentUser)
 		
 		// then
+		XCTAssertFalse(mockRouter.openVideoStoryWithInitiatorGotCalled)
+		XCTAssertNil(mockRouter.opponent)
+		XCTAssertTrue(mockInteractor.requestCallWithOpponentGotCalled)
+	}
+	
+	func testPresenterOpensVideoStory_whenPermissonForCallHasBeenReceived() {
+		// given
+		let tag = "test chatroom name"
+		let testUser = TestsStorage.svuserTest
+		let opponentUser = TestsStorage.svuserRealUser1
+		
+		// when
+		presenter.setTag(tag, currentUser: testUser)
+		presenter.didReceiveApprovedRequestForCallWithOpponent(opponentUser)
+		
+		// then
 		XCTAssertTrue(mockRouter.openVideoStoryWithInitiatorGotCalled)
-		XCTAssertEqual(mockRouter.initiator, testUser)
 		XCTAssertEqual(mockRouter.opponent, opponentUser)
 	}
+	
+	func testPresenterHandlesDeclinedRequestForCall() {
+		// given2
+		let tag = "test chatroom name"
+		let testUser = TestsStorage.svuserTest
+		let opponentUser = TestsStorage.svuserRealUser1
+		
+		// when
+		presenter.setTag(tag, currentUser: testUser)
+		presenter.didDeclineRequestForCallWithOpponent(opponentUser, reason: "reason")
+		
+		// then
+		XCTAssertFalse(mockRouter.openVideoStoryWithInitiatorGotCalled)
+		XCTAssertNil(mockRouter.opponent)
+		XCTAssertTrue(mockView.showErrorMessageGotCalled)
+	}
+	
 	
 	// MARK: ChatUsersStoryInteractorOutput tests
 	
@@ -77,7 +109,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		XCTAssertEqualOptional(mockView.users, testUsers)
 	}
 	
-	func testPresentedOpensIncomingCallStory_whenCallRequestHasBeenReceived() {
+	func testPresenterOpensIncomingCallStory_whenCallRequestHasBeenReceived() {
 		// given
 		let tag = "test chatroom name"
 		let currentUser = TestsStorage.svuserTest
@@ -110,6 +142,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 
     class MockInteractor: ChatUsersStoryInteractorInput {
 		var retrieveUsersWithTagGotCalled = false
+		var requestCallWithOpponentGotCalled = false
 		
 		var setTagGotCalled = false
 		var user: SVUser?
@@ -125,6 +158,10 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		func setTag(tag: String, currentUser: SVUser) {
 			setTagGotCalled = true
 			self.user = currentUser
+		}
+		
+		func requestCallWithOpponent(opponent: SVUser) {
+			requestCallWithOpponentGotCalled = true
 		}
     }
 
@@ -150,6 +187,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
     class MockViewController: ChatUsersStoryViewInput {
 
 		var configureViewWithCurrentUserGotCalled = false
+		var showErrorMessageGotCalled = false
 		
 		var reloadDataGotCalled = false
 		var users: [SVUser]?
@@ -165,6 +203,10 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		func reloadDataWithUsers(users: [SVUser]) {
 			reloadDataGotCalled = true
 			self.users = users
+		}
+		
+		func showErrorMessage(message: String) {
+			showErrorMessageGotCalled = true
 		}
     }
 }

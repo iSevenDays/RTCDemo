@@ -19,7 +19,7 @@ extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
 	}
 	
 	func didTriggerUserTapped(user: SVUser) {
-		router.openVideoStoryWithInitiator(interactor.retrieveCurrentUser(), thenCallOpponent: user)
+		interactor.requestCallWithOpponent(user)
 	}
 }
 
@@ -47,5 +47,13 @@ extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 		if error == .CanNotRetrieveUsers {
 			view?.reloadDataWithUsers([])
 		}
+	}
+	
+	func didReceiveApprovedRequestForCallWithOpponent(opponent: SVUser) {
+		router.openVideoStoryWithInitiator(interactor.retrieveCurrentUser(), thenCallOpponent: opponent)
+	}
+	
+	func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String) {
+		view?.showErrorMessage(reason)
 	}
 }
