@@ -6,14 +6,14 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
+class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 
     weak var output: ChatUsersStoryInteractorOutput?
 	internal weak var restService: RESTServiceProtocol!
 	internal weak var cacheService: CacheServiceProtocol!
 	internal weak var callService: CallServiceProtocol!
 	
-	internal var tag: String?
+	internal var chatRoomName: String?
 	internal var currentUser: SVUser!
 	
 	/**
@@ -22,20 +22,19 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 	- parameter tag: String instance, must be >= 3 characters long
 	- parameter currentUser: current user
 	*/
-	func setTag(tag: String, currentUser: SVUser) {
-		guard tag.characters.count >= 3 else {
+	func setChatRoomName(chatRoomName: String) {
+		guard chatRoomName.characters.count >= 3 else {
 			
 			self.output?.didError(ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
 			return
 			
 		}
 		
-		self.tag = tag
-		self.currentUser = currentUser
+		self.chatRoomName = chatRoomName
 	}
 	
 	func retrieveCurrentUser() -> SVUser {
-		return currentUser
+		return callService.currentUser!
 	}
 	
 	/**
@@ -46,7 +45,7 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 	
 	*/
 	func retrieveUsersWithTag() {
-		guard let unwrappedTag = tag else {
+		guard let unwrappedTag = chatRoomName else {
 			NSLog("%@", "Error: tag is not set")
 			return
 		}
@@ -76,7 +75,7 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 	Download user with tag and cache
 	*/
 	internal func downloadUsersWithTag() {
-		guard let unwrappedTag = tag else {
+		guard let unwrappedTag = chatRoomName else {
 			fatalError("Error tag has not been set")
 		}
 		
@@ -94,7 +93,7 @@ class ChatUsersStoryInteractor: NSObject, ChatUsersStoryInteractorInput {
 	}
 	
 	internal func removeCurrentUserFromUsers(users: [SVUser]) -> [SVUser] {
-		guard let currentUserID = restService.currentUser()?.ID else {
+		guard let currentUserID = callService.currentUser?.ID else {
 			NSLog("Current user is not presented in users array")
 			return users
 		}

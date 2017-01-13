@@ -20,12 +20,8 @@ enum QBRESTServiceErrorCode: Int {
 /// Implements RESTServiceProtocol using QuickBlox API
 class QBRESTService : RESTServiceProtocol {
 	
-	func currentUser() -> SVUser? {
-		if let qbuser = QBSession.currentSession().currentUser {
-			return SVUser(QBUUser: qbuser)
-		}
-		
-		return nil
+	var isLoggedIn: Bool {
+		return QBSession.currentSession().currentUser != nil
 	}
 	
 	/**

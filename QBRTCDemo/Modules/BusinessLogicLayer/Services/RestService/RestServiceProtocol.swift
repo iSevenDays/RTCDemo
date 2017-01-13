@@ -9,12 +9,7 @@
 
 protocol RESTServiceProtocol: class {
 	
-	/**
-	Get current user if logged in REST
-	
-	- returns: SVUser instance or nil
-	*/
-	func currentUser() -> SVUser?
+	var isLoggedIn: Bool { get }
 	
 	func loginWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void)
 	

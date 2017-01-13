@@ -36,6 +36,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		mockCacheService = MockCacheService()
 		interactor.cacheService = mockCacheService
 		callService = FakeCallSevice()
+		callService.signalingChannel = FakeSignalingChannel()
 		interactor.callService = callService
 		mockRESTService = MockRESTService()
 		interactor.restService = mockRESTService
@@ -47,7 +48,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	func testRetrievesUsersFromCacheAndDownloadsThemFromREST() {
 		// given
 		let cachedUsers = interactor.cacheService.cachedUsersForRoomWithName(tag)
-		interactor.tag = tag
+		interactor.chatRoomName = tag
 		
 		// when
 		interactor.retrieveUsersWithTag()
@@ -60,20 +61,18 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	
 	func testSetsTagIfTagContainMoreThanThreeCharacters() {
 		// when
-		interactor.setTag(tag, currentUser: testUser)
+		interactor.setChatRoomName(tag)
 		
 		// then
 		XCTAssertNil(mockOutput.error)
-		XCTAssertEqual(interactor.retrieveCurrentUser(), testUser)
 	}
 	
 	func testDoesNOTSetTagIfTagContainLessThanThreeCharacters() {
 		// given
 		let tag = "ta"
-		let testUser = TestsStorage.svuserTest
 		
 		// when
-		interactor.setTag(tag, currentUser: testUser)
+		interactor.setChatRoomName(tag)
 		
 		// then
 		XCTAssertEqual(mockOutput.error, ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
@@ -82,7 +81,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	func testDownloadsUsersFromRESTAndCaches() {
 		// given
 		mockCacheService.cachedUsersArray = nil
-		interactor.tag = tag
+		interactor.chatRoomName = tag
 		
 		// when
 		interactor.retrieveUsersWithTag()
@@ -122,7 +121,6 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	func testNotifiesPresenterAboutIncomingCall() {
 		// given
 		let tag = "tag"
-		let currentUser = TestsStorage.svuserTest
 		let opponentUser = TestsStorage.svuserRealUser1
 		
 		let fakeCallService = FakeCallSevice()
@@ -130,7 +128,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		fakeCallService.signalingChannel = FakeSignalingChannel()
 		
 		// when
-		interactor.setTag(tag, currentUser: currentUser)
+		interactor.setChatRoomName(tag)
 		
 		interactor.callService(fakeCallService, didReceiveCallRequestFromOpponent: opponentUser)
 		

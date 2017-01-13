@@ -109,7 +109,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			return
 		}
 		
-		if restService.currentUser() != nil && callService.isConnected {
+		if restService.isLoggedIn && callService.isConnected {
 			self.mutableSuccessBlock?(user: user)
 			self.mutableSuccessBlock = nil
 			return
@@ -117,7 +117,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		
 		callService.connectWithUser(user) { [unowned self] (error) in
 			
-			if self.restService.currentUser() != nil && self.callService.isConnected {
+			if self.restService.isLoggedIn && self.callService.isConnected {
 				self.mutableSuccessBlock?(user: user)
 				self.mutableSuccessBlock = nil
 			}
@@ -139,15 +139,17 @@ extension AuthStoryInteractor: CallServiceObserver {
 		}
 		
 		guard let currentUser = callService.currentUser else {
-			
+			NSLog("%@", "AuthStoryInteractor callService currentUser nil")
+			return
+		}
+		guard restService.isLoggedIn else {
+			NSLog("%@", "AuthStoryInteractor restService isLoggedIn == false")
 			return
 		}
 		
-		if restService.currentUser() != nil {
-			NSLog("%@", "AuthStoryInteractor callService didChangeState mutableSuccessBlock")
-			mutableSuccessBlock?(user: currentUser)
-			mutableSuccessBlock = nil
-		}
+		NSLog("%@", "AuthStoryInteractor callService didChangeState mutableSuccessBlock")
+		mutableSuccessBlock?(user: currentUser)
+		mutableSuccessBlock = nil
 	}
 }
 

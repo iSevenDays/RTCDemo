@@ -25,7 +25,7 @@ extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
 
 extension ChatUsersStoryPresenter: ChatUsersStoryModuleInput {
 	func setTag(tag: String, currentUser: SVUser) {
-		interactor.setTag(tag, currentUser: currentUser)
+		interactor.setChatRoomName(tag)
 		view?.configureViewWithCurrentUser(currentUser)
 	}
 }

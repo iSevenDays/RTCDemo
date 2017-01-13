@@ -68,6 +68,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		let tag = "test chatroom name"
 		let testUser = TestsStorage.svuserTest
 		let opponentUser = TestsStorage.svuserRealUser1
+		mockInteractor.user = testUser
 		
 		// when
 		presenter.setTag(tag, currentUser: testUser)
@@ -135,7 +136,6 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockInteractor.setTagGotCalled)
-		XCTAssertEqual(mockInteractor.user, testUser)
 		XCTAssertTrue(mockView.configureViewWithCurrentUserGotCalled)
 	}
 	
@@ -155,9 +155,8 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 			return user!
 		}
 		
-		func setTag(tag: String, currentUser: SVUser) {
+		func setChatRoomName(chatRoomName: String) {
 			setTagGotCalled = true
-			self.user = currentUser
 		}
 		
 		func requestCallWithOpponent(opponent: SVUser) {

@@ -28,11 +28,11 @@ protocol ChatUsersStoryInteractorInput {
 	func retrieveUsersWithTag()
 	
 	/**
-	Sets tag (chat room name)
+	Sets chat room name
 	
-	- parameter tag: String instance, must be >= 3 characters long
+	- parameter chatRoomName: String instance, must be >= 3 characters long
 	*/
-	func setTag(tag: String, currentUser: SVUser)
+	func setChatRoomName(chatRoomName: String)
 	
 	func retrieveCurrentUser() -> SVUser
 }
