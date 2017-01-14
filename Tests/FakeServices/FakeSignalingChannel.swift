@@ -43,7 +43,7 @@ extension FakeSignalingChannel: SignalingChannelProtocol {
 		completion?(error: nil)
 	}
 	
-	func sendMessage(message: SignalingMessage, withSessionDetails: SessionDetails, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
+	func sendMessage(message: SignalingMessage, withSessionDetails: SessionDetails?, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
 		let error: NSError? = shouldSensMessagesSuccessfully ? nil : NSError(domain: "", code: -1, userInfo: nil)
 		completion?(error: error)
 	}

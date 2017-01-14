@@ -65,6 +65,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertNil(mockOutput.error)
+		XCTAssertTrue(mockOutput.didSetChatRoomNameGotCalled)
 	}
 	
 	func testDoesNOTSetTagIfTagContainLessThanThreeCharacters() {
@@ -76,6 +77,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertEqual(mockOutput.error, ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
+		XCTAssertFalse(mockOutput.didSetChatRoomNameGotCalled)
 	}
 	
 	func testDownloadsUsersFromRESTAndCaches() {
@@ -116,6 +118,30 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		XCTAssertFalse(mockOutput.didReceiveApprovedRequestForCallWithOpponentGotCalled)
 	}
 	
+	func testNotifiesPresenterAboutCurrentUserNotifiedOtherUsersInChatRoom() {
+		// given
+		callService.shouldBeConnected = true
+		interactor.chatRoomName = tag
+		
+		// when
+		interactor.notifyUsersAboutCurrentUserEnteredRoom()
+		
+		// then
+		XCTAssertTrue(mockOutput.didNotifyUsersAboutCurrentUserEnteredRoomGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutCurrentUserFailedToNotifyOtherUsersInChatRoom() {
+		// given
+		callService.shouldBeConnected = true
+		interactor.chatRoomName = tag
+		
+		// when
+		interactor.notifyUsersAboutCurrentUserEnteredRoom()
+		
+		// then
+		XCTAssertTrue(mockOutput.didNotifyUsersAboutCurrentUserEnteredRoomGotCalled)
+	}
+	
 	// MARK: ChatUsersStoryInteractor CallServiceDelegate tests
 	
 	func testNotifiesPresenterAboutIncomingCall() {
@@ -137,6 +163,31 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		XCTAssertEqual(mockOutput.opponent, opponentUser)
 	}
 	
+	func testNotifiesPresenterWhenReceivedNewUser_forCurrentChatRoomName() {
+		// given
+		let tag = "tag"
+		let opponentUser = TestsStorage.svuserRealUser1
+		// when
+		interactor.setChatRoomName(tag)
+		
+		interactor.callService(interactor.callService, didReceiveUser: opponentUser, forChatRoomName: tag)
+		
+		// then
+		XCTAssertTrue(mockOutput.didRetrieveUsersGotCalled)
+	}
+	
+	func testDoesntNotifyPresenterWhenReceivedNewUser_forUndefinedChatRoomName() {
+		// given
+		let tag = "tag"
+		let opponentUser = TestsStorage.svuserRealUser1
+		// when
+		interactor.setChatRoomName(tag)
+		
+		interactor.callService(interactor.callService, didReceiveUser: opponentUser, forChatRoomName: "blah blah")
+		
+		// then
+		XCTAssertFalse(mockOutput.didRetrieveUsersGotCalled)
+	}
 	
     class MockPresenter: ChatUsersStoryInteractorOutput {
 		var retrievedUsers: [SVUser]?
@@ -146,9 +197,14 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		var opponent: SVUser?
 		
 		var error: ChatUsersStoryInteractorError?
+		var didSetChatRoomNameGotCalled = false
 		
 		var didReceiveApprovedRequestForCallWithOpponentGotCalled = false
 		var didDeclineRequestForCallWithOpponentGotCalled = false
+		
+		var didNotifyUsersAboutCurrentUserEnteredRoomGotCalled = false
+		var didFailToNotifyUsersAboutCurrentUserEnteredRoomGotCalled = false
+		
 		func didRetrieveUsers(users: [SVUser]) {
 			didRetrieveUsersGotCalled = true
 			retrievedUsers = users
@@ -156,6 +212,10 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		func didError(error: ChatUsersStoryInteractorError) {
 			self.error = error
+		}
+		
+		func didSetChatRoomName(chatRoomName: String) {
+			didSetChatRoomNameGotCalled = true
 		}
 		
 		func didReceiveCallRequestFromOpponent(opponent: SVUser) {
@@ -169,6 +229,14 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String) {
 			didDeclineRequestForCallWithOpponentGotCalled = true
+		}
+		
+		func didNotifyUsersAboutCurrentUserEnteredRoom() {
+			didNotifyUsersAboutCurrentUserEnteredRoomGotCalled = true
+		}
+		
+		func didFailToNotifyUsersAboutCurrentUserEnteredRoom() {
+			didFailToNotifyUsersAboutCurrentUserEnteredRoomGotCalled = true
 		}
     }
 	

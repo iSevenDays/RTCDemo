@@ -26,7 +26,7 @@ protocol SignalingChannelProtocol {
 	
 	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) throws
 	
-	func sendMessage(message: SignalingMessage, withSessionDetails: SessionDetails, toUser user: SVUser, completion: ((error: NSError?) -> Void)?)
+	func sendMessage(message: SignalingMessage, withSessionDetails: SessionDetails?, toUser user: SVUser, completion: ((error: NSError?) -> Void)?)
 	
 	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?)
 }

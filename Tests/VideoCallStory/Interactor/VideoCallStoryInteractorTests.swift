@@ -153,6 +153,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	func testStoresLocalVideoTrack() {
 		// given
 		useFakeCallService()
+		(interactor.callService as! FakeCallSevice).shouldBeConnected = true
 		
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
@@ -166,6 +167,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	func testReceivesRemoteVideoTrack_whenConnectedAndStartedCall() {
 		// given
 		useFakeCallService()
+		(interactor.callService as! FakeCallSevice).shouldBeConnected = true
 		
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)

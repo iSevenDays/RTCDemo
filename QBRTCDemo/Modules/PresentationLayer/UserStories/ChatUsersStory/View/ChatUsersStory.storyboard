@@ -29,17 +29,21 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Users in the chat room" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxp-4H-je1">
-                                            <rect key="frame" x="8" y="12" width="304" height="21"/>
+                                            <rect key="frame" x="8" y="12" width="177.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IKm-AU-Zmg">
+                                            <rect key="frame" x="195.5" y="13" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Lxp-4H-je1" secondAttribute="trailing" constant="8" id="E6P-yH-8XF"/>
                                         <constraint firstItem="Lxp-4H-je1" firstAttribute="centerY" secondItem="fux-4s-IMo" secondAttribute="centerY" id="EK8-oa-Od2"/>
+                                        <constraint firstItem="IKm-AU-Zmg" firstAttribute="leading" secondItem="Lxp-4H-je1" secondAttribute="trailing" constant="10" id="TOF-jH-cQV"/>
                                         <constraint firstItem="Lxp-4H-je1" firstAttribute="leading" secondItem="fux-4s-IMo" secondAttribute="leading" constant="8" id="WmA-EF-pwC"/>
+                                        <constraint firstItem="IKm-AU-Zmg" firstAttribute="centerY" secondItem="Lxp-4H-je1" secondAttribute="centerY" id="f7R-Z6-6Hq"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -85,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="IKm-AU-Zmg" id="old-Lx-B2a"/>
                         <outlet property="tableHeaderLbl" destination="Lxp-4H-je1" id="G8t-ek-UNz"/>
                         <outlet property="tableView" destination="pJy-i2-7ab" id="zRF-sy-0No"/>
                         <segue destination="3bv-Lq-0pq" kind="show" identifier="ChatUsersStoryToVideoCallStorySegueIdentifier" id="NvK-96-iiQ"/>

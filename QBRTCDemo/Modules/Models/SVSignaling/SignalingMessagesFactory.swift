@@ -27,6 +27,7 @@ enum SignalingMessageType: String {
 	case answer = "answer"
 	case hangup = "hangup"
 	case reject = "reject"
+	case userEnteredChatRoom = "userForChatRoom"
 }
 
 enum SignalingParams: String {
@@ -47,13 +48,16 @@ enum SignalingParams: String {
 	case senderLogin = "login"
 	case senderFullName = "fullName"
 	
+	// Chat room name for sender
+	case roomName = "roomName"
+	
 	// Compressed data - contains all information above 
 	case compressedData = "compressedData"
 }
 
 class SignalingMessagesFactory {
 	
-	func qbMessageFromSignalingMessage(message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails) throws -> QBChatMessage {
+	func qbMessageFromSignalingMessage(message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails?) throws -> QBChatMessage {
 		var params: [String: AnyObject] = [:]
 		
 		// SVUser sender populating
@@ -61,10 +65,11 @@ class SignalingMessagesFactory {
 		params[SignalingParams.senderFullName.rawValue] = sender.fullName
 		
 		// SessionDetails populating
-		params[SignalingParams.sessionID.rawValue] = sessionDetails.sessionID
-		params[SignalingParams.membersIDs.rawValue] = sessionDetails.membersIDs.flatMap({String($0)}).joinWithSeparator(",")
-		params[SignalingParams.initiatorID.rawValue] = String(sessionDetails.initiatorID)
-				
+		if let sessionDetails = sessionDetails {
+			params[SignalingParams.sessionID.rawValue] = sessionDetails.sessionID
+			params[SignalingParams.membersIDs.rawValue] = sessionDetails.membersIDs.flatMap({String($0)}).joinWithSeparator(",")
+			params[SignalingParams.initiatorID.rawValue] = String(sessionDetails.initiatorID)
+		}
 		switch message {
 		case let .answer(sdp: sessionDescription):
 			params[SignalingParams.type.rawValue] = SignalingMessageType.answer.rawValue
@@ -93,6 +98,10 @@ class SignalingMessagesFactory {
 		case .reject:
 			params[SignalingParams.type.rawValue] = SignalingMessageType.reject.rawValue
 			break
+		case let .user(enteredChatRoomName: roomName):
+			params[SignalingParams.type.rawValue] = SignalingMessageType.userEnteredChatRoom.rawValue
+			params[SignalingParams.roomName.rawValue] = roomName
+			break
 		}
 		
 		// Compression
@@ -105,7 +114,16 @@ class SignalingMessagesFactory {
 		return qbMessage
 	}
 	
-	func signalingMessageFromQBMessage(message: QBChatMessage) throws -> (message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails) {
+	/**
+	Parses SignalingMessage from QBChatMessage
+	
+	- parameter message: QBChatMessage instance
+	
+	- throws: SignalingMessagesFactoryError type
+	
+	- returns: return message, sender, sessionDetails(nil for chat room SignalingMessage)
+	*/
+	func signalingMessageFromQBMessage(message: QBChatMessage) throws -> (message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails?) {
 		guard let base64Representation = message.customParameters[SignalingParams.compressedData.rawValue] as? String else {
 			throw SignalingMessagesFactoryError.incorrectSignalingMessage(message: message)
 		}
@@ -135,17 +153,22 @@ class SignalingMessagesFactory {
 		let sender = SVUser(ID: message.senderID, login: userLogin, fullName: userFullName, password: nil, tags: nil)
 		
 		// SessionDetails populating
-		guard let initiatorID = params[SignalingParams.initiatorID.rawValue] as? String else {
-			throw SignalingMessagesFactoryError.missingInitiatorID
-		}
-		guard let sessionID = params[SignalingParams.sessionID.rawValue] as? String else {
-			throw SignalingMessagesFactoryError.missingSessionID
-		}
-		guard let membersIDs = (params[SignalingParams.membersIDs.rawValue] as? String)?.componentsSeparatedByString(",").flatMap({UInt.init($0)}) else {
-			throw SignalingMessagesFactoryError.missingSessionID
-		}
-		let sessionDetails = SessionDetails(initiatorID: UInt(initiatorID)!, membersIDs: membersIDs, sessionID: sessionID)
+		var sessionDetails: SessionDetails?
 		
+		switch signalingMessageType {
+		case .answer, .candidates, .hangup, .offer, .reject:
+			guard let initiatorID = params[SignalingParams.initiatorID.rawValue] as? String else {
+				throw SignalingMessagesFactoryError.missingInitiatorID
+			}
+			guard let sessionID = params[SignalingParams.sessionID.rawValue] as? String else {
+				throw SignalingMessagesFactoryError.missingSessionID
+			}
+			guard let membersIDs = (params[SignalingParams.membersIDs.rawValue] as? String)?.componentsSeparatedByString(",").flatMap({UInt.init($0)}) else {
+				throw SignalingMessagesFactoryError.missingMembersIDs
+			}
+			sessionDetails = SessionDetails(initiatorID: UInt(initiatorID)!, membersIDs: membersIDs, sessionID: sessionID)
+		case .userEnteredChatRoom: break
+		}
 		
 		switch signalingMessageType {
 		case .answer, .offer:
@@ -184,6 +207,11 @@ class SignalingMessagesFactory {
 			
 		case .hangup: return (message: SignalingMessage.hangup, sender: sender, sessionDetails: sessionDetails)
 		case .reject: return (message: SignalingMessage.reject, sender: sender, sessionDetails: sessionDetails)
+		case .userEnteredChatRoom:
+			guard let roomName = params[SignalingParams.roomName.rawValue] as? String else {
+				throw SignalingMessagesFactoryError.undefinedSignalingMessageType
+			}
+			return (message: SignalingMessage.user(enteredChatRoomName: roomName), sender: sender, sessionDetails: nil)
 		}
 		
 		throw SignalingMessagesFactoryError.undefinedSignalingMessageType

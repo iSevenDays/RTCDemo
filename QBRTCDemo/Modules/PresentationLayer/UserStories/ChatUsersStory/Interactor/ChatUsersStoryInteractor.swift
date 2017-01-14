@@ -16,21 +16,24 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 	internal var chatRoomName: String?
 	internal var currentUser: SVUser!
 	
-	/**
-	Sets tag (chat room name)
+	// Already notified users about current user entered to the given chat room name
+	// Chat room name: Users
+	internal var notifiedUsers: [String: [SVUser]] = [:]
 	
-	- parameter tag: String instance, must be >= 3 characters long
-	- parameter currentUser: current user
+	/**
+	Sets chat room name
+	
+	- parameter chatRoomName: String instance, must be >= 3 characters long
 	*/
 	func setChatRoomName(chatRoomName: String) {
 		guard chatRoomName.characters.count >= 3 else {
-			
 			self.output?.didError(ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
 			return
-			
 		}
 		
 		self.chatRoomName = chatRoomName
+		
+		output?.didSetChatRoomName(chatRoomName)
 	}
 	
 	func retrieveCurrentUser() -> SVUser {
@@ -40,7 +43,7 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 	/**
 	Retrieves users from cache, then downloads them from REST
  
-	Step 1 download users from cache and notify output
+	Step 1 get users from cache and notify output
 	Step 2 download users from REST and notify output
 	
 	*/
@@ -57,6 +60,26 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 		downloadUsersWithTag()
 	}
 	
+	/**
+	Download user with tag(chat room name) and cache
+	*/
+	internal func downloadUsersWithTag() {
+		guard let unwrappedTag = chatRoomName else {
+			fatalError("Error tag has not been set")
+		}
+		
+		restService.downloadUsersWithTags([unwrappedTag], successBlock: { [unowned self] (users) in
+			
+			let filteredUsers = self.removeCurrentUserFromUsers(users)
+			
+			self.cacheService.cacheUsers(filteredUsers, forRoomName: unwrappedTag)
+			
+			self.output?.didRetrieveUsers(filteredUsers)
+			}) { (error) in
+				self.output?.didError(ChatUsersStoryInteractorError.CanNotRetrieveUsers)
+		}
+	}
+	
 	func requestCallWithOpponent(opponent: SVUser) {
 		if callService.isConnected {
 			output?.didReceiveApprovedRequestForCallWithOpponent(opponent)
@@ -71,25 +94,30 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 		}
 	}
 	
-	/**
-	Download user with tag and cache
-	*/
-	internal func downloadUsersWithTag() {
-		guard let unwrappedTag = chatRoomName else {
-			fatalError("Error tag has not been set")
+	func notifyUsersAboutCurrentUserEnteredRoom() {
+		guard let chatRoomName = self.chatRoomName else {
+			output?.didFailToNotifyUsersAboutCurrentUserEnteredRoom()
+			return
 		}
 		
-		restService.downloadUsersWithTags([unwrappedTag], successBlock: { [unowned self] (users) in
-			
-			let filteredUsers = self.removeCurrentUserFromUsers(users)
-			
-			self.output?.didRetrieveUsers(filteredUsers)
-			
-			self.cacheService.cacheUsers(filteredUsers, forRoomName: unwrappedTag)
-			
-			}) { (error) in
-				self.output?.didError(ChatUsersStoryInteractorError.CanNotRetrieveUsers)
+		guard let usersInChatRoom = cacheService.cachedUsersForRoomWithName(chatRoomName) else {
+			output?.didFailToNotifyUsersAboutCurrentUserEnteredRoom()
+			return
 		}
+		
+		for user in usersInChatRoom {
+			if var notifiedCurrentChatRoomUsers = notifiedUsers[chatRoomName] {
+				guard !notifiedCurrentChatRoomUsers.contains(user) else { return }
+				notifiedCurrentChatRoomUsers.append(user)
+				notifiedUsers[chatRoomName] = notifiedCurrentChatRoomUsers
+			} else {
+				notifiedUsers[chatRoomName] = [user]
+			}
+			callService.sendMessageCurrentUserEnteredChatRoom(chatRoomName, toUser: user)
+			
+		}
+		
+		output?.didNotifyUsersAboutCurrentUserEnteredRoom()
 	}
 	
 	internal func removeCurrentUserFromUsers(users: [SVUser]) -> [SVUser] {
@@ -97,7 +125,6 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 			NSLog("Current user is not presented in users array")
 			return users
 		}
-		
 		return users.filter({$0.ID?.isEqualToNumber(currentUserID) == false})
 	}
 }
@@ -105,5 +132,29 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 extension ChatUsersStoryInteractor: CallServiceObserver {
 	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		output?.didReceiveCallRequestFromOpponent(opponent)
+	}
+	
+	func callService(callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String) {
+		var usersForChatRoomName: [SVUser] = []
+		var shouldReloadTable = false
+		
+		if var cachedUsers = cacheService.cachedUsersForRoomWithName(chatRoomName) {
+			if !cachedUsers.contains(user) {
+				cachedUsers.append(user)
+				shouldReloadTable = true
+			}
+			usersForChatRoomName = cachedUsers
+			cacheService.cacheUsers(cachedUsers, forRoomName: chatRoomName)
+		} else {
+			shouldReloadTable = true
+			usersForChatRoomName = [user]
+			cacheService.cacheUsers(usersForChatRoomName, forRoomName: chatRoomName)
+		}
+		
+		if self.chatRoomName == chatRoomName {
+			if shouldReloadTable {
+				output?.didRetrieveUsers(usersForChatRoomName)
+			}
+		}
 	}
 }

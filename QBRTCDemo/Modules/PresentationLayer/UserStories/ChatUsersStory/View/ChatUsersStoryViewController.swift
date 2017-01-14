@@ -15,6 +15,7 @@ class ChatUsersStoryViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var tableHeaderLbl: UILabel!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	var alertControl: AlertControlProtocol!
 	
@@ -30,7 +31,7 @@ class ChatUsersStoryViewController: UIViewController {
 
 extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 	func setupInitialState() {
-		
+		activityIndicator.startAnimating()
 	}
 	
 	func configureViewWithCurrentUser(user: SVUser) {
@@ -42,6 +43,7 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 	}
 	
 	func reloadDataWithUsers(users: [SVUser]) {
+		activityIndicator.stopAnimating()
 		
 		self.users = users
 		

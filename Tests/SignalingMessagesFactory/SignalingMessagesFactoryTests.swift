@@ -51,7 +51,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
-			XCTAssert(sessionDetails == receivedSessionDetails)
+			XCTAssert(sessionDetails == receivedSessionDetails!)
 			
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
@@ -59,6 +59,43 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			case .reject: XCTFail()
 			case .candidates(candidates: _): XCTFail()
 			case .hangup: break
+			case .user(enteredChatRoomName: _): XCTFail()
+			}
+			
+		} catch let error {
+			XCTAssertNil(error)
+		}
+	}
+	
+	func testConvertsSignalingUserMessageToQBMessageAndBack() {
+		// given
+		let roomName = "test chat toom name"
+		let signalingMessage = SignalingMessage.user(enteredChatRoomName: roomName)
+		
+		do {
+			// when
+			
+			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: nil)
+			convertedQBMessage.senderID = sender.ID!.unsignedIntegerValue
+			// then
+			
+			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
+			
+			XCTAssertNotNil(receivedSignalingMessage)
+			XCTAssertNotNil(receivedSender)
+			XCTAssertNil(receivedSessionDetails)
+			
+			XCTAssertEqual(sender.ID, receivedSender.ID)
+			XCTAssertEqual(sender.fullName, receivedSender.fullName)
+			XCTAssertEqual(sender.login, receivedSender.login)
+			
+			switch receivedSignalingMessage {
+			case .answer(sdp: _): XCTFail()
+			case .offer(sdp: _): XCTFail()
+			case .reject: XCTFail()
+			case .candidates(candidates: _): XCTFail()
+			case .hangup: break
+			case let .user(enteredChatRoomName: chatRoomName): XCTAssertEqual(chatRoomName, roomName)
 			}
 			
 		} catch let error {
@@ -91,14 +128,14 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
-			XCTAssert(sessionDetails == receivedSessionDetails)
+			XCTAssert(sessionDetails == receivedSessionDetails!)
 			
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
 			case .offer(sdp: _): XCTFail()
 			case .hangup: XCTFail()
 			case .reject: XCTFail()
-				
+			case .user(enteredChatRoomName: _): XCTFail()
 			case let .candidates(candidates: candidates):
 				XCTAssertEqual(candidates.count, 2)
 				guard let receivedAudioCandidate = candidates.filter({$0.sdpMLineIndex == 0}).first else {
@@ -147,7 +184,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
-			XCTAssert(sessionDetails == receivedSessionDetails)
+			XCTAssert(sessionDetails == receivedSessionDetails!)
 			
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
@@ -156,6 +193,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			case .reject: XCTFail()
 			case .candidates(candidates: _): XCTFail()
 			case .hangup: XCTFail()
+			case .user(enteredChatRoomName: _): XCTFail()
 			}
 			
 		} catch let error {

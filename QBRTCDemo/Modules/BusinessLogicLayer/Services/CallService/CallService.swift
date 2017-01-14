@@ -246,7 +246,13 @@ extension CallService: CallServiceProtocol {
 			signalingChannel.sendMessage(SignalingMessage.hangup, withSessionDetails: sessionDetails, toUser: connection.opponent, completion: nil)
 			observers => { $0.callService(self, didSendHangupToOpponent: connection.opponent) }
 		}
-	}	
+	}
+	
+	func sendMessageCurrentUserEnteredChatRoom(chatRoomName: String, toUser: SVUser) {
+		let signalingMessage = SignalingMessage.user(enteredChatRoomName: chatRoomName)
+		signalingChannel.sendMessage(signalingMessage, withSessionDetails: nil, toUser: toUser, completion: nil)
+		observers => { $0.callService(self, didSendUserEnteredChatRoomName: chatRoomName, toUser: toUser) }
+	}
 }
 
 // MARK: - SignalingProcessorObserver
@@ -373,6 +379,9 @@ extension CallService: PeerConnectionObserver {
 	func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError) {
 		observers => { $0.callService(self, didError: error) }
 	}
+	func didReceiveUser(signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String) {
+		observers => { $0.callService(self, didReceiveUser: user, forChatRoomName: chatRoomName) }
+	}
 }
 
 extension CallService: SignalingChannelObserver {
@@ -382,7 +391,7 @@ extension CallService: SignalingChannelObserver {
 		}
 	}
 	
-	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails) {
+	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails?) {
 		
 	}
 }

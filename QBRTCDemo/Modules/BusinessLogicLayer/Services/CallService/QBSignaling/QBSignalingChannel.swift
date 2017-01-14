@@ -10,7 +10,7 @@ import Foundation
 import Quickblox
 
 protocol SignalingChannelObserver: class {
-	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails)
+	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails?)
 	func signalingChannel(channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState)
 }
 
@@ -67,7 +67,7 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 		}
 	}   
 	
-	func sendMessage(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
+	func sendMessage(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails?, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
 		guard let currentUser = self.user else {
 			NSLog("%@", "Error failed to send message, current user is nil")
 			return

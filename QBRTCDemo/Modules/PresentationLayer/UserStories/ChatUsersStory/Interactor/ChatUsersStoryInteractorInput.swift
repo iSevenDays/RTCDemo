@@ -35,4 +35,10 @@ protocol ChatUsersStoryInteractorInput {
 	func setChatRoomName(chatRoomName: String)
 	
 	func retrieveCurrentUser() -> SVUser
+	
+ 	/**
+	Notify users in the chat room about current user entered the room,
+	so they can immediately see new user
+	*/
+	func notifyUsersAboutCurrentUserEnteredRoom()
 }
