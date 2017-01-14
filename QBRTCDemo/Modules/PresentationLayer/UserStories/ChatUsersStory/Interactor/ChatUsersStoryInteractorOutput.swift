@@ -22,4 +22,9 @@ protocol ChatUsersStoryInteractorOutput: class {
 	func didReceiveCallRequestFromOpponent(opponent: SVUser)
 	
 	func didError(error: ChatUsersStoryInteractorError)
+	
+	func didSetChatRoomName(chatRoomName: String)
+	
+	func didNotifyUsersAboutCurrentUserEnteredRoom()
+	func didFailToNotifyUsersAboutCurrentUserEnteredRoom()
 }

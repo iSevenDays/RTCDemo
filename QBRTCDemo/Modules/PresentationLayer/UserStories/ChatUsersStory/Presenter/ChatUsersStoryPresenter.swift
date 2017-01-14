@@ -25,7 +25,7 @@ extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
 
 extension ChatUsersStoryPresenter: ChatUsersStoryModuleInput {
 	func setTag(tag: String, currentUser: SVUser) {
-		interactor.setTag(tag, currentUser: currentUser)
+		interactor.setChatRoomName(tag)
 		view?.configureViewWithCurrentUser(currentUser)
 	}
 }
@@ -33,14 +33,11 @@ extension ChatUsersStoryPresenter: ChatUsersStoryModuleInput {
 extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 	func didRetrieveUsers(users: [SVUser]) {
 		view?.reloadDataWithUsers(users)
+		interactor.notifyUsersAboutCurrentUserEnteredRoom()
 	}
 	
 	func didReceiveCallRequestFromOpponent(opponent: SVUser) {
 		router.openIncomingCallStoryWithOpponent(opponent)
-	}
-	
-	func didReceiveHangupFromOpponent(opponent: SVUser) {
-		
 	}
 	
 	func didError(error: ChatUsersStoryInteractorError) {
@@ -55,5 +52,14 @@ extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 	
 	func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String) {
 		view?.showErrorMessage(reason)
+	}
+	
+	func didReceiveHangupFromOpponent(opponent: SVUser) {
+	}
+	func didSetChatRoomName(chatRoomName: String) {
+	}
+	func didNotifyUsersAboutCurrentUserEnteredRoom() {
+	}
+	func didFailToNotifyUsersAboutCurrentUserEnteredRoom() {
 	}
 }

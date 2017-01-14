@@ -19,7 +19,8 @@ import Foundation
 extension NSUserDefaults: CacheServiceProtocol {
 	
 	func cacheUsers(users: [SVUser], forRoomName roomName: String) {
-		let usersData = NSKeyedArchiver.archivedDataWithRootObject(users)
+		let uniqueUsers = Array(Set(users))
+		let usersData = NSKeyedArchiver.archivedDataWithRootObject(uniqueUsers)
 		setObject(usersData, forKey: "users" + roomName)
 		synchronize()
 	}

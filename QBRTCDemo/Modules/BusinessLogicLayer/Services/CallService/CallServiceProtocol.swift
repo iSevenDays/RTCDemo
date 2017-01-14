@@ -24,4 +24,5 @@ protocol CallServiceProtocol: class {
 	func acceptCallFromOpponent(opponent: SVUser) throws
 	func hangup()
 	func sendRejectCallToOpponent(user: SVUser) throws
+	func sendMessageCurrentUserEnteredChatRoom(chatRoomName: String, toUser: SVUser)
 }

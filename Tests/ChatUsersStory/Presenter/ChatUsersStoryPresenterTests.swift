@@ -68,6 +68,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		let tag = "test chatroom name"
 		let testUser = TestsStorage.svuserTest
 		let opponentUser = TestsStorage.svuserRealUser1
+		mockInteractor.user = testUser
 		
 		// when
 		presenter.setTag(tag, currentUser: testUser)
@@ -109,7 +110,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		XCTAssertEqualOptional(mockView.users, testUsers)
 	}
 	
-	func testPresenterOpensIncomingCallStory_whenCallRequestHasBeenReceived() {
+	func testOpensIncomingCallStory_whenCallRequestHasBeenReceived() {
 		// given
 		let tag = "test chatroom name"
 		let currentUser = TestsStorage.svuserTest
@@ -124,18 +125,30 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		XCTAssertEqual(mockRouter.opponent, opponentUser)
 	}
 	
+	func testCallsInteractorToNotifyOtherUsersAboutCurrentUserEnteredTheRoom_whenChatRoomNameIsSet() {
+		// given
+		let tag = "test chatroom name"
+		let currentUser = TestsStorage.svuserTest
+		
+		// when
+		presenter.setTag(tag, currentUser: currentUser)
+		presenter.didRetrieveUsers([TestsStorage.svuserRealUser1])
+		
+		// then
+		XCTAssertTrue(mockInteractor.notifyUsersAboutCurrentUserEnteredRoomGotCalled)
+	}
+	
 	// MARK: ChatUsersStoryModuleInput tests
 	func testCallsSetsTagWithInitiatorUser_whenStoryHasBeenLoaded() {
 		// given
 		let tag = "test chatroom name"
-		let testUser = TestsStorage.svuserTest
+		let currentUser = TestsStorage.svuserTest
 		
 		// when
-		presenter.setTag(tag, currentUser: testUser)
+		presenter.setTag(tag, currentUser: currentUser)
 		
 		// then
 		XCTAssertTrue(mockInteractor.setTagGotCalled)
-		XCTAssertEqual(mockInteractor.user, testUser)
 		XCTAssertTrue(mockView.configureViewWithCurrentUserGotCalled)
 	}
 	
@@ -147,6 +160,8 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		var setTagGotCalled = false
 		var user: SVUser?
 		
+		var notifyUsersAboutCurrentUserEnteredRoomGotCalled = false
+		
 		func retrieveUsersWithTag() {
 			retrieveUsersWithTagGotCalled = true
 		}
@@ -155,13 +170,16 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 			return user!
 		}
 		
-		func setTag(tag: String, currentUser: SVUser) {
+		func setChatRoomName(chatRoomName: String) {
 			setTagGotCalled = true
-			self.user = currentUser
 		}
 		
 		func requestCallWithOpponent(opponent: SVUser) {
 			requestCallWithOpponentGotCalled = true
+		}
+		
+		func notifyUsersAboutCurrentUserEnteredRoom() {
+			notifyUsersAboutCurrentUserEnteredRoomGotCalled = true
 		}
     }
 
