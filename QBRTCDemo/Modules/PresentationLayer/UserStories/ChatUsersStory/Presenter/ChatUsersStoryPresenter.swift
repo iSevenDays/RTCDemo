@@ -32,7 +32,9 @@ extension ChatUsersStoryPresenter: ChatUsersStoryModuleInput {
 
 extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
 	func didRetrieveUsers(users: [SVUser]) {
-		view?.reloadDataWithUsers(users)
+		dispatch_async(dispatch_get_main_queue()) { [view] in
+			view?.reloadDataWithUsers(users)
+		}
 		interactor.notifyUsersAboutCurrentUserEnteredRoom()
 	}
 	

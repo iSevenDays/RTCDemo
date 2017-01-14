@@ -27,6 +27,9 @@ class ChatUsersStoryViewController: UIViewController {
         super.viewDidLoad()
         output.viewIsReady()
     }
+	deinit {
+		
+	}
 }
 
 extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
@@ -51,14 +54,12 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 			if let emptyView = ChatUsersStoryEmptyView.instanceFromNib() {
 				tableView.backgroundView = emptyView
 			}
+			tableView.reloadData()
 			return
 		}
 		
 		tableView.backgroundView = nil
-		
-		dispatch_async(dispatch_get_main_queue()) { [weak self] in
-			self?.tableView.reloadData()
-		}
+		tableView.reloadData()
 	}
 	
 	func showErrorMessage(message: String) {
@@ -103,7 +104,8 @@ extension ChatUsersStoryViewController: UITableViewDelegate {
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		guard indexPath.row < users.count else {
-			fatalError("Error: data error, no user at indexPath")
+			NSLog("%@%", "Error: data error, no user at indexPath")
+			return
 		}
 		
 		let user = users[indexPath.row]
