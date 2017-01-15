@@ -24,7 +24,7 @@ generamba gen VideoCallStory swifty_viper
 
 VIPER integration tips:
 
-Projects uses generamba `rviper_controller` template with some [modifications]([https://github.com/rambler-digital-solutions/The-Book-of-VIPER/issues/21])
+Projects uses generamba `swifty_viper` template with some [modifications]([https://github.com/rambler-digital-solutions/The-Book-of-VIPER/issues/21])
 
 
 ```Shell
@@ -34,6 +34,7 @@ generamba gen VideoCallStory rviper_controller
 To correctly route one module to another (performSegue) we should modify the template ():
 
 1. ViewController output must be marked with ```@objc``` 
+2. ViewOutput must be marked with ```@objc``` 
 2. Presenter must be marked with ```@objc``` and inherit from NSObject
 3. In your ViewController storyboard create `Object`, set custom class to `YourStoryClassModuleInitializer`
 4. Connect ViewController with `Object` from step 3 (`Object` must have viewController outlet available)
