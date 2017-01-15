@@ -65,6 +65,7 @@ class FakeQBRESTService : QBRESTService {
 	override func signUpWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?) {
 		if shouldSignUpSuccessfully {
 			registered = true
+			user.ID = 888
 			successBlock?(user: user)
 		} else {
 			errorBlock?(nil)

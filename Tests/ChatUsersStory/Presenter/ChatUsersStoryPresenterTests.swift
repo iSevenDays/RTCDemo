@@ -16,7 +16,7 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class ChatUsersStoryPresenterTest: XCTestCase {
+class ChatUsersStoryPresenterTest: BaseTestCase {
 
 	var presenter: ChatUsersStoryPresenter!
 	var mockInteractor: MockInteractor!
@@ -104,6 +104,7 @@ class ChatUsersStoryPresenterTest: XCTestCase {
 		
 		// when
 		presenter.didRetrieveUsers(testUsers)
+		waitForTimeInterval(1)
 		
 		// then
 		XCTAssertTrue(mockView.reloadDataGotCalled)

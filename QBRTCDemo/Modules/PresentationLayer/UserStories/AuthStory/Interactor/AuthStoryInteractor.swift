@@ -12,6 +12,8 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	internal weak var restService: RESTServiceProtocol!
 	internal weak var callService: CallServiceProtocol!
 	
+	private let cachedUserKey = "user"
+	
 	// In case chat is doing reconnect(for example connect is triggered by QBChat), we can only log in to REST
 	//
 	var mutableSuccessBlock: ((user: SVUser) -> Void)? = nil
@@ -186,23 +188,22 @@ internal extension AuthStoryInteractor {
 		}
 	}
 	
-	
 	func cacheUser(user: SVUser) {
 		assert(user.password != nil)
 		assert(user.ID != nil)
 		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
-		let key = "user"
-		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: key)
+		
+		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: cachedUserKey)
 		NSUserDefaults.standardUserDefaults().synchronize()
 		
-		KeychainSwift().set(userData, forKey: key)
+		KeychainSwift().set(userData, forKey: cachedUserKey)
 	}
 	
 	func cachedUser() -> SVUser? {
-		let key = "user"
-		var userData = NSUserDefaults.standardUserDefaults().objectForKey(key) as? NSData
+		
+		var userData = NSUserDefaults.standardUserDefaults().objectForKey(cachedUserKey) as? NSData
 		if userData == nil {
-			userData = KeychainSwift().getData(key)
+			userData = KeychainSwift().getData(cachedUserKey)
 		}
 		if let userData = userData,
 			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? SVUser {
@@ -211,5 +212,11 @@ internal extension AuthStoryInteractor {
 			return user
 		}
 		return nil
+	}
+	
+	internal func removeCachedUser() {
+		NSUserDefaults.standardUserDefaults().removeObjectForKey(cachedUserKey)
+		NSUserDefaults.standardUserDefaults().synchronize()
+		KeychainSwift().delete(cachedUserKey)
 	}
 }

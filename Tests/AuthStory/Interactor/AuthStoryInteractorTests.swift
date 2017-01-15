@@ -16,7 +16,7 @@ import XCTest
 	import QBRTCDemo
 #endif
 
-class AuthStoryInteractorTests: XCTestCase {
+class AuthStoryInteractorTests: BaseTestCase {
 
 	var interactor: AuthStoryInteractor!
 	var mockOutput: MockPresenter!
@@ -38,6 +38,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		
 		interactor.callService = fakeCallService
 		interactor.restService = fakeService
+		interactor.removeCachedUser()
     }
 
 	override func tearDown() {
@@ -48,6 +49,7 @@ class AuthStoryInteractorTests: XCTestCase {
 	func testNotifiesPresenterAboutSuccessfulLogin() {
 		// given
 		fakeService.shouldLoginSuccessfully = true
+		fakeCallService.shouldBeConnected = true
 		
 		// when
 		interactor.signUpOrLoginWithUserName(userName, tags: tags)
@@ -61,6 +63,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		fakeService.shouldLoginSuccessfully = false
 		fakeService.shouldLoginAfterSignupSuccessfully = true
 		fakeService.shouldSignUpSuccessfully = true
+		fakeCallService.shouldBeConnected = true
 		
 		// when
 		interactor.signUpOrLoginWithUserName(userName, tags: tags)
@@ -120,6 +123,7 @@ class AuthStoryInteractorTests: XCTestCase {
 	func testCachesUserAfterLogin() {
 		// given
 		fakeService.shouldLoginSuccessfully = true
+		fakeCallService.shouldBeConnected = true
 		
 		// when
 		interactor.signUpOrLoginWithUserName(userName, tags: tags)
@@ -129,6 +133,7 @@ class AuthStoryInteractorTests: XCTestCase {
 		XCTAssertNotNil(cachedUser)
 		XCTAssertEqual(cachedUser?.fullName, userName)
 		XCTAssertEqual(cachedUser?.tags?.first, tags.first)
+		XCTAssertFalse(mockOutput.didErrorLoginGotCalled)
 	}
 	
     class MockPresenter: AuthStoryInteractorOutput {
