@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SettingsStoryInteractorOutput: class {
-
+	func didReceiveFullHDVideoQualityEnabled(enabled: Bool)
 }

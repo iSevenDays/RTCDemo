@@ -8,10 +8,18 @@
 
 class SettingsStoryInteractor {
 
-    weak var output: SettingsStoryInteractorOutput!
+    weak var output: SettingsStoryInteractorOutput?
+	weak var settingsStorage: SettingsStorage!
 
 }
 
 extension SettingsStoryInteractor: SettingsStoryInteractorInput {
+	func requestFullHDVideoQualityStatus() {
+		output?.didReceiveFullHDVideoQualityEnabled(settingsStorage.fullHDVideoQualityEnabled)
+	}
 	
+	func requestFullHDVideoQualityEnabled(enabled: Bool) {
+		settingsStorage.fullHDVideoQualityEnabled = enabled
+		output?.didReceiveFullHDVideoQualityEnabled(enabled)
+	}
 }

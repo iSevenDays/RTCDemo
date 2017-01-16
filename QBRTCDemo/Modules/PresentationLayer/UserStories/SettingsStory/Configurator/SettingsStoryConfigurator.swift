@@ -24,7 +24,8 @@ class SettingsStoryModuleConfigurator {
 
         let interactor = SettingsStoryInteractor()
         interactor.output = presenter
-
+		interactor.settingsStorage = ServicesProvider.currentProvider.settingsStorage
+		
         presenter.interactor = interactor
         viewController.output = presenter
     }

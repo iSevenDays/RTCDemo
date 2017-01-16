@@ -10,20 +10,22 @@ import UIKit
 
 class SettingsStoryViewController: UIViewController {
 
-    @objc var output: SettingsStoryViewOutput!
+    @objc var output: SettingsStoryViewOutput?
 
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        output.viewIsReady()
-    }
-
-
-    // MARK: SettingsStoryViewInput
-    func setupInitialState() {
+        output?.viewIsReady()
     }
 }
 
+// MARK: SettingsStoryViewInput
+
 extension SettingsStoryViewController: SettingsStoryViewInput {
+	func setupInitialState() {
+	}
 	
+	func showFullHDVideoQualityEnabled(enabled: Bool) {
+		
+	}
 }

@@ -38,6 +38,15 @@
 		140A57E21E09BC3D0093AC33 /* UIColor+RandomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A57E01E09BC3D0093AC33 /* UIColor+RandomColors.swift */; };
 		140BF10C1E2BFD340039706F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140BF10B1E2BFD340039706F /* Settings.storyboard */; };
 		140BF10D1E2BFD340039706F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140BF10B1E2BFD340039706F /* Settings.storyboard */; };
+		140BF1101E2C9B5D0039706F /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140BF10F1E2C9B5D0039706F /* SettingsStorage.swift */; };
+		140BF1111E2C9B5D0039706F /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140BF10F1E2C9B5D0039706F /* SettingsStorage.swift */; };
+		140BF1171E2C9DB30039706F /* SettingsStoryConfiguratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B49288888762D6DD9AA879 /* SettingsStoryConfiguratorTests.swift */; };
+		140BF1181E2C9DB30039706F /* SettingsStoryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69967B1F345F63A6CBBEC93 /* SettingsStoryViewTests.swift */; };
+		140BF1191E2C9DB30039706F /* SettingsStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E182BE47389527AAA46C6 /* SettingsStoryInteractorTests.swift */; };
+		140BF11A1E2C9DB30039706F /* SettingsStoryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771EDCD283E0069A0DBBB381 /* SettingsStoryPresenterTests.swift */; };
+		140BF11B1E2C9DB30039706F /* SettingsStoryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26655BAA026F990D376259E1 /* SettingsStoryRouterTests.swift */; };
+		140BF11F1E2C9E8C0039706F /* FakeCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140BF11C1E2C9E790039706F /* FakeCacheService.swift */; };
+		140BF1201E2C9E8C0039706F /* FakeCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140BF11C1E2C9E790039706F /* FakeCacheService.swift */; };
 		14114A181CB68FEB0092AA26 /* NSObject+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 14114A171CB68FEB0092AA26 /* NSObject+Testing.m */; };
 		14114A191CB68FEB0092AA26 /* NSObject+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = 14114A171CB68FEB0092AA26 /* NSObject+Testing.m */; };
 		1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1418BAEB1C761B0A0085C7E3 /* Photos.framework */; };
@@ -545,6 +554,8 @@
 		140A57DD1E09BA760093AC33 /* ChatUsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUsersTableViewCell.swift; sourceTree = "<group>"; };
 		140A57E01E09BC3D0093AC33 /* UIColor+RandomColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RandomColors.swift"; sourceTree = "<group>"; };
 		140BF10B1E2BFD340039706F /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		140BF10F1E2C9B5D0039706F /* SettingsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsStorage.swift; path = SettingsStorage/SettingsStorage.swift; sourceTree = "<group>"; };
+		140BF11C1E2C9E790039706F /* FakeCacheService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCacheService.swift; sourceTree = "<group>"; };
 		14114A161CB68FEB0092AA26 /* NSObject+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Testing.h"; sourceTree = "<group>"; };
 		14114A171CB68FEB0092AA26 /* NSObject+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Testing.m"; sourceTree = "<group>"; };
 		1418BAEB1C761B0A0085C7E3 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -1194,6 +1205,14 @@
 			path = QBRTCDemoTests;
 			sourceTree = "<group>";
 		};
+		140BF10E1E2C08E90039706F /* SettingsStorage */ = {
+			isa = PBXGroup;
+			children = (
+				140BF10F1E2C9B5D0039706F /* SettingsStorage.swift */,
+			);
+			name = SettingsStorage;
+			sourceTree = "<group>";
+		};
 		1417B3441C57E4B9004D6416 /* FakeClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -1205,6 +1224,7 @@
 				1445F1961E032F5C0040F8ED /* FakeQBPushNotificationsService.swift */,
 				14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */,
 				14A85C701E1CDFDE00510B2E /* FakePermissionsService.swift */,
+				140BF11C1E2C9E790039706F /* FakeCacheService.swift */,
 			);
 			name = FakeClasses;
 			path = FakeServices;
@@ -1762,6 +1782,7 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				140BF10E1E2C08E90039706F /* SettingsStorage */,
 				14A85C691E1C389400510B2E /* PermissionsService */,
 				14740A741E03197B00557FB3 /* PushNotificationsService */,
 				14736E821C561284009DFBBC /* CallService */,
@@ -2955,17 +2976,21 @@
 				142D138D1C888A8A005A348D /* ImageGalleryStoryCollectionViewInteractorTests.swift in Sources */,
 				142B50751CDD2C7A005B143C /* ChatUsersStoryRouterTests.swift in Sources */,
 				142B51641CDE13E2005B143C /* XCTest+Optionals.swift in Sources */,
+				140BF1181E2C9DB30039706F /* SettingsStoryViewTests.swift in Sources */,
 				14A85C741E1CE27D00510B2E /* FakePermissionsService.swift in Sources */,
 				142B50721CDD2C7A005B143C /* ChatUsersStoryViewTests.swift in Sources */,
 				14EBDD2D1DFC171100A1EEB5 /* FakeCallService.swift in Sources */,
+				140BF11A1E2C9DB30039706F /* SettingsStoryPresenterTests.swift in Sources */,
 				1439A9051E04705E00741460 /* CallServiceHelpers.swift in Sources */,
 				14EBDD3A1DFC7D4100A1EEB5 /* CallServiceTests.swift in Sources */,
 				1420E46A1CE7CE6E0043EFF9 /* IncomingCallStoryPresenterTests.swift in Sources */,
 				14EBDD321DFC7C4E00A1EEB5 /* VideoCallStoryConfiguratorTests.swift in Sources */,
 				1473EAC91CAC607C007F9DF8 /* AuthStoryRouterTests.swift in Sources */,
 				14B697F01E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */,
+				140BF11B1E2C9DB30039706F /* SettingsStoryRouterTests.swift in Sources */,
 				142B50741CDD2C7A005B143C /* ChatUsersStoryPresenterTests.swift in Sources */,
 				14EBDD231DFC154E00A1EEB5 /* VideoCallStoryInteractorTests.swift in Sources */,
+				140BF1201E2C9E8C0039706F /* FakeCacheService.swift in Sources */,
 				1420E4671CE7CE6E0043EFF9 /* IncomingCallStoryConfiguratorTests.swift in Sources */,
 				14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */,
 				14ADBDE01C73851C003A0C98 /* ImageGalleryStoryRouterTests.swift in Sources */,
@@ -2974,7 +2999,9 @@
 				1433C5FA1DF1956100A2CED6 /* VideoCallStoryRouterTests.swift in Sources */,
 				1445F19A1E040AB60040F8ED /* TestsStorage.swift in Sources */,
 				1433C5F71DF1735100A2CED6 /* VideoCallStoryPresenterTests.swift in Sources */,
+				140BF1191E2C9DB30039706F /* SettingsStoryInteractorTests.swift in Sources */,
 				1420E4681CE7CE6E0043EFF9 /* IncomingCallStoryViewTests.swift in Sources */,
+				140BF1171E2C9DB30039706F /* SettingsStoryConfiguratorTests.swift in Sources */,
 				14ADBDDD1C738514003A0C98 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				14ADBDDF1C73851C003A0C98 /* ImageGalleryStoryPresenterTests.swift in Sources */,
 				14C970B71DFCE1B000462981 /* SignalingMessagesFactoryTests.swift in Sources */,
@@ -3067,6 +3094,7 @@
 				1473EACF1CAC6090007F9DF8 /* AuthStoryInteractorInput.swift in Sources */,
 				14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */,
 				1420E47C1CE7CE860043EFF9 /* IncomingCallStoryViewOutput.swift in Sources */,
+				140BF1101E2C9B5D0039706F /* SettingsStorage.swift in Sources */,
 				142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				1473EAD11CAC6090007F9DF8 /* AuthStoryInteractor.swift in Sources */,
 				1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */,
@@ -3144,6 +3172,7 @@
 				14C970BB1DFCEB5B00462981 /* QBSignalingChannel.swift in Sources */,
 				0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */,
 				07E270C0398789943B7C3148 /* ImageGalleryStoryInitializer.swift in Sources */,
+				140BF1111E2C9B5D0039706F /* SettingsStorage.swift in Sources */,
 				7C92BC563CF188F3FDA03D37 /* AuthStoryViewInput.swift in Sources */,
 				A049C3E01A2B5FAE66666F31 /* AuthStoryViewOutput.swift in Sources */,
 				14A85C6C1E1C38CA00510B2E /* PermissionsServiceProtocol.swift in Sources */,
@@ -3251,6 +3280,7 @@
 				279B1DC844A7A151B2E4620C /* ImageGalleryStoryPresenterTests.swift in Sources */,
 				148A83D71CB0180400F88933 /* FakeQBRESTService.swift in Sources */,
 				14EBDD2F1DFC77CE00A1EEB5 /* IncomingCallStoryInteractorTests.swift in Sources */,
+				140BF11F1E2C9E8C0039706F /* FakeCacheService.swift in Sources */,
 				E662C4854C54702B5BFEDA78 /* ImageGalleryStoryRouterTests.swift in Sources */,
 				A49D4EB8C7F6DF685E7F5B8D /* AuthStoryConfiguratorTests.swift in Sources */,
 				71126378754862BDA35556EB /* AuthStoryViewTests.swift in Sources */,

@@ -22,6 +22,7 @@ class ServicesProvider: NSObject {
 	private(set) var restService: RESTServiceProtocol!
 	private(set) var pushService: PushNotificationsServiceProtocol!
 	private(set) var permissionsService: PermissionsServiceProtocol!
+	private(set) var settingsStorage: SettingsStorage!
 	
 	init(zone: Zone) {
 		super.init()
@@ -54,10 +55,13 @@ class ServicesProvider: NSObject {
 			
 			self.permissionsService = PermissionsService()
 			
+			let settingsStorage = SettingsStorage()
+			settingsStorage.cacheService = NSUserDefaults.standardUserDefaults()
+			self.settingsStorage = settingsStorage
+			
 			break
 		}
 	}
-	
 }
 
 class ServicesConfigurator {

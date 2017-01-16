@@ -8,13 +8,14 @@
 
 @objc class SettingsStoryPresenter: NSObject {
 
-    weak var view: SettingsStoryViewInput!
+    weak var view: SettingsStoryViewInput?
     var interactor: SettingsStoryInteractorInput!
     var router: SettingsStoryRouterInput!
 
     func viewIsReady() {
 
     }
+	
 }
 
 extension SettingsStoryPresenter: SettingsStoryModuleInput {
@@ -26,6 +27,8 @@ extension SettingsStoryPresenter: SettingsStoryViewOutput {
 }
 
 extension SettingsStoryPresenter: SettingsStoryInteractorOutput {
-	
+	func didReceiveFullHDVideoQualityEnabled(enabled: Bool) {
+		view?.showFullHDVideoQualityEnabled(enabled)
+	}
 }
 

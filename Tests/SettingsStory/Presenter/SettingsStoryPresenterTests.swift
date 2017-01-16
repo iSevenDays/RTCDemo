@@ -8,6 +8,14 @@
 
 import XCTest
 
+#if QBRTCDemo_s
+	@testable
+	import QBRTCDemo_s
+#elseif QBRTCDemo
+	@testable
+	import QBRTCDemo
+#endif
+
 class SettingsStoryPresenterTest: XCTestCase {
 
     override func setUp() {
@@ -21,7 +29,9 @@ class SettingsStoryPresenterTest: XCTestCase {
     }
 
     class MockInteractor: SettingsStoryInteractorInput {
-
+		func requestFullHDVideoQualityEnabled(enabled: Bool) {
+			
+		}
     }
 
     class MockRouter: SettingsStoryRouterInput {
@@ -33,5 +43,9 @@ class SettingsStoryPresenterTest: XCTestCase {
         func setupInitialState() {
 
         }
+		
+		func showFullHDVideoQualityEnabled(enabled: Bool) {
+			
+		}
     }
 }

@@ -14,4 +14,6 @@ protocol SettingsStoryViewInput: class {
     */
 
     func setupInitialState()
+	
+	func showFullHDVideoQualityEnabled(enabled: Bool)
 }

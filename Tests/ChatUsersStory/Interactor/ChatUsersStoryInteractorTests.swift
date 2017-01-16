@@ -20,7 +20,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 
 	var interactor: ChatUsersStoryInteractor!
 	var mockOutput: MockPresenter!
-	var mockCacheService: MockCacheService!
+	var mockCacheService: FakeCacheService!
 	var mockRESTService: MockRESTService!
 	var callService: FakeCallSevice!
 	
@@ -33,7 +33,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
 
-		mockCacheService = MockCacheService()
+		mockCacheService = FakeCacheService()
 		interactor.cacheService = mockCacheService
 		callService = FakeCallSevice()
 		callService.signalingChannel = FakeSignalingChannel()
@@ -239,31 +239,6 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 			didFailToNotifyUsersAboutCurrentUserEnteredRoomGotCalled = true
 		}
     }
-	
-	
-	class MockCacheService: NSObject, CacheServiceProtocol {
-		var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest]
-		
-		func setBool(value: Bool, forKey defaultName: String) {
-			
-		}
-		
-		func boolForKey(defaultName: String) -> Bool {
-			return true
-		}
-		
-		func cachedUserWithID(id: Int) -> SVUser? {
-			return nil
-		}
-		
-		func cacheUsers(users: [SVUser], forRoomName roomName: String) {
-			cachedUsersArray = users
-		}
-		
-		func cachedUsersForRoomWithName(roomName: String) -> [SVUser]? {
-			return cachedUsersArray
-		}
-	}
 	
 	class MockRESTService: FakeQBRESTService {
 		var downloadUsersWithTagsGotCalled = false
