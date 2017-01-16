@@ -104,7 +104,7 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 		
 		// when
 		presenter.didRetrieveUsers(testUsers)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.reloadDataGotCalled)

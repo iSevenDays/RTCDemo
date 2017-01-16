@@ -66,7 +66,7 @@ class AuthStoryPresenterTests: BaseTestCase {
 	func testShowsLoggingInIndicator() {
 		// when
 		self.presenter.doingLoginWithUser(TestsStorage.svuserTest)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(self.mockView.showIndicatorLoggingInGotCalled)
@@ -77,7 +77,7 @@ class AuthStoryPresenterTests: BaseTestCase {
 	func testShowsSigningUpIndicator() {
 		// when
 		self.presenter.doingSignUpWithUser(TestsStorage.svuserTest)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(self.mockView.showIndicatorSigningUpGotCalled)
@@ -101,7 +101,7 @@ class AuthStoryPresenterTests: BaseTestCase {
 	func testShowsError_whenLoginFailed() {
 		// when
 		self.presenter.didErrorLogin(nil)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(self.mockView.showErrorLoginGotCalled)

@@ -91,7 +91,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesChatConnectionError() {
 		// when
 		presenter.didFailToConnectToChat()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showErrorConnectGotCalled)
@@ -100,7 +100,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesCallServiceError() {
 		// when
 		presenter.didFailCallService()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showErrorCallServiceDisconnectedGotCalled)
@@ -117,7 +117,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesHangupAndCallsViewShowHangup() {
 		// when
 		presenter.didHangup()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showHangupGotCalled)
@@ -126,7 +126,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesOpponentHangupAndCallsViewShowOpponentHangup() {
 		// when
 		presenter.didReceiveHangupFromOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showOpponentHangupGotCalled)
@@ -135,7 +135,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesOpponentRejectAndCallsViewShowOpponentReject() {
 		// when
 		presenter.didReceiveRejectFromOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showOpponentRejectGotCalled)
@@ -147,7 +147,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		
 		// when
 		presenter.didSetLocalCaptureSession(localCaptureSession)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.setLocalVideoCaptureSessionGotCalled)
@@ -157,7 +157,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesRemoteVideoTrack() {
 		// when
 		presenter.didReceiveRemoteVideoTrackWithConfigurationBlock(nil)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.configureRemoteVideoViewWithBlockGotCalled)
@@ -166,7 +166,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesDataChannelNotReadyState() {
 		// when
 		presenter.didReceiveDataChannelStateNotReady()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showErrorDataChannelNotReadyGotCalled)
@@ -223,7 +223,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesDialingOpponent() {
 		// when
 		presenter.didStartDialingOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showStartDialingOpponentGotCalled)
@@ -232,7 +232,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterHandlesReceivedAnswerFromOpponent() {
 		// when
 		presenter.didReceiveAnswerFromOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showReceivedAnswerFromOpponentGotCalled)
@@ -242,7 +242,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterNotifiesViewAboutAuthorizedCamera() {
 		// when
 		presenter.didReceiveVideoStatusAuthorized()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showLocalVideoTrackAuthorizedGotCalled)
@@ -251,7 +251,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterNotifiesViewAboutDeniedCamera() {
 		// when
 		presenter.didReceiveVideoStatusDenied()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showLocalVideoTrackDeniedGotCalled)
@@ -261,7 +261,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterNotifiesViewAboutAuthorizedMicrophone() {
 		// when
 		presenter.didReceiveMicrophoneStatusAuthorized()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showMicrophoneAuthorizedGotCalled)
@@ -270,7 +270,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterNotifiesViewAboutDeniedMicrophone() {
 		// when
 		presenter.didReceiveMicrophoneStatusDenied()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showMicrophoneDeniedGotCalled)
@@ -280,7 +280,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterNotifiesViewAboutVideoTrackStateChange() {
 		// when
 		presenter.didSwitchLocalVideoTrackState(true)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showLocalVideoTrackEnabledGotCalled)
@@ -290,7 +290,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	func testPresenterNotifiesViewAboutAudioTrackStateChange() {
 		// when
 		presenter.didSwitchLocalAudioTrackState(true)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockView.showLocalAudioTrackEnabledGotCalled)

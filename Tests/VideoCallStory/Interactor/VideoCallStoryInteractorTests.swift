@@ -116,7 +116,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
 		// time to apply local SDP and start dialing, dialing must call send push event
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
@@ -158,7 +158,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertNotNil(interactor.localVideoTrack)
@@ -172,7 +172,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled)
@@ -210,10 +210,10 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		let initialLocalVideoTrackState = interactor.isLocalVideoTrackEnabled()
 		interactor.switchLocalVideoTrackState()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockOutput.didSwitchLocalVideoTrackStateGotCalled)
@@ -229,9 +229,9 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		interactor.switchLocalVideoTrackState()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveVideoStatusDeniedGotCalled)
@@ -245,10 +245,10 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		let initialLocalAudioTrackState = interactor.isLocalAudioTrackEnabled()
 		interactor.switchLocalAudioTrackState()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockOutput.didSwitchLocalAudioTrackStateGotCalled)
@@ -264,9 +264,9 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		interactor.switchLocalAudioTrackState()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveMicrophoneStatusDeniedGotCalled)
@@ -281,9 +281,9 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		interactor.switchCamera()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertTrue(mockOutput.didSwitchCameraPositionGotCalled)
@@ -298,9 +298,9 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
 		interactor.startCallWithOpponent(testUser2)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		interactor.switchCamera()
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		
 		// then
 		XCTAssertFalse(mockOutput.didSwitchCameraPositionGotCalled)

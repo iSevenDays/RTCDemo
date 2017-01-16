@@ -103,7 +103,7 @@ class CallServiceTests: BaseTestCase {
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		callService.hangup()
 		
 		// then
@@ -158,9 +158,9 @@ class CallServiceTests: BaseTestCase {
 		// when
 		callService.connectWithUser(user1, completion: nil)
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		XCTAssertNotNil(try? callService.acceptCallFromOpponent(user2))
-		waitForTimeInterval(1)
+		waitForTimeInterval(50)
 		callService.didReceiveOffer(callService.signalingProcessor, offer: rtcOfferSDP, fromOpponent: user2, sessionDetails: sessionDetails)
 		
 		// then
