@@ -18,19 +18,67 @@ import XCTest
 
 class SettingsStoryPresenterTest: XCTestCase {
 
+	var presenter: SettingsStoryPresenter!
+	var mockInteractor: MockInteractor!
+	var mockRouter: MockRouter!
+	var mockView: MockViewController!
+	
+	let settings: [SettingModel] = [SettingModel(label: "lbl", type: .switcher(enabled: true))]
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+		presenter = SettingsStoryPresenter()
+		
+		mockInteractor = MockInteractor()
+		
+		mockRouter = MockRouter()
+		mockView = MockViewController()
+		
+		presenter.interactor = mockInteractor
+		presenter.router = mockRouter
+		presenter.view = mockView
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	
+	// MARK: SettingsStoryViewOutput tests
+	
+	func testPresenterHandlesViewReadyEvent() {
+		// when
+		presenter.viewIsReady()
+		
+		// then
+		XCTAssertTrue(mockView.setupInitialStateGotCalled)
+		XCTAssertTrue(mockInteractor.requestSettingsGotCalled)
+	}
+	
+	// MARK: SettingsStoryInteractorOutput tests
+	func testPresenterNotifiesViewAboutReceivedSettings() {
+		// when
+		presenter.didReceiveSettings(settings)
+		
+		// then
+		XCTAssertTrue(mockView.reloadSettingsGotCalled)
+	}
+	
+	// MARK: - SettingsStoryViewOutput tests
+	
+	func testRequestsInteractorToSwitchFullHDVideoQualityState() {
+		// when
+		presenter.didSelectSettingModel(settings[0])
+		
+		// then
+		XCTAssertTrue(mockInteractor.handleSettingModelSelectedGotCalled)
+	}
 
     class MockInteractor: SettingsStoryInteractorInput {
-		func requestFullHDVideoQualityEnabled(enabled: Bool) {
-			
+		var handleSettingModelSelectedGotCalled = false
+		var requestSettingsGotCalled = false
+		
+		func requestSettings() {
+			requestSettingsGotCalled = true
+		}
+		
+		func handleSettingModelSelected(settingModel: SettingModel) {
+			handleSettingModelSelectedGotCalled = true
 		}
     }
 
@@ -39,13 +87,16 @@ class SettingsStoryPresenterTest: XCTestCase {
     }
 
     class MockViewController: SettingsStoryViewInput {
-
+		var setupInitialStateGotCalled = false
+		
+		var reloadSettingsGotCalled = false
+		
         func setupInitialState() {
-
+			setupInitialStateGotCalled = true
         }
 		
-		func showFullHDVideoQualityEnabled(enabled: Bool) {
-			
+		func reloadSettings(settings: [SettingModel]) {
+			reloadSettingsGotCalled = true
 		}
     }
 }

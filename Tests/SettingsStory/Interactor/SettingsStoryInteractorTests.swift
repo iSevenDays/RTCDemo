@@ -24,6 +24,8 @@ class SettingsStoryInteractorTests: XCTestCase {
 	var mockSettingsStorage: MockSettingsStorage!
 	var callService: FakeCallSevice!
 	
+	let settings: [SettingModel] = [SettingModel(label: "lbl", type: .switcher(enabled: true))]
+	
     override func setUp() {
         super.setUp()
 		interactor = SettingsStoryInteractor()
@@ -31,31 +33,35 @@ class SettingsStoryInteractorTests: XCTestCase {
 		interactor.output = mockOutput
 		
 		mockCacheService = FakeCacheService()
+		mockSettingsStorage = MockSettingsStorage()
 		mockSettingsStorage.cacheService = mockCacheService
 		interactor.settingsStorage = mockSettingsStorage
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
 	
-	func callsOutputWhenRequestedFullHDVideoQuality() {
+	func testNotifiesPresenterAboutSettings() {
 		// given
 		mockSettingsStorage.fullHDVideoQualityEnabled = true
 		
 		// when
-		interactor.requestFullHDVideoQualityStatus()
+		interactor.requestSettings()
 		
 		// then
-		XCTAssertTrue(mockOutput.didReceiveFullHDVideoQualityEnabledGotCalled)
+		XCTAssertTrue(mockOutput.didReceiveSettingsGotCalled)
+	}
+	
+	func testNotifiesPresenterAboutChangedSettings() {
+		// when
+		interactor.handleSettingModelSelected(settings[0])
+		
+		// then
+		XCTAssertTrue(mockOutput.didReceiveSettingsGotCalled)
 	}
 
     class MockPresenter: SettingsStoryInteractorOutput {
-		var didReceiveFullHDVideoQualityEnabledGotCalled = false
+		var didReceiveSettingsGotCalled = false
 		
-		func didReceiveFullHDVideoQualityEnabled(enabled: Bool) {
-			didReceiveFullHDVideoQualityEnabledGotCalled = true
+		func didReceiveSettings(settings: [SettingModel]) {
+			didReceiveSettingsGotCalled = true
 		}
     }
 	

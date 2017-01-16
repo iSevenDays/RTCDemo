@@ -9,5 +9,17 @@
 import Foundation
 
 protocol SettingsStoryInteractorInput {
-	func requestFullHDVideoQualityEnabled(enabled: Bool)
+ 	/**
+	Request available settings
+	output will be notified with didReceiveSettings:
+	*/
+	func requestSettings()
+	
+	/**
+	Process SettingModel and depending on setting type
+	notify output
+	
+	Currently only switcher setting model is supported
+	*/
+	func handleSettingModelSelected(settingModel: SettingModel)
 }

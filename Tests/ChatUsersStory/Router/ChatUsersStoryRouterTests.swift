@@ -42,6 +42,14 @@ class ChatUsersStoryRouterTests: BaseTestCase {
 		XCTAssertEqual(mockOutput.segueIdentifier, router.chatUsersStoryToVideoCallStorySegueIdentifier)
 	}
 	
+	func testRouterOpensSettingsStory() {
+		// when
+		router.openSettingsStory()
+		
+		// then
+		XCTAssertTrue(mockOutput.openModuleUsingSegueGotCalled)
+		XCTAssertEqual(mockOutput.segueIdentifier, router.chatUsersStoryToSettingsStorySegueIdentifier)
+	}
 	
 	func testSegues() {
 		// given

@@ -39,6 +39,14 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 
 	// MARK: ChatUsersStoryViewOutput tests
 	
+	func testPresenterHandlesViewReadyEvent() {
+		// when
+		presenter.viewIsReady()
+		
+		// then
+		XCTAssertTrue(mockView.setupInitialStateGotCalled)
+	}
+	
 	func testTriesToRetrieveCachedUsersWithTag_whenViewIsReady() {
 		// when
 		presenter.viewIsReady()
@@ -77,6 +85,15 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 		// then
 		XCTAssertTrue(mockRouter.openVideoStoryWithInitiatorGotCalled)
 		XCTAssertEqual(mockRouter.opponent, opponentUser)
+	}
+	
+	
+	func testPresenterOpensSettingsStory() {
+		// when
+		presenter.didTriggerSettingsButtonTapped()
+		
+		// then
+		XCTAssertTrue(mockRouter.openSettingsStoryGotCalled)
 	}
 	
 	func testPresenterHandlesDeclinedRequestForCall() {
@@ -189,12 +206,17 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 		var opponent: SVUser?
 		
 		var openVideoStoryWithInitiatorGotCalled = false
+		var openSettingsStoryGotCalled = false
 		var openIncomingCallStoryWithOpponentGotCalled = false
 		
 		func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
 			self.initiator = initiator
 			self.opponent = opponent
 			openVideoStoryWithInitiatorGotCalled = true
+		}
+		
+		func openSettingsStory() {
+			openSettingsStoryGotCalled = true
 		}
 		
 		func openIncomingCallStoryWithOpponent(opponent: SVUser) {
@@ -205,6 +227,8 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 
     class MockViewController: ChatUsersStoryViewInput {
 
+		var setupInitialStateGotCalled = false
+		
 		var configureViewWithCurrentUserGotCalled = false
 		var showErrorMessageGotCalled = false
 		
@@ -212,7 +236,7 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 		var users: [SVUser]?
 		
         func setupInitialState() {
-
+			setupInitialStateGotCalled = true
         }
 		
 		func configureViewWithCurrentUser(user: SVUser) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="x42-6x-mV0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,20 +9,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--View Controller-->
         <scene sceneID="2ni-sh-45f">
             <objects>
-                <tableViewController id="x42-6x-mV0" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsStoryViewController" id="x42-6x-mV0" customClass="SettingsStoryViewController" customModule="QBRTCDemo_s" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="TRZ-TE-0jK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5tQ-NT-pV5">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitcherTableViewCellIdentifier" id="5tQ-NT-pV5" customClass="SettingsSwitchTableViewCell" customModule="QBRTCDemo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5tQ-NT-pV5" id="rsP-ez-Wml">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prefer Full HD Video Quality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71C-vx-ehA">
@@ -32,7 +32,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q30-FU-kVG">
-                                            <rect key="frame" x="313" y="5" width="52" height="32"/>
+                                            <rect key="frame" x="313" y="5.5" width="52" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="Id7-0w-nai"/>
                                                 <constraint firstAttribute="width" constant="50" id="SbL-Ot-ayp"/>
@@ -48,6 +48,10 @@
                                         <constraint firstAttribute="trailing" secondItem="Q30-FU-kVG" secondAttribute="trailing" constant="12" id="ctJ-q6-Tit"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="71C-vx-ehA" id="ukM-l4-3a2"/>
+                                    <outlet property="switchControl" destination="Q30-FU-kVG" id="JPk-h7-bCt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -57,7 +61,11 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4D-Gc-iTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="r9w-xM-7ZK" customClass="SettingsStoryModuleInitializer" customModule="QBRTCDemo_s"/>
+                <customObject id="r9w-xM-7ZK" customClass="SettingsStoryModuleInitializer" customModule="QBRTCDemo_s">
+                    <connections>
+                        <outlet property="viewController" destination="x42-6x-mV0" id="6ml-x4-PU8"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-223.19999999999999" y="60.719640179910051"/>
         </scene>

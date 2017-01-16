@@ -21,4 +21,10 @@
 	- parameter user: SVUser instance
 	*/
 	func didTriggerUserTapped(user: SVUser)
+	
+	
+	/**
+	Request to open Settings Story
+	*/
+	func didTriggerSettingsButtonTapped()
 }

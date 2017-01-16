@@ -6,14 +6,17 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
+class ChatUsersStoryRouter {
 	
 	let chatUsersStoryToVideoCallStorySegueIdentifier = "ChatUsersStoryToVideoCallStorySegueIdentifier"
 	let chatUsersStoryToIncomingCallStorySegueIdentifier = "ChatUsersStoryToIncomingCallStorySegueIdentifier"
+	let chatUsersStoryToSettingsStorySegueIdentifier = "ChatUsersStoryToSettingsStorySegueIdentifier"
 	
 	// ChatUsersViewController is transitionHandler
 	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
-	
+}
+
+extension ChatUsersStoryRouter: ChatUsersStoryRouterInput {
 	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
 		
 		transitionHandler.openModuleUsingSegue?(chatUsersStoryToVideoCallStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
@@ -40,7 +43,10 @@ class ChatUsersStoryRouter: ChatUsersStoryRouterInput {
 			
 			return nil
 		})
-		
+	}
+	
+	func openSettingsStory() {
+		transitionHandler.openModuleUsingSegue?(chatUsersStoryToSettingsStorySegueIdentifier)
 	}
 	
 }

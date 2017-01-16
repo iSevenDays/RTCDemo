@@ -14,4 +14,6 @@
     */
 
     func viewIsReady()
+	
+	func didSelectSettingModel(settingModel: SettingModel)
 }

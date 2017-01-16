@@ -13,7 +13,8 @@
     var router: SettingsStoryRouterInput!
 
     func viewIsReady() {
-
+		view?.setupInitialState()
+		interactor.requestSettings()
     }
 	
 }
@@ -23,12 +24,14 @@ extension SettingsStoryPresenter: SettingsStoryModuleInput {
 }
 
 extension SettingsStoryPresenter: SettingsStoryViewOutput {
-	
+	func didSelectSettingModel(settingModel: SettingModel) {
+		interactor.handleSettingModelSelected(settingModel)
+	}
 }
 
 extension SettingsStoryPresenter: SettingsStoryInteractorOutput {
-	func didReceiveFullHDVideoQualityEnabled(enabled: Bool) {
-		view?.showFullHDVideoQualityEnabled(enabled)
+	func didReceiveSettings(settings: [SettingModel]) {
+		view?.reloadSettings(settings)
 	}
 }
 

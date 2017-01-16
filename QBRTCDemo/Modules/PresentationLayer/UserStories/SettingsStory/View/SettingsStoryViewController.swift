@@ -8,10 +8,14 @@
 
 import UIKit
 
-class SettingsStoryViewController: UIViewController {
+class SettingsStoryViewController: UITableViewController {
 
     @objc var output: SettingsStoryViewOutput?
-
+	
+	var settings: [SettingModel] = []
+	
+	let switcherCellIdentifier = "SwitcherTableViewCellIdentifier"
+	
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +27,31 @@ class SettingsStoryViewController: UIViewController {
 
 extension SettingsStoryViewController: SettingsStoryViewInput {
 	func setupInitialState() {
+		
 	}
 	
-	func showFullHDVideoQualityEnabled(enabled: Bool) {
-		
+	func reloadSettings(settings: [SettingModel]) {
+		self.settings = settings
+		tableView.reloadData()
+	}
+}
+
+// MARK: - UITableViewDelegate
+extension SettingsStoryViewController {
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		output?.didSelectSettingModel(settings[indexPath.row])
+	}
+	
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let setting = settings[indexPath.row]
+		switch setting.type {
+		case let .switcher(enabled: enabled):
+			
+			let cell = tableView.dequeueReusableCellWithIdentifier(switcherCellIdentifier, forIndexPath: indexPath) as! SettingsSwitchTableViewCell
+			cell.label.text = setting.label
+			cell.switchControl.on = enabled
+			return cell
+		}
 	}
 }

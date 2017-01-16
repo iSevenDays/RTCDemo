@@ -94,6 +94,7 @@
                         <outlet property="tableView" destination="pJy-i2-7ab" id="zRF-sy-0No"/>
                         <segue destination="3bv-Lq-0pq" kind="show" identifier="ChatUsersStoryToVideoCallStorySegueIdentifier" id="NvK-96-iiQ"/>
                         <segue destination="pme-U0-dcE" kind="presentation" identifier="ChatUsersStoryToIncomingCallStorySegueIdentifier" id="XrM-qt-yCx"/>
+                        <segue destination="2ib-P6-fFJ" kind="show" identifier="ChatUsersStoryToSettingsStorySegueIdentifier" id="r9z-sA-cmT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugj-Zt-xDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -120,6 +121,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Faz-MI-lFm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="420" y="498"/>
+        </scene>
+        <!--SettingsStory-->
+        <scene sceneID="AZa-4k-78W">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsStory" id="2ib-P6-fFJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQ4-0w-Js0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="413" y="579"/>
         </scene>
     </scenes>
 </document>

@@ -10,16 +10,33 @@ class SettingsStoryInteractor {
 
     weak var output: SettingsStoryInteractorOutput?
 	weak var settingsStorage: SettingsStorage!
-
+	
+	func settings() -> [SettingModel]{
+		
+		let fullHDVideoQualitySetting = SettingModel(label: "Prefer FullHD Video Quality", type: .switcher(enabled: settingsStorage.fullHDVideoQualityEnabled))
+		
+		return [fullHDVideoQualitySetting]
+	}
+	
 }
 
 extension SettingsStoryInteractor: SettingsStoryInteractorInput {
-	func requestFullHDVideoQualityStatus() {
-		output?.didReceiveFullHDVideoQualityEnabled(settingsStorage.fullHDVideoQualityEnabled)
+	func requestSettings() {
+		output?.didReceiveSettings(settings())
 	}
 	
-	func requestFullHDVideoQualityEnabled(enabled: Bool) {
-		settingsStorage.fullHDVideoQualityEnabled = enabled
-		output?.didReceiveFullHDVideoQualityEnabled(enabled)
+	// TODO: implement UUID for SettingItem and SettingsStorage setting
+	// to connect between model and SettingsStorage
+	func handleSettingModelSelected(settingModel: SettingModel) {
+		let allSettings = settings()
+		if let settingIndex = allSettings.indexOf(settingModel) {
+			let setting = allSettings[settingIndex]
+			switch setting.type {
+			case let .switcher(enabled: enabled):
+				settingsStorage.fullHDVideoQualityEnabled = enabled
+			}
+		}
+		
+		output?.didReceiveSettings(settings())
 	}
 }

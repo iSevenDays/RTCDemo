@@ -18,5 +18,4 @@ class SettingsStoryModuleInitializer: NSObject {
         let configurator = SettingsStoryModuleConfigurator()
         configurator.configureModuleForViewInput(viewController)
     }
-
 }

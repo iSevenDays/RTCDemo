@@ -21,7 +21,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 	var controller: ChatUsersStoryViewController!
 	var mockOutput: MockViewControllerOutput!
 	
-	let emptySender = UIResponder()
+	let emptySender = UIButton()
 	
     override func setUp() {
         super.setUp()
@@ -102,13 +102,26 @@ class ChatUsersStoryViewTests: XCTestCase {
 		XCTAssertEqual(mockOutput.user, firstUser)
 	}
 	
+	func testViewCorrectlyHandlesOpenSettingsButtonTappedEvent() {
+		// given
+		controller.loadView()
+		
+		// when
+		controller.openSettings(emptySender)
+		
+		// then
+		XCTAssertTrue(mockOutput.didTriggerSettingsButtonTappedGotCalled)
+	}
+	
 	// MARK: IBActions
 	
-	@objc class MockViewControllerOutput : NSObject,  ChatUsersStoryViewOutput {
+	@objc class MockViewControllerOutput : NSObject, ChatUsersStoryViewOutput {
 		var viewIsReadyGotCalled = false
 		
 		var didTriggerUserTappedGotCalled = false
 		var user: SVUser?
+		
+		var didTriggerSettingsButtonTappedGotCalled = false
 		
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
@@ -119,6 +132,9 @@ class ChatUsersStoryViewTests: XCTestCase {
 			self.user = user
 		}
 		
+		func didTriggerSettingsButtonTapped() {
+			didTriggerSettingsButtonTappedGotCalled = true
+		}
 	}
 
 }

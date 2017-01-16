@@ -15,11 +15,16 @@
 
 extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
 	func viewIsReady() {
+		view?.setupInitialState()
 		interactor.retrieveUsersWithTag()
 	}
 	
 	func didTriggerUserTapped(user: SVUser) {
 		interactor.requestCallWithOpponent(user)
+	}
+	
+	func didTriggerSettingsButtonTapped() {
+		router.openSettingsStory()
 	}
 }
 

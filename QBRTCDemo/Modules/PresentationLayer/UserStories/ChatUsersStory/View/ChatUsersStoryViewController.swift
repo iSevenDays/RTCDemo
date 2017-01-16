@@ -21,14 +21,16 @@ class ChatUsersStoryViewController: UIViewController {
 	
 	internal var users: [SVUser] = []
 	let randomColors = UIColor.randomColors()
+	let cellIdentifier = "ChatUsersCellIdentifier"
 	
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewIsReady()
     }
-	deinit {
-		
+	
+	@IBAction func openSettings(sender: UIButton) {
+		output.didTriggerSettingsButtonTapped()
 	}
 }
 
@@ -70,8 +72,6 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 		
 	}
 }
-
-let cellIdentifier = "ChatUsersCellIdentifier"
 
 extension ChatUsersStoryViewController: UITableViewDataSource {
 	

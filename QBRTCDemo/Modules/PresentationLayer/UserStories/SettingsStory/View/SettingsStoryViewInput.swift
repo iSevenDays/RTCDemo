@@ -15,5 +15,5 @@ protocol SettingsStoryViewInput: class {
 
     func setupInitialState()
 	
-	func showFullHDVideoQualityEnabled(enabled: Bool)
+	func reloadSettings(settings: [SettingModel])
 }
