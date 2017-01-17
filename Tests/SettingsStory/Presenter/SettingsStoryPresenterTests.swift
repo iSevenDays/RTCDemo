@@ -23,7 +23,7 @@ class SettingsStoryPresenterTest: XCTestCase {
 	var mockRouter: MockRouter!
 	var mockView: MockViewController!
 	
-	let settings: [SettingModel] = [SettingModel(label: "lbl", type: .switcher(enabled: true))]
+	let settingSection = SettingsSection(name: "name", settings: [SettingModel(type: .subtile(label: "lbl", subLabel: nil, selected: false))])
 	
     override func setUp() {
         super.setUp()
@@ -53,7 +53,7 @@ class SettingsStoryPresenterTest: XCTestCase {
 	// MARK: SettingsStoryInteractorOutput tests
 	func testPresenterNotifiesViewAboutReceivedSettings() {
 		// when
-		presenter.didReceiveSettings(settings)
+		presenter.didReceiveSettings([settingSection])
 		
 		// then
 		XCTAssertTrue(mockView.reloadSettingsGotCalled)
@@ -63,7 +63,7 @@ class SettingsStoryPresenterTest: XCTestCase {
 	
 	func testRequestsInteractorToSwitchFullHDVideoQualityState() {
 		// when
-		presenter.didSelectSettingModel(settings[0])
+		presenter.didSelectSettingModel(settingSection.settings[0])
 		
 		// then
 		XCTAssertTrue(mockInteractor.handleSettingModelSelectedGotCalled)
@@ -95,7 +95,7 @@ class SettingsStoryPresenterTest: XCTestCase {
 			setupInitialStateGotCalled = true
         }
 		
-		func reloadSettings(settings: [SettingModel]) {
+		func reloadSettings(settings: [SettingsSection]) {
 			reloadSettingsGotCalled = true
 		}
     }

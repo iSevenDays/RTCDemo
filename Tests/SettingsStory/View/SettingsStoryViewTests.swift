@@ -22,7 +22,7 @@ class SettingsStoryViewTests: XCTestCase {
 	var mockOutput: MockViewControllerOutput!
 	
 	let emptySender = UIResponder()
-	let settings: [SettingModel] = [SettingModel(label: "lbl", type: .switcher(enabled: true))]
+	let settingSection = SettingsSection(name: "name", settings: [SettingModel(type: .subtile(label: "lbl", subLabel: nil, selected: false))])
 	
 	override func setUp() {
 		super.setUp()
@@ -42,15 +42,15 @@ class SettingsStoryViewTests: XCTestCase {
 	
 	func testFullHDVideoQualityButtonTriggersAction() {
 		// given
-		controller.settings = settings
-			
+		controller.settings = [settingSection]
+		
 		// when
 		controller.tableView.reloadData()
 		controller.tableView(controller.tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
 		
 		// then
 		XCTAssertTrue(mockOutput.didSelectSettingModelGotCalled)
-		XCTAssertEqual(mockOutput.settingModel, settings[0])
+		XCTAssertEqual(mockOutput.settingModel, settingSection.settings.first)
 	}
 	
 	@objc class MockViewControllerOutput : NSObject, SettingsStoryViewOutput {

@@ -18,42 +18,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitcherTableViewCellIdentifier" id="5tQ-NT-pV5" customClass="SettingsSwitchTableViewCell" customModule="QBRTCDemo" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" textLabel="DuI-KQ-fgZ" detailTextLabel="NpM-9T-VJg" style="IBUITableViewCellStyleSubtitle" id="5tQ-NT-pV5">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5tQ-NT-pV5" id="rsP-ez-Wml">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prefer Full HD Video Quality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71C-vx-ehA">
-                                            <rect key="frame" x="12" y="11" width="293" height="21"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DuI-KQ-fgZ">
+                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Q30-FU-kVG">
-                                            <rect key="frame" x="313" y="5.5" width="52" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="Id7-0w-nai"/>
-                                                <constraint firstAttribute="width" constant="50" id="SbL-Ot-ayp"/>
-                                            </constraints>
-                                            <color key="onTintColor" red="1" green="0.54366366379999997" blue="0.045212596610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </switch>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NpM-9T-VJg">
+                                            <rect key="frame" x="15" y="25.5" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Q30-FU-kVG" firstAttribute="leading" secondItem="71C-vx-ehA" secondAttribute="trailing" constant="8" id="41n-3a-vC0"/>
-                                        <constraint firstItem="71C-vx-ehA" firstAttribute="centerY" secondItem="rsP-ez-Wml" secondAttribute="centerY" id="9wG-TQ-bP3"/>
-                                        <constraint firstItem="71C-vx-ehA" firstAttribute="leading" secondItem="rsP-ez-Wml" secondAttribute="leading" constant="12" id="ap7-vH-Q0H"/>
-                                        <constraint firstItem="Q30-FU-kVG" firstAttribute="centerY" secondItem="71C-vx-ehA" secondAttribute="centerY" id="cMy-Mf-0wo"/>
-                                        <constraint firstAttribute="trailing" secondItem="Q30-FU-kVG" secondAttribute="trailing" constant="12" id="ctJ-q6-Tit"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="label" destination="71C-vx-ehA" id="ukM-l4-3a2"/>
-                                    <outlet property="switchControl" destination="Q30-FU-kVG" id="JPk-h7-bCt"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="x42-6x-mV0" id="PXG-wi-gJf"/>
                             <outlet property="delegate" destination="x42-6x-mV0" id="1bt-gT-Bcd"/>

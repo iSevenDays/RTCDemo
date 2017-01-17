@@ -30,7 +30,7 @@ extension SettingsStoryPresenter: SettingsStoryViewOutput {
 }
 
 extension SettingsStoryPresenter: SettingsStoryInteractorOutput {
-	func didReceiveSettings(settings: [SettingModel]) {
+	func didReceiveSettings(settings: [SettingsSection]) {
 		view?.reloadSettings(settings)
 	}
 }

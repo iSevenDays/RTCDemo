@@ -161,10 +161,10 @@
 		1454052F1C859431005E3790 /* DataChannelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454052C1C859431005E3790 /* DataChannelMessages.m */; };
 		1454D9CC1E2D7E8300E1FA21 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9CB1E2D7E8300E1FA21 /* SettingModel.swift */; };
 		1454D9CD1E2D7E8900E1FA21 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9CB1E2D7E8300E1FA21 /* SettingModel.swift */; };
-		1454D9D11E2D7EBC00E1FA21 /* SettingsSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9CF1E2D7EBC00E1FA21 /* SettingsSwitchTableViewCell.swift */; };
 		1454D9D21E2D7EBC00E1FA21 /* SettingsStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1454D9D01E2D7EBC00E1FA21 /* SettingsStory.storyboard */; };
-		1454D9D31E2D7EC900E1FA21 /* SettingsSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9CF1E2D7EBC00E1FA21 /* SettingsSwitchTableViewCell.swift */; };
 		1454D9D41E2D7ECF00E1FA21 /* SettingsStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1454D9D01E2D7EBC00E1FA21 /* SettingsStory.storyboard */; };
+		1454D9D61E2E902E00E1FA21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9D51E2E902E00E1FA21 /* Settings.swift */; };
+		1454D9D71E2E902E00E1FA21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9D51E2E902E00E1FA21 /* Settings.swift */; };
 		146CA9F01C62643400F768C8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		146CA9F11C62643C00F768C8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
@@ -693,8 +693,8 @@
 		1454052B1C859431005E3790 /* DataChannelMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataChannelMessages.h; sourceTree = "<group>"; };
 		1454052C1C859431005E3790 /* DataChannelMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataChannelMessages.m; sourceTree = "<group>"; };
 		1454D9CB1E2D7E8300E1FA21 /* SettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
-		1454D9CF1E2D7EBC00E1FA21 /* SettingsSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		1454D9D01E2D7EBC00E1FA21 /* SettingsStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsStory.storyboard; sourceTree = "<group>"; };
+		1454D9D51E2E902E00E1FA21 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		146CA9F21C62644000F768C8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		14736EE61C567EC5009DFBBC /* CallService_old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService_old.m; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
@@ -1173,7 +1173,6 @@
 		007C7AD80316DE21151FF029 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1454D9CE1E2D7EBC00E1FA21 /* Cells */,
 				1454D9D01E2D7EBC00E1FA21 /* SettingsStory.storyboard */,
 				57F0F6D32D927746F06869D3 /* SettingsStoryViewInput.swift */,
 				82C6403C17343E546525B3A7 /* SettingsStoryViewOutput.swift */,
@@ -1596,16 +1595,9 @@
 			isa = PBXGroup;
 			children = (
 				1454D9CB1E2D7E8300E1FA21 /* SettingModel.swift */,
+				1454D9D51E2E902E00E1FA21 /* Settings.swift */,
 			);
 			path = SettingsModel;
-			sourceTree = "<group>";
-		};
-		1454D9CE1E2D7EBC00E1FA21 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				1454D9CF1E2D7EBC00E1FA21 /* SettingsSwitchTableViewCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		14736E821C561284009DFBBC /* CallService */ = {
@@ -3079,7 +3071,6 @@
 				14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */,
 				1448B77F1DF9D17A002D5371 /* SessionDetails.swift in Sources */,
 				14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */,
-				1454D9D11E2D7EBC00E1FA21 /* SettingsSwitchTableViewCell.swift in Sources */,
 				142B50991CDD2CE0005B143C /* ChatUsersStoryRouter.swift in Sources */,
 				142D137F1C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
 				1420E4FF1CE7DAA20043EFF9 /* CallServicePendingRequest.swift in Sources */,
@@ -3093,6 +3084,7 @@
 				1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */,
 				14ADBDEF1C738554003A0C98 /* ImageGalleryStoryInteractorInput.swift in Sources */,
 				14740A791E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */,
+				1454D9D61E2E902E00E1FA21 /* Settings.swift in Sources */,
 				142B50961CDD2CE0005B143C /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1420E4911CE7CE9C0043EFF9 /* IncomingCallStoryRouterInput.swift in Sources */,
@@ -3170,7 +3162,6 @@
 				142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
 				1448B7801DF9D17A002D5371 /* SessionDetails.swift in Sources */,
 				1448B7901DFAE950002D5371 /* MulticastDelegate.swift in Sources */,
-				1454D9D31E2D7EC900E1FA21 /* SettingsSwitchTableViewCell.swift in Sources */,
 				148233A71C002DFE0000E9ED /* SVUser.m in Sources */,
 				14C970BE1DFCEBEF00462981 /* SignalingChannelProtocol.swift in Sources */,
 				14E8A1061E16D9A9007B6E29 /* AlertControlProtocol.swift in Sources */,
@@ -3271,6 +3262,7 @@
 				46506361658A1A5772ADE29B /* SettingsStoryPresenter.swift in Sources */,
 				5F8EB08489983D589DF9EF2E /* SettingsStoryInteractorInput.swift in Sources */,
 				FCFBF3819D23A329104C383F /* SettingsStoryInteractorOutput.swift in Sources */,
+				1454D9D71E2E902E00E1FA21 /* Settings.swift in Sources */,
 				E9C1AD9145872DAC33642D50 /* SettingsStoryInteractor.swift in Sources */,
 				11D6E490924AD16F67A13AFF /* SettingsStoryRouterInput.swift in Sources */,
 				A4E2EAD8C6C7AA5EF61D4A19 /* SettingsStoryRouter.swift in Sources */,

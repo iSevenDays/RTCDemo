@@ -14,6 +14,9 @@ import Foundation
 	
 	func setBool(value: Bool, forKey defaultName: String)
 	func boolForKey(defaultName: String) -> Bool
+	
+	func setObject(value: AnyObject?, forKey defaultName: String)
+	func stringForKey(defaultName: String) -> String?
 }
 
 extension NSUserDefaults: CacheServiceProtocol {

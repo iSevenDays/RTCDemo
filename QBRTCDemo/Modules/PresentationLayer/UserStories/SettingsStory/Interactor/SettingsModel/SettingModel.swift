@@ -8,15 +8,13 @@
 
 import Foundation
 
-enum SettingType {
-	case switcher(enabled: Bool)
+enum SettingViewType {
+	case subtile(label: String, subLabel: String?, selected: Bool)
 }
 
 @objc class SettingModel: NSObject {
-	var label: String
-	var type: SettingType
-	init(label: String, type: SettingType) {
-		self.label = label
+	var type: SettingViewType
+	init(type: SettingViewType) {
 		self.type = type
 	}
 

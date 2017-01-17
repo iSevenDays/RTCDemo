@@ -23,6 +23,14 @@ class FakeCacheService: NSObject, CacheServiceProtocol {
 		
 	}
 	
+	func setObject(value: AnyObject?, forKey defaultName: String) {
+		
+	}
+	
+	func stringForKey(defaultName: String) -> String? {
+		return nil
+	}
+	
 	func boolForKey(defaultName: String) -> Bool {
 		return true
 	}

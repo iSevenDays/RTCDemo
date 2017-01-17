@@ -24,7 +24,7 @@ class SettingsStoryInteractorTests: XCTestCase {
 	var mockSettingsStorage: MockSettingsStorage!
 	var callService: FakeCallSevice!
 	
-	let settings: [SettingModel] = [SettingModel(label: "lbl", type: .switcher(enabled: true))]
+	let setting = SettingModel(type: .subtile(label: "lbl", subLabel: nil, selected: false))
 	
     override func setUp() {
         super.setUp()
@@ -39,9 +39,6 @@ class SettingsStoryInteractorTests: XCTestCase {
     }
 	
 	func testNotifiesPresenterAboutSettings() {
-		// given
-		mockSettingsStorage.fullHDVideoQualityEnabled = true
-		
 		// when
 		interactor.requestSettings()
 		
@@ -51,7 +48,7 @@ class SettingsStoryInteractorTests: XCTestCase {
 	
 	func testNotifiesPresenterAboutChangedSettings() {
 		// when
-		interactor.handleSettingModelSelected(settings[0])
+		interactor.handleSettingModelSelected(setting)
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveSettingsGotCalled)
@@ -60,7 +57,7 @@ class SettingsStoryInteractorTests: XCTestCase {
     class MockPresenter: SettingsStoryInteractorOutput {
 		var didReceiveSettingsGotCalled = false
 		
-		func didReceiveSettings(settings: [SettingModel]) {
+		func didReceiveSettings(settings: [SettingsSection]) {
 			didReceiveSettingsGotCalled = true
 		}
     }
