@@ -9,7 +9,7 @@
 import Foundation
 
 enum SettingViewType {
-	case subtile(label: String, subLabel: String?, selected: Bool)
+	case subtitle(label: String, subLabel: String?, selected: Bool)
 }
 
 @objc class SettingModel: NSObject {

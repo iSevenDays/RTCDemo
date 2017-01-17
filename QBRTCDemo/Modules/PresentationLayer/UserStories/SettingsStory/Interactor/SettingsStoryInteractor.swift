@@ -12,15 +12,25 @@ class SettingsStoryInteractor {
 	weak var settingsStorage: SettingsStorage!
 	
 	func settings() -> [SettingsSection] {
+		var videoSettings: [SettingModel] = []
 		
-		let videoSettingLow = SettingModel(type: .subtile(label: VideoQualitySetting.low.rawValue, subLabel: "Use when you have slow internet connection", selected: false))
-		let videoSettingMedium = SettingModel(type: .subtile(label: VideoQualitySetting.medium.rawValue, subLabel: "Use when you have 3G internet connection", selected: false))
-		let videoSettingHigh = SettingModel(type: .subtile(label: VideoQualitySetting.high.rawValue, subLabel: "Use when you have fast 3G or Wi-Fi internet connection", selected: false))
+		let selectedVideoSetting = settingsStorage.videoSetting
 		
-		let videoSettings = SettingsSection(name: "Video Quality", settings: [videoSettingLow, videoSettingMedium, videoSettingHigh])
-		return [videoSettings]
+		for videoSettingType in VideoQualitySetting.allValues {
+			var subLabel = ""
+			switch videoSettingType {
+			case .low: subLabel = "Best for slow internet connection"
+			case .medium: subLabel = "Best for 3G internet connection"
+			case .high: subLabel = "Best for fast 3G or Wi-Fi internet connection"
+			default: NSLog("%@", "Error undefined video type")
+			}
+			let setting = SettingModel(type: .subtitle(label: videoSettingType.rawValue, subLabel: subLabel, selected: videoSettingType == selectedVideoSetting))
+			videoSettings.append(setting)
+		}
+		
+		let videoSettingsSection = SettingsSection(name: "Video Quality", settings: videoSettings)
+		return [videoSettingsSection]
 	}
-	
 }
 
 extension SettingsStoryInteractor: SettingsStoryInteractorInput {
@@ -31,14 +41,14 @@ extension SettingsStoryInteractor: SettingsStoryInteractorInput {
 	// TODO: implement UUID for SettingItem and SettingsStorage setting
 	// to connect between model and SettingsStorage
 	func handleSettingModelSelected(settingModel: SettingModel) {
-//		let allSettings = settings()
-//		if let settingIndex = allSettings.values.indexOf(settingModel) {
-//			let setting = allSettings[settingIndex]
-//			switch setting.type {
-//			case let .subtile(label: label, subLabel: subLabel, selected: selected):
-//				settingsStorage.fullHDVideoQualityEnabled = false
-//			}
-//		}
+		switch settingModel.type {
+		case let .subtitle(label: label, subLabel: _, selected: _):
+			guard let videoSetting = VideoQualitySetting(rawValue: label) else {
+				NSLog("%@", "Error unknown video setting type")
+				return
+			}
+			settingsStorage.videoSetting = videoSetting
+		}
 		
 		output?.didReceiveSettings(settings())
 	}

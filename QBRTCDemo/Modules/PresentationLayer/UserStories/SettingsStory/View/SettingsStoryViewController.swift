@@ -12,7 +12,7 @@ class SettingsStoryViewController: UITableViewController {
 
     @objc var output: SettingsStoryViewOutput?
 	
-	var settings: [SettingsSection] = []
+	var settingsSections: [SettingsSection] = []
 	
 	let switcherCellIdentifier = "SwitcherTableViewCellIdentifier"
 	
@@ -31,18 +31,26 @@ extension SettingsStoryViewController: SettingsStoryViewInput {
 	}
 	
 	func reloadSettings(settings: [SettingsSection]) {
-		self.settings = settings
+		self.settingsSections = settings
 		tableView.reloadData()
+	}
+	
+	func settingAtIndexPath(indexPath: NSIndexPath) -> SettingModel {
+		let settingsSection = settingsSections[indexPath.section]
+		let setting = settingsSection.settings[indexPath.row]
+		return setting
 	}
 }
 
 // MARK: - UITableViewDelegate
 extension SettingsStoryViewController {
 	
-	func settingAtIndexPath(indexPath: NSIndexPath) -> SettingModel {
-		let settingsSection = settings[indexPath.section]
-		let setting = settingsSection.settings[indexPath.row]
-		return setting
+	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		return settingsSections.count
+	}
+	
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return settingsSections[section].settings.count
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -56,19 +64,24 @@ extension SettingsStoryViewController {
 		let setting = settingAtIndexPath(indexPath)
 		
 		switch setting.type {
-		case let .subtile(label: label, subLabel: subLabel, selected: selected):
+		case let .subtitle(label: label, subLabel: subLabel, selected: selected):
 			
 			let cell: UITableViewCell = {
-				guard let cell = tableView.dequeueReusableCellWithIdentifier("subtileCell") else {
+				let reuseIdentifier = "subtitleCell"
+				guard let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) else {
 					// Never fails:
-					return UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "subtileCell")
+					return UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
 				}
 				return cell
 			}()
 			
 			cell.textLabel?.text = label
 			cell.detailTextLabel?.text = subLabel
-			cell.selected = selected
+			if selected {
+				cell.accessoryType = .Checkmark
+			} else {
+				cell.accessoryType = .None
+			}
 			return cell
 		}
 	}

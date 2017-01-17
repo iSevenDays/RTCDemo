@@ -29,7 +29,7 @@ class ChatUsersStoryViewController: UIViewController {
         output.viewIsReady()
     }
 	
-	@IBAction func openSettings(sender: UIButton) {
+	@IBAction func openSettings(sender: AnyObject) {
 		output.didTriggerSettingsButtonTapped()
 	}
 }

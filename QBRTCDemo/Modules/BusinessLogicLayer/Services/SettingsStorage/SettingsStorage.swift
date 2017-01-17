@@ -13,13 +13,17 @@ enum VideoQualitySetting: String {
 	case low = "Low"
 	case medium = "Medium"
 	case high = "High"
+	
+	static var allValues: [VideoQualitySetting] {
+		return [.low, .medium, .high]
+	}
 }
 
 class SettingsStorage {
 	
 	var cacheService: CacheServiceProtocol!
 	
-	var videoSeting: VideoQualitySetting {
+	var videoSetting: VideoQualitySetting {
 		get {
 			if let str = cacheService.stringForKey(VideoQualitySetting.identifier.rawValue), let savedSetting = VideoQualitySetting(rawValue: str) {
 				return savedSetting
@@ -27,8 +31,7 @@ class SettingsStorage {
 			return .medium
 		}
 		set {
-			cacheService.setObject(videoSeting.rawValue, forKey: VideoQualitySetting.identifier.rawValue)
+			cacheService.setObject(newValue.rawValue, forKey: VideoQualitySetting.identifier.rawValue)
 		}
 	}
-	
 }
