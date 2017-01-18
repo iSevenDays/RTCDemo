@@ -23,7 +23,7 @@ class SettingsStoryPresenterTest: XCTestCase {
 	var mockRouter: MockRouter!
 	var mockView: MockViewController!
 	
-	let settingSection = SettingsSection(name: "name", settings: [SettingModel(type: .subtile(label: "lbl", subLabel: nil, selected: false))])
+	let settingSection = SettingsSection(name: "name", settings: [SettingModel(type: .subtitle(label: "lbl", subLabel: nil, selected: false))])
 	
     override func setUp() {
         super.setUp()

@@ -24,7 +24,7 @@ class SettingsStoryInteractorTests: XCTestCase {
 	var mockSettingsStorage: MockSettingsStorage!
 	var callService: FakeCallSevice!
 	
-	let setting = SettingModel(type: .subtile(label: "lbl", subLabel: nil, selected: false))
+	let setting = SettingModel(type: .subtitle(label: "lbl", subLabel: nil, selected: false))
 	
     override func setUp() {
         super.setUp()

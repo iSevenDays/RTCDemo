@@ -8,6 +8,10 @@ Targets information:
 2. BuildPeerConnection target used for building WebRTC core stack, first launch takes ~3 hours to download 12-16 Gb of data
 3. RTCDemo used to run a sample with full webrtc debug mode, BuildPeerConnection must be finished before executing this target
 
+# BuildPeerConnection target
+
+Includes arguments where current WebRTC revision is specified.
+
 # VIPER Information and implementation
 
 I applied and modified this pattern from Rambler Digital Solutions
