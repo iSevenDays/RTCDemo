@@ -165,6 +165,9 @@
 		1454D9D41E2D7ECF00E1FA21 /* SettingsStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1454D9D01E2D7EBC00E1FA21 /* SettingsStory.storyboard */; };
 		1454D9D61E2E902E00E1FA21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9D51E2E902E00E1FA21 /* Settings.swift */; };
 		1454D9D71E2E902E00E1FA21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454D9D51E2E902E00E1FA21 /* Settings.swift */; };
+		146A776C1E30C602004834F6 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146A776B1E30C602004834F6 /* WebRTC.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		146A776D1E31324F004834F6 /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146A776B1E30C602004834F6 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		146A776E1E315326004834F6 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146A776B1E30C602004834F6 /* WebRTC.framework */; };
 		146CA9F01C62643400F768C8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609741BF944C50091071C /* libstdc++.tbd */; };
 		146CA9F11C62643C00F768C8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609761BF944D60091071C /* CoreVideo.framework */; };
 		146CA9F31C62644000F768C8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
@@ -188,10 +191,6 @@
 		1473EAD31CAC6090007F9DF8 /* AuthStoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036D04FD706443E892936BF0 /* AuthStoryRouter.swift */; };
 		1473EAD41CAC6090007F9DF8 /* AuthStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E979D19A33587E93B35ADA1 /* AuthStoryConfigurator.swift */; };
 		1473EAD51CAC6090007F9DF8 /* AuthStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D414AAB6999D9EFCFEBBB300 /* AuthStoryInitializer.swift */; };
-		1473EADA1CAC69DB007F9DF8 /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
-		1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
-		1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
-		1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
 		14740A761E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */; };
 		14740A771E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */; };
 		14740A791E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A781E031A0E00557FB3 /* QBPushNotificationsService.swift */; };
@@ -396,10 +395,6 @@
 		14EE3D0D1C6BC03700C451CF /* pull.sh in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D041C6BC03700C451CF /* pull.sh */; };
 		14EE3D0F1C6BC03700C451CF /* blox_target.py in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D051C6BC03700C451CF /* blox_target.py */; };
 		14EE3D111C6BC03700C451CF /* build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 14EE3D061C6BC03700C451CF /* build.sh */; };
-		14EE3D131C6BC5BE00C451CF /* webrtc-arm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466D1C4FFC7F00C1797D /* webrtc-arm.a */; };
-		14EE3D141C6BC5BE00C451CF /* webrtc-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466E1C4FFC7F00C1797D /* webrtc-arm64.a */; };
-		14EE3D151C6BC5BE00C451CF /* webrtc-ia32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC466F1C4FFC7F00C1797D /* webrtc-ia32.a */; };
-		14EE3D161C6BC5BE00C451CF /* webrtc-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FC46701C4FFC7F00C1797D /* webrtc-x86_64.a */; };
 		14FB2CB61C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */; };
 		14FB2CB71C7284DB00970ED8 /* ImageGalleryStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FB2CB51C7284DB00970ED8 /* ImageGalleryStory.storyboard */; };
 		1F4FE651BEB38EBDCE8B76A8 /* ImageGalleryStoryModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4169946633B7AC4E5A7ED13 /* ImageGalleryStoryModuleInput.swift */; };
@@ -525,6 +520,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				146A776D1E31324F004834F6 /* WebRTC.framework in Embed Frameworks */,
 				1445F1921E0328040040F8ED /* Quickblox.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -695,6 +691,7 @@
 		1454D9CB1E2D7E8300E1FA21 /* SettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		1454D9D01E2D7EBC00E1FA21 /* SettingsStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsStory.storyboard; sourceTree = "<group>"; };
 		1454D9D51E2E902E00E1FA21 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		146A776B1E30C602004834F6 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Scripts/webrtc/lib/WebRTC.framework; sourceTree = "<group>"; };
 		146CA9F21C62644000F768C8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		14736EE61C567EC5009DFBBC /* CallService_old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService_old.m; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
@@ -995,10 +992,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1473EADA1CAC69DB007F9DF8 /* webrtc-arm.a in Frameworks */,
-				1473EADB1CAC69DB007F9DF8 /* webrtc-arm64.a in Frameworks */,
-				1473EADC1CAC69DB007F9DF8 /* webrtc-ia32.a in Frameworks */,
-				1473EADD1CAC69DB007F9DF8 /* webrtc-x86_64.a in Frameworks */,
+				146A776E1E315326004834F6 /* WebRTC.framework in Frameworks */,
 				1428E36E1C6D213C0087B790 /* libicucore.tbd in Frameworks */,
 				146CA9F51C62645400F768C8 /* GLKit.framework in Frameworks */,
 				146CA9F41C62644C00F768C8 /* VideoToolbox.framework in Frameworks */,
@@ -1033,6 +1027,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				146A776C1E30C602004834F6 /* WebRTC.framework in Frameworks */,
 				1418BAEC1C761B0A0085C7E3 /* Photos.framework in Frameworks */,
 				148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */,
 				148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */,
@@ -1040,11 +1035,7 @@
 				148233AF1C002DFE0000E9ED /* libxml2.tbd in Frameworks */,
 				148233B01C002DFE0000E9ED /* GLKit.framework in Frameworks */,
 				148233B11C002DFE0000E9ED /* OpenGLES.framework in Frameworks */,
-				14EE3D131C6BC5BE00C451CF /* webrtc-arm.a in Frameworks */,
 				1445F1911E0328040040F8ED /* Quickblox.framework in Frameworks */,
-				14EE3D141C6BC5BE00C451CF /* webrtc-arm64.a in Frameworks */,
-				14EE3D151C6BC5BE00C451CF /* webrtc-ia32.a in Frameworks */,
-				14EE3D161C6BC5BE00C451CF /* webrtc-x86_64.a in Frameworks */,
 				148233B21C002DFE0000E9ED /* libicucore.tbd in Frameworks */,
 				148233B31C002DFE0000E9ED /* VideoToolbox.framework in Frameworks */,
 				148233B41C002DFE0000E9ED /* CoreVideo.framework in Frameworks */,
@@ -1291,6 +1282,7 @@
 		143609801BF9C7850091071C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				146A776B1E30C602004834F6 /* WebRTC.framework */,
 				141B75D71C93090E0095B818 /* libPods-QBRTCDemoTests.a */,
 				14DE29681C92FDA900D5842E /* libvpx.a */,
 				14F6B4481C80690F008D2844 /* libwebrtc_objc_target.dylib */,
@@ -3375,6 +3367,7 @@
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Scripts/webrtc/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -3420,6 +3413,7 @@
 					"$(SRCROOT)/QBRTCDemo/ThirdParty",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Scripts/webrtc/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -3683,6 +3677,7 @@
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
 					"$(inherited)",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(PROJECT_DIR)/Scripts/webrtc/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -3695,7 +3690,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
-					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
 					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/\"",
 					"\"$(SRCROOT)/QBRTCDemo/Modules/Models/\"",
@@ -3740,6 +3734,7 @@
 					"$(SRCROOT)/QBRTCDemo/ThirdParty/**",
 					"$(inherited)",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty",
+					"$(PROJECT_DIR)/Scripts/webrtc/lib",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/QBRTCDemo/QBRTCDemo-prefix.pch";
@@ -3752,7 +3747,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/QBRTCDemo/AppRTCDemo/common\"",
 					"\"$(SRCROOT)/QBRTCDemo/Signaling\"",
-					"\"$(SRCROOT)/Scripts/webrtc/headers\"/**",
 					"$(PROJECT_DIR)/QBRTCDemo/ThirdParty/**",
 					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/\"",
 					"\"$(SRCROOT)/QBRTCDemo/Modules/Models/\"",

@@ -13,6 +13,6 @@ enum SignalingMessage {
 	case answer(sdp: RTCSessionDescription)
 	case hangup
 	case reject
-	case candidates(candidates: [RTCICECandidate])
+	case candidates(candidates: [RTCIceCandidate])
 	case user(enteredChatRoomName: String)
 }

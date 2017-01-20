@@ -110,6 +110,7 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
 		XCTAssertTrue(mockOutput.didStopDialingOpponentGotCalled)
 		XCTAssertTrue(mockOutput.didSendHangupToOpponentGotCalled)
+		XCTAssertFalse(mockOutput.didErrorGotCalled)
 		XCTAssertEqual(callService.dialingTimers.count, 0)
 		XCTAssertFalse(callService.connections.values.flatten().contains({$0.state == PeerConnectionState.Initial}))
 	}
@@ -132,7 +133,7 @@ class CallServiceTests: BaseTestCase {
  
 	func testSendsRejectIfAlreadyHasActiveCall() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 		
 		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
 		
@@ -151,7 +152,7 @@ class CallServiceTests: BaseTestCase {
 	*/
 	func testDoesntSendRejectIfAlreadyHasActiveCallWithTheSameUserAndSessionID() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 		
 		let sessionDetails = SessionDetails(initiatorID: user2.ID!.unsignedIntegerValue, membersIDs: [user2.ID!.unsignedIntegerValue])
 		
@@ -171,7 +172,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testCorrectlyAcceptsOfferFromOpponent() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 	
 		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
 		
@@ -228,7 +229,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testRejectsIncomingCallOfferForTheAlreadyRejectedCall_andTheSameSession() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 		
 		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
 		sessionDetails.sessionState = .Rejected
@@ -248,7 +249,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testCorrectlyProcessesAnswerMessage_whenAnswerIsReceivedForActiveCall() {
 		// given
-		let unusedSessionSDP = RTCSessionDescription(type: SignalingMessageType.answer.rawValue, sdp: CallServiceHelpers.offerSDP)
+		let unusedSessionSDP = RTCSessionDescription(type: .Answer, sdp: CallServiceHelpers.answerSDP)
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -262,7 +263,7 @@ class CallServiceTests: BaseTestCase {
 			return
 		}
 		
-		waitForTimeInterval(3)
+		waitForTimeInterval(50)
 		
 		callService.didReceiveAnswer(callService.signalingProcessor, answer: unusedSessionSDP, fromOpponent: user2, sessionDetails: callService.sessions[createdConnectionWithUser2.sessionID]!)
 		
@@ -285,7 +286,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testStoresRejectedSession() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 		
 		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [user1.ID!.unsignedIntegerValue, user2.ID!.unsignedIntegerValue])
 		
@@ -306,7 +307,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testsStartsDialingOpponentWithLocalSessionDescription() {
 		// given
-		let localSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: CallServiceHelpers.offerSDP)
+		let localSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -331,7 +332,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testsSendsLocalICECandidates() {
 		// given
-		let localICECandidateAudio = RTCICECandidate(mid: "audio", index: 0, sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG")
+		let localICECandidateAudio = RTCIceCandidate(sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG", sdpMLineIndex: 0, sdpMid: "audio")
 		
 		let sessionDetails = SessionDetails(initiatorID: 1, membersIDs: [1])
 		callService.sessions[sessionDetails.sessionID] = sessionDetails
@@ -392,7 +393,7 @@ class CallServiceTests: BaseTestCase {
 		func callService(callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser) {
 			didAnswerTimeoutForOpponentGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCICEConnectionState) {
+		func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState) {
 			didChangeConnectionStateGotCalled = true
 		}
 		func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
@@ -425,10 +426,10 @@ class CallServiceTests: BaseTestCase {
 		}
 		
 		// Sending local ICE candidates
-		func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser) {
+		func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser) {
 			didSendLocalICECandidatesGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCICECandidate], toOpponent opponent: SVUser, error: NSError) {
+		func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser, error: NSError) {
 			didErrorSendingLocalICECandidatesGotCalled = true
 		}
 		

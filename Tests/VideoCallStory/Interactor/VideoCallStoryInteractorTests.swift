@@ -161,7 +161,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		waitForTimeInterval(50)
 		
 		// then
-		XCTAssertNotNil(interactor.localVideoTrack)
+		XCTAssertTrue(interactor.localVideoTrack != nil)
 	}
 	
 	func testReceivesRemoteVideoTrack_whenConnectedAndStartedCall() {

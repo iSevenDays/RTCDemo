@@ -73,11 +73,11 @@ class SignalingMessagesFactory {
 		switch message {
 		case let .answer(sdp: sessionDescription):
 			params[SignalingParams.type.rawValue] = SignalingMessageType.answer.rawValue
-			params[SignalingParams.sdp.rawValue] = sessionDescription.description
+			params[SignalingParams.sdp.rawValue] = sessionDescription.sdp
 			break
 		case let .offer(sdp: sessionDescription):
 			params[SignalingParams.type.rawValue] = SignalingMessageType.offer.rawValue
-			params[SignalingParams.sdp.rawValue] = sessionDescription.description
+			params[SignalingParams.sdp.rawValue] = sessionDescription.sdp
 			break
 		case let .candidates(candidates: candidates):
 			params[SignalingParams.type.rawValue] = SignalingMessageType.candidates.rawValue
@@ -85,7 +85,7 @@ class SignalingMessagesFactory {
 			for candidate in candidates {
 				candidatesDict.append([
 					SignalingParams.index.rawValue: String(candidate.sdpMLineIndex),
-					SignalingParams.mid.rawValue: candidate.sdpMid,
+					SignalingParams.mid.rawValue: candidate.sdpMid!,
 					SignalingParams.sdp.rawValue: candidate.sdp])
 				
 			}
@@ -175,17 +175,19 @@ class SignalingMessagesFactory {
 			guard let sourceSDP = params[SignalingParams.sdp.rawValue]?.stringByReplacingOccurrencesOfString("&#13;", withString: "\r") else {
 				throw SignalingMessagesFactoryError.missingSDP
 			}
-			let sdp = RTCSessionDescription(type: signalingMessageType.rawValue, sdp: sourceSDP)
+			
 			if signalingMessageType == .offer {
+				let sdp = RTCSessionDescription(type: .Offer, sdp: sourceSDP)
 				return (message: SignalingMessage.offer(sdp: sdp), sender: sender, sessionDetails: sessionDetails)
 			} else if signalingMessageType == .answer {
+				let sdp = RTCSessionDescription(type: .Answer, sdp: sourceSDP)
 				return (message: SignalingMessage.answer(sdp: sdp), sender: sender, sessionDetails: sessionDetails)
 			}
 		case .candidates:
 			guard let candidates = params[SignalingParams.candidates.rawValue] as? [[String: String]] else {
 				throw SignalingMessagesFactoryError.undefinedSignalingMessageType
 			}
-			var iceCandidates: [RTCICECandidate] = []
+			var iceCandidates: [RTCIceCandidate] = []
 			for candidate in candidates {
 				guard let mid = candidate[SignalingParams.mid.rawValue] else {
 					continue
@@ -193,14 +195,13 @@ class SignalingMessagesFactory {
 				guard let indexStr = candidate[SignalingParams.index.rawValue] else {
 					continue
 				}
-				guard let index = Int(indexStr) else {
+				guard let index = Int32(indexStr) else {
 					continue
 				}
 				guard let candidateSDP = candidate[SignalingParams.sdp.rawValue]?.stringByReplacingOccurrencesOfString("&#13;", withString: "\r") else {
 					continue
 				}
-				
-				let iceCandidate = RTCICECandidate(mid: mid, index: index, sdp: candidateSDP)
+				let iceCandidate = RTCIceCandidate(sdp: candidateSDP, sdpMLineIndex: index, sdpMid: mid)
 				iceCandidates += iceCandidate
 			}
 			return (message: SignalingMessage.candidates(candidates: iceCandidates), sender: sender, sessionDetails: sessionDetails)

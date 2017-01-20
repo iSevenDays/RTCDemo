@@ -42,7 +42,7 @@ class PeerConnectionTests: BaseTestCase {
 	
 	func testDoesntCreateAnswerSDPWhenPeerConnectionIsClosed() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: "offer", sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 		
 		// when
 		peerConnection.acceptCall()
@@ -83,7 +83,7 @@ class PeerConnectionTests: BaseTestCase {
 		func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError) {
 			didCreateSessionWithErrorGotCalled = true
 		}
-		func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCICECandidate) {
+		func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCIceCandidate) {
 			didSetLocalICECandidatesGotCalled = true
 		}
 		

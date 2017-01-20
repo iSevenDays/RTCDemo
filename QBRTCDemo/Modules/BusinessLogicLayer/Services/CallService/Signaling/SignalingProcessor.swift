@@ -10,7 +10,7 @@ import Foundation
 
 /// NOTE: Initiator User may not be equal to fromOpponent
 protocol SignalingProcessorObserver: class {
-	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCICECandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
+	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCIceCandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
 	func didReceiveOffer(signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
 	func didReceiveAnswer(signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
 	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)

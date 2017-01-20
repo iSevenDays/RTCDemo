@@ -34,27 +34,27 @@ class VideoCallStoryInteractor: NSObject {
 	// MARK: - Enable/disable local video track
 	
 	internal func isLocalAudioTrackEnabled() -> Bool {
-		return localAudioTrack?.isEnabled() ?? false
+		return localAudioTrack?.isEnabled ?? false
 	}
 	
 	internal func isLocalVideoTrackEnabled() -> Bool {
-		return localVideoTrack?.isEnabled() ?? false
+		return localVideoTrack?.isEnabled ?? false
 	}
 	
 	internal func enableLocalVideoTrack() {
-		localVideoTrack?.setEnabled(true)
+		localVideoTrack?.isEnabled = true
 	}
 	
 	internal func disableLocalVideoTrack() {
-		localVideoTrack?.setEnabled(false)
+		localVideoTrack?.isEnabled = false
 	}
 	
 	internal func enableLocalAudioTrack() {
-		localAudioTrack?.setEnabled(true)
+		localAudioTrack?.isEnabled = true
 	}
 	
 	internal func disableLocalAudioTrack() {
-		localAudioTrack?.setEnabled(false)
+		localAudioTrack?.isEnabled = false
 	}
 }
 
@@ -316,14 +316,14 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 			guard let strongSelf = self else { return }
 			guard strongSelf.remoteVideoTrack != remoteVideoTrack else { return }
 			
-			strongSelf.remoteVideoTrack?.removeRenderer(nil)
+			//strongSelf.remoteVideoTrack?.removeRenderer(nil)
 			strongSelf.remoteVideoTrack = nil
 			
 			//TODO: FIX and uncomment: renderer?.renderFrame(nil)
 			
 			strongSelf.remoteVideoTrack = remoteVideoTrack
 			
-			strongSelf.remoteVideoTrack?.addRenderer(renderer)
+			strongSelf.remoteVideoTrack?.addRenderer(renderer!)
 		}
 	}
 	
@@ -335,7 +335,7 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		output?.didReceiveAnswerTimeoutForOpponent(opponent)
 	}
 	
-	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCICEConnectionState) {
+	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState) {
 		
 	}
 	

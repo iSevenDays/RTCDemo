@@ -7,17 +7,12 @@
 //
 
 #import "WebRTCHelpers.h"
-#import <RTCMediaConstraints.h>
-#import <RTCPair.h>
-#import <RTCICEServer.h>
-#import <RTCPeerConnectionInterface.h>
-#import <RTCSessionDescription.h>
-#import <RTCLogging.h>
+#import <WebRTC/WebRTC.h>
 
 @implementation WebRTCHelpers
 
 + (RTCSessionDescription *)descriptionForDescription:(RTCSessionDescription *)description preferredVideoCodec:(NSString *)codec {
-	NSString *sdpString = description.description;
+	NSString *sdpString = description.sdp;
 	NSString *lineSeparator = @"\n";
 	NSString *mLineSeparator = @" ";
 	// Copied from PeerConnectionClient.java.
@@ -90,18 +85,37 @@
 
 + (RTCMediaConstraints *)defaultMediaStreamConstraints {
 	
-	RTCPair *dtls = [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:true ? @"true" : @"false"];
+	NSDictionary<NSString *, NSString *> *optionalConstraints = @{@"DtlsSrtpKeyAgreement": true ? @"true" : @"false"};
 	
-	NSArray *optionalConstraints = @[dtls];
+//	RTCPair *minWidth;
+//	RTCPair *minHeight;
+//	RTCPair *maxWidth;
+//	RTCPair *maxHeight;
+//	BOOL low = YES;
+//	if (low) {
+//		
+//		// 352x288
+//		minWidth = [[RTCPair alloc] initWithKey:@"minWidth" value:@"320"];
+//		minHeight = [[RTCPair alloc] initWithKey:@"minHeight" value:@"180"];
+//		
+//		maxWidth = [[RTCPair alloc] initWithKey:@"maxWidth" value:@"320"];
+//		maxHeight = [[RTCPair alloc] initWithKey:@"maxHeight" value:@"240"];
+//	} else {
+//		minWidth = [[RTCPair alloc] initWithKey:@"minWidth" value:@"1280"];
+//		minHeight = [[RTCPair alloc] initWithKey:@"minHeight" value:@"720"];
+//		
+//		maxWidth = [[RTCPair alloc] initWithKey:@"maxWidth" value:@"1920"];
+//		maxHeight = [[RTCPair alloc] initWithKey:@"maxHeight" value:@"1080"];
+//	}
 	RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:nil optionalConstraints:optionalConstraints];
 	return constraints;
 }
 
 + (RTCMediaConstraints *)defaultOfferConstraints {
-	NSArray *mandatoryConstraints = @[
-									  [[RTCPair alloc] initWithKey:@"OfferToReceiveAudio" value:@"true"],
-									  [[RTCPair alloc] initWithKey:@"OfferToReceiveVideo" value:@"true"]
-									  ];
+	NSDictionary<NSString *, NSString*> *mandatoryConstraints = @{
+									  @"OfferToReceiveAudio":@"true",
+									  @"OfferToReceiveVideo":@"true"
+									  };
 	RTCMediaConstraints* constraints =
 	[[RTCMediaConstraints alloc]
 	 initWithMandatoryConstraints:mandatoryConstraints
@@ -115,10 +129,10 @@
 
 + (RTCMediaConstraints *)defaultPeerConnectionConstraints {
 	NSString *value = true ? @"true" : @"false";
-	NSArray *mandatory = @[
-									 [[RTCPair alloc] initWithKey:@"DtlsSrtpKeyAgreement" value:value],
-									 [[RTCPair alloc] initWithKey:@"internalSctpDataChannels" value:@"true"],
-									 ];
+	NSDictionary<NSString *, NSString *> *mandatory = @{
+									 @"DtlsSrtpKeyAgreement": value,
+									 @"internalSctpDataChannels": @"true",
+									 };
 	RTCMediaConstraints* constraints =
 	[[RTCMediaConstraints alloc]
 	 initWithMandatoryConstraints:mandatory
@@ -133,7 +147,11 @@
 }
 
 + (NSArray *)defaultIceServers {
-	return @[[[RTCICEServer alloc] initWithURI:[NSURL URLWithString:@"stun:stun.l.google.com:19302"] username:@"" password:@""]];
+	return @[[[RTCIceServer alloc] initWithURLStrings:@[@"stun:stun.l.google.com:19302"] username:@"" credential:@""]];
+}
+
++ (NSArray<NSString *> *)videoResolutions {
+	return @[ @"640x480", @"960x540", @"1280x720" ];
 }
 
 @end

@@ -30,3 +30,4 @@ Scripts/webrtc/src
 
 # OS X
 .DS_Store
+Scripts/webrtc/headers

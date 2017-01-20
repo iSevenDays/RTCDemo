@@ -15,7 +15,7 @@ class CallServicePendingRequest {
 	private(set) var sessionDetails: SessionDetails
 	
 	init(initiator: SVUser, pendingSessionDescription: RTCSessionDescription, sessionDetails: SessionDetails) {
-		assert(pendingSessionDescription.type == SignalingMessageType.offer.rawValue)
+		assert(pendingSessionDescription.type == .Offer)
 		
 		self.initiator = initiator
 		self.pendingSessionDescription = pendingSessionDescription

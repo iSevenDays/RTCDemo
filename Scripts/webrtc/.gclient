@@ -5,7 +5,6 @@ solutions = [
     "managed"     : False,
     "custom_deps" : {
     },
-    "safesync_url": "",
   },
 ]
 cache_dir = None

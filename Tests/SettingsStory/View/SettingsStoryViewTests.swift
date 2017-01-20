@@ -42,7 +42,7 @@ class SettingsStoryViewTests: XCTestCase {
 	
 	func testFullHDVideoQualityButtonTriggersAction() {
 		// given
-		controller.settings = [settingSection]
+		controller.settingsSections = [settingSection]
 		
 		// when
 		controller.tableView.reloadData()

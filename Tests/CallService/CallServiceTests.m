@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 
 
-#import <RTCICECandidate.h>
+#import <RTCIceCandidate.h>
 #import <RTCSessionDescription.h>
 #import <RTCPeerConnection.h>
 
@@ -127,9 +127,9 @@
 	// given
 	[[self.mockCallService reject] peerConnection:[OCMArg any] didSetSessionDescriptionWithError:[OCMArg isNotNil]];
 	
-	RTCICECandidate *rtcIceCandidateAudio = [[RTCICECandidate alloc] initWithMid:@"audio" index:0 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
+	RTCIceCandidate *rtcIceCandidateAudio = [[RTCIceCandidate alloc] initWithMid:@"audio" index:0 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
 	
-	RTCICECandidate *rtcIceCandidateVideo = [[RTCICECandidate alloc] initWithMid:@"video" index:1 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
+	RTCIceCandidate *rtcIceCandidateVideo = [[RTCIceCandidate alloc] initWithMid:@"video" index:1 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
 	
 	SVSignalingMessage *iceAudio = [[SVSignalingMessageICE alloc] initWithICECandidate:rtcIceCandidateAudio];
 	SVSignalingMessage *iceVideo = [[SVSignalingMessageICE alloc] initWithICECandidate:rtcIceCandidateVideo];
@@ -160,9 +160,9 @@
 	
 	offerSDP.sender = self.user2;
 	
-	RTCICECandidate *rtcIceCandidateAudio = [[RTCICECandidate alloc] initWithMid:@"audio" index:0 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
+	RTCIceCandidate *rtcIceCandidateAudio = [[RTCIceCandidate alloc] initWithMid:@"audio" index:0 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
 	
-	RTCICECandidate *rtcIceCandidateVideo = [[RTCICECandidate alloc] initWithMid:@"video" index:1 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
+	RTCIceCandidate *rtcIceCandidateVideo = [[RTCIceCandidate alloc] initWithMid:@"video" index:1 sdp:@"candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG"];
 	
 	SVSignalingMessage *iceAudio = [[SVSignalingMessageICE alloc] initWithICECandidate:rtcIceCandidateAudio];
 	SVSignalingMessage *iceVideo = [[SVSignalingMessageICE alloc] initWithICECandidate:rtcIceCandidateVideo];

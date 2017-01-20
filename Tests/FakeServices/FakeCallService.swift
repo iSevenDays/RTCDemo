@@ -34,12 +34,8 @@ public class FakeCallSevice: CallService {
 	override func startCallWithOpponent(user: SVUser) throws {
 		let factory = RTCPeerConnectionFactory()
 		
-		let videoSourceClass: AnyClass = RTCVideoSource.self
-		let videoSourceInitializable = videoSourceClass as! NSObject.Type
-		let videoSource = videoSourceInitializable.init() as! RTCVideoSource
-		
-		let emptyVideoTrack = RTCVideoTrack(factory: factory, source: videoSource, trackId: "trackID")
-		
+		let videoSource = factory.avFoundationVideoSourceWithConstraints(nil)
+		let emptyVideoTrack = factory.videoTrackWithSource(videoSource, trackId: "trackID")
 		
 		observers => { $0.callService(self, didReceiveLocalVideoTrack: emptyVideoTrack) }
 		

@@ -79,7 +79,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "webrtc_revision"
-            value = "43166b8adf749c6672eca0cd4a39399cf27d4761"
+            value = "a3c8c90f1a2aeb68fecd4f373fd418312e055bd2"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

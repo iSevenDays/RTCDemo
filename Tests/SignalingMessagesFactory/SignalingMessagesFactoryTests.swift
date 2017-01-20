@@ -105,9 +105,9 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	
 	func testConvertsSignalingICEMessageToQBMessageAndBack() {
 		// given
-		let rtcIceCandidateAudio = RTCICECandidate(mid: "audio", index: 0, sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG")
+		let rtcIceCandidateAudio = RTCIceCandidate(sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 58130 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG", sdpMLineIndex: 0, sdpMid: "audio")
 		
-		let rtcIceCandidateVideo = RTCICECandidate(mid: "video", index: 1, sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG")
+		let rtcIceCandidateVideo = RTCIceCandidate(sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG", sdpMLineIndex: 1, sdpMid: "video")
 		
 		let signalingMessage = SignalingMessage.candidates(candidates: [rtcIceCandidateAudio, rtcIceCandidateVideo])
 		let sessionID = NSUUID().UUIDString
@@ -164,7 +164,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	
 	func testConvertsSignalingOfferMessageToQBMessageAndBack() {
 		// given
-		let sessionDescription = RTCSessionDescription(type: "offer", sdp: CallServiceHelpers.offerSDP)
+		let sessionDescription = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
 		let signalingMessage = SignalingMessage.offer(sdp: sessionDescription)
 		let sessionID = NSUUID().UUIDString
 		let sessionDetails = SessionDetails(initiatorID: sender.ID!.unsignedIntegerValue, membersIDs: [sender.ID!.unsignedIntegerValue, testUser.ID!.unsignedIntegerValue], sessionID: sessionID)
@@ -189,7 +189,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
 			case let .offer(sdp: offerSDP):
-				XCTAssertEqual(sessionDescription.description, offerSDP.description)
+				XCTAssertEqual(sessionDescription.sdp, offerSDP.sdp)
 			case .reject: XCTFail()
 			case .candidates(candidates: _): XCTFail()
 			case .hangup: XCTFail()

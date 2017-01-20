@@ -51,7 +51,7 @@ public class CallService: NSObject {
 	var defaultMediaStreamConstraints: RTCMediaConstraints!
 	var defaultConfigurationWithCurrentICEServers: RTCConfiguration!
 	var signalingChannel: SignalingChannelProtocol!
-	var ICEServers: [RTCICEServer]!
+	var ICEServers: [RTCIceServer]!
 	
 	internal var dialingTimers: [SVUser: SVTimer] = [:]
 	
@@ -257,7 +257,7 @@ extension CallService: CallServiceProtocol {
 
 // MARK: - SignalingProcessorObserver
 extension CallService: SignalingProcessorObserver {
-	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCICECandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
+	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCIceCandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyICECandidates(ICECandidates)
 	}
 	
@@ -330,7 +330,7 @@ extension CallService: PeerConnectionObserver {
 	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionOfferDescription: RTCSessionDescription) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let opponent = peerConnection.opponent
-		let offerSDP = RTCSessionDescription(type: SignalingMessageType.offer.rawValue, sdp: localSessionOfferDescription.description)
+		let offerSDP = RTCSessionDescription(type: .Offer, sdp: localSessionOfferDescription.sdp)
 		let offerMessage = SignalingMessage.offer(sdp: offerSDP)
 		startDialingOpponent(opponent, withMessage: offerMessage, sessionDetails: sessionDetails)
 	}
@@ -338,7 +338,7 @@ extension CallService: PeerConnectionObserver {
 	// Current User has an answer to send
 	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionAnswerDescription: RTCSessionDescription) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
-		let answerSDP = RTCSessionDescription(type: SignalingMessageType.answer.rawValue, sdp: localSessionAnswerDescription.description)
+		let answerSDP = RTCSessionDescription(type: .Answer, sdp: localSessionAnswerDescription.sdp)
 		let opponent = peerConnection.opponent
 		sendSignalingMessageSDP(SignalingMessage.answer(sdp: answerSDP), withSessionDetails: sessionDetails, toOpponent: opponent)
 	}
@@ -353,7 +353,7 @@ extension CallService: PeerConnectionObserver {
 		}
 	}
 	
-	func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCICECandidate) {
+	func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCIceCandidate) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let signalingMessage = SignalingMessage.candidates(candidates: [localICECandidates])
 		let opponent = peerConnection.opponent
