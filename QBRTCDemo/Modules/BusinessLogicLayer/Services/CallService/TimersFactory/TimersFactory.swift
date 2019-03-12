@@ -23,10 +23,10 @@ class TimersFactory {
 	* 
 	* @param expirationBlock - will be called after timer expires, call may be delayed as specified in 'tolerance'
 	*/
-	func createDialingTimerWithExpirationTime(expirationTime: NSTimeInterval, block: () -> Void?, expirationBlock: () -> Void) -> SVTimer {
+	func createDialingTimerWithExpirationTime(_ expirationTime: TimeInterval, block: @escaping () -> Void?, expirationBlock: @escaping () -> Void) -> SVTimer {
 		let startTime = CACurrentMediaTime()
 		
-		return SVTimer(interval: dialingTimeInterval, tolerance: tolerance, repeats: true, queue: dispatch_get_main_queue(), block: {
+		return SVTimer(interval: DispatchTimeInterval.milliseconds(Int(dialingTimeInterval)), tolerance: Int(tolerance), repeats: true, queue: DispatchQueue.main, block: {
 			
 			let elapsedTimeInSeconds = CACurrentMediaTime() - startTime
 			let elapsedTimeMilliSeconds = elapsedTimeInSeconds * 1000

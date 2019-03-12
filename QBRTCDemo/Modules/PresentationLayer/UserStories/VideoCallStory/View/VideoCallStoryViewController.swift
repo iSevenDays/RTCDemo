@@ -26,9 +26,12 @@ class VideoCallStoryViewController: UIViewController {
 	@IBOutlet weak var btnSwitchLocalVideoTrackState: DesignableButton!
 	
 	@IBOutlet weak var lblState: UILabel!
-	@IBOutlet weak var viewRemote: RTCEAGLVideoView!
-	@IBOutlet weak var viewLocal: RTCCameraPreviewView!
+	@IBOutlet weak var viewRemote: RenderableView!
+	@IBOutlet weak var viewLocal: RenderableView!
 	@IBOutlet weak var videoCameraImgView: UIImageView!
+
+	var viewLocalRender: RenderableView!
+	var viewRemoteRender: RenderableView!
 	
 	var localVideoTrackStateAuthorized = true
 	var microphoneStateAuthorized = true
@@ -42,46 +45,82 @@ class VideoCallStoryViewController: UIViewController {
 	
 	// MARK: - IBActions
 	
-	@IBAction func didTapButtonHangup(sender: UIButton) {
+	@IBAction func didTapButtonHangup(_ sender: UIButton) {
 		output.didTriggerHangupButtonTapped()
 	}
 	
-	@IBAction func didTapButtonDataChannelImageGallery(sender: UIButton) {
+	@IBAction func didTapButtonDataChannelImageGallery(_ sender: UIButton) {
 		output.didTriggerDataChannelButtonTapped()
 	}
 	
-	@IBAction func didTapButtonSwitchCamera(sender: UIButton) {
+	@IBAction func didTapButtonSwitchCamera(_ sender: UIButton) {
 		output.didTriggerSwitchCameraButtonTapped()
 	}
 	
-	@IBAction func didTapButtonSwitchAudioRoute(sender: UIButton) {
-		sender.selected = !sender.selected
+	@IBAction func didTapButtonSwitchAudioRoute(_ sender: UIButton) {
+		sender.isSelected = !sender.isSelected
 		output.didTriggerSwitchAudioRouteButtonTapped()
 	}
 	
-	@IBAction func didTapButtonSwitchLocalVideoTrack(sender: UIButton) {
+	@IBAction func didTapButtonSwitchLocalVideoTrack(_ sender: UIButton) {
 		output.didTriggerSwitchLocalVideoTrackStateButtonTapped()
 	}
 	
-	@IBAction func didTapButtonMicrophone(sender: UIButton) {
+	@IBAction func didTapButtonMicrophone(_ sender: UIButton) {
 		output.didTriggerMicrophoneButtonTapped()
 	}
 }
 
 extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	func setupInitialState() {
+		loadViewIfNeeded()
 		navigationItem.title = "Connecting..."
+
+		#if arch(arm64)
+		// Using metal (arm64 only)
+		viewLocalRender = RTCMTLVideoView(frame: self.viewLocal?.frame ?? CGRect.zero)
+		viewRemoteRender = RTCMTLVideoView(frame: self.viewRemote.frame)
+		(viewLocalRender as? RTCMTLVideoView)?.videoContentMode = .scaleAspectFill
+		(viewRemoteRender as? RTCMTLVideoView)?.videoContentMode = .scaleAspectFill
+		#else
+		// Using OpenGLES for the rest
+		viewLocalRender = RTCEAGLVideoView(frame: self.viewLocal?.frame ?? CGRect.zero)
+		viewRemoteRender = RTCEAGLVideoView(frame: self.viewRemote.frame)
+		#endif
+		if let localVideoView = self.viewLocal {
+			self.embedView(viewLocalRender, into: localVideoView)
+		}
+		self.embedView(viewRemoteRender, into: self.viewRemote)
 	}
-	
-	func configureViewWithUser(user: SVUser) {
+
+	private func embedView(_ view: UIView, into containerView: UIView) {
+		containerView.addSubview(view)
+		view.translatesAutoresizingMaskIntoConstraints = false
+		containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",
+																	options: [],
+																	metrics: nil,
+																	views: ["view":view]))
+
+		containerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",
+																	options: [],
+																	metrics: nil,
+																	views: ["view":view]))
+		containerView.layoutIfNeeded()
+	}
+
+	func configureViewWithUser(_ user: SVUser) {
 		
 	}
 	
-	func showStartDialingOpponent(opponent: SVUser) {
+	func showStartDialingOpponent(_ opponent: SVUser) {
 		navigationItem.title = "Dialing \(opponent.fullName)..."
 	}
 	
-	func showReceivedAnswerFromOpponent(opponent: SVUser) {
+	func showCurrentUserAcceptedCallFromOpponent(_ opponent: SVUser) {
+		navigationItem.title = "Call with \(opponent.fullName)"
+	}
+	
+	func showReceivedAnswerFromOpponent(_ opponent: SVUser) {
 		navigationItem.title = "Call with \(opponent.fullName)"
 	}
 	
@@ -91,19 +130,19 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	
 	func showOpponentReject() {
 		alertControl.showMessage("Opponent is busy, please call later", title: "Notification", overViewController: self, completion: { [output] in
-			output.didTriggerCloseButtonTapped()
+			output?.didTriggerCloseButtonTapped()
 			})
 	}
 	
 	func showOpponentHangup() {
 		alertControl.showMessage("Opponent ended the call", title: "Notification", overViewController: self, completion: { [output] in
-			output.didTriggerCloseButtonTapped()
+			output?.didTriggerCloseButtonTapped()
 			})
 	}
 	
 	func showOpponentAnswerTimeout() {
 		alertControl.showMessage("Opponent isn't answering. Please try again later", title: "Notification", overViewController: self, completion: { [output] in
-			output.didTriggerCloseButtonTapped()
+			output?.didTriggerCloseButtonTapped()
 			})
 	}
 	
@@ -113,55 +152,60 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	
 	func showErrorCallServiceDisconnected() {
 		alertControl.showErrorMessage("Disconnected. Can not connect. Please try again later", overViewController: self, completion: { [output] in
-			output.didTriggerCloseButtonTapped()
+			output?.didTriggerCloseButtonTapped()
 			})
 	}
-	
-	func setLocalVideoCaptureSession(captureSession: AVCaptureSession) {
-		_ = view
-		viewLocal.captureSession = captureSession
+
+	func configureLocalVideoViewWithBlock(_ block: ((RenderableView?) -> Void)?) {
+		loadViewIfNeeded()
+		block?(viewLocalRender)
+	}
+
+	func configureRemoteVideoViewWithBlock(_ block: ((RenderableView?) -> Void)?) {
+		loadViewIfNeeded()
+		block?(viewRemoteRender)
 	}
 	
-	func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?) {
-		block?(viewRemote)
-	}
-	
-	func showLocalVideoTrackEnabled(enabled: Bool) {
+	func showLocalVideoTrackEnabled(_ enabled: Bool) {
+		loadViewIfNeeded()
 		// Video can not be enabled until user granted the permission
 		guard localVideoTrackStateAuthorized else { return }
 		
-		imgSwitchCamera.hidden = !enabled
-		viewLocal.hidden = !enabled
-		btnSwitchCamera.hidden = !enabled
-		btnSwitchLocalVideoTrackState.selected = !enabled
+		imgSwitchCamera.isHidden = !enabled
+		viewLocal.isHidden = !enabled
+		btnSwitchCamera.isHidden = !enabled
+		btnSwitchLocalVideoTrackState.isSelected = !enabled
 	}
 	
-	func showLocalAudioTrackEnabled(enabled: Bool) {
-		btnMute.selected = !enabled
+	func showLocalAudioTrackEnabled(_ enabled: Bool) {
+		loadViewIfNeeded()
+		btnMute.isSelected = !enabled
 	}
 	
 	func showLocalVideoTrackAuthorized() {
-		viewLocal.hidden = false
+		loadViewIfNeeded()
+		viewLocal.isHidden = false
 	}
 	
 	func showLocalVideoTrackDenied() {
+		loadViewIfNeeded()
 		localVideoTrackStateAuthorized = false
 		
 		// Local view area
-		viewLocal.hidden = true
-		btnSwitchCamera.selected = true
-		btnSwitchCamera.setImage(UIImage(named: "block"), forState: .Normal)
-		btnSwitchCamera.contentVerticalAlignment = .Center
-		btnSwitchCamera.contentHorizontalAlignment = .Center
+		viewLocal.isHidden = true
+		btnSwitchCamera.isSelected = true
+		btnSwitchCamera.setImage(UIImage(named: "block"), for: .normal)
+		btnSwitchCamera.contentVerticalAlignment = .center
+		btnSwitchCamera.contentHorizontalAlignment = .center
 		
 		// Bottom button
-		btnSwitchLocalVideoTrackState.setImage(UIImage(named: "videoBlock"), forState: .Normal)
+		btnSwitchLocalVideoTrackState.setImage(UIImage(named: "videoBlock"), for: .normal)
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+		let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
 
-		let settingsAction = UIAlertAction(title: "Go To Settings", style: .Cancel) { _ in
-			if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
-				UIApplication.sharedApplication().openURL(url)
+		let settingsAction = UIAlertAction(title: "Go To Settings", style: .cancel) { _ in
+			if let url = URL(string: UIApplication.openSettingsURLString) {
+				UIApplication.shared.openURL(url)
 			}
 		}
 		
@@ -169,41 +213,46 @@ extension VideoCallStoryViewController: VideoCallStoryViewInput {
 	}
 	
 	func showMicrophoneAuthorized() {
-		btnMute.hidden = false
+		btnMute.isHidden = false
 	}
 	
 	func showMicrophoneDenied() {
 		microphoneStateAuthorized = false
 		
-		btnMute.setImage(UIImage(named: "microphoneDenied"), forState: .Normal)
-		btnMute.setImage(UIImage(named: "microphoneDenied"), forState: .Selected)
+		btnMute.setImage(UIImage(named: "microphoneDenied"), for: .normal)
+		btnMute.setImage(UIImage(named: "microphoneDenied"), for: .selected)
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+		let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
 		
-		let settingsAction = UIAlertAction(title: "Go To Settings", style: .Cancel) { _ in
-			if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
-				UIApplication.sharedApplication().openURL(url)
+		let settingsAction = UIAlertAction(title: "Go To Settings", style: .cancel) { _ in
+			if let url = URL(string: UIApplication.openSettingsURLString) {
+				UIApplication.shared.openURL(url)
 			}
 		}
 		
 		alertControl.showMessage("Please allow microphone access for video calls. If you cancel, the opponent will NOT be able to hear you", title: "Permissions warning", overViewController: self, actions: [cancelAction, settingsAction], completion: nil)
 	}
 	
-	func showCameraPosition(backCamera: Bool) {
+	func showCameraPosition(_ backCamera: Bool) {
 		let animation = CATransition()
 		animation.duration = 0.5
-		animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-		animation.type = "oglFlip"
+		animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+		animation.type = convertToCATransitionType("oglFlip")
 		if backCamera {
-			animation.subtype = kCATransitionFromRight
+			animation.subtype = CATransitionSubtype.fromRight
 		} else {
-			animation.subtype = kCATransitionFromLeft
+			animation.subtype = CATransitionSubtype.fromLeft
 		}
-		viewLocal.layer.addAnimation(animation, forKey: kCATransition)
+		viewLocal.layer.add(animation, forKey: kCATransition)
 	}
 	
 	// Currently not used
 	func showErrorDataChannelNotReady() {
 		
 	}
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCATransitionType(_ input: String) -> CATransitionType {
+	return CATransitionType(rawValue: input)
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Anton Sokolchenko. All rights reserved.
 //
 
-@objc class SettingsStoryPresenter: NSObject {
+class SettingsStoryPresenter: NSObject {
 
     weak var view: SettingsStoryViewInput?
     var interactor: SettingsStoryInteractorInput!
@@ -24,13 +24,13 @@ extension SettingsStoryPresenter: SettingsStoryModuleInput {
 }
 
 extension SettingsStoryPresenter: SettingsStoryViewOutput {
-	func didSelectSettingModel(settingModel: SettingModel) {
+	func didSelectSettingModel(_ settingModel: SettingModel) {
 		interactor.handleSettingModelSelected(settingModel)
 	}
 }
 
 extension SettingsStoryPresenter: SettingsStoryInteractorOutput {
-	func didReceiveSettings(settings: [SettingsSection]) {
+	func didReceiveSettings(_ settings: [SettingsSection]) {
 		view?.reloadSettings(settings)
 	}
 }

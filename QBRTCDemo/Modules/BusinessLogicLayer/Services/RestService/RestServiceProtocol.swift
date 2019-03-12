@@ -11,9 +11,9 @@ protocol RESTServiceProtocol: class {
 	
 	var isLoggedIn: Bool { get }
 	
-	func loginWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void)
+	func loginWithUser(_ user: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void)
 	
-	func signUpWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void)
+	func signUpWithUser(_ user: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void)
 	
 	/**
 	Update current user with requested user
@@ -24,7 +24,7 @@ protocol RESTServiceProtocol: class {
 	- parameter successBlock:  success block with SVUser instance
 	- parameter errorBlock:    error block with error
 	*/
-	func updateCurrentUserFieldsIfNeededWithUser(requestedUser: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void)
+	func updateCurrentUserFieldsIfNeededWithUser(_ requestedUser: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void)
 	
-	func downloadUsersWithTags(tags: [String], successBlock: (users: [SVUser]) -> Void, errorBlock: (error: NSError?) -> Void)
+	func downloadUsersWithTags(_ tags: [String], successBlock: @escaping (_ users: [SVUser]) -> Void, errorBlock: @escaping (_ error: Error?) -> Void)
 }

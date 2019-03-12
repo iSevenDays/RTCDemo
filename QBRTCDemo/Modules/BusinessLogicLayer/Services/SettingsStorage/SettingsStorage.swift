@@ -25,13 +25,14 @@ class SettingsStorage {
 	
 	var videoSetting: VideoQualitySetting {
 		get {
-			if let str = cacheService.stringForKey(VideoQualitySetting.identifier.rawValue), let savedSetting = VideoQualitySetting(rawValue: str) {
+			if let str = cacheService.string(forKey: VideoQualitySetting.identifier.rawValue), let savedSetting = VideoQualitySetting(rawValue: str) {
 				return savedSetting
 			}
 			return .medium
 		}
 		set {
-			cacheService.setObject(newValue.rawValue, forKey: VideoQualitySetting.identifier.rawValue)
+			
+			cacheService.set(newValue.rawValue, forKey: VideoQualitySetting.identifier.rawValue)
 		}
 	}
 }

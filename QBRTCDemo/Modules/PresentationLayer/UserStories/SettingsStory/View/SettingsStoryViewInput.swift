@@ -16,5 +16,5 @@ protocol SettingsStoryViewInput: class {
     func setupInitialState()
 	
 	// Reload Settings
-	func reloadSettings(settings: [SettingsSection])
+	func reloadSettings(_ settings: [SettingsSection])
 }

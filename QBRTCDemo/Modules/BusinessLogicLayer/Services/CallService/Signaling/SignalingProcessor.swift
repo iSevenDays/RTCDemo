@@ -10,12 +10,12 @@ import Foundation
 
 /// NOTE: Initiator User may not be equal to fromOpponent
 protocol SignalingProcessorObserver: class {
-	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCIceCandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
-	func didReceiveOffer(signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
-	func didReceiveAnswer(signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
-	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
-	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
-	func didReceiveUser(signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String)
+	func didReceiveICECandidates(_ signalingProcessor: SignalingProcessor, ICECandidates: [RTCIceCandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
+	func didReceiveOffer(_ signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
+	func didReceiveAnswer(_ signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
+	func didReceiveHangup(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
+	func didReceiveReject(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
+	func didReceiveUser(_ signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String)
 }
 
 /// Class to process SVSignaling messages
@@ -25,7 +25,7 @@ class SignalingProcessor: NSObject {
 }
 
 extension SignalingProcessor: SignalingChannelObserver {
-	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent opponent: SVUser, withSessionDetails sessionDetails: SessionDetails?) {
+	func signalingChannel(_ channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent opponent: SVUser, withSessionDetails sessionDetails: SessionDetails?) {
 		
 		switch message {
 		case let .offer(sdp: sessionDescription) :
@@ -42,7 +42,7 @@ extension SignalingProcessor: SignalingChannelObserver {
 			observer?.didReceiveUser(self, user: opponent, forChatRoomName: roomName)
 		}
 	}
-	func signalingChannel(channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState) {
+	func signalingChannel(_ channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState) {
 		
 	}
 }

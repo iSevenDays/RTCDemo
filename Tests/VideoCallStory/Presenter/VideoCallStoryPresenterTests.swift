@@ -59,6 +59,16 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		XCTAssertEqual(mockInteractor.opponent, testUser2)
 	}
 	
+	func testPresenterHandlesAcceptCallWithUserEventFromModuleInput() {
+		// when
+		presenter.acceptCallFromOpponent(testUser2)
+		waitForTimeInterval(50)
+		
+		// then
+		XCTAssertTrue(mockInteractor.acceptCallFromOpponentGotCalled)
+		XCTAssertTrue(mockView.showCurrentUserAcceptedCallFromOpponentGotCalled)
+	}
+	
 	// MARK: - Testing methods of VideoCallStoryViewOutput
 	func testPresenterHandlesViewReadyEvent() {
 		// when
@@ -142,16 +152,12 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 	}
 	
 	func testPresenterHandlesLocalVideoTrack() {
-		// given
-		let localCaptureSession = AVCaptureSession()
-		
 		// when
-		presenter.didSetLocalCaptureSession(localCaptureSession)
+		presenter.didReceiveLocalVideoTrackWithConfigurationBlock(nil)
 		waitForTimeInterval(50)
 		
 		// then
-		XCTAssertTrue(mockView.setLocalVideoCaptureSessionGotCalled)
-		XCTAssertEqual(localCaptureSession, mockView.localCaptureSession)
+		XCTAssertTrue(mockView.configureLocalVideoViewWithBlockGotCalled)
 	}
 	
 	func testPresenterHandlesRemoteVideoTrack() {
@@ -316,17 +322,17 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		var requestVideoPermissionStatusGotCalled = false
 		var requestMicrophonePermissionStatusGotCalled = false
 		
-		func startCallWithOpponent(opponent: SVUser) {
+		func startCallWithOpponent(_ opponent: SVUser) {
 			self.opponent = opponent
 			startCallWithOpponentGotCalled = true
 		}
 		
-		func acceptCallFromOpponent(opponent: SVUser) {
+		func acceptCallFromOpponent(_ opponent: SVUser) {
 			self.opponent = opponent
 			acceptCallFromOpponentGotCalled = true
 		}
 		
-		func showStartDialingOpponent(opponent: SVUser) {
+		func showStartDialingOpponent(_ opponent: SVUser) {
 			self.opponent = opponent
 			showStartDialingOpponentGotCalled = true
 		}
@@ -380,11 +386,11 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		}
     }
 
-    class MockViewController: VideoCallStoryViewInput {
-
+	class MockViewController: VideoCallStoryViewInput {
 		var setupInitialStateGotCalled = false
 		var configureViewWithUserGotCalled = false
 		var showStartDialingOpponentGotCalled = false
+		var showCurrentUserAcceptedCallFromOpponentGotCalled = false
 		var showReceivedAnswerFromOpponentGotCalled = false
 		var showHangupGotCalled = false
 		var showOpponentHangupGotCalled = false
@@ -393,9 +399,10 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 		var showErrorConnectGotCalled = false
 		var showErrorCallServiceDisconnectedGotCalled = false
 		var showErrorDataChannelNotReadyGotCalled = false
-		var localCaptureSession: AVCaptureSession?
+
 		var setLocalVideoCaptureSessionGotCalled = false
 		var configureRemoteVideoViewWithBlockGotCalled = false
+		var configureLocalVideoViewWithBlockGotCalled = false
 		
 		var showLocalVideoTrackEnabledGotCalled = false
 		var showLocalAudioTrackEnabledGotCalled = false
@@ -410,15 +417,19 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 			setupInitialStateGotCalled = true
         }
 		
-		func configureViewWithUser(user: SVUser) {
+		func configureViewWithUser(_ user: SVUser) {
 			configureViewWithUserGotCalled = true
 		}
 		
-		func showStartDialingOpponent(opponent: SVUser) {
+		func showStartDialingOpponent(_ opponent: SVUser) {
 			showStartDialingOpponentGotCalled = true
 		}
 		
-		func showReceivedAnswerFromOpponent(opponent: SVUser) {
+		func showCurrentUserAcceptedCallFromOpponent(_ opponent: SVUser) {
+			showCurrentUserAcceptedCallFromOpponentGotCalled = true
+		}
+		
+		func showReceivedAnswerFromOpponent(_ opponent: SVUser) {
 			showReceivedAnswerFromOpponentGotCalled = true
 		}
 		
@@ -450,20 +461,19 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 			showErrorDataChannelNotReadyGotCalled = true
 		}
 		
-		func setLocalVideoCaptureSession(captureSession: AVCaptureSession) {
-			localCaptureSession = captureSession
-			setLocalVideoCaptureSessionGotCalled = true
-		}
-		
-		func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?) {
+		func configureRemoteVideoViewWithBlock(_ block: ((RenderableView?) -> Void)?) {
 			configureRemoteVideoViewWithBlockGotCalled = true
 		}
+
+		func configureLocalVideoViewWithBlock(_ block: ((RenderableView?) -> Void)?) {
+			configureLocalVideoViewWithBlockGotCalled = true
+		}
 		
-		func showLocalVideoTrackEnabled(enabled: Bool) {
+		func showLocalVideoTrackEnabled(_ enabled: Bool) {
 			showLocalVideoTrackEnabledGotCalled = true
 		}
 		
-		func showLocalAudioTrackEnabled(enabled: Bool) {
+		func showLocalAudioTrackEnabled(_ enabled: Bool) {
 			showLocalAudioTrackEnabledGotCalled = true
 		}
 		
@@ -483,7 +493,7 @@ class VideoCallStoryPresenterTest: BaseTestCase {
 			showMicrophoneDeniedGotCalled = true
 		}
 		
-		func showCameraPosition(backCamera: Bool) {
+		func showCameraPosition(_ backCamera: Bool) {
 			
 		}
 		

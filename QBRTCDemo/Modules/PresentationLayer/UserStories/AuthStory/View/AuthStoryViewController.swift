@@ -27,31 +27,31 @@ class AuthStoryViewController: UITableViewController {
         output.viewIsReady()
 	}
 
-	override func viewDidDisappear(animated: Bool) {
+	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		activityIndicator.stopAnimating()
 		enableInput()
 	}
 	
-	func dismissKeyboard() {
+	@objc func dismissKeyboard() {
 		view.endEditing(true)
 	}
 	
-	private func setInputEnabled(value: Bool) {
-		userNameInput.enabled = value
-		roomNameInput.enabled = value
-		login.enabled = value
+	fileprivate func setInputEnabled(_ value: Bool) {
+		userNameInput.isEnabled = value
+		roomNameInput.isEnabled = value
+		login.isEnabled = value
 	}
 	
 	func validateLogin() -> Bool {
-		if let userName = userNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) {
+		if let userName = userNameInput.text?.trimmingCharacters(in: CharacterSet.whitespaces) {
 			return userName.characters.count >= minCharactersCount
 		}
 		return false
 	}
 	
 	func validateRoomName() -> Bool {
-		if let roomName = roomNameInput.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) {
+		if let roomName = roomNameInput.text?.trimmingCharacters(in: CharacterSet.whitespaces) {
 			return roomName.characters.count >= minCharactersCount
 		}
 		return false
@@ -59,7 +59,7 @@ class AuthStoryViewController: UITableViewController {
 	
 	// MAKR: IBActions
 	
-	@IBAction func didTapLoginButton(sender: UIButton) {
+	@IBAction func didTapLoginButton(_ sender: UIButton) {
 		guard validateLogin() else {
 			userNameInput.shake(3, for: 0.2, withTranslation: 14)
 			return
@@ -81,7 +81,7 @@ class AuthStoryViewController: UITableViewController {
 
 // MARK: AuthStoryViewInput
 extension AuthStoryViewController: AuthStoryViewInput {
-    func setupInitialState() {
+    @objc func setupInitialState() {
     }
 	
 	func enableInput() {
@@ -92,11 +92,11 @@ extension AuthStoryViewController: AuthStoryViewInput {
 		setInputEnabled(false)
 	}
 	
-	func setUserName(userName: String) {
+	func setUserName(_ userName: String) {
 		userNameInput.text = userName
 	}
 	
-	func setRoomName(roomName: String) {
+	func setRoomName(_ roomName: String) {
 		roomNameInput.text = roomName
 	}
 	
@@ -126,7 +126,7 @@ extension AuthStoryViewController: AuthStoryViewInput {
 // MARK: UITextFieldDelegate methods
 extension AuthStoryViewController: UITextFieldDelegate {
 	// Limit max length of tag text field to 15
-	func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		if string.isEmpty {
 			return true // allow backspace
 		}
@@ -137,32 +137,32 @@ extension AuthStoryViewController: UITextFieldDelegate {
 			// First letter must be a character, not a digit
 			let textFieldIsEmtpy = textField.text?.isEmpty ?? true
 			if textFieldIsEmtpy {
-				if string.rangeOfCharacterFromSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet) == nil  {
+				if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil  {
 					return false
 				}
 			}
 		}
 		
 		// No white spaces
-		guard string.rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) == nil else {
+		guard string.rangeOfCharacter(from: CharacterSet.whitespacesAndNewlines) == nil else {
 			return false
 		}
 		
 		// Allow only alphanumeric characters
-		guard string.rangeOfCharacterFromSet(NSCharacterSet.alphanumericCharacterSet()) != nil else {
+		guard string.rangeOfCharacter(from: CharacterSet.alphanumerics) != nil else {
 			return false
 		}
 		
 		// Prevent crashing undo bug – see http://stackoverflow.com/a/1773257/760518
-		let charactersCount = textField.text?.characters.count ?? 0
+		let charactersCount = textField.text?.count ?? 0
 		if range.length + range.location > charactersCount {
 			return false
 		}
-		let newLength = charactersCount + string.characters.count - range.length
+		let newLength = charactersCount + string.count - range.length
 		return newLength <= 15
 	}
 	
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		if textField == userNameInput {
 			roomNameInput.becomeFirstResponder()
 		} else if textField == roomNameInput {

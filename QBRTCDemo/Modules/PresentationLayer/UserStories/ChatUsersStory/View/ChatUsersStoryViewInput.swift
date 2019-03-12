@@ -15,12 +15,12 @@ protocol ChatUsersStoryViewInput: class {
 
     func setupInitialState()
 	
-	func showErrorMessage(message: String)
+	func showErrorMessage(_ message: String)
 	
 	/**
 	Reload table view data
 	*/
-	func reloadDataWithUsers(users: [SVUser])
+	func reloadDataWithUsers(_ users: [SVUser])
 	
-	func configureViewWithCurrentUser(user: SVUser)
+	func configureViewWithCurrentUser(_ user: SVUser)
 }

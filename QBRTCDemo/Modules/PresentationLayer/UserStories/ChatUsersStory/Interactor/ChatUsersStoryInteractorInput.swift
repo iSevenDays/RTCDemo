@@ -17,7 +17,7 @@ protocol ChatUsersStoryInteractorInput {
 	didDeclineRequestForCallWithUser: will be called if call can not be made
 	- parameter opponent: SVUser instance
 	*/
-	func requestCallWithOpponent(opponent: SVUser)
+	func requestCallWithOpponent(_ opponent: SVUser)
 	
 	/**
 	Retrieve users with tag
@@ -32,7 +32,7 @@ protocol ChatUsersStoryInteractorInput {
 	
 	- parameter chatRoomName: String instance, must be >= 3 characters long
 	*/
-	func setChatRoomName(chatRoomName: String)
+	func setChatRoomName(_ chatRoomName: String)
 	
 	func retrieveCurrentUser() -> SVUser
 	

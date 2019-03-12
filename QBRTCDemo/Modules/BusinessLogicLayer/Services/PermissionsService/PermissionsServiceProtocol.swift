@@ -18,6 +18,6 @@ protocol PermissionsServiceProtocol: class {
 	func authorizationStatusForVideo() -> AuthorizationStatus
 	func authorizationStatusForMicrophone() -> AuthorizationStatus
 	
-	func requestAccessForVideo(completion: (granted: Bool) -> Void)
-	func requestAccessForMicrophone(completion: (granted: Bool) -> Void)
+	func requestAccessForVideo(_ completion: @escaping (_ granted: Bool) -> Void)
+	func requestAccessForMicrophone(_ completion: @escaping (_ granted: Bool) -> Void)
 }

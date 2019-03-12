@@ -18,6 +18,7 @@
 // codec. We do this by placing the specified codec at the beginning of the
 // codec list if it exists in the sdp.
 + (RTCSessionDescription *)descriptionForDescription:(RTCSessionDescription *)description preferredVideoCodec:(NSString *)codec;
++ (RTCSessionDescription *)constrainedSessionDescription:(RTCSessionDescription *)description videoBandwidth:(NSUInteger)videoBandwidth audioBandwidth:(NSUInteger)audioBandwidth;
 
 + (RTCConfiguration *)defaultConfigurationWithCurrentICEServers;
 

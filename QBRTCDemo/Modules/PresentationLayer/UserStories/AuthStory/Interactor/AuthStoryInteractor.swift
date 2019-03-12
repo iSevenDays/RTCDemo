@@ -6,17 +6,19 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
+import KeychainSwift
+
 class AuthStoryInteractor: AuthStoryInteractorInput {
 
     weak var output: AuthStoryInteractorOutput!
 	internal weak var restService: RESTServiceProtocol!
 	internal weak var callService: CallServiceProtocol!
 	
-	private let cachedUserKey = "user"
+	fileprivate let cachedUserKey = "user"
 	
 	// In case chat is doing reconnect(for example connect is triggered by QBChat), we can only log in to REST
 	//
-	var mutableSuccessBlock: ((user: SVUser) -> Void)? = nil
+	var mutableSuccessBlock: ((_ user: SVUser) -> Void)? = nil
 	
 	// MARK: AuthStoryInteractorInput
 	func tryLoginWithCachedUser() {
@@ -30,19 +32,19 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		}
 	}
 	
-	func signUpOrLoginWithUserName(userName: String, tags: [String]) {
+	func signUpOrLoginWithUserName(_ userName: String, tags: [String]) {
 		callService.addObserver(self)
 		
-		let login = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? NSUUID().UUIDString
+		let login = UIDevice.current.identifierForVendor?.uuidString ?? NSUUID().uuidString
 		let password = "zZc64fj13$_1=fx%"
 		
-		let user = SVUser(ID: nil, login: login, password: password, tags: tags)
+		let user = SVUser(id: nil, login: login, password: password, tags: tags)
 		user.fullName = userName
 		
 		if let cachedUser = cachedUser() {
 			// update current user instead of creating new one
 			if cachedUser.tags != nil {
-				user.ID = cachedUser.ID
+				user.id = cachedUser.id
 				user.login = cachedUser.login
 			}
 		}
@@ -66,7 +68,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 	- parameter successBlock: successBlock with SVUser instance
 	- parameter errorBlock:   error block
 	*/
-	func signUpOrLoginWithUserInRESTSimulatenouslyWithChat(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void) {
+	func signUpOrLoginWithUserInRESTSimulatenouslyWithChat(_ user: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void) {
 		
 		assert(user.password != nil)
 		
@@ -80,39 +82,39 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 				return
 			}
 			guard !self.callService.isConnected else {
-				self.mutableSuccessBlock?(user: restUser)
+				self.mutableSuccessBlock?(restUser)
 				self.mutableSuccessBlock = nil
 				return
 			}
 			
 			assert(restUser.password != nil)
-			assert(restUser.ID != nil)
+			assert(restUser.id != nil)
 			
 			self.callService.connectWithUser(restUser, completion: { (error) in
 				if error != nil || !self.callService.isConnected {
-					errorBlock(error: error)
+					errorBlock(error)
 					return
 				}
-				if user.ID == nil {
-					user.ID = self.callService.currentUser?.ID
+				if user.id == nil {
+					user.id = self.callService.currentUser?.id
 				}
-				self.mutableSuccessBlock?(user: user)
+				self.mutableSuccessBlock?(user)
 				self.mutableSuccessBlock = nil
 			})
 			
 		}) { (error) in
-			errorBlock(error: error)
+			errorBlock(error)
 		}
 		
 		
 		// If user ID is not nil, then the user has been logged in previously
-		guard user.ID != nil else { return }
+		guard user.id != nil else { return }
 		guard !callService.isConnecting else {
 			return
 		}
 		
 		if restService.isLoggedIn && callService.isConnected {
-			self.mutableSuccessBlock?(user: user)
+			self.mutableSuccessBlock?(user)
 			self.mutableSuccessBlock = nil
 			return
 		}
@@ -120,7 +122,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		callService.connectWithUser(user) { [unowned self] (error) in
 			
 			if self.restService.isLoggedIn && self.callService.isConnected {
-				self.mutableSuccessBlock?(user: user)
+				self.mutableSuccessBlock?(user)
 				self.mutableSuccessBlock = nil
 			}
 		}
@@ -128,15 +130,15 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 }
 
 extension AuthStoryInteractor: CallServiceObserver {
-	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
+	func callService(_ callService: CallServiceProtocol, didChangeState state: CallServiceState) {
 		NSLog("%@", "AuthStoryInteractor callService didChangeState \(state)")
 		
-		guard state != .Error else {
+		guard state != .error else {
 			output?.didErrorLogin(nil)
 			return
 		}
 		
-		guard state == .Connected else {
+		guard state == .connected else {
 			return
 		}
 		
@@ -150,7 +152,7 @@ extension AuthStoryInteractor: CallServiceObserver {
 		}
 		
 		NSLog("%@", "AuthStoryInteractor callService didChangeState mutableSuccessBlock")
-		mutableSuccessBlock?(user: currentUser)
+		mutableSuccessBlock?(currentUser)
 		mutableSuccessBlock = nil
 	}
 }
@@ -172,51 +174,52 @@ internal extension AuthStoryInteractor {
 	- parameter successBlock: success block
 	- parameter errorBlock:   error block
 	*/
-	func signUpOrLoginWithUser(user: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (NSError?) -> Void) {
+	func signUpOrLoginWithUser(_ user: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (Error?) -> Void) {
 		output.doingLoginWithUser(user)
 		
 		restService.loginWithUser(user, successBlock: { [unowned self] (downloadedUser) in
 			
-			user.ID = downloadedUser.ID
+			user.id = downloadedUser.id
 			
-			self.restService.updateCurrentUserFieldsIfNeededWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
+			self.restService.updateCurrentUserFieldsIfNeededWithUser(user, successBlock: successBlock, errorBlock: errorBlock )
 			
 			}) { [weak self] (error) in
 				guard let strongSelf = self else { return }
 				strongSelf.output.doingSignUpWithUser(user)
-				strongSelf.restService.signUpWithUser(user, successBlock: successBlock, errorBlock: errorBlock)
+				strongSelf.restService.signUpWithUser(user, successBlock: successBlock, errorBlock: errorBlock )
 		}
 	}
 	
-	func cacheUser(user: SVUser) {
+	func cacheUser(_ user: SVUser) {
 		assert(user.password != nil)
-		assert(user.ID != nil)
-		let userData = NSKeyedArchiver.archivedDataWithRootObject(user)
+		assert(user.id != nil)
+		let userData = NSKeyedArchiver.archivedData(withRootObject: user)
 		
-		NSUserDefaults.standardUserDefaults().setObject(userData, forKey: cachedUserKey)
-		NSUserDefaults.standardUserDefaults().synchronize()
+		UserDefaults.standard.set(userData, forKey: cachedUserKey)
+		UserDefaults.standard.synchronize()
 		
 		KeychainSwift().set(userData, forKey: cachedUserKey)
 	}
 	
 	func cachedUser() -> SVUser? {
 		
-		var userData = NSUserDefaults.standardUserDefaults().objectForKey(cachedUserKey) as? NSData
+		var userData = UserDefaults.standard.object(forKey: cachedUserKey) as? Data
 		if userData == nil {
 			userData = KeychainSwift().getData(cachedUserKey)
 		}
 		if let userData = userData,
-			let user = NSKeyedUnarchiver.unarchiveObjectWithData(userData) as? SVUser {
+			let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? SVUser {
 			assert(user.password != nil)
-			assert(user.ID != nil)
+			assert(user.id != nil)
 			return user
 		}
 		return nil
 	}
 	
 	internal func removeCachedUser() {
-		NSUserDefaults.standardUserDefaults().removeObjectForKey(cachedUserKey)
-		NSUserDefaults.standardUserDefaults().synchronize()
+		UserDefaults.standard.removeObject(forKey: cachedUserKey)
+		UserDefaults.standard.synchronize()
+
 		KeychainSwift().delete(cachedUserKey)
 	}
 }

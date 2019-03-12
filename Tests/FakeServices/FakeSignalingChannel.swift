@@ -24,33 +24,33 @@ class FakeSignalingChannel: NSObject {
 	var state = SignalingChannelState.open
 	var user: SVUser?
 	
-	var observers: MulticastDelegate<SignalingChannelObserver>?
+	var observers = MulticastDelegate<SignalingChannelObserver>()
 }
 
 extension FakeSignalingChannel: SignalingChannelProtocol {
 	
-	func addObserver(observer: SignalingChannelObserver) {
+	func addObserver(_ observer: SignalingChannelObserver) {
 		observers += observer
 	}
 	
-	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) {
+	func connectWithUser(_ user: SVUser, completion: ((_ error: Error?) -> Void)?) {
 		self.state = .open
 		
 		self.user = user
 		
 		self.state = .established
 		
-		completion?(error: nil)
+		completion?(nil)
 	}
 	
-	func sendMessage(message: SignalingMessage, withSessionDetails: SessionDetails?, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
+	func sendMessage(_ message: SignalingMessage, withSessionDetails: SessionDetails?, toUser user: SVUser, completion: ((_ error: Error?) -> Void)?) {
 		let error: NSError? = shouldSensMessagesSuccessfully ? nil : NSError(domain: "", code: -1, userInfo: nil)
-		completion?(error: error)
+		completion?(error)
 	}
 	
-	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?) {
+	func disconnectWithCompletion(_ completion: ((_ error: Error?) -> Void)?) {
 		self.state = .closed
-		completion?(error: nil)
+		completion?(nil)
 	}
 	
 	var isConnected: Bool {

@@ -10,12 +10,12 @@ import UIKit
 
 class CallServicePendingRequest {
 	
-	private(set) var pendingSessionDescription: RTCSessionDescription
-	private(set) var initiator: SVUser
-	private(set) var sessionDetails: SessionDetails
+	fileprivate(set) var pendingSessionDescription: RTCSessionDescription
+	fileprivate(set) var initiator: SVUser
+	fileprivate(set) var sessionDetails: SessionDetails
 	
 	init(initiator: SVUser, pendingSessionDescription: RTCSessionDescription, sessionDetails: SessionDetails) {
-		assert(pendingSessionDescription.type == .Offer)
+		assert(pendingSessionDescription.type == .offer)
 		
 		self.initiator = initiator
 		self.pendingSessionDescription = pendingSessionDescription

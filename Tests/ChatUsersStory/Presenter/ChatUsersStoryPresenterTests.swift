@@ -188,11 +188,11 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 			return user!
 		}
 		
-		func setChatRoomName(chatRoomName: String) {
+		func setChatRoomName(_ chatRoomName: String) {
 			setTagGotCalled = true
 		}
 		
-		func requestCallWithOpponent(opponent: SVUser) {
+		func requestCallWithOpponent(_ opponent: SVUser) {
 			requestCallWithOpponentGotCalled = true
 		}
 		
@@ -209,7 +209,7 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 		var openSettingsStoryGotCalled = false
 		var openIncomingCallStoryWithOpponentGotCalled = false
 		
-		func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
+		func openVideoStoryWithInitiator(_ initiator: SVUser, thenCallOpponent opponent: SVUser) {
 			self.initiator = initiator
 			self.opponent = opponent
 			openVideoStoryWithInitiatorGotCalled = true
@@ -219,7 +219,7 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 			openSettingsStoryGotCalled = true
 		}
 		
-		func openIncomingCallStoryWithOpponent(opponent: SVUser) {
+		func openIncomingCallStoryWithOpponent(_ opponent: SVUser) {
 			openIncomingCallStoryWithOpponentGotCalled = true
 			self.opponent = opponent
 		}
@@ -239,16 +239,16 @@ class ChatUsersStoryPresenterTest: BaseTestCase {
 			setupInitialStateGotCalled = true
         }
 		
-		func configureViewWithCurrentUser(user: SVUser) {
+		func configureViewWithCurrentUser(_ user: SVUser) {
 			configureViewWithCurrentUserGotCalled = true
 		}
 		
-		func reloadDataWithUsers(users: [SVUser]) {
+		func reloadDataWithUsers(_ users: [SVUser]) {
 			reloadDataGotCalled = true
 			self.users = users
 		}
 		
-		func showErrorMessage(message: String) {
+		func showErrorMessage(_ message: String) {
 			showErrorMessageGotCalled = true
 		}
     }

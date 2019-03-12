@@ -16,13 +16,13 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	weak var output: ImageGalleryStoryCollectionViewInteractorOutput!
 	
 	// MARK: ImageGalleryStoryCollectionViewInteractorInput
-	func addImage(image: UIImage) {
+	func addImage(_ image: UIImage) {
 		images.append(image)
 		
 		output.didUpdateImages()
 	}
 	
-	func imageAt(index: Int) -> UIImage? {
+	func imageAt(_ index: Int) -> UIImage? {
 		if images.count > index {
 			return images[index]
 		}
@@ -34,13 +34,13 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 	}
 	
 	// MARK: UICollectionView
-	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return imagesCount()
 	}
 	
-	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(imageGalleryStoryCollectionViewCellIdentifier, forIndexPath: indexPath) as! ImageGalleryStoryCollectionViewCell
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imageGalleryStoryCollectionViewCellIdentifier, for: indexPath as IndexPath) as! ImageGalleryStoryCollectionViewCell
 
 		cell.imageView?.image = images[indexPath.row]
 		
@@ -48,14 +48,14 @@ class ImageGalleryStoryCollectionViewInteractor : NSObject, UICollectionViewDele
 		
 	}
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		return CGSizeMake(100, 100)
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(width: 100, height: 100)
 	}
 	
 	
 	// MARK: ImageGalleryStoryInteractorImagesOutput
 	
-	func didReceiveImage(image: UIImage) {
+	func didReceiveImage(_ image: UIImage) {
 		addImage(image)
 	}
 }

@@ -10,11 +10,11 @@ import UIKit
 
 class SettingsStoryModuleConfigurator {
 
-    func configureModuleForViewInput(viewInput: SettingsStoryViewController) {
+    func configureModuleForViewInput(_ viewInput: SettingsStoryViewController) {
 		configure(viewInput)
     }
 
-    private func configure(viewController: SettingsStoryViewController) {
+    fileprivate func configure(_ viewController: SettingsStoryViewController) {
 
         let router = SettingsStoryRouter()
 

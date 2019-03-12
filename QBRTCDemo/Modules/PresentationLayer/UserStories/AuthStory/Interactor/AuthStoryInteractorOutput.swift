@@ -14,21 +14,21 @@ protocol AuthStoryInteractorOutput: class {
 	Notifies about doing login in with user
 	note: can be called after doingLoginWithCachedUser
 	*/
-	func doingLoginWithUser(user: SVUser)
+	func doingLoginWithUser(_ user: SVUser)
 	
 	/**
 	Notifies about doing login with cached user
 	*/
-	func doingLoginWithCachedUser(user: SVUser)
+	func doingLoginWithCachedUser(_ user: SVUser)
 	
-	func doingSignUpWithUser(user: SVUser)
+	func doingSignUpWithUser(_ user: SVUser)
 	
-	func didLoginUser(user: SVUser)
+	func didLoginUser(_ user: SVUser)
 	
 	/**
 	Called when user logined successfuly
 	But returned user is nil (this should not happen)
 	*/
-	func didErrorLogin(error: NSError?)
+	func didErrorLogin(_ error: Error?)
 	
 }

@@ -85,29 +85,22 @@
 
 + (RTCMediaConstraints *)defaultMediaStreamConstraints {
 	
-	NSDictionary<NSString *, NSString *> *optionalConstraints = @{@"DtlsSrtpKeyAgreement": true ? @"true" : @"false"};
+	NSMutableDictionary<NSString *, NSString *> *videoConstraints = [NSMutableDictionary dictionary];
 	
-//	RTCPair *minWidth;
-//	RTCPair *minHeight;
-//	RTCPair *maxWidth;
-//	RTCPair *maxHeight;
-//	BOOL low = YES;
-//	if (low) {
-//		
-//		// 352x288
-//		minWidth = [[RTCPair alloc] initWithKey:@"minWidth" value:@"320"];
-//		minHeight = [[RTCPair alloc] initWithKey:@"minHeight" value:@"180"];
-//		
-//		maxWidth = [[RTCPair alloc] initWithKey:@"maxWidth" value:@"320"];
-//		maxHeight = [[RTCPair alloc] initWithKey:@"maxHeight" value:@"240"];
-//	} else {
-//		minWidth = [[RTCPair alloc] initWithKey:@"minWidth" value:@"1280"];
-//		minHeight = [[RTCPair alloc] initWithKey:@"minHeight" value:@"720"];
-//		
-//		maxWidth = [[RTCPair alloc] initWithKey:@"maxWidth" value:@"1920"];
-//		maxHeight = [[RTCPair alloc] initWithKey:@"maxHeight" value:@"1080"];
-//	}
-	RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:nil optionalConstraints:optionalConstraints];
+	
+//	videoConstraints[kRTCMediaConstraintsMinWidth] = @"320";
+//	videoConstraints[kRTCMediaConstraintsMinHeight] = @"180";
+	
+//	videoConstraints[kRTCMediaConstraintsMinWidth] = @"1280";
+//	videoConstraints[kRTCMediaConstraintsMinHeight] = @"720";
+//	
+//	
+//	videoConstraints[kRTCMediaConstraintsMaxWidth] = @"1920";
+//	videoConstraints[kRTCMediaConstraintsMaxHeight] = @"1080";
+//	videoConstraints[kRTCMediaConstraintsMinFrameRate] = @"5";
+//	videoConstraints[kRTCMediaConstraintsMaxFrameRate] = @"60";
+	
+	RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:videoConstraints optionalConstraints:nil];
 	return constraints;
 }
 
@@ -131,7 +124,7 @@
 	NSString *value = true ? @"true" : @"false";
 	NSDictionary<NSString *, NSString *> *mandatory = @{
 									 @"DtlsSrtpKeyAgreement": value,
-									 @"internalSctpDataChannels": @"true",
+									 /*@"internalSctpDataChannels": @"true",*/
 									 };
 	RTCMediaConstraints* constraints =
 	[[RTCMediaConstraints alloc]
@@ -147,7 +140,42 @@
 }
 
 + (NSArray *)defaultIceServers {
-	return @[[[RTCIceServer alloc] initWithURLStrings:@[@"stun:stun.l.google.com:19302"] username:@"" credential:@""]];
+	RTCIceServer *googleSTUN = [[RTCIceServer alloc] initWithURLStrings:@[@"stun:stun.l.google.com:19302"] username:@"" credential:@""];
+	RTCIceServer *qbUSA = [[RTCIceServer alloc] initWithURLStrings:@[@"turn:turn.quickblox.com:3478?transport=udp", @"turn:turn.quickblox.com:3478?transport=tcp"] username:@"quickblox" credential:@"baccb97ba2d92d71e26eb9886da5f1e0"];
+	RTCIceServer *qbSingapore = [[RTCIceServer alloc] initWithURLStrings:@[@"turn:turnsingapore.quickblox.com:3478?transport=udp", @"turn:turnsingapore.quickblox.com:3478?transport=tcp"] username:@"quickblox" credential:@"baccb97ba2d92d71e26eb9886da5f1e0"];
+	RTCIceServer *qbIreland = [[RTCIceServer alloc] initWithURLStrings:@[@"turn:turnireland.quickblox.com:3478?transport=udp", @"turn:turnireland.quickblox.com:3478?transport=tcp"] username:@"quickblox" credential:@"baccb97ba2d92d71e26eb9886da5f1e0"];
+	
+	return @[googleSTUN, qbUSA, qbSingapore, qbIreland];
+}
+
++ (RTCSessionDescription *)constrainedSessionDescription:(RTCSessionDescription *)description videoBandwidth:(NSUInteger)videoBandwidth audioBandwidth:(NSUInteger)audioBandwidth {
+	// Modify the SDP's video & audio media sections to restrict the maximum bandwidth used.
+	
+	NSString *mAudioLinePattern = @"m=audio(.*)";
+	NSString *mVideoLinePattern = @"m=video(.*)";
+	
+	NSString *constraintedSDPString = [self limitBandwidth:description.sdp withPattern:mAudioLinePattern maximum:audioBandwidth];
+	constraintedSDPString = [self limitBandwidth:constraintedSDPString withPattern:mVideoLinePattern maximum:videoBandwidth];
+	
+	RTCSessionDescription *constraintedSDP = [[RTCSessionDescription alloc] initWithType:description.type sdp: constraintedSDPString];
+	
+	return constraintedSDP;
+}
+
++ (NSString *)limitBandwidth:(NSString *)sdp withPattern:(NSString *)mLinePattern maximum:(NSUInteger)bandwidthLimit {
+	NSString *cLinePattern = @"c=IN(.*)";
+	NSError *error = nil;
+	NSRegularExpression *mRegex = [[NSRegularExpression alloc] initWithPattern:mLinePattern options:0 error:&error];
+	NSRegularExpression *cRegex = [[NSRegularExpression alloc] initWithPattern:cLinePattern options:0 error:&error];
+	NSRange mLineRange = [mRegex rangeOfFirstMatchInString:sdp options:NSMatchingWithoutAnchoringBounds range:NSMakeRange(0, [sdp length])];
+	NSRange cLineSearchRange = NSMakeRange(mLineRange.location + mLineRange.length, [sdp length] - (mLineRange.location + mLineRange.length));
+	NSRange cLineRange = [cRegex rangeOfFirstMatchInString:sdp options:NSMatchingWithoutAnchoringBounds range:cLineSearchRange];
+	
+	NSString *cLineString = [sdp substringWithRange:cLineRange];
+	NSString *bandwidthString = [NSString stringWithFormat:@"b=AS:%d", (int)bandwidthLimit];
+	
+	return [sdp stringByReplacingCharactersInRange:cLineRange
+										withString:[NSString stringWithFormat:@"%@\n%@", cLineString, bandwidthString]];
 }
 
 + (NSArray<NSString *> *)videoResolutions {

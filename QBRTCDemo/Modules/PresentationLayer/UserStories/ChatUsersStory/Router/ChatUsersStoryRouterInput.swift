@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ChatUsersStoryRouterInput {
-	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser)
-	func openIncomingCallStoryWithOpponent(opponent: SVUser)
+	func openVideoStoryWithInitiator(_ initiator: SVUser, thenCallOpponent opponent: SVUser)
+	func openIncomingCallStoryWithOpponent(_ opponent: SVUser)
 	func openSettingsStory()
 }

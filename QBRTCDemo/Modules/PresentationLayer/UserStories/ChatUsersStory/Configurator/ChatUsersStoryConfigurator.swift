@@ -10,11 +10,11 @@ import UIKit
 
 class ChatUsersStoryModuleConfigurator {
 
-    func configureModuleForViewInput(viewInput: ChatUsersStoryViewController) {
+    func configureModuleForViewInput(_ viewInput: ChatUsersStoryViewController) {
 		configure(viewInput)
     }
 
-    private func configure(viewController: ChatUsersStoryViewController) {
+    fileprivate func configure(_ viewController: ChatUsersStoryViewController) {
 
         let router = ChatUsersStoryRouter()
 		router.transitionHandler = viewController
@@ -25,7 +25,7 @@ class ChatUsersStoryModuleConfigurator {
 
         let interactor = ChatUsersStoryInteractor()
         interactor.output = presenter
-		interactor.cacheService = NSUserDefaults.standardUserDefaults()
+		interactor.cacheService = UserDefaults.standard as CacheServiceProtocol
 		interactor.restService = ServicesProvider.currentProvider.restService
 		interactor.callService = ServicesProvider.currentProvider.callService
 		

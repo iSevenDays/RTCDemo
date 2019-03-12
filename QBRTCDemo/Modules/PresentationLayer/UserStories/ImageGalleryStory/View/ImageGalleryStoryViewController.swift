@@ -21,7 +21,7 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
         output.viewIsReady()
     }
 
-	@IBAction func didTapStartButton(sender: AnyObject) {
+	@IBAction func didTapStartButton(_ sender: AnyObject) {
 		output.didTriggerStartButtonTapped()
 	}
 	
@@ -37,11 +37,11 @@ class ImageGalleryStoryViewController: UIViewController, ImageGalleryStoryViewIn
 	
 	func configureViewForReceiving() {
 		btnStartSynchronization.title = ""
-		btnStartSynchronization.enabled = false
+		btnStartSynchronization.isEnabled = false
 	}
 	
 	func reloadCollectionView() {
-		dispatch_async(dispatch_get_main_queue()) {[weak self] () -> Void in
+		DispatchQueue.main.async {[weak self] () -> Void in
 			
 			self?.imageCollectionView.collectionViewLayout.invalidateLayout()
 			self?.imageCollectionView.reloadData()

@@ -15,5 +15,5 @@
 
     func viewIsReady()
 	
-	func didSelectSettingModel(settingModel: SettingModel)
+	func didSelectSettingModel(_ settingModel: SettingModel)
 }

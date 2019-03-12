@@ -14,31 +14,31 @@ class PermissionsService {
 
 extension PermissionsService: PermissionsServiceProtocol {
 	func authorizationStatusForVideo() -> AuthorizationStatus {
-		let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+		let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
 		switch authStatus {
-		case .Authorized: return .authorized
-		case .Denied: return .denied
-		case .Restricted: return .denied
-		case .NotDetermined: return .notDetermined
+		case .authorized: return .authorized
+		case .denied: return .denied
+		case .restricted: return .denied
+		case .notDetermined: return .notDetermined
 		}
 	}
 	
 	func authorizationStatusForMicrophone() -> AuthorizationStatus {
-		let authStatus = AVAudioSession.sharedInstance().recordPermission()
+		let authStatus = AVAudioSession.sharedInstance().recordPermission
 		switch authStatus {
-		case AVAudioSessionRecordPermission.Granted: return .authorized
-		case AVAudioSessionRecordPermission.Denied: return .denied
-		case AVAudioSessionRecordPermission.Undetermined: return .notDetermined
+		case AVAudioSession.RecordPermission.granted: return .authorized
+		case AVAudioSession.RecordPermission.denied: return .denied
+		case AVAudioSession.RecordPermission.undetermined: return .notDetermined
 		default:
 			return .notDetermined
 		}
 	}
 	
-	func requestAccessForVideo(completion: (granted: Bool) -> Void) {
-		AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: completion)
+	func requestAccessForVideo(_ completion: @escaping (_ granted: Bool) -> Void) {
+		AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: completion)
 	}
 	
-	func requestAccessForMicrophone(completion: (granted: Bool) -> Void) {
+	func requestAccessForMicrophone(_ completion: @escaping (_ granted: Bool) -> Void) {
 		AVAudioSession.sharedInstance().requestRecordPermission(completion)
 	}
 }

@@ -14,9 +14,9 @@ class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 	
 	weak var imagesOutput: ImageGalleryStoryInteractorImagesOutput!
 
-	private weak var _callService: protocol<CallServiceProtocol>!
+	fileprivate weak var _callService: CallServiceProtocol!
 	
-	var callService: protocol<CallServiceProtocol>! {
+	var callService: CallServiceProtocol! {
 		get {
 			return _callService
 		}
@@ -26,10 +26,11 @@ class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 		}
 	}
 	
-	var collectionViewConfigurationBlock: ((collectionView: ImageGalleryStoryCollectionView) -> Void)!
+	var collectionViewConfigurationBlock: ((_: ImageGalleryStoryCollectionView) -> Void)!
 	
-	func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {
-		collectionViewConfigurationBlock(collectionView: collectionView)
+	func configureCollectionView(_ collectionView: ImageGalleryStoryCollectionView) {
+
+		collectionViewConfigurationBlock(collectionView)
 	}
 	
 	func startSynchronizationImages() {
@@ -109,30 +110,26 @@ class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 		
 		var assets: [PHAsset] = []
 		
-		let fetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
-		
-		fetchResult.enumerateObjectsUsingBlock { (object: AnyObject!, count: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
-		
-			if let asset = object as? PHAsset {
-				assets.append(asset)
-			}
-			
+		let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+		// TODO: uncomment
+		fetchResult.enumerateObjects { (object: PHAsset, count: Int, stop: UnsafeMutablePointer<ObjCBool>) in
+			assets.append(object)
 		}
 		return assets
 	}
 	
-	func imageWithAsset(asset: PHAsset) -> UIImage? {
+	func imageWithAsset(_ asset: PHAsset) -> UIImage? {
 		
-		let manager = PHImageManager.defaultManager()
+		let manager = PHImageManager.default()
 		
 		var finalImage: UIImage?
 		
 		let imageRequestOptions = PHImageRequestOptions()
-		imageRequestOptions.synchronous = true
+		imageRequestOptions.isSynchronous = true
 		
-		manager.requestImageForAsset(asset, targetSize: CGSizeMake(128, 128), contentMode: PHImageContentMode.Default, options: imageRequestOptions, resultHandler: {(
-			let image: UIImage?,
-			let info: [NSObject : AnyObject]?) -> Void in
+		manager.requestImage(for: asset, targetSize: CGSize(width: 128, height: 128), contentMode: PHImageContentMode(rawValue: 0)!, options: imageRequestOptions, resultHandler: {(
+			image: UIImage?,
+			info: [AnyHashable: Any]?) -> Void in
 			
 			guard let imageUnwrapped = image else {
 				print("Retrieved image is nil")
@@ -145,8 +142,8 @@ class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 		return finalImage
 	}
 	
-	func dataWithUIImage(image: UIImage) -> NSData? {
-		guard let imageDataUnwrapped = UIImageJPEGRepresentation(image, 0.9) else {
+	func dataWithUIImage(_ image: UIImage) -> Data? {
+		guard let imageDataUnwrapped = image.jpegData(compressionQuality: 0.9) else {
 			print("Cannot create image JPEG representation")
 			return nil;
 		}
@@ -154,8 +151,8 @@ class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 		return imageDataUnwrapped
 	}
 	
-	func dataWithUIImages(images: [UIImage]) -> [NSData] {
-		var data: [NSData] = []
+	func dataWithUIImages(_ images: [UIImage]) -> [Data] {
+		var data: [Data] = []
 		
 		for image in images {
 			if let unwrappedImageData = dataWithUIImage(image) {
@@ -165,7 +162,7 @@ class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 		return data
 	}
 	
-	func sendData(data: NSData) -> Bool {
+	func sendData(_ data: Data) -> Bool {
 		return false
 //		let success = callService.sendData(data)
 //		if success {
@@ -176,7 +173,7 @@ class ImageGalleryStoryInteractor: NSObject, ImageGalleryStoryInteractorInput {
 //		return success
 	}
 	
-	func sendDataObjects(data: [NSData]) {
+	func sendDataObjects(_ data: [Data]) {
 //		for dataObject in data {
 //			callService.sendData(dataObject)
 //		}

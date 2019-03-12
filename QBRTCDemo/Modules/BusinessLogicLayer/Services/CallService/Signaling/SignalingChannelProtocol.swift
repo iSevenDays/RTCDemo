@@ -22,16 +22,16 @@ protocol SignalingChannelProtocol {
 	var state: SignalingChannelState { get }
 	var user: SVUser? { get }
 	
-	func addObserver(observer: SignalingChannelObserver)
+	func addObserver(_ observer: SignalingChannelObserver)
 	
-	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) throws
+	func connectWithUser(_ user: SVUser, completion: ((_ error: Error?) -> Void)?) throws
 	
-	func sendMessage(message: SignalingMessage, withSessionDetails: SessionDetails?, toUser user: SVUser, completion: ((error: NSError?) -> Void)?)
+	func sendMessage(_ message: SignalingMessage, withSessionDetails: SessionDetails?, toUser user: SVUser, completion: ((_ error: Error?) -> Void)?)
 	
-	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?)
+	func disconnectWithCompletion(_ completion: ((_ error: Error?) -> Void)?)
 }
 
-enum SignalingChannelError: ErrorType {
+enum SignalingChannelError: Error {
 	case missingUserID
-	case chatError(error: NSError)
+	case chatError(error: Error)
 }

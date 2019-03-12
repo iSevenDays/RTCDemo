@@ -13,7 +13,7 @@
 	
  	Configure module and start call with user
  	*/
-	func startCallWithOpponent(opponent: SVUser)
+	func startCallWithOpponent(_ opponent: SVUser)
 	
-	func acceptCallFromOpponent(opponent: SVUser)
+	func acceptCallFromOpponent(_ opponent: SVUser)
 }

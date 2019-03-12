@@ -25,7 +25,7 @@ class PeerConnectionTests: BaseTestCase {
 	// Always PeerConnection opponent
 	let user2 = TestsStorage.svuserRealUser2
 	
-	let user3 = SVUser(ID: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
+	let user3 = SVUser(id: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
 	
 	var peerConnection: PeerConnection!
 	let sessionID = "session_unique_ID"
@@ -42,7 +42,7 @@ class PeerConnectionTests: BaseTestCase {
 	
 	func testDoesntCreateAnswerSDPWhenPeerConnectionIsClosed() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
 		// when
 		peerConnection.acceptCall()
@@ -71,29 +71,29 @@ class PeerConnectionTests: BaseTestCase {
 		var didSetLocalSessionOfferDescriptionGotCalled = false
 		var didSetLocalSessionAnswerDescriptionGotCalled = false
 		
-		func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
+		func peerConnection(_ peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
 			didReceiveLocalVideoTrackGotCalled = true
 		}
-		func peerConnection(peerConnection: PeerConnection, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
+		func peerConnection(_ peerConnection: PeerConnection, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
 			didReceiveLocalAudioTrackGotCalled = true
 		}
-		func peerConnection(peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
+		func peerConnection(_ peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
 			didReceiveRemoteVideoTrackGotCalled = true
 		}
-		func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError) {
+		func peerConnection(_ peerConnection: PeerConnection, didCreateSessionWithError error: Error) {
 			didCreateSessionWithErrorGotCalled = true
 		}
-		func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCIceCandidate) {
+		func peerConnection(_ peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCIceCandidate) {
 			didSetLocalICECandidatesGotCalled = true
 		}
 		
 		// User has an offer to send
-		func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionDescription: RTCSessionDescription) {
+		func peerConnection(_ peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionDescription: RTCSessionDescription) {
 			didSetLocalSessionOfferDescriptionGotCalled = true
 		}
 		
 		// User has an answer to send
-		func peerConnection(peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionDescription: RTCSessionDescription) {
+		func peerConnection(_ peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionDescription: RTCSessionDescription) {
 			didSetLocalSessionAnswerDescriptionGotCalled = true
 		}
 	}

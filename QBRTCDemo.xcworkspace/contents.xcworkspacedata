@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Scripts/webrtc/src/all.xcodeproj">
+      location = "group:Scripts/webrtc/src/out_ios_libs/arm64_libs/products.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:QBRTCDemo.xcodeproj">

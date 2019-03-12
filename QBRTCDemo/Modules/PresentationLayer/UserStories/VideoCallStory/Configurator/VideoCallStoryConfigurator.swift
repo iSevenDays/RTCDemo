@@ -10,14 +10,14 @@ import UIKit
 
 class VideoCallStoryModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(_ viewInput: UIViewController) {
 
         if let viewController = viewInput as? VideoCallStoryViewController {
             configure(viewController)
         }
     }
 
-    private func configure(viewController: VideoCallStoryViewController) {
+    fileprivate func configure(_ viewController: VideoCallStoryViewController) {
 
         let router = VideoCallStoryRouter()
 		router.transitionHandler = viewController

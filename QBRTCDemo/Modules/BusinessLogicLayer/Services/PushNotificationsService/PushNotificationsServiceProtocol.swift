@@ -9,8 +9,8 @@
 import Foundation
 
 protocol PushNotificationsServiceProtocol: class {
-	func addObserver(observer: PushNotificationsServiceObserver)
+	func addObserver(_ observer: PushNotificationsServiceObserver)
 	
-	func registerForPushNotificationsWithDeviceToken(deviceToken: NSData)
-	func sendPushNotificationMessage(message: String, toOpponent opponent: SVUser)
+	func registerForPushNotificationsWithDeviceToken(_ deviceToken: Data)
+	func sendPushNotificationMessage(_ message: String, toOpponent opponent: SVUser)
 }

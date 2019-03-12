@@ -22,7 +22,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 	var mockOutput: MockPresenter!
 	var mockCacheService: FakeCacheService!
 	var mockRESTService: MockRESTService!
-	var callService: FakeCallSevice!
+	var callService: FakeCallService!
 	
 	var testUser: SVUser!
 	let tag = "tag"
@@ -35,7 +35,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 
 		mockCacheService = FakeCacheService()
 		interactor.cacheService = mockCacheService
-		callService = FakeCallSevice()
+		callService = FakeCallService()
 		callService.signalingChannel = FakeSignalingChannel()
 		interactor.callService = callService
 		mockRESTService = MockRESTService()
@@ -76,7 +76,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		interactor.setChatRoomName(tag)
 		
 		// then
-		XCTAssertEqual(mockOutput.error, ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
+		XCTAssertEqual(mockOutput.error, ChatUsersStoryInteractorError.tagLengthMustBeGreaterThanThreeCharacters)
 		XCTAssertFalse(mockOutput.didSetChatRoomNameGotCalled)
 	}
 	
@@ -90,6 +90,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		
 		// then
 		XCTAssertTrue(mockRESTService.downloadUsersWithTagsGotCalled)
+
 		XCTAssertEqualOptional(mockCacheService.cachedUsersForRoomWithName("tag"), mockOutput.retrievedUsers) // users should be cached
 		XCTAssertEqualOptional(mockOutput.retrievedUsers, mockRESTService.restUsersArray)
 	}
@@ -149,7 +150,7 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		let tag = "tag"
 		let opponentUser = TestsStorage.svuserRealUser1
 		
-		let fakeCallService = FakeCallSevice()
+		let fakeCallService = FakeCallService()
 		ServicesConfigurator().configureCallService(fakeCallService)
 		fakeCallService.signalingChannel = FakeSignalingChannel()
 		
@@ -205,29 +206,29 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		var didNotifyUsersAboutCurrentUserEnteredRoomGotCalled = false
 		var didFailToNotifyUsersAboutCurrentUserEnteredRoomGotCalled = false
 		
-		func didRetrieveUsers(users: [SVUser]) {
+		func didRetrieveUsers(_ users: [SVUser]) {
 			didRetrieveUsersGotCalled = true
 			retrievedUsers = users
 		}
 		
-		func didError(error: ChatUsersStoryInteractorError) {
+		func didError(_ error: ChatUsersStoryInteractorError) {
 			self.error = error
 		}
 		
-		func didSetChatRoomName(chatRoomName: String) {
+		func didSetChatRoomName(_ chatRoomName: String) {
 			didSetChatRoomNameGotCalled = true
 		}
 		
-		func didReceiveCallRequestFromOpponent(opponent: SVUser) {
+		func didReceiveCallRequestFromOpponent(_ opponent: SVUser) {
 			self.opponent = opponent
 			didReceiveCallRequestFromOpponentGotCalled = true
 		}
 		
-		func didReceiveApprovedRequestForCallWithOpponent(opponent: SVUser) {
+		func didReceiveApprovedRequestForCallWithOpponent(_ opponent: SVUser) {
 			didReceiveApprovedRequestForCallWithOpponentGotCalled = true
 		}
 		
-		func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String) {
+		func didDeclineRequestForCallWithOpponent(_ opponent: SVUser, reason: String) {
 			didDeclineRequestForCallWithOpponentGotCalled = true
 		}
 		
@@ -244,9 +245,9 @@ class ChatUsersStoryInteractorTests: XCTestCase {
 		var downloadUsersWithTagsGotCalled = false
 		var restUsersArray: [SVUser] = [TestsStorage.svuserTest]
 		
-		override func downloadUsersWithTags(tags: [String], successBlock: ((users: [SVUser]) -> Void)?, errorBlock: ((error: NSError?) -> Void)?) {
+		override func downloadUsersWithTags(_ tags: [String], successBlock: @escaping (_ users: [SVUser]) -> Void, errorBlock: @escaping (_ error: Error?) -> Void) {
 			downloadUsersWithTagsGotCalled = true
-			successBlock?(users: restUsersArray)
+			successBlock(restUsersArray)
 		}
 	}
 }

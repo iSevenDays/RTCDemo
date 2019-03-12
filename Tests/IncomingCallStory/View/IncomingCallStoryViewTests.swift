@@ -26,7 +26,7 @@ class IncomingCallStoryViewTests: XCTestCase {
 	
 	override func setUp() {
 		super.setUp()
-		controller = UIStoryboard(name: "IncomingCallStory", bundle: nil).instantiateViewControllerWithIdentifier(String(IncomingCallStoryViewController.self)) as! IncomingCallStoryViewController
+		controller = UIStoryboard(name: "IncomingCallStory", bundle: nil).instantiateViewController(withIdentifier: String(describing: IncomingCallStoryViewController.self)) as! IncomingCallStoryViewController
 		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput

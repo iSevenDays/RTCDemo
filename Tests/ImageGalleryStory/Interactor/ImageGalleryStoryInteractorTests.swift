@@ -22,8 +22,8 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 	var mockOutput: MockPresenter!
 	var mockImagesOutput: MockImagesOutput!
 	
-	let user1: SVUser = CallServiceHelpers.user1()
-	let user2: SVUser = CallServiceHelpers.user2()
+	let user1 = TestsStorage.svuserRealUser1
+	let user2 = TestsStorage.svuserRealUser2
 	
 	
 	var fakeCallService: FakeCallService!
@@ -39,13 +39,27 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		
 		interactor.imagesOutput = mockImagesOutput
 		
-		let fakeSignalingChannel: SVSignalingChannelProtocol = FakeSignalingChannel()
+		let fakeSignalingChannel: SignalingChannelProtocol = FakeSignalingChannel()
 		
 		fakeCallService = FakeCallService()
 		fakeCallService.signalingChannel = fakeSignalingChannel
-		
-		realCallService = ServiceProviderd
+		fakeCallService.signalingProcessor = SignalingProcessor()
+		fakeCallService.ICEServers = WebRTCHelpers.defaultIceServers()
+		fakeCallService.defaultMediaStreamConstraints = WebRTCHelpers.defaultMediaStreamConstraints()
+		fakeCallService.defaultPeerConnectionConstraints = WebRTCHelpers.defaultPeerConnectionConstraints()
+		fakeCallService.defaultOfferConstraints = WebRTCHelpers.defaultOfferConstraints()
+		fakeCallService.defaultAnswerConstraints = WebRTCHelpers.defaultAnswerConstraints()
+		fakeCallService.timersFactory = TimersFactory()
+
+		realCallService = CallService()
 		realCallService.signalingChannel = fakeSignalingChannel
+		realCallService.signalingProcessor = SignalingProcessor()
+		realCallService.ICEServers = WebRTCHelpers.defaultIceServers()
+		realCallService.defaultMediaStreamConstraints = WebRTCHelpers.defaultMediaStreamConstraints()
+		realCallService.defaultPeerConnectionConstraints = WebRTCHelpers.defaultPeerConnectionConstraints()
+		realCallService.defaultOfferConstraints = WebRTCHelpers.defaultOfferConstraints()
+		realCallService.defaultAnswerConstraints = WebRTCHelpers.defaultAnswerConstraints()
+		realCallService.timersFactory = TimersFactory()
     }
 	
 	// Use when using real CallService is not possible
@@ -73,7 +87,11 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		// given
 		useRealCallService()
 		interactor.callService.connectWithUser(user1, completion: nil)
-		XCTAssertNotNil(try? interactor.callService.startCallWithOpponent(user2))
+		do {
+			try interactor.callService.startCallWithOpponent(user2)
+		} catch let error {
+			XCTAssertNil(error)
+		}
 		
 		// when
 		interactor.requestCallerRole()
@@ -142,8 +160,8 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 	
 	class MockImagesOutput : ImageGalleryStoryInteractorImagesOutput {
 		var didReceiveImageGotCalled = false
-		
-		func didReceiveImage(image: UIImage) {
+
+		func didReceiveImage(_ image: UIImage) {
 			didReceiveImageGotCalled = true
 		}
 	}

@@ -40,7 +40,7 @@ extension SettingsStoryInteractor: SettingsStoryInteractorInput {
 	
 	// TODO: implement UUID for SettingItem and SettingsStorage setting
 	// to connect between model and SettingsStorage
-	func handleSettingModelSelected(settingModel: SettingModel) {
+	func handleSettingModelSelected(_ settingModel: SettingModel) {
 		switch settingModel.type {
 		case let .subtitle(label: label, subLabel: _, selected: _):
 			guard let videoSetting = VideoQualitySetting(rawValue: label) else {

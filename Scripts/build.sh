@@ -431,8 +431,8 @@ function dance() {
 
     build_t "ia32" "-iphonesimulator"
     build_t "x86_64" "-iphonesimulator"
+	build_t "arm" "-iphoneos"
     build_t "arm64" "-iphoneos"
-    build_t "arm" "-iphoneos"
 
     copy_final_headers_dir
 }

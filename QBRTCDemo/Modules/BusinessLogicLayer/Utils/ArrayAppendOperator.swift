@@ -12,6 +12,6 @@ extension Array {
 	
 }
 
-func += <V> (inout left: [V], right: V) {
+func += <V> (left: inout [V], right: V) {
 	left.append(right)
 }

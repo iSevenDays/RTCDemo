@@ -22,26 +22,26 @@ class IncomingCallStoryViewController: UIViewController {
 	
 	// MARK: IBActions
 	
-	@IBAction func acceptCall(sender: AnyObject) {
+	@IBAction func acceptCall(_ sender: AnyObject) {
 		_ = view
 		output.didTriggerAcceptButtonTapped()
 	}
 	
-	@IBAction func declineCall(sender: AnyObject) {
+	@IBAction func declineCall(_ sender: AnyObject) {
 		_ = view
 		output.didTriggerDeclineButtonTapped()
 	}
 }
 
 extension IncomingCallStoryViewController: IncomingCallStoryViewInput {
-	func setupInitialState() {
+	@objc func setupInitialState() {
 		
 	}
 	
-	func configureViewWithCallInitiator(callInitiator: SVUser) {
+	func configureViewWithCallInitiator(_ callInitiator: SVUser) {
 		_ = view
 		lblIncomingCall.text = "Incoming call from " + callInitiator.fullName
-		lblIncomingCall.hidden = false
+		lblIncomingCall.isHidden = false
 	}
 	
 	func showOpponentDecidedToDeclineCall() {
@@ -49,10 +49,10 @@ extension IncomingCallStoryViewController: IncomingCallStoryViewInput {
 	}
 	
 	func hideView() {
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) { [view] in
-			let v = UIView(frame: view.frame)
-			v.backgroundColor = UIColor.blackColor()
-			view.addSubview(v)
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC)) { [view] in
+			let v = UIView(frame: (view?.frame)!)
+			v.backgroundColor = UIColor.black
+			view?.addSubview(v)
 		}
 	}
 }

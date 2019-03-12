@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AlertControlProtocol: class {
-	func showMessage(message: String, title: String, overViewController: UIViewController?, actions: [UIAlertAction] , completion: (() -> Void)?)
-	func showMessage(message: String, title: String, overViewController: UIViewController?, completion: (() -> Void)?)
-	func showErrorMessage(message: String, overViewController: UIViewController, completion: (() -> Void)?)
+	func showMessage(_ message: String, title: String, overViewController: UIViewController?, actions: [UIAlertAction] , completion: (() -> Void)?)
+	func showMessage(_ message: String, title: String, overViewController: UIViewController?, completion: (() -> Void)?)
+	func showErrorMessage(_ message: String, overViewController: UIViewController, completion: (() -> Void)?)
 }

@@ -71,9 +71,10 @@ class IncomingCallStoryInteractorTests: XCTestCase {
 		XCTAssertFalse(mockPresenter.didReceiveHangupForIncomingCallGotCalled)
 	}
 	
-	class MockOutput: FakeCallSevice {
+	class MockOutput: FakeCallService {
 		var opponent: SVUser?
-		override func sendRejectCallToOpponent(user: SVUser) throws {
+		
+		override func sendRejectCallToOpponent(_ user: SVUser) throws {
 			opponent = user
 		}
 	}

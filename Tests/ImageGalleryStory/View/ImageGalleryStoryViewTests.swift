@@ -25,7 +25,7 @@ class ImageGalleryStoryViewTests: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-		controller = UIStoryboard(name: "ImageGalleryStory", bundle: nil).instantiateViewControllerWithIdentifier(String( ImageGalleryStoryViewController.self)) as! ImageGalleryStoryViewController
+		controller = UIStoryboard(name: "ImageGalleryStory", bundle: nil).instantiateViewController(withIdentifier: String(describing: ImageGalleryStoryViewController.self)) as! ImageGalleryStoryViewController
 		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput

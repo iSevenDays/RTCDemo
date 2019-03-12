@@ -20,9 +20,9 @@ class FakePushNotificationsService: QBPushNotificationsService {
 	
 	var shouldSendPushes = true
 	
-	override func sendPushNotificationMessage(message: String, toOpponent opponent: SVUser) {
+	override func sendPushNotificationMessage(_ message: String, toOpponent opponent: SVUser) {
 		if shouldSendPushes {
-			observers => { $0.pushNotificationsService(self, didSendMessage: message, toOpponent: opponent) }
+			observers |> { $0.pushNotificationsService(self, didSendMessage: message, toOpponent: opponent) }
 		}
 	}
 	

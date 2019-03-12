@@ -6,24 +6,26 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-import Foundation
+import CoreFoundation
+typealias RenderableView = (UIView & RTCVideoRenderer)
 
 @objc protocol VideoCallStoryInteractorOutput: class {
 	/// Current user called hangup
 	func didHangup()
 	
 	/// Method is called when hangup is received from opponent user in a current call
-	func didReceiveHangupFromOpponent(opponent: SVUser)
+	func didReceiveHangupFromOpponent(_ opponent: SVUser)
 	
 	/// Method is called when reject for a call is received from opponent user
-	func didReceiveRejectFromOpponent(opponent: SVUser)
+	func didReceiveRejectFromOpponent(_ opponent: SVUser)
 	
 	/// Method is called when answer timeout occured for calling the given opponent
-	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser)
+	func didReceiveAnswerTimeoutForOpponent(_ opponent: SVUser)
 	
 	func didFailToConnectToChat()
-	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession)
-	func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?)
+	func didReceiveLocalVideoTrackWithConfigurationBlock(_ block: ((_ renderer: RenderableView?) -> Void)?)
+	func didReceiveRemoteVideoTrackWithConfigurationBlock(_ block: ((_ renderer: RenderableView?) -> Void)?)
+	func willSwitchDevicePositionWithConfigurationBlock(_ block: ((_ renderer: RenderableView?) -> Void)?)
 	func didOpenDataChannel()
 	func didReceiveDataChannelStateReady()
 	func didReceiveDataChannelStateNotReady()
@@ -40,18 +42,18 @@ import Foundation
 	 */
 	func didFailCallService()
 	
-	func didStartDialingOpponent(opponent: SVUser)
-	func didReceiveAnswerFromOpponent(opponent: SVUser)
+	func didStartDialingOpponent(_ opponent: SVUser)
+	func didReceiveAnswerFromOpponent(_ opponent: SVUser)
 	
-	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser)
+	func didSendPushNotificationAboutNewCallToOpponent(_ opponent: SVUser)
 	
-	func didSwitchCameraPosition(backCamera: Bool)
+	func didSwitchCameraPosition(_ backCamera: Bool)
 	
 	/// Called when local video track state is changed
-	func didSwitchLocalVideoTrackState(enabled: Bool)
+	func didSwitchLocalVideoTrackState(_ enabled: Bool)
 	
 	/// Called when local audio track state is changed
-	func didSwitchLocalAudioTrackState(enabled: Bool)
+	func didSwitchLocalAudioTrackState(_ enabled: Bool)
 	
 	/// Called when the app is authorized to use camera
 	func didReceiveVideoStatusAuthorized()

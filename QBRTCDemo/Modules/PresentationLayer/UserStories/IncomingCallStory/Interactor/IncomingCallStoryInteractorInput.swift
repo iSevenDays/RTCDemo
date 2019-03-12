@@ -14,7 +14,7 @@ protocol IncomingCallStoryInteractorInput {
 	
 	- parameter opponent: opponent, call initiator
 	*/
-	func setOpponent(opponent: SVUser)
+	func setOpponent(_ opponent: SVUser)
 	
 	/**
 	Retrieve opponent, call initiator

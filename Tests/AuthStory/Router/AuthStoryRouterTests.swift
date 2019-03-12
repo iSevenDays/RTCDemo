@@ -37,7 +37,7 @@ class AuthStoryRouterTests: BaseTestCase {
 	
 	func testSegues() {
 		// given
-		let identifiers = segues(ofViewController: UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewControllerWithIdentifier("AuthStoryViewController"))
+		let identifiers = segues(ofViewController: UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewController(withIdentifier: "AuthStoryViewController"))
 		
 		// then
 		XCTAssertTrue(identifiers.contains(router.authStoryToChatUsersStorySegueIdentifier))
@@ -45,7 +45,7 @@ class AuthStoryRouterTests: BaseTestCase {
 	
 	class MockOutput: AuthStoryViewController {
 		var openedModuleSegueIdentifier: String?
-		override func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
+		override func openModule(usingSegue segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
 			openedModuleSegueIdentifier = segueIdentifier
 			return RamblerViperOpenModulePromise()
 		}

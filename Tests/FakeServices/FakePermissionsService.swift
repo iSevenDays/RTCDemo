@@ -28,25 +28,25 @@ class FakePermissionsService: PermissionsServiceProtocol {
 		return authStatus
 	}
 	
-	func requestAccessForVideo(completion: (granted: Bool) -> Void) {
+	func requestAccessForVideo(_ completion: @escaping (_ granted: Bool) -> Void) {
 		switch authStatus {
 		case .authorized:
-			completion(granted: true)
+			completion(true)
 		case .notDetermined:
-			completion(granted: false)
+			completion(false)
 		case .denied:
-			completion(granted: false)
+			completion(false)
 		}	
 	}
 	
-	func requestAccessForMicrophone(completion: (granted: Bool) -> Void) {
+	func requestAccessForMicrophone(_ completion: @escaping (_ granted: Bool) -> Void) {
 		switch authStatus {
 		case .authorized:
-			completion(granted: true)
+			completion(true)
 		case .notDetermined:
-			completion(granted: false)
+			completion(false)
 		case .denied:
-			completion(granted: false)
+			completion(false)
 		}
 	}
 }

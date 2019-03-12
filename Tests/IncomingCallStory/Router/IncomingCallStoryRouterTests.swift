@@ -54,7 +54,7 @@ class IncomingCallStoryRouterTests: BaseTestCase {
 	
 	class MockOutput: IncomingCallStoryViewController {
 		var openedModuleSegueIdentifier: String?
-		override func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
+		override func openModule(usingSegue segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
 			openedModuleSegueIdentifier = segueIdentifier
 			return RamblerViperOpenModulePromise()
 		}

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-@objc class IncomingCallStoryPresenter: NSObject {
+class IncomingCallStoryPresenter: NSObject {
 
     weak var view: IncomingCallStoryViewInput!
     var interactor: IncomingCallStoryInteractorInput!
@@ -14,7 +14,7 @@
 }
 
 extension IncomingCallStoryPresenter: IncomingCallStoryModuleInput {
-	func configureModuleWithCallInitiator(opponent: SVUser) {
+	func configureModuleWithCallInitiator(_ opponent: SVUser) {
 		interactor.setOpponent(opponent)
 		view.configureViewWithCallInitiator(opponent)
 	}

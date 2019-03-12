@@ -13,40 +13,36 @@ class ChatUsersStoryRouter {
 	let chatUsersStoryToSettingsStorySegueIdentifier = "ChatUsersStoryToSettingsStorySegueIdentifier"
 	
 	// ChatUsersViewController is transitionHandler
-	@objc weak var transitionHandler: protocol<RamblerViperModuleTransitionHandlerProtocol>!
+	@objc weak var transitionHandler: RamblerViperModuleTransitionHandlerProtocol!
 }
 
 extension ChatUsersStoryRouter: ChatUsersStoryRouterInput {
-	func openVideoStoryWithInitiator(initiator: SVUser, thenCallOpponent opponent: SVUser) {
-		
-		transitionHandler.openModuleUsingSegue?(chatUsersStoryToVideoCallStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
-			
+	func openVideoStoryWithInitiator(_ initiator: SVUser, thenCallOpponent opponent: SVUser) {
+		transitionHandler.openModule?(usingSegue: chatUsersStoryToVideoCallStorySegueIdentifier)?.thenChain({ (moduleInput) -> RamblerViperModuleOutput? in
 			guard let videoStoryInput = moduleInput as? VideoCallStoryModuleInput else {
 				fatalError("moduleInput is not VideoStoryModuleInput")
 			}
-			
 			videoStoryInput.startCallWithOpponent(opponent)
-			
 			return nil
 		})
 	}
-	
-	func openIncomingCallStoryWithOpponent(opponent: SVUser) {
+
+	func openIncomingCallStoryWithOpponent(_ opponent: SVUser) {
 		
-		transitionHandler.openModuleUsingSegue?(chatUsersStoryToIncomingCallStorySegueIdentifier).thenChainUsingBlock({ (moduleInput) -> RamblerViperModuleOutput! in
-			
+		transitionHandler.openModule?(usingSegue: chatUsersStoryToIncomingCallStorySegueIdentifier)?.thenChain({ (moduleInput) -> RamblerViperModuleOutput? in
+
 			guard let incomingCallStoryInput = moduleInput as? IncomingCallStoryModuleInput else {
 				fatalError("moduleInput is not IncomingCallStoryModuleInput")
 			}
-			
+
 			incomingCallStoryInput.configureModuleWithCallInitiator(opponent)
-			
+
 			return nil
 		})
 	}
 	
 	func openSettingsStory() {
-		transitionHandler.openModuleUsingSegue?(chatUsersStoryToSettingsStorySegueIdentifier)
+		transitionHandler.openModule?(usingSegue: chatUsersStoryToSettingsStorySegueIdentifier)
 	}
 	
 }

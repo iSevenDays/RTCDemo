@@ -8,7 +8,7 @@
 
 import Foundation
 //
-enum SignalingMessagesFactoryError: ErrorType {
+enum SignalingMessagesFactoryError: Error {
 	case incorrectSignalingMessage(message: QBChatMessage)
 	case failedToDecompressMessage(message: QBChatMessage)
 	case undefinedSignalingMessageType
@@ -57,30 +57,30 @@ enum SignalingParams: String {
 
 class SignalingMessagesFactory {
 	
-	func qbMessageFromSignalingMessage(message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails?) throws -> QBChatMessage {
+	func qbMessageFromSignalingMessage(_ message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails?) throws -> QBChatMessage {
 		var params: [String: AnyObject] = [:]
 		
 		// SVUser sender populating
-		params[SignalingParams.senderLogin.rawValue] = sender.login
-		params[SignalingParams.senderFullName.rawValue] = sender.fullName
+		params[SignalingParams.senderLogin.rawValue] = sender.login as AnyObject
+		params[SignalingParams.senderFullName.rawValue] = sender.fullName as AnyObject
 		
 		// SessionDetails populating
 		if let sessionDetails = sessionDetails {
-			params[SignalingParams.sessionID.rawValue] = sessionDetails.sessionID
-			params[SignalingParams.membersIDs.rawValue] = sessionDetails.membersIDs.flatMap({String($0)}).joinWithSeparator(",")
-			params[SignalingParams.initiatorID.rawValue] = String(sessionDetails.initiatorID)
+			params[SignalingParams.sessionID.rawValue] = sessionDetails.sessionID as AnyObject
+			params[SignalingParams.membersIDs.rawValue] = sessionDetails.membersIDs.compactMap({String($0)}).joined(separator: ",") as AnyObject
+			params[SignalingParams.initiatorID.rawValue] = String(sessionDetails.initiatorID) as AnyObject
 		}
 		switch message {
 		case let .answer(sdp: sessionDescription):
-			params[SignalingParams.type.rawValue] = SignalingMessageType.answer.rawValue
-			params[SignalingParams.sdp.rawValue] = sessionDescription.sdp
+			params[SignalingParams.type.rawValue] = SignalingMessageType.answer.rawValue as AnyObject
+			params[SignalingParams.sdp.rawValue] = sessionDescription.sdp as AnyObject
 			break
 		case let .offer(sdp: sessionDescription):
-			params[SignalingParams.type.rawValue] = SignalingMessageType.offer.rawValue
-			params[SignalingParams.sdp.rawValue] = sessionDescription.sdp
+			params[SignalingParams.type.rawValue] = SignalingMessageType.offer.rawValue as AnyObject
+			params[SignalingParams.sdp.rawValue] = sessionDescription.sdp as AnyObject
 			break
 		case let .candidates(candidates: candidates):
-			params[SignalingParams.type.rawValue] = SignalingMessageType.candidates.rawValue
+			params[SignalingParams.type.rawValue] = SignalingMessageType.candidates.rawValue as AnyObject
 			var candidatesDict: [[String: String]] = []
 			for candidate in candidates {
 				candidatesDict.append([
@@ -89,18 +89,18 @@ class SignalingMessagesFactory {
 					SignalingParams.sdp.rawValue: candidate.sdp])
 				
 			}
-			params[SignalingParams.candidates.rawValue] = candidatesDict
+			params[SignalingParams.candidates.rawValue] = candidatesDict as AnyObject
 			
 			break
 		case .hangup:
-			params[SignalingParams.type.rawValue] = SignalingMessageType.hangup.rawValue
+			params[SignalingParams.type.rawValue] = SignalingMessageType.hangup.rawValue as AnyObject
 			break
 		case .reject:
-			params[SignalingParams.type.rawValue] = SignalingMessageType.reject.rawValue
+			params[SignalingParams.type.rawValue] = SignalingMessageType.reject.rawValue as AnyObject
 			break
 		case let .user(enteredChatRoomName: roomName):
-			params[SignalingParams.type.rawValue] = SignalingMessageType.userEnteredChatRoom.rawValue
-			params[SignalingParams.roomName.rawValue] = roomName
+			params[SignalingParams.type.rawValue] = SignalingMessageType.userEnteredChatRoom.rawValue as AnyObject
+			params[SignalingParams.roomName.rawValue] = roomName as AnyObject
 			break
 		}
 		
@@ -123,17 +123,18 @@ class SignalingMessagesFactory {
 	
 	- returns: return message, sender, sessionDetails(nil for chat room SignalingMessage)
 	*/
-	func signalingMessageFromQBMessage(message: QBChatMessage) throws -> (message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails?) {
+	func signalingMessageFromQBMessage(_ message: QBChatMessage) throws -> (message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails?) {
 		guard let base64Representation = message.customParameters[SignalingParams.compressedData.rawValue] as? String else {
 			throw SignalingMessagesFactoryError.incorrectSignalingMessage(message: message)
 		}
-		guard let decodedBase64Data = NSData(base64EncodedString: base64Representation, options: NSDataBase64DecodingOptions(rawValue: 0)) else {
+
+		guard let decodedBase64Data = Data(base64Encoded: base64Representation, options: Data.Base64DecodingOptions(rawValue: 0)) else {
 			throw SignalingMessagesFactoryError.incorrectSignalingMessage(message: message)
 		}
-		guard let ungzippedData = decodedBase64Data.gunzippedData() else {
+		guard let ungzippedData = (decodedBase64Data as NSData).gunzipped() else {
 			throw SignalingMessagesFactoryError.failedToDecompressMessage(message: message)
 		}
-		guard let params = try NSJSONSerialization.JSONObjectWithData(ungzippedData, options: NSJSONReadingOptions.AllowFragments) as? [String: AnyObject] else {
+		guard let params = try JSONSerialization.jsonObject(with: ungzippedData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject] else {
 			throw SignalingMessagesFactoryError.incorrectParamsType
 		}
 		guard let signalingMessageTypeString = params[SignalingParams.type.rawValue] as? String else {
@@ -150,7 +151,7 @@ class SignalingMessagesFactory {
 		guard let userFullName = params[SignalingParams.senderFullName.rawValue] as? String else {
 			throw SignalingMessagesFactoryError.missingSender
 		}
-		let sender = SVUser(ID: message.senderID, login: userLogin, fullName: userFullName, password: nil, tags: nil)
+		let sender = SVUser(id: NSNumber(value: message.senderID), login: userLogin, fullName: userFullName, password: nil, tags: nil)
 		
 		// SessionDetails populating
 		var sessionDetails: SessionDetails?
@@ -163,7 +164,7 @@ class SignalingMessagesFactory {
 			guard let sessionID = params[SignalingParams.sessionID.rawValue] as? String else {
 				throw SignalingMessagesFactoryError.missingSessionID
 			}
-			guard let membersIDs = (params[SignalingParams.membersIDs.rawValue] as? String)?.componentsSeparatedByString(",").flatMap({UInt.init($0)}) else {
+			guard let membersIDs = (params[SignalingParams.membersIDs.rawValue] as? String)?.components(separatedBy: ",").compactMap({UInt.init($0)}) else {
 				throw SignalingMessagesFactoryError.missingMembersIDs
 			}
 			sessionDetails = SessionDetails(initiatorID: UInt(initiatorID)!, membersIDs: membersIDs, sessionID: sessionID)
@@ -172,15 +173,15 @@ class SignalingMessagesFactory {
 		
 		switch signalingMessageType {
 		case .answer, .offer:
-			guard let sourceSDP = params[SignalingParams.sdp.rawValue]?.stringByReplacingOccurrencesOfString("&#13;", withString: "\r") else {
+			guard let sourceSDP = params[SignalingParams.sdp.rawValue]?.replacingOccurrences(of: "&#13;", with: "\r") else {
 				throw SignalingMessagesFactoryError.missingSDP
 			}
 			
 			if signalingMessageType == .offer {
-				let sdp = RTCSessionDescription(type: .Offer, sdp: sourceSDP)
+				let sdp = RTCSessionDescription(type: .offer, sdp: sourceSDP)
 				return (message: SignalingMessage.offer(sdp: sdp), sender: sender, sessionDetails: sessionDetails)
 			} else if signalingMessageType == .answer {
-				let sdp = RTCSessionDescription(type: .Answer, sdp: sourceSDP)
+				let sdp = RTCSessionDescription(type: .answer, sdp: sourceSDP)
 				return (message: SignalingMessage.answer(sdp: sdp), sender: sender, sessionDetails: sessionDetails)
 			}
 		case .candidates:
@@ -198,7 +199,7 @@ class SignalingMessagesFactory {
 				guard let index = Int32(indexStr) else {
 					continue
 				}
-				guard let candidateSDP = candidate[SignalingParams.sdp.rawValue]?.stringByReplacingOccurrencesOfString("&#13;", withString: "\r") else {
+				guard let candidateSDP = candidate[SignalingParams.sdp.rawValue]?.replacingOccurrences(of: "&#13;", with: "\r") else {
 					continue
 				}
 				let iceCandidate = RTCIceCandidate(sdp: candidateSDP, sdpMLineIndex: index, sdpMid: mid)
@@ -218,10 +219,10 @@ class SignalingMessagesFactory {
 		throw SignalingMessagesFactoryError.undefinedSignalingMessageType
 	}
 	
-	private func compressedCustomParams(params: [String: AnyObject]) -> String? {
-		let jsonRepresentation = try? NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions(rawValue: 0))
-		let compressedParams = jsonRepresentation?.gzippedData()
-		let base64Representation = compressedParams?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.EncodingEndLineWithLineFeed)
+	fileprivate func compressedCustomParams(_ params: [String: AnyObject]) -> String? {
+		let jsonRepresentation = try? JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions(rawValue: 0))
+		let compressedParams = (jsonRepresentation as NSData?)?.gzipped()
+		let base64Representation = compressedParams?.base64EncodedString(options: NSData.Base64EncodingOptions.endLineWithLineFeed)
 		return base64Representation
 	}
 }

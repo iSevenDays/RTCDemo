@@ -26,7 +26,7 @@ class VideoCallStoryViewTests: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-        controller = UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewControllerWithIdentifier(String(VideoCallStoryViewController.self)) as! VideoCallStoryViewController
+		controller = UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewController(withIdentifier: String(describing: VideoCallStoryViewController.self)) as! VideoCallStoryViewController
 		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
@@ -140,17 +140,6 @@ class VideoCallStoryViewTests: XCTestCase {
 	}
 	
 	// MARK: Testing methods of VideoCallStoryViewInput
-	
-	func testSetLocalVideoCaptureSession_setsCaptureSession() {
-		// given
-		let testCaptureSession = AVCaptureSession()
-		
-		// when
-		controller.setLocalVideoCaptureSession(testCaptureSession)
-		
-		// then
-		XCTAssertEqual(controller.viewLocal.captureSession, testCaptureSession)
-	}
 
 	func testShowsDialingInformation() {
 		// when

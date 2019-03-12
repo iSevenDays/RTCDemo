@@ -18,8 +18,8 @@ protocol AuthStoryViewInput: class {
 	func enableInput()
 	func disableInput()
 	
-	func setUserName(userName: String)
-	func setRoomName(roomName: String)
+	func setUserName(_ userName: String)
+	func setRoomName(_ roomName: String)
 	
 	/**
 	Retrieve UserName and RoomName

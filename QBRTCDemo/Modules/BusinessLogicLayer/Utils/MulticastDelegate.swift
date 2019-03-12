@@ -1,166 +1,149 @@
 //
 //  MulticastDelegate.swift
-//  MulticastDelegate
+//  MulticastDelegateDemo
 //
-//  Created by Thong Nguyen on 31/03/2016.
-//  Copyright © 2016 King Street Apps Limited. All rights reserved.
+//  Created by Joao Nunes on 28/12/15.
+//  Copyright © 2015 Joao Nunes. All rights reserved.
 //
 
 import Foundation
 
-public func += <T> (inout left: MulticastDelegate<T>?, right: T)
-{
-	if left != nil
-	{
-		left = MulticastDelegate<T>.addDelegate(left!, delegate: right)
+/**
+*  `MulticastDelegate` lets you easily create a "multicast delegate" for a given protocol or class.
+*/
+open class MulticastDelegate<T> {
+
+	/// The delegates hash table.
+	private let delegates: NSHashTable<AnyObject>
+
+	/**
+	*  Use the property to check if no delegates are contained there.
+	*
+	*  - returns: `true` if there are no delegates at all, `false` if there is at least one.
+	*/
+	public var isEmpty: Bool {
+
+		return delegates.count == 0
 	}
-	else
-	{
-		left = MulticastDelegate<T>(delegate: right as! AnyObject)
+
+	/**
+	*  Use this method to initialize a new `MulticastDelegate` specifying whether delegate references should be weak or
+	*  strong.
+	*
+	*  - parameter strongReferences: Whether delegates should be strongly referenced, false by default.
+	*
+	*  - returns: A new `MulticastDelegate` instance
+	*/
+	public init(strongReferences: Bool = false) {
+
+		delegates = strongReferences ? NSHashTable<AnyObject>() : NSHashTable<AnyObject>.weakObjects()
+	}
+
+	/**
+	*  Use this method to initialize a new `MulticastDelegate` specifying the storage options yourself.
+	*
+	*  - parameter options: The underlying storage options to use
+	*
+	*  - returns: A new `MulticastDelegate` instance
+	*/
+	public init(options: NSPointerFunctions.Options) {
+
+		delegates = NSHashTable<AnyObject>(options: options, capacity: 0)
+	}
+
+	/**
+	*  Use this method to add a delelgate.
+	*
+	*  Alternatively, you can use the `+=` operator to add a delegate.
+	*
+	*  - parameter delegate:  The delegate to be added.
+	*/
+	public func addDelegate(_ delegate: T) {
+
+		delegates.add(delegate as AnyObject)
+	}
+
+	/**
+	*  Use this method to remove a previously-added delegate.
+	*
+	*  Alternatively, you can use the `-=` operator to add a delegate.
+	*
+	*  - parameter delegate:  The delegate to be removed.
+	*/
+	public func removeDelegate(_ delegate: T) {
+
+		delegates.remove(delegate as AnyObject)
+	}
+
+	/**
+	*  Use this method to invoke a closure on each delegate.
+	*
+	*  Alternatively, you can use the `|>` operator to invoke a given closure on each delegate.
+	*
+	*  - parameter invocation: The closure to be invoked on each delegate.
+	*/
+	public func invokeDelegates(_ invocation: (T) -> ()) {
+
+		for delegate in delegates.allObjects {
+			invocation(delegate as! T)
+		}
+	}
+
+	/**
+	*  Use this method to determine if the multicast delegate contains a given delegate.
+	*
+	*  - parameter delegate:   The given delegate to check if it's contained
+	*
+	*  - returns: `true` if the delegate is found or `false` otherwise
+	*/
+	public func containsDelegate(_ delegate: T) -> Bool {
+
+		return delegates.contains(delegate as AnyObject)
 	}
 }
 
-public func -= <T> (inout left: MulticastDelegate<T>?, right: T)
-{
-	if left != nil
-	{
-		left = MulticastDelegate<T>.removeDelegate(left!, delegate: right)
-	}
+/**
+*  Use this operator to add a delegate.
+*
+*  This is a convenience operator for calling `addDelegate`.
+*
+*  - parameter left:   The multicast delegate
+*  - parameter right:  The delegate to be added
+*/
+public func +=<T>(left: MulticastDelegate<T>, right: T) {
+
+	left.addDelegate(right)
 }
 
-infix operator => {}
+/**
+*  Use this operator to remove a delegate.
+*
+*  This is a convenience operator for calling `removeDelegate`.
+*
+*  - parameter left:   The multicast delegate
+*  - parameter right:  The delegate to be removed
+*/
+public func -=<T>(left: MulticastDelegate<T>, right: T) {
 
-public func => <T> (inout left: MulticastDelegate<T>?, invocation: (T) -> ())
-{
-	if let originalleft = left
-	{
-		let cleaned = MulticastDelegate<T>.invoke(originalleft, invocation: invocation)
-		
-		if let currentleft = left where originalleft === currentleft
-		{
-			left = cleaned
-		}
-	}
+	left.removeDelegate(right)
 }
 
-private struct WeakRef: Equatable
-{
-	weak var value: AnyObject?
-	
-	init(value: AnyObject)
-	{
-		self.value = value
-	}
+/**
+*  Use this operator invoke a closure on each delegate.
+*
+*  This is a convenience operator for calling `invokeDelegates`.
+*
+*  - parameter left:   The multicast delegate
+*  - parameter right:  The closure to be invoked on each delegate
+*
+*  - returns: The `MulticastDelegate` after all its delegates have been invoked
+*/
+precedencegroup MulticastPrecedence {
+	associativity: left
+	higherThan: TernaryPrecedence
 }
+infix operator |> : MulticastPrecedence
+public func |><T>(left: MulticastDelegate<T>, right: (T) -> ()) {
 
-private func ==(lhs: WeakRef, rhs: WeakRef) -> Bool
-{
-	return lhs.value === rhs.value
-}
-
-public class MulticastDelegate<T>
-{
-	private var delegates: [WeakRef]
-	
-	private init(delegate: AnyObject)
-	{
-		self.delegates = [WeakRef(value: delegate)]
-	}
-	
-	private init(delegates: Array<WeakRef>)
-	{
-		self.delegates = delegates
-	}
-	
-	private init(delegates: Array<WeakRef>, delegate: AnyObject)
-	{
-		var copy = delegates
-		let weakDelegate = WeakRef(value: delegate)
-		if !copy.contains(weakDelegate) {
-			copy.append(weakDelegate)
-		}
-		
-		self.delegates = copy
-	}
-	
-	static func addDelegate(multicastDelegate: MulticastDelegate<T>, delegate: T) -> MulticastDelegate<T>?
-	{
-		if let delegate = delegate as? AnyObject
-		{
-			return MulticastDelegate<T>(delegates: multicastDelegate.delegates, delegate: delegate)
-		}
-		
-		return multicastDelegate
-	}
-	
-	static func removeDelegate(multicastDelegate: MulticastDelegate<T>, delegate: T) -> MulticastDelegate<T>?
-	{
-		for (index, ref) in multicastDelegate.delegates.enumerate()
-		{
-			if ref.value === delegate as? AnyObject
-			{
-				if multicastDelegate.delegates.count == 1
-				{
-					return nil
-				}
-				
-				var newDelegates = Array<WeakRef>(multicastDelegate.delegates[0..<index])
-				
-				if multicastDelegate.delegates.count - index - 1 > 0
-				{
-					newDelegates.appendContentsOf(multicastDelegate.delegates[index + 1..<multicastDelegate.delegates.count])
-				}
-				
-				return MulticastDelegate<T>(delegates: newDelegates)
-			}
-		}
-		
-		return multicastDelegate
-	}
-	
-	static func invoke(multicastDelegate: MulticastDelegate<T>, invocation: (T) -> ()) -> MulticastDelegate<T>?
-	{
-		var hasNewDelegates = false
-		var newDelegates: Array<WeakRef>? = nil
-		
-		for (index, ref) in multicastDelegate.delegates.enumerate()
-		{
-			if let delegate = ref.value
-			{
-				invocation(delegate as! T)
-				
-				if var newDelegates = newDelegates
-				{
-					newDelegates.append(ref)
-				}
-				else if hasNewDelegates
-				{
-					newDelegates = Array.init(arrayLiteral: ref)
-				}
-			}
-			else
-			{
-				if newDelegates == nil
-				{
-					hasNewDelegates = true
-					
-					if index > 0
-					{
-						newDelegates = multicastDelegate.delegates.filter({$0.value != nil})
-					}
-				}
-			}
-		}
-		
-		if let newDelegates = newDelegates
-		{
-			return MulticastDelegate<T>(delegates: newDelegates)
-		}
-		else if hasNewDelegates
-		{
-			return nil
-		}
-		
-		return multicastDelegate
-	}
+	left.invokeDelegates(right)
 }

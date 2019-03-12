@@ -15,11 +15,14 @@ import Foundation
 }
 
 extension VideoCallStoryPresenter: VideoCallStoryModuleInput {
-	func startCallWithOpponent(opponent: SVUser) {
+	func startCallWithOpponent(_ opponent: SVUser) {
 		interactor.startCallWithOpponent(opponent)
 	}
 	
-	func acceptCallFromOpponent(opponent: SVUser) {
+	func acceptCallFromOpponent(_ opponent: SVUser) {
+		DispatchQueue.main.async { [view] in
+			view?.showCurrentUserAcceptedCallFromOpponent(opponent)
+		}
 		interactor.acceptCallFromOpponent(opponent)
 	}
 }
@@ -63,50 +66,56 @@ extension VideoCallStoryPresenter: VideoCallStoryViewOutput {
 extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	
 	func didHangup() {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+		DispatchQueue.main.async { [view] in
 			view?.showHangup()
 		}
 	}
 	
-	func didReceiveHangupFromOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+	func didReceiveHangupFromOpponent(_ opponent: SVUser) {
+		DispatchQueue.main.async { [view] in
 			view?.showOpponentHangup()
 		}
 	}
 	
-	func didReceiveRejectFromOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+	func didReceiveRejectFromOpponent(_ opponent: SVUser) {
+		DispatchQueue.main.async { [view] in
 			view?.showOpponentReject()
 		}
 	}
 	
-	func didReceiveAnswerTimeoutForOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+	func didReceiveAnswerTimeoutForOpponent(_ opponent: SVUser) {
+		DispatchQueue.main.async { [view] in
 			view?.showOpponentAnswerTimeout()
 		}
 	}
 	
 	func didFailToConnectToChat() {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+		DispatchQueue.main.async { [view] in
 			view?.showErrorConnect()
 		}
 	}
 	
 	func didFailCallService() {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+		DispatchQueue.main.async { [view] in
 			view?.showErrorCallServiceDisconnected()
 		}
 	}
 	
-	func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
-			view?.setLocalVideoCaptureSession(localCaptureSession)
+	func didReceiveLocalVideoTrackWithConfigurationBlock(_ block: ((_ renderer: RenderableView?) -> Void)?) {
+		DispatchQueue.main.async { [view] in
+			view?.configureLocalVideoViewWithBlock(block)
 		}
 	}
 	
-	func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+	func didReceiveRemoteVideoTrackWithConfigurationBlock(_ block: ((_ renderer: RenderableView?) -> Void)?) {
+		DispatchQueue.main.async { [view] in
 			view?.configureRemoteVideoViewWithBlock(block)
+		}
+	}
+
+	func willSwitchDevicePositionWithConfigurationBlock(_ block: ((RenderableView?) -> Void)?) {
+		DispatchQueue.main.async { [view] in
+			view?.configureLocalVideoViewWithBlock(block)
 		}
 	}
 	
@@ -123,67 +132,67 @@ extension VideoCallStoryPresenter: VideoCallStoryInteractorOutput {
 	}
 	
 	func didReceiveDataChannelStateNotReady() {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+		DispatchQueue.main.async(execute: { [view] in
 			view?.showErrorDataChannelNotReady()
 			})
 	}
 	
-	func didStartDialingOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+	func didStartDialingOpponent(_ opponent: SVUser) {
+		DispatchQueue.main.async(execute: { [view] in
 			view?.showStartDialingOpponent(opponent)
 			})
 	}
 	
-	func didReceiveAnswerFromOpponent(opponent: SVUser) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+	func didReceiveAnswerFromOpponent(_ opponent: SVUser) {
+		DispatchQueue.main.async(execute: { [view] in
 			view?.showReceivedAnswerFromOpponent(opponent)
 			})
 	}
 	
 	// TODO: Add Tests
-	func didSwitchCameraPosition(backCamera: Bool) {
-		dispatch_async(dispatch_get_main_queue(), { [view] in
+	func didSwitchCameraPosition(_ backCamera: Bool) {
+		DispatchQueue.main.async(execute: { [view] in
 			view?.showCameraPosition(backCamera)
 		})
 	}
 	
-	func didSwitchLocalVideoTrackState(enabled: Bool) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+	func didSwitchLocalVideoTrackState(_ enabled: Bool) {
+		DispatchQueue.main.async { [view] in
 			view?.showLocalVideoTrackEnabled(enabled)
 		}
 	}
 	
-	func didSwitchLocalAudioTrackState(enabled: Bool) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+	func didSwitchLocalAudioTrackState(_ enabled: Bool) {
+		DispatchQueue.main.async { [view] in
 			view?.showLocalAudioTrackEnabled(enabled)
 		}
 	}
 	
 	func didReceiveVideoStatusAuthorized() {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+		DispatchQueue.main.async { [view] in
 			view?.showLocalVideoTrackAuthorized()
 		}
 	}
 	
 	func didReceiveVideoStatusDenied() {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+		DispatchQueue.main.async { [view] in
 			view?.showLocalVideoTrackDenied()
 		}
 	}
 	
 	func didReceiveMicrophoneStatusAuthorized() {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+		DispatchQueue.main.async { [view] in
 			view?.showMicrophoneAuthorized()
 		}
 	}
 	
 	func didReceiveMicrophoneStatusDenied() {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+		DispatchQueue.main.async { [view] in
 			view?.showMicrophoneDenied()
 		}
 	}
 	
-	func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
+	func didSendPushNotificationAboutNewCallToOpponent(_ opponent: SVUser) {
 		
 	}
 	

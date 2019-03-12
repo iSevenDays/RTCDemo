@@ -10,6 +10,6 @@ import Foundation
 
 protocol ImageGalleryStoryInteractorImagesOutput: class {
 	
-	func didReceiveImage(image: UIImage)
+	func didReceiveImage(_ image: UIImage)
 	
 }

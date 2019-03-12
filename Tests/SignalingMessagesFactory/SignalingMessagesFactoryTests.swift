@@ -32,14 +32,14 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	func testConvertsSignalingHangupMessageToQBMessageAndBack() {
 		// given
 		let signalingMessage = SignalingMessage.hangup
-		let sessionID = NSUUID().UUIDString
-		let sessionDetails = SessionDetails(initiatorID: sender.ID!.unsignedIntegerValue, membersIDs: [sender.ID!.unsignedIntegerValue, testUser.ID!.unsignedIntegerValue], sessionID: sessionID)
+		let sessionID = UUID().uuidString
+		let sessionDetails = SessionDetails(initiatorID: sender.id!.uintValue, membersIDs: [sender.id!.uintValue, testUser.id!.uintValue], sessionID: sessionID)
 		
 		do {
 			// when
 			
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
-			convertedQBMessage.senderID = sender.ID!.unsignedIntegerValue
+			convertedQBMessage.senderID = sender.id!.uintValue
 			// then
 			
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -48,7 +48,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNotNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.ID, receivedSender.ID)
+			XCTAssertEqual(sender.id, receivedSender.id)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			XCTAssert(sessionDetails == receivedSessionDetails!)
@@ -76,7 +76,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			// when
 			
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: nil)
-			convertedQBMessage.senderID = sender.ID!.unsignedIntegerValue
+			convertedQBMessage.senderID = sender.id!.uintValue
 			// then
 			
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -85,7 +85,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.ID, receivedSender.ID)
+			XCTAssertEqual(sender.id, receivedSender.id)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			
@@ -110,13 +110,13 @@ class SignalingMessagesFactoryTests: XCTestCase {
 		let rtcIceCandidateVideo = RTCIceCandidate(sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG", sdpMLineIndex: 1, sdpMid: "video")
 		
 		let signalingMessage = SignalingMessage.candidates(candidates: [rtcIceCandidateAudio, rtcIceCandidateVideo])
-		let sessionID = NSUUID().UUIDString
-		let sessionDetails = SessionDetails(initiatorID: sender.ID!.unsignedIntegerValue, membersIDs: [sender.ID!.unsignedIntegerValue, testUser.ID!.unsignedIntegerValue], sessionID: sessionID)
+		let sessionID = UUID().uuidString
+		let sessionDetails = SessionDetails(initiatorID: sender.id!.uintValue, membersIDs: [sender.id!.uintValue, testUser.id!.uintValue], sessionID: sessionID)
 		
 		do {
 			// when
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
-			convertedQBMessage.senderID = sender.ID!.unsignedIntegerValue
+			convertedQBMessage.senderID = sender.id!.uintValue
 			
 			// then
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -125,7 +125,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNotNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.ID, receivedSender.ID)
+			XCTAssertEqual(sender.id, receivedSender.id)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			XCTAssert(sessionDetails == receivedSessionDetails!)
@@ -164,15 +164,15 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	
 	func testConvertsSignalingOfferMessageToQBMessageAndBack() {
 		// given
-		let sessionDescription = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let sessionDescription = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		let signalingMessage = SignalingMessage.offer(sdp: sessionDescription)
-		let sessionID = NSUUID().UUIDString
-		let sessionDetails = SessionDetails(initiatorID: sender.ID!.unsignedIntegerValue, membersIDs: [sender.ID!.unsignedIntegerValue, testUser.ID!.unsignedIntegerValue], sessionID: sessionID)
+		let sessionID = UUID().uuidString
+		let sessionDetails = SessionDetails(initiatorID: sender.id!.uintValue, membersIDs: [sender.id!.uintValue, testUser.id!.uintValue], sessionID: sessionID)
 		
 		do {
 			// when
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
-			convertedQBMessage.senderID = sender.ID!.unsignedIntegerValue
+			convertedQBMessage.senderID = sender.id!.uintValue
 			
 			// then
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -181,7 +181,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNotNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.ID, receivedSender.ID)
+			XCTAssertEqual(sender.id, receivedSender.id)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			XCTAssert(sessionDetails == receivedSessionDetails!)

@@ -25,7 +25,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-		controller = UIStoryboard(name: "ChatUsersStory", bundle: nil).instantiateViewControllerWithIdentifier(String(ChatUsersStoryViewController.self)) as! ChatUsersStoryViewController
+		controller = UIStoryboard(name: "ChatUsersStory", bundle: nil).instantiateViewController(withIdentifier: String(describing: ChatUsersStoryViewController.self)) as! ChatUsersStoryViewController
 		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
@@ -49,7 +49,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 		controller.reloadDataWithUsers(users)
 		
 		// then
-		let firstCell = controller.tableView.dataSource?.tableView(controller.tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as? ChatUsersTableViewCell
+		let firstCell = controller.tableView.dataSource?.tableView(controller.tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as? ChatUsersTableViewCell
 		let numberOfRows = controller.tableView.dataSource?.tableView(controller.tableView, numberOfRowsInSection: 0)
 		
 		XCTAssertEqual(controller.users.count, 1)
@@ -96,7 +96,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 		controller.reloadDataWithUsers(users)
 		
 		// then
-		controller.tableView.delegate?.tableView?(controller.tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+		controller.tableView.delegate?.tableView!(controller.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
 		
 		XCTAssertTrue(mockOutput.didTriggerUserTappedGotCalled)
 		XCTAssertEqual(mockOutput.user, firstUser)
@@ -127,7 +127,7 @@ class ChatUsersStoryViewTests: XCTestCase {
 			viewIsReadyGotCalled = true
 		}
 		
-		func didTriggerUserTapped(user: SVUser) {
+		func didTriggerUserTapped(_ user: SVUser) {
 			didTriggerUserTappedGotCalled = true
 			self.user = user
 		}

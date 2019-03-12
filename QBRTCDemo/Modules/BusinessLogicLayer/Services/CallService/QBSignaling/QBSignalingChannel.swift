@@ -10,17 +10,17 @@ import Foundation
 import Quickblox
 
 protocol SignalingChannelObserver: class {
-	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails?)
-	func signalingChannel(channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState)
+	func signalingChannel(_ channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails?)
+	func signalingChannel(_ channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState)
 }
 
 class QBSignalingChannel: NSObject {
-	var observers: MulticastDelegate<SignalingChannelObserver>?
+	var observers = MulticastDelegate<SignalingChannelObserver>()
 	
 	let signalingMessagesFactory = SignalingMessagesFactory()
 	var state = SignalingChannelState.open {
 		didSet {
-			observers => { $0.signalingChannel(self, didChangeState: self.state) }
+			observers |> { $0.signalingChannel(self, didChangeState: self.state) }
 		}
 	}
 	
@@ -30,7 +30,7 @@ class QBSignalingChannel: NSObject {
 		QBChat.instance().addDelegate(self)
 	}
 	
-	func addObserver(observer: SignalingChannelObserver) {
+	func addObserver(_ observer: SignalingChannelObserver) {
 		observers += observer
 	}
 }
@@ -45,8 +45,8 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 		return QBChat.instance().isConnecting
 	}
 	
-	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) throws {
-		guard let userID = user.ID else {
+	func connectWithUser(_ user: SVUser, completion: ((_ error: Error?) -> Void)?) throws {
+		guard let userID = user.id else {
 			throw SignalingChannelError.missingUserID
 		}
 		guard userID != 0 else {
@@ -54,38 +54,38 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 		}
 		state = .open
 		
-		QBChat.instance().connectWithUser(QBUUser(SVUser: user)) { [unowned self] (error) in
+		QBChat.instance().connect(with: QBUUser(svUser: user)) { [unowned self] (error) in
 			if error != nil {
 				self.state = .error
 			} else {
 				self.user = user
 				QBChat.instance().currentUser()?.password = user.password
-				QBChat.instance().currentUser()?.ID = userID.unsignedIntegerValue
+				QBChat.instance().currentUser()?.id = userID.uintValue
 				self.state = .established
 			}
-			completion?(error: error)
+			completion?(error)
 		}
 	}   
 	
-	func sendMessage(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails?, toUser user: SVUser, completion: ((error: NSError?) -> Void)?) {
+	func sendMessage(_ message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails?, toUser user: SVUser, completion: ((_ error: Error?) -> Void)?) {
 		guard let currentUser = self.user else {
 			NSLog("%@", "Error failed to send message, current user is nil")
 			return
 		}
 		let qbMessage = try? signalingMessagesFactory.qbMessageFromSignalingMessage(message, sender: currentUser, sessionDetails: sessionDetails)
-		qbMessage!.recipientID = user.ID!.unsignedIntegerValue
+		qbMessage!.recipientID = user.id!.uintValue
 		
 		QBChat.instance().sendSystemMessage(qbMessage!, completion: completion)
 	}
 	
-	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?) {
-		QBChat.instance().disconnectWithCompletionBlock { [unowned self] (error) in
+	func disconnectWithCompletion(_ completion: ((_ error: Error?) -> Void)?) {
+		QBChat.instance().disconnect { [unowned self] (error) in
 			if error == nil {
 				self.state = .closed
 			} else {
 				self.state = .error
 			}
-			completion?(error: nil)
+			completion?(nil)
 		}
 	}
 }
@@ -102,11 +102,11 @@ extension QBSignalingChannel: QBChatDelegate {
 		self.state = .error
 	}
 	
-	func chatDidReceiveSystemMessage(message: QBChatMessage) {
+	func chatDidReceiveSystemMessage(_ message: QBChatMessage) {
 		do {
 			let (message, sender, sessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(message)
 			
-			self.observers => { $0.signalingChannel(self, didReceiveMessage: message, fromOpponent: sender, withSessionDetails: sessionDetails) }
+			self.observers |> { $0.signalingChannel(self, didReceiveMessage: message, fromOpponent: sender, withSessionDetails: sessionDetails) }
 			
 		} catch SignalingMessagesFactoryError.failedToDecompressMessage(message: message) {
 			NSLog("%@", "Error: failed to decompress message \(message)")

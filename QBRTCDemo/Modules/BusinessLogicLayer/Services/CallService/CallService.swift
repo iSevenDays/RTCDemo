@@ -9,31 +9,31 @@
 import Foundation
 
 enum CallServiceState {
-	case Undefined
-	case Connecting
-	case Connected
-	case Disconnected
-	case Error
+	case undefined
+	case connecting
+	case connected
+	case disconnected
+	case error
 }
 
-enum CallServiceError: ErrorType {
+enum CallServiceError: Error {
 	case notLogined
 	case noPendingOfferForOpponent
 	case canNotRejectCallWithoutPendingOffer
 }
 
-public class CallService: NSObject {
+@objc open class CallService: NSObject {
 	
-	internal var observers: MulticastDelegate<CallServiceObserver>?
+	internal var observers = MulticastDelegate<CallServiceObserver>()
 	
 	internal var sessions: [String: SessionDetails] = [:]
 	/// SessionID: Connections
 	var connections: [String: [PeerConnection]] = [:]
 	var pendingRequests: [SVUser: CallServicePendingRequest] = [:]
 	
-	var state = CallServiceState.Undefined {
+	var state = CallServiceState.undefined {
 		didSet {
-			observers => { $0.callService(self, didChangeState: self.state) }
+			observers |> { $0.callService(self, didChangeState: self.state) }
 		}
 	}
 	
@@ -56,17 +56,17 @@ public class CallService: NSObject {
 	internal var dialingTimers: [SVUser: SVTimer] = [:]
 	
 	/// Return active connection for opponenID with given session ID
-	func activeConnectionWithSessionID(sessionID: String, opponent: SVUser) -> PeerConnection? {
-		return connections[sessionID]?.filter({$0.opponent.ID == opponent.ID && $0.state == PeerConnectionState.Initial}).first
+	func activeConnectionWithSessionID(_ sessionID: String, opponent: SVUser) -> PeerConnection? {
+		return connections[sessionID]?.filter({$0.opponent.id == opponent.id && $0.state == PeerConnectionState.initial}).first
 	}
 }
 
 extension CallService: CallServiceProtocol {
-	var isConnected: Bool {
+	@objc var isConnected: Bool {
 		return signalingChannel.isConnected
 	}
 	
-	var isConnecting: Bool {
+	@objc var isConnecting: Bool {
 		return signalingChannel.isConnecting
 	}
 	
@@ -80,40 +80,43 @@ extension CallService: CallServiceProtocol {
 	*/
 	var hasActiveCall: Bool {
 		let peerConnections = connections.flatMap({$0.1})
-		return peerConnections.contains({$0.state == PeerConnectionState.Initial})
+		return peerConnections.contains { (peerConnection) -> Bool in
+			let isIncluded = peerConnection.state == .initial
+			return isIncluded
+		}
 	}
 	
-	func addObserver(observer: CallServiceObserver) {
+	func addObserver(_ observer: CallServiceObserver) {
 		observers += observer
 	}
 	
-	func removeObserver(observer: CallServiceObserver) {
+	func removeObserver(_ observer: CallServiceObserver) {
 		observers -= observer
 	}
 	
-	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?) {
+	func connectWithUser(_ user: SVUser, completion: ((_ error: Error?) -> Void)?) {
 		assert(user.password != nil)
-		state = .Connecting
+		state = .connecting
 		
 		signalingChannel.addObserver(self)
 		signalingChannel.addObserver(signalingProcessor)
 		
 		do{
 			try signalingChannel.connectWithUser(user) { [unowned self] (error) in
-				self.state = (error == nil) ? .Connected : .Error
-				completion?(error: error)
+				self.state = (error == nil) ? .connected : .error
+				completion?(error)
 			}
 		} catch let error {
 			NSLog("%@", "Error connecting with user \(error)")
 		}
 	}
 	
-	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?) {
+	func disconnectWithCompletion(_ completion: ((_ error: Error?) -> Void)?) {
 		signalingChannel.disconnectWithCompletion { [unowned self] (error) in
 			if error == nil {
-				self.state = .Disconnected
+				self.state = .disconnected
 			}
-			completion?(error: error)
+			completion?(error)
 		}
 	}
 	
@@ -130,13 +133,17 @@ extension CallService: CallServiceProtocol {
 	
 	- throws: throws CallServiceError.notLogined exception in case user is not logged in
 	*/
-	func startCallWithOpponent(user: SVUser) throws {
-		guard let currentUserID = self.currentUser?.ID?.unsignedIntegerValue else {
+	@objc func startCallWithOpponent(_ user: SVUser) throws {
+		guard let currentUserID = self.currentUser?.id?.uintValue else {
 			throw CallServiceError.notLogined
 		}
-		let sessionDetails = SessionDetails(initiatorID: currentUserID, membersIDs: [currentUserID, user.ID!.unsignedIntegerValue])
+		let sessionDetails = SessionDetails(initiatorID: currentUserID, membersIDs: [currentUserID, user.id!.uintValue])
 		sessions[sessionDetails.sessionID] = sessionDetails
-		
+
+		assert(ICEServers != nil)
+		assert(defaultMediaStreamConstraints != nil)
+		assert(defaultPeerConnectionConstraints != nil)
+
 		let connection = PeerConnection(opponent: user, sessionID: sessionDetails.sessionID, ICEServers: ICEServers, factory: factory, mediaStreamConstraints: defaultMediaStreamConstraints, peerConnectionConstraints: defaultPeerConnectionConstraints, offerAnswerConstraints: defaultOfferConstraints)
 		connection.addObserver(self)
 		connections[sessionDetails.sessionID] = [connection]
@@ -144,7 +151,7 @@ extension CallService: CallServiceProtocol {
 		connection.startCall()
 	}
 	
-	func acceptCallFromOpponent(opponent: SVUser) throws {
+	func acceptCallFromOpponent(_ opponent: SVUser) throws {
 		guard let pendingRequest = pendingRequests[opponent] else {
 			throw CallServiceError.noPendingOfferForOpponent
 		}
@@ -174,16 +181,17 @@ extension CallService: CallServiceProtocol {
 	- parameter message:        SignalingMessage instance
 	- parameter sessionDetails: SessionDetails instance
 	*/
-	func startDialingOpponent(opponent: SVUser, withMessage message: SignalingMessage, sessionDetails: SessionDetails) {
+	func startDialingOpponent(_ opponent: SVUser, withMessage message: SignalingMessage, sessionDetails: SessionDetails) {
+		assert(timersFactory != nil)
 		let sendMessageBlock = { [weak self] in
 			self?.signalingChannel.sendMessage(message, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
 		}
 		sendMessageBlock()
 		
-		observers => { $0.callService(self, didStartDialingOpponent: opponent) }
+		observers |> { $0.callService(self, didStartDialingOpponent: opponent) }
 		
 		let dialingTimer = timersFactory.createDialingTimerWithExpirationTime(45000, block: sendMessageBlock) { [unowned self] in
-			self.observers => { $0.callService(self, didAnswerTimeoutForOpponent: opponent) }
+			self.observers |> { $0.callService(self, didAnswerTimeoutForOpponent: opponent) }
 			self.stopDialingOpponent(opponent)
 			self.activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.close()
 		}
@@ -198,13 +206,13 @@ extension CallService: CallServiceProtocol {
 	
 	- parameter opponent: SVUser instance
 	*/
-	func stopDialingOpponent(opponent: SVUser) {
+	func stopDialingOpponent(_ opponent: SVUser) {
 		if let timer = dialingTimers[opponent] {
 			if timer.isValid {
 				timer.cancel()
 			}
 			dialingTimers[opponent] = nil
-			observers => { $0.callService(self, didStopDialingOpponent: opponent) }
+			observers |> { $0.callService(self, didStopDialingOpponent: opponent) }
 		}
 	}
 	
@@ -217,19 +225,19 @@ extension CallService: CallServiceProtocol {
 	
 	- parameter opponent: SVUser instance
 	*/
-	func sendRejectCallToOpponent(opponent: SVUser) throws {
+	@objc func sendRejectCallToOpponent(_ opponent: SVUser) throws {
 		guard let pendingRequest = pendingRequests[opponent] else {
 			throw CallServiceError.canNotRejectCallWithoutPendingOffer
 		}
 		let sessionDetails = pendingRequest.sessionDetails
-		sessionDetails.sessionState = .Rejected
+		sessionDetails.sessionState = .rejected
 		sessions[sessionDetails.sessionID] = sessionDetails
 		
 		signalingChannel.sendMessage(SignalingMessage.reject, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
 		
 		pendingRequests[opponent] = nil
 		
-		observers => { $0.callService(self, didSendRejectToOpponent: opponent) }
+		observers |> { $0.callService(self, didSendRejectToOpponent: opponent) }
 	}
 	
 	func hangup() {
@@ -237,31 +245,31 @@ extension CallService: CallServiceProtocol {
 			self.stopDialingOpponent(user)
 		}
 		
-		for connection in connections.values.flatten() where connection.state == PeerConnectionState.Initial {
+		for connection in connections.values.joined() where connection.state == PeerConnectionState.initial {
 			connection.close()
 			guard let sessionDetails = sessions[connection.sessionID] else {
 				NSLog("Error: no session details for connection with session ID: \(connection.sessionID))")
 				continue
 			}
 			signalingChannel.sendMessage(SignalingMessage.hangup, withSessionDetails: sessionDetails, toUser: connection.opponent, completion: nil)
-			observers => { $0.callService(self, didSendHangupToOpponent: connection.opponent) }
+			observers |> { $0.callService(self, didSendHangupToOpponent: connection.opponent) }
 		}
 	}
 	
-	func sendMessageCurrentUserEnteredChatRoom(chatRoomName: String, toUser: SVUser) {
+	func sendMessageCurrentUserEnteredChatRoom(_ chatRoomName: String, toUser: SVUser) {
 		let signalingMessage = SignalingMessage.user(enteredChatRoomName: chatRoomName)
 		signalingChannel.sendMessage(signalingMessage, withSessionDetails: nil, toUser: toUser, completion: nil)
-		observers => { $0.callService(self, didSendUserEnteredChatRoomName: chatRoomName, toUser: toUser) }
+		observers |> { $0.callService(self, didSendUserEnteredChatRoomName: chatRoomName, toUser: toUser) }
 	}
 }
 
 // MARK: - SignalingProcessorObserver
 extension CallService: SignalingProcessorObserver {
-	func didReceiveICECandidates(signalingProcessor: SignalingProcessor, ICECandidates: [RTCIceCandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
+	func didReceiveICECandidates(_ signalingProcessor: SignalingProcessor, ICECandidates: [RTCIceCandidate], fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent)?.applyICECandidates(ICECandidates)
 	}
 	
-	func didReceiveOffer(signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
+	func didReceiveOffer(_ signalingProcessor: SignalingProcessor, offer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveOffer")
 		guard activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) == nil else {
 			// The second and further offer for a call for the same user for the same session
@@ -276,28 +284,28 @@ extension CallService: SignalingProcessorObserver {
 		}
 		
 		if let session = sessions[sessionDetails.sessionID] {
-			guard session.sessionState != SessionDetailsState.Rejected else {
+			guard session.sessionState != SessionDetailsState.rejected else {
 				NSLog("declined rejected session")
 				return
 			}
 		} else {
 			if pendingRequests[opponent] == nil {
 				pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent,  pendingSessionDescription: offer, sessionDetails: sessionDetails)
-				observers => { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
+				observers |> { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
 			}
 		}
 	}
 	
-	func didReceiveAnswer(signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
+	func didReceiveAnswer(_ signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveAnswer")
 		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
 			connection.applyRemoteSDP(answer)
-			observers => { $0.callService(self, didReceiveAnswerFromOpponent: opponent) }
+			observers |> { $0.callService(self, didReceiveAnswerFromOpponent: opponent) }
 			stopDialingOpponent(opponent)
 		}
 	}
 	
-	func didReceiveHangup(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
+	func didReceiveHangup(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveHangup")
 		pendingRequests[opponent] = nil
 		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
@@ -306,17 +314,17 @@ extension CallService: SignalingProcessorObserver {
 		}
 		// Anyway, If we received hangup for pending offer,
 		// then we should notify IncomingCallStory the opponent decided to decline the offer for a call
-		observers => { $0.callService(self, didReceiveHangupFromOpponent: opponent) }
+		observers |> { $0.callService(self, didReceiveHangupFromOpponent: opponent) }
 		stopDialingOpponent(opponent)
 		
 	}
 	
-	func didReceiveReject(signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
+	func didReceiveReject(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveReject")
 		pendingRequests[opponent] = nil
 		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
 			connection.close()
-			observers => { $0.callService(self, didReceiveRejectFromOpponent: opponent) }
+			observers |> { $0.callService(self, didReceiveRejectFromOpponent: opponent) }
 			stopDialingOpponent(opponent)
 		}
 	}
@@ -327,71 +335,126 @@ extension CallService: SignalingProcessorObserver {
 extension CallService: PeerConnectionObserver {
 	
 	// Current User has an offer to send
-	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionOfferDescription: RTCSessionDescription) {
+	func peerConnection(_ peerConnection: PeerConnection, didSetLocalSessionOfferDescription localSessionOfferDescription: RTCSessionDescription) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let opponent = peerConnection.opponent
-		let offerSDP = RTCSessionDescription(type: .Offer, sdp: localSessionOfferDescription.sdp)
+		let offerSDP = RTCSessionDescription(type: .offer, sdp: localSessionOfferDescription.sdp)
 		let offerMessage = SignalingMessage.offer(sdp: offerSDP)
 		startDialingOpponent(opponent, withMessage: offerMessage, sessionDetails: sessionDetails)
 	}
 	
 	// Current User has an answer to send
-	func peerConnection(peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionAnswerDescription: RTCSessionDescription) {
+	func peerConnection(_ peerConnection: PeerConnection, didSetLocalSessionAnswerDescription localSessionAnswerDescription: RTCSessionDescription) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
-		let answerSDP = RTCSessionDescription(type: .Answer, sdp: localSessionAnswerDescription.sdp)
+		let answerSDP = RTCSessionDescription(type: .answer, sdp: localSessionAnswerDescription.sdp)
 		let opponent = peerConnection.opponent
 		sendSignalingMessageSDP(SignalingMessage.answer(sdp: answerSDP), withSessionDetails: sessionDetails, toOpponent: opponent)
 	}
 	
-	func sendSignalingMessageSDP(message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toOpponent opponent: SVUser) {
+	func sendSignalingMessageSDP(_ message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toOpponent opponent: SVUser) {
 		signalingChannel.sendMessage(message, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in
 			if let error = error {
-				self.observers => { $0.callService(self, didErrorSendingLocalSessionDescriptionMessage: message, toOpponent: opponent, error: error) }
+				self.observers |> { $0.callService(self, didErrorSendingLocalSessionDescriptionMessage: message, toOpponent: opponent, error: error) }
 			} else {
-				self.observers => { $0.callService(self, didSendLocalSessionDescriptionMessage: message, toOpponent: opponent) }
+				self.observers |> { $0.callService(self, didSendLocalSessionDescriptionMessage: message, toOpponent: opponent) }
 			}
 		}
 	}
 	
-	func peerConnection(peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCIceCandidate) {
+	func peerConnection(_ peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCIceCandidate) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let signalingMessage = SignalingMessage.candidates(candidates: [localICECandidates])
 		let opponent = peerConnection.opponent
 		
 		signalingChannel.sendMessage(signalingMessage, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in
 			if let error = error {
-				self.observers => { $0.callService(self, didErrorSendingLocalICECandidates: [localICECandidates], toOpponent: opponent, error: error) }
+				self.observers |> { $0.callService(self, didErrorSendingLocalICECandidates: [localICECandidates], toOpponent: opponent, error: error) }
 			} else {
-				self.observers => { $0.callService(self, didSendLocalICECandidates: [localICECandidates], toOpponent: opponent) }
+				self.observers |> { $0.callService(self, didSendLocalICECandidates: [localICECandidates], toOpponent: opponent) }
 			}
 		}
 	}
 	
-	func peerConnection(peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
-		observers => { $0.callService(self, didReceiveLocalVideoTrack: localVideoTrack) }
+	func peerConnection(_ peerConnection: PeerConnection, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
+		observers |> { $0.callService(self, didReceiveLocalVideoTrack: localVideoTrack) }
 	}
-	func peerConnection(peerConnection: PeerConnection, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
-		observers => { $0.callService(self, didReceiveLocalAudioTrack: localAudioTrack) }
+	func peerConnection(_ peerConnection: PeerConnection, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
+		observers |> { $0.callService(self, didReceiveLocalAudioTrack: localAudioTrack) }
 	}
-	func peerConnection(peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
-		observers => { $0.callService(self, didReceiveRemoteVideoTrack: remoteVideoTrack) }
+	func peerConnection(_ peerConnection: PeerConnection, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
+		observers |> { $0.callService(self, didReceiveRemoteVideoTrack: remoteVideoTrack) }
 	}
-	func peerConnection(peerConnection: PeerConnection, didCreateSessionWithError error: NSError) {
-		observers => { $0.callService(self, didError: error) }
+	func peerConnection(_ peerConnection: PeerConnection, didCreateSessionWithError error: Error) {
+		observers |> { $0.callService(self, didError: error) }
 	}
-	func didReceiveUser(signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String) {
-		observers => { $0.callService(self, didReceiveUser: user, forChatRoomName: chatRoomName) }
+	func didReceiveUser(_ signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String) {
+		observers |> { $0.callService(self, didReceiveUser: user, forChatRoomName: chatRoomName) }
 	}
 }
 
 extension CallService: SignalingChannelObserver {
-	func signalingChannel(channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState) {
+	func signalingChannel(_ channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState) {
 		if state == .established {
-			self.state = .Connected
+			self.state = .connected
 		}
 	}
 	
-	func signalingChannel(channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails?) {
+	func signalingChannel(_ channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails?) {
 		
+	}
+}
+
+// Video switcher
+extension CallService: CallServiceCameraSwitcherProtocol {
+
+	/// Switch device position(front or back camera) and return new state
+	///
+	/// - Parameters:
+	///   - localVideoTrack: local video track
+	///   - renderer: rendered to render a video
+	/// - Returns: new state
+	func switchCamera(forActivePeerConnectionWithLocalVideoTrack localVideoTrack: RTCVideoTrack, renderer: RenderableView) -> AVCaptureDevice.Position? {
+		let peerConnections = connections.flatMap({$0.1})
+		let activeConnections = peerConnections.filter { (peerConnection) -> Bool in
+			let isIncluded = peerConnection.state == .initial
+			return isIncluded
+		}
+		for activeConnection in activeConnections {
+			guard activeConnection.localVideoTrack == localVideoTrack else {
+				continue
+			}
+			guard let activeDevicePosition = activeConnection.localVideoCapturePosition() else {
+				continue
+			}
+			let newPosition = activeDevicePosition == .front ? AVCaptureDevice.Position.back : AVCaptureDevice.Position.front
+			activeConnection.startCaptureLocalVideo(renderer: renderer, position: newPosition)
+			return newPosition
+		}
+		return nil
+	}
+
+	/// Switch device position and start rendering and return new state
+	///
+	/// - Parameters:
+	///   - localVideoTrack: local video track
+	///   - renderer: rendered to render a video
+	/// - Returns: new state
+	func setCamera(forActivePeerConnectionWithLocalVideoTrack localVideoTrack: RTCVideoTrack, renderer: RenderableView, position: AVCaptureDevice.Position) -> AVCaptureDevice.Position? {
+		let peerConnections = connections.flatMap({$0.1})
+		let activeConnections = peerConnections.filter { (peerConnection) -> Bool in
+			let isIncluded = peerConnection.state == .initial
+			return isIncluded
+		}
+		for activeConnection in activeConnections {
+			guard activeConnection.localVideoTrack == localVideoTrack else {
+				continue
+			}
+			activeConnection.startCaptureLocalVideo(renderer: renderer, position: position)
+			guard let activeDevicePosition = activeConnection.localVideoCapturePosition() else {
+				return nil
+			}
+			return activeDevicePosition
+		}
+		return nil
 	}
 }

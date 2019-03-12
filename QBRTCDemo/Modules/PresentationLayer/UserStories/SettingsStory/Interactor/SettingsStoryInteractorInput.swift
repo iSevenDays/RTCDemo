@@ -21,5 +21,5 @@ protocol SettingsStoryInteractorInput {
 	
 	Currently only switcher setting model is supported
 	*/
-	func handleSettingModelSelected(settingModel: SettingModel)
+	func handleSettingModelSelected(_ settingModel: SettingModel)
 }

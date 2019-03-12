@@ -8,5 +8,5 @@
 
 @objc protocol IncomingCallStoryModuleInput: RamblerViperModuleInput {
 	
-	func configureModuleWithCallInitiator(opponent: SVUser)
+	func configureModuleWithCallInitiator(_ opponent: SVUser)
 }

@@ -20,7 +20,7 @@
 	
 	- parameter user: SVUser instance
 	*/
-	func didTriggerUserTapped(user: SVUser)
+	func didTriggerUserTapped(_ user: SVUser)
 	
 	
 	/**

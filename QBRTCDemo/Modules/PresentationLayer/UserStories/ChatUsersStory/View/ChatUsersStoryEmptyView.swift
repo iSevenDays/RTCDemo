@@ -10,6 +10,6 @@ import Foundation
 
 class ChatUsersStoryEmptyView: UIView {
 	class func instanceFromNib() -> UIView? {
-		return UINib(nibName: "ChatUsersStoryEmptyView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as? UIView
+		return UINib(nibName: "ChatUsersStoryEmptyView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
 	}
 }

@@ -10,68 +10,68 @@ import Foundation
 
 protocol CallServiceObserver: class {
 	
-	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser)
-	func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser)
-	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser)
-	func callService(callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser)
-	func callService(callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser)
-	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState)
-	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState)
-	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack)
-	func callService(callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack)
-	func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack)
-	func callService(callService: CallServiceProtocol, didError error: NSError)
-	func callService(callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String)
+	func callService(_ callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState)
+	func callService(_ callService: CallServiceProtocol, didChangeState state: CallServiceState)
+	func callService(_ callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack)
+	func callService(_ callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack)
+	func callService(_ callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack)
+	func callService(_ callService: CallServiceProtocol, didError error: Error)
+	func callService(_ callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String)
 	
-	func callService(callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser)
 	
 	// Note: the method is not called when current user hangups a call
-	func callService(callService: CallServiceProtocol, didStopDialingOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didStopDialingOpponent opponent: SVUser)
 	
 	// Sending local SDP
-	func callService(callService: CallServiceProtocol, didSendLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser)
-	func callService(callService: CallServiceProtocol, didErrorSendingLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser, error: NSError)
+	func callService(_ callService: CallServiceProtocol, didSendLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didErrorSendingLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser, error: Error)
 	
 	// Sending local ICE candidates
-	func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser)
-	func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser, error: NSError)
+	func callService(_ callService: CallServiceProtocol, didSendLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser, error: Error)
 	
 	// Send reject to a user
 	// Also reject is send when CallService has active call by the moment
 	// New offer for a call is received
-	func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser)
 	
-	func callService(callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser)
+	func callService(_ callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser)
 	
-	func callService(callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser)
+	func callService(_ callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser)
 }
 
 extension CallServiceObserver {
-	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser){}
-	func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser){}
-	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser){}
-	func callService(callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser){}
-	func callService(callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser){}
-	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState){}
-	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState){}
-	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack){}
-	func callService(callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack){}
-	func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack){}
-	func callService(callService: CallServiceProtocol, didError error: NSError){}
-	func callService(callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String){}
+	func callService(_ callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser){}
+	func callService(_ callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser){}
+	func callService(_ callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser){}
+	func callService(_ callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser){}
+	func callService(_ callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser){}
+	func callService(_ callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState){}
+	func callService(_ callService: CallServiceProtocol, didChangeState state: CallServiceState){}
+	func callService(_ callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack){}
+	func callService(_ callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack){}
+	func callService(_ callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack){}
+	func callService(_ callService: CallServiceProtocol, didError error: Error){}
+	func callService(_ callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String){}
 	
-	func callService(callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser){}
-	func callService(callService: CallServiceProtocol, didStopDialingOpponent opponent: SVUser){}
+	func callService(_ callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser){}
+	func callService(_ callService: CallServiceProtocol, didStopDialingOpponent opponent: SVUser){}
 	
 	// Sending local SDP
-	func callService(callService: CallServiceProtocol, didSendLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser) {}
-	func callService(callService: CallServiceProtocol, didErrorSendingLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser, error: NSError) {}
+	func callService(_ callService: CallServiceProtocol, didSendLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser) {}
+	func callService(_ callService: CallServiceProtocol, didErrorSendingLocalSessionDescriptionMessage: SignalingMessage, toOpponent opponent: SVUser, error: Error) {}
 	
 	// Sending local ICE candidates
-	func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser) {}
-	func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser, error: NSError) {}
+	func callService(_ callService: CallServiceProtocol, didSendLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser) {}
+	func callService(_ callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser, error: Error) {}
 	
-	func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {}
-	func callService(callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser) {}
-	func callService(callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser) {}
+	func callService(_ callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {}
+	func callService(_ callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser) {}
+	func callService(_ callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser) {}
 }

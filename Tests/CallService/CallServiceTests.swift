@@ -21,7 +21,7 @@ class CallServiceTests: BaseTestCase {
 	
 	let user1 = TestsStorage.svuserRealUser1
 	let user2 = TestsStorage.svuserRealUser2
-	let user3 = SVUser(ID: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
+	let user3 = SVUser(id: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
 	
 	var fakeSignalingChannel: FakeSignalingChannel!
 	var callService: CallService!
@@ -42,11 +42,11 @@ class CallServiceTests: BaseTestCase {
 		if let invocation = invocation{
 			selectorName = NSStringFromSelector(invocation.selector)
 		}
-		return expectationWithDescription(selectorName)
+		return expectation(description: selectorName)
 	}
 	
 	func waitForTestExpectations() {
-		waitForExpectationsWithTimeout(10.0) { (error) in
+		waitForExpectations(timeout: 10.0) { (error) in
 			XCTAssertNil(error)
 		}
 	}
@@ -58,7 +58,7 @@ class CallServiceTests: BaseTestCase {
 		// when
 		callService.connectWithUser(user1) { (error) in
 			XCTAssertNil(error)
-			XCTAssertEqual(self.callService.state, CallServiceState.Connected)
+			XCTAssertEqual(self.callService.state, CallServiceState.connected)
 			expectation.fulfill()
 		}
 		
@@ -86,7 +86,7 @@ class CallServiceTests: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didChangeStateGotCalled)
-		XCTAssertEqual(mockOutput.callServiceState, CallServiceState.Connected)
+		XCTAssertEqual(mockOutput.callServiceState, CallServiceState.connected)
 	}
 	
 	func testCorrectlyChangesClientStateToDisconnectedAfterDisconnectFromChat() {
@@ -96,7 +96,7 @@ class CallServiceTests: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didChangeStateGotCalled)
-		XCTAssertEqual(mockOutput.callServiceState, CallServiceState.Disconnected)
+		XCTAssertEqual(mockOutput.callServiceState, CallServiceState.disconnected)
 	}
 	
 	func testCorrectlyHangupsJustStartedCall() {
@@ -112,7 +112,10 @@ class CallServiceTests: BaseTestCase {
 		XCTAssertTrue(mockOutput.didSendHangupToOpponentGotCalled)
 		XCTAssertFalse(mockOutput.didErrorGotCalled)
 		XCTAssertEqual(callService.dialingTimers.count, 0)
-		XCTAssertFalse(callService.connections.values.flatten().contains({$0.state == PeerConnectionState.Initial}))
+
+		let peerConnections: [PeerConnection] = callService.connections.flatMap({$0.value})
+		let peerConnectionsStates = peerConnections.compactMap({$0.state})
+		XCTAssertFalse(peerConnectionsStates.contains(where: {$0 == PeerConnectionState.initial}))
 	}
 	
 	func testCorrectlySendsMessageCurrentUserEnteredChatRoom() {
@@ -133,9 +136,9 @@ class CallServiceTests: BaseTestCase {
  
 	func testSendsRejectIfAlreadyHasActiveCall() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
+		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [1])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -152,9 +155,9 @@ class CallServiceTests: BaseTestCase {
 	*/
 	func testDoesntSendRejectIfAlreadyHasActiveCallWithTheSameUserAndSessionID() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user2.ID!.unsignedIntegerValue, membersIDs: [user2.ID!.unsignedIntegerValue])
+		let sessionDetails = SessionDetails(initiatorID: user2.id!.uintValue, membersIDs: [user2.id!.uintValue])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -172,9 +175,9 @@ class CallServiceTests: BaseTestCase {
 	
 	func testCorrectlyAcceptsOfferFromOpponent() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 	
-		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
+		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [1])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -209,6 +212,11 @@ class CallServiceTests: BaseTestCase {
 	func testCorrectlyProcessesRejectMessage_whenRejectIsReceivedForSentOffer() {
 		// when
 		callService.connectWithUser(user1, completion: nil)
+		do {
+			try callService.startCallWithOpponent(user2)
+		} catch let error {
+			XCTAssertNil(error)
+		}
 		XCTAssertNotNil(try? callService.startCallWithOpponent(user2))
 		guard let createdConnectionWithUser2 = callService.connections.values.first?.first else {
 			XCTFail()
@@ -220,7 +228,7 @@ class CallServiceTests: BaseTestCase {
 		
 		// then
 		XCTAssertTrue(mockOutput.didReceiveRejectFromOpponentGotCalled)
-		XCTAssertEqual(createdConnectionWithUser2.state, PeerConnectionState.Closed)
+		XCTAssertEqual(createdConnectionWithUser2.state, PeerConnectionState.closed)
 		XCTAssertTrue(mockOutput.didStartDialingOpponentGotCalled)
 		XCTAssertTrue(mockOutput.didStopDialingOpponentGotCalled)
 		XCTAssertEqual(callService.dialingTimers.count, 0)
@@ -229,10 +237,10 @@ class CallServiceTests: BaseTestCase {
 	
 	func testRejectsIncomingCallOfferForTheAlreadyRejectedCall_andTheSameSession() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [1])
-		sessionDetails.sessionState = .Rejected
+		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [1])
+		sessionDetails.sessionState = .rejected
 		callService.sessions[sessionDetails.sessionID] = sessionDetails
 		
 		// when
@@ -249,7 +257,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testCorrectlyProcessesAnswerMessage_whenAnswerIsReceivedForActiveCall() {
 		// given
-		let unusedSessionSDP = RTCSessionDescription(type: .Answer, sdp: CallServiceHelpers.answerSDP)
+		let unusedSessionSDP = RTCSessionDescription(type: .answer, sdp: CallServiceHelpers.answerSDP)
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -286,9 +294,9 @@ class CallServiceTests: BaseTestCase {
 	
 	func testStoresRejectedSession() {
 		// given
-		let rtcOfferSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user1.ID!.unsignedIntegerValue, membersIDs: [user1.ID!.unsignedIntegerValue, user2.ID!.unsignedIntegerValue])
+		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [user1.id!.uintValue, user2.id!.uintValue])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -299,7 +307,7 @@ class CallServiceTests: BaseTestCase {
 		// then
 		XCTAssertEqual(callService.sessions.count, 1)
 		XCTAssertEqual(callService.connections.count, 0)
-		XCTAssertEqual(callService.sessions[sessionDetails.sessionID]!.sessionState, SessionDetailsState.Rejected)
+		XCTAssertEqual(callService.sessions[sessionDetails.sessionID]!.sessionState, SessionDetailsState.rejected)
 		XCTAssertEqual(callService.pendingRequests.count, 0)
 	}
 	
@@ -307,7 +315,7 @@ class CallServiceTests: BaseTestCase {
 	
 	func testsStartsDialingOpponentWithLocalSessionDescription() {
 		// given
-		let localSDP = RTCSessionDescription(type: .Offer, sdp: CallServiceHelpers.offerSDP)
+		let localSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -372,76 +380,76 @@ class CallServiceTests: BaseTestCase {
 		var didSendRejectToOpponentGotCalled = false
 		var didSendHangupToOpponentGotCalled = false
 		
-		var callServiceState = CallServiceState.Undefined
+		var callServiceState = CallServiceState.undefined
 		var videoTrack: RTCVideoTrack?
 		
 		var chatRoomName: String?
 		var didSendUserEnteredChatRoomNameGotCalled = false
 		
-		func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 			didReceiveCallRequestFromOpponentGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
 			didReceiveAnswerFromOpponentGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
 			didReceiveHangupFromOpponentGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser) {
 			didReceiveRejectFromOpponentGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser) {
 			didAnswerTimeoutForOpponentGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState) {
+		func callService(_ callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState) {
 			didChangeConnectionStateGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
+		func callService(_ callService: CallServiceProtocol, didChangeState state: CallServiceState) {
 			didChangeStateGotCalled = true
 			callServiceState = state
 		}
-		func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
+		func callService(_ callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
 			didReceiveLocalVideoTrackGotCalled = true
 			videoTrack = localVideoTrack
 		}
-		func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
+		func callService(_ callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
 			didReceiveRemoteVideoTrackGotCalled = true
 			videoTrack = remoteVideoTrack
 		}
-		func callService(callService: CallServiceProtocol, didError error: NSError) {
+		func callService(_ callService: CallServiceProtocol, didError error: Error) {
 			didErrorGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String) {
+		func callService(_ callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String) {
 			didReceiveUserGotCalled = true
 		}
 		
-		func callService(callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
 			self.opponent = opponent
 			didStartDialingOpponentGotCalled = true
 		}
 		
-		func callService(callService: CallServiceProtocol, didStopDialingOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didStopDialingOpponent opponent: SVUser) {
 			self.opponent = opponent
 			didStopDialingOpponentGotCalled = true
 		}
 		
 		// Sending local ICE candidates
-		func callService(callService: CallServiceProtocol, didSendLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didSendLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser) {
 			didSendLocalICECandidatesGotCalled = true
 		}
-		func callService(callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser, error: NSError) {
+		func callService(_ callService: CallServiceProtocol, didErrorSendingLocalICECandidates: [RTCIceCandidate], toOpponent opponent: SVUser, error: NSError) {
 			didErrorSendingLocalICECandidatesGotCalled = true
 		}
 		
-		func callService(callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {
 			didSendRejectToOpponentGotCalled = true
 		}
 		
-		func callService(callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser) {
 			didSendHangupToOpponentGotCalled = true
 		}
 		
-		func callService(callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser) {
+		func callService(_ callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser) {
 			self.chatRoomName = chatRoomName
 			didSendUserEnteredChatRoomNameGotCalled = true
 			opponent = toUser

@@ -11,7 +11,7 @@ import XCTest
 
 extension XCTestCase {
 	
-	func XCTAssertEqualOptional<T: Equatable>(@autoclosure a: () -> [T]?, @autoclosure _ b: () -> [T]?, _ message: String? = nil, file: StaticString = #file, line: UInt = #line) {
+	func XCTAssertEqualOptional<T: Equatable>(_ a: @autoclosure () -> [T]?, _ b: @autoclosure () -> [T]?, _ message: String? = nil, file: StaticString = #file, line: UInt = #line) {
 		if let _a = a() {
 			if let _b = b() {
 				XCTAssertEqual(_a, _b, (message != nil ? message! : ""), file: file, line: line)

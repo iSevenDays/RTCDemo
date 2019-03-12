@@ -10,57 +10,58 @@ import Foundation
 import Quickblox
 
 class QBPushNotificationsService: PushNotificationsServiceProtocol {
-	internal var observers: MulticastDelegate<PushNotificationsServiceObserver>?
+	internal var observers = MulticastDelegate<PushNotificationsServiceObserver>()
 	internal weak var cacheService: CacheServiceProtocol!
 	
 	internal let pushNotificationsKey = "pushNotificationsKey"
 	
-	func addObserver(observer: PushNotificationsServiceObserver) {
+	func addObserver(_ observer: PushNotificationsServiceObserver) {
 		observers += observer
 	}
 	
 	// MARK: - PushNotificationsServiceProtocol
 	
-	func registerForPushNotificationsWithDeviceToken(deviceToken: NSData) {
-		guard !cacheService.boolForKey(pushNotificationsKey) else {
+	func registerForPushNotificationsWithDeviceToken(_ deviceToken: Data) {
+		guard !cacheService.bool(forKey: pushNotificationsKey) else {
 			// already registered
 			return
 		}
 		
-		let deviceIdentifier = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? NSUUID().UUIDString
+		let deviceIdentifier = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
 		let subscription = QBMSubscription()
 		
 		subscription.notificationChannel = .APNS
 		subscription.deviceUDID = deviceIdentifier
 		subscription.deviceToken = deviceToken
 		QBRequest.createSubscription(subscription, successBlock: { [cacheService, pushNotificationsKey] (response: QBResponse!, objects: [QBMSubscription]?) in
-			cacheService.setBool(true, forKey: pushNotificationsKey)
+
+			cacheService?.set(true, forKey: pushNotificationsKey)
 		}) { (response: QBResponse!) in
 		}
 	}
 	
 	// located here because we should be able to override the class
-	func sendPushNotificationMessage(message: String, toOpponent opponent: SVUser) {
-		guard let opponentID = opponent.ID else {
+	func sendPushNotificationMessage(_ message: String, toOpponent opponent: SVUser) {
+		guard let opponentID = opponent.id else {
 			NSLog("Error sending push notification: opponentID is nil")
 			return
 		}
 		
 		let event = QBMEvent()
-		event.notificationType = .Push
-		event.usersIDs = String(opponentID)
-		event.type = .OneShot
+		event.notificationType = .push
+		event.usersIDs = String(opponentID.intValue)
+		event.type = .oneShot
 		
 		// custom params
 		let pushCustomParams = ["message" : message,
 		                        //"ios_badge": "1",
 			"ios_sound": "default"]
 		do {
-			let data = try NSJSONSerialization.dataWithJSONObject(pushCustomParams, options: .PrettyPrinted)
-			let json = String(data: data, encoding: NSUTF8StringEncoding)
+			let data = try JSONSerialization.data(withJSONObject: pushCustomParams, options: .prettyPrinted)
+			let json = String(data: data, encoding: String.Encoding.utf8)
 			event.message = json
 		} catch let error {
-			observers => { $0.pushNotificationsService(self, didFailToSendMessage: message, toOpponent: opponent, error: error as NSError) }
+			observers |> { $0.pushNotificationsService(self, didFailToSendMessage: message, toOpponent: opponent, error: error) }
 		}
 		
 		guard event.message != nil else {
@@ -69,12 +70,12 @@ class QBPushNotificationsService: PushNotificationsServiceProtocol {
 		
 		QBRequest.createEvent(event, successBlock: { [unowned self] (response, events) in
 			
-			self.observers => { $0.pushNotificationsService(self, didSendMessage: message, toOpponent: opponent) }
+			self.observers |> { $0.pushNotificationsService(self, didSendMessage: message, toOpponent: opponent) }
 			
 			})
 		{ [unowned self] (response) in
 			if let error = response.error?.error {
-				self.observers => { $0.pushNotificationsService(self, didFailToSendMessage: message, toOpponent: opponent, error: error) }
+				self.observers |> { $0.pushNotificationsService(self, didFailToSendMessage: message, toOpponent: opponent, error: error) }
 			}
 		}
 	}

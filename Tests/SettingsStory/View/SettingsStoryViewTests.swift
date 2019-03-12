@@ -26,7 +26,7 @@ class SettingsStoryViewTests: XCTestCase {
 	
 	override func setUp() {
 		super.setUp()
-		controller = UIStoryboard(name: "SettingsStory", bundle: nil).instantiateViewControllerWithIdentifier(String(SettingsStoryViewController.self)) as! SettingsStoryViewController
+		controller = UIStoryboard(name: "SettingsStory", bundle: nil).instantiateViewController(withIdentifier: String(describing: SettingsStoryViewController.self)) as! SettingsStoryViewController
 		
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
@@ -46,7 +46,7 @@ class SettingsStoryViewTests: XCTestCase {
 		
 		// when
 		controller.tableView.reloadData()
-		controller.tableView(controller.tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+		controller.tableView(controller.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
 		
 		// then
 		XCTAssertTrue(mockOutput.didSelectSettingModelGotCalled)
@@ -62,7 +62,7 @@ class SettingsStoryViewTests: XCTestCase {
 		func viewIsReady() {
 			viewIsReadyGotCalled = true
 		}
-		func didSelectSettingModel(settingModel: SettingModel) {
+		func didSelectSettingModel(_ settingModel: SettingModel) {
 			didSelectSettingModelGotCalled = true
 			self.settingModel = settingModel
 			

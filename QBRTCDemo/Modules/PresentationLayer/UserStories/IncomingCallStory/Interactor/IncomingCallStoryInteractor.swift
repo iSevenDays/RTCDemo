@@ -16,7 +16,7 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 	// MARK: IncomingCallStoryInteractorInput
 	
 	/// Set opponent, initiator of a call
-	func setOpponent(opponent: SVUser) {
+	func setOpponent(_ opponent: SVUser) {
 		self.opponent = opponent
 	}
 	
@@ -40,7 +40,7 @@ class IncomingCallStoryInteractor: IncomingCallStoryInteractorInput {
 }
 
 extension IncomingCallStoryInteractor: CallServiceObserver {
-	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
 		if self.opponent == opponent {
 			output.didReceiveHangupForIncomingCall()
 		}

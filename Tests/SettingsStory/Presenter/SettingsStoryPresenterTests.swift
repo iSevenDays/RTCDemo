@@ -77,7 +77,7 @@ class SettingsStoryPresenterTest: XCTestCase {
 			requestSettingsGotCalled = true
 		}
 		
-		func handleSettingModelSelected(settingModel: SettingModel) {
+		func handleSettingModelSelected(_ settingModel: SettingModel) {
 			handleSettingModelSelectedGotCalled = true
 		}
     }
@@ -95,7 +95,7 @@ class SettingsStoryPresenterTest: XCTestCase {
 			setupInitialStateGotCalled = true
         }
 		
-		func reloadSettings(settings: [SettingsSection]) {
+		func reloadSettings(_ settings: [SettingsSection]) {
 			reloadSettingsGotCalled = true
 		}
     }

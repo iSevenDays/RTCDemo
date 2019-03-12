@@ -62,11 +62,11 @@ class ChatUsersStoryRouterTests: BaseTestCase {
 	class MockOutput: ChatUsersStoryViewController {
 		var openModuleUsingSegueGotCalled = false
 		var segueIdentifier: String?
-		
-		override func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
+
+		override func openModule(usingSegue segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
 			openModuleUsingSegueGotCalled = true
 			self.segueIdentifier = segueIdentifier
-			
+
 			return RamblerViperOpenModulePromise()
 		}
 	}

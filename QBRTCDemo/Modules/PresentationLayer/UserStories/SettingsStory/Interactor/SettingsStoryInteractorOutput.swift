@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SettingsStoryInteractorOutput: class {
-	func didReceiveSettings(settings: [SettingsSection])
+	func didReceiveSettings(_ settings: [SettingsSection])
 }

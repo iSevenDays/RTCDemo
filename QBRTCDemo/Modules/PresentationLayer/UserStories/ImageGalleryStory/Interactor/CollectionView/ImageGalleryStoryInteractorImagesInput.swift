@@ -10,8 +10,8 @@ import Foundation
 
 protocol ImageGalleryStoryCollectionViewInteractorInput: UICollectionViewDataSource {
 	
-	func addImage(image: UIImage)
-	func imageAt(index: Int) -> UIImage?
+	func addImage(_ image: UIImage)
+	func imageAt(_ index: Int) -> UIImage?
 	func imagesCount() -> Int
 }
 

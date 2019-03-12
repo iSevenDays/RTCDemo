@@ -7,6 +7,7 @@
 //
 
 #import "SVUser+QBUUser.h"
+#import <Quickblox/Quickblox.h>
 
 @implementation SVUser (QBUUser)
 

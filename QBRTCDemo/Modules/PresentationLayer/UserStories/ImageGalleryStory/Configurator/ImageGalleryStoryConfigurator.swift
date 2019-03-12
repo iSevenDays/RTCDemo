@@ -10,11 +10,11 @@ import UIKit
 
 class ImageGalleryStoryModuleConfigurator {
 
-    func configureModuleForViewInput(viewInput: ImageGalleryStoryViewController) {
+    func configureModuleForViewInput(_ viewInput: ImageGalleryStoryViewController) {
 		configure(viewInput)
     }
 
-    private func configure(viewController: ImageGalleryStoryViewController) {
+    fileprivate func configure(_ viewController: ImageGalleryStoryViewController) {
 
         let router = ImageGalleryStoryRouter()
 

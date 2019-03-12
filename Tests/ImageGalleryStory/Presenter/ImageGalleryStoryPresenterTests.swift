@@ -119,7 +119,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 			requestCallerRoleGotCalled = true
 		}
 		
-		func configureCollectionView(collectionView: ImageGalleryStoryCollectionView) {
+		func configureCollectionView(_ collectionView: ImageGalleryStoryCollectionView) {
 			configureCollectionViewGotCalled = true
 		}
     }
@@ -160,7 +160,7 @@ class ImageGalleryStoryPresenterTest: XCTestCase {
 
 		func collectionView() -> ImageGalleryStoryCollectionView {
 			collectionViewGotCalled = true
-			let collection = ImageGalleryStoryCollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+			let collection = ImageGalleryStoryCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 			return collection
 		}
     }

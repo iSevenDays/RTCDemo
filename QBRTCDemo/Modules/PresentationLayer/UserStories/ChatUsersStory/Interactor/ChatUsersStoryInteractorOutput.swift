@@ -8,22 +8,22 @@
 
 import Foundation
 
-enum ChatUsersStoryInteractorError: ErrorType {
-	case TagLengthMustBeGreaterThanThreeCharacters
-	case CanNotRetrieveUsers
+enum ChatUsersStoryInteractorError: Error {
+	case tagLengthMustBeGreaterThanThreeCharacters
+	case canNotRetrieveUsers
 }
 
 protocol ChatUsersStoryInteractorOutput: class {
 	
-	func didReceiveApprovedRequestForCallWithOpponent(opponent: SVUser)
-	func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String)
+	func didReceiveApprovedRequestForCallWithOpponent(_ opponent: SVUser)
+	func didDeclineRequestForCallWithOpponent(_ opponent: SVUser, reason: String)
 	
-	func didRetrieveUsers(users: [SVUser])
-	func didReceiveCallRequestFromOpponent(opponent: SVUser)
+	func didRetrieveUsers(_ users: [SVUser])
+	func didReceiveCallRequestFromOpponent(_ opponent: SVUser)
 	
-	func didError(error: ChatUsersStoryInteractorError)
+	func didError(_ error: ChatUsersStoryInteractorError)
 	
-	func didSetChatRoomName(chatRoomName: String)
+	func didSetChatRoomName(_ chatRoomName: String)
 	
 	func didNotifyUsersAboutCurrentUserEnteredRoom()
 	func didFailToNotifyUsersAboutCurrentUserEnteredRoom()

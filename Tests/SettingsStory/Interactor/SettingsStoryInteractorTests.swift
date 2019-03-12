@@ -22,7 +22,7 @@ class SettingsStoryInteractorTests: XCTestCase {
 	var mockOutput: MockPresenter!
 	var mockCacheService: FakeCacheService!
 	var mockSettingsStorage: MockSettingsStorage!
-	var callService: FakeCallSevice!
+	var callService: FakeCallService!
 	
 	let setting = SettingModel(type: .subtitle(label: "Medium", subLabel: nil, selected: false))
 	
@@ -57,7 +57,7 @@ class SettingsStoryInteractorTests: XCTestCase {
     class MockPresenter: SettingsStoryInteractorOutput {
 		var didReceiveSettingsGotCalled = false
 		
-		func didReceiveSettings(settings: [SettingsSection]) {
+		func didReceiveSettings(_ settings: [SettingsSection]) {
 			didReceiveSettingsGotCalled = true
 		}
     }

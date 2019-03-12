@@ -11,29 +11,29 @@ import Foundation
 class ServicesProvider: NSObject {
 	
 	enum Zone {
-		case Development
-		case Production
+		case development
+		case production
 	}
 	
-	static let currentProvider = ServicesProvider(zone: Zone.Production)
+	static let currentProvider = ServicesProvider(zone: Zone.production)
 	
 	
-	private(set) var callService: CallServiceProtocol!
-	private(set) var restService: RESTServiceProtocol!
-	private(set) var pushService: PushNotificationsServiceProtocol!
-	private(set) var permissionsService: PermissionsServiceProtocol!
-	private(set) var settingsStorage: SettingsStorage!
+	fileprivate(set) var callService: (CallServiceProtocol & CallServiceCameraSwitcherProtocol)!
+	fileprivate(set) var restService: RESTServiceProtocol!
+	fileprivate(set) var pushService: PushNotificationsServiceProtocol!
+	fileprivate(set) var permissionsService: PermissionsServiceProtocol!
+	fileprivate(set) var settingsStorage: SettingsStorage!
 	
 	init(zone: Zone) {
 		super.init()
 		
 		switch zone {
-		case .Development:
+		case .development:
 			fatalError("Error: zone is not configured")
 			
 			break
 			
-		case .Production:
+		case .production:
 			let signalingChannel = QBSignalingChannel()
 			let callService = CallService()
 				
@@ -50,13 +50,13 @@ class ServicesProvider: NSObject {
 			self.restService = restService
 			
 			let pushService = QBPushNotificationsService()
-			pushService.cacheService = NSUserDefaults.standardUserDefaults()
+			pushService.cacheService = UserDefaults.standard as CacheServiceProtocol
 			self.pushService = pushService
 			
 			self.permissionsService = PermissionsService()
 			
 			let settingsStorage = SettingsStorage()
-			settingsStorage.cacheService = NSUserDefaults.standardUserDefaults()
+			settingsStorage.cacheService = UserDefaults.standard as CacheServiceProtocol
 			self.settingsStorage = settingsStorage
 			
 			break
@@ -66,8 +66,8 @@ class ServicesProvider: NSObject {
 
 class ServicesConfigurator {
 	
-	func configureCallService(callService: CallService) {
-		callService.cacheService = NSUserDefaults.standardUserDefaults()
+	func configureCallService(_ callService: CallService) {
+		callService.cacheService = UserDefaults.standard as CacheServiceProtocol
 		callService.defaultOfferConstraints = WebRTCHelpers.defaultOfferConstraints()
 		callService.defaultAnswerConstraints = WebRTCHelpers.defaultAnswerConstraints()
 		callService.defaultPeerConnectionConstraints = WebRTCHelpers.defaultPeerConnectionConstraints()
@@ -78,7 +78,7 @@ class ServicesConfigurator {
 		callService.timersFactory = TimersFactory()
 	}
 	
-	func configureRESTService(restService: QBRESTService) {
+	func configureRESTService(_ restService: QBRESTService) {
 		QBSettings.setApplicationID(31016)
 		QBSettings.setAuthKey("aqsHa2AhDO5Z9Th")
 		QBSettings.setAuthSecret("825Bv-3ByACjD4O")

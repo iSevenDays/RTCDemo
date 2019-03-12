@@ -107,7 +107,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		var stopHandlingEventsGotCalled = false
 		var opponent: SVUser?
 		
-		func setOpponent(opponent: SVUser) {
+		func setOpponent(_ opponent: SVUser) {
 			self.opponent = opponent
 		}
 		
@@ -129,7 +129,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		var openVideoStoryWithOpponentGotCalled = false
 		var unwindToChatsUserStoryGotCalled = false
 		
-		func openVideoStoryWithOpponent(opponent: SVUser) {
+		func openVideoStoryWithOpponent(_ opponent: SVUser) {
 			openVideoStoryWithOpponentGotCalled = true
 		}
 		
@@ -152,7 +152,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 			setupInitialStateGotCalled = true
         }
 		
-		func configureViewWithCallInitiator(callInitiator: SVUser) {
+		func configureViewWithCallInitiator(_ callInitiator: SVUser) {
 			configureViewWithCallInitiatorGotCalled = true
 			self.callInitiator = callInitiator
 		}

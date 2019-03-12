@@ -10,7 +10,7 @@ class VideoCallStoryInteractor: NSObject {
 
     weak var output: VideoCallStoryInteractorOutput?
 	
-	var callService: CallServiceProtocol!
+	var callService: (CallServiceProtocol & CallServiceCameraSwitcherProtocol)!
 	var pushService: PushNotificationsServiceProtocol!
 	var permissionsService: PermissionsServiceProtocol!
 	
@@ -20,7 +20,7 @@ class VideoCallStoryInteractor: NSObject {
 	var remoteVideoTrack: RTCVideoTrack?
 	var connectingToChat = false
 	var opponent: SVUser?
-	var audioSessionPortOverride: AVAudioSessionPortOverride = .Speaker
+	var audioSessionPortOverride: AVAudioSession.PortOverride = .speaker
 	
 	var currentUser: SVUser? {
 		return callService.currentUser
@@ -59,7 +59,7 @@ class VideoCallStoryInteractor: NSObject {
 }
 
 extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
-	func startCallWithOpponent(opponent: SVUser) {
+	func startCallWithOpponent(_ opponent: SVUser) {
 		guard callService.isConnected else {
 			NSLog("Error: not connected to chat")
 			return
@@ -83,7 +83,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 		}
 	}
 	
-	func acceptCallFromOpponent(opponent: SVUser) {
+	func acceptCallFromOpponent(_ opponent: SVUser) {
 		self.opponent = opponent
 		callService.addObserver(self)
 		do {
@@ -101,7 +101,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 	func setupDefaultAudioSessionPort() {
 		var desiredRoute = audioSessionPortOverride
 		
-		RTCDispatcher.dispatchAsyncOnType(.TypeAudioSession) { [unowned self] in
+		RTCDispatcher.dispatchAsync(on: .typeAudioSession) { [unowned self] in
 			let session = RTCAudioSession.sharedInstance()
 			
 			do {
@@ -146,23 +146,37 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 			output?.didReceiveVideoStatusDenied()
 			return
 		}
-		
-		if let videoSource = localVideoTrack?.source as? RTCAVFoundationVideoSource {
-			videoSource.useBackCamera = !videoSource.useBackCamera
-			output?.didSwitchCameraPosition(videoSource.useBackCamera)
-		} else if NSClassFromString("XCTest") != nil {
-			// We should not received nil localVideoTrack without granted permissions
-			output?.didSwitchCameraPosition(true)
+		guard let localVideoTrack = self.localVideoTrack else {
+			return
 		}
+		if NSClassFromString("XCTest") != nil {
+			// We should not received nil localVideoTrack without granted permissions
+			output?.willSwitchDevicePositionWithConfigurationBlock({ [weak self] (renderer) in
+				guard let `self` = self else { return }
+				self.output?.didSwitchCameraPosition(true)
+			})
+			return
+		}
+		output?.willSwitchDevicePositionWithConfigurationBlock({ (renderer) in
+			guard let rendererView = renderer else {
+				return
+			}
+			guard let newPosition = self.callService.switchCamera(forActivePeerConnectionWithLocalVideoTrack: localVideoTrack, renderer: rendererView) else {
+				// TODO: pass error
+				return
+			}
+
+			self.output?.didSwitchCameraPosition(newPosition == .back)
+		})
 	}
 	
 	// MARK: - Switch audio route
 	func switchAudioRoute() {
-		var desiredRoute = AVAudioSessionPortOverride.None
+		var desiredRoute = AVAudioSession.PortOverride.none
 		if audioSessionPortOverride == desiredRoute {
-			desiredRoute = .Speaker
+			desiredRoute = .speaker
 		}
-		RTCDispatcher.dispatchAsyncOnType(.TypeAudioSession) { [unowned self] in
+		RTCDispatcher.dispatchAsync(on: .typeAudioSession) { [unowned self] in
 			let session = RTCAudioSession.sharedInstance()
 			
 			do {
@@ -245,34 +259,7 @@ extension VideoCallStoryInteractor: VideoCallStoryInteractorInput {
 }
 
 extension VideoCallStoryInteractor: CallServiceObserver {
-	func callService(callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
-		if NSClassFromString("XCTest") != nil {
-			// We should not received nil localVideoTrack without granted permissions
-			if permissionsService.authorizationStatusForVideo() == .authorized {
-				self.localVideoTrack = localVideoTrack
-				output?.didSetLocalCaptureSession(AVCaptureSession())
-				output?.didSwitchLocalVideoTrackState(true)
-			}
-			return
-		}
-		
-		guard self.localVideoTrack != localVideoTrack else {
-			NSLog("Warning: Received the same local video track")
-			return
-		}
-		self.localVideoTrack = localVideoTrack
-		
-		let source = localVideoTrack.source as? RTCAVFoundationVideoSource
-		
-		if let session = source?.captureSession {
-			output?.didSetLocalCaptureSession(session)
-			output?.didSwitchLocalVideoTrackState(true)
-		} else {
-			output?.didSwitchLocalVideoTrackState(false)
-		}
-	}
-	
-	func callService(callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
+	func callService(_ callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack) {
 		if NSClassFromString("XCTest") != nil {
 			// We should not received nil localVideoTrack without granted permissions
 			if permissionsService.authorizationStatusForMicrophone() == .authorized {
@@ -294,7 +281,7 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		}
 	}
 	
-	func callService(callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didReceiveHangupFromOpponent opponent: SVUser) {
 		guard let currentOpponent = self.opponent else {
 			return
 		}
@@ -304,48 +291,96 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		output?.didReceiveHangupFromOpponent(opponent)
 	}
 	
-	func callService(callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didReceiveRejectFromOpponent opponent: SVUser) {
 		output?.didReceiveRejectFromOpponent(opponent)
 	}
+
+	func callService(_ callService: CallServiceProtocol, didReceiveLocalVideoTrack localVideoTrack: RTCVideoTrack) {
+
+		guard self.localVideoTrack != localVideoTrack else {
+			NSLog("Warning: Received the same local video track")
+			return
+		}
+		self.localVideoTrack = localVideoTrack
+
+		if NSClassFromString("XCTest") != nil {
+			// We should not received nil localVideoTrack without granted permissions
+			if permissionsService.authorizationStatusForVideo() == .authorized {
+				output?.didReceiveLocalVideoTrackWithConfigurationBlock({ [weak self] (renderer) in
+					guard let `self` = self else { return }
+					self.localVideoTrack = localVideoTrack
+					self.output?.didSwitchLocalVideoTrackState(true)
+
+				})
+			}
+			return
+		}
+
+		output?.didReceiveLocalVideoTrackWithConfigurationBlock({ [weak self] (renderer) in
+			guard let `self` = self else { return }
+
+			self.localVideoTrack = nil
+			self.localVideoTrack = localVideoTrack
+
+			if let renderer = renderer {
+				self.callService.setCamera(forActivePeerConnectionWithLocalVideoTrack: localVideoTrack, renderer: renderer, position: .front)
+				// called automatically - strongSelf.localVideoTrack?.add(renderer)
+
+				self.output?.didSwitchLocalVideoTrackState(true)
+			} else if NSClassFromString("XCTest") == nil {
+				fatalError("Error - failed to get renderer")
+			}
+		})
+
+
+		// TODO: consider removing all calls to didSetLocalCaptureSession
+		//source.session
+		//		if let session = source?.captureSession {
+		//			output?.didSetLocalCaptureSession(session)
+		//			output?.didSwitchLocalVideoTrackState(true)
+		//		} else {
+		//			output?.didSwitchLocalVideoTrackState(false)
+		//		}
+	}
 	
-	func callService(callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
+	func callService(_ callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack) {
 		
 		//DDLogVerbose(@"Call service %@ didReceiveRemoteVideoTrack: %@", callService,  remoteVideoTrack);
 		
 		output?.didReceiveRemoteVideoTrackWithConfigurationBlock { [weak self] (renderer) in
 			guard let strongSelf = self else { return }
 			guard strongSelf.remoteVideoTrack != remoteVideoTrack else { return }
-			
-			//strongSelf.remoteVideoTrack?.removeRenderer(nil)
+
 			strongSelf.remoteVideoTrack = nil
-			
-			//TODO: FIX and uncomment: renderer?.renderFrame(nil)
-			
 			strongSelf.remoteVideoTrack = remoteVideoTrack
-			
-			strongSelf.remoteVideoTrack?.addRenderer(renderer!)
+
+			if let renderer = renderer {
+				strongSelf.remoteVideoTrack?.add(renderer)
+			} else if NSClassFromString("XCTest") == nil {
+				fatalError("Error - failed to get renderer")
+			}
 		}
 	}
 	
-	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		// do nothing
 	}
 	
-	func callService(callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didAnswerTimeoutForOpponent opponent: SVUser) {
 		output?.didReceiveAnswerTimeoutForOpponent(opponent)
 	}
 	
-	func callService(callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState) {
+	func callService(_ callService: CallServiceProtocol, didChangeConnectionState state: RTCIceConnectionState) {
 		
 	}
 	
-	func callService(callService: CallServiceProtocol, didChangeState state: CallServiceState) {
-		if state == CallServiceState.Error {
+	func callService(_ callService: CallServiceProtocol, didChangeState state: CallServiceState) {
+		if state == CallServiceState.error {
 			output?.didFailCallService()
 		}
 	}
 	
-	func callService(callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
 		output?.didStartDialingOpponent(opponent)
 		
 		guard let currentUserFullName = self.currentUser?.fullName else { return }
@@ -353,12 +388,12 @@ extension VideoCallStoryInteractor: CallServiceObserver {
 		output?.didSendPushNotificationAboutNewCallToOpponent(opponent)
 	}
 	
-	func callService(callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didReceiveAnswerFromOpponent opponent: SVUser) {
 		setupDefaultAudioSessionPort()
 		output?.didReceiveAnswerFromOpponent(opponent)
-	}
+	}  
 	
-	func callService(callService: CallServiceProtocol, didError error: NSError) {
+	func callService(_ callService: CallServiceProtocol, didError error: Error) {
 		
 	}
 }

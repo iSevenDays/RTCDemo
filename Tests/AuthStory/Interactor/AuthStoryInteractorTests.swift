@@ -22,7 +22,7 @@ class AuthStoryInteractorTests: BaseTestCase {
 	var mockOutput: MockPresenter!
 	
 	let fakeService = FakeQBRESTService()
-	var fakeCallService: FakeCallSevice!
+	var fakeCallService: FakeCallService!
 	
 	let userName = "test"
 	let tags = ["tag"]
@@ -32,7 +32,7 @@ class AuthStoryInteractorTests: BaseTestCase {
 		interactor = AuthStoryInteractor()
 		mockOutput = MockPresenter()
 		interactor.output = mockOutput
-		fakeCallService = FakeCallSevice()
+		fakeCallService = FakeCallService()
 		fakeCallService.signalingChannel = FakeSignalingChannel()
 		ServicesConfigurator().configureCallService(fakeCallService)
 		
@@ -101,7 +101,7 @@ class AuthStoryInteractorTests: BaseTestCase {
 		fakeService.shouldLoginSuccessfully = true
 		
 		// when
-		interactor.cacheUser(SVUser(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
+		interactor.cacheUser(SVUser(id: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
 		interactor.tryLoginWithCachedUser()
 		
 		// then
@@ -144,25 +144,25 @@ class AuthStoryInteractorTests: BaseTestCase {
 		var didLoginUserGotCalled = false
 		
 		var didErrorLoginGotCalled = false
-		var errorLogin: NSError?
+		var errorLogin: Error?
 		
-		func doingLoginWithUser(user: SVUser) {
+		func doingLoginWithUser(_ user: SVUser) {
 			doingLoginWithUserGotCalled = true
 		}
 		
-		func doingLoginWithCachedUser(user: SVUser) {
+		func doingLoginWithCachedUser(_ user: SVUser) {
 			doingLoginWithCachedUserGotCalled = true
 		}
 		
-		func doingSignUpWithUser(user: SVUser) {
+		func doingSignUpWithUser(_ user: SVUser) {
 			doingSignUpWithUserGotCalled = true
 		}
 		
-		func didLoginUser(user: SVUser) {
+		func didLoginUser(_ user: SVUser) {
 			didLoginUserGotCalled = true
 		}
 		
-		func didErrorLogin(error: NSError?) {
+		func didErrorLogin(_ error: Error?) {
 			didErrorLoginGotCalled = true
 			errorLogin = error
 		}

@@ -115,7 +115,7 @@ class AuthStoryPresenterTests: BaseTestCase {
 			tryLoginWithCachedUserGotCalled = true
 		}
 		
-		func signUpOrLoginWithUserName(userName: String, tags: [String]) {
+		func signUpOrLoginWithUserName(_ userName: String, tags: [String]) {
 			signUpOrLoginWithUserNameGotCalled = true
 		}
 		
@@ -126,7 +126,7 @@ class AuthStoryPresenterTests: BaseTestCase {
 		var tag: String?
 		var user: SVUser?
 		
-		func openChatUsersStoryWithTag(tag: String, currentUser: SVUser) {
+		func openChatUsersStoryWithTag(_ tag: String, currentUser: SVUser) {
 			openChatUsersStoryGotCalled = true
 			self.tag = tag
 			self.user = currentUser
@@ -159,11 +159,11 @@ class AuthStoryPresenterTests: BaseTestCase {
 			disableInputGotCalled = true
 		}
 		
-		func setUserName(userName: String) {
+		func setUserName(_ userName: String) {
 			setUserNameGotCalled = true
 		}
 		
-		func setRoomName(roomName: String) {
+		func setRoomName(_ roomName: String) {
 			setRoomNameGotCalled = true
 		}
 		

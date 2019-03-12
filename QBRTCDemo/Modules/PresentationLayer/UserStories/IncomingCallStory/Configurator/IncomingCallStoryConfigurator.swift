@@ -10,11 +10,11 @@ import UIKit
 
 class IncomingCallStoryModuleConfigurator {
 
-	func configureModuleForViewInput(viewInput: IncomingCallStoryViewController) {
+	func configureModuleForViewInput(_ viewInput: IncomingCallStoryViewController) {
 		configure(viewInput)
 	}
 
-    private func configure(viewController: IncomingCallStoryViewController) {
+    fileprivate func configure(_ viewController: IncomingCallStoryViewController) {
 
         let router = IncomingCallStoryRouter()
 		router.transitionHandler = viewController

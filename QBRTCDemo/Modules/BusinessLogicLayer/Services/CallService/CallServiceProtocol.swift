@@ -14,15 +14,20 @@ protocol CallServiceProtocol: class {
 	var currentUser: SVUser? { get }
 	var hasActiveCall: Bool { get }
 	
-	var observers: MulticastDelegate<CallServiceObserver>? { get }
+	var observers: MulticastDelegate<CallServiceObserver> { get }
 	
-	func addObserver(observer: CallServiceObserver)
-	func removeObserver(observer: CallServiceObserver)
-	func connectWithUser(user: SVUser, completion: ((error: NSError?) -> Void)?)
-	func disconnectWithCompletion(completion: ((error: NSError?) -> Void)?)
-	func startCallWithOpponent(user: SVUser) throws
-	func acceptCallFromOpponent(opponent: SVUser) throws
+	func addObserver(_ observer: CallServiceObserver)
+	func removeObserver(_ observer: CallServiceObserver)
+	func connectWithUser(_ user: SVUser, completion: ((_ error: Error?) -> Void)?)
+	func disconnectWithCompletion(_ completion: ((_ error: Error?) -> Void)?)
+	func startCallWithOpponent(_ user: SVUser) throws
+	func acceptCallFromOpponent(_ opponent: SVUser) throws
 	func hangup()
-	func sendRejectCallToOpponent(user: SVUser) throws
-	func sendMessageCurrentUserEnteredChatRoom(chatRoomName: String, toUser: SVUser)
+	func sendRejectCallToOpponent(_ user: SVUser) throws
+	func sendMessageCurrentUserEnteredChatRoom(_ chatRoomName: String, toUser: SVUser)
+}
+
+protocol CallServiceCameraSwitcherProtocol: class {
+	func switchCamera(forActivePeerConnectionWithLocalVideoTrack localVideoTrack: RTCVideoTrack, renderer: RenderableView) -> AVCaptureDevice.Position?
+	func setCamera(forActivePeerConnectionWithLocalVideoTrack localVideoTrack: RTCVideoTrack, renderer: RenderableView, position: AVCaptureDevice.Position) -> AVCaptureDevice.Position?
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Anton Sokolchenko. All rights reserved.
 //
 
-@objc class ChatUsersStoryPresenter: NSObject {
+class ChatUsersStoryPresenter: NSObject {
 
     weak var view: ChatUsersStoryViewInput?
     var interactor: ChatUsersStoryInteractorInput!
@@ -19,7 +19,7 @@ extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
 		interactor.retrieveUsersWithTag()
 	}
 	
-	func didTriggerUserTapped(user: SVUser) {
+	func didTriggerUserTapped(_ user: SVUser) {
 		interactor.requestCallWithOpponent(user)
 	}
 	
@@ -29,41 +29,41 @@ extension ChatUsersStoryPresenter: ChatUsersStoryViewOutput {
 }
 
 extension ChatUsersStoryPresenter: ChatUsersStoryModuleInput {
-	func setTag(tag: String, currentUser: SVUser) {
+	func setTag(_ tag: String, currentUser: SVUser) {
 		interactor.setChatRoomName(tag)
 		view?.configureViewWithCurrentUser(currentUser)
 	}
 }
 
 extension ChatUsersStoryPresenter: ChatUsersStoryInteractorOutput {
-	func didRetrieveUsers(users: [SVUser]) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
+	func didRetrieveUsers(_ users: [SVUser]) {
+		DispatchQueue.main.async() { [view] in
 			view?.reloadDataWithUsers(users)
 		}
 		interactor.notifyUsersAboutCurrentUserEnteredRoom()
 	}
 	
-	func didReceiveCallRequestFromOpponent(opponent: SVUser) {
+	func didReceiveCallRequestFromOpponent(_ opponent: SVUser) {
 		router.openIncomingCallStoryWithOpponent(opponent)
 	}
 	
-	func didError(error: ChatUsersStoryInteractorError) {
-		if error == .CanNotRetrieveUsers {
+	func didError(_ error: ChatUsersStoryInteractorError) {
+		if error == .canNotRetrieveUsers {
 			view?.reloadDataWithUsers([])
 		}
 	}
 	
-	func didReceiveApprovedRequestForCallWithOpponent(opponent: SVUser) {
+	func didReceiveApprovedRequestForCallWithOpponent(_ opponent: SVUser) {
 		router.openVideoStoryWithInitiator(interactor.retrieveCurrentUser(), thenCallOpponent: opponent)
 	}
 	
-	func didDeclineRequestForCallWithOpponent(opponent: SVUser, reason: String) {
+	func didDeclineRequestForCallWithOpponent(_ opponent: SVUser, reason: String) {
 		view?.showErrorMessage(reason)
 	}
 	
-	func didReceiveHangupFromOpponent(opponent: SVUser) {
+	func didReceiveHangupFromOpponent(_ opponent: SVUser) {
 	}
-	func didSetChatRoomName(chatRoomName: String) {
+	func didSetChatRoomName(_ chatRoomName: String) {
 	}
 	func didNotifyUsersAboutCurrentUserEnteredRoom() {
 	}

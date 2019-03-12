@@ -45,7 +45,7 @@ class VideoCallStoryRouterTests: BaseTestCase {
 	
 	func testSegues() {
 		// given
-		let identifiers = segues(ofViewController: UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewControllerWithIdentifier("VideoCallStoryViewController"))
+		let identifiers = segues(ofViewController: UIStoryboard(name: "VideoCallStory", bundle: nil).instantiateViewController(withIdentifier: "VideoCallStoryViewController"))
 		
 		// then
 		XCTAssertTrue(identifiers.contains(router.videoStoryToImageGalleryModuleSegue))
@@ -54,7 +54,8 @@ class VideoCallStoryRouterTests: BaseTestCase {
 	
 	class MockTransitionHandler: NSObject, RamblerViperModuleTransitionHandlerProtocol {
 		var openedModuleSegueIdentifier: String?
-		func openModuleUsingSegue(segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
+		
+		func openModule(usingSegue segueIdentifier: String!) -> RamblerViperOpenModulePromise! {
 			openedModuleSegueIdentifier = segueIdentifier
 			return RamblerViperOpenModulePromise()
 		}

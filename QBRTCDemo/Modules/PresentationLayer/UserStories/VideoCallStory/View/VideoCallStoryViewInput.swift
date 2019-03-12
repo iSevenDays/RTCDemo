@@ -15,10 +15,13 @@ protocol VideoCallStoryViewInput: class {
     func setupInitialState()
 	
 	/// Show current user is dialing the opponent
-	func showStartDialingOpponent(opponent: SVUser)
+	func showStartDialingOpponent(_ opponent: SVUser)
+	
+	/// Show current user has accepted an offer for a call from the opponent
+	func showCurrentUserAcceptedCallFromOpponent(_ opponent: SVUser)
 	
 	/// Show current user has received the answer from the opponent
-	func showReceivedAnswerFromOpponent(opponent: SVUser)
+	func showReceivedAnswerFromOpponent(_ opponent: SVUser)
 	
 	/// Show current user hang up a call
 	func showHangup()
@@ -40,17 +43,16 @@ protocol VideoCallStoryViewInput: class {
 	
 	/// Data channel error not ready, currently not used
 	func showErrorDataChannelNotReady()
-	
-	/// Set local video track
-	func setLocalVideoCaptureSession(captureSession: AVCaptureSession)
-	
-	func configureRemoteVideoViewWithBlock(block: ((RTCEAGLVideoView?) -> Void)?)
+
+	func configureLocalVideoViewWithBlock(_ block: ((RenderableView?) -> Void)?)
+
+	func configureRemoteVideoViewWithBlock(_ block: ((RenderableView?) -> Void)?)
 	
 	/// Show local video track state (enabled/disabled)
-	func showLocalVideoTrackEnabled(enabled: Bool)
+	func showLocalVideoTrackEnabled(_ enabled: Bool)
 	
 	/// Show local audio track(microphone) state (enabled/disabled)
-	func showLocalAudioTrackEnabled(enabled: Bool)
+	func showLocalAudioTrackEnabled(_ enabled: Bool)
 	
 	/// Show the app can use camera
  	func showLocalVideoTrackAuthorized()
@@ -64,5 +66,5 @@ protocol VideoCallStoryViewInput: class {
 	/// Show the app is denied to use microphone
 	func showMicrophoneDenied()
 	
-	func showCameraPosition(backCamera: Bool)
+	func showCameraPosition(_ backCamera: Bool)
 }

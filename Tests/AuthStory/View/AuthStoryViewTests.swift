@@ -25,7 +25,9 @@ class AuthStoryViewTests: XCTestCase {
 	
     override func setUp() {
         super.setUp()
-		controller = UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewControllerWithIdentifier(String(AuthStoryViewController.self)) as! AuthStoryViewController
+		let identifier = String(describing: AuthStoryViewController.self)
+		let vc = UIStoryboard(name: "AuthStory", bundle: nil).instantiateViewController(withIdentifier: identifier)
+		controller = vc as! AuthStoryViewController
 		mockOutput = MockViewControllerOutput()
 		controller.output = mockOutput
 		controller.alertControl = FakeAlertControl()
@@ -88,11 +90,11 @@ class AuthStoryViewTests: XCTestCase {
 			viewIsReadyGotCalled = true
 		}
 		
-		func didTriggerLoginButtonTapped(userName: String, roomName: String) {
+		func didTriggerLoginButtonTapped(_ userName: String, roomName: String) {
 			loginButtonTapped = true
 		}
 		
-		func didReceiveUserName(userName: String, roomName: String) {
+		func didReceiveUserName(_ userName: String, roomName: String) {
 			didReceiveUserNameGotCalled = true
 			self.userName = userName
 			self.roomName = roomName

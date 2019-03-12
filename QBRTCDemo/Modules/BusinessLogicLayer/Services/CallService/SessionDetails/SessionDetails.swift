@@ -9,14 +9,14 @@
 import Foundation
 
 enum SessionDetailsState {
-	case Undefined
-	case OfferSent
-	case OfferReceived
-	case AnswerSent
-	case AnswerReceived
-	case Established
-	case Rejected
-	case Closed
+	case undefined
+	case offerSent
+	case offerReceived
+	case answerSent
+	case answerReceived
+	case established
+	case rejected
+	case closed
 }
 
 class SessionDetails {
@@ -24,14 +24,14 @@ class SessionDetails {
 	/// Unique session identifier
 	var sessionID: String
 	var initiatorID: UInt
-	var sessionState = SessionDetailsState.Undefined
+	var sessionState = SessionDetailsState.undefined
 	
 	// all users in current session including initiator
 	var membersIDs: [UInt]
 	
 	// Generate new SessionDetails
 	init(initiatorID: UInt, membersIDs: [UInt]) {
-		sessionID = NSUUID().UUIDString
+		sessionID = UUID().uuidString
 		self.initiatorID = initiatorID
 		self.membersIDs = membersIDs
 	}

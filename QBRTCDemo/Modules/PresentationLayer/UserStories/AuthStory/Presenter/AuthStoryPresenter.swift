@@ -20,19 +20,19 @@ extension AuthStoryPresenter: AuthStoryViewOutput {
 	}
 	
 	
-	func didTriggerLoginButtonTapped(userName: String, roomName: String) {
+	func didTriggerLoginButtonTapped(_ userName: String, roomName: String) {
 		view.disableInput()
 		interactor.signUpOrLoginWithUserName(userName, tags: [roomName])
 	}
 	
-	func didReceiveUserName(userName: String, roomName: String) {
+	func didReceiveUserName(_ userName: String, roomName: String) {
 		
 	}
 }
 
 extension AuthStoryPresenter: AuthStoryInteractorOutput {
 	
-	func didLoginUser(user: SVUser) {
+	func didLoginUser(_ user: SVUser) {
 		guard let firstTag = user.tags?.first else {
 			NSLog("Error user has no tags")
 			return
@@ -41,39 +41,39 @@ extension AuthStoryPresenter: AuthStoryInteractorOutput {
 		router.openChatUsersStoryWithTag(firstTag, currentUser: user)
 	}
 	
-	func didErrorLogin(error: NSError?) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
-			view.showErrorLogin()
-			view.enableInput()
+	func didErrorLogin(_ error: Error?) {
+		DispatchQueue.main.async() { [view] in
+			view?.showErrorLogin()
+			view?.enableInput()
 		}
 	}
 	
-	func doingLoginWithUser(user: SVUser) {
+	func doingLoginWithUser(_ user: SVUser) {
 		NSLog("%@", "doingLoginWithUser")
-		dispatch_async(dispatch_get_main_queue()) { [view] in
-			view.showIndicatorLoggingIn()
-			view.setUserName(user.fullName)
-			view.setRoomName(user.tags!.joinWithSeparator(","))
-			view.disableInput()
+		DispatchQueue.main.async() { [view] in
+			view?.showIndicatorLoggingIn()
+			view?.setUserName(user.fullName)
+			view?.setRoomName(user.tags!.joined(separator: ","))
+			view?.disableInput()
 		}
 	}
 	
-	func doingLoginWithCachedUser(user: SVUser) {
+	func doingLoginWithCachedUser(_ user: SVUser) {
 		NSLog("%@", "doingLoginWithCachedUser")
-		dispatch_async(dispatch_get_main_queue()) { [view] in
-			view.showIndicatorLoggingIn()
-			view.setUserName(user.fullName)
-			view.setRoomName(user.tags!.joinWithSeparator(","))
-			view.disableInput()
+		DispatchQueue.main.async() { [view] in
+			view?.showIndicatorLoggingIn()
+			view?.setUserName(user.fullName)
+			view?.setRoomName(user.tags!.joined(separator: ","))
+			view?.disableInput()
 		}
 	}
 	
-	func doingSignUpWithUser(user: SVUser) {
-		dispatch_async(dispatch_get_main_queue()) { [view] in
-			view.showIndicatorSigningUp()
-			view.setUserName(user.fullName)
-			view.setRoomName(user.tags!.joinWithSeparator(","))
-			view.disableInput()
+	func doingSignUpWithUser(_ user: SVUser) {
+		DispatchQueue.main.async() { [view] in
+			view?.showIndicatorSigningUp()
+			view?.setUserName(user.fullName)
+			view?.setRoomName(user.tags!.joined(separator: ","))
+			view?.disableInput()
 		}
 	}
 }

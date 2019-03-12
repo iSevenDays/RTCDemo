@@ -1,26 +1,32 @@
-platform :ios, "8.0"
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Artsy/Specs.git'
 
-def available_pods
+platform :ios, "10.0"
+inhibit_all_warnings!
+use_frameworks!
+
+target 'QBRTCDemo' do
 	pod 'ViperMcFlurry', '~> 1.5.2'
+	pod 'GoogleWebRTC', '~> 1.1'
+	pod 'KeychainSwift', '~> 13.0'
+
+	target 'QBRTCDemoTests' do
+		inherit! :search_paths
+	end
 end
 
+target 'QBRTCDemo_s' do
+	pod 'ViperMcFlurry', '~> 1.5.2'
+	pod 'GoogleWebRTC', '~> 1.1'
+	pod 'KeychainSwift', '~> 13.0'
 
-target :QBRTCDemo_s do
-	available_pods
+	target 'QBRTCDemo_sTests' do
+		inherit! :search_paths
+	end
 end
 
-target :QBRTCDemo do
-	available_pods
-end
-
-def tests_pods
-	inherit! :search_paths
-end
-
-target :QBRTCDemoTests do
-	tests_pods
-end
-
-target :QBRTCDemo_sTests do
-	tests_pods
+post_install do |installer|
+	installer.pods_project.targets.each do |target|
+		puts target.name
+	end
 end

@@ -8,5 +8,5 @@
 
 @objc protocol ChatUsersStoryModuleInput: RamblerViperModuleInput {
 	
-	func setTag(tag: String, currentUser: SVUser)
+	func setTag(_ tag: String, currentUser: SVUser)
 }

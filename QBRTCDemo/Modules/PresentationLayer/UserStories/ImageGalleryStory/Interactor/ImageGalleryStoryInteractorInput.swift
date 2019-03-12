@@ -14,5 +14,5 @@ protocol ImageGalleryStoryInteractorInput {
 	
 	func requestCallerRole()
 	
-	func configureCollectionView(collectionView: ImageGalleryStoryCollectionView)
+	func configureCollectionView(_ collectionView: ImageGalleryStoryCollectionView)
 }

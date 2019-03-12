@@ -52,19 +52,19 @@ class DesignableButton: UIButton {
 		}
 	}
 	
-	override var highlighted: Bool {
+	override var isHighlighted: Bool {
 		didSet {
 			guard highlightedBackgroundColor != nil else { return }
-			if highlighted {
-				layer.backgroundColor = highlightedBackgroundColor?.CGColor
+			if isHighlighted {
+				layer.backgroundColor = highlightedBackgroundColor?.cgColor
 			} else {
-				layer.backgroundColor = normalBackgroundColor?.CGColor
+				layer.backgroundColor = normalBackgroundColor?.cgColor
 			}
 			setNeedsDisplay()
 		}
 	}
 	
-	override var selected: Bool {
+	override var isSelected: Bool {
 		didSet {
 			updateSelectedBackgrounColor()
 			setNeedsDisplay()
@@ -72,10 +72,10 @@ class DesignableButton: UIButton {
 	}
 	
 	func updateSelectedBackgrounColor() {
-		if selected {
-			layer.backgroundColor = selectedBackgroundColor?.CGColor
+		if isSelected {
+			layer.backgroundColor = selectedBackgroundColor?.cgColor
 		} else {
-			layer.backgroundColor = normalBackgroundColor?.CGColor
+			layer.backgroundColor = normalBackgroundColor?.cgColor
 		}
 	}
 }

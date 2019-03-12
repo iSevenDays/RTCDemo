@@ -9,6 +9,6 @@
 import Foundation
 
 protocol PushNotificationsServiceObserver: class {
-	func pushNotificationsService(service: PushNotificationsServiceProtocol, didSendMessage message: String, toOpponent: SVUser)
-	func pushNotificationsService(service: PushNotificationsServiceProtocol, didFailToSendMessage message: String, toOpponent: SVUser, error: NSError)
+	func pushNotificationsService(_ service: PushNotificationsServiceProtocol, didSendMessage message: String, toOpponent: SVUser)
+	func pushNotificationsService(_ service: PushNotificationsServiceProtocol, didFailToSendMessage message: String, toOpponent: SVUser, error: Error)
 }

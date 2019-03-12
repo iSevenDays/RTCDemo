@@ -8,32 +8,34 @@
 
 import Foundation
 
-@objc protocol CacheServiceProtocol: class {
-	func cacheUsers(users: [SVUser], forRoomName roomName: String)
-	func cachedUsersForRoomWithName(roomName: String) -> [SVUser]?
+protocol CacheServiceProtocol: class {
+	func cacheUsers(_ users: [SVUser], forRoomName roomName: String)
+	func cachedUsersForRoomWithName(_ roomName: String) -> [SVUser]?
+
+	func set(_ value: Bool, forKey defaultName: String)
+	func bool(forKey defaultName: String) -> Bool
 	
-	func setBool(value: Bool, forKey defaultName: String)
-	func boolForKey(defaultName: String) -> Bool
-	
-	func setObject(value: AnyObject?, forKey defaultName: String)
-	func stringForKey(defaultName: String) -> String?
+	func set(_ value: Any?, forKey defaultName: String)
+	func string(forKey defaultName: String) -> String?
 }
 
-extension NSUserDefaults: CacheServiceProtocol {
+
+extension UserDefaults: CacheServiceProtocol {
 	
-	func cacheUsers(users: [SVUser], forRoomName roomName: String) {
+	func cacheUsers(_ users: [SVUser], forRoomName roomName: String) {
 		let uniqueUsers = Array(Set(users))
-		let usersData = NSKeyedArchiver.archivedDataWithRootObject(uniqueUsers)
-		setObject(usersData, forKey: "users" + roomName)
+		let usersData = NSKeyedArchiver.archivedData(withRootObject: uniqueUsers)
+		set(usersData, forKey: "users" + roomName)
 		synchronize()
 	}
+
 	
-	func cachedUsersForRoomWithName(roomName: String) -> [SVUser]? {
-		guard let usersData = objectForKey("users" + roomName) as? NSData else {
+	func cachedUsersForRoomWithName(_ roomName: String) -> [SVUser]? {
+		guard let usersData = object(forKey: "users" + roomName) as? Data else {
 			NSLog("%@", "Warning: No stored users data for room name \(roomName)")
 			return nil
 		}
 		
-		return NSKeyedUnarchiver.unarchiveObjectWithData(usersData) as? [SVUser]
+		return NSKeyedUnarchiver.unarchiveObject(with: usersData) as? [SVUser]
 	}
 }

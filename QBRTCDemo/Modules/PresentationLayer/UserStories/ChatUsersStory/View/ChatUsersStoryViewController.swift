@@ -29,17 +29,17 @@ class ChatUsersStoryViewController: UIViewController {
         output.viewIsReady()
     }
 	
-	@IBAction func openSettings(sender: AnyObject) {
+	@IBAction func openSettings(_ sender: AnyObject) {
 		output.didTriggerSettingsButtonTapped()
 	}
 }
 
 extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
-	func setupInitialState() {
+	@objc func setupInitialState() {
 		activityIndicator.startAnimating()
 	}
 	
-	func configureViewWithCurrentUser(user: SVUser) {
+	func configureViewWithCurrentUser(_ user: SVUser) {
 		navigationItem.title = "Logged in as " + user.fullName
 		if let roomName = user.tags?.first {
 			_ = view
@@ -47,7 +47,7 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 		}
 	}
 	
-	func reloadDataWithUsers(users: [SVUser]) {
+	func reloadDataWithUsers(_ users: [SVUser]) {
 		activityIndicator.stopAnimating()
 		
 		self.users = users
@@ -64,23 +64,23 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 		tableView.reloadData()
 	}
 	
-	func showErrorMessage(message: String) {
+	func showErrorMessage(_ message: String) {
 		alertControl.showErrorMessage(message, overViewController: self, completion: nil)
 	}
 	
-	@IBAction func prepareForUnwindFromVideoStoryToChatUsersStory(segue: UIStoryboardSegue) {
+	@IBAction func prepareForUnwindFromVideoStoryToChatUsersStory(_ segue: UIStoryboardSegue) {
 		
 	}
 }
 
 extension ChatUsersStoryViewController: UITableViewDataSource {
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return users.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ChatUsersTableViewCell
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChatUsersTableViewCell
 		
 		guard indexPath.row < users.count else {
 			fatalError("Error: data error, no user at indexPath")
@@ -101,8 +101,8 @@ extension ChatUsersStoryViewController: UITableViewDataSource {
 }
 
 extension ChatUsersStoryViewController: UITableViewDelegate {
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		guard indexPath.row < users.count else {
 			NSLog("%@%", "Error: data error, no user at indexPath")
 			return

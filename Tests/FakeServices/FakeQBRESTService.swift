@@ -25,8 +25,8 @@ class FakeQBRESTService : QBRESTService {
 	var shouldDownloadUsersWithTags = true
 	var usersWithTags: [SVUser] = [TestsStorage.svuserTest]
 	
-	private var logined = false
-	private var registered = false
+	fileprivate var logined = false
+	fileprivate var registered = false
 	
 	internal var updatedUser: SVUser?
 	
@@ -44,14 +44,14 @@ class FakeQBRESTService : QBRESTService {
 	- parameter successBlock: success block
 	- parameter errorBlock:   error block
 	*/
-	override func loginWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?) {
+	override func loginWithUser(_ user: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void) {
 		if shouldLoginSuccessfully ||
 		(registered && shouldLoginAfterSignupSuccessfully) {
 			logined = true
-			user.ID = 777
-			successBlock?(user: user)
+			user.id = 777
+			successBlock(user)
 		} else {
-			errorBlock?(nil)
+			errorBlock(nil)
 		}
 	}
 	
@@ -62,13 +62,13 @@ class FakeQBRESTService : QBRESTService {
 	- parameter successBlock: success block
 	- parameter errorBlock:   error block
 	*/
-	override func signUpWithUser(user: SVUser, successBlock: ((user: SVUser) -> Void)?, errorBlock: ((NSError?) -> Void)?) {
+	override func signUpWithUser(_ user: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void) {
 		if shouldSignUpSuccessfully {
 			registered = true
-			user.ID = 888
-			successBlock?(user: user)
+			user.id = 888
+			successBlock(user)
 		} else {
-			errorBlock?(nil)
+			errorBlock(nil)
 		}
 	}
 	
@@ -79,16 +79,16 @@ class FakeQBRESTService : QBRESTService {
 	- parameter successBlock: success block with users
 	- parameter errorBlock:   error block
 	*/
-	override func downloadUsersWithTags(tags: [String], successBlock: ((users: [SVUser]) -> Void)?, errorBlock: ((error: NSError?) -> Void)?) {
+	override func downloadUsersWithTags(_ tags: [String], successBlock: @escaping (_ users: [SVUser]) -> Void, errorBlock: @escaping (_ error: Error?) -> Void) {
 		if shouldDownloadUsersWithTags {
-			successBlock?(users: usersWithTags)
+			successBlock(usersWithTags)
 		} else {
-			errorBlock?(error: nil)
+			errorBlock(nil)
 		}
 	}
 	
-	override func updateCurrentUserFieldsIfNeededWithUser(requestedUser: SVUser, successBlock: (user: SVUser) -> Void, errorBlock: (error: NSError?) -> Void) {
-		successBlock(user: requestedUser)
+	override func updateCurrentUserFieldsIfNeededWithUser(_ requestedUser: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void) {
+		successBlock(requestedUser)
 	}
 	
 	func tearDown() {

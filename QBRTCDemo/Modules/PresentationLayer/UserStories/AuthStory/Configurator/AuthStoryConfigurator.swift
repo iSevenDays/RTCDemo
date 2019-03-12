@@ -10,11 +10,11 @@ import UIKit
 
 class AuthStoryModuleConfigurator {
 
-    func configureModuleForViewInput(viewInput: AuthStoryViewController) {
+    func configureModuleForViewInput(_ viewInput: AuthStoryViewController) {
 		configure(viewInput)
     }
 
-    private func configure(viewController: AuthStoryViewController) {
+    fileprivate func configure(_ viewController: AuthStoryViewController) {
 
         let router = AuthStoryRouter()
 		router.transitionHandler = viewController

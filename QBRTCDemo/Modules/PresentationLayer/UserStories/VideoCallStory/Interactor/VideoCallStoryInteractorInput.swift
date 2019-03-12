@@ -10,8 +10,8 @@ import Foundation
 
 protocol VideoCallStoryInteractorInput {
 	
-	func startCallWithOpponent(opponent: SVUser)
-	func acceptCallFromOpponent(opponent: SVUser)
+	func startCallWithOpponent(_ opponent: SVUser)
+	func acceptCallFromOpponent(_ opponent: SVUser)
 	
 	func hangup()
 	

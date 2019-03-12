@@ -17,19 +17,19 @@ class VideoCallStoryRouter {
 extension VideoCallStoryRouter: VideoCallStoryRouterInput {
 	func openImageGallery() {
 		
-		transitionHandler.openModuleUsingSegue?(videoStoryToImageGalleryModuleSegue).thenChainUsingBlock { (moduleInput) -> RamblerViperModuleOutput! in
-			
+		transitionHandler.openModule?(usingSegue: videoStoryToImageGalleryModuleSegue)?.thenChain { (moduleInput) -> RamblerViperModuleOutput? in
+
 			guard let imageGalleryModuleInput = moduleInput as? ImageGalleryStoryModuleInput else {
 				fatalError("moduleInput is not ImageGalleryStoryModuleInput")
 			}
-			
+
 			imageGalleryModuleInput.configureModule()
-			
+
 			return nil
 		}
 	}
 	
 	func unwindToChatsUserStory() {
-		transitionHandler.openModuleUsingSegue?(videoStoryToChatsUserStoryModuleSegue)
+		transitionHandler.openModule?(usingSegue: videoStoryToChatsUserStoryModuleSegue)
 	}
 }

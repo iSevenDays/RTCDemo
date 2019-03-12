@@ -17,33 +17,33 @@ import Foundation
 #endif
 
 class FakeCacheService: NSObject, CacheServiceProtocol {
+	func set(_ value: Bool, forKey defaultName: String) {
+		
+	}
+
+	func set(_ value: Any?, forKey defaultName: String) {
+
+	}
+
 	var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest]
-	
-	func setBool(value: Bool, forKey defaultName: String) {
-		
-	}
-	
-	func setObject(value: AnyObject?, forKey defaultName: String) {
-		
-	}
-	
-	func stringForKey(defaultName: String) -> String? {
+
+	func string(forKey: String) -> String? {
 		return nil
 	}
-	
-	func boolForKey(defaultName: String) -> Bool {
+
+	func bool(forKey: String) -> Bool {
 		return true
 	}
 	
-	func cachedUserWithID(id: Int) -> SVUser? {
+	func cachedUserWithID(_ id: Int) -> SVUser? {
 		return nil
 	}
 	
-	func cacheUsers(users: [SVUser], forRoomName roomName: String) {
+	func cacheUsers(_ users: [SVUser], forRoomName roomName: String) {
 		cachedUsersArray = users
 	}
 	
-	func cachedUsersForRoomWithName(roomName: String) -> [SVUser]? {
+	func cachedUsersForRoomWithName(_ roomName: String) -> [SVUser]? {
 		return cachedUsersArray
 	}
 }

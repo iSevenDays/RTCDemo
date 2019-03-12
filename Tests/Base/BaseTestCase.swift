@@ -11,15 +11,15 @@ import XCTest
 
 class BaseTestCase: XCTestCase {
 	func segues(ofViewController viewController: UIViewController) -> [String] {
-		let identifiers = (viewController.valueForKey("storyboardSegueTemplates") as? [AnyObject])?.flatMap({ $0.valueForKey("identifier") as? String }) ?? []
+		let identifiers = (viewController.value(forKey: "storyboardSegueTemplates") as? [AnyObject])?.compactMap({ $0.value(forKey: "identifier") as? String }) ?? []
 		return identifiers
 	}
 	
-	func waitForTimeInterval(milliseconds: UInt64) {
+	func waitForTimeInterval(_ milliseconds: UInt64) {
 		var waitCondition = true
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(milliseconds * NSEC_PER_MSEC)), dispatch_get_main_queue()) {
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(milliseconds * NSEC_PER_MSEC)) / Double(NSEC_PER_SEC)) {
 			waitCondition = false
 		}
-		while(waitCondition) { NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture()) }
+		while(waitCondition) { RunLoop.current.run(mode: RunLoop.Mode.default, before: Date.distantFuture) }
 	}
 }

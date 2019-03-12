@@ -40,7 +40,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	}
 	
 	func useFakeCallService() {
-		let callService = FakeCallSevice()
+		let callService = FakeCallService()
 		ServicesConfigurator().configureCallService(callService)
 		callService.signalingChannel = FakeSignalingChannel()
 		interactor.callService = callService
@@ -96,18 +96,6 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		XCTAssertEqual(mockOutput.opponent, testUser2)
 	}
 	
-	func testSuccessfullySetsLocalCaptureSession() {
-		// given
-		useRealCallService()
-		
-		// when
-		interactor.callService.connectWithUser(testUser, completion: nil)
-		interactor.startCallWithOpponent(testUser2)
-		
-		// then
-		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
-	}
-	
 	func testSendsPushNotificationToOpponentAboutNewCall_whenDialingIsStarted() {
 		// given
 		useRealCallService()
@@ -119,7 +107,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		waitForTimeInterval(50)
 		
 		// then
-		XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
+		//XCTAssertTrue(mockOutput.didSetLocalCaptureSessionGotCalled)
 		XCTAssertTrue(mockOutput.didSwitchLocalVideoTrackStateGotCalled)
 		XCTAssertTrue(mockOutput.localVideoTrackState ?? false)
 		XCTAssertTrue(mockOutput.didSendPushNotificationAboutNewCallToOpponentGotCalled)
@@ -153,7 +141,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	func testStoresLocalVideoTrack() {
 		// given
 		useFakeCallService()
-		(interactor.callService as! FakeCallSevice).shouldBeConnected = true
+		(interactor.callService as! FakeCallService).shouldBeConnected = true
 		
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
@@ -167,7 +155,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 	func testReceivesRemoteVideoTrack_whenConnectedAndStartedCall() {
 		// given
 		useFakeCallService()
-		(interactor.callService as! FakeCallSevice).shouldBeConnected = true
+		(interactor.callService as! FakeCallService).shouldBeConnected = true
 		
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
@@ -177,14 +165,44 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		// then
 		XCTAssertTrue(mockOutput.didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled)
 	}
-	
+
+	func testReceivesLocalVideoTrack_whenConnectedAndStartedCall() {
+		// given
+		useFakeCallService()
+		(interactor.callService as! FakeCallService).shouldBeConnected = true
+
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(50)
+
+		// then
+		XCTAssertTrue(mockOutput.didReceiveLocalVideoTrackWithConfigurationBlockGotCalled)
+	}
+
+	func testHandlesCameraPositionSwitch_whenConnectedAndStartedCall() {
+		// given
+		useFakeCallService()
+		(interactor.callService as! FakeCallService).shouldBeConnected = true
+
+		// when
+		interactor.callService.connectWithUser(testUser, completion: nil)
+		interactor.startCallWithOpponent(testUser2)
+		waitForTimeInterval(50)
+		interactor.switchCamera()
+		waitForTimeInterval(150)
+
+		// then
+		XCTAssertTrue(mockOutput.willSwitchDevicePositionWithConfigurationBlockGotCalled)
+	}
+
 	func testNotifiesPresenterAboutCallServiceOccuredFailure() {
 		// given
 		useRealCallService()
 		
 		// when
 		interactor.callService.connectWithUser(testUser, completion: nil)
-		interactor.callService(interactor.callService, didChangeState: .Error)
+		interactor.callService(interactor.callService, didChangeState: .error)
 		
 		// then
 		XCTAssertTrue(mockOutput.didFailCallServiceGotCalled)
@@ -495,6 +513,7 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		
 		var didSetLocalCaptureSessionGotCalled = false
 		var didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled = false
+		var didReceiveLocalVideoTrackWithConfigurationBlockGotCalled = false
 		var didOpenDataChannelGotCalled = false
 		var didReceiveDataChannelStateReadyGotCalled = false
 		var didReceiveDataChannelStateNotReadyGotCalled = false
@@ -518,22 +537,24 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 		
 		var didReceiveMicrophoneStatusAuthorizedGotCalled = false
 		var didReceiveMicrophoneStatusDeniedGotCalled = false
+
+		var willSwitchDevicePositionWithConfigurationBlockGotCalled = false
 		
 		func didHangup() {
 			didHangupGotCalled = true
 		}
 		
-		func didReceiveHangupFromOpponent(opponent: SVUser) {
+		func didReceiveHangupFromOpponent(_ opponent: SVUser) {
 			didReceiveHangupFromOpponentGotCalled = true
 			self.opponent = opponent
 		}
 		
-		func didReceiveRejectFromOpponent(opponent: SVUser) {
+		func didReceiveRejectFromOpponent(_ opponent: SVUser) {
 			didReceiveRejectFromOpponentGotCalled = true
 			self.opponent = opponent
 		}
 		
-		func didReceiveAnswerTimeoutForOpponent(opponent: SVUser) {
+		func didReceiveAnswerTimeoutForOpponent(_ opponent: SVUser) {
 			didReceiveAnswerTimeoutForOpponentGotCalled = true
 			self.opponent = opponent
 		}
@@ -546,12 +567,21 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 			didFailCallServiceGotCalled = true
 		}
 		
-		func didSetLocalCaptureSession(localCaptureSession: AVCaptureSession) {
+		func didSetLocalCaptureSession(_ localCaptureSession: AVCaptureSession) {
 			didSetLocalCaptureSessionGotCalled = true
 		}
 		
-		func didReceiveRemoteVideoTrackWithConfigurationBlock(block: ((renderer: RTCEAGLVideoView?) -> Void)?) {
+		func didReceiveRemoteVideoTrackWithConfigurationBlock(_ block: ((_ renderer: RenderableView?) -> Void)?) {
+			block?(nil)
 			didReceiveRemoteVideoTrackWithConfigurationBlockGotCalled = true
+		}
+		func didReceiveLocalVideoTrackWithConfigurationBlock(_ block: ((RenderableView?) -> Void)?) {
+			block?(nil)
+			didReceiveLocalVideoTrackWithConfigurationBlockGotCalled = true
+		}
+		func willSwitchDevicePositionWithConfigurationBlock(_ block: ((_ renderer: RenderableView?) -> Void)?) {
+			block?(nil)
+			willSwitchDevicePositionWithConfigurationBlockGotCalled = true
 		}
 		func didOpenDataChannel() {
 			didOpenDataChannelGotCalled = true
@@ -573,31 +603,31 @@ class VideoCallStoryInteractorTests: BaseTestCase {
 			didSendInvitationToOpenImageGalleryGotCalled = true
 		}
 
-		func didStartDialingOpponent(opponent: SVUser) {
+		func didStartDialingOpponent(_ opponent: SVUser) {
 			self.opponent = opponent
 			didStartDialingOpponentGotCalled = true
 		}
 		
-		func didReceiveAnswerFromOpponent(opponent: SVUser) {
+		func didReceiveAnswerFromOpponent(_ opponent: SVUser) {
 			self.opponent = opponent
 			didReceiveAnswerFromOpponentGotCalled = true
 		}
 		
-		func didSendPushNotificationAboutNewCallToOpponent(opponent: SVUser) {
+		func didSendPushNotificationAboutNewCallToOpponent(_ opponent: SVUser) {
 			didSendPushNotificationAboutNewCallToOpponentGotCalled = true
 			self.opponent = opponent
 		}
 		
-		func didSwitchCameraPosition(backCamera: Bool) {
+		func didSwitchCameraPosition(_ backCamera: Bool) {
 			didSwitchCameraPositionGotCalled = true
 		}
 		
-		func didSwitchLocalVideoTrackState(enabled: Bool) {
+		func didSwitchLocalVideoTrackState(_ enabled: Bool) {
 			localVideoTrackState = enabled
 			didSwitchLocalVideoTrackStateGotCalled = true
 		}
 		
-		func didSwitchLocalAudioTrackState(enabled: Bool) {
+		func didSwitchLocalAudioTrackState(_ enabled: Bool) {
 			localAudioTrackState = enabled
 			didSwitchLocalAudioTrackStateGotCalled = true
 		}

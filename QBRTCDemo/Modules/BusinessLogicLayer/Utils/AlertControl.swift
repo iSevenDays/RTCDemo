@@ -10,31 +10,31 @@ import Foundation
 
 class AlertControl: AlertControlProtocol {
 	
-	func showMessage(message: String, title: String, overViewController: UIViewController?, actions: [UIAlertAction] , completion: (() -> Void)? = nil) {
+	func showMessage(_ message: String, title: String, overViewController: UIViewController?, actions: [UIAlertAction] , completion: (() -> Void)? = nil) {
 		
-		let alertControl = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+		let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		
 		for action in actions {
 			alertControl.addAction(action)
 		}
 		
 		if let viewController = overViewController {
-			viewController.presentViewController(alertControl, animated: true, completion: nil)
+			viewController.present(alertControl, animated: true, completion: nil)
 		} else {
-			UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertControl, animated: true, completion: completion)
+			UIApplication.shared.keyWindow?.rootViewController?.present(alertControl, animated: true, completion: completion)
 		}
 	}
 	
-	func showMessage(message: String, title: String, overViewController: UIViewController?, completion: (() -> Void)? = nil) {
+	func showMessage(_ message: String, title: String, overViewController: UIViewController?, completion: (() -> Void)? = nil) {
 		
-		let okAction = UIAlertAction(title: "Ok" , style: .Default) { action in
+		let okAction = UIAlertAction(title: "Ok" , style: .default) { action in
 			completion?()
 		}
 		
 		self.showMessage(message, title: title, overViewController: overViewController, actions: [okAction], completion: completion)
 	}
 	
-	func showErrorMessage(message: String, overViewController: UIViewController, completion: (() -> Void)? = nil) {
+	func showErrorMessage(_ message: String, overViewController: UIViewController, completion: (() -> Void)? = nil) {
 		
 		self.showMessage(message, title: "Error", overViewController: overViewController, completion: completion)
 	}

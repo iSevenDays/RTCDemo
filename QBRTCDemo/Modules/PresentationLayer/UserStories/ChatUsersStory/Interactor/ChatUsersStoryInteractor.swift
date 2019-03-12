@@ -25,9 +25,9 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 	
 	- parameter chatRoomName: String instance, must be >= 3 characters long
 	*/
-	func setChatRoomName(chatRoomName: String) {
+	func setChatRoomName(_ chatRoomName: String) {
 		guard chatRoomName.characters.count >= 3 else {
-			self.output?.didError(ChatUsersStoryInteractorError.TagLengthMustBeGreaterThanThreeCharacters)
+			self.output?.didError(ChatUsersStoryInteractorError.tagLengthMustBeGreaterThanThreeCharacters)
 			return
 		}
 		
@@ -76,11 +76,11 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 			
 			self.output?.didRetrieveUsers(filteredUsers)
 			}) { (error) in
-				self.output?.didError(ChatUsersStoryInteractorError.CanNotRetrieveUsers)
+				self.output?.didError(ChatUsersStoryInteractorError.canNotRetrieveUsers)
 		}
 	}
 	
-	func requestCallWithOpponent(opponent: SVUser) {
+	func requestCallWithOpponent(_ opponent: SVUser) {
 		if callService.isConnected {
 			output?.didReceiveApprovedRequestForCallWithOpponent(opponent)
 		} else {
@@ -120,21 +120,21 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 		output?.didNotifyUsersAboutCurrentUserEnteredRoom()
 	}
 	
-	internal func removeCurrentUserFromUsers(users: [SVUser]) -> [SVUser] {
-		guard let currentUserID = callService.currentUser?.ID else {
+	internal func removeCurrentUserFromUsers(_ users: [SVUser]) -> [SVUser] {
+		guard let currentUserID = callService.currentUser?.id else {
 			NSLog("Current user is not presented in users array")
 			return users
 		}
-		return users.filter({$0.ID?.isEqualToNumber(currentUserID) == false})
+		return users.filter({$0.id?.isEqual(to: currentUserID) == false})
 	}
 }
 
 extension ChatUsersStoryInteractor: CallServiceObserver {
-	func callService(callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
+	func callService(_ callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 		output?.didReceiveCallRequestFromOpponent(opponent)
 	}
 	
-	func callService(callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String) {
+	func callService(_ callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String) {
 		var usersForChatRoomName: [SVUser] = []
 		var shouldReloadTable = false
 		
