@@ -41,7 +41,14 @@ enum CallServiceError: Error {
 	var timersFactory: TimersFactory!
 	
 	// MARK: - RTC properties
-	internal let factory = RTCPeerConnectionFactory()
+	internal let factory: RTCPeerConnectionFactory = {
+		let decoderFactory = RTCDefaultVideoDecoderFactory()
+		let encoderFactory = RTCDefaultVideoEncoderFactory()
+		let defaultVideoCodecInfo = RTCVideoCodecInfo(name: kRTCVideoCodecH264Name)
+		encoderFactory.preferredCodec = defaultVideoCodecInfo
+		let factory = RTCPeerConnectionFactory(encoderFactory: encoderFactory, decoderFactory: decoderFactory)
+		return factory
+	}()
 	
 	// Injected dependencies
 	var cacheService: CacheServiceProtocol!

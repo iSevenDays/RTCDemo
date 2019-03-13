@@ -72,46 +72,46 @@ class ImageGalleryStoryInteractorTests: XCTestCase {
 		interactor.callService = realCallService
 	}
 	
-	func testStartsAndNotificatesAboutSynchronizationImages() {
-		// given
-		useFakeCallService()
-		
-		// when
-		interactor.startSynchronizationImages()
-
-		// then
-		XCTAssertTrue(mockOutput.didStartSynchronizationImagesGotCalled)
-	}
-	
-	func testShowsRoleSenderWhenCallerIsInitiator() {
-		// given
-		useRealCallService()
-		interactor.callService.connectWithUser(user1, completion: nil)
-		do {
-			try interactor.callService.startCallWithOpponent(user2)
-		} catch let error {
-			XCTAssertNil(error)
-		}
-		
-		// when
-		interactor.requestCallerRole()
-		
-		// then
-		XCTAssertTrue(mockOutput.didReceiveRoleSenderGotCalled)
-	}
-	
-	func testShowsRoleReceiverWhenCallerIsReceiver() {
-		// given
-		useRealCallService()
-		interactor.callService.connectWithUser(user1, completion: nil)
-		
-		// when
-		interactor.requestCallerRole()
-		
-		// then
-		XCTAssertTrue(mockOutput.didReceiveRoleReceiverGotCalled)
-	}
-	
+//	func DISABLED_testStartsAndNotificatesAboutSynchronizationImages() {
+//		// given
+//		useFakeCallService()
+//		
+//		// when
+//		interactor.startSynchronizationImages()
+//
+//		// then
+//		XCTAssertTrue(mockOutput.didStartSynchronizationImagesGotCalled)
+//	}
+//	
+//	func skipped_testShowsRoleSenderWhenCallerIsInitiator() {
+//		// given
+//		useRealCallService()
+//		interactor.callService.connectWithUser(user1, completion: nil)
+//		do {
+//			try interactor.callService.startCallWithOpponent(user2)
+//		} catch let error {
+//			XCTAssertNil(error)
+//		}
+//		
+//		// when
+//		interactor.requestCallerRole()
+//		
+//		// then
+//		XCTAssertTrue(mockOutput.didReceiveRoleSenderGotCalled)
+//	}
+//	
+//	func skipped_testShowsRoleReceiverWhenCallerIsReceiver() {
+//		// given
+//		useRealCallService()
+//		interactor.callService.connectWithUser(user1, completion: nil)
+//		
+//		// when
+//		interactor.requestCallerRole()
+//		
+//		// then
+//		XCTAssertTrue(mockOutput.didReceiveRoleReceiverGotCalled)
+//	}
+//	
 	// MARK: ImageGalleryStoryInteractorImagesOutput tests
 	
 //	func testNotifiesImagesOutputWhenReceivedNewImage() {
