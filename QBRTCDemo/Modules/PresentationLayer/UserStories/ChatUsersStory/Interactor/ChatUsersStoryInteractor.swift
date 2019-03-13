@@ -10,7 +10,7 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 
     weak var output: ChatUsersStoryInteractorOutput?
 	internal weak var restService: RESTServiceProtocol!
-	internal weak var cacheService: CacheServiceProtocol!
+	internal weak var cacheService: CacheServiceChatRoomProtocol!
 	internal weak var callService: (CallServiceProtocol & CallServiceChatRoomProtocol)!
 	
 	internal var chatRoomName: String?

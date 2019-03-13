@@ -17,6 +17,8 @@ import Foundation
 #endif
 
 class FakeCacheService: NSObject, CacheServiceProtocol {
+	var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest]
+
 	func set(_ value: Bool, forKey defaultName: String) {
 		
 	}
@@ -24,8 +26,6 @@ class FakeCacheService: NSObject, CacheServiceProtocol {
 	func set(_ value: Any?, forKey defaultName: String) {
 
 	}
-
-	var cachedUsersArray: [SVUser]? = [TestsStorage.svuserTest]
 
 	func string(forKey: String) -> String? {
 		return nil
@@ -38,11 +38,13 @@ class FakeCacheService: NSObject, CacheServiceProtocol {
 	func cachedUserWithID(_ id: Int) -> SVUser? {
 		return nil
 	}
-	
+}
+
+extension FakeCacheService: CacheServiceChatRoomProtocol {
 	func cacheUsers(_ users: [SVUser], forRoomName roomName: String) {
 		cachedUsersArray = users
 	}
-	
+
 	func cachedUsersForRoomWithName(_ roomName: String) -> [SVUser]? {
 		return cachedUsersArray
 	}

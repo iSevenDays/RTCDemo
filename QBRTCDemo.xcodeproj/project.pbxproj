@@ -294,6 +294,8 @@
 		14CEB8F922390F4700CEA3B0 /* CallServiceChatRoomObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8F622390F2900CEA3B0 /* CallServiceChatRoomObserver.swift */; };
 		14CEB8FB2239101700CEA3B0 /* SignalingChannelObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */; };
 		14CEB8FC2239101800CEA3B0 /* SignalingChannelObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */; };
+		14CEB90022391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FF22391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift */; };
+		14CEB90122391E4A00CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FF22391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift */; };
 		14E8A1061E16D9A9007B6E29 /* AlertControlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1041E16D8FF007B6E29 /* AlertControlProtocol.swift */; };
 		14E8A1081E179A92007B6E29 /* FakeAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */; };
 		14E8A1091E179A92007B6E29 /* FakeAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */; };
@@ -545,7 +547,6 @@
 		1454D9D01E2D7EBC00E1FA21 /* SettingsStory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsStory.storyboard; sourceTree = "<group>"; };
 		1454D9D51E2E902E00E1FA21 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		146CA9F21C62644000F768C8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		14736EE61C567EC5009DFBBC /* CallService_old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallService_old.m; sourceTree = "<group>"; };
 		14736EEC1C568462009DFBBC /* WebRTCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRTCHelpers.h; sourceTree = "<group>"; };
 		14736EED1C568462009DFBBC /* WebRTCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRTCHelpers.m; sourceTree = "<group>"; };
 		14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -588,6 +589,7 @@
 		14C9EC7E1E0B181600589641 /* AlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
 		14CEB8F622390F2900CEA3B0 /* CallServiceChatRoomObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallServiceChatRoomObserver.swift; sourceTree = "<group>"; };
 		14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingChannelObserver.swift; sourceTree = "<group>"; };
+		14CEB8FF22391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingProcessorChatRoomObserver.swift; sourceTree = "<group>"; };
 		14E8A1041E16D8FF007B6E29 /* AlertControlProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControlProtocol.swift; sourceTree = "<group>"; };
 		14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAlertControl.swift; sourceTree = "<group>"; };
 		14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1017,10 +1019,8 @@
 				14CEB8F522390F1D00CEA3B0 /* Observers */,
 				142582D51E00791C00BA9F21 /* TimersFactory */,
 				1448B77D1DF9D161002D5371 /* SessionDetails */,
-				14A028721BFA543A00BDF2C5 /* QBSignaling */,
 				14F4FAF21C52961400E9488C /* Signaling */,
 				14736EEA1C56843F009DFBBC /* WebRTC */,
-				14736EE61C567EC5009DFBBC /* CallService_old.m */,
 				1431CE171C70E8BB00DCED6D /* CallServiceDataChannelAdditionsDelegate.h */,
 				1431CE0E1C6F90C400DCED6D /* CallServiceDataChannelAdditionsProtocol.h */,
 				1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */,
@@ -1137,6 +1137,33 @@
 			path = Observers;
 			sourceTree = "<group>";
 		};
+		14CEB8FD2239199D00CEA3B0 /* QBUser+SVUser */ = {
+			isa = PBXGroup;
+			children = (
+				14A028851BFB1A3100BDF2C5 /* QBUUser+SVUser.h */,
+				14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */,
+				1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */,
+				1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */,
+			);
+			path = "QBUser+SVUser";
+			sourceTree = "<group>";
+		};
+		14CEB8FE22391E1B00CEA3B0 /* SignalingServices */ = {
+			isa = PBXGroup;
+			children = (
+				14CEB9022239330500CEA3B0 /* SendBird */,
+				14A028721BFA543A00BDF2C5 /* QBSignaling */,
+			);
+			path = SignalingServices;
+			sourceTree = "<group>";
+		};
+		14CEB9022239330500CEA3B0 /* SendBird */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SendBird;
+			sourceTree = "<group>";
+		};
 		14D0A3B01C529C52005AF958 /* SVSignaling */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,6 +1243,7 @@
 		14F4FAF11C5295DA00E9488C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				14CEB8FE22391E1B00CEA3B0 /* SignalingServices */,
 				140BF10E1E2C08E90039706F /* SettingsStorage */,
 				14A85C691E1C389400510B2E /* PermissionsService */,
 				14740A741E03197B00557FB3 /* PushNotificationsService */,
@@ -1232,6 +1260,7 @@
 				1448B7811DF9D95C002D5371 /* SignalingProcessor.swift */,
 				14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */,
 				14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */,
+				14CEB8FF22391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift */,
 			);
 			path = Signaling;
 			sourceTree = "<group>";
@@ -1239,13 +1268,10 @@
 		14F4FAF81C5296BB00E9488C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				14CEB8FD2239199D00CEA3B0 /* QBUser+SVUser */,
 				14D0A3B01C529C52005AF958 /* SVSignaling */,
 				1454052B1C859431005E3790 /* DataChannelMessages.h */,
 				1454052C1C859431005E3790 /* DataChannelMessages.m */,
-				14A028851BFB1A3100BDF2C5 /* QBUUser+SVUser.h */,
-				14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */,
-				1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */,
-				1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */,
 				14A0287F1BFB190800BDF2C5 /* SVUser.h */,
 				14A028801BFB190800BDF2C5 /* SVUser.m */,
 			);
@@ -2474,6 +2500,7 @@
 				14BAF2B21E380A970081C905 /* VideoCallStoryModuleInput.swift in Sources */,
 				1420E47B1CE7CE860043EFF9 /* IncomingCallStoryViewInput.swift in Sources */,
 				14BAF2BB1E380A970081C905 /* SettingsStoryViewController.swift in Sources */,
+				14CEB90022391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */,
 				14ADBDE31C73854C003A0C98 /* ImageGalleryStoryViewOutput.swift in Sources */,
 				14ADBDE41C73854C003A0C98 /* ImageGalleryStoryViewController.swift in Sources */,
 				14BAF2AA1E380A640081C905 /* AuthStoryInteractor.swift in Sources */,
@@ -2602,6 +2629,7 @@
 				63A59E34E800C1A9FCF24C63 /* AuthStoryInteractor.swift in Sources */,
 				6C49A339274F0DC6F59B9512 /* AuthStoryRouterInput.swift in Sources */,
 				CAB1B0BA5443499CF8EF2DFD /* AuthStoryRouter.swift in Sources */,
+				14CEB90122391E4A00CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */,
 				4565B18CED6A7AAC3013F9CA /* AuthStoryConfigurator.swift in Sources */,
 				1448B7731DF87BC0002D5371 /* SVTimer.swift in Sources */,
 				4DEB82D05EA0A1975DFD6636 /* AuthStoryInitializer.swift in Sources */,

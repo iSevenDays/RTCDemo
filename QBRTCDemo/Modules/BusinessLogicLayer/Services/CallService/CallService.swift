@@ -309,7 +309,7 @@ extension CallService: SignalingProcessorObserver {
 			}
 		} else {
 			if pendingRequests[opponent] == nil {
-				pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent,  pendingSessionDescription: offer, sessionDetails: sessionDetails)
+				pendingRequests[opponent] = CallServicePendingRequest(initiator: opponent, pendingSessionDescription: offer, sessionDetails: sessionDetails)
 				observers |> { $0.callService(self, didReceiveCallRequestFromOpponent: opponent) }
 			}
 		}
@@ -317,11 +317,12 @@ extension CallService: SignalingProcessorObserver {
 	
 	func didReceiveAnswer(_ signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveAnswer")
-		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
-			connection.applyRemoteSDP(answer)
-			observers |> { $0.callService(self, didReceiveAnswerFromOpponent: opponent) }
-			stopDialingOpponent(opponent)
+		guard let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) else {
+			return
 		}
+		connection.applyRemoteSDP(answer)
+		observers |> { $0.callService(self, didReceiveAnswerFromOpponent: opponent) }
+		stopDialingOpponent(opponent)
 	}
 	
 	func didReceiveHangup(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
@@ -341,11 +342,12 @@ extension CallService: SignalingProcessorObserver {
 	func didReceiveReject(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails) {
 		NSLog("didReceiveReject")
 		pendingRequests[opponent] = nil
-		if let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) {
-			connection.close()
-			observers |> { $0.callService(self, didReceiveRejectFromOpponent: opponent) }
-			stopDialingOpponent(opponent)
+		guard let connection = activeConnectionWithSessionID(sessionDetails.sessionID, opponent: opponent) else {
+			return
 		}
+		connection.close()
+		observers |> { $0.callService(self, didReceiveRejectFromOpponent: opponent) }
+		stopDialingOpponent(opponent)
 	}
 }
 

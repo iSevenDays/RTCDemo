@@ -25,7 +25,7 @@ class ChatUsersStoryModuleConfigurator {
 
         let interactor = ChatUsersStoryInteractor()
         interactor.output = presenter
-		interactor.cacheService = UserDefaults.standard as CacheServiceProtocol
+		interactor.cacheService = UserDefaults.standard
 		interactor.restService = ServicesProvider.currentProvider.restService
 		interactor.callService = ServicesProvider.currentProvider.callService
 		

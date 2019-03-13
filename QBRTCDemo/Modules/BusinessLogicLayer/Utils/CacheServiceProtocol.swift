@@ -8,10 +8,12 @@
 
 import Foundation
 
-protocol CacheServiceProtocol: class {
+protocol CacheServiceChatRoomProtocol: class {
 	func cacheUsers(_ users: [SVUser], forRoomName roomName: String)
 	func cachedUsersForRoomWithName(_ roomName: String) -> [SVUser]?
+}
 
+protocol CacheServiceProtocol: class {
 	func set(_ value: Bool, forKey defaultName: String)
 	func bool(forKey defaultName: String) -> Bool
 	
@@ -21,6 +23,8 @@ protocol CacheServiceProtocol: class {
 
 
 extension UserDefaults: CacheServiceProtocol {
+}
+extension UserDefaults: CacheServiceChatRoomProtocol {
 	
 	func cacheUsers(_ users: [SVUser], forRoomName roomName: String) {
 		let uniqueUsers = Array(Set(users))

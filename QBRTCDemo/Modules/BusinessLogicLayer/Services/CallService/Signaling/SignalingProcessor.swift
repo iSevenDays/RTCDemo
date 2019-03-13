@@ -17,10 +17,6 @@ protocol SignalingProcessorObserver: class {
 	func didReceiveReject(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
 }
 
-protocol SignalingProcessorChatRoomObserver: class {
-	func didReceiveUser(_ signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String)
-}
-
 /// Class to process SVSignaling messages
 /// and forward them to CallService
 class SignalingProcessor: NSObject {
