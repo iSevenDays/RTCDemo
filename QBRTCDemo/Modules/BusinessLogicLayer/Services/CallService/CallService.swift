@@ -25,6 +25,7 @@ enum CallServiceError: Error {
 @objc open class CallService: NSObject {
 	
 	internal var observers = MulticastDelegate<CallServiceObserver>()
+	internal var chatRoomObservers = MulticastDelegate<CallServiceChatRoomObserver>()
 	
 	internal var sessions: [String: SessionDetails] = [:]
 	/// SessionID: Connections
@@ -262,11 +263,22 @@ extension CallService: CallServiceProtocol {
 			observers |> { $0.callService(self, didSendHangupToOpponent: connection.opponent) }
 		}
 	}
-	
+}
+
+extension CallService: CallServiceChatRoomProtocol {
+
+	func addObserver(_ observer: CallServiceChatRoomObserver) {
+		chatRoomObservers += observer
+	}
+
+	func removeObserver(_ observer: CallServiceChatRoomObserver) {
+		chatRoomObservers -= observer
+	}
+
 	func sendMessageCurrentUserEnteredChatRoom(_ chatRoomName: String, toUser: SVUser) {
 		let signalingMessage = SignalingMessage.user(enteredChatRoomName: chatRoomName)
 		signalingChannel.sendMessage(signalingMessage, withSessionDetails: nil, toUser: toUser, completion: nil)
-		observers |> { $0.callService(self, didSendUserEnteredChatRoomName: chatRoomName, toUser: toUser) }
+		chatRoomObservers |> { $0.callService(self, didSendUserEnteredChatRoomName: chatRoomName, toUser: toUser) }
 	}
 }
 
@@ -395,7 +407,7 @@ extension CallService: PeerConnectionObserver {
 		observers |> { $0.callService(self, didError: error) }
 	}
 	func didReceiveUser(_ signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String) {
-		observers |> { $0.callService(self, didReceiveUser: user, forChatRoomName: chatRoomName) }
+		chatRoomObservers |> { $0.callService(self, didReceiveUser: user, forChatRoomName: chatRoomName) }
 	}
 }
 

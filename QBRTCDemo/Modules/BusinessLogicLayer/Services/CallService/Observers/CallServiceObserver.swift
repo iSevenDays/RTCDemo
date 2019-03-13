@@ -21,7 +21,7 @@ protocol CallServiceObserver: class {
 	func callService(_ callService: CallServiceProtocol, didReceiveLocalAudioTrack localAudioTrack: RTCAudioTrack)
 	func callService(_ callService: CallServiceProtocol, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack)
 	func callService(_ callService: CallServiceProtocol, didError error: Error)
-	func callService(_ callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String)
+
 	
 	func callService(_ callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser)
 	
@@ -42,8 +42,6 @@ protocol CallServiceObserver: class {
 	func callService(_ callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser)
 	
 	func callService(_ callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser)
-	
-	func callService(_ callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser)
 }
 
 extension CallServiceObserver {
@@ -73,5 +71,4 @@ extension CallServiceObserver {
 	
 	func callService(_ callService: CallServiceProtocol, didSendRejectToOpponent opponent: SVUser) {}
 	func callService(_ callService: CallServiceProtocol, didSendHangupToOpponent opponent: SVUser) {}
-	func callService(_ callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser) {}
 }

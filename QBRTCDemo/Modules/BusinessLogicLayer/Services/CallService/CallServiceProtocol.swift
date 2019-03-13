@@ -24,10 +24,16 @@ protocol CallServiceProtocol: class {
 	func acceptCallFromOpponent(_ opponent: SVUser) throws
 	func hangup()
 	func sendRejectCallToOpponent(_ user: SVUser) throws
-	func sendMessageCurrentUserEnteredChatRoom(_ chatRoomName: String, toUser: SVUser)
 }
 
 protocol CallServiceCameraSwitcherProtocol: class {
 	func switchCamera(forActivePeerConnectionWithLocalVideoTrack localVideoTrack: RTCVideoTrack, renderer: RenderableView) -> AVCaptureDevice.Position?
 	func setCamera(forActivePeerConnectionWithLocalVideoTrack localVideoTrack: RTCVideoTrack, renderer: RenderableView, position: AVCaptureDevice.Position) -> AVCaptureDevice.Position?
+}
+
+protocol CallServiceChatRoomProtocol: class {
+	func sendMessageCurrentUserEnteredChatRoom(_ chatRoomName: String, toUser: SVUser)
+
+	func addObserver(_ observer: CallServiceChatRoomObserver)
+	func removeObserver(_ observer: CallServiceChatRoomObserver)
 }

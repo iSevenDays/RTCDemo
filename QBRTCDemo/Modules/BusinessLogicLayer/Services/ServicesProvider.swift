@@ -18,7 +18,7 @@ class ServicesProvider: NSObject {
 	static let currentProvider = ServicesProvider(zone: Zone.production)
 	
 	
-	fileprivate(set) var callService: (CallServiceProtocol & CallServiceCameraSwitcherProtocol)!
+	fileprivate(set) var callService: (CallServiceProtocol & CallServiceCameraSwitcherProtocol & CallServiceChatRoomProtocol)!
 	fileprivate(set) var restService: RESTServiceProtocol!
 	fileprivate(set) var pushService: PushNotificationsServiceProtocol!
 	fileprivate(set) var permissionsService: PermissionsServiceProtocol!
@@ -42,6 +42,7 @@ class ServicesProvider: NSObject {
 			
 			callService.signalingChannel = signalingChannel
 			callService.signalingProcessor.observer = callService
+			
 			
 			let restService = QBRESTService()
 			serviceConfigurator.configureRESTService(restService)

@@ -26,6 +26,7 @@ class CallServiceTests: BaseTestCase {
 	var fakeSignalingChannel: FakeSignalingChannel!
 	var callService: CallService!
 	var mockOutput: MockOutput!
+	var mockOutputChatRoom: MockOutputChatRoom!
 	
 	override func setUp() {
 		fakeSignalingChannel = FakeSignalingChannel()
@@ -35,6 +36,9 @@ class CallServiceTests: BaseTestCase {
 		
 		mockOutput = MockOutput()
 		callService.addObserver(mockOutput)
+
+		mockOutputChatRoom = MockOutputChatRoom()
+		callService.addObserver(mockOutputChatRoom)
 	}
 	
 	func currentSelectorTestExpectation() -> XCTestExpectation {
@@ -127,9 +131,9 @@ class CallServiceTests: BaseTestCase {
 		callService.sendMessageCurrentUserEnteredChatRoom(chatName, toUser: user2)
 		
 		// then
-		XCTAssertTrue(mockOutput.didSendUserEnteredChatRoomNameGotCalled)
-		XCTAssertEqual(mockOutput.opponent, user2)
-		XCTAssertEqual(mockOutput.chatRoomName, chatName)
+		XCTAssertTrue(mockOutputChatRoom.didSendUserEnteredChatRoomNameGotCalled)
+		XCTAssertEqual(mockOutputChatRoom.opponent, user2)
+		XCTAssertEqual(mockOutputChatRoom.chatRoomName, chatName)
 	}
 	
 	//MARK: - Signaling Processor observer methods processing
@@ -289,7 +293,7 @@ class CallServiceTests: BaseTestCase {
 		callService.didReceiveUser(callService.signalingProcessor, user: user2, forChatRoomName: "roomName")
 		
 		// then
-		XCTAssertTrue(mockOutput.didReceiveUserGotCalled)
+		XCTAssertTrue(mockOutputChatRoom.didReceiveUserGotCalled)
 	}
 	
 	func testStoresRejectedSession() {
@@ -368,8 +372,7 @@ class CallServiceTests: BaseTestCase {
 		var didReceiveLocalVideoTrackGotCalled = false
 		var didReceiveRemoteVideoTrackGotCalled = false
 		var didErrorGotCalled = false
-		var didReceiveUserGotCalled = false
-		
+
 		var didStartDialingOpponentGotCalled = false
 		var didStopDialingOpponentGotCalled = false
 		var opponent: SVUser?
@@ -382,9 +385,6 @@ class CallServiceTests: BaseTestCase {
 		
 		var callServiceState = CallServiceState.undefined
 		var videoTrack: RTCVideoTrack?
-		
-		var chatRoomName: String?
-		var didSendUserEnteredChatRoomNameGotCalled = false
 		
 		func callService(_ callService: CallServiceProtocol, didReceiveCallRequestFromOpponent opponent: SVUser) {
 			didReceiveCallRequestFromOpponentGotCalled = true
@@ -419,9 +419,6 @@ class CallServiceTests: BaseTestCase {
 		func callService(_ callService: CallServiceProtocol, didError error: Error) {
 			didErrorGotCalled = true
 		}
-		func callService(_ callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String) {
-			didReceiveUserGotCalled = true
-		}
 		
 		func callService(_ callService: CallServiceProtocol, didStartDialingOpponent opponent: SVUser) {
 			self.opponent = opponent
@@ -449,6 +446,19 @@ class CallServiceTests: BaseTestCase {
 			didSendHangupToOpponentGotCalled = true
 		}
 		
+
+	}
+
+	class MockOutputChatRoom: CallServiceChatRoomObserver {
+		var didReceiveUserGotCalled = false
+		var didSendUserEnteredChatRoomNameGotCalled = false
+		var chatRoomName: String?
+		var opponent: SVUser?
+
+		func callService(_ callService: CallServiceProtocol, didReceiveUser user: SVUser, forChatRoomName chatRoomName: String) {
+			didReceiveUserGotCalled = true
+		}
+
 		func callService(_ callService: CallServiceProtocol, didSendUserEnteredChatRoomName chatRoomName: String, toUser: SVUser) {
 			self.chatRoomName = chatRoomName
 			didSendUserEnteredChatRoomNameGotCalled = true

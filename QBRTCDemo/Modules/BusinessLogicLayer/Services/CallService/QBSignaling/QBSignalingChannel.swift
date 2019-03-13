@@ -9,11 +9,6 @@
 import Foundation
 import Quickblox
 
-protocol SignalingChannelObserver: class {
-	func signalingChannel(_ channel: SignalingChannelProtocol, didReceiveMessage message: SignalingMessage, fromOpponent: SVUser, withSessionDetails sessionDetails: SessionDetails?)
-	func signalingChannel(_ channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState)
-}
-
 class QBSignalingChannel: NSObject {
 	var observers = MulticastDelegate<SignalingChannelObserver>()
 	

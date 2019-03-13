@@ -15,6 +15,9 @@ protocol SignalingProcessorObserver: class {
 	func didReceiveAnswer(_ signalingProcessor: SignalingProcessor, answer: RTCSessionDescription, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
 	func didReceiveHangup(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
 	func didReceiveReject(_ signalingProcessor: SignalingProcessor, fromOpponent opponent: SVUser, sessionDetails: SessionDetails)
+}
+
+protocol SignalingProcessorChatRoomObserver: class {
 	func didReceiveUser(_ signalingProcessor: SignalingProcessor, user: SVUser, forChatRoomName chatRoomName: String)
 }
 
@@ -22,6 +25,7 @@ protocol SignalingProcessorObserver: class {
 /// and forward them to CallService
 class SignalingProcessor: NSObject {
 	weak var observer: SignalingProcessorObserver?
+	weak var chatRoomObserver: SignalingProcessorChatRoomObserver?
 }
 
 extension SignalingProcessor: SignalingChannelObserver {
@@ -39,7 +43,7 @@ extension SignalingProcessor: SignalingChannelObserver {
 		case .reject:
 			observer?.didReceiveReject(self, fromOpponent: opponent, sessionDetails: sessionDetails!)
 		case let .user(enteredChatRoomName: roomName):
-			observer?.didReceiveUser(self, user: opponent, forChatRoomName: roomName)
+			chatRoomObserver?.didReceiveUser(self, user: opponent, forChatRoomName: roomName)
 		}
 	}
 	func signalingChannel(_ channel: SignalingChannelProtocol, didChangeState state: SignalingChannelState) {

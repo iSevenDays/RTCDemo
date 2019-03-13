@@ -11,7 +11,7 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
     weak var output: ChatUsersStoryInteractorOutput?
 	internal weak var restService: RESTServiceProtocol!
 	internal weak var cacheService: CacheServiceProtocol!
-	internal weak var callService: CallServiceProtocol!
+	internal weak var callService: (CallServiceProtocol & CallServiceChatRoomProtocol)!
 	
 	internal var chatRoomName: String?
 	internal var currentUser: SVUser!
@@ -26,7 +26,7 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 	- parameter chatRoomName: String instance, must be >= 3 characters long
 	*/
 	func setChatRoomName(_ chatRoomName: String) {
-		guard chatRoomName.characters.count >= 3 else {
+		guard chatRoomName.count >= 3 else {
 			self.output?.didError(ChatUsersStoryInteractorError.tagLengthMustBeGreaterThanThreeCharacters)
 			return
 		}

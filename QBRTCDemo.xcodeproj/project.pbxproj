@@ -136,7 +136,6 @@
 		1448B78D1DFAE849002D5371 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B78B1DFAE849002D5371 /* CallService.swift */; };
 		1448B7901DFAE950002D5371 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B78E1DFAE950002D5371 /* MulticastDelegate.swift */; };
 		1448B7931DFAF5DE002D5371 /* CallServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7911DFAF5DE002D5371 /* CallServiceProtocol.swift */; };
-		1448B7961DFAF6A0002D5371 /* CallServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7941DFAF6A0002D5371 /* CallServiceObserver.swift */; };
 		1448B7991DFB1B46002D5371 /* PeerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7971DFB1B46002D5371 /* PeerConnection.swift */; };
 		1448B79C1DFB231E002D5371 /* ArrayAppendOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B79A1DFB231E002D5371 /* ArrayAppendOperator.swift */; };
 		1452AADE1BF92FA30018DA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1452AADD1BF92FA30018DA30 /* Assets.xcassets */; };
@@ -290,6 +289,11 @@
 		14C970BB1DFCEB5B00462981 /* QBSignalingChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970B91DFCEB5B00462981 /* QBSignalingChannel.swift */; };
 		14C970BE1DFCEBEF00462981 /* SignalingChannelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */; };
 		14C9EC801E0B181600589641 /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C9EC7E1E0B181600589641 /* AlertControl.swift */; };
+		14CEB8F722390F2900CEA3B0 /* CallServiceChatRoomObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8F622390F2900CEA3B0 /* CallServiceChatRoomObserver.swift */; };
+		14CEB8F822390F4400CEA3B0 /* CallServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1448B7941DFAF6A0002D5371 /* CallServiceObserver.swift */; };
+		14CEB8F922390F4700CEA3B0 /* CallServiceChatRoomObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8F622390F2900CEA3B0 /* CallServiceChatRoomObserver.swift */; };
+		14CEB8FB2239101700CEA3B0 /* SignalingChannelObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */; };
+		14CEB8FC2239101800CEA3B0 /* SignalingChannelObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */; };
 		14E8A1061E16D9A9007B6E29 /* AlertControlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1041E16D8FF007B6E29 /* AlertControlProtocol.swift */; };
 		14E8A1081E179A92007B6E29 /* FakeAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */; };
 		14E8A1091E179A92007B6E29 /* FakeAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */; };
@@ -582,6 +586,8 @@
 		14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingChannelProtocol.swift; sourceTree = "<group>"; };
 		14C9EC7D1E0B002500589641 /* QBRTCDemo_s.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QBRTCDemo_s.entitlements; sourceTree = "<group>"; };
 		14C9EC7E1E0B181600589641 /* AlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
+		14CEB8F622390F2900CEA3B0 /* CallServiceChatRoomObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallServiceChatRoomObserver.swift; sourceTree = "<group>"; };
+		14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingChannelObserver.swift; sourceTree = "<group>"; };
 		14E8A1041E16D8FF007B6E29 /* AlertControlProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControlProtocol.swift; sourceTree = "<group>"; };
 		14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAlertControl.swift; sourceTree = "<group>"; };
 		14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1008,6 +1014,7 @@
 		14736E821C561284009DFBBC /* CallService */ = {
 			isa = PBXGroup;
 			children = (
+				14CEB8F522390F1D00CEA3B0 /* Observers */,
 				142582D51E00791C00BA9F21 /* TimersFactory */,
 				1448B77D1DF9D161002D5371 /* SessionDetails */,
 				14A028721BFA543A00BDF2C5 /* QBSignaling */,
@@ -1019,7 +1026,6 @@
 				1420E4FE1CE7DAA20043EFF9 /* CallServicePendingRequest.swift */,
 				1448B78B1DFAE849002D5371 /* CallService.swift */,
 				1448B7911DFAF5DE002D5371 /* CallServiceProtocol.swift */,
-				1448B7941DFAF6A0002D5371 /* CallServiceObserver.swift */,
 				1448B7971DFB1B46002D5371 /* PeerConnection.swift */,
 			);
 			path = CallService;
@@ -1122,6 +1128,15 @@
 			name = SignalingMessagesFactory;
 			sourceTree = "<group>";
 		};
+		14CEB8F522390F1D00CEA3B0 /* Observers */ = {
+			isa = PBXGroup;
+			children = (
+				14CEB8F622390F2900CEA3B0 /* CallServiceChatRoomObserver.swift */,
+				1448B7941DFAF6A0002D5371 /* CallServiceObserver.swift */,
+			);
+			path = Observers;
+			sourceTree = "<group>";
+		};
 		14D0A3B01C529C52005AF958 /* SVSignaling */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,6 +1231,7 @@
 			children = (
 				1448B7811DF9D95C002D5371 /* SignalingProcessor.swift */,
 				14C970BC1DFCEBEF00462981 /* SignalingChannelProtocol.swift */,
+				14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */,
 			);
 			path = Signaling;
 			sourceTree = "<group>";
@@ -2492,6 +2508,7 @@
 				1420E47C1CE7CE860043EFF9 /* IncomingCallStoryViewOutput.swift in Sources */,
 				142D13821C887BA3005A348D /* ImageGalleryStoryInteractorImagesOutput.swift in Sources */,
 				1454052E1C859431005E3790 /* DataChannelMessages.m in Sources */,
+				14CEB8F722390F2900CEA3B0 /* CallServiceChatRoomObserver.swift in Sources */,
 				1445F1941E0329750040F8ED /* AppDelegate.swift in Sources */,
 				142D13851C888631005A348D /* ImageGalleryStoryCollectionViewInteractorOutput.swift in Sources */,
 				14BAF2B01E380A640081C905 /* AuthStoryRouterInput.swift in Sources */,
@@ -2500,6 +2517,7 @@
 				1473EACC1CAC6090007F9DF8 /* AuthStoryViewOutput.swift in Sources */,
 				14EBDD341DFC7C9000A1EEB5 /* VideoCallStoryViewController.swift in Sources */,
 				14BAF2981E380A640081C905 /* PeerConnection.swift in Sources */,
+				14CEB8FB2239101700CEA3B0 /* SignalingChannelObserver.swift in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
 				14BAF2AE1E380A640081C905 /* AuthStoryPresenter.swift in Sources */,
 				1420E47D1CE7CE860043EFF9 /* IncomingCallStoryViewController.swift in Sources */,
@@ -2598,7 +2616,6 @@
 				0909F9104C8B2CCC1DF7F4DB /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				303F608B74B20BF8FD4C0D2D /* ChatUsersStoryInteractor.swift in Sources */,
 				3FB6E2C773C33D251FF9991C /* ChatUsersStoryRouterInput.swift in Sources */,
-				1448B7961DFAF6A0002D5371 /* CallServiceObserver.swift in Sources */,
 				8AA2EC4850501B343EE9F092 /* ChatUsersStoryRouter.swift in Sources */,
 				3D143C528847477690AADFA0 /* ChatUsersStoryConfigurator.swift in Sources */,
 				FBF0C170A58C76BCF9BA87D9 /* ChatUsersStoryInitializer.swift in Sources */,
@@ -2619,6 +2636,7 @@
 				ED69F39761EF6C34B0E8C3EC /* VideoCallStoryViewInput.swift in Sources */,
 				1448B7931DFAF5DE002D5371 /* CallServiceProtocol.swift in Sources */,
 				CD56A4E200CD5C22E43D7421 /* VideoCallStoryViewOutput.swift in Sources */,
+				14CEB8F922390F4700CEA3B0 /* CallServiceChatRoomObserver.swift in Sources */,
 				574FE6CEF8B57721BF1E2332 /* VideoCallStoryViewController.swift in Sources */,
 				B6B2202C1D8FC2AC870DC0DE /* VideoCallStoryModuleInput.swift in Sources */,
 				1445F1951E0329750040F8ED /* AppDelegate.swift in Sources */,
@@ -2627,6 +2645,7 @@
 				1448B78D1DFAE849002D5371 /* CallService.swift in Sources */,
 				28FFDBE56651FC0FAE43A114 /* VideoCallStoryInteractorOutput.swift in Sources */,
 				275383DC6208D349187975DB /* VideoCallStoryInteractor.swift in Sources */,
+				14CEB8FC2239101800CEA3B0 /* SignalingChannelObserver.swift in Sources */,
 				14C7DA751E0C89B400870C00 /* ChatUsersStoryEmptyView.swift in Sources */,
 				4BB2DADCF0A8097BEFBCF0E2 /* VideoCallStoryRouterInput.swift in Sources */,
 				E4FBAEB769B3C7F83FA0CEC7 /* VideoCallStoryRouter.swift in Sources */,
@@ -2643,6 +2662,7 @@
 				FCFBF3819D23A329104C383F /* SettingsStoryInteractorOutput.swift in Sources */,
 				1454D9D71E2E902E00E1FA21 /* Settings.swift in Sources */,
 				E9C1AD9145872DAC33642D50 /* SettingsStoryInteractor.swift in Sources */,
+				14CEB8F822390F4400CEA3B0 /* CallServiceObserver.swift in Sources */,
 				11D6E490924AD16F67A13AFF /* SettingsStoryRouterInput.swift in Sources */,
 				A4E2EAD8C6C7AA5EF61D4A19 /* SettingsStoryRouter.swift in Sources */,
 				101EB262B4194C0F51372593 /* SettingsStoryConfigurator.swift in Sources */,
