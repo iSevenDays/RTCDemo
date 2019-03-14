@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Quickblox
 
 class ServicesProvider: NSObject {
 	

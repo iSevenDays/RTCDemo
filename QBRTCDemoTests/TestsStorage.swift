@@ -14,19 +14,20 @@ import Foundation
 	@testable
 	import QBRTCDemo
 #endif
+import Quickblox
 
 class TestsStorage {
 	
 	class var svuserRealUser1: SVUser {
-		return SVUser(id: 6942802, login: "UUID_CUSTOM", fullName: "rtcuser1_fullname", password: "rtcuser1", tags: ["tag1"])
+		return SVUser(ID: 6942802, login: "UUID_CUSTOM", fullName: "rtcuser1_fullname", password: "rtcuser1", tags: ["tag1"])
 	}
 	
 	class var svuserRealUser2: SVUser {
-		return SVUser(id: 6942803, login: "UUID_CUSTOM2", fullName: "rtcuser2_fullname", password: "rtcuser2", tags: ["tag2"])
+		return SVUser(ID: 6942803, login: "UUID_CUSTOM2", fullName: "rtcuser2_fullname", password: "rtcuser2", tags: ["tag2"])
 	}
 	
 	class var svuserTest: SVUser {
-		return SVUser(id: 123, login: "svlogin", fullName: "full_name_sv", password: "svpass", tags: ["svtag"])
+		return SVUser(ID: 123, login: "svlogin", fullName: "full_name_sv", password: "svpass", tags: ["svtag"])
 	}
 	
 	class var qbuserTest: QBUUser {

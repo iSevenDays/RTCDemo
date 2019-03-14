@@ -121,11 +121,11 @@ class ChatUsersStoryInteractor: ChatUsersStoryInteractorInput {
 	}
 	
 	internal func removeCurrentUserFromUsers(_ users: [SVUser]) -> [SVUser] {
-		guard let currentUserID = callService.currentUser?.id else {
+		guard let currentUserID = callService.currentUser?.ID else {
 			NSLog("Current user is not presented in users array")
 			return users
 		}
-		return users.filter({$0.id?.isEqual(to: currentUserID) == false})
+		return users.filter({$0.ID != currentUserID})
 	}
 }
 

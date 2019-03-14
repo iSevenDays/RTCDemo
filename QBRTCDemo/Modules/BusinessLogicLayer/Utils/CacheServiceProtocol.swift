@@ -28,7 +28,8 @@ extension UserDefaults: CacheServiceChatRoomProtocol {
 	
 	func cacheUsers(_ users: [SVUser], forRoomName roomName: String) {
 		let uniqueUsers = Array(Set(users))
-		let usersData = NSKeyedArchiver.archivedData(withRootObject: uniqueUsers)
+		let usersData = try! PropertyListEncoder().encode(uniqueUsers)
+
 		set(usersData, forKey: "users" + roomName)
 		synchronize()
 	}
@@ -39,7 +40,7 @@ extension UserDefaults: CacheServiceChatRoomProtocol {
 			NSLog("%@", "Warning: No stored users data for room name \(roomName)")
 			return nil
 		}
-		
-		return NSKeyedUnarchiver.unarchiveObject(with: usersData) as? [SVUser]
+
+		return try! PropertyListDecoder().decode([SVUser].self, from: usersData)
 	}
 }

@@ -15,6 +15,7 @@ import Foundation
 	@testable
 	import QBRTCDemo
 #endif
+import Quickblox
 
 class FakeQBRESTService : QBRESTService {
 	
@@ -48,7 +49,7 @@ class FakeQBRESTService : QBRESTService {
 		if shouldLoginSuccessfully ||
 		(registered && shouldLoginAfterSignupSuccessfully) {
 			logined = true
-			user.id = 777
+			user.ID = 777
 			successBlock(user)
 		} else {
 			errorBlock(nil)
@@ -65,7 +66,7 @@ class FakeQBRESTService : QBRESTService {
 	override func signUpWithUser(_ user: SVUser, successBlock: @escaping (_ user: SVUser) -> Void, errorBlock: @escaping (_ error: Error?) -> Void) {
 		if shouldSignUpSuccessfully {
 			registered = true
-			user.id = 888
+			user.ID = 888
 			successBlock(user)
 		} else {
 			errorBlock(nil)

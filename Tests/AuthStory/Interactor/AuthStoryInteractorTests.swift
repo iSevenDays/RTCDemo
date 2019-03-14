@@ -101,7 +101,7 @@ class AuthStoryInteractorTests: BaseTestCase {
 		fakeService.shouldLoginSuccessfully = true
 		
 		// when
-		interactor.cacheUser(SVUser(id: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
+		interactor.cacheUser(SVUser(ID: 33, login: "login", fullName: "fullname", password: "pas", tags: ["tag"]))
 		interactor.tryLoginWithCachedUser()
 		
 		// then

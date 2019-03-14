@@ -31,7 +31,6 @@
 		0EEB143555101F94D846D806 /* ImageGalleryStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE588FA6E59C6379F0AD29B /* ImageGalleryStoryConfigurator.swift */; };
 		101EB262B4194C0F51372593 /* SettingsStoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22F9D55DC01B93851D25C7 /* SettingsStoryConfigurator.swift */; };
 		11D6E490924AD16F67A13AFF /* SettingsStoryRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F0696E113CAFBCF2493E4 /* SettingsStoryRouterInput.swift */; };
-		14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		140A57DE1E09BA760093AC33 /* ChatUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A57DD1E09BA760093AC33 /* ChatUsersTableViewCell.swift */; };
 		140A57DF1E09BA760093AC33 /* ChatUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A57DD1E09BA760093AC33 /* ChatUsersTableViewCell.swift */; };
 		140A57E21E09BC3D0093AC33 /* UIColor+RandomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A57E01E09BC3D0093AC33 /* UIColor+RandomColors.swift */; };
@@ -165,12 +164,8 @@
 		14740A771E03199400557FB3 /* PushNotificationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */; };
 		14740A7A1E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A781E031A0E00557FB3 /* QBPushNotificationsService.swift */; };
 		14740A7D1E031B2700557FB3 /* PushNotificationsServiceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14740A7B1E031B2700557FB3 /* PushNotificationsServiceObserver.swift */; };
-		1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
-		1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */; };
 		147546411CAE560C004CCE95 /* RESTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */; };
 		147546451CAE5649004CCE95 /* QBRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147546431CAE5649004CCE95 /* QBRESTService.swift */; };
-		1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */; };
-		148233A71C002DFE0000E9ED /* SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028801BFB190800BDF2C5 /* SVUser.m */; };
 		148233AC1C002DFE0000E9ED /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287C1BFB092800BDF2C5 /* libresolv.tbd */; };
 		148233AD1C002DFE0000E9ED /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287A1BFB090C00BDF2C5 /* SystemConfiguration.framework */; };
 		148233AE1C002DFE0000E9ED /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A028781BFB08F900BDF2C5 /* MobileCoreServices.framework */; };
@@ -190,8 +185,6 @@
 		14A028791BFB08F900BDF2C5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A028781BFB08F900BDF2C5 /* MobileCoreServices.framework */; };
 		14A0287B1BFB090C00BDF2C5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287A1BFB090C00BDF2C5 /* SystemConfiguration.framework */; };
 		14A0287D1BFB092800BDF2C5 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A0287C1BFB092800BDF2C5 /* libresolv.tbd */; };
-		14A028811BFB190800BDF2C5 /* SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028801BFB190800BDF2C5 /* SVUser.m */; };
-		14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */; };
 		14A321A11DF5E03600B7AEE3 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A321A01DF5E03600B7AEE3 /* BaseTestCase.swift */; };
 		14A321A21DF5E03600B7AEE3 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A321A01DF5E03600B7AEE3 /* BaseTestCase.swift */; };
 		14A601351C6DEFFB00065437 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097A1BF945280091071C /* libicucore.tbd */; };
@@ -278,6 +271,12 @@
 		14BAF2C41E380A980081C905 /* SettingsStoryInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6498567AA1F8591ED8222F /* SettingsStoryInitializer.swift */; };
 		14BAF2C51E380AB40081C905 /* ImageGalleryStoryInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70AA5BF86E1A22302E67CA /* ImageGalleryStoryInteractorTests.swift */; };
 		14BAF2C61E380AD30081C905 /* ChatUsersStory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142B50301CDD1C93005B143C /* ChatUsersStory.storyboard */; };
+		14C4ED2122395BB000D6DAEF /* SVUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ED2022395BB000D6DAEF /* SVUser.swift */; };
+		14C4ED2222395BB000D6DAEF /* SVUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ED2022395BB000D6DAEF /* SVUser.swift */; };
+		14C4ED24223965AC00D6DAEF /* QBUUser+SVUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ED23223965AC00D6DAEF /* QBUUser+SVUser.swift */; };
+		14C4ED25223965AC00D6DAEF /* QBUUser+SVUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ED23223965AC00D6DAEF /* QBUUser+SVUser.swift */; };
+		14C4ED272239663800D6DAEF /* SVUser+QBUUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ED262239663800D6DAEF /* SVUser+QBUUser.swift */; };
+		14C4ED282239663800D6DAEF /* SVUser+QBUUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ED262239663800D6DAEF /* SVUser+QBUUser.swift */; };
 		14C7DA6F1E0C829A00870C00 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C7DA6D1E0C829A00870C00 /* UIView+Shake.swift */; };
 		14C7DA721E0C876900870C00 /* ChatUsersStoryEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C7DA701E0C876900870C00 /* ChatUsersStoryEmptyView.xib */; };
 		14C7DA741E0C89B400870C00 /* ChatUsersStoryEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C7DA731E0C89B400870C00 /* ChatUsersStoryEmptyView.swift */; };
@@ -296,10 +295,19 @@
 		14CEB8FC2239101800CEA3B0 /* SignalingChannelObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */; };
 		14CEB90022391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FF22391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift */; };
 		14CEB90122391E4A00CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB8FF22391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift */; };
+		14CEB9042239334900CEA3B0 /* SendBirdSignalingChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB9032239334900CEA3B0 /* SendBirdSignalingChannel.swift */; };
+		14CEB9052239334900CEA3B0 /* SendBirdSignalingChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB9032239334900CEA3B0 /* SendBirdSignalingChannel.swift */; };
+		14CEB9072239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB9062239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift */; };
+		14CEB9082239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB9062239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift */; };
+		14CEB90A2239498E00CEA3B0 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB9092239498E00CEA3B0 /* SessionDescription.swift */; };
+		14CEB90B2239498E00CEA3B0 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB9092239498E00CEA3B0 /* SessionDescription.swift */; };
+		14CEB90D223949A000CEA3B0 /* IceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB90C223949A000CEA3B0 /* IceCandidate.swift */; };
+		14CEB90E223949A000CEA3B0 /* IceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB90C223949A000CEA3B0 /* IceCandidate.swift */; };
+		14CEB910223949FF00CEA3B0 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB90F223949FF00CEA3B0 /* SystemMessage.swift */; };
+		14CEB911223949FF00CEA3B0 /* SystemMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEB90F223949FF00CEA3B0 /* SystemMessage.swift */; };
 		14E8A1061E16D9A9007B6E29 /* AlertControlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1041E16D8FF007B6E29 /* AlertControlProtocol.swift */; };
 		14E8A1081E179A92007B6E29 /* FakeAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */; };
 		14E8A1091E179A92007B6E29 /* FakeAlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */; };
-		14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */; };
 		14E9F5A41C6CD317007F58B7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1436097E1BF945490091071C /* GLKit.framework */; };
 		14E9F5A51C6CD317007F58B7 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143609781BF9450A0091071C /* VideoToolbox.framework */; };
 		14E9F5A61C6CD317007F58B7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146CA9F21C62644000F768C8 /* CoreMedia.framework */; };
@@ -484,7 +492,6 @@
 		0EB123A1EC90BA998004ED3D /* AuthStoryInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthStoryInteractorOutput.swift; sourceTree = "<group>"; };
 		14015A391BFCD08400830618 /* QBRTCDemo_sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemo_sTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14015A3D1BFCD08400830618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUserTests.m"; sourceTree = "<group>"; };
 		140A57DD1E09BA760093AC33 /* ChatUsersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUsersTableViewCell.swift; sourceTree = "<group>"; };
 		140A57E01E09BC3D0093AC33 /* UIColor+RandomColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RandomColors.swift"; sourceTree = "<group>"; };
 		140BF10F1E2C9B5D0039706F /* SettingsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsStorage.swift; path = SettingsStorage/SettingsStorage.swift; sourceTree = "<group>"; };
@@ -517,7 +524,6 @@
 		1436097A1BF945280091071C /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		1436097C1BF9453C0091071C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		1436097E1BF945490091071C /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		14398F6B1C010A0800F3CE74 /* SVUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUserTests.m; sourceTree = "<group>"; };
 		1439A9041E04705E00741460 /* CallServiceHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallServiceHelpers.swift; sourceTree = "<group>"; };
 		1439F67D1C5A556B00438B48 /* FakeSignalingChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeSignalingChannel.h; sourceTree = "<group>"; };
 		1439F67E1C5A556B00438B48 /* FakeSignalingChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeSignalingChannel.m; sourceTree = "<group>"; };
@@ -552,8 +558,6 @@
 		14740A751E03199400557FB3 /* PushNotificationsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsServiceProtocol.swift; sourceTree = "<group>"; };
 		14740A781E031A0E00557FB3 /* QBPushNotificationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBPushNotificationsService.swift; sourceTree = "<group>"; };
 		14740A7B1E031B2700557FB3 /* PushNotificationsServiceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsServiceObserver.swift; sourceTree = "<group>"; };
-		1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVUser+QBUUser.h"; sourceTree = "<group>"; };
-		1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVUser+QBUUser.m"; sourceTree = "<group>"; };
 		147546401CAE5533004CCE95 /* RESTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTServiceProtocol.swift; sourceTree = "<group>"; };
 		147546431CAE5649004CCE95 /* QBRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QBRESTService.swift; sourceTree = "<group>"; };
 		147C35981DFB51DA0019C298 /* FakeCallService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCallService.swift; sourceTree = "<group>"; };
@@ -565,10 +569,6 @@
 		14A028781BFB08F900BDF2C5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		14A0287A1BFB090C00BDF2C5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		14A0287C1BFB092800BDF2C5 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		14A0287F1BFB190800BDF2C5 /* SVUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVUser.h; sourceTree = "<group>"; };
-		14A028801BFB190800BDF2C5 /* SVUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUser.m; sourceTree = "<group>"; };
-		14A028851BFB1A3100BDF2C5 /* QBUUser+SVUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QBUUser+SVUser.h"; sourceTree = "<group>"; };
-		14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QBUUser+SVUser.m"; sourceTree = "<group>"; };
 		14A321A01DF5E03600B7AEE3 /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		14A6006F1C6DEDE700065437 /* libwebrtc_libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwebrtc_libraries.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A85C6A1E1C38CA00510B2E /* PermissionsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PermissionsServiceProtocol.swift; path = PermissionsService/PermissionsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -576,6 +576,9 @@
 		14A85C701E1CDFDE00510B2E /* FakePermissionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakePermissionsService.swift; sourceTree = "<group>"; };
 		14B49288888762D6DD9AA879 /* SettingsStoryConfiguratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsStoryConfiguratorTests.swift; sourceTree = "<group>"; };
 		14B697EF1E01FBFB0053A79C /* PeerConnectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeerConnectionTests.swift; path = PeerConnection/PeerConnectionTests.swift; sourceTree = "<group>"; };
+		14C4ED2022395BB000D6DAEF /* SVUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVUser.swift; sourceTree = "<group>"; };
+		14C4ED23223965AC00D6DAEF /* QBUUser+SVUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QBUUser+SVUser.swift"; sourceTree = "<group>"; };
+		14C4ED262239663800D6DAEF /* SVUser+QBUUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVUser+QBUUser.swift"; sourceTree = "<group>"; };
 		14C534EA1C6A315800A0FFE8 /* CallServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallServiceTests.m; sourceTree = "<group>"; };
 		14C7DA6D1E0C829A00870C00 /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		14C7DA701E0C876900870C00 /* ChatUsersStoryEmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatUsersStoryEmptyView.xib; sourceTree = "<group>"; };
@@ -590,6 +593,11 @@
 		14CEB8F622390F2900CEA3B0 /* CallServiceChatRoomObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallServiceChatRoomObserver.swift; sourceTree = "<group>"; };
 		14CEB8FA2239101700CEA3B0 /* SignalingChannelObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingChannelObserver.swift; sourceTree = "<group>"; };
 		14CEB8FF22391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingProcessorChatRoomObserver.swift; sourceTree = "<group>"; };
+		14CEB9032239334900CEA3B0 /* SendBirdSignalingChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendBirdSignalingChannel.swift; sourceTree = "<group>"; };
+		14CEB9062239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignalingMessagesFactory+SendBird.swift"; sourceTree = "<group>"; };
+		14CEB9092239498E00CEA3B0 /* SessionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
+		14CEB90C223949A000CEA3B0 /* IceCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCandidate.swift; sourceTree = "<group>"; };
+		14CEB90F223949FF00CEA3B0 /* SystemMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMessage.swift; sourceTree = "<group>"; };
 		14E8A1041E16D8FF007B6E29 /* AlertControlProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControlProtocol.swift; sourceTree = "<group>"; };
 		14E8A1071E179A92007B6E29 /* FakeAlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAlertControl.swift; sourceTree = "<group>"; };
 		14E9F5B41C6CD317007F58B7 /* QBRTCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QBRTCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -827,8 +835,6 @@
 				14015A3D1BFCD08400830618 /* Info.plist */,
 				14114A161CB68FEB0092AA26 /* NSObject+Testing.h */,
 				14114A171CB68FEB0092AA26 /* NSObject+Testing.m */,
-				14015A431BFCD0CB00830618 /* QBUUser+SVUserTests.m */,
-				14398F6B1C010A0800F3CE74 /* SVUserTests.m */,
 				1445F1991E040AB60040F8ED /* TestsStorage.swift */,
 			);
 			path = QBRTCDemoTests;
@@ -1140,10 +1146,8 @@
 		14CEB8FD2239199D00CEA3B0 /* QBUser+SVUser */ = {
 			isa = PBXGroup;
 			children = (
-				14A028851BFB1A3100BDF2C5 /* QBUUser+SVUser.h */,
-				14A028861BFB1A3100BDF2C5 /* QBUUser+SVUser.m */,
-				1475463B1CADC72D004CCE95 /* SVUser+QBUUser.h */,
-				1475463C1CADC72E004CCE95 /* SVUser+QBUUser.m */,
+				14C4ED23223965AC00D6DAEF /* QBUUser+SVUser.swift */,
+				14C4ED262239663800D6DAEF /* SVUser+QBUUser.swift */,
 			);
 			path = "QBUser+SVUser";
 			sourceTree = "<group>";
@@ -1160,6 +1164,7 @@
 		14CEB9022239330500CEA3B0 /* SendBird */ = {
 			isa = PBXGroup;
 			children = (
+				14CEB9032239334900CEA3B0 /* SendBirdSignalingChannel.swift */,
 			);
 			path = SendBird;
 			sourceTree = "<group>";
@@ -1169,6 +1174,7 @@
 			children = (
 				14C970AF1DFCB5E000462981 /* SignalingMessage.swift */,
 				14C970B21DFCC09600462981 /* SignalingMessagesFactory.swift */,
+				14CEB9062239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift */,
 			);
 			path = SVSignaling;
 			sourceTree = "<group>";
@@ -1272,8 +1278,10 @@
 				14D0A3B01C529C52005AF958 /* SVSignaling */,
 				1454052B1C859431005E3790 /* DataChannelMessages.h */,
 				1454052C1C859431005E3790 /* DataChannelMessages.m */,
-				14A0287F1BFB190800BDF2C5 /* SVUser.h */,
-				14A028801BFB190800BDF2C5 /* SVUser.m */,
+				14CEB9092239498E00CEA3B0 /* SessionDescription.swift */,
+				14CEB90C223949A000CEA3B0 /* IceCandidate.swift */,
+				14CEB90F223949FF00CEA3B0 /* SystemMessage.swift */,
+				14C4ED2022395BB000D6DAEF /* SVUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2276,6 +2284,8 @@
 				"${PODS_ROOT}/Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo-frameworks.sh",
 				"${PODS_ROOT}/GoogleWebRTC/Frameworks/frameworks/WebRTC.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework",
+				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/ViperMcFlurry/ViperMcFlurry.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2284,6 +2294,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendBirdSDK.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/SendBirdSDK.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViperMcFlurry.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2302,6 +2314,8 @@
 				"${PODS_ROOT}/Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s-frameworks.sh",
 				"${PODS_ROOT}/GoogleWebRTC/Frameworks/frameworks/WebRTC.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework",
+				"${PODS_ROOT}/SendBirdSDK/SendBirdSDK.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/ViperMcFlurry/ViperMcFlurry.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2310,6 +2324,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendBirdSDK.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/SendBirdSDK.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViperMcFlurry.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2410,7 +2426,6 @@
 				14EBDD231DFC154E00A1EEB5 /* VideoCallStoryInteractorTests.swift in Sources */,
 				140BF1201E2C9E8C0039706F /* FakeCacheService.swift in Sources */,
 				1420E4671CE7CE6E0043EFF9 /* IncomingCallStoryConfiguratorTests.swift in Sources */,
-				14015A441BFCD0CB00830618 /* QBUUser+SVUserTests.m in Sources */,
 				14ADBDE01C73851C003A0C98 /* ImageGalleryStoryRouterTests.swift in Sources */,
 				14EBDD2E1DFC77CE00A1EEB5 /* IncomingCallStoryInteractorTests.swift in Sources */,
 				14EBDD311DFC7B7B00A1EEB5 /* AuthStoryInteractorTests.swift in Sources */,
@@ -2469,7 +2484,6 @@
 				14BAF2C21E380A970081C905 /* SettingsStoryRouter.swift in Sources */,
 				14BAF2911E380A640081C905 /* QBSignalingChannel.swift in Sources */,
 				142B50901CDD2CE0005B143C /* ChatUsersStoryViewInput.swift in Sources */,
-				1475463D1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				142B50921CDD2CE0005B143C /* ChatUsersStoryViewController.swift in Sources */,
 				14ADBDF51C738554003A0C98 /* ImageGalleryStoryInitializer.swift in Sources */,
 				14ADBDF21C738554003A0C98 /* ImageGalleryStoryRouterInput.swift in Sources */,
@@ -2491,13 +2505,16 @@
 				1454D9D61E2E902E00E1FA21 /* Settings.swift in Sources */,
 				14BAF2971E380A640081C905 /* CallServiceObserver.swift in Sources */,
 				14BAF28D1E380A640081C905 /* QBPushNotificationsService.swift in Sources */,
+				14C4ED2122395BB000D6DAEF /* SVUser.swift in Sources */,
 				14BAF2A91E380A640081C905 /* AuthStoryInitializer.swift in Sources */,
+				14CEB9072239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift in Sources */,
 				142B50961CDD2CE0005B143C /* ChatUsersStoryInteractorOutput.swift in Sources */,
 				142D137B1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				1420E4911CE7CE9C0043EFF9 /* IncomingCallStoryRouterInput.swift in Sources */,
 				140A57DE1E09BA760093AC33 /* ChatUsersTableViewCell.swift in Sources */,
 				14BAF2961E380A640081C905 /* CallServiceProtocol.swift in Sources */,
 				14BAF2B21E380A970081C905 /* VideoCallStoryModuleInput.swift in Sources */,
+				14CEB90A2239498E00CEA3B0 /* SessionDescription.swift in Sources */,
 				1420E47B1CE7CE860043EFF9 /* IncomingCallStoryViewInput.swift in Sources */,
 				14BAF2BB1E380A970081C905 /* SettingsStoryViewController.swift in Sources */,
 				14CEB90022391E4700CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */,
@@ -2529,7 +2546,6 @@
 				14BAF2B41E380A970081C905 /* VideoCallStoryInteractorInput.swift in Sources */,
 				14BAF2A71E380A640081C905 /* DesignableViews.swift in Sources */,
 				14BAF29C1E380A640081C905 /* AlertControl.swift in Sources */,
-				14A028871BFB1A3100BDF2C5 /* QBUUser+SVUser.m in Sources */,
 				14BAF2891E380A640081C905 /* SettingsStorage.swift in Sources */,
 				14ADBDF11C738554003A0C98 /* ImageGalleryStoryInteractor.swift in Sources */,
 				1420E47C1CE7CE860043EFF9 /* IncomingCallStoryViewOutput.swift in Sources */,
@@ -2546,6 +2562,8 @@
 				14BAF2981E380A640081C905 /* PeerConnection.swift in Sources */,
 				14CEB8FB2239101700CEA3B0 /* SignalingChannelObserver.swift in Sources */,
 				142D13781C8876E0005A348D /* ImageGalleryStoryCollectionViewCell.swift in Sources */,
+				14C4ED24223965AC00D6DAEF /* QBUUser+SVUser.swift in Sources */,
+				14C4ED272239663800D6DAEF /* SVUser+QBUUser.swift in Sources */,
 				14BAF2AE1E380A640081C905 /* AuthStoryPresenter.swift in Sources */,
 				1420E47D1CE7CE860043EFF9 /* IncomingCallStoryViewController.swift in Sources */,
 				14BAF29A1E380A640081C905 /* RESTServiceProtocol.swift in Sources */,
@@ -2554,17 +2572,19 @@
 				1420E4921CE7CE9C0043EFF9 /* IncomingCallStoryRouter.swift in Sources */,
 				14BAF2B31E380A970081C905 /* VideoCallStoryPresenter.swift in Sources */,
 				14BAF2A11E380A640081C905 /* ArrayAppendOperator.swift in Sources */,
-				14A028811BFB190800BDF2C5 /* SVUser.m in Sources */,
 				14ADBDEE1C738554003A0C98 /* ImageGalleryStoryPresenter.swift in Sources */,
 				14BAF2AC1E380A640081C905 /* AuthStoryInteractorOutput.swift in Sources */,
+				14CEB910223949FF00CEA3B0 /* SystemMessage.swift in Sources */,
 				14ADBDF41C738554003A0C98 /* ImageGalleryStoryConfigurator.swift in Sources */,
 				1473EAC51CAC6070007F9DF8 /* AuthStoryViewController.swift in Sources */,
 				14BAF2B61E380A970081C905 /* VideoCallStoryRouterInput.swift in Sources */,
 				14BAF2B71E380A970081C905 /* VideoCallStoryRouter.swift in Sources */,
+				14CEB90D223949A000CEA3B0 /* IceCandidate.swift in Sources */,
 				14BAF2901E380A640081C905 /* SessionDetails.swift in Sources */,
 				14BAF2B51E380A970081C905 /* VideoCallStoryInteractorOutput.swift in Sources */,
 				1420E4971CE7CEA20043EFF9 /* IncomingCallStoryInitializer.swift in Sources */,
 				14EBDD351DFC7CA500A1EEB5 /* VideoCallStoryViewInput.swift in Sources */,
+				14CEB9042239334900CEA3B0 /* SendBirdSignalingChannel.swift in Sources */,
 				14BAF2C41E380A980081C905 /* SettingsStoryInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2578,16 +2598,13 @@
 				147546451CAE5649004CCE95 /* QBRESTService.swift in Sources */,
 				14736EEF1C568462009DFBBC /* WebRTCHelpers.m in Sources */,
 				142D13801C887873005A348D /* ImageGalleryStoryCollectionViewInteractor.swift in Sources */,
-				1475463E1CADC72E004CCE95 /* SVUser+QBUUser.m in Sources */,
 				140A57E21E09BC3D0093AC33 /* UIColor+RandomColors.swift in Sources */,
-				1482339E1C002DFE0000E9ED /* QBUUser+SVUser.m in Sources */,
 				142866CF1E049DDC00F9AB41 /* DesignableViews.swift in Sources */,
 				14740A7A1E031A0E00557FB3 /* QBPushNotificationsService.swift in Sources */,
 				142D137C1C8877A2005A348D /* ImageGalleryStoryCollectionView.swift in Sources */,
 				142154631CE75ACB003C1C4A /* ServicesProvider.swift in Sources */,
 				1448B7801DF9D17A002D5371 /* SessionDetails.swift in Sources */,
 				1448B7901DFAE950002D5371 /* MulticastDelegate.swift in Sources */,
-				148233A71C002DFE0000E9ED /* SVUser.m in Sources */,
 				14C970BE1DFCEBEF00462981 /* SignalingChannelProtocol.swift in Sources */,
 				14E8A1061E16D9A9007B6E29 /* AlertControlProtocol.swift in Sources */,
 				142D13901C888C1D005A348D /* ImageGalleryStoryInteractorImagesInput.swift in Sources */,
@@ -2620,13 +2637,16 @@
 				A049C3E01A2B5FAE66666F31 /* AuthStoryViewOutput.swift in Sources */,
 				14A85C6C1E1C38CA00510B2E /* PermissionsServiceProtocol.swift in Sources */,
 				24BCC726FCD00FB50CE99B69 /* AuthStoryViewController.swift in Sources */,
+				14C4ED2222395BB000D6DAEF /* SVUser.swift in Sources */,
 				1454D9CD1E2D7E8900E1FA21 /* SettingModel.swift in Sources */,
+				14CEB9082239432200CEA3B0 /* SignalingMessagesFactory+SendBird.swift in Sources */,
 				B9EC69970C8CCBEF7AF2BA39 /* AuthStoryModuleInput.swift in Sources */,
 				EA81168A4C17567BC162640A /* AuthStoryPresenter.swift in Sources */,
 				24C83F54AD1112D275D087D8 /* AuthStoryInteractorInput.swift in Sources */,
 				0BA1EF8A8A8D529DCD29EDDA /* AuthStoryInteractorOutput.swift in Sources */,
 				14EBDD221DFBFB9900A1EEB5 /* NSData+GZIP.m in Sources */,
 				63A59E34E800C1A9FCF24C63 /* AuthStoryInteractor.swift in Sources */,
+				14CEB90B2239498E00CEA3B0 /* SessionDescription.swift in Sources */,
 				6C49A339274F0DC6F59B9512 /* AuthStoryRouterInput.swift in Sources */,
 				CAB1B0BA5443499CF8EF2DFD /* AuthStoryRouter.swift in Sources */,
 				14CEB90122391E4A00CEA3B0 /* SignalingProcessorChatRoomObserver.swift in Sources */,
@@ -2676,6 +2696,8 @@
 				14CEB8FC2239101800CEA3B0 /* SignalingChannelObserver.swift in Sources */,
 				14C7DA751E0C89B400870C00 /* ChatUsersStoryEmptyView.swift in Sources */,
 				4BB2DADCF0A8097BEFBCF0E2 /* VideoCallStoryRouterInput.swift in Sources */,
+				14C4ED25223965AC00D6DAEF /* QBUUser+SVUser.swift in Sources */,
+				14C4ED282239663800D6DAEF /* SVUser+QBUUser.swift in Sources */,
 				E4FBAEB769B3C7F83FA0CEC7 /* VideoCallStoryRouter.swift in Sources */,
 				14C970B11DFCB5E000462981 /* SignalingMessage.swift in Sources */,
 				EAA4E764EA4EFF7810DB4CB9 /* VideoCallStoryConfigurator.swift in Sources */,
@@ -2686,14 +2708,17 @@
 				392505F4AF6E78CF3D01B29A /* SettingsStoryViewController.swift in Sources */,
 				9DA6DA9544588F430F211457 /* SettingsStoryModuleInput.swift in Sources */,
 				46506361658A1A5772ADE29B /* SettingsStoryPresenter.swift in Sources */,
+				14CEB911223949FF00CEA3B0 /* SystemMessage.swift in Sources */,
 				5F8EB08489983D589DF9EF2E /* SettingsStoryInteractorInput.swift in Sources */,
 				FCFBF3819D23A329104C383F /* SettingsStoryInteractorOutput.swift in Sources */,
 				1454D9D71E2E902E00E1FA21 /* Settings.swift in Sources */,
 				E9C1AD9145872DAC33642D50 /* SettingsStoryInteractor.swift in Sources */,
+				14CEB90E223949A000CEA3B0 /* IceCandidate.swift in Sources */,
 				14CEB8F822390F4400CEA3B0 /* CallServiceObserver.swift in Sources */,
 				11D6E490924AD16F67A13AFF /* SettingsStoryRouterInput.swift in Sources */,
 				A4E2EAD8C6C7AA5EF61D4A19 /* SettingsStoryRouter.swift in Sources */,
 				101EB262B4194C0F51372593 /* SettingsStoryConfigurator.swift in Sources */,
+				14CEB9052239334900CEA3B0 /* SendBirdSignalingChannel.swift in Sources */,
 				25BBDBBC61108C777B236AE7 /* SettingsStoryInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2719,7 +2744,6 @@
 				1433C5F91DF17A3000A2CED6 /* VideoCallStoryViewTests.swift in Sources */,
 				1439A9061E04705E00741460 /* CallServiceHelpers.swift in Sources */,
 				14EBDD3B1DFC7D4200A1EEB5 /* CallServiceTests.swift in Sources */,
-				14E9F5981C6CD317007F58B7 /* QBUUser+SVUserTests.m in Sources */,
 				14B697F11E01FBFB0053A79C /* PeerConnectionTests.swift in Sources */,
 				3B71C5530680B27B2D00D203 /* ImageGalleryStoryConfiguratorTests.swift in Sources */,
 				14EBDD2C1DFC170F00A1EEB5 /* FakeCallService.swift in Sources */,
@@ -2914,7 +2938,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2959,7 +2983,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -2997,7 +3021,7 @@
 					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/WebRTC/Helpers/\"",
 				);
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3045,7 +3069,7 @@
 					"\"$(SRCROOT)/QBRTCDemo/Modules/BusinessLogicLayer/Services/CallService/WebRTC/Helpers/\"",
 				);
 				INFOPLIST_FILE = QBRTCDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3124,6 +3148,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "QBRTCDemo/QBRTCDemo_s-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -3159,6 +3184,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "QBRTCDemo/QBRTCDemo_s-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";

@@ -21,7 +21,7 @@ class CallServiceTests: BaseTestCase {
 	
 	let user1 = TestsStorage.svuserRealUser1
 	let user2 = TestsStorage.svuserRealUser2
-	let user3 = SVUser(id: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
+	let user3 = SVUser(ID: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
 	
 	var fakeSignalingChannel: FakeSignalingChannel!
 	var callService: CallService!
@@ -142,7 +142,7 @@ class CallServiceTests: BaseTestCase {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [1])
+		let sessionDetails = SessionDetails(initiatorID: UInt(user1.ID!), membersIDs: [1])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -161,7 +161,7 @@ class CallServiceTests: BaseTestCase {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user2.id!.uintValue, membersIDs: [user2.id!.uintValue])
+		let sessionDetails = SessionDetails(initiatorID: UInt(user2.ID!), membersIDs: [UInt(user2.ID!)])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -181,7 +181,7 @@ class CallServiceTests: BaseTestCase {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 	
-		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [1])
+		let sessionDetails = SessionDetails(initiatorID: UInt(user1.ID!), membersIDs: [1])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)
@@ -243,7 +243,7 @@ class CallServiceTests: BaseTestCase {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [1])
+		let sessionDetails = SessionDetails(initiatorID: UInt(user1.ID!), membersIDs: [1])
 		sessionDetails.sessionState = .rejected
 		callService.sessions[sessionDetails.sessionID] = sessionDetails
 		
@@ -300,7 +300,7 @@ class CallServiceTests: BaseTestCase {
 		// given
 		let rtcOfferSDP = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
 		
-		let sessionDetails = SessionDetails(initiatorID: user1.id!.uintValue, membersIDs: [user1.id!.uintValue, user2.id!.uintValue])
+		let sessionDetails = SessionDetails(initiatorID: UInt(user1.ID!), membersIDs: [UInt(user1.ID!), UInt(user2.ID!)])
 		
 		// when
 		callService.connectWithUser(user1, completion: nil)

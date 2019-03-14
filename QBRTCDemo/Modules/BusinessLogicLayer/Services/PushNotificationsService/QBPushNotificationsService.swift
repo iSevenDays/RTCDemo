@@ -42,14 +42,14 @@ class QBPushNotificationsService: PushNotificationsServiceProtocol {
 	
 	// located here because we should be able to override the class
 	func sendPushNotificationMessage(_ message: String, toOpponent opponent: SVUser) {
-		guard let opponentID = opponent.id else {
+		guard let opponentID = opponent.ID else {
 			NSLog("Error sending push notification: opponentID is nil")
 			return
 		}
 		
 		let event = QBMEvent()
 		event.notificationType = .push
-		event.usersIDs = String(opponentID.intValue)
+		event.usersIDs = String(opponentID)
 		event.type = .oneShot
 		
 		// custom params

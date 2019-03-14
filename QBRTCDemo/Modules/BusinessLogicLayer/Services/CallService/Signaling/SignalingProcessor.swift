@@ -29,15 +29,18 @@ extension SignalingProcessor: SignalingChannelObserver {
 		
 		switch message {
 		case let .offer(sdp: sessionDescription) :
-			observer?.didReceiveOffer(self, offer: sessionDescription, fromOpponent: opponent, sessionDetails: sessionDetails!)
+			observer?.didReceiveOffer(self, offer: sessionDescription.rtcSessionDescription, fromOpponent: opponent, sessionDetails: sessionDetails!)
 		case let .answer(sdp: sessionDescription):
-			observer?.didReceiveAnswer(self, answer: sessionDescription, fromOpponent: opponent, sessionDetails: sessionDetails!)
+			observer?.didReceiveAnswer(self, answer: sessionDescription.rtcSessionDescription, fromOpponent: opponent, sessionDetails: sessionDetails!)
 		case let .candidates(candidates: candidates):
-			observer?.didReceiveICECandidates(self, ICECandidates: candidates, fromOpponent: opponent, sessionDetails: sessionDetails!)
-		case .hangup:
-			observer?.didReceiveHangup(self, fromOpponent: opponent, sessionDetails: sessionDetails!)
-		case .reject:
-			observer?.didReceiveReject(self, fromOpponent: opponent, sessionDetails: sessionDetails!)
+			observer?.didReceiveICECandidates(self, ICECandidates: candidates.compactMap({$0.rtcIceCandidate}), fromOpponent: opponent, sessionDetails: sessionDetails!)
+		case .system(let systemMessage):
+			switch systemMessage {
+			case .hangup:
+				observer?.didReceiveHangup(self, fromOpponent: opponent, sessionDetails: sessionDetails!)
+			case .reject:
+				observer?.didReceiveReject(self, fromOpponent: opponent, sessionDetails: sessionDetails!)
+			}
 		case let .user(enteredChatRoomName: roomName):
 			chatRoomObserver?.didReceiveUser(self, user: opponent, forChatRoomName: roomName)
 		}

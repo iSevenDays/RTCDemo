@@ -9,6 +9,7 @@ target 'QBRTCDemo' do
 	pod 'ViperMcFlurry', '~> 1.5.2'
 	pod 'GoogleWebRTC', '~> 1.1'
 	pod 'KeychainSwift', '~> 13.0'
+	pod 'SendBirdSDK', '~> 3.0'
 
 	target 'QBRTCDemoTests' do
 		inherit! :search_paths
@@ -19,6 +20,7 @@ target 'QBRTCDemo_s' do
 	pod 'ViperMcFlurry', '~> 1.5.2'
 	pod 'GoogleWebRTC', '~> 1.1'
 	pod 'KeychainSwift', '~> 13.0'
+	pod 'SendBirdSDK', '~> 3.0'
 
 	target 'QBRTCDemo_sTests' do
 		inherit! :search_paths

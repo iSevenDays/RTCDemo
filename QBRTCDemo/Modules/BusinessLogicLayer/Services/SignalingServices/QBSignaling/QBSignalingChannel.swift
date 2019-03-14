@@ -41,7 +41,7 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 	}
 	
 	func connectWithUser(_ user: SVUser, completion: ((_ error: Error?) -> Void)?) throws {
-		guard let userID = user.id else {
+		guard let userID = user.ID else {
 			throw SignalingChannelError.missingUserID
 		}
 		guard userID != 0 else {
@@ -49,13 +49,13 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 		}
 		state = .open
 		
-		QBChat.instance().connect(with: QBUUser(svUser: user)) { [unowned self] (error) in
+		QBChat.instance().connect(with: QBUUser.fromSVUser(svuser: user)) { [unowned self] (error) in
 			if error != nil {
 				self.state = .error
 			} else {
 				self.user = user
 				QBChat.instance().currentUser()?.password = user.password
-				QBChat.instance().currentUser()?.id = userID.uintValue
+				QBChat.instance().currentUser()?.id = UInt(userID)
 				self.state = .established
 			}
 			completion?(error)
@@ -68,7 +68,7 @@ extension QBSignalingChannel: SignalingChannelProtocol {
 			return
 		}
 		let qbMessage = try? signalingMessagesFactory.qbMessageFromSignalingMessage(message, sender: currentUser, sessionDetails: sessionDetails)
-		qbMessage!.recipientID = user.id!.uintValue
+		qbMessage!.recipientID = UInt(user.ID!)
 		
 		QBChat.instance().sendSystemMessage(qbMessage!, completion: completion)
 	}
@@ -103,11 +103,11 @@ extension QBSignalingChannel: QBChatDelegate {
 			
 			self.observers |> { $0.signalingChannel(self, didReceiveMessage: message, fromOpponent: sender, withSessionDetails: sessionDetails) }
 			
-		} catch SignalingMessagesFactoryError.failedToDecompressMessage(message: message) {
+		} catch SignalingMessagesFactoryError.failedToDecompressMessage(message: .quickblox(message)) {
 			NSLog("%@", "Error: failed to decompress message \(message)")
 		} catch SignalingMessagesFactoryError.incorrectParamsType {
 			NSLog("%@", "Error: incorrect params type")
-		} catch SignalingMessagesFactoryError.incorrectSignalingMessage(message: message) {
+		} catch SignalingMessagesFactoryError.incorrectSignalingMessage(message: .quickblox(message)) {
 			NSLog("%@", "Error: incorrect signaling message \(message)")
 		} catch SignalingMessagesFactoryError.missingInitiatorID {
 			NSLog("%@", "Error: missing initiator ID")

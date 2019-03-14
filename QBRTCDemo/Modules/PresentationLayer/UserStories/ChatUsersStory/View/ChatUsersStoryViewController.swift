@@ -40,7 +40,7 @@ extension ChatUsersStoryViewController: ChatUsersStoryViewInput {
 	}
 	
 	func configureViewWithCurrentUser(_ user: SVUser) {
-		navigationItem.title = "Logged in as " + user.fullName
+		navigationItem.title = "Logged in as " + user.fullName ?? user.login ?? "unknown"
 		if let roomName = user.tags?.first {
 			_ = view
 			tableHeaderLbl.text = "Room \"\(roomName)\""

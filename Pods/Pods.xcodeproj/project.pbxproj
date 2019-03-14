@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		902F102CD5ABEC9CC2247D6BCCA20F18 /* SendBirdSDK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5D33208C75F339D65CCB02CE60EC2755 /* Build configuration list for PBXAggregateTarget "SendBirdSDK" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = SendBirdSDK;
+		};
 		B9309BA8D8A41857882FFD9308EFC4DB /* GoogleWebRTC */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 18B664D4DBF22B3F6B271154516833C2 /* Build configuration list for PBXAggregateTarget "GoogleWebRTC" */;
@@ -19,84 +28,98 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		003277CE687947EE5C4E88CF0996AE2E /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C71BECEA841FC1C06243BDDE55961B4A /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		0261131B035455ADBAD9FE804C76F43B /* ViperMcFlurry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFC1B6D4C17FCEE798642B67177D5C5 /* ViperMcFlurry-dummy.m */; };
 		04433B212A5C31E09277BA5118AD94E3 /* Pods-QBRTCDemoTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC31A02D16983D4C458EC4BC05B9A48D /* Pods-QBRTCDemoTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		10BE32420EE62CA65187FB155FC2AFA3 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7447403A5088CD4F85B0CD37DAC201 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		18CE1B771296CF3A21A1DEB813FFC665 /* RamblerViperOpenModulePromise.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA835C4277EEBDA00BC70852E64EA31 /* RamblerViperOpenModulePromise.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		1FE31B3F33A83590BAF90F3D6E9064BE /* RamblerViperModuleInput.h in Headers */ = {isa = PBXBuildFile; fileRef = 371134E8DDF9BD65F40262D4125F9D97 /* RamblerViperModuleInput.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0908C51E2E08F54A9AD383DC9A62736F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
+		1A0F78EA710D8CB99CDB64F69529D052 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B7DC2A52BF1567D1E8428333609FA47 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2011AF34D7B2F7F56E09E7CEEDD26B2C /* Pods-QBRTCDemoTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3CF26C3FE80787ABD1FE01E538DF2E /* Pods-QBRTCDemoTests-dummy.m */; };
-		28F832A1DB2DFB40EB7D6BE1C3B10044 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		2B4E950EC72C42CB63420900A5D74C35 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62907F233CFD89C929EF94D0E9984B46 /* TegKeychainConstants.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		32B2A0286B297FA7E2C483C86B88EE06 /* ViperMcFlurry.h in Headers */ = {isa = PBXBuildFile; fileRef = A25D84EA6DE0EC0FF890EFC3C6770A3D /* ViperMcFlurry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E005DAF098F5C474884D5824EA4A017 /* RamblerViperModuleFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 38DB4F9906FAF7EE47076CD05FACE6F1 /* RamblerViperModuleFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3F65920658F39FEF273AE506DB361D94 /* KeychainSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8FDDA16F3B593C4A1C9753111782B42 /* KeychainSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		24D357CBB65A4C4A926F99FA993B5D7B /* Pods-QBRTCDemo_s-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8937D2ABACFD7D4E05795698DCC10A4 /* Pods-QBRTCDemo_s-dummy.m */; };
+		2B4E950EC72C42CB63420900A5D74C35 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF6DA0C36C27A98E5A77533B5F97C55 /* TegKeychainConstants.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		2D1712E4585123E30CA0A52D97BDF1EB /* Pods-QBRTCDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDE45DD69D25CBF35C7C978AF4740D8 /* Pods-QBRTCDemo-dummy.m */; };
+		2EE689BF54C5F1D7157F91C90A1B2FDF /* ViperMcFlurry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DD119F3C5F0DA1D9F46DA7ABB3DD95 /* ViperMcFlurry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		30DAA9113B00BC7022F09C530A9F64C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
+		37AB66AC85B3B799708645E9F05BF9F7 /* ViperMcFlurry.h in Headers */ = {isa = PBXBuildFile; fileRef = 17C1B6A267BE3B00DB5D19D583654CCA /* ViperMcFlurry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F65920658F39FEF273AE506DB361D94 /* KeychainSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AFF48692BCF2C7C09B7ED77F81AE3A /* KeychainSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41AFFA5A04BEC9832343ACB06697A566 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		438B3E702C74EAADD585CE633E98576D /* Pods-QBRTCDemo_sTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 117DFE8E6B7D14F92B5851245E59C169 /* Pods-QBRTCDemo_sTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		47B8B1865F0CE7EFA8A0E31BD3F3F399 /* KeychainSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB5BBC740C2D6AD6C00ED9F2B640EEF /* KeychainSwift-dummy.m */; };
-		48443D3007B18A14B0700B9AAA933329 /* Pods-QBRTCDemo_s-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8937D2ABACFD7D4E05795698DCC10A4 /* Pods-QBRTCDemo_s-dummy.m */; };
-		5C58F3FFEAF6C9ABB30389F7BAF42C25 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A8DA92D4C89EF61C0B434A403270B5 /* KeychainSwift.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		60446301AB08DE9E89251607C4D5A68A /* RamblerViperModuleFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E7AC5FEF964CF540A136C0C04451B2 /* RamblerViperModuleFactory.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		78AFD1C2B504455D78648BEB86A8C488 /* RamblerViperModuleTransitionHandlerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = EAED462EB0FF8923F8F55CE8FBFB0F36 /* RamblerViperModuleTransitionHandlerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92F5E7397548A315E3D8E0CF0EB1CD1E /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 96C79B7866A248444494A7E94CAA616C /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47B8B1865F0CE7EFA8A0E31BD3F3F399 /* KeychainSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D7A5E68904B4FA7723655B142EA48D /* KeychainSwift-dummy.m */; };
+		4E3691931D6E85D8E32653EA8F16D91C /* RamblerViperModuleTransitionHandlerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = E9B1A89F50798C7C768532CF5F3FD543 /* RamblerViperModuleTransitionHandlerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C58F3FFEAF6C9ABB30389F7BAF42C25 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386AEB9B70BFD6BEC2AD40AE762F74E6 /* KeychainSwift.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		642A1DA813972F969142A2674740D6D6 /* Pods-QBRTCDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F7640FBD652922512E9CF9308767BB1 /* Pods-QBRTCDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84297585286619A6C625CC0B3F08FDF0 /* RamblerViperOpenModulePromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 644AD2F782CCE4D1B9920298F57C1273 /* RamblerViperOpenModulePromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		864BAC285297E07BE1C5DD6112D09DFE /* RamblerViperOpenModulePromise.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEA94CD99CA5B0D715AD812C44B56B7 /* RamblerViperOpenModulePromise.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8C2D03A04A8AEDA60ADB462B8394FA0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		95A6DAFD550107618D60843FB910BCEB /* Pods-QBRTCDemo_sTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01925A2C1A21D47F7A8A4A1974DF3DE8 /* Pods-QBRTCDemo_sTests-dummy.m */; };
-		96108E010517B7B88A5A91647761EEAF /* Pods-QBRTCDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F7640FBD652922512E9CF9308767BB1 /* Pods-QBRTCDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7CFF5D3AA4700C2FAF321A8AD9C1E63 /* ViperMcFlurry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4B259DF6208E7C62FCEE3A5276C7A7 /* ViperMcFlurry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A98958A5A92BCD7A15B938D639410013 /* RamblerViperModuleOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A07A354D472DF60964B9CA15790E138 /* RamblerViperModuleOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABFBD2C8D5581F6AEF4B417CE5CBA9B2 /* RamblerViperModuleFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = E587CF006DE11F34B714F2E0BC9EDDC4 /* RamblerViperModuleFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFB97451AC919D53E6251E4FEB5ACF96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		B0BE604530B35600B604C718E20621AD /* Pods-QBRTCDemo_s-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A08ACFD8037204E8AF02EF5A61C3C9C /* Pods-QBRTCDemo_s-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B741D3F64A5F6658EF2318E719045C76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		C2862124F91FFE2C62EC6F69BA12FBA5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		CB8977757D1B91446B9EA21DB1679745 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		DE7F4D698D1E13C35AF8891FBE4C5076 /* Pods-QBRTCDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDE45DD69D25CBF35C7C978AF4740D8 /* Pods-QBRTCDemo-dummy.m */; };
-		E4F14D6A794589673535E5C289E2A4F6 /* ViperMcFlurry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5110511AAB10DE7D1BCCE17CBEF90E3B /* ViperMcFlurry-dummy.m */; };
-		E6D44FD338F2B57CA20A164E923A2E1C /* RamblerViperOpenModulePromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 34EE433008CE0E1AB087DD74420749A9 /* RamblerViperOpenModulePromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E7BD1E6D383E4604FF37E935E61EC91F /* KeychainSwiftAccessOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804D1EB513BDF701214E2CC3CAF10EF1 /* KeychainSwiftAccessOptions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E7F04B03AD3CC6D1A263DF88E99C43DD /* RamblerViperModuleOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A08B2A44F71E5DA3E85BC7CD05B537B /* RamblerViperModuleOutput.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC05B02E7FD189E52128C479055E8F2E /* RamblerViperModuleFactoryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 591E5830FCF076713CAD15189859E015 /* RamblerViperModuleFactoryProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BBD8D4F45D8A90178E9FD86D245D02E8 /* RamblerViperModuleFactoryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = EAC934732EC35E2C30F5F7C83179141F /* RamblerViperModuleFactoryProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFECC008BA3CCF081162C2BFDF1439C5 /* RamblerViperModuleInput.h in Headers */ = {isa = PBXBuildFile; fileRef = 128C47BC180D4C71D2AC23AF358238CA /* RamblerViperModuleInput.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7341962D58905DE13021DAC0F975FF9 /* RamblerViperModuleFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3B866DA3DACA051C1092F811F80407 /* RamblerViperModuleFactory.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		E2961B33EB684DDC4A3B118AA3B118FA /* Pods-QBRTCDemo_s-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A08ACFD8037204E8AF02EF5A61C3C9C /* Pods-QBRTCDemo_s-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E7BD1E6D383E4604FF37E935E61EC91F /* KeychainSwiftAccessOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977E26A2582D7D6934371364419EFEA5 /* KeychainSwiftAccessOptions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0840661E8499CAE8954E4020B20178A1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B9309BA8D8A41857882FFD9308EFC4DB;
-			remoteInfo = GoogleWebRTC;
-		};
-		0C9619CEA5A6F24D129A8D69A20C22CA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 717F2BBA94FCFD23AD55F4B8253C2ADB;
-			remoteInfo = "Pods-QBRTCDemo_s";
-		};
-		0D603DF155B9462C036E29D416DD06CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B9309BA8D8A41857882FFD9308EFC4DB;
-			remoteInfo = GoogleWebRTC;
-		};
-		1A43F240192A0A8B779E239BE4323646 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C015A904B5FBC4DFD0D9EC902CE936E5;
-			remoteInfo = ViperMcFlurry;
-		};
-		746F7853353E1D0E5DB378CFD7CA1CD8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C015A904B5FBC4DFD0D9EC902CE936E5;
-			remoteInfo = ViperMcFlurry;
-		};
-		857AE0E560C04CE6E8AAF11C22125B9D /* PBXContainerItemProxy */ = {
+		0130D17915CA9C563392CDC5DA9F89CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 5393E0C0738D594E66BCCB9824BB73D8;
 			remoteInfo = KeychainSwift;
 		};
-		E09BBEA9F8FF92A95D5569B8138D84F0 /* PBXContainerItemProxy */ = {
+		0C9619CEA5A6F24D129A8D69A20C22CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 378B1DB2CC4A28859240BC4B69D1BC72;
+			remoteInfo = "Pods-QBRTCDemo_s";
+		};
+		0F59023DF3C544B5EA44021D94D7A1D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 549A4D0706BA3481CF60C407B8EB8E3A;
+			remoteInfo = ViperMcFlurry;
+		};
+		5F44ACB4A97CE5A0BDA30DB1D469E8B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9309BA8D8A41857882FFD9308EFC4DB;
+			remoteInfo = GoogleWebRTC;
+		};
+		7344A7D1AD211E7EF18C8BC8A5498E8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9309BA8D8A41857882FFD9308EFC4DB;
+			remoteInfo = GoogleWebRTC;
+		};
+		9C6D6031F108066E4C0A39DA196A65AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 902F102CD5ABEC9CC2247D6BCCA20F18;
+			remoteInfo = SendBirdSDK;
+		};
+		9F5C1192A9DED68046190EAC5E70DAA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 902F102CD5ABEC9CC2247D6BCCA20F18;
+			remoteInfo = SendBirdSDK;
+		};
+		AD91B7910BF0B3BAB49EF5C4A222E5B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 549A4D0706BA3481CF60C407B8EB8E3A;
+			remoteInfo = ViperMcFlurry;
+		};
+		B983DE5B68B00C545E62D3CB964D67F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -107,7 +130,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 237675AECBCF26D70CA00D6C2B82FB25;
+			remoteGlobalIDString = CF7A63E3E6DFDDD5E1FF93B6B3CB1E32;
 			remoteInfo = "Pods-QBRTCDemo";
 		};
 /* End PBXContainerItemProxy section */
@@ -115,74 +138,76 @@
 /* Begin PBXFileReference section */
 		01925A2C1A21D47F7A8A4A1974DF3DE8 /* Pods-QBRTCDemo_sTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QBRTCDemo_sTests-dummy.m"; sourceTree = "<group>"; };
 		037769701B52BC6747EA640B443D33F9 /* Pods-QBRTCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		06EDFA58F0B81797DEB3DA4E0C7D8FCD /* ViperMcFlurry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ViperMcFlurry.xcconfig; sourceTree = "<group>"; };
 		0A73DB955E887D7DC1BF123501E8FF1E /* Pods-QBRTCDemo_s-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QBRTCDemo_s-frameworks.sh"; sourceTree = "<group>"; };
 		0D3C6B46EB864124C8A02E52588BAA5E /* Pods-QBRTCDemoTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemoTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		0F7640FBD652922512E9CF9308767BB1 /* Pods-QBRTCDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QBRTCDemo-umbrella.h"; sourceTree = "<group>"; };
 		117DFE8E6B7D14F92B5851245E59C169 /* Pods-QBRTCDemo_sTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QBRTCDemo_sTests-umbrella.h"; sourceTree = "<group>"; };
-		188DF03963FC4B038D013214BF05E7B7 /* ViperMcFlurry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ViperMcFlurry.xcconfig; sourceTree = "<group>"; };
+		128C47BC180D4C71D2AC23AF358238CA /* RamblerViperModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleInput.h; path = Source/RamblerViperModuleInput.h; sourceTree = "<group>"; };
+		17C1B6A267BE3B00DB5D19D583654CCA /* ViperMcFlurry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ViperMcFlurry.h; path = Source/ViperMcFlurry.h; sourceTree = "<group>"; };
+		1EAD63B204897D8BD460542333C07BF4 /* GoogleWebRTC.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleWebRTC.xcconfig; sourceTree = "<group>"; };
+		2224062D4D38882F1F482B3EE6434704 /* KeychainSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KeychainSwift-Info.plist"; sourceTree = "<group>"; };
 		2509E9AFA3EB767FBB2E20961B24ACCB /* Pods-QBRTCDemoTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemoTests-Info.plist"; sourceTree = "<group>"; };
-		258C21545E651D37370B244DC174CE56 /* KeychainSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-prefix.pch"; sourceTree = "<group>"; };
 		2986EF158B366F8A59B3E89F08D4165E /* Pods-QBRTCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		29F81B4E2944B895192EB9D4D63C6E0B /* ViperMcFlurry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ViperMcFlurry.framework; path = ViperMcFlurry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A08ACFD8037204E8AF02EF5A61C3C9C /* Pods-QBRTCDemo_s-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QBRTCDemo_s-umbrella.h"; sourceTree = "<group>"; };
 		2A3CF26C3FE80787ABD1FE01E538DF2E /* Pods-QBRTCDemoTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QBRTCDemoTests-dummy.m"; sourceTree = "<group>"; };
+		2B7DC2A52BF1567D1E8428333609FA47 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RamblerViperModuleTransitionHandlerProtocol.h"; path = "Source/UIViewController+RamblerViperModuleTransitionHandlerProtocol.h"; sourceTree = "<group>"; };
+		2CF6DA0C36C27A98E5A77533B5F97C55 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TegKeychainConstants.swift; path = Sources/TegKeychainConstants.swift; sourceTree = "<group>"; };
 		3080BCDF4457E52D730569513538C2CF /* Pods-QBRTCDemo_sTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemo_sTests.release.xcconfig"; sourceTree = "<group>"; };
-		34EE433008CE0E1AB087DD74420749A9 /* RamblerViperOpenModulePromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperOpenModulePromise.h; path = Source/RamblerViperOpenModulePromise.h; sourceTree = "<group>"; };
+		30DD119F3C5F0DA1D9F46DA7ABB3DD95 /* ViperMcFlurry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViperMcFlurry-umbrella.h"; sourceTree = "<group>"; };
 		3607A38F5B82FDFBA4536743C3D9F350 /* Pods-QBRTCDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QBRTCDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
-		371134E8DDF9BD65F40262D4125F9D97 /* RamblerViperModuleInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleInput.h; path = Source/RamblerViperModuleInput.h; sourceTree = "<group>"; };
-		38DB4F9906FAF7EE47076CD05FACE6F1 /* RamblerViperModuleFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleFactory.h; path = Source/RamblerViperModuleFactory.h; sourceTree = "<group>"; };
+		363DB161B1B745247FF60A40BC1E2CCF /* KeychainSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KeychainSwift.modulemap; sourceTree = "<group>"; };
+		386AEB9B70BFD6BEC2AD40AE762F74E6 /* KeychainSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwift.swift; path = Sources/KeychainSwift.swift; sourceTree = "<group>"; };
 		3D8137BA6264BEB090B755470536513E /* Pods-QBRTCDemo_s.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-QBRTCDemo_s.modulemap"; sourceTree = "<group>"; };
+		431C0B8D4B5DC912FD16397D5DD493EA /* ViperMcFlurry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ViperMcFlurry.modulemap; sourceTree = "<group>"; };
 		467E49521950F94BE6EE4E2CF6324A89 /* Pods-QBRTCDemo_sTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-QBRTCDemo_sTests.modulemap"; sourceTree = "<group>"; };
 		47E566ECC07B489C97759E2374513800 /* Pods-QBRTCDemo_sTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemo_sTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		4A7447403A5088CD4F85B0CD37DAC201 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RamblerViperModuleTransitionHandlerProtocol.m"; path = "Source/UIViewController+RamblerViperModuleTransitionHandlerProtocol.m"; sourceTree = "<group>"; };
-		5110511AAB10DE7D1BCCE17CBEF90E3B /* ViperMcFlurry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ViperMcFlurry-dummy.m"; sourceTree = "<group>"; };
 		52D14AC390DC33E8152DDF8EFAF84DC3 /* Pods-QBRTCDemoTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QBRTCDemoTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5703F232FCA852B9DF066DC0E086A3E5 /* GoogleWebRTC.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleWebRTC.xcconfig; sourceTree = "<group>"; };
 		57C431DCE53613D2BC77709DF90930B6 /* Pods-QBRTCDemo_sTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemo_sTests-Info.plist"; sourceTree = "<group>"; };
-		591E5830FCF076713CAD15189859E015 /* RamblerViperModuleFactoryProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleFactoryProtocol.h; path = Source/RamblerViperModuleFactoryProtocol.h; sourceTree = "<group>"; };
-		595111D9B0978023711F8E8471163595 /* KeychainSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KeychainSwift-Info.plist"; sourceTree = "<group>"; };
-		5A08B2A44F71E5DA3E85BC7CD05B537B /* RamblerViperModuleOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleOutput.h; path = Source/RamblerViperModuleOutput.h; sourceTree = "<group>"; };
-		5B6AC56365F5D9C2EC1B74C11D3D3122 /* KeychainSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KeychainSwift.xcconfig; sourceTree = "<group>"; };
 		5EE003EB8CE4B066FFEC45878390D42A /* Pods-QBRTCDemo-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemo-Info.plist"; sourceTree = "<group>"; };
-		62907F233CFD89C929EF94D0E9984B46 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TegKeychainConstants.swift; path = Sources/TegKeychainConstants.swift; sourceTree = "<group>"; };
+		641872C51484CF0C2B9C346B28A64952 /* SendBirdSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SendBirdSDK.xcconfig; sourceTree = "<group>"; };
+		644AD2F782CCE4D1B9920298F57C1273 /* RamblerViperOpenModulePromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperOpenModulePromise.h; path = Source/RamblerViperOpenModulePromise.h; sourceTree = "<group>"; };
 		66D92A0E54422316029DC99BE481BDFD /* Pods-QBRTCDemo_s-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemo_s-Info.plist"; sourceTree = "<group>"; };
+		69AFF48692BCF2C7C09B7ED77F81AE3A /* KeychainSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-umbrella.h"; sourceTree = "<group>"; };
 		6A35ED6764DA2F5C1EE11CAA8667FA43 /* Pods_QBRTCDemo_s.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_QBRTCDemo_s.framework; path = "Pods-QBRTCDemo_s.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DDB029F5BCAD10055F966166AC2671B /* ViperMcFlurry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ViperMcFlurry.modulemap; sourceTree = "<group>"; };
+		6D4A163A786917769C8C79681E8FA87B /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Frameworks/frameworks/WebRTC.framework; sourceTree = "<group>"; };
+		7A07A354D472DF60964B9CA15790E138 /* RamblerViperModuleOutput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleOutput.h; path = Source/RamblerViperModuleOutput.h; sourceTree = "<group>"; };
 		7A3F273DABAF30FC3BF3716B6B9B9D3C /* Pods-QBRTCDemo_s.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemo_s.release.xcconfig"; sourceTree = "<group>"; };
-		7F4B259DF6208E7C62FCEE3A5276C7A7 /* ViperMcFlurry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViperMcFlurry-umbrella.h"; sourceTree = "<group>"; };
 		7F7D9896D03D96E5B034A48D76F5960A /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KeychainSwift.framework; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		804D1EB513BDF701214E2CC3CAF10EF1 /* KeychainSwiftAccessOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwiftAccessOptions.swift; path = Sources/KeychainSwiftAccessOptions.swift; sourceTree = "<group>"; };
-		880A51CB6BD3A81916FE95F3DAB25F83 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Frameworks/frameworks/WebRTC.framework; sourceTree = "<group>"; };
-		88E7AC5FEF964CF540A136C0C04451B2 /* RamblerViperModuleFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RamblerViperModuleFactory.m; path = Source/RamblerViperModuleFactory.m; sourceTree = "<group>"; };
+		898D9C41AD5B06E5788330B8BD30AA4C /* ViperMcFlurry-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ViperMcFlurry-Info.plist"; sourceTree = "<group>"; };
 		8F8CA4360F1281507E5E0E0FEB53FA4F /* Pods_QBRTCDemo_sTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_QBRTCDemo_sTests.framework; path = "Pods-QBRTCDemo_sTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96C79B7866A248444494A7E94CAA616C /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RamblerViperModuleTransitionHandlerProtocol.h"; path = "Source/UIViewController+RamblerViperModuleTransitionHandlerProtocol.h"; sourceTree = "<group>"; };
+		942F323173E0F46107D87A1D100CC92F /* ViperMcFlurry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViperMcFlurry-prefix.pch"; sourceTree = "<group>"; };
+		977E26A2582D7D6934371364419EFEA5 /* KeychainSwiftAccessOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwiftAccessOptions.swift; path = Sources/KeychainSwiftAccessOptions.swift; sourceTree = "<group>"; };
 		9903A3948EC2F2CAE25F18E234028FEA /* Pods-QBRTCDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A25D84EA6DE0EC0FF890EFC3C6770A3D /* ViperMcFlurry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ViperMcFlurry.h; path = Source/ViperMcFlurry.h; sourceTree = "<group>"; };
 		A8937D2ABACFD7D4E05795698DCC10A4 /* Pods-QBRTCDemo_s-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QBRTCDemo_s-dummy.m"; sourceTree = "<group>"; };
 		A89EBFB16D1A31A334E562FE69D9D505 /* Pods-QBRTCDemo_s-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QBRTCDemo_s-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A8FDDA16F3B593C4A1C9753111782B42 /* KeychainSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-umbrella.h"; sourceTree = "<group>"; };
 		AD9FAD695CEA609F54C9F45611A90D0A /* Pods-QBRTCDemo_s.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemo_s.debug.xcconfig"; sourceTree = "<group>"; };
 		AFDE45DD69D25CBF35C7C978AF4740D8 /* Pods-QBRTCDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QBRTCDemo-dummy.m"; sourceTree = "<group>"; };
 		B21B29A8455DE211572569CCDA9850A1 /* Pods-QBRTCDemoTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-QBRTCDemoTests.modulemap"; sourceTree = "<group>"; };
 		B605D2D62144D48CE81D7F01D9259D67 /* Pods_QBRTCDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_QBRTCDemoTests.framework; path = "Pods-QBRTCDemoTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77D08A33FD9D6608E42ABD6CEFA3AFF /* Pods-QBRTCDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-QBRTCDemo.modulemap"; sourceTree = "<group>"; };
 		B7A085A66CA2A0B4799AFD2669321458 /* Pods-QBRTCDemo_sTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemo_sTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B8A8DA92D4C89EF61C0B434A403270B5 /* KeychainSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwift.swift; path = Sources/KeychainSwift.swift; sourceTree = "<group>"; };
+		BCFC1B6D4C17FCEE798642B67177D5C5 /* ViperMcFlurry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ViperMcFlurry-dummy.m"; sourceTree = "<group>"; };
+		C71BECEA841FC1C06243BDDE55961B4A /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RamblerViperModuleTransitionHandlerProtocol.m"; path = "Source/UIViewController+RamblerViperModuleTransitionHandlerProtocol.m"; sourceTree = "<group>"; };
 		CABB5B4E9175BE3C317E00C2B2179C28 /* Pods-QBRTCDemo_sTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QBRTCDemo_sTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CC1D75BDD40F745266B202A18D9B7106 /* Pods-QBRTCDemo_s-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemo_s-acknowledgements.plist"; sourceTree = "<group>"; };
 		CC31A02D16983D4C458EC4BC05B9A48D /* Pods-QBRTCDemoTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QBRTCDemoTests-umbrella.h"; sourceTree = "<group>"; };
+		CEEA94CD99CA5B0D715AD812C44B56B7 /* RamblerViperOpenModulePromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RamblerViperOpenModulePromise.m; path = Source/RamblerViperOpenModulePromise.m; sourceTree = "<group>"; };
 		D3CD6547A93A86474767C66972540296 /* Pods_QBRTCDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_QBRTCDemo.framework; path = "Pods-QBRTCDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4D7A5E68904B4FA7723655B142EA48D /* KeychainSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KeychainSwift-dummy.m"; sourceTree = "<group>"; };
 		D9D2A46E506E1713F8C0DBD892DD4E39 /* Pods-QBRTCDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QBRTCDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		DFC9856A13CA5302DE18B2DCBB4D0954 /* KeychainSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KeychainSwift.modulemap; sourceTree = "<group>"; };
+		DCF5A864DD77282B46A00B65EE6E821A /* KeychainSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = KeychainSwift.xcconfig; sourceTree = "<group>"; };
+		DEC9640EE99C828A60CF3CCA8EB021E1 /* KeychainSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-prefix.pch"; sourceTree = "<group>"; };
 		E1BC36C214833908C5911D712AEB9283 /* Pods-QBRTCDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QBRTCDemo-acknowledgements.plist"; sourceTree = "<group>"; };
-		EAED462EB0FF8923F8F55CE8FBFB0F36 /* RamblerViperModuleTransitionHandlerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleTransitionHandlerProtocol.h; path = Source/RamblerViperModuleTransitionHandlerProtocol.h; sourceTree = "<group>"; };
+		E587CF006DE11F34B714F2E0BC9EDDC4 /* RamblerViperModuleFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleFactory.h; path = Source/RamblerViperModuleFactory.h; sourceTree = "<group>"; };
+		E9B1A89F50798C7C768532CF5F3FD543 /* RamblerViperModuleTransitionHandlerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleTransitionHandlerProtocol.h; path = Source/RamblerViperModuleTransitionHandlerProtocol.h; sourceTree = "<group>"; };
+		EA3B866DA3DACA051C1092F811F80407 /* RamblerViperModuleFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RamblerViperModuleFactory.m; path = Source/RamblerViperModuleFactory.m; sourceTree = "<group>"; };
+		EAC934732EC35E2C30F5F7C83179141F /* RamblerViperModuleFactoryProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RamblerViperModuleFactoryProtocol.h; path = Source/RamblerViperModuleFactoryProtocol.h; sourceTree = "<group>"; };
 		ED9D9342D6C62333128711950E899B3F /* Pods-QBRTCDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QBRTCDemo-frameworks.sh"; sourceTree = "<group>"; };
-		EDBCBE0DBED1D36AFC7841C2A1C5C4A2 /* ViperMcFlurry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ViperMcFlurry-prefix.pch"; sourceTree = "<group>"; };
-		F1865994CBC0E5B1A984DE24A345C7FC /* ViperMcFlurry-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ViperMcFlurry-Info.plist"; sourceTree = "<group>"; };
-		FAA835C4277EEBDA00BC70852E64EA31 /* RamblerViperOpenModulePromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RamblerViperOpenModulePromise.m; path = Source/RamblerViperOpenModulePromise.m; sourceTree = "<group>"; };
-		FEB5BBC740C2D6AD6C00ED9F2B640EEF /* KeychainSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KeychainSwift-dummy.m"; sourceTree = "<group>"; };
+		F82B9ED0E4C97FE81A9C78284EF9C374 /* SendBirdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SendBirdSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,27 +219,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7F98F50777F84FF6CD3C6DAA002C68F8 /* Frameworks */ = {
+		19DCEC42A095CB80AAF54D2DACE1B757 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28F832A1DB2DFB40EB7D6BE1C3B10044 /* Foundation.framework in Frameworks */,
+				0908C51E2E08F54A9AD383DC9A62736F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B34FF9A7685175BC55773DFC4C6356ED /* Frameworks */ = {
+		700DE4BE88EBEF5D06FDD7430C65C702 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2862124F91FFE2C62EC6F69BA12FBA5 /* Foundation.framework in Frameworks */,
+				30DAA9113B00BC7022F09C530A9F64C8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAD36A9EE1DA22D3D4830AFC6EDB218F /* Frameworks */ = {
+		97AF502F44C68A09973F7D3691926D06 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB8977757D1B91446B9EA21DB1679745 /* Foundation.framework in Frameworks */,
+				8C2D03A04A8AEDA60ADB462B8394FA0F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,12 +262,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		09B28872618EE83529AAEAB62ED2AD1D /* Frameworks */ = {
+		0CB7850CEBAD4F5F999357E2778EDCC0 /* KeychainSwift */ = {
 			isa = PBXGroup;
 			children = (
-				880A51CB6BD3A81916FE95F3DAB25F83 /* WebRTC.framework */,
+				386AEB9B70BFD6BEC2AD40AE762F74E6 /* KeychainSwift.swift */,
+				977E26A2582D7D6934371364419EFEA5 /* KeychainSwiftAccessOptions.swift */,
+				2CF6DA0C36C27A98E5A77533B5F97C55 /* TegKeychainConstants.swift */,
+				8F072D675FDEC19A2FF514C5D7CFA27B /* Support Files */,
 			);
-			name = Frameworks;
+			name = KeychainSwift;
+			path = KeychainSwift;
+			sourceTree = "<group>";
+		};
+		4A940FCC6C08EF81586F3C8974F0564A /* ViperMcFlurry */ = {
+			isa = PBXGroup;
+			children = (
+				E587CF006DE11F34B714F2E0BC9EDDC4 /* RamblerViperModuleFactory.h */,
+				EA3B866DA3DACA051C1092F811F80407 /* RamblerViperModuleFactory.m */,
+				EAC934732EC35E2C30F5F7C83179141F /* RamblerViperModuleFactoryProtocol.h */,
+				128C47BC180D4C71D2AC23AF358238CA /* RamblerViperModuleInput.h */,
+				7A07A354D472DF60964B9CA15790E138 /* RamblerViperModuleOutput.h */,
+				E9B1A89F50798C7C768532CF5F3FD543 /* RamblerViperModuleTransitionHandlerProtocol.h */,
+				644AD2F782CCE4D1B9920298F57C1273 /* RamblerViperOpenModulePromise.h */,
+				CEEA94CD99CA5B0D715AD812C44B56B7 /* RamblerViperOpenModulePromise.m */,
+				2B7DC2A52BF1567D1E8428333609FA47 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h */,
+				C71BECEA841FC1C06243BDDE55961B4A /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m */,
+				17C1B6A267BE3B00DB5D19D583654CCA /* ViperMcFlurry.h */,
+				510EEB85ACB161529EE1473178DA434C /* Support Files */,
+			);
+			name = ViperMcFlurry;
+			path = ViperMcFlurry;
+			sourceTree = "<group>";
+		};
+		510EEB85ACB161529EE1473178DA434C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				431C0B8D4B5DC912FD16397D5DD493EA /* ViperMcFlurry.modulemap */,
+				06EDFA58F0B81797DEB3DA4E0C7D8FCD /* ViperMcFlurry.xcconfig */,
+				BCFC1B6D4C17FCEE798642B67177D5C5 /* ViperMcFlurry-dummy.m */,
+				898D9C41AD5B06E5788330B8BD30AA4C /* ViperMcFlurry-Info.plist */,
+				942F323173E0F46107D87A1D100CC92F /* ViperMcFlurry-prefix.pch */,
+				30DD119F3C5F0DA1D9F46DA7ABB3DD95 /* ViperMcFlurry-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ViperMcFlurry";
 			sourceTree = "<group>";
 		};
 		5D7FD1B270FEDB00B15D751561771439 /* Pods-QBRTCDemo */ = {
@@ -262,14 +325,23 @@
 			path = "Target Support Files/Pods-QBRTCDemo";
 			sourceTree = "<group>";
 		};
-		74F010342BBEFB021719C30C5C7E3884 /* Pods */ = {
+		5EA4075DA936558760F46B2309776F19 /* GoogleWebRTC */ = {
 			isa = PBXGroup;
 			children = (
-				FD5CD2CFD1812178F2FFF629D5AA3C05 /* GoogleWebRTC */,
-				8C0843261B7E56D9F3BF34F037ECAED1 /* KeychainSwift */,
-				EFF869603B14C65B7A8561F4F5A257B9 /* ViperMcFlurry */,
+				A7344F0E19FEAC433886A12890A6447C /* Frameworks */,
+				EE48DB8323B370A8404A258FAE9D88C8 /* Support Files */,
 			);
-			name = Pods;
+			name = GoogleWebRTC;
+			path = GoogleWebRTC;
+			sourceTree = "<group>";
+		};
+		6A8A589E9A48B9136EA041073B3DBFC5 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				641872C51484CF0C2B9C346B28A64952 /* SendBirdSDK.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SendBirdSDK";
 			sourceTree = "<group>";
 		};
 		7D16D15020E40EC340E643D76770BECC /* Pods-QBRTCDemoTests */ = {
@@ -286,18 +358,6 @@
 			);
 			name = "Pods-QBRTCDemoTests";
 			path = "Target Support Files/Pods-QBRTCDemoTests";
-			sourceTree = "<group>";
-		};
-		8C0843261B7E56D9F3BF34F037ECAED1 /* KeychainSwift */ = {
-			isa = PBXGroup;
-			children = (
-				B8A8DA92D4C89EF61C0B434A403270B5 /* KeychainSwift.swift */,
-				804D1EB513BDF701214E2CC3CAF10EF1 /* KeychainSwiftAccessOptions.swift */,
-				62907F233CFD89C929EF94D0E9984B46 /* TegKeychainConstants.swift */,
-				EE9A0F155DA48C684B2AFE60EBCF7EF3 /* Support Files */,
-			);
-			name = KeychainSwift;
-			path = KeychainSwift;
 			sourceTree = "<group>";
 		};
 		8D31DA4D2C9ABCBF5C71FF559AEF9409 /* Pods-QBRTCDemo_s */ = {
@@ -317,6 +377,20 @@
 			path = "Target Support Files/Pods-QBRTCDemo_s";
 			sourceTree = "<group>";
 		};
+		8F072D675FDEC19A2FF514C5D7CFA27B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				363DB161B1B745247FF60A40BC1E2CCF /* KeychainSwift.modulemap */,
+				DCF5A864DD77282B46A00B65EE6E821A /* KeychainSwift.xcconfig */,
+				D4D7A5E68904B4FA7723655B142EA48D /* KeychainSwift-dummy.m */,
+				2224062D4D38882F1F482B3EE6434704 /* KeychainSwift-Info.plist */,
+				DEC9640EE99C828A60CF3CCA8EB021E1 /* KeychainSwift-prefix.pch */,
+				69AFF48692BCF2C7C09B7ED77F81AE3A /* KeychainSwift-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/KeychainSwift";
+			sourceTree = "<group>";
+		};
 		9B055D0CFEA43187E72B03DED11F5662 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,27 +399,30 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		A371B38B821EA10069E5158BFA442F14 /* Support Files */ = {
+		A7344F0E19FEAC433886A12890A6447C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5703F232FCA852B9DF066DC0E086A3E5 /* GoogleWebRTC.xcconfig */,
+				6D4A163A786917769C8C79681E8FA87B /* WebRTC.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/GoogleWebRTC";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B6788FDB37F245A195199243AFEFCA57 /* Support Files */ = {
+		A823370924CA4A7C24E9B61DCCDCC115 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6DDB029F5BCAD10055F966166AC2671B /* ViperMcFlurry.modulemap */,
-				188DF03963FC4B038D013214BF05E7B7 /* ViperMcFlurry.xcconfig */,
-				5110511AAB10DE7D1BCCE17CBEF90E3B /* ViperMcFlurry-dummy.m */,
-				F1865994CBC0E5B1A984DE24A345C7FC /* ViperMcFlurry-Info.plist */,
-				EDBCBE0DBED1D36AFC7841C2A1C5C4A2 /* ViperMcFlurry-prefix.pch */,
-				7F4B259DF6208E7C62FCEE3A5276C7A7 /* ViperMcFlurry-umbrella.h */,
+				F82B9ED0E4C97FE81A9C78284EF9C374 /* SendBirdSDK.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/ViperMcFlurry";
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B503E8CA311ED77A73681EFC5EAC3017 /* SendBirdSDK */ = {
+			isa = PBXGroup;
+			children = (
+				A823370924CA4A7C24E9B61DCCDCC115 /* Frameworks */,
+				6A8A589E9A48B9136EA041073B3DBFC5 /* Support Files */,
+			);
+			name = SendBirdSDK;
+			path = SendBirdSDK;
 			sourceTree = "<group>";
 		};
 		BF4D59A7DA3BE6EA52E309C5E92EF4CD /* Targets Support Files */ = {
@@ -377,7 +454,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				74F010342BBEFB021719C30C5C7E3884 /* Pods */,
+				F25158C38A60A5A1ABADDCF449D1BDC3 /* Pods */,
 				C9B700DB4DEA8E5C02EE66D7CB3F9FF2 /* Products */,
 				BF4D59A7DA3BE6EA52E309C5E92EF4CD /* Targets Support Files */,
 			);
@@ -391,38 +468,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EE9A0F155DA48C684B2AFE60EBCF7EF3 /* Support Files */ = {
+		EE48DB8323B370A8404A258FAE9D88C8 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				DFC9856A13CA5302DE18B2DCBB4D0954 /* KeychainSwift.modulemap */,
-				5B6AC56365F5D9C2EC1B74C11D3D3122 /* KeychainSwift.xcconfig */,
-				FEB5BBC740C2D6AD6C00ED9F2B640EEF /* KeychainSwift-dummy.m */,
-				595111D9B0978023711F8E8471163595 /* KeychainSwift-Info.plist */,
-				258C21545E651D37370B244DC174CE56 /* KeychainSwift-prefix.pch */,
-				A8FDDA16F3B593C4A1C9753111782B42 /* KeychainSwift-umbrella.h */,
+				1EAD63B204897D8BD460542333C07BF4 /* GoogleWebRTC.xcconfig */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/KeychainSwift";
+			path = "../Target Support Files/GoogleWebRTC";
 			sourceTree = "<group>";
 		};
-		EFF869603B14C65B7A8561F4F5A257B9 /* ViperMcFlurry */ = {
+		F25158C38A60A5A1ABADDCF449D1BDC3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				38DB4F9906FAF7EE47076CD05FACE6F1 /* RamblerViperModuleFactory.h */,
-				88E7AC5FEF964CF540A136C0C04451B2 /* RamblerViperModuleFactory.m */,
-				591E5830FCF076713CAD15189859E015 /* RamblerViperModuleFactoryProtocol.h */,
-				371134E8DDF9BD65F40262D4125F9D97 /* RamblerViperModuleInput.h */,
-				5A08B2A44F71E5DA3E85BC7CD05B537B /* RamblerViperModuleOutput.h */,
-				EAED462EB0FF8923F8F55CE8FBFB0F36 /* RamblerViperModuleTransitionHandlerProtocol.h */,
-				34EE433008CE0E1AB087DD74420749A9 /* RamblerViperOpenModulePromise.h */,
-				FAA835C4277EEBDA00BC70852E64EA31 /* RamblerViperOpenModulePromise.m */,
-				96C79B7866A248444494A7E94CAA616C /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h */,
-				4A7447403A5088CD4F85B0CD37DAC201 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m */,
-				A25D84EA6DE0EC0FF890EFC3C6770A3D /* ViperMcFlurry.h */,
-				B6788FDB37F245A195199243AFEFCA57 /* Support Files */,
+				5EA4075DA936558760F46B2309776F19 /* GoogleWebRTC */,
+				0CB7850CEBAD4F5F999357E2778EDCC0 /* KeychainSwift */,
+				B503E8CA311ED77A73681EFC5EAC3017 /* SendBirdSDK */,
+				4A940FCC6C08EF81586F3C8974F0564A /* ViperMcFlurry */,
 			);
-			name = ViperMcFlurry;
-			path = ViperMcFlurry;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F479E809D6976A95103215F3A09D00FF /* Pods-QBRTCDemo_sTests */ = {
@@ -441,24 +504,46 @@
 			path = "Target Support Files/Pods-QBRTCDemo_sTests";
 			sourceTree = "<group>";
 		};
-		FD5CD2CFD1812178F2FFF629D5AA3C05 /* GoogleWebRTC */ = {
-			isa = PBXGroup;
-			children = (
-				09B28872618EE83529AAEAB62ED2AD1D /* Frameworks */,
-				A371B38B821EA10069E5158BFA442F14 /* Support Files */,
-			);
-			name = GoogleWebRTC;
-			path = GoogleWebRTC;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		0CEA8EB2B82E9D1DA5721D83D28855A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABFBD2C8D5581F6AEF4B417CE5CBA9B2 /* RamblerViperModuleFactory.h in Headers */,
+				BBD8D4F45D8A90178E9FD86D245D02E8 /* RamblerViperModuleFactoryProtocol.h in Headers */,
+				BFECC008BA3CCF081162C2BFDF1439C5 /* RamblerViperModuleInput.h in Headers */,
+				A98958A5A92BCD7A15B938D639410013 /* RamblerViperModuleOutput.h in Headers */,
+				4E3691931D6E85D8E32653EA8F16D91C /* RamblerViperModuleTransitionHandlerProtocol.h in Headers */,
+				84297585286619A6C625CC0B3F08FDF0 /* RamblerViperOpenModulePromise.h in Headers */,
+				1A0F78EA710D8CB99CDB64F69529D052 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h in Headers */,
+				2EE689BF54C5F1D7157F91C90A1B2FDF /* ViperMcFlurry-umbrella.h in Headers */,
+				37AB66AC85B3B799708645E9F05BF9F7 /* ViperMcFlurry.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2542979CD7CD230C76C89B0DCF119B1C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				04433B212A5C31E09277BA5118AD94E3 /* Pods-QBRTCDemoTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AAE6E628216F837CB91F62754CCCC9A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				642A1DA813972F969142A2674740D6D6 /* Pods-QBRTCDemo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58F482ECC89279AEC6640271B5A3D45C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2961B33EB684DDC4A3B118AA3B118FA /* Pods-QBRTCDemo_s-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,30 +555,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CDC57296B6154FA1F557B97D781CAED3 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				96108E010517B7B88A5A91647761EEAF /* Pods-QBRTCDemo-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D427271C9B6F6364753F61EDACCC2CA8 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3E005DAF098F5C474884D5824EA4A017 /* RamblerViperModuleFactory.h in Headers */,
-				EC05B02E7FD189E52128C479055E8F2E /* RamblerViperModuleFactoryProtocol.h in Headers */,
-				1FE31B3F33A83590BAF90F3D6E9064BE /* RamblerViperModuleInput.h in Headers */,
-				E7F04B03AD3CC6D1A263DF88E99C43DD /* RamblerViperModuleOutput.h in Headers */,
-				78AFD1C2B504455D78648BEB86A8C488 /* RamblerViperModuleTransitionHandlerProtocol.h in Headers */,
-				E6D44FD338F2B57CA20A164E923A2E1C /* RamblerViperOpenModulePromise.h in Headers */,
-				92F5E7397548A315E3D8E0CF0EB1CD1E /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.h in Headers */,
-				A7CFF5D3AA4700C2FAF321A8AD9C1E63 /* ViperMcFlurry-umbrella.h in Headers */,
-				32B2A0286B297FA7E2C483C86B88EE06 /* ViperMcFlurry.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EFA194E4AA5F7BC231C717E4397AF09E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -502,36 +563,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F177D9A1F9CAFA3B9F72D36262553DCB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B0BE604530B35600B604C718E20621AD /* Pods-QBRTCDemo_s-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		237675AECBCF26D70CA00D6C2B82FB25 /* Pods-QBRTCDemo */ = {
+		378B1DB2CC4A28859240BC4B69D1BC72 /* Pods-QBRTCDemo_s */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B44D00EAFDF79747E95B534B2EFB751 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo" */;
+			buildConfigurationList = D11F8E3AF1F07BA447C7C5AE42BA44C5 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo_s" */;
 			buildPhases = (
-				CDC57296B6154FA1F557B97D781CAED3 /* Headers */,
-				EF3109E20B4B6FCC0EA43D2D6A2B04A3 /* Sources */,
-				B34FF9A7685175BC55773DFC4C6356ED /* Frameworks */,
-				50FCBBCE65F1027E34396CA54480AEE0 /* Resources */,
+				58F482ECC89279AEC6640271B5A3D45C /* Headers */,
+				3AB0383615916AEA75BCAFFF27575F6A /* Sources */,
+				97AF502F44C68A09973F7D3691926D06 /* Frameworks */,
+				7EA4C374E0247003D43051E1BE50A59F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				EA8BF8772F7A5E5D0217E8EBF8A6A1F1 /* PBXTargetDependency */,
-				E4EA51CBDEC2E94660BDDA1CA3E46084 /* PBXTargetDependency */,
-				70379BC93F995B09DD7157BD5924DD33 /* PBXTargetDependency */,
+				5DE9464277884DF469B50837CFEDA2BC /* PBXTargetDependency */,
+				3103FB8FB6099A0DB5C6C596D739704A /* PBXTargetDependency */,
+				66C8C4E2E1BA5E9B65CD1FAB257631DC /* PBXTargetDependency */,
+				B953B60030144A7274A4638251500ED6 /* PBXTargetDependency */,
 			);
-			name = "Pods-QBRTCDemo";
-			productName = "Pods-QBRTCDemo";
-			productReference = D3CD6547A93A86474767C66972540296 /* Pods_QBRTCDemo.framework */;
+			name = "Pods-QBRTCDemo_s";
+			productName = "Pods-QBRTCDemo_s";
+			productReference = 6A35ED6764DA2F5C1EE11CAA8667FA43 /* Pods_QBRTCDemo_s.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		465859171F2400FC80977FA1CC7D31BF /* Pods-QBRTCDemoTests */ = {
@@ -571,35 +625,14 @@
 			productReference = 7F7D9896D03D96E5B034A48D76F5960A /* KeychainSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		717F2BBA94FCFD23AD55F4B8253C2ADB /* Pods-QBRTCDemo_s */ = {
+		549A4D0706BA3481CF60C407B8EB8E3A /* ViperMcFlurry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5598ED97BE5B1735A44A90198140DAEA /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo_s" */;
+			buildConfigurationList = F52969C7F11C90A8AACF2E01896A4899 /* Build configuration list for PBXNativeTarget "ViperMcFlurry" */;
 			buildPhases = (
-				F177D9A1F9CAFA3B9F72D36262553DCB /* Headers */,
-				74296C77DE83B29B6C94CF76961AB845 /* Sources */,
-				7F98F50777F84FF6CD3C6DAA002C68F8 /* Frameworks */,
-				6E119A939EF53B3AB9992BCD317B7A10 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				18C1C0B0FA12E2B572318CB915F01C43 /* PBXTargetDependency */,
-				74FEB6BD35B3681503EB1EBFC0D34EF2 /* PBXTargetDependency */,
-				53A3F0309FE86405921551356C59EEAF /* PBXTargetDependency */,
-			);
-			name = "Pods-QBRTCDemo_s";
-			productName = "Pods-QBRTCDemo_s";
-			productReference = 6A35ED6764DA2F5C1EE11CAA8667FA43 /* Pods_QBRTCDemo_s.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		C015A904B5FBC4DFD0D9EC902CE936E5 /* ViperMcFlurry */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C3D748A1C0C930AA2A2C34929A954E94 /* Build configuration list for PBXNativeTarget "ViperMcFlurry" */;
-			buildPhases = (
-				D427271C9B6F6364753F61EDACCC2CA8 /* Headers */,
-				2D1C55E1645F0DA2F6C94F06FBAAF89B /* Sources */,
-				BAD36A9EE1DA22D3D4830AFC6EDB218F /* Frameworks */,
-				8397713198A3161B99C1F4B0E241F52B /* Resources */,
+				0CEA8EB2B82E9D1DA5721D83D28855A9 /* Headers */,
+				2BD508F71CD94AA515F30C01E52CFE49 /* Sources */,
+				19DCEC42A095CB80AAF54D2DACE1B757 /* Frameworks */,
+				3F98F9A8BF6B7308B0F47DE69EF4FA10 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -608,6 +641,28 @@
 			name = ViperMcFlurry;
 			productName = ViperMcFlurry;
 			productReference = 29F81B4E2944B895192EB9D4D63C6E0B /* ViperMcFlurry.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CF7A63E3E6DFDDD5E1FF93B6B3CB1E32 /* Pods-QBRTCDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78480ED66AA5949F7D0CB5F6A74F11B5 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo" */;
+			buildPhases = (
+				3AAE6E628216F837CB91F62754CCCC9A /* Headers */,
+				8B735A80C8A44AE13B6BC242697D0831 /* Sources */,
+				700DE4BE88EBEF5D06FDD7430C65C702 /* Frameworks */,
+				8A10F5F8D75CB18784CA913776D4A23B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56AD9451103F6FED9B0BB2396DE26DAB /* PBXTargetDependency */,
+				D4FB453860ED8B949A6713FF36CE5A7B /* PBXTargetDependency */,
+				A253EC7A16E16ADFE2E08F2763916F3B /* PBXTargetDependency */,
+				AAE8DEAC514F4F934FA8BBDA15E5C7FC /* PBXTargetDependency */,
+			);
+			name = "Pods-QBRTCDemo";
+			productName = "Pods-QBRTCDemo";
+			productReference = D3CD6547A93A86474767C66972540296 /* Pods_QBRTCDemo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D5F615F2AB39EE15C0D003618428668B /* Pods-QBRTCDemo_sTests */ = {
@@ -652,11 +707,12 @@
 			targets = (
 				B9309BA8D8A41857882FFD9308EFC4DB /* GoogleWebRTC */,
 				5393E0C0738D594E66BCCB9824BB73D8 /* KeychainSwift */,
-				237675AECBCF26D70CA00D6C2B82FB25 /* Pods-QBRTCDemo */,
-				717F2BBA94FCFD23AD55F4B8253C2ADB /* Pods-QBRTCDemo_s */,
+				CF7A63E3E6DFDDD5E1FF93B6B3CB1E32 /* Pods-QBRTCDemo */,
+				378B1DB2CC4A28859240BC4B69D1BC72 /* Pods-QBRTCDemo_s */,
 				D5F615F2AB39EE15C0D003618428668B /* Pods-QBRTCDemo_sTests */,
 				465859171F2400FC80977FA1CC7D31BF /* Pods-QBRTCDemoTests */,
-				C015A904B5FBC4DFD0D9EC902CE936E5 /* ViperMcFlurry */,
+				902F102CD5ABEC9CC2247D6BCCA20F18 /* SendBirdSDK */,
+				549A4D0706BA3481CF60C407B8EB8E3A /* ViperMcFlurry */,
 			);
 		};
 /* End PBXProject section */
@@ -669,7 +725,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		50FCBBCE65F1027E34396CA54480AEE0 /* Resources */ = {
+		3F98F9A8BF6B7308B0F47DE69EF4FA10 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -683,13 +739,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6E119A939EF53B3AB9992BCD317B7A10 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7E99A5D1D3AD733EE9662694B6E392F8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -697,7 +746,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8397713198A3161B99C1F4B0E241F52B /* Resources */ = {
+		7EA4C374E0247003D43051E1BE50A59F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A10F5F8D75CB18784CA913776D4A23B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -707,14 +763,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2D1C55E1645F0DA2F6C94F06FBAAF89B /* Sources */ = {
+		2BD508F71CD94AA515F30C01E52CFE49 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60446301AB08DE9E89251607C4D5A68A /* RamblerViperModuleFactory.m in Sources */,
-				18CE1B771296CF3A21A1DEB813FFC665 /* RamblerViperOpenModulePromise.m in Sources */,
-				10BE32420EE62CA65187FB155FC2AFA3 /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m in Sources */,
-				E4F14D6A794589673535E5C289E2A4F6 /* ViperMcFlurry-dummy.m in Sources */,
+				C7341962D58905DE13021DAC0F975FF9 /* RamblerViperModuleFactory.m in Sources */,
+				864BAC285297E07BE1C5DD6112D09DFE /* RamblerViperOpenModulePromise.m in Sources */,
+				003277CE687947EE5C4E88CF0996AE2E /* UIViewController+RamblerViperModuleTransitionHandlerProtocol.m in Sources */,
+				0261131B035455ADBAD9FE804C76F43B /* ViperMcFlurry-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AB0383615916AEA75BCAFFF27575F6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24D357CBB65A4C4A926F99FA993B5D7B /* Pods-QBRTCDemo_s-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,11 +793,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		74296C77DE83B29B6C94CF76961AB845 /* Sources */ = {
+		8B735A80C8A44AE13B6BC242697D0831 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48443D3007B18A14B0700B9AAA933329 /* Pods-QBRTCDemo_s-dummy.m in Sources */,
+				2D1712E4585123E30CA0A52D97BDF1EB /* Pods-QBRTCDemo-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,144 +817,73 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EF3109E20B4B6FCC0EA43D2D6A2B04A3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DE7F4D698D1E13C35AF8891FBE4C5076 /* Pods-QBRTCDemo-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		052559EBB194713E7DC04A478F8D9D81 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-QBRTCDemo";
-			target = 237675AECBCF26D70CA00D6C2B82FB25 /* Pods-QBRTCDemo */;
+			target = CF7A63E3E6DFDDD5E1FF93B6B3CB1E32 /* Pods-QBRTCDemo */;
 			targetProxy = ECA83B610A2728A56615E972711768CC /* PBXContainerItemProxy */;
 		};
-		18C1C0B0FA12E2B572318CB915F01C43 /* PBXTargetDependency */ = {
+		3103FB8FB6099A0DB5C6C596D739704A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KeychainSwift;
+			target = 5393E0C0738D594E66BCCB9824BB73D8 /* KeychainSwift */;
+			targetProxy = B983DE5B68B00C545E62D3CB964D67F9 /* PBXContainerItemProxy */;
+		};
+		56AD9451103F6FED9B0BB2396DE26DAB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GoogleWebRTC;
 			target = B9309BA8D8A41857882FFD9308EFC4DB /* GoogleWebRTC */;
-			targetProxy = 0840661E8499CAE8954E4020B20178A1 /* PBXContainerItemProxy */;
-		};
-		53A3F0309FE86405921551356C59EEAF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ViperMcFlurry;
-			target = C015A904B5FBC4DFD0D9EC902CE936E5 /* ViperMcFlurry */;
-			targetProxy = 1A43F240192A0A8B779E239BE4323646 /* PBXContainerItemProxy */;
+			targetProxy = 7344A7D1AD211E7EF18C8BC8A5498E8C /* PBXContainerItemProxy */;
 		};
 		5DC56D14420740FEB622EE2E9690A9FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-QBRTCDemo_s";
-			target = 717F2BBA94FCFD23AD55F4B8253C2ADB /* Pods-QBRTCDemo_s */;
+			target = 378B1DB2CC4A28859240BC4B69D1BC72 /* Pods-QBRTCDemo_s */;
 			targetProxy = 0C9619CEA5A6F24D129A8D69A20C22CA /* PBXContainerItemProxy */;
 		};
-		70379BC93F995B09DD7157BD5924DD33 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ViperMcFlurry;
-			target = C015A904B5FBC4DFD0D9EC902CE936E5 /* ViperMcFlurry */;
-			targetProxy = 746F7853353E1D0E5DB378CFD7CA1CD8 /* PBXContainerItemProxy */;
-		};
-		74FEB6BD35B3681503EB1EBFC0D34EF2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = KeychainSwift;
-			target = 5393E0C0738D594E66BCCB9824BB73D8 /* KeychainSwift */;
-			targetProxy = 857AE0E560C04CE6E8AAF11C22125B9D /* PBXContainerItemProxy */;
-		};
-		E4EA51CBDEC2E94660BDDA1CA3E46084 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = KeychainSwift;
-			target = 5393E0C0738D594E66BCCB9824BB73D8 /* KeychainSwift */;
-			targetProxy = E09BBEA9F8FF92A95D5569B8138D84F0 /* PBXContainerItemProxy */;
-		};
-		EA8BF8772F7A5E5D0217E8EBF8A6A1F1 /* PBXTargetDependency */ = {
+		5DE9464277884DF469B50837CFEDA2BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GoogleWebRTC;
 			target = B9309BA8D8A41857882FFD9308EFC4DB /* GoogleWebRTC */;
-			targetProxy = 0D603DF155B9462C036E29D416DD06CC /* PBXContainerItemProxy */;
+			targetProxy = 5F44ACB4A97CE5A0BDA30DB1D469E8B7 /* PBXContainerItemProxy */;
+		};
+		66C8C4E2E1BA5E9B65CD1FAB257631DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SendBirdSDK;
+			target = 902F102CD5ABEC9CC2247D6BCCA20F18 /* SendBirdSDK */;
+			targetProxy = 9C6D6031F108066E4C0A39DA196A65AF /* PBXContainerItemProxy */;
+		};
+		A253EC7A16E16ADFE2E08F2763916F3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SendBirdSDK;
+			target = 902F102CD5ABEC9CC2247D6BCCA20F18 /* SendBirdSDK */;
+			targetProxy = 9F5C1192A9DED68046190EAC5E70DAA8 /* PBXContainerItemProxy */;
+		};
+		AAE8DEAC514F4F934FA8BBDA15E5C7FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ViperMcFlurry;
+			target = 549A4D0706BA3481CF60C407B8EB8E3A /* ViperMcFlurry */;
+			targetProxy = 0F59023DF3C544B5EA44021D94D7A1D3 /* PBXContainerItemProxy */;
+		};
+		B953B60030144A7274A4638251500ED6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ViperMcFlurry;
+			target = 549A4D0706BA3481CF60C407B8EB8E3A /* ViperMcFlurry */;
+			targetProxy = AD91B7910BF0B3BAB49EF5C4A222E5B2 /* PBXContainerItemProxy */;
+		};
+		D4FB453860ED8B949A6713FF36CE5A7B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KeychainSwift;
+			target = 5393E0C0738D594E66BCCB9824BB73D8 /* KeychainSwift */;
+			targetProxy = 0130D17915CA9C563392CDC5DA9F89CA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		097276790205649A76E0FACCF1D27226 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2986EF158B366F8A59B3E89F08D4165E /* Pods-QBRTCDemo.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		0E249CAEED6CA9B7E0F651DE33416E40 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 188DF03963FC4B038D013214BF05E7B7 /* ViperMcFlurry.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ViperMcFlurry/ViperMcFlurry-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry.modulemap";
-				PRODUCT_MODULE_NAME = ViperMcFlurry;
-				PRODUCT_NAME = ViperMcFlurry;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1AB1EF3E817B0C74A8BAD3740EFA19A7 /* Release */ = {
+		1FA341FC7BA88428683B75DE11445BDF /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A3F273DABAF30FC3BF3716B6B9B9D3C /* Pods-QBRTCDemo_s.release.xcconfig */;
 			buildSettings = {
@@ -969,7 +962,7 @@
 		};
 		23C5E7C585E990B3C257F22E3345AA3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5703F232FCA852B9DF066DC0E086A3E5 /* GoogleWebRTC.xcconfig */;
+			baseConfigurationReference = 1EAD63B204897D8BD460542333C07BF4 /* GoogleWebRTC.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1043,9 +1036,44 @@
 			};
 			name = Release;
 		};
-		4DBD0BD947EEA5C559CE650640EF5D8C /* Debug */ = {
+		33065983D9BBD597F1C51D0560579148 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD9FAD695CEA609F54C9F45611A90D0A /* Pods-QBRTCDemo_s.debug.xcconfig */;
+			baseConfigurationReference = 06EDFA58F0B81797DEB3DA4E0C7D8FCD /* ViperMcFlurry.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ViperMcFlurry/ViperMcFlurry-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry.modulemap";
+				PRODUCT_MODULE_NAME = ViperMcFlurry;
+				PRODUCT_NAME = ViperMcFlurry;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		442B9B2A4DE4141D1908DF1ABCCDAD3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2986EF158B366F8A59B3E89F08D4165E /* Pods-QBRTCDemo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1058,7 +1086,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1067,7 +1095,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-QBRTCDemo/Pods-QBRTCDemo.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -1076,14 +1104,15 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		54A6FA13944FFD80AB413DEAA71690DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5703F232FCA852B9DF066DC0E086A3E5 /* GoogleWebRTC.xcconfig */;
+			baseConfigurationReference = 1EAD63B204897D8BD460542333C07BF4 /* GoogleWebRTC.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1201,41 +1230,6 @@
 			};
 			name = Debug;
 		};
-		6264816FE5E39B399E8E66F5CCDFA37A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 188DF03963FC4B038D013214BF05E7B7 /* ViperMcFlurry.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ViperMcFlurry/ViperMcFlurry-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry.modulemap";
-				PRODUCT_MODULE_NAME = ViperMcFlurry;
-				PRODUCT_NAME = ViperMcFlurry;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		77679CE0C78E93068B1800BF8133F4E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7A085A66CA2A0B4799AFD2669321458 /* Pods-QBRTCDemo_sTests.debug.xcconfig */;
@@ -1274,7 +1268,59 @@
 			};
 			name = Debug;
 		};
-		92549924F5409BFDDE504712663B43DF /* Debug */ = {
+		A81FA12EA7FE6C1890EEC23F5C5C4E31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 641872C51484CF0C2B9C346B28A64952 /* SendBirdSDK.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B224AE7A9799F80AC7D29EF39BB83FB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCF5A864DD77282B46A00B65EE6E821A /* KeychainSwift.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/KeychainSwift/KeychainSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/KeychainSwift/KeychainSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/KeychainSwift/KeychainSwift.modulemap";
+				PRODUCT_MODULE_NAME = KeychainSwift;
+				PRODUCT_NAME = KeychainSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BC01A36899F57F85AD2D281059AC8A46 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 037769701B52BC6747EA640B443D33F9 /* Pods-QBRTCDemo.debug.xcconfig */;
 			buildSettings = {
@@ -1312,9 +1358,63 @@
 			};
 			name = Debug;
 		};
-		B224AE7A9799F80AC7D29EF39BB83FB7 /* Debug */ = {
+		CB25B8F84D10F116CF2F0BCE7D465669 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B6AC56365F5D9C2EC1B74C11D3D3122 /* KeychainSwift.xcconfig */;
+			baseConfigurationReference = AD9FAD695CEA609F54C9F45611A90D0A /* Pods-QBRTCDemo_s.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-QBRTCDemo_s/Pods-QBRTCDemo_s.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F783A12CD59DF9429264F4D68BF9D379 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 641872C51484CF0C2B9C346B28A64952 /* SendBirdSDK.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F8E370C62298809DAD9EA8F481D4824B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06EDFA58F0B81797DEB3DA4E0C7D8FCD /* ViperMcFlurry.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1325,8 +1425,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/KeychainSwift/KeychainSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/KeychainSwift/KeychainSwift-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/ViperMcFlurry/ViperMcFlurry-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1334,22 +1434,23 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/KeychainSwift/KeychainSwift.modulemap";
-				PRODUCT_MODULE_NAME = KeychainSwift;
-				PRODUCT_NAME = KeychainSwift;
+				MODULEMAP_FILE = "Target Support Files/ViperMcFlurry/ViperMcFlurry.modulemap";
+				PRODUCT_MODULE_NAME = ViperMcFlurry;
+				PRODUCT_NAME = ViperMcFlurry;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		FBD1A880DE142095A78E335E77FD3269 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B6AC56365F5D9C2EC1B74C11D3D3122 /* KeychainSwift.xcconfig */;
+			baseConfigurationReference = DCF5A864DD77282B46A00B65EE6E821A /* KeychainSwift.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1452,29 +1553,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5598ED97BE5B1735A44A90198140DAEA /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo_s" */ = {
+		5D33208C75F339D65CCB02CE60EC2755 /* Build configuration list for PBXAggregateTarget "SendBirdSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4DBD0BD947EEA5C559CE650640EF5D8C /* Debug */,
-				1AB1EF3E817B0C74A8BAD3740EFA19A7 /* Release */,
+				F783A12CD59DF9429264F4D68BF9D379 /* Debug */,
+				A81FA12EA7FE6C1890EEC23F5C5C4E31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B44D00EAFDF79747E95B534B2EFB751 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo" */ = {
+		78480ED66AA5949F7D0CB5F6A74F11B5 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92549924F5409BFDDE504712663B43DF /* Debug */,
-				097276790205649A76E0FACCF1D27226 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C3D748A1C0C930AA2A2C34929A954E94 /* Build configuration list for PBXNativeTarget "ViperMcFlurry" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6264816FE5E39B399E8E66F5CCDFA37A /* Debug */,
-				0E249CAEED6CA9B7E0F651DE33416E40 /* Release */,
+				BC01A36899F57F85AD2D281059AC8A46 /* Debug */,
+				442B9B2A4DE4141D1908DF1ABCCDAD3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1488,11 +1580,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D11F8E3AF1F07BA447C7C5AE42BA44C5 /* Build configuration list for PBXNativeTarget "Pods-QBRTCDemo_s" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB25B8F84D10F116CF2F0BCE7D465669 /* Debug */,
+				1FA341FC7BA88428683B75DE11445BDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E123193BCFD9FB5C09D6DCC5DAEF50A4 /* Build configuration list for PBXNativeTarget "KeychainSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B224AE7A9799F80AC7D29EF39BB83FB7 /* Debug */,
 				FBD1A880DE142095A78E335E77FD3269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F52969C7F11C90A8AACF2E01896A4899 /* Build configuration list for PBXNativeTarget "ViperMcFlurry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33065983D9BBD597F1C51D0560579148 /* Debug */,
+				F8E370C62298809DAD9EA8F481D4824B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

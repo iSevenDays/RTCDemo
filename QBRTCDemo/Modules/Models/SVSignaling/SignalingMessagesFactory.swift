@@ -7,10 +7,16 @@
 //
 
 import Foundation
-//
+import Quickblox
+
+enum SignalingMessageOption {
+	case quickblox(QBChatMessage)
+	case sendBird(String)
+}
+
 enum SignalingMessagesFactoryError: Error {
-	case incorrectSignalingMessage(message: QBChatMessage)
-	case failedToDecompressMessage(message: QBChatMessage)
+	case incorrectSignalingMessage(message: SignalingMessageOption)
+	case failedToDecompressMessage(message: SignalingMessageOption)
 	case undefinedSignalingMessageType
 	case incorrectParamsType
 	case missingSDP
@@ -92,12 +98,13 @@ class SignalingMessagesFactory {
 			params[SignalingParams.candidates.rawValue] = candidatesDict as AnyObject
 			
 			break
-		case .hangup:
-			params[SignalingParams.type.rawValue] = SignalingMessageType.hangup.rawValue as AnyObject
-			break
-		case .reject:
-			params[SignalingParams.type.rawValue] = SignalingMessageType.reject.rawValue as AnyObject
-			break
+		case .system(let systemMessage):
+			switch systemMessage {
+			case .hangup:
+				params[SignalingParams.type.rawValue] = SignalingMessageType.hangup.rawValue as AnyObject
+			case .reject:
+				params[SignalingParams.type.rawValue] = SignalingMessageType.reject.rawValue as AnyObject
+			}
 		case let .user(enteredChatRoomName: roomName):
 			params[SignalingParams.type.rawValue] = SignalingMessageType.userEnteredChatRoom.rawValue as AnyObject
 			params[SignalingParams.roomName.rawValue] = roomName as AnyObject
@@ -125,14 +132,14 @@ class SignalingMessagesFactory {
 	*/
 	func signalingMessageFromQBMessage(_ message: QBChatMessage) throws -> (message: SignalingMessage, sender: SVUser, sessionDetails: SessionDetails?) {
 		guard let base64Representation = message.customParameters[SignalingParams.compressedData.rawValue] as? String else {
-			throw SignalingMessagesFactoryError.incorrectSignalingMessage(message: message)
+			throw SignalingMessagesFactoryError.incorrectSignalingMessage(message: .quickblox(message))
 		}
 
 		guard let decodedBase64Data = Data(base64Encoded: base64Representation, options: Data.Base64DecodingOptions(rawValue: 0)) else {
-			throw SignalingMessagesFactoryError.incorrectSignalingMessage(message: message)
+			throw SignalingMessagesFactoryError.incorrectSignalingMessage(message: .quickblox(message))
 		}
 		guard let ungzippedData = (decodedBase64Data as NSData).gunzipped() else {
-			throw SignalingMessagesFactoryError.failedToDecompressMessage(message: message)
+			throw SignalingMessagesFactoryError.failedToDecompressMessage(message: .quickblox(message))
 		}
 		guard let params = try JSONSerialization.jsonObject(with: ungzippedData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject] else {
 			throw SignalingMessagesFactoryError.incorrectParamsType
@@ -151,7 +158,7 @@ class SignalingMessagesFactory {
 		guard let userFullName = params[SignalingParams.senderFullName.rawValue] as? String else {
 			throw SignalingMessagesFactoryError.missingSender
 		}
-		let sender = SVUser(id: NSNumber(value: message.senderID), login: userLogin, fullName: userFullName, password: nil, tags: nil)
+		let sender = SVUser(ID: Int(message.senderID), login: userLogin, fullName: userFullName, password: nil, tags: nil)
 		
 		// SessionDetails populating
 		var sessionDetails: SessionDetails?
@@ -179,16 +186,16 @@ class SignalingMessagesFactory {
 			
 			if signalingMessageType == .offer {
 				let sdp = RTCSessionDescription(type: .offer, sdp: sourceSDP)
-				return (message: SignalingMessage.offer(sdp: sdp), sender: sender, sessionDetails: sessionDetails)
+				return (message: SignalingMessage.offer(sdp: SessionDescription(from: sdp)), sender: sender, sessionDetails: sessionDetails)
 			} else if signalingMessageType == .answer {
 				let sdp = RTCSessionDescription(type: .answer, sdp: sourceSDP)
-				return (message: SignalingMessage.answer(sdp: sdp), sender: sender, sessionDetails: sessionDetails)
+				return (message: SignalingMessage.answer(sdp: SessionDescription(from: sdp)), sender: sender, sessionDetails: sessionDetails)
 			}
 		case .candidates:
 			guard let candidates = params[SignalingParams.candidates.rawValue] as? [[String: String]] else {
 				throw SignalingMessagesFactoryError.undefinedSignalingMessageType
 			}
-			var iceCandidates: [RTCIceCandidate] = []
+			var iceCandidates: [IceCandidate] = []
 			for candidate in candidates {
 				guard let mid = candidate[SignalingParams.mid.rawValue] else {
 					continue
@@ -203,12 +210,13 @@ class SignalingMessagesFactory {
 					continue
 				}
 				let iceCandidate = RTCIceCandidate(sdp: candidateSDP, sdpMLineIndex: index, sdpMid: mid)
-				iceCandidates += iceCandidate
+				let wrappedIceCandidate = IceCandidate(from: iceCandidate)
+				iceCandidates += wrappedIceCandidate
 			}
 			return (message: SignalingMessage.candidates(candidates: iceCandidates), sender: sender, sessionDetails: sessionDetails)
 			
-		case .hangup: return (message: SignalingMessage.hangup, sender: sender, sessionDetails: sessionDetails)
-		case .reject: return (message: SignalingMessage.reject, sender: sender, sessionDetails: sessionDetails)
+		case .hangup: return (message: SignalingMessage.system(.hangup), sender: sender, sessionDetails: sessionDetails)
+		case .reject: return (message: SignalingMessage.system(.reject), sender: sender, sessionDetails: sessionDetails)
 		case .userEnteredChatRoom:
 			guard let roomName = params[SignalingParams.roomName.rawValue] as? String else {
 				throw SignalingMessagesFactoryError.undefinedSignalingMessageType

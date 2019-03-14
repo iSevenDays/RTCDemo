@@ -112,7 +112,7 @@ class IncomingCallStoryPresenterTest: XCTestCase {
 		}
 		
 		func retrieveOpponent() -> SVUser {
-			return opponent ?? SVUser()
+			return opponent ?? SVUser(ID: nil, login: nil, fullName: "unknown opponent", password: nil, tags: nil)
 		}
 		
 		func rejectCall() {

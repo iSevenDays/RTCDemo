@@ -33,5 +33,6 @@ protocol SignalingChannelProtocol {
 
 enum SignalingChannelError: Error {
 	case missingUserID
+	case missingUserLogin
 	case chatError(error: Error)
 }

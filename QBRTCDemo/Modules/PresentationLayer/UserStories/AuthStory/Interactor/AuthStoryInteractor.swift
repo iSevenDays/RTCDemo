@@ -37,20 +37,18 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		
 		let login = UIDevice.current.identifierForVendor?.uuidString ?? NSUUID().uuidString
 		let password = "zZc64fj13$_1=fx%"
-		
-		let user = SVUser(id: nil, login: login, password: password, tags: tags)
-		user.fullName = userName
+
+		let user = SVUser(ID: nil, login: login, fullName: userName, password: password, tags: tags)
 		
 		if let cachedUser = cachedUser() {
 			// update current user instead of creating new one
 			if cachedUser.tags != nil {
-				user.id = cachedUser.id
+				user.ID = cachedUser.ID
 				user.login = cachedUser.login
 			}
 		}
 		
 		signUpOrLoginWithUserInRESTSimulatenouslyWithChat(user, successBlock: { [weak self] (user) in
-			
 			user.password = password
 			self?.cacheUser(user)
 			self?.output.didLoginUser(user)
@@ -88,15 +86,17 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 			}
 			
 			assert(restUser.password != nil)
-			assert(restUser.id != nil)
+			assert(restUser.ID != nil)
 			
 			self.callService.connectWithUser(restUser, completion: { (error) in
 				if error != nil || !self.callService.isConnected {
 					errorBlock(error)
 					return
 				}
-				if user.id == nil {
-					user.id = self.callService.currentUser?.id
+
+				var user = user
+				if user.ID == nil {
+					user.ID = self.callService.currentUser?.ID
 				}
 				self.mutableSuccessBlock?(user)
 				self.mutableSuccessBlock = nil
@@ -108,7 +108,7 @@ class AuthStoryInteractor: AuthStoryInteractorInput {
 		
 		
 		// If user ID is not nil, then the user has been logged in previously
-		guard user.id != nil else { return }
+		guard user.ID != nil else { return }
 		guard !callService.isConnecting else {
 			return
 		}
@@ -178,8 +178,7 @@ internal extension AuthStoryInteractor {
 		output.doingLoginWithUser(user)
 		
 		restService.loginWithUser(user, successBlock: { [unowned self] (downloadedUser) in
-			
-			user.id = downloadedUser.id
+			user.ID = downloadedUser.ID
 			
 			self.restService.updateCurrentUserFieldsIfNeededWithUser(user, successBlock: successBlock, errorBlock: errorBlock )
 			
@@ -192,13 +191,14 @@ internal extension AuthStoryInteractor {
 	
 	func cacheUser(_ user: SVUser) {
 		assert(user.password != nil)
-		assert(user.id != nil)
-		let userData = NSKeyedArchiver.archivedData(withRootObject: user)
+		assert(user.ID != nil)
+		let rootObject = try! PropertyListEncoder().encode(user)
+		NSKeyedArchiver.archivedData(withRootObject: rootObject)
 		
-		UserDefaults.standard.set(userData, forKey: cachedUserKey)
+		UserDefaults.standard.set(rootObject, forKey: cachedUserKey)
 		UserDefaults.standard.synchronize()
 		
-		KeychainSwift().set(userData, forKey: cachedUserKey)
+		KeychainSwift().set(rootObject, forKey: cachedUserKey)
 	}
 	
 	func cachedUser() -> SVUser? {
@@ -207,11 +207,15 @@ internal extension AuthStoryInteractor {
 		if userData == nil {
 			userData = KeychainSwift().getData(cachedUserKey)
 		}
-		if let userData = userData,
-			let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? SVUser {
-			assert(user.password != nil)
-			assert(user.id != nil)
-			return user
+		do {
+			if let userData = userData {
+				let user = try PropertyListDecoder().decode(SVUser.self, from: userData)
+				assert(user.password != nil)
+				assert(user.ID != nil)
+				return user
+			}
+		} catch let error {
+			NSLog("Error unarchiving a user: \(error)")
 		}
 		return nil
 	}

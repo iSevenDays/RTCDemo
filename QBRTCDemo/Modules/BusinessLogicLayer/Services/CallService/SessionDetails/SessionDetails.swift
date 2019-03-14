@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SessionDetailsState {
+enum SessionDetailsState: String, Codable {
 	case undefined
 	case offerSent
 	case offerReceived
@@ -19,7 +19,7 @@ enum SessionDetailsState {
 	case closed
 }
 
-class SessionDetails {
+class SessionDetails: Codable {
 	
 	/// Unique session identifier
 	var sessionID: String
@@ -42,7 +42,32 @@ class SessionDetails {
 		self.membersIDs = membersIDs
 		self.sessionID = sessionID
 	}
+
+	// Codable
+	enum CodingKeys: String, CodingKey {
+		case sessionID
+		case initiatorID
+		case sessionState
+		case membersIDs
+	}
+
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(sessionID, forKey: .sessionID)
+		try container.encode(initiatorID, forKey: .initiatorID)
+		try container.encode(sessionState, forKey: .sessionState)
+		try container.encode(membersIDs, forKey: .membersIDs)
+	}
+
+	required init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		sessionID = try container.decode(String.self, forKey: .sessionID)
+		initiatorID = try container.decode(UInt.self, forKey: .initiatorID)
+		sessionState = try container.decode(SessionDetailsState.self, forKey: .sessionState)
+		membersIDs = try container.decode([UInt].self, forKey: .membersIDs)
+	}
 }
+
 
 extension SessionDetailsState: Equatable {
 }

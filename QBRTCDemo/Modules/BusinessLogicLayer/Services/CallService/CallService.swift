@@ -20,6 +20,7 @@ enum CallServiceError: Error {
 	case notLogined
 	case noPendingOfferForOpponent
 	case canNotRejectCallWithoutPendingOffer
+	case incorrectOpponent
 }
 
 @objc open class CallService: NSObject {
@@ -65,7 +66,7 @@ enum CallServiceError: Error {
 	
 	/// Return active connection for opponenID with given session ID
 	func activeConnectionWithSessionID(_ sessionID: String, opponent: SVUser) -> PeerConnection? {
-		return connections[sessionID]?.filter({$0.opponent.id == opponent.id && $0.state == PeerConnectionState.initial}).first
+		return connections[sessionID]?.filter({$0.opponent.ID == opponent.ID && $0.state == PeerConnectionState.initial}).first
 	}
 }
 
@@ -142,10 +143,13 @@ extension CallService: CallServiceProtocol {
 	- throws: throws CallServiceError.notLogined exception in case user is not logged in
 	*/
 	@objc func startCallWithOpponent(_ user: SVUser) throws {
-		guard let currentUserID = self.currentUser?.id?.uintValue else {
+		guard let currentUserID = self.currentUser?.ID else {
 			throw CallServiceError.notLogined
 		}
-		let sessionDetails = SessionDetails(initiatorID: currentUserID, membersIDs: [currentUserID, user.id!.uintValue])
+		guard let opponentID = user.ID else {
+			throw CallServiceError.incorrectOpponent
+		}
+		let sessionDetails = SessionDetails(initiatorID: UInt(currentUserID), membersIDs: [UInt(currentUserID), UInt(opponentID)])
 		sessions[sessionDetails.sessionID] = sessionDetails
 
 		assert(ICEServers != nil)
@@ -241,7 +245,7 @@ extension CallService: CallServiceProtocol {
 		sessionDetails.sessionState = .rejected
 		sessions[sessionDetails.sessionID] = sessionDetails
 		
-		signalingChannel.sendMessage(SignalingMessage.reject, withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
+		signalingChannel.sendMessage(SignalingMessage.system(.reject), withSessionDetails: sessionDetails, toUser: opponent, completion: nil)
 		
 		pendingRequests[opponent] = nil
 		
@@ -259,7 +263,7 @@ extension CallService: CallServiceProtocol {
 				NSLog("Error: no session details for connection with session ID: \(connection.sessionID))")
 				continue
 			}
-			signalingChannel.sendMessage(SignalingMessage.hangup, withSessionDetails: sessionDetails, toUser: connection.opponent, completion: nil)
+			signalingChannel.sendMessage(SignalingMessage.system(.hangup), withSessionDetails: sessionDetails, toUser: connection.opponent, completion: nil)
 			observers |> { $0.callService(self, didSendHangupToOpponent: connection.opponent) }
 		}
 	}
@@ -360,7 +364,7 @@ extension CallService: PeerConnectionObserver {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let opponent = peerConnection.opponent
 		let offerSDP = RTCSessionDescription(type: .offer, sdp: localSessionOfferDescription.sdp)
-		let offerMessage = SignalingMessage.offer(sdp: offerSDP)
+		let offerMessage = SignalingMessage.offer(sdp: SessionDescription(from: offerSDP))
 		startDialingOpponent(opponent, withMessage: offerMessage, sessionDetails: sessionDetails)
 	}
 	
@@ -369,7 +373,7 @@ extension CallService: PeerConnectionObserver {
 		let sessionDetails = sessions[peerConnection.sessionID]!
 		let answerSDP = RTCSessionDescription(type: .answer, sdp: localSessionAnswerDescription.sdp)
 		let opponent = peerConnection.opponent
-		sendSignalingMessageSDP(SignalingMessage.answer(sdp: answerSDP), withSessionDetails: sessionDetails, toOpponent: opponent)
+		sendSignalingMessageSDP(SignalingMessage.answer(sdp: SessionDescription(from: answerSDP)), withSessionDetails: sessionDetails, toOpponent: opponent)
 	}
 	
 	func sendSignalingMessageSDP(_ message: SignalingMessage, withSessionDetails sessionDetails: SessionDetails, toOpponent opponent: SVUser) {
@@ -381,10 +385,10 @@ extension CallService: PeerConnectionObserver {
 			}
 		}
 	}
-	
+
 	func peerConnection(_ peerConnection: PeerConnection, didSetLocalICECandidates localICECandidates: RTCIceCandidate) {
 		let sessionDetails = sessions[peerConnection.sessionID]!
-		let signalingMessage = SignalingMessage.candidates(candidates: [localICECandidates])
+		let signalingMessage = SignalingMessage.candidates(candidates: [IceCandidate(from: localICECandidates)])
 		let opponent = peerConnection.opponent
 		
 		signalingChannel.sendMessage(signalingMessage, withSessionDetails: sessionDetails, toUser: opponent) { [unowned self] (error) in

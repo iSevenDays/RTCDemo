@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C015A904B5FBC4DFD0D9EC902CE936E5"
+               BlueprintIdentifier = "549A4D0706BA3481CF60C407B8EB8E3A"
                BuildableName = "ViperMcFlurry.framework"
                BlueprintName = "ViperMcFlurry"
                ReferencedContainer = "container:Pods.xcodeproj">

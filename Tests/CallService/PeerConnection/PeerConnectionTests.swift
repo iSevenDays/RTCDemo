@@ -25,7 +25,7 @@ class PeerConnectionTests: BaseTestCase {
 	// Always PeerConnection opponent
 	let user2 = TestsStorage.svuserRealUser2
 	
-	let user3 = SVUser(id: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
+	let user3 = SVUser(ID: 1, login: "login", fullName: "full_name", password: "", tags: ["tag1"])
 	
 	var peerConnection: PeerConnection!
 	let sessionID = "session_unique_ID"

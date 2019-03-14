@@ -31,15 +31,15 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	
 	func testConvertsSignalingHangupMessageToQBMessageAndBack() {
 		// given
-		let signalingMessage = SignalingMessage.hangup
+		let signalingMessage = SignalingMessage.system(.hangup)
 		let sessionID = UUID().uuidString
-		let sessionDetails = SessionDetails(initiatorID: sender.id!.uintValue, membersIDs: [sender.id!.uintValue, testUser.id!.uintValue], sessionID: sessionID)
+		let sessionDetails = SessionDetails(initiatorID: UInt(sender.ID!), membersIDs: [UInt(sender.ID!), UInt(testUser.ID!)], sessionID: sessionID)
 		
 		do {
 			// when
 			
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
-			convertedQBMessage.senderID = sender.id!.uintValue
+			convertedQBMessage.senderID = UInt(sender.ID!)
 			// then
 			
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -48,7 +48,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNotNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.id, receivedSender.id)
+			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			XCTAssert(sessionDetails == receivedSessionDetails!)
@@ -56,9 +56,12 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
 			case .offer(sdp: _): XCTFail()
-			case .reject: XCTFail()
+			case .system(let systemMessage):
+				switch systemMessage {
+				case .hangup: break
+				case .reject: XCTFail()
+				}
 			case .candidates(candidates: _): XCTFail()
-			case .hangup: break
 			case .user(enteredChatRoomName: _): XCTFail()
 			}
 			
@@ -76,7 +79,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			// when
 			
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: nil)
-			convertedQBMessage.senderID = sender.id!.uintValue
+			convertedQBMessage.senderID = UInt(sender.ID!)
 			// then
 			
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -85,16 +88,19 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.id, receivedSender.id)
+			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
 			case .offer(sdp: _): XCTFail()
-			case .reject: XCTFail()
 			case .candidates(candidates: _): XCTFail()
-			case .hangup: break
+			case .system(let systemMessage):
+				switch systemMessage {
+				case .hangup: break
+				case .reject: XCTFail()
+				}
 			case let .user(enteredChatRoomName: chatRoomName): XCTAssertEqual(chatRoomName, roomName)
 			}
 			
@@ -109,14 +115,14 @@ class SignalingMessagesFactoryTests: XCTestCase {
 		
 		let rtcIceCandidateVideo = RTCIceCandidate(sdp: "candidate:1009584571 1 udp 2122260223 192.168.8.197 62216 typ host generation 0 ufrag 0+C/nsdLdjk3x5eG", sdpMLineIndex: 1, sdpMid: "video")
 		
-		let signalingMessage = SignalingMessage.candidates(candidates: [rtcIceCandidateAudio, rtcIceCandidateVideo])
+		let signalingMessage = SignalingMessage.candidates(candidates: [IceCandidate(from: rtcIceCandidateAudio), IceCandidate(from: rtcIceCandidateVideo)])
 		let sessionID = UUID().uuidString
-		let sessionDetails = SessionDetails(initiatorID: sender.id!.uintValue, membersIDs: [sender.id!.uintValue, testUser.id!.uintValue], sessionID: sessionID)
+		let sessionDetails = SessionDetails(initiatorID: UInt(sender.ID!), membersIDs: [UInt(sender.ID!), UInt(testUser.ID!)], sessionID: sessionID)
 		
 		do {
 			// when
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
-			convertedQBMessage.senderID = sender.id!.uintValue
+			convertedQBMessage.senderID = UInt(sender.ID!)
 			
 			// then
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -125,7 +131,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNotNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.id, receivedSender.id)
+			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			XCTAssert(sessionDetails == receivedSessionDetails!)
@@ -133,8 +139,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			switch receivedSignalingMessage {
 			case .answer(sdp: _): XCTFail()
 			case .offer(sdp: _): XCTFail()
-			case .hangup: XCTFail()
-			case .reject: XCTFail()
+			case .system(_): XCTFail()
 			case .user(enteredChatRoomName: _): XCTFail()
 			case let .candidates(candidates: candidates):
 				XCTAssertEqual(candidates.count, 2)
@@ -165,14 +170,14 @@ class SignalingMessagesFactoryTests: XCTestCase {
 	func testConvertsSignalingOfferMessageToQBMessageAndBack() {
 		// given
 		let sessionDescription = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
-		let signalingMessage = SignalingMessage.offer(sdp: sessionDescription)
+		let signalingMessage = SignalingMessage.offer(sdp: SessionDescription(from: sessionDescription))
 		let sessionID = UUID().uuidString
-		let sessionDetails = SessionDetails(initiatorID: sender.id!.uintValue, membersIDs: [sender.id!.uintValue, testUser.id!.uintValue], sessionID: sessionID)
+		let sessionDetails = SessionDetails(initiatorID: UInt(sender.ID!), membersIDs: [UInt(sender.ID!), UInt(testUser.ID!)], sessionID: sessionID)
 		
 		do {
 			// when
 			let convertedQBMessage = try signalingMessagesFactory.qbMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
-			convertedQBMessage.senderID = sender.id!.uintValue
+			convertedQBMessage.senderID = UInt(sender.ID!)
 			
 			// then
 			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromQBMessage(convertedQBMessage)
@@ -181,7 +186,7 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			XCTAssertNotNil(receivedSender)
 			XCTAssertNotNil(receivedSessionDetails)
 			
-			XCTAssertEqual(sender.id, receivedSender.id)
+			XCTAssertEqual(sender.ID, receivedSender.ID)
 			XCTAssertEqual(sender.fullName, receivedSender.fullName)
 			XCTAssertEqual(sender.login, receivedSender.login)
 			XCTAssert(sessionDetails == receivedSessionDetails!)
@@ -190,12 +195,67 @@ class SignalingMessagesFactoryTests: XCTestCase {
 			case .answer(sdp: _): XCTFail()
 			case let .offer(sdp: offerSDP):
 				XCTAssertEqual(sessionDescription.sdp, offerSDP.sdp)
-			case .reject: XCTFail()
+			case .system(_): XCTFail()
 			case .candidates(candidates: _): XCTFail()
-			case .hangup: XCTFail()
 			case .user(enteredChatRoomName: _): XCTFail()
 			}
 			
+		} catch let error {
+			XCTAssertNil(error)
+		}
+	}
+
+	func testConvertsSignalingOfferMessageToSendBirdMessage() {
+		// given
+		let sessionDescription = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
+		let signalingMessage = SignalingMessage.offer(sdp: SessionDescription(from: sessionDescription))
+		let sessionID = UUID().uuidString
+		let sessionDetails = SessionDetails(initiatorID: UInt(sender.ID!), membersIDs: [UInt(sender.ID!), UInt(testUser.ID!)], sessionID: sessionID)
+
+		do {
+			// when
+			// then
+			let convertedSendBirdMessage = try signalingMessagesFactory.sendBirdMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
+
+			// the
+			XCTAssertNotNil(convertedSendBirdMessage)
+		} catch let error {
+			XCTAssertNil(error)
+		}
+	}
+
+	func testConvertsSignalingOfferMessageToSendBirdMessageAndBack() {
+		// given
+		let sessionDescription = RTCSessionDescription(type: .offer, sdp: CallServiceHelpers.offerSDP)
+		let signalingMessage = SignalingMessage.offer(sdp: SessionDescription(from: sessionDescription))
+		let sessionID = UUID().uuidString
+		let sessionDetails = SessionDetails(initiatorID: UInt(sender.ID!), membersIDs: [UInt(sender.ID!), UInt(testUser.ID!)], sessionID: sessionID)
+
+		do {
+			// when
+			let convertedSendBirdMessage = try signalingMessagesFactory.sendBirdMessageFromSignalingMessage(signalingMessage, sender: sender, sessionDetails: sessionDetails)
+
+			// then
+			let (receivedSignalingMessage, receivedSender, receivedSessionDetails) = try signalingMessagesFactory.signalingMessageFromSendBirdUserMessage(convertedSendBirdMessage)
+
+			XCTAssertNotNil(receivedSignalingMessage)
+			XCTAssertNotNil(receivedSender)
+			XCTAssertNotNil(receivedSessionDetails)
+
+			XCTAssertEqual(sender.ID, receivedSender.ID)
+			XCTAssertEqual(sender.fullName, receivedSender.fullName)
+			XCTAssertEqual(sender.login, receivedSender.login)
+			XCTAssert(sessionDetails == receivedSessionDetails!)
+
+			switch receivedSignalingMessage {
+			case .answer(sdp: _): XCTFail()
+			case let .offer(sdp: offerSDP):
+				XCTAssertEqual(sessionDescription.sdp, offerSDP.sdp)
+			case .system(_): XCTFail()
+			case .candidates(candidates: _): XCTFail()
+			case .user(enteredChatRoomName: _): XCTFail()
+			}
+
 		} catch let error {
 			XCTAssertNil(error)
 		}
