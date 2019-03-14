@@ -8,6 +8,7 @@
 
 import Foundation
 import Quickblox
+import SendBirdSDK
 
 class ServicesProvider: NSObject {
 	
@@ -35,13 +36,15 @@ class ServicesProvider: NSObject {
 			break
 			
 		case .production:
-			let signalingChannel = QBSignalingChannel()
+			// QBSignalingChannel()
+			let signalingChannel = SendBirdSignalingChannel()
 			let callService = CallService()
 				
 			let serviceConfigurator = ServicesConfigurator()
 			serviceConfigurator.configureCallService(callService)
 			
 			callService.signalingChannel = signalingChannel
+			serviceConfigurator.configureSignalingChannel(channel: callService.signalingChannel)
 			callService.signalingProcessor.observer = callService
 			
 			
@@ -85,5 +88,17 @@ class ServicesConfigurator {
 		QBSettings.setAuthKey("aqsHa2AhDO5Z9Th")
 		QBSettings.setAuthSecret("825Bv-3ByACjD4O")
 		QBSettings.setAccountKey("ZsFuaKozyNC3yLzvN3Xa")
+	}
+
+	func configureSignalingChannel(channel: SignalingChannelProtocol) {
+		if channel is SendBirdSignalingChannel {
+			SBDMain.initWithApplicationId("B83FDA6D-A534-4C73-ABFD-34EBF59DE86C")
+		} else if channel is QBSignalingChannel {
+			// nothing to configure
+
+		} else {
+			fatalError()
+		}
+
 	}
 }
