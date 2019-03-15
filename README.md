@@ -6,8 +6,8 @@ Peer to peer audio/video calls application using WebRTC technology.
 <b>License:</b> MIT
 
 ## Project information:<br>
-<b>Swift version:</b> 2.3 (support for 3.0 will be added later)<br>
-<b>Signaling channel:</b> QuickBlox chat API<br>
+<b>Swift version:</b> 4.2<br>
+<b>Signaling channel:</b> QuickBlox chat API, SendBirdSDK chat API<br>
 <b>REST API provider:</b> QuickBlox REST API<br>
 
 How to add your custom signalling channel or REST API provider:<br>
@@ -17,18 +17,8 @@ How to add your custom signalling channel or REST API provider:<br>
 
 Targets information:
 
-1. RTCDemo_s uses WebRTC.framework from Scripts/webrtc/lib directory, should be used by default
-2. BuildPeerConnection target used for building WebRTC core stack, first launch takes ~3 hours to download 12-16 Gb of data.<br>
-<font color="red">Currently the target is not supported because of updated WebRTC project format.</font>
-3. RTCDemo used to run a sample with full webrtc debug mode, BuildPeerConnection must be finished before executing this target.<br>
-<font color="red">Currently the target is not supported because of updated WebRTC project format.</font>
+1. (QB)RTCDemo_s uses WebRTC.framework should be used by default
 
-Latest supported WebRTC revision(commit) for BuildPeerConnection and RTCDemo is 43166b8adf749c6672eca0cd4a39399cf27d4761 (you can specify this in BuildPeerConnection arguments).
-
-# BuildPeerConnection target
-
-Includes arguments where current WebRTC revision is specified.<br>
-Downloads specified revision into Scripts/webrtc folder
 # VIPER Information and implementation
 
 I applied and modified the pattern from Rambler Digital Solutions
