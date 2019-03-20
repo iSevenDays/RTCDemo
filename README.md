@@ -5,10 +5,19 @@ Peer to peer audio/video calls application using WebRTC technology.
 <b>iTunes name:</b> Instant Calls<br>
 <b>License:</b> MIT
 
+## User Interface
+
+![1](/Screenshots/appstore_screenshot1.jpg?raw=true "1") ![2](/Screenshots/appstore_screenshot1.jpg?raw=true "2") ![3](/Screenshots/appstore_screenshot1.jpg?raw=true "3") ![4](/Screenshots/appstore_screenshot1.jpg?raw=true "4") ![5](/Screenshots/appstore_screenshot1.jpg?raw=true "5")
+
+
 ## Project information:<br>
 <b>Swift version:</b> 4.2<br>
 <b>Signaling channel:</b> QuickBlox chat API, SendBirdSDK chat API<br>
 <b>REST API provider:</b> QuickBlox REST API<br>
+<b>REST API provides:</b><br>
+User login and registration<br>
+Retrieving users in a room<br>
+Push Notifications<br>
 
 How to add your custom signalling channel or REST API provider:<br>
 1. Implement protocol SignalingChannelProtocol<br>
@@ -17,11 +26,11 @@ How to add your custom signalling channel or REST API provider:<br>
 
 Targets information:
 
-1. (QB)RTCDemo_s uses WebRTC.framework should be used by default
+1. (QB)RTCDemo_s uses WebRTC.framework and should be used by default
 
 # VIPER Information and implementation
 
-I applied and modified the pattern from Rambler Digital Solutions
+I applied and modified architecture pattern VIPER from Rambler Digital Solutions
 
 Adding new VIPER module:
 
@@ -52,4 +61,4 @@ To correctly route one module to another (performSegue) we should modify the tem
 
 # Tests #
 
-Unit tests should be run on 64-bit Simulator (example: iPhone 5s)
+Unit tests should be run on 64-bit Simulator (example: iPhone 8)
