@@ -6,13 +6,13 @@ Peer to peer audio/video calls application using WebRTC technology.
 <b>License:</b> MIT
 
 ## User Interface
-
+<p float="left">
 <img src="/Screenshots/appstore_screenshot1.jpg" width="320"/>
 <img src="/Screenshots/appstore_screenshot2.jpg" width="320"/>
 <img src="/Screenshots/appstore_screenshot3.jpg" width="320"/>
 <img src="/Screenshots/appstore_screenshot4.jpg" width="320"/>
 <img src="/Screenshots/appstore_screenshot5.jpg" width="320"/>
-
+</p>
 
 ## Project information:<br>
 <b>Swift version:</b> 4.2<br>
