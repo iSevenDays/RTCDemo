@@ -7,11 +7,11 @@ Peer to peer audio/video calls application using WebRTC technology.
 
 ## User Interface
 
-![1](/Screenshots/appstore_screenshot1.jpg?raw=true =320px "1")
-![2](/Screenshots/appstore_screenshot2.jpg?raw=true =320px "2")
-![3](/Screenshots/appstore_screenshot3.jpg?raw=true =320px "3")
-![4](/Screenshots/appstore_screenshot4.jpg?raw=true =320px "4")
-![5](/Screenshots/appstore_screenshot5.jpg?raw=true =320px "5")
+<img src="/Screenshots/appstore_screenshot1.jpg" width="320"/>
+<img src="/Screenshots/appstore_screenshot2.jpg" width="320"/>
+<img src="/Screenshots/appstore_screenshot3.jpg" width="320"/>
+<img src="/Screenshots/appstore_screenshot4.jpg" width="320"/>
+<img src="/Screenshots/appstore_screenshot5.jpg" width="320"/>
 
 
 ## Project information:<br>
