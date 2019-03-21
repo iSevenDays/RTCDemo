@@ -66,3 +66,6 @@ To correctly route one module to another (performSegue) we should modify the tem
 # Tests #
 
 Unit tests should be run on 64-bit Simulator (example: iPhone 8)
+
+# Presentation about WebRTC 
+<a href="/Documentation/webrtc.pptx">Click here to download</a>
